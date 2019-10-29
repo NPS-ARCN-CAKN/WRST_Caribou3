@@ -86,6 +86,7 @@ Partial Class Form1
         SurveyFlightsGridEX_DesignTimeLayout.LayoutString = resources.GetString("SurveyFlightsGridEX_DesignTimeLayout.LayoutString")
         Me.SurveyFlightsGridEX.DesignTimeLayout = SurveyFlightsGridEX_DesignTimeLayout
         Me.SurveyFlightsGridEX.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.SurveyFlightsGridEX.FilterMode = Janus.Windows.GridEX.FilterMode.Automatic
         Me.SurveyFlightsGridEX.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.SurveyFlightsGridEX.GroupByBoxVisible = False
         Me.SurveyFlightsGridEX.Location = New System.Drawing.Point(0, 0)

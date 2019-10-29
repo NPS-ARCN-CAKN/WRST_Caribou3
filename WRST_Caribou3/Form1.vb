@@ -257,4 +257,12 @@ Public Class Form1
     Private Sub SaveToolStripButton_Click(sender As Object, e As EventArgs) Handles SaveToolStripButton.Click
         SaveDataset()
     End Sub
+
+    Private Sub Form1_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
+        If WRST_CaribouDataSet.HasChanges = True Then
+            If MsgBox("You have unsaved changes. Save to database?", MsgBoxStyle.YesNo, "Save changes?") = MsgBoxResult.Yes Then
+                SaveDataset()
+            End If
+        End If
+    End Sub
 End Class
