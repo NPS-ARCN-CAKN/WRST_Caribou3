@@ -1,4 +1,6 @@
-﻿Imports Janus.Windows.GridEX
+﻿Imports System.IO
+Imports Janus.Windows.GridEX
+Imports SkeeterDataTablesTranslator
 
 Public Class Form1
     Private Sub SurveyFlightsBindingNavigatorSaveItem_Click(sender As Object, e As EventArgs)
@@ -14,23 +16,33 @@ Public Class Form1
 
         'set up default values for the flights grid
         SetSurveyFlightsGridExDefaultValues()
+        SetSurveysGridEXDefaultValues()
 
         'load the survey flights gridex dropdowns
         SetSurveyFlightsGridEXDropDowns()
+        SetUpSurveysGridEXDropDowns()
     End Sub
 
     Private Sub LoadDataset()
-        Me.SurveyFlightsTableAdapter.Fill(Me.WRST_CaribouDataSet.SurveyFlights)
-        Me.SurveysTableAdapter.Fill(Me.WRST_CaribouDataSet.Surveys)
-        Me.CollaredAnimalsInGroupsTableAdapter.Fill(Me.WRST_CaribouDataSet.CollaredAnimalsInGroups)
+        Try
+            Me.SurveyFlightsTableAdapter.Fill(Me.WRST_CaribouDataSet.SurveyFlights)
+            Me.SurveysTableAdapter.Fill(Me.WRST_CaribouDataSet.Surveys)
+            Me.CollaredAnimalsInGroupsTableAdapter.Fill(Me.WRST_CaribouDataSet.CollaredAnimalsInGroups)
+        Catch ex As Exception
+            MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name)
+        End Try
     End Sub
 
     Private Sub SaveDataset()
-        Me.Validate()
-        Me.CollaredAnimalsInGroupsBindingSource.EndEdit()
-        Me.SurveysBindingSource.EndEdit()
-        Me.SurveyFlightsBindingSource.EndEdit()
-        Me.TableAdapterManager.UpdateAll(Me.WRST_CaribouDataSet)
+        Try
+            Me.Validate()
+            Me.CollaredAnimalsInGroupsBindingSource.EndEdit()
+            Me.SurveysBindingSource.EndEdit()
+            Me.SurveyFlightsBindingSource.EndEdit()
+            Me.TableAdapterManager.UpdateAll(Me.WRST_CaribouDataSet)
+        Catch ex As Exception
+            MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name)
+        End Try
     End Sub
 
     ''' <summary>
@@ -66,19 +78,32 @@ Public Class Form1
             Next
             Grid.RootTable.Columns("SOPVersion").DefaultValue = MaxSOPVersion
 
-            ''set up default values for child tables and also set up a header for user context
+            'set up default values for child tables and also set up a header for user context
             'If Not Me.SurveyFlightsGridEX.CurrentRow Is Nothing Then
             '    If Not Me.SurveyFlightsGridEX.CurrentRow.Cells("FlightID") Is Nothing Then
 
             '        'set up flightid default values for child tables
             '        Dim FlightID As String = GetCurrentGridEXCellValue(Me.SurveyFlightsGridEX, "FlightID")
-            '        Me.RadioTrackingGridEX.RootTable.Columns("FlightID").DefaultValue = FlightID
-            '        Me.CompositionCountsGridEX.RootTable.Columns("FlightID").DefaultValue = FlightID
-            '        Me.PopulationEstimateGridEX.RootTable.Columns("FlightID").DefaultValue = FlightID
+            '        Me.SurveysGridEX.RootTable.Columns("FlightID").DefaultValue = FlightID
             '    End If
             'End If
         Catch ex As Exception
             MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name & ")")
+        End Try
+    End Sub
+
+    ''' <summary>
+    ''' Sets up the population data grid default values
+    ''' </summary>
+    Private Sub SetSurveysGridEXDefaultValues()
+        Try
+            Dim GridEX As GridEX = Me.SurveysGridEX
+            GridEX.RootTable.Columns("EID").DefaultValue = Guid.NewGuid.ToString
+            GridEX.RootTable.Columns("RecordInsertedDate").DefaultValue = Now
+            GridEX.RootTable.Columns("RecordInsertedBy").DefaultValue = My.User.Name
+            GridEX.RootTable.Columns("GroupNumber").DefaultValue = GetMaximumGroupNumber(GridEX) + 1
+        Catch ex As Exception
+            MsgBox(ex.Message & " " & System.Reflection.MethodBase.GetCurrentMethod.Name)
         End Try
     End Sub
 
@@ -148,6 +173,37 @@ Public Class Form1
     End Sub
 
     ''' <summary>
+    ''' Sets up the SurveysGridEX default values and DropDowns/Combos
+    ''' </summary>
+    Private Sub SetUpSurveysGridEXDropDowns()
+
+        'Set up default values
+        Dim Grid As GridEX = Me.SurveysGridEX
+        Grid.RootTable.Columns("EID").DefaultValue = Guid.NewGuid.ToString
+        Grid.RootTable.Columns("RecordInsertedDate").DefaultValue = Now
+        Grid.RootTable.Columns("RecordInsertedBy").DefaultValue = My.User.Name
+
+        'search areas dropdown
+        'this line loads the csv list of search areas from my.settings into a datatable
+        Dim SearchAreasDataTable As DataTable = GetSearchAreasDataTable()
+
+        'set up the search area column to accept a dropdown
+        With Grid.RootTable.Columns("SearchArea")
+            .HasValueList = True
+            .LimitToList = True
+            .ValueList.Clear()
+            .EditType = EditType.DropDownList
+        End With
+        Dim SearchAreasList As GridEXValueListItemCollection = Grid.RootTable.Columns("SearchArea").ValueList
+        'load in the searcharea items into the combobox
+        For Each Row As DataRow In SearchAreasDataTable.Rows
+            Dim SearchArea As String = Row.Item("SearchArea")
+            SearchAreasList.Add(SearchArea, SearchArea)
+        Next
+
+    End Sub
+
+    ''' <summary>
     ''' Returns the current value of the cell specified by GridEXColumnKey of the current row of GridEX.
     ''' </summary>
     ''' <param name="GridEX">GridEX to search. GridEX</param>
@@ -169,6 +225,23 @@ Public Class Form1
             MsgBox(ex.Message & " " & System.Reflection.MethodBase.GetCurrentMethod.Name)
         End Try
         Return CellValue
+    End Function
+
+    ''' <summary>
+    ''' Returns the maximum value of GridEX's column named GroupNumber. Used to increment GroupNumber as a default value for new records by adding 1.
+    ''' </summary>
+    ''' <returns></returns>
+    Private Function GetMaximumGroupNumber(GridEX As GridEX) As Integer
+        Dim MaxGroupNumber As Integer = 0
+        If Not GridEX Is Nothing Then
+            'determine the maximum group number
+            For Each Row As GridEXRow In GridEX.GetRows()
+                If Row.Cells("GroupNumber").Value > MaxGroupNumber Then
+                    MaxGroupNumber = Row.Cells("GroupNumber").Value
+                End If
+            Next
+        End If
+        Return MaxGroupNumber
     End Function
 
     ''' <summary>
@@ -264,5 +337,185 @@ Public Class Form1
                 SaveDataset()
             End If
         End If
+    End Sub
+
+    Private Sub SurveysGridEX_SelectionChanged(sender As Object, e As EventArgs) Handles SurveysGridEX.SelectionChanged
+        'renew default values, especially to generate a new primary key value
+        SetSurveysGridEXDefaultValues()
+    End Sub
+
+    Private Sub SurveyFlightsGridEX_SelectionChanged(sender As Object, e As EventArgs) Handles SurveyFlightsGridEX.SelectionChanged
+        'renew default values, especially to generate a new primary key value
+        SetSurveyFlightsGridExDefaultValues()
+    End Sub
+
+    Private Sub CollaredAnimalsInGroupsGridEX_SelectionChanged(sender As Object, e As EventArgs) Handles CollaredAnimalsInGroupsGridEX.SelectionChanged
+        'renew default values, especially to generate a new primary key value
+
+    End Sub
+
+
+    Private Sub ImportSurveyDataFromFileToolStripButton_Click(sender As Object, e As EventArgs) Handles ImportSurveyDataFromFileToolStripButton.Click
+
+        'get the current flightid from the survey flights grid
+        Dim CurrentFlightID As String = GetCurrentGridEXCellValue(Me.SurveyFlightsGridEX, "FlightID")
+
+        'get the current herd from the surveys grid
+        Dim CurrentHerd As String = GetCurrentGridEXCellValue(Me.SurveyFlightsGridEX, "Herd")
+
+        'if valid
+        If Not CurrentFlightID Is Nothing And Not CurrentHerd Is Nothing Then
+
+            If Not IsDBNull(CurrentFlightID) And Not IsDBNull(CurrentHerd) Then
+                If Not CurrentFlightID.Trim.Length = 0 Or CurrentHerd.Trim.Length = 0 Then
+
+                    'get the structure of the destination datatable, we only need one record since the translator will clear all records anyway
+                    Dim Sql As String = "SELECT TOP 1 [SightingDate],[SearchArea],[GroupNumber],[SmallBull],[MediumBull],[LargeBull],[Bull],[Cow],[Calf],[Adult],[FrequenciesInGroup],[Lat],[Lon],[InOrOut]
+,[Seen],[Marked],[Mode],[Accuracy],[RetainedAntler],[DistendedUdders],[CalvesAtHeel],[WaypointName],[Comment],[SourceFilename],[FlightID],[RecordInsertedDate],[RecordInsertedBy],[EID]
+  FROM [dbo].[Surveys]"
+
+                    'use the structure of the query above to build a skeleton datatable
+                    Dim DestinationDataTable As DataTable = GetDataTable(My.Settings.WRST_CaribouConnectionString, Sql)
+
+                    'import the data from the selected file
+                    ImportSurveyDataFromFile(DestinationDataTable, SurveyType.PopulationEstimate, CurrentHerd, CurrentFlightID)
+
+                    'save the dataset
+                    'SaveDataset()
+
+                    'convert any animal counts of zero to null
+                    ExecuteStoredProcedure("SP_CaribouGroupsZeroesToNulls")
+
+                    'reload the corrected dataset
+                    'LoadDataset()
+                Else
+                    MsgBox("There is no currently selected Flight to associate with any imported points (Zero length FlightID or Herd).")
+                End If
+            Else
+                MsgBox("There is no currently selected Flight to associate with any imported points (FlightID or Herd is Null).")
+            End If
+        Else
+            MsgBox("There is no currently selected Flight to associate with any imported points (FlightID or Herd is Nothing).")
+        End If
+    End Sub
+
+    ''' <summary>
+    ''' Survey types
+    ''' </summary>
+    Public Enum SurveyType
+        CompositionCounts
+        PopulationEstimate
+        Radiotracking
+    End Enum
+
+    ''' <summary>
+    ''' Loads a source file of waypoints and an intended destination DataTable, then opens a translator form to map the source columns into the destination datatable schema.
+    ''' Finally, loads the transformed data into the DestinationDataTable.
+    ''' </summary>
+    ''' <param name="DestinationDataTable">DataTable. The DataTable schema into which the source DataTable's columns should be matched.</param>
+    Private Sub ImportSurveyDataFromFile(DestinationDataTable As DataTable, SurveyType As SurveyType, Herd As String, FlightID As String)
+        Dim DataLossMessage As String = "Important warning! The Excel driver used in this import tool may cause data loss. To avoid data loss make sure the data type of each column in the source Excel sheet is explicitly set. Do not use the Excel 'General' data type."
+        'Try
+        If Not DestinationDataTable Is Nothing Then
+                If SurveyType.ToString = "PopulationEstimate" Or SurveyType.ToString = "CompositionCounts" Or SurveyType.ToString = "Radiotracking" Then
+                    If Herd = "Mentasta" Or Herd = "Chisana" Then
+                        If FlightID.Trim.Length > 0 Then
+                            Try
+                                'get the data fileinfo to import
+                                Dim SourceFileInfo As New FileInfo(GetFile("Select a data file to open. If Excel workbook the data to be imported must be in the first worksheet (tab).", "Survey data file (.csv;.xls;.xlsx)|*.csv;*.xls;*.xlsx|Comma separated values (.csv)|*.csv|Excel worksheet (.xlsx)|*.xlsx|Excel worksheet (.xls)|*.xls"))
+
+                                'convert the file into a datatable so we can work with it
+                                Dim InputDataTable As DataTable = Nothing
+
+                                'determine if the input file is csv or excel
+                                If SourceFileInfo.Extension = ".csv" Then
+                                    'convert the data file into a datatable
+                                    InputDataTable = GetDataTableFromDelimitedTextFile(SourceFileInfo, ",")
+                                ElseIf SourceFileInfo.Extension = ".xlsx" Then
+                                    'MsgBox(DataLossMessage, MsgBoxStyle.Information, "Important note on Excel spreadsheets")
+                                    'Me.HelpProvider.SetHelpKeyword(Me, "Import")
+                                    'convert the excel sheet into a datatable
+
+                                    'IMEX=1 means all data will be treated as text. we had problems with group frequencies column being treated as numeric so it omitted any cells with commas separating frequencies
+                                    'the Excel General data type confused .NET as to what kind of data to expect.
+                                    'see https://www.connectionstrings.com/excel/
+                                    Dim ExcelConnectionString As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" & SourceFileInfo.FullName & ";Extended Properties=""Excel 12.0 Xml;HDR=YES;IMEX=1"";"
+                                    Dim ExcelDataset As DataSet = GetDatasetFromExcelWorkbook(ExcelConnectionString)
+                                    InputDataTable = ExcelDataset.Tables(0) 'can only grab the first worksheet (tab)
+                                ElseIf SourceFileInfo.Extension = ".xls" Then
+                                    MsgBox(DataLossMessage, MsgBoxStyle.Information, "Important note on Excel spreadsheets")
+
+                                    'convert the excel sheet into a datatable
+                                    Dim ExcelConnectionString As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" & SourceFileInfo.FullName & ";Extended Properties=""Excel 8.0;HDR=YES;IMEX=1"";"
+                                    Dim ExcelDataset As DataSet = GetDatasetFromExcelWorkbook(ExcelConnectionString)
+                                    InputDataTable = ExcelDataset.Tables(0) 'first worksheet
+                                End If
+
+                                'make a list of desired default values to pass into the data tables translator form
+                                'these items will show up in the mappings datagridview's default values column to make things a little easier
+                                Dim DefaultValuesList As New List(Of String)
+                                With DefaultValuesList
+                                'add the search areas from my.settings to the default values
+                                For Each Item In My.Settings.SearchAreas.Split(",")
+                                    .Add(Item)
+                                Next
+                                .Add("TRUE")
+                                .Add("FALSE")
+
+                                'common default values
+                                .Add(GetCurrentGridEXCellValue(Me.SurveyFlightsGridEX, "FlightID")) 'the primary key of the currently selected flight
+                                .Add(GetCurrentGridEXCellValue(Me.SurveyFlightsGridEX, "Herd")) 'the currently selected herd in the campaigns table
+                                .Add(SourceFileInfo.Name) 'the import file name
+                            End With
+
+                                'open up a datatable translator form to allow the user to map fields from the csv file to the destination datatable
+                                Dim TranslatorForm As New SkeeterDataTablesTranslatorForm(InputDataTable, DestinationDataTable, "Import data", "Use the tool on the left to map the fields from your source data table to the destination data table.", DefaultValuesList)
+                                TranslatorForm.ShowDialog()
+
+                                'at this point we have transformed the csv into a clone of the destination datatable
+                                Dim ImportDataTable As DataTable = TranslatorForm.DestinationDataTable
+
+                            'the next step is to get the transformed data into the Surveys GridEX DataTable
+                            'loop through the waypoints datatable and try to insert them into the datatable
+                            Dim TableName As String = SurveyType.ToString
+                            For Each Row As DataRow In ImportDataTable.Rows
+
+                                'make a new row
+                                Dim NewRow As DataRow = Me.WRST_CaribouDataSet.Tables("Surveys").NewRow
+                                For Each Column As DataColumn In ImportDataTable.Columns
+                                    NewRow.Item(Column.ColumnName) = Row.Item(Column.ColumnName)
+                                Next
+
+                                'override any selections made on the translator form
+                                NewRow.Item("FlightID") = FlightID
+                                NewRow.Item("RecordInsertedDate") = Now
+                                NewRow.Item("RecordInsertedBy") = My.User.Name
+                                NewRow.Item("EID") = Guid.NewGuid.ToString
+
+                                'add the row
+                                Me.WRST_CaribouDataSet.Tables("Surveys").Rows.Add(NewRow)
+
+                                'end the edit
+                                Me.SurveysBindingSource.EndEdit()
+                            Next
+
+                        Catch ex As Exception
+                                MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name & ")")
+                            End Try
+                        Else
+                            MsgBox("FlightID is required")
+                        End If
+                    Else
+                        MsgBox("Herd must be Mentasta or Chisana")
+                    End If
+                Else
+                    MsgBox("SurveyType must be PopulationEstimate Object CompositionCount Or Radiotracking")
+                End If
+            Else
+                MsgBox("DestinationDataTable cannot be nothing.")
+            End If
+        'Catch ex As Exception
+        '    MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name & ")")
+        'End Try
     End Sub
 End Class

@@ -64,6 +64,31 @@ Namespace My
                 Return CType(Me("WRST_CaribouConnectionString"),String)
             End Get
         End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("Data Source=INPAKROVMAIS;Initial Catalog=Animal_Movement;Integrated Security=True"& _ 
+            "")>  _
+        Public Property Animal_MovementConnectionString() As String
+            Get
+                Return CType(Me("Animal_MovementConnectionString"),String)
+            End Get
+            Set
+                Me("Animal_MovementConnectionString") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("Alaska,Copper River,Mt. Drum,Mt. Sanford,Yukon")>  _
+        Public Property SearchAreas() As String
+            Get
+                Return CType(Me("SearchAreas"),String)
+            End Get
+            Set
+                Me("SearchAreas") = value
+            End Set
+        End Property
     End Class
 End Namespace
 

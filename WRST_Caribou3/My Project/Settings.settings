@@ -10,5 +10,11 @@
 &lt;/SerializableConnectionString&gt;</DesignTimeValue>
       <Value Profile="(Default)">Data Source=inpyugamsvm01\nuna_dev;Initial Catalog=WRST_Caribou;Integrated Security=True</Value>
     </Setting>
+    <Setting Name="Animal_MovementConnectionString" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Data Source=INPAKROVMAIS;Initial Catalog=Animal_Movement;Integrated Security=True</Value>
+    </Setting>
+    <Setting Name="SearchAreas" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Alaska,Copper River,Mt. Drum,Mt. Sanford,Yukon</Value>
+    </Setting>
   </Settings>
 </SettingsFile>
