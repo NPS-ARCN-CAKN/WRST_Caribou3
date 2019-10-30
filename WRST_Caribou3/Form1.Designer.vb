@@ -91,7 +91,6 @@ Partial Class Form1
         Me.SurveyFlightsGridEX.Dock = System.Windows.Forms.DockStyle.Fill
         Me.SurveyFlightsGridEX.FilterMode = Janus.Windows.GridEX.FilterMode.Automatic
         Me.SurveyFlightsGridEX.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.SurveyFlightsGridEX.GroupByBoxVisible = False
         Me.SurveyFlightsGridEX.Location = New System.Drawing.Point(0, 0)
         Me.SurveyFlightsGridEX.Name = "SurveyFlightsGridEX"
         Me.SurveyFlightsGridEX.RecordNavigator = True
@@ -145,6 +144,9 @@ Partial Class Form1
         Me.SurveysGridEX.Size = New System.Drawing.Size(1281, 959)
         Me.SurveysGridEX.TabIndex = 0
         Me.SurveysGridEX.TableHeaders = Janus.Windows.GridEX.InheritableBoolean.[True]
+        Me.SurveysGridEX.TotalRow = Janus.Windows.GridEX.InheritableBoolean.[True]
+        Me.SurveysGridEX.TotalRowFormatStyle.FontBold = Janus.Windows.GridEX.TriState.[True]
+        Me.SurveysGridEX.TotalRowPosition = Janus.Windows.GridEX.TotalRowPosition.BottomFixed
         '
         'SurveysBindingSource
         '
