@@ -13,7 +13,7 @@ Public Class Form1
         LoadDataset()
         FormatGridEX(Me.SurveyFlightsGridEX)
         FormatGridEX(Me.SurveysGridEX)
-        FormatGridEX(Me.SurveysGridEX)
+        FormatGridEX(Me.CollaredAnimalsInGroupsGridEX)
 
         'set up default values for the flights grid
         SetSurveyFlightsGridExDefaultValues()
@@ -22,6 +22,9 @@ Public Class Form1
         'load the survey flights gridex dropdowns
         SetSurveyFlightsGridEXDropDowns()
         SetUpSurveysGridEXDropDowns()
+
+        'load the collared animal deployments from Animal Movement into the CollaredAnimalsGridEX
+        SetUpCollaredAnimalsInGroupsGridEXDropDowns()
     End Sub
 
     Private Sub LoadDataset()
@@ -58,8 +61,6 @@ Public Class Form1
             Grid.RootTable.Columns("SOPNumber").DefaultValue = 0
             Grid.RootTable.Columns("RecordInsertedDate").DefaultValue = Now
             Grid.RootTable.Columns("RecordInsertedBy").DefaultValue = My.User.Name
-            Grid.RootTable.Columns("CertificationLevel").DefaultValue = "Raw"
-
 
             'CrewNumber default value
             Dim MaxCrewNumber As Integer = 0
@@ -103,6 +104,7 @@ Public Class Form1
             GridEX.RootTable.Columns("RecordInsertedDate").DefaultValue = Now
             GridEX.RootTable.Columns("RecordInsertedBy").DefaultValue = My.User.Name
             GridEX.RootTable.Columns("GroupNumber").DefaultValue = GetMaximumGroupNumber(GridEX) + 1
+            GridEX.RootTable.Columns("CertificationLevel").DefaultValue = "Raw"
         Catch ex As Exception
             MsgBox(ex.Message & " " & System.Reflection.MethodBase.GetCurrentMethod.Name)
         End Try
@@ -152,22 +154,6 @@ Public Class Form1
             Dim SurveysHerdList As GridEXValueListItemCollection = Grid.RootTable.Columns("Herd").ValueList
             SurveysHerdList.Add("Chisana", "Chisana")
             SurveysHerdList.Add("Mentasta", "Mentasta")
-
-            'CertificationLevel dropdown
-            With Grid.RootTable.Columns("CertificationLevel")
-                .EditType = EditType.Combo
-                .HasValueList = True
-                .LimitToList = True
-                .AllowSort = True
-                .AutoComplete = True
-                .ValueList.Clear()
-            End With
-            Dim CertificationLevelList As GridEXValueListItemCollection = Grid.RootTable.Columns("CertificationLevel").ValueList
-            CertificationLevelList.Add("Raw", "Raw")
-            CertificationLevelList.Add("Provisional", "Provisional")
-            CertificationLevelList.Add("Accepted", "Accepted")
-            CertificationLevelList.Add("Certified", "Certified")
-
         Catch ex As Exception
             MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name & ")")
         End Try
@@ -190,10 +176,12 @@ Public Class Form1
 
         'set up the search area column to accept a dropdown
         With Grid.RootTable.Columns("SearchArea")
+            .EditType = EditType.Combo
             .HasValueList = True
             .LimitToList = True
+            .AllowSort = True
+            .AutoComplete = True
             .ValueList.Clear()
-            .EditType = EditType.DropDownList
         End With
         Dim SearchAreasList As GridEXValueListItemCollection = Grid.RootTable.Columns("SearchArea").ValueList
         'load in the searcharea items into the combobox
@@ -202,6 +190,59 @@ Public Class Form1
             SearchAreasList.Add(SearchArea, SearchArea)
         Next
 
+        'CertificationLevel dropdown
+        With Grid.RootTable.Columns("CertificationLevel")
+            .EditType = EditType.Combo
+            .HasValueList = True
+            .LimitToList = True
+            .AllowSort = True
+            .AutoComplete = True
+            .ValueList.Clear()
+        End With
+        Dim CertificationLevelList As GridEXValueListItemCollection = Grid.RootTable.Columns("CertificationLevel").ValueList
+        CertificationLevelList.Add("Raw", "Raw")
+        CertificationLevelList.Add("Provisional", "Provisional")
+        CertificationLevelList.Add("Accepted", "Accepted")
+        CertificationLevelList.Add("Certified", "Certified")
+
+    End Sub
+
+    ''' <summary>
+    ''' Sets up the SurveysGridEX default values and DropDowns/Combos
+    ''' </summary>
+    Private Sub SetUpCollaredAnimalsInGroupsGridEXDropDowns()
+        'Try
+        'Set up default values
+        Dim Grid As GridEX = Me.CollaredAnimalsInGroupsGridEX
+
+            'search areas dropdown
+            'this line loads the csv list of search areas from my.settings into a datatable
+            Dim Sql As String = ""
+            Dim CollaredAnimalsDataTable As DataTable = GetDataTable(My.Settings.Animal_MovementConnectionString, Sql)
+
+        'set up the search area column to accept a dropdown
+        With Grid.RootTable.Columns("AnimalID")
+            .EditType = EditType.Combo
+            .HasValueList = True
+            .LimitToList = True
+            .AllowSort = True
+            .AutoComplete = True
+            .ValueList.Clear()
+        End With
+        Dim AnimalsList As GridEXValueListItemCollection = Grid.RootTable.Columns("AnimalID").ValueList
+        'load in the searcharea items into the combobox
+        If CollaredAnimalsDataTable.Rows.Count > 0 Then
+                For Each Row As DataRow In CollaredAnimalsDataTable.Rows
+                    Dim AnimalID As String = Row.Item("AnimalID")
+                    Dim Frequency As String = Row.Item("Frequency")
+                    AnimalsList.Add(AnimalID, AnimalID)
+                Next
+            Else
+                AnimalsList.Add("", "No collared animals found")
+            End If
+        'Catch ex As Exception
+        '    MsgBox(ex.Message & " " & System.Reflection.MethodBase.GetCurrentMethod.Name)
+        'End Try
     End Sub
 
     ''' <summary>
@@ -520,6 +561,10 @@ Public Class Form1
         End Try
     End Sub
 
+    ''' <summary>
+    ''' Executes the stored procedure on the WRST_Caribou database.
+    ''' </summary>
+    ''' <param name="ProcedureName">Name of the stored procedure to execute. String.</param>
     Private Sub ExecuteStoredProcedure(ProcedureName As String)
         Try
             Dim MySqlConnection As New SqlConnection(My.Settings.WRST_CaribouConnectionString)
@@ -534,4 +579,31 @@ Public Class Form1
             MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name & ")")
         End Try
     End Sub
+
+
+
+    '    ''' <summary>
+    '    ''' Returns a DataTable of the WRST caribou collar deployments from the Animal_Movement database
+    '    ''' </summary>
+    '    ''' <returns>DataTable</returns>
+    '    Public Function GetCollarDeploymentsDataTable() As DataTable
+    '        Dim CollarDeploymentsDataTable As New DataTable
+    '        Try
+    '            Dim Sql As String = "SELECT Animals.AnimalId,   Collars.Frequency,CollarDeployments.DeploymentDate, CollarDeployments.RetrievalDate, 
+    '                         Animals.MortalityDate, Collars.DisposalDate, Collars.HasGps, CollarDeployments.CollarManufacturer, Collars.CollarModel, Collars.SerialNumber, Animals.Species, Animals.Gender, Animals.GroupName, 
+    '                         Animals.Description, Collars.Manager, Collars.Owner, Collars.Notes AS CollarNotes,       CONVERT(Varchar(20), Collars.Frequency) + ' - ' + Animals.AnimalId AS CollaredCaribou, CollarDeployments.CollarId, Animals.ProjectId, CollarDeployments.DeploymentId
+    'FROM            Animals INNER JOIN
+    '                         CollarDeployments ON Animals.ProjectId = CollarDeployments.ProjectId AND Animals.AnimalId = CollarDeployments.AnimalId INNER JOIN
+    '                         Collars ON CollarDeployments.CollarManufacturer = Collars.CollarManufacturer AND CollarDeployments.CollarId = Collars.CollarId
+    'WHERE        (Animals.ProjectId = 'WRST_Caribou')
+    'ORDER BY Frequency"
+    '            CollarDeploymentsDataTable = GetDataTable(My.Settings.Animal_MovementConnectionString, Sql)
+    '            CollarDeploymentsDataTable.TableName = "CollarDeployments"
+    '        Catch ex As Exception
+    '            MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name & ")")
+    '        End Try
+    '        Return CollarDeploymentsDataTable
+    '    End Function
+
+
 End Class

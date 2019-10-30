@@ -29,8 +29,6 @@ Partial Class Form1
         Dim CollaredAnimalsInGroupsGridEX_DesignTimeLayout As Janus.Windows.GridEX.GridEXLayout = New Janus.Windows.GridEX.GridEXLayout()
         Me.SplitContainer1 = New System.Windows.Forms.SplitContainer()
         Me.SurveyFlightsGridEX = New Janus.Windows.GridEX.GridEX()
-        Me.SurveyFlightsBindingSource = New System.Windows.Forms.BindingSource(Me.components)
-        Me.WRST_CaribouDataSet = New WRST_Caribou3.WRST_CaribouDataSet()
         Me.SplitContainer2 = New System.Windows.Forms.SplitContainer()
         Me.SurveysGridEX = New Janus.Windows.GridEX.GridEX()
         Me.SurveysBindingSource = New System.Windows.Forms.BindingSource(Me.components)
@@ -40,6 +38,8 @@ Partial Class Form1
         Me.CollaredAnimalsInGroupsBindingSource = New System.Windows.Forms.BindingSource(Me.components)
         Me.ToolStrip1 = New System.Windows.Forms.ToolStrip()
         Me.SaveToolStripButton = New System.Windows.Forms.ToolStripButton()
+        Me.SurveyFlightsBindingSource = New System.Windows.Forms.BindingSource(Me.components)
+        Me.WRST_CaribouDataSet = New WRST_Caribou3.WRST_CaribouDataSet()
         Me.SurveyFlightsTableAdapter = New WRST_Caribou3.WRST_CaribouDataSetTableAdapters.SurveyFlightsTableAdapter()
         Me.TableAdapterManager = New WRST_Caribou3.WRST_CaribouDataSetTableAdapters.TableAdapterManager()
         Me.CollaredAnimalsInGroupsTableAdapter = New WRST_Caribou3.WRST_CaribouDataSetTableAdapters.CollaredAnimalsInGroupsTableAdapter()
@@ -49,8 +49,6 @@ Partial Class Form1
         Me.SplitContainer1.Panel2.SuspendLayout()
         Me.SplitContainer1.SuspendLayout()
         CType(Me.SurveyFlightsGridEX, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.SurveyFlightsBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.WRST_CaribouDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.SplitContainer2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SplitContainer2.Panel1.SuspendLayout()
         Me.SplitContainer2.Panel2.SuspendLayout()
@@ -61,6 +59,8 @@ Partial Class Form1
         CType(Me.CollaredAnimalsInGroupsGridEX, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.CollaredAnimalsInGroupsBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.ToolStrip1.SuspendLayout()
+        CType(Me.SurveyFlightsBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.WRST_CaribouDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'SplitContainer1
@@ -98,16 +98,6 @@ Partial Class Form1
         Me.SurveyFlightsGridEX.Size = New System.Drawing.Size(2323, 457)
         Me.SurveyFlightsGridEX.TabIndex = 0
         Me.SurveyFlightsGridEX.TableHeaders = Janus.Windows.GridEX.InheritableBoolean.[True]
-        '
-        'SurveyFlightsBindingSource
-        '
-        Me.SurveyFlightsBindingSource.DataMember = "SurveyFlights"
-        Me.SurveyFlightsBindingSource.DataSource = Me.WRST_CaribouDataSet
-        '
-        'WRST_CaribouDataSet
-        '
-        Me.WRST_CaribouDataSet.DataSetName = "WRST_CaribouDataSet"
-        Me.WRST_CaribouDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
         '
         'SplitContainer2
         '
@@ -173,6 +163,8 @@ Partial Class Form1
         '
         'CollaredAnimalsInGroupsGridEX
         '
+        Me.CollaredAnimalsInGroupsGridEX.AllowAddNew = Janus.Windows.GridEX.InheritableBoolean.[True]
+        Me.CollaredAnimalsInGroupsGridEX.AllowDelete = Janus.Windows.GridEX.InheritableBoolean.[True]
         Me.CollaredAnimalsInGroupsGridEX.DataSource = Me.CollaredAnimalsInGroupsBindingSource
         CollaredAnimalsInGroupsGridEX_DesignTimeLayout.LayoutString = resources.GetString("CollaredAnimalsInGroupsGridEX_DesignTimeLayout.LayoutString")
         Me.CollaredAnimalsInGroupsGridEX.DesignTimeLayout = CollaredAnimalsInGroupsGridEX_DesignTimeLayout
@@ -210,6 +202,16 @@ Partial Class Form1
         Me.SaveToolStripButton.Size = New System.Drawing.Size(96, 29)
         Me.SaveToolStripButton.Text = "Save edits"
         '
+        'SurveyFlightsBindingSource
+        '
+        Me.SurveyFlightsBindingSource.DataMember = "SurveyFlights"
+        Me.SurveyFlightsBindingSource.DataSource = Me.WRST_CaribouDataSet
+        '
+        'WRST_CaribouDataSet
+        '
+        Me.WRST_CaribouDataSet.DataSetName = "WRST_CaribouDataSet"
+        Me.WRST_CaribouDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
+        '
         'SurveyFlightsTableAdapter
         '
         Me.SurveyFlightsTableAdapter.ClearBeforeFill = True
@@ -244,8 +246,6 @@ Partial Class Form1
         CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.SplitContainer1.ResumeLayout(False)
         CType(Me.SurveyFlightsGridEX, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.SurveyFlightsBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.WRST_CaribouDataSet, System.ComponentModel.ISupportInitialize).EndInit()
         Me.SplitContainer2.Panel1.ResumeLayout(False)
         Me.SplitContainer2.Panel1.PerformLayout()
         Me.SplitContainer2.Panel2.ResumeLayout(False)
@@ -259,6 +259,8 @@ Partial Class Form1
         CType(Me.CollaredAnimalsInGroupsBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ToolStrip1.ResumeLayout(False)
         Me.ToolStrip1.PerformLayout()
+        CType(Me.SurveyFlightsBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.WRST_CaribouDataSet, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 

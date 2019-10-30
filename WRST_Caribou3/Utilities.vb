@@ -111,7 +111,7 @@ Module Utilites
                 MySqlConnection.Close()
             End Using
         Catch ex As Exception
-            MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name & ")")
+            MsgBox("Error: Query on " & ConnectionString & " failed. " & ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name & ")")
         End Try
 
         'return the datatable

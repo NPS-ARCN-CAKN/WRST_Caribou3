@@ -696,12 +696,6 @@ Partial Public Class WRST_CaribouDataSet
         
         Private columnSOPVersion As Global.System.Data.DataColumn
         
-        Private columnCertificationDate As Global.System.Data.DataColumn
-        
-        Private columnCertifiedBy As Global.System.Data.DataColumn
-        
-        Private columnCertificationLevel As Global.System.Data.DataColumn
-        
         Private columnRecordInsertedDate As Global.System.Data.DataColumn
         
         Private columnRecordInsertedBy As Global.System.Data.DataColumn
@@ -907,30 +901,6 @@ Partial Public Class WRST_CaribouDataSet
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public ReadOnly Property CertificationDateColumn() As Global.System.Data.DataColumn
-            Get
-                Return Me.columnCertificationDate
-            End Get
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public ReadOnly Property CertifiedByColumn() As Global.System.Data.DataColumn
-            Get
-                Return Me.columnCertifiedBy
-            End Get
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public ReadOnly Property CertificationLevelColumn() As Global.System.Data.DataColumn
-            Get
-                Return Me.columnCertificationLevel
-            End Get
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Public ReadOnly Property RecordInsertedDateColumn() As Global.System.Data.DataColumn
             Get
                 Return Me.columnRecordInsertedDate
@@ -1019,15 +989,12 @@ Partial Public Class WRST_CaribouDataSet
                     ByVal Herd As String,  _
                     ByVal SOPNumber As Integer,  _
                     ByVal SOPVersion As Decimal,  _
-                    ByVal CertificationDate As Date,  _
-                    ByVal CertifiedBy As String,  _
-                    ByVal CertificationLevel As String,  _
                     ByVal RecordInsertedDate As Date,  _
                     ByVal RecordInsertedBy As String,  _
                     ByVal FlightID As String,  _
                     ByVal TS() As Byte) As SurveyFlightsRow
             Dim rowSurveyFlightsRow As SurveyFlightsRow = CType(Me.NewRow,SurveyFlightsRow)
-            Dim columnValuesArray() As Object = New Object() {Year, SurveyType, CrewNumber, Pilot, Observer1, Observer2, AircraftType, TailNo, TimeDepart, TimeReturn, IsFollowUpFlight, SpotterPlaneTailNo, SpotterPlaneType, SpotterPlanePilot, WeatherConditions, SnowConditions, Notes, Herd, SOPNumber, SOPVersion, CertificationDate, CertifiedBy, CertificationLevel, RecordInsertedDate, RecordInsertedBy, FlightID, TS}
+            Dim columnValuesArray() As Object = New Object() {Year, SurveyType, CrewNumber, Pilot, Observer1, Observer2, AircraftType, TailNo, TimeDepart, TimeReturn, IsFollowUpFlight, SpotterPlaneTailNo, SpotterPlaneType, SpotterPlanePilot, WeatherConditions, SnowConditions, Notes, Herd, SOPNumber, SOPVersion, RecordInsertedDate, RecordInsertedBy, FlightID, TS}
             rowSurveyFlightsRow.ItemArray = columnValuesArray
             Me.Rows.Add(rowSurveyFlightsRow)
             Return rowSurveyFlightsRow
@@ -1076,9 +1043,6 @@ Partial Public Class WRST_CaribouDataSet
             Me.columnHerd = MyBase.Columns("Herd")
             Me.columnSOPNumber = MyBase.Columns("SOPNumber")
             Me.columnSOPVersion = MyBase.Columns("SOPVersion")
-            Me.columnCertificationDate = MyBase.Columns("CertificationDate")
-            Me.columnCertifiedBy = MyBase.Columns("CertifiedBy")
-            Me.columnCertificationLevel = MyBase.Columns("CertificationLevel")
             Me.columnRecordInsertedDate = MyBase.Columns("RecordInsertedDate")
             Me.columnRecordInsertedBy = MyBase.Columns("RecordInsertedBy")
             Me.columnFlightID = MyBase.Columns("FlightID")
@@ -1128,12 +1092,6 @@ Partial Public Class WRST_CaribouDataSet
             MyBase.Columns.Add(Me.columnSOPNumber)
             Me.columnSOPVersion = New Global.System.Data.DataColumn("SOPVersion", GetType(Decimal), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnSOPVersion)
-            Me.columnCertificationDate = New Global.System.Data.DataColumn("CertificationDate", GetType(Date), Nothing, Global.System.Data.MappingType.Element)
-            MyBase.Columns.Add(Me.columnCertificationDate)
-            Me.columnCertifiedBy = New Global.System.Data.DataColumn("CertifiedBy", GetType(String), Nothing, Global.System.Data.MappingType.Element)
-            MyBase.Columns.Add(Me.columnCertifiedBy)
-            Me.columnCertificationLevel = New Global.System.Data.DataColumn("CertificationLevel", GetType(String), Nothing, Global.System.Data.MappingType.Element)
-            MyBase.Columns.Add(Me.columnCertificationLevel)
             Me.columnRecordInsertedDate = New Global.System.Data.DataColumn("RecordInsertedDate", GetType(Date), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnRecordInsertedDate)
             Me.columnRecordInsertedBy = New Global.System.Data.DataColumn("RecordInsertedBy", GetType(String), Nothing, Global.System.Data.MappingType.Element)
@@ -1163,9 +1121,6 @@ Partial Public Class WRST_CaribouDataSet
             Me.columnNotes.MaxLength = 1000
             Me.columnHerd.AllowDBNull = false
             Me.columnHerd.MaxLength = 8
-            Me.columnCertifiedBy.MaxLength = 50
-            Me.columnCertificationLevel.AllowDBNull = false
-            Me.columnCertificationLevel.MaxLength = 15
             Me.columnRecordInsertedDate.AllowDBNull = false
             Me.columnRecordInsertedBy.AllowDBNull = false
             Me.columnRecordInsertedBy.MaxLength = 50
@@ -1367,6 +1322,12 @@ Partial Public Class WRST_CaribouDataSet
         Private columnTS As Global.System.Data.DataColumn
         
         Private columnEID As Global.System.Data.DataColumn
+        
+        Private columnCertificationDate As Global.System.Data.DataColumn
+        
+        Private columnCertifiedBy As Global.System.Data.DataColumn
+        
+        Private columnCertificationLevel As Global.System.Data.DataColumn
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
@@ -1636,6 +1597,30 @@ Partial Public Class WRST_CaribouDataSet
         End Property
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property CertificationDateColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnCertificationDate
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property CertifiedByColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnCertifiedBy
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property CertificationLevelColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnCertificationLevel
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
          Global.System.ComponentModel.Browsable(false)>  _
         Public ReadOnly Property Count() As Integer
@@ -1701,11 +1686,14 @@ Partial Public Class WRST_CaribouDataSet
                     ByVal RecordInsertedDate As Date,  _
                     ByVal RecordInsertedBy As String,  _
                     ByVal TS() As Byte,  _
-                    ByVal EID As String) As SurveysRow
+                    ByVal EID As String,  _
+                    ByVal CertificationDate As Date,  _
+                    ByVal CertifiedBy As String,  _
+                    ByVal CertificationLevel As String) As SurveysRow
             Dim rowSurveysRow As SurveysRow = CType(Me.NewRow,SurveysRow)
-            Dim columnValuesArray() As Object = New Object() {SightingDate, SearchArea, GroupNumber, SmallBull, MediumBull, LargeBull, Bull, Cow, Calf, Adult, FrequenciesInGroup, Lat, Lon, Out, Seen, Marked, Mode, Accuracy, RetainedAntler, DistendedUdders, CalvesAtHeel, WaypointName, Comment, SourceFilename, Nothing, RecordInsertedDate, RecordInsertedBy, TS, EID}
+            Dim columnValuesArray() As Object = New Object() {SightingDate, SearchArea, GroupNumber, SmallBull, MediumBull, LargeBull, Bull, Cow, Calf, Adult, FrequenciesInGroup, Lat, Lon, Out, Seen, Marked, Mode, Accuracy, RetainedAntler, DistendedUdders, CalvesAtHeel, WaypointName, Comment, SourceFilename, Nothing, RecordInsertedDate, RecordInsertedBy, TS, EID, CertificationDate, CertifiedBy, CertificationLevel}
             If (Not (parentSurveyFlightsRowByFK_Surveys_SurveyFlights) Is Nothing) Then
-                columnValuesArray(24) = parentSurveyFlightsRowByFK_Surveys_SurveyFlights(25)
+                columnValuesArray(24) = parentSurveyFlightsRowByFK_Surveys_SurveyFlights(22)
             End If
             rowSurveysRow.ItemArray = columnValuesArray
             Me.Rows.Add(rowSurveysRow)
@@ -1764,6 +1752,9 @@ Partial Public Class WRST_CaribouDataSet
             Me.columnRecordInsertedBy = MyBase.Columns("RecordInsertedBy")
             Me.columnTS = MyBase.Columns("TS")
             Me.columnEID = MyBase.Columns("EID")
+            Me.columnCertificationDate = MyBase.Columns("CertificationDate")
+            Me.columnCertifiedBy = MyBase.Columns("CertifiedBy")
+            Me.columnCertificationLevel = MyBase.Columns("CertificationLevel")
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -1827,6 +1818,12 @@ Partial Public Class WRST_CaribouDataSet
             MyBase.Columns.Add(Me.columnTS)
             Me.columnEID = New Global.System.Data.DataColumn("EID", GetType(String), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnEID)
+            Me.columnCertificationDate = New Global.System.Data.DataColumn("CertificationDate", GetType(Date), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnCertificationDate)
+            Me.columnCertifiedBy = New Global.System.Data.DataColumn("CertifiedBy", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnCertifiedBy)
+            Me.columnCertificationLevel = New Global.System.Data.DataColumn("CertificationLevel", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnCertificationLevel)
             Me.Constraints.Add(New Global.System.Data.UniqueConstraint("Constraint1", New Global.System.Data.DataColumn() {Me.columnEID}, true))
             Me.columnSightingDate.AllowDBNull = false
             Me.columnSearchArea.AllowDBNull = false
@@ -1851,6 +1848,12 @@ Partial Public Class WRST_CaribouDataSet
             Me.columnEID.AllowDBNull = false
             Me.columnEID.Unique = true
             Me.columnEID.MaxLength = 50
+            Me.columnCertificationDate.Caption = "Certification Date"
+            Me.columnCertifiedBy.Caption = "Certified By"
+            Me.columnCertifiedBy.MaxLength = 50
+            Me.columnCertificationLevel.AllowDBNull = false
+            Me.columnCertificationLevel.Caption = "Certification Level"
+            Me.columnCertificationLevel.MaxLength = 15
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -2345,47 +2348,6 @@ Partial Public Class WRST_CaribouDataSet
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Property CertificationDate() As Date
-            Get
-                Try 
-                    Return CType(Me(Me.tableSurveyFlights.CertificationDateColumn),Date)
-                Catch e As Global.System.InvalidCastException
-                    Throw New Global.System.Data.StrongTypingException("The value for column 'CertificationDate' in table 'SurveyFlights' is DBNull.", e)
-                End Try
-            End Get
-            Set
-                Me(Me.tableSurveyFlights.CertificationDateColumn) = value
-            End Set
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Property CertifiedBy() As String
-            Get
-                Try 
-                    Return CType(Me(Me.tableSurveyFlights.CertifiedByColumn),String)
-                Catch e As Global.System.InvalidCastException
-                    Throw New Global.System.Data.StrongTypingException("The value for column 'CertifiedBy' in table 'SurveyFlights' is DBNull.", e)
-                End Try
-            End Get
-            Set
-                Me(Me.tableSurveyFlights.CertifiedByColumn) = value
-            End Set
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Property CertificationLevel() As String
-            Get
-                Return CType(Me(Me.tableSurveyFlights.CertificationLevelColumn),String)
-            End Get
-            Set
-                Me(Me.tableSurveyFlights.CertificationLevelColumn) = value
-            End Set
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Public Property RecordInsertedDate() As Date
             Get
                 Return CType(Me(Me.tableSurveyFlights.RecordInsertedDateColumn),Date)
@@ -2586,30 +2548,6 @@ Partial Public Class WRST_CaribouDataSet
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Public Sub SetSOPVersionNull()
             Me(Me.tableSurveyFlights.SOPVersionColumn) = Global.System.Convert.DBNull
-        End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Function IsCertificationDateNull() As Boolean
-            Return Me.IsNull(Me.tableSurveyFlights.CertificationDateColumn)
-        End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Sub SetCertificationDateNull()
-            Me(Me.tableSurveyFlights.CertificationDateColumn) = Global.System.Convert.DBNull
-        End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Function IsCertifiedByNull() As Boolean
-            Return Me.IsNull(Me.tableSurveyFlights.CertifiedByColumn)
-        End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Sub SetCertifiedByNull()
-            Me(Me.tableSurveyFlights.CertifiedByColumn) = Global.System.Convert.DBNull
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -3039,6 +2977,47 @@ Partial Public Class WRST_CaribouDataSet
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property CertificationDate() As Date
+            Get
+                Try 
+                    Return CType(Me(Me.tableSurveys.CertificationDateColumn),Date)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'CertificationDate' in table 'Surveys' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableSurveys.CertificationDateColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property CertifiedBy() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tableSurveys.CertifiedByColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'CertifiedBy' in table 'Surveys' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableSurveys.CertifiedByColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property CertificationLevel() As String
+            Get
+                Return CType(Me(Me.tableSurveys.CertificationLevelColumn),String)
+            End Get
+            Set
+                Me(Me.tableSurveys.CertificationLevelColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Public Property SurveyFlightsRow() As SurveyFlightsRow
             Get
                 Return CType(Me.GetParentRow(Me.Table.ParentRelations("FK_Surveys_SurveyFlights")),SurveyFlightsRow)
@@ -3250,6 +3229,30 @@ Partial Public Class WRST_CaribouDataSet
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Public Sub SetTSNull()
             Me(Me.tableSurveys.TSColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function IsCertificationDateNull() As Boolean
+            Return Me.IsNull(Me.tableSurveys.CertificationDateColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub SetCertificationDateNull()
+            Me(Me.tableSurveys.CertificationDateColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function IsCertifiedByNull() As Boolean
+            Return Me.IsNull(Me.tableSurveys.CertifiedByColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub SetCertifiedByNull()
+            Me(Me.tableSurveys.CertifiedByColumn) = Global.System.Convert.DBNull
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -3870,9 +3873,6 @@ Namespace WRST_CaribouDataSetTableAdapters
             tableMapping.ColumnMappings.Add("Herd", "Herd")
             tableMapping.ColumnMappings.Add("SOPNumber", "SOPNumber")
             tableMapping.ColumnMappings.Add("SOPVersion", "SOPVersion")
-            tableMapping.ColumnMappings.Add("CertificationDate", "CertificationDate")
-            tableMapping.ColumnMappings.Add("CertifiedBy", "CertifiedBy")
-            tableMapping.ColumnMappings.Add("CertificationLevel", "CertificationLevel")
             tableMapping.ColumnMappings.Add("RecordInsertedDate", "RecordInsertedDate")
             tableMapping.ColumnMappings.Add("RecordInsertedBy", "RecordInsertedBy")
             tableMapping.ColumnMappings.Add("FlightID", "FlightID")
@@ -3888,18 +3888,15 @@ Namespace WRST_CaribouDataSetTableAdapters
             Me._adapter.InsertCommand.CommandText = "INSERT INTO SurveyFlights"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"             (Year, SurveyType, CrewNumber, Pilot, Obs"& _ 
                 "erver1, Observer2, AircraftType, TailNo, TimeDepart, TimeReturn, IsFollowUpFligh"& _ 
                 "t, SpotterPlaneTailNo, SpotterPlaneType, SpotterPlanePilot, WeatherConditions, S"& _ 
-                "nowConditions, Notes, Herd, SOPNumber, SOPVersion, CertificationDate, "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"        "& _ 
-                "     CertifiedBy, CertificationLevel, RecordInsertedDate, RecordInsertedBy, Flig"& _ 
-                "htID)"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"VALUES (@Year,@SurveyType,@CrewNumber,@Pilot,@Observer1,@Observer2,@Aircr"& _ 
-                "aftType,@TailNo,@TimeDepart,@TimeReturn,@IsFollowUpFlight,@SpotterPlaneTailNo,@S"& _ 
-                "potterPlaneType,@SpotterPlanePilot,@WeatherConditions,@SnowConditions,@Notes,@He"& _ 
-                "rd,@SOPNumber,@SOPVersion,@CertificationDate,@CertifiedBy,@CertificationLevel,@R"& _ 
-                "ecordInsertedDate,@RecordInsertedBy,@FlightID); "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"SELECT Year, SurveyType, CrewN"& _ 
-                "umber, Pilot, Observer1, Observer2, AircraftType, TailNo, TimeDepart, TimeReturn"& _ 
-                ", IsFollowUpFlight, SpotterPlaneTailNo, SpotterPlaneType, SpotterPlanePilot, Wea"& _ 
-                "therConditions, SnowConditions, Notes, Herd, SOPNumber, SOPVersion, Certificatio"& _ 
-                "nDate, CertifiedBy, CertificationLevel, RecordInsertedDate, RecordInsertedBy, Fl"& _ 
-                "ightID, TS FROM SurveyFlights WHERE (FlightID = @FlightID)"
+                "nowConditions, Notes, Herd, SOPNumber, SOPVersion, FlightID)"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"VALUES (@Year,@Sur"& _ 
+                "veyType,@CrewNumber,@Pilot,@Observer1,@Observer2,@AircraftType,@TailNo,@TimeDepa"& _ 
+                "rt,@TimeReturn,@IsFollowUpFlight,@SpotterPlaneTailNo,@SpotterPlaneType,@SpotterP"& _ 
+                "lanePilot,@WeatherConditions,@SnowConditions,@Notes,@Herd,@SOPNumber,@SOPVersion"& _ 
+                ",@FlightID); "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"SELECT Year, SurveyType, CrewNumber, Pilot, Observer1, Observer2,"& _ 
+                " AircraftType, TailNo, TimeDepart, TimeReturn, IsFollowUpFlight, SpotterPlaneTai"& _ 
+                "lNo, SpotterPlaneType, SpotterPlanePilot, WeatherConditions, SnowConditions, Not"& _ 
+                "es, Herd, SOPNumber, SOPVersion, RecordInsertedDate, RecordInsertedBy, FlightID,"& _ 
+                " TS FROM SurveyFlights WHERE (FlightID = @FlightID)"
             Me._adapter.InsertCommand.CommandType = Global.System.Data.CommandType.Text
             Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Year", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 0, 0, "Year", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@SurveyType", Global.System.Data.SqlDbType.VarChar, 2, Global.System.Data.ParameterDirection.Input, 0, 0, "SurveyType", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
@@ -3921,11 +3918,6 @@ Namespace WRST_CaribouDataSetTableAdapters
             Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Herd", Global.System.Data.SqlDbType.VarChar, 8, Global.System.Data.ParameterDirection.Input, 0, 0, "Herd", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@SOPNumber", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 0, 0, "SOPNumber", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@SOPVersion", Global.System.Data.SqlDbType.[Decimal], 5, Global.System.Data.ParameterDirection.Input, 6, 2, "SOPVersion", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@CertificationDate", Global.System.Data.SqlDbType.DateTime, 8, Global.System.Data.ParameterDirection.Input, 0, 0, "CertificationDate", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@CertifiedBy", Global.System.Data.SqlDbType.VarChar, 50, Global.System.Data.ParameterDirection.Input, 0, 0, "CertifiedBy", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@CertificationLevel", Global.System.Data.SqlDbType.VarChar, 15, Global.System.Data.ParameterDirection.Input, 0, 0, "CertificationLevel", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@RecordInsertedDate", Global.System.Data.SqlDbType.DateTime, 8, Global.System.Data.ParameterDirection.Input, 0, 0, "RecordInsertedDate", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@RecordInsertedBy", Global.System.Data.SqlDbType.NVarChar, 50, Global.System.Data.ParameterDirection.Input, 0, 0, "RecordInsertedBy", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@FlightID", Global.System.Data.SqlDbType.VarChar, 50, Global.System.Data.ParameterDirection.Input, 0, 0, "FlightID", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.UpdateCommand = New Global.System.Data.SqlClient.SqlCommand()
             Me._adapter.UpdateCommand.Connection = Me.Connection
@@ -3940,9 +3932,8 @@ Namespace WRST_CaribouDataSetTableAdapters
                 "; "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"SELECT Year, SurveyType, CrewNumber, Pilot, Observer1, Observer2, AircraftTy"& _ 
                 "pe, TailNo, TimeDepart, TimeReturn, IsFollowUpFlight, SpotterPlaneTailNo, Spotte"& _ 
                 "rPlaneType, SpotterPlanePilot, WeatherConditions, SnowConditions, Notes, Herd, S"& _ 
-                "OPNumber, SOPVersion, CertificationDate, CertifiedBy, CertificationLevel, Record"& _ 
-                "InsertedDate, RecordInsertedBy, FlightID, TS FROM SurveyFlights WHERE (FlightID "& _ 
-                "= @FlightID)"
+                "OPNumber, SOPVersion, RecordInsertedDate, RecordInsertedBy, FlightID, TS FROM Su"& _ 
+                "rveyFlights WHERE (FlightID = @FlightID)"
             Me._adapter.UpdateCommand.CommandType = Global.System.Data.CommandType.Text
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Year", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 0, 0, "Year", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@SurveyType", Global.System.Data.SqlDbType.VarChar, 2, Global.System.Data.ParameterDirection.Input, 0, 0, "SurveyType", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
@@ -3984,8 +3975,8 @@ Namespace WRST_CaribouDataSetTableAdapters
             Me._commandCollection(0).CommandText = "SELECT Year, SurveyType, CrewNumber, Pilot, Observer1, Observer2, AircraftType, T"& _ 
                 "ailNo, TimeDepart, TimeReturn, IsFollowUpFlight, SpotterPlaneTailNo, SpotterPlan"& _ 
                 "eType, SpotterPlanePilot, WeatherConditions, SnowConditions, Notes, Herd, SOPNum"& _ 
-                "ber, SOPVersion, CertificationDate, CertifiedBy, CertificationLevel, RecordInser"& _ 
-                "tedDate, RecordInsertedBy, FlightID, TS FROM dbo.SurveyFlights"
+                "ber, SOPVersion, "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"             RecordInsertedDate, RecordInsertedBy, FlightID, "& _ 
+                "TS"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"FROM   SurveyFlights"
             Me._commandCollection(0).CommandType = Global.System.Data.CommandType.Text
         End Sub
         
@@ -4091,11 +4082,6 @@ Namespace WRST_CaribouDataSetTableAdapters
                     ByVal Herd As String,  _
                     ByVal SOPNumber As Global.System.Nullable(Of Integer),  _
                     ByVal SOPVersion As Global.System.Nullable(Of Decimal),  _
-                    ByVal CertificationDate As Global.System.Nullable(Of Date),  _
-                    ByVal CertifiedBy As String,  _
-                    ByVal CertificationLevel As String,  _
-                    ByVal RecordInsertedDate As Date,  _
-                    ByVal RecordInsertedBy As String,  _
                     ByVal FlightID As String) As Integer
             Me.Adapter.InsertCommand.Parameters(0).Value = CType(Year,Integer)
             If (SurveyType Is Nothing) Then
@@ -4189,31 +4175,10 @@ Namespace WRST_CaribouDataSetTableAdapters
             Else
                 Me.Adapter.InsertCommand.Parameters(19).Value = Global.System.DBNull.Value
             End If
-            If (CertificationDate.HasValue = true) Then
-                Me.Adapter.InsertCommand.Parameters(20).Value = CType(CertificationDate.Value,Date)
-            Else
-                Me.Adapter.InsertCommand.Parameters(20).Value = Global.System.DBNull.Value
-            End If
-            If (CertifiedBy Is Nothing) Then
-                Me.Adapter.InsertCommand.Parameters(21).Value = Global.System.DBNull.Value
-            Else
-                Me.Adapter.InsertCommand.Parameters(21).Value = CType(CertifiedBy,String)
-            End If
-            If (CertificationLevel Is Nothing) Then
-                Throw New Global.System.ArgumentNullException("CertificationLevel")
-            Else
-                Me.Adapter.InsertCommand.Parameters(22).Value = CType(CertificationLevel,String)
-            End If
-            Me.Adapter.InsertCommand.Parameters(23).Value = CType(RecordInsertedDate,Date)
-            If (RecordInsertedBy Is Nothing) Then
-                Throw New Global.System.ArgumentNullException("RecordInsertedBy")
-            Else
-                Me.Adapter.InsertCommand.Parameters(24).Value = CType(RecordInsertedBy,String)
-            End If
             If (FlightID Is Nothing) Then
                 Throw New Global.System.ArgumentNullException("FlightID")
             Else
-                Me.Adapter.InsertCommand.Parameters(25).Value = CType(FlightID,String)
+                Me.Adapter.InsertCommand.Parameters(20).Value = CType(FlightID,String)
             End If
             Dim previousConnectionState As Global.System.Data.ConnectionState = Me.Adapter.InsertCommand.Connection.State
             If ((Me.Adapter.InsertCommand.Connection.State And Global.System.Data.ConnectionState.Open)  _
@@ -4532,6 +4497,9 @@ Namespace WRST_CaribouDataSetTableAdapters
             tableMapping.ColumnMappings.Add("TS", "TS")
             tableMapping.ColumnMappings.Add("EID", "EID")
             tableMapping.ColumnMappings.Add("Out", "Out")
+            tableMapping.ColumnMappings.Add("CertificationDate", "CertificationDate")
+            tableMapping.ColumnMappings.Add("CertifiedBy", "CertifiedBy")
+            tableMapping.ColumnMappings.Add("CertificationLevel", "CertificationLevel")
             Me._adapter.TableMappings.Add(tableMapping)
             Me._adapter.DeleteCommand = New Global.System.Data.SqlClient.SqlCommand()
             Me._adapter.DeleteCommand.Connection = Me.Connection
@@ -4543,16 +4511,16 @@ Namespace WRST_CaribouDataSetTableAdapters
             Me._adapter.InsertCommand.CommandText = "INSERT INTO Surveys"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"             (SightingDate, SearchArea, GroupNumber, SmallBu"& _ 
                 "ll, MediumBull, LargeBull, Bull, Cow, Calf, Adult, FrequenciesInGroup, Lat, Lon,"& _ 
                 " Out, Seen, Marked, Mode, Accuracy, RetainedAntler, DistendedUdders, CalvesAtHee"& _ 
-                "l, WaypointName, Comment, SourceFilename, FlightID, "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"             RecordInserte"& _ 
-                "dDate, RecordInsertedBy, EID)"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"VALUES (@SightingDate,@SearchArea,@GroupNumber,@S"& _ 
-                "mallBull,@MediumBull,@LargeBull,@Bull,@Cow,@Calf,@Adult,@FrequenciesInGroup,@Lat"& _ 
-                ",@Lon,@Out,@Seen,@Marked,@Mode,@Accuracy,@RetainedAntler,@DistendedUdders,@Calve"& _ 
-                "sAtHeel,@WaypointName,@Comment,@SourceFilename,@FlightID,@RecordInsertedDate,@Re"& _ 
-                "cordInsertedBy,@EID); "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"SELECT SightingDate, SearchArea, GroupNumber, SmallBull,"& _ 
-                " MediumBull, LargeBull, Bull, Cow, Calf, Adult, FrequenciesInGroup, Lat, Lon, Ou"& _ 
-                "t, Seen, Marked, Mode, Accuracy, RetainedAntler, DistendedUdders, CalvesAtHeel, "& _ 
-                "WaypointName, Comment, SourceFilename, FlightID, RecordInsertedDate, RecordInser"& _ 
-                "tedBy, TS, EID FROM Surveys WHERE (EID = @EID)"
+                "l, WaypointName, Comment, SourceFilename, FlightID, EID)"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"VALUES (@SightingDate,"& _ 
+                "@SearchArea,@GroupNumber,@SmallBull,@MediumBull,@LargeBull,@Bull,@Cow,@Calf,@Adu"& _ 
+                "lt,@FrequenciesInGroup,@Lat,@Lon,@Out,@Seen,@Marked,@Mode,@Accuracy,@RetainedAnt"& _ 
+                "ler,@DistendedUdders,@CalvesAtHeel,@WaypointName,@Comment,@SourceFilename,@Fligh"& _ 
+                "tID,@EID); "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"SELECT SightingDate, SearchArea, GroupNumber, SmallBull, MediumBull"& _ 
+                ", LargeBull, Bull, Cow, Calf, Adult, FrequenciesInGroup, Lat, Lon, Out, Seen, Ma"& _ 
+                "rked, Mode, Accuracy, RetainedAntler, DistendedUdders, CalvesAtHeel, WaypointNam"& _ 
+                "e, Comment, SourceFilename, FlightID, RecordInsertedDate, RecordInsertedBy, TS, "& _ 
+                "EID, CertificationDate, CertifiedBy, CertificationLevel FROM Surveys WHERE (EID "& _ 
+                "= @EID) ORDER BY SightingDate, GroupNumber"
             Me._adapter.InsertCommand.CommandType = Global.System.Data.CommandType.Text
             Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@SightingDate", Global.System.Data.SqlDbType.DateTime, 8, Global.System.Data.ParameterDirection.Input, 0, 0, "SightingDate", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@SearchArea", Global.System.Data.SqlDbType.VarChar, 20, Global.System.Data.ParameterDirection.Input, 0, 0, "SearchArea", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
@@ -4579,8 +4547,6 @@ Namespace WRST_CaribouDataSetTableAdapters
             Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Comment", Global.System.Data.SqlDbType.VarChar, 255, Global.System.Data.ParameterDirection.Input, 0, 0, "Comment", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@SourceFilename", Global.System.Data.SqlDbType.VarChar, 255, Global.System.Data.ParameterDirection.Input, 0, 0, "SourceFilename", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@FlightID", Global.System.Data.SqlDbType.VarChar, 50, Global.System.Data.ParameterDirection.Input, 0, 0, "FlightID", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@RecordInsertedDate", Global.System.Data.SqlDbType.DateTime, 8, Global.System.Data.ParameterDirection.Input, 0, 0, "RecordInsertedDate", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@RecordInsertedBy", Global.System.Data.SqlDbType.NVarChar, 50, Global.System.Data.ParameterDirection.Input, 0, 0, "RecordInsertedBy", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@EID", Global.System.Data.SqlDbType.VarChar, 50, Global.System.Data.ParameterDirection.Input, 0, 0, "EID", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.UpdateCommand = New Global.System.Data.SqlClient.SqlCommand()
             Me._adapter.UpdateCommand.Connection = Me.Connection
@@ -4591,13 +4557,13 @@ Namespace WRST_CaribouDataSetTableAdapters
                 "Out = @Out, Seen = @Seen, Marked = @Marked, Mode = @Mode, Accuracy = @Accuracy, "& _ 
                 "RetainedAntler = @RetainedAntler, DistendedUdders = @DistendedUdders, CalvesAtHe"& _ 
                 "el = @CalvesAtHeel, WaypointName = @WaypointName, Comment = @Comment, "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"        "& _ 
-                "     SourceFilename = @SourceFilename, FlightID = @FlightID, RecordInsertedDate "& _ 
-                "= @RecordInsertedDate, RecordInsertedBy = @RecordInsertedBy, EID = @EID"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"WHERE ("& _ 
-                "EID = @Original_EID); "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"SELECT SightingDate, SearchArea, GroupNumber, SmallBull,"& _ 
-                " MediumBull, LargeBull, Bull, Cow, Calf, Adult, FrequenciesInGroup, Lat, Lon, Ou"& _ 
-                "t, Seen, Marked, Mode, Accuracy, RetainedAntler, DistendedUdders, CalvesAtHeel, "& _ 
-                "WaypointName, Comment, SourceFilename, FlightID, RecordInsertedDate, RecordInser"& _ 
-                "tedBy, TS, EID FROM Surveys WHERE (EID = @EID)"
+                "     SourceFilename = @SourceFilename, FlightID = @FlightID"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"WHERE (EID = @Origi"& _ 
+                "nal_EID); "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"SELECT SightingDate, SearchArea, GroupNumber, SmallBull, MediumBull,"& _ 
+                " LargeBull, Bull, Cow, Calf, Adult, FrequenciesInGroup, Lat, Lon, Out, Seen, Mar"& _ 
+                "ked, Mode, Accuracy, RetainedAntler, DistendedUdders, CalvesAtHeel, WaypointName"& _ 
+                ", Comment, SourceFilename, FlightID, RecordInsertedDate, RecordInsertedBy, TS, E"& _ 
+                "ID, CertificationDate, CertifiedBy, CertificationLevel FROM Surveys WHERE (EID ="& _ 
+                " @EID) ORDER BY SightingDate, GroupNumber"
             Me._adapter.UpdateCommand.CommandType = Global.System.Data.CommandType.Text
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@SightingDate", Global.System.Data.SqlDbType.DateTime, 8, Global.System.Data.ParameterDirection.Input, 0, 0, "SightingDate", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@SearchArea", Global.System.Data.SqlDbType.VarChar, 20, Global.System.Data.ParameterDirection.Input, 0, 0, "SearchArea", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
@@ -4624,10 +4590,8 @@ Namespace WRST_CaribouDataSetTableAdapters
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Comment", Global.System.Data.SqlDbType.VarChar, 255, Global.System.Data.ParameterDirection.Input, 0, 0, "Comment", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@SourceFilename", Global.System.Data.SqlDbType.VarChar, 255, Global.System.Data.ParameterDirection.Input, 0, 0, "SourceFilename", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@FlightID", Global.System.Data.SqlDbType.VarChar, 50, Global.System.Data.ParameterDirection.Input, 0, 0, "FlightID", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@RecordInsertedDate", Global.System.Data.SqlDbType.DateTime, 8, Global.System.Data.ParameterDirection.Input, 0, 0, "RecordInsertedDate", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@RecordInsertedBy", Global.System.Data.SqlDbType.NVarChar, 50, Global.System.Data.ParameterDirection.Input, 0, 0, "RecordInsertedBy", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@EID", Global.System.Data.SqlDbType.VarChar, 50, Global.System.Data.ParameterDirection.Input, 0, 0, "EID", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_EID", Global.System.Data.SqlDbType.VarChar, 50, Global.System.Data.ParameterDirection.Input, 0, 0, "EID", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@EID", Global.System.Data.SqlDbType.VarChar, 50, Global.System.Data.ParameterDirection.Input, 0, 0, "EID", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -4647,7 +4611,8 @@ Namespace WRST_CaribouDataSetTableAdapters
                 "ull, Cow, Calf, Adult, FrequenciesInGroup, Lat, Lon, Out, Seen, Marked, Mode, Ac"& _ 
                 "curacy, RetainedAntler, DistendedUdders, CalvesAtHeel, WaypointName, Comment, So"& _ 
                 "urceFilename, FlightID, "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"             RecordInsertedDate, RecordInsertedBy, TS,"& _ 
-                " EID"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"FROM   Surveys"
+                " EID, CertificationDate, CertifiedBy, CertificationLevel"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"FROM   Surveys"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"ORDER "& _ 
+                "BY SightingDate, GroupNumber"
             Me._commandCollection(0).CommandType = Global.System.Data.CommandType.Text
         End Sub
         
@@ -4758,8 +4723,6 @@ Namespace WRST_CaribouDataSetTableAdapters
                     ByVal Comment As String,  _
                     ByVal SourceFilename As String,  _
                     ByVal FlightID As String,  _
-                    ByVal RecordInsertedDate As Date,  _
-                    ByVal RecordInsertedBy As String,  _
                     ByVal EID As String) As Integer
             Me.Adapter.InsertCommand.Parameters(0).Value = CType(SightingDate,Date)
             If (SearchArea Is Nothing) Then
@@ -4862,16 +4825,10 @@ Namespace WRST_CaribouDataSetTableAdapters
             Else
                 Me.Adapter.InsertCommand.Parameters(24).Value = CType(FlightID,String)
             End If
-            Me.Adapter.InsertCommand.Parameters(25).Value = CType(RecordInsertedDate,Date)
-            If (RecordInsertedBy Is Nothing) Then
-                Throw New Global.System.ArgumentNullException("RecordInsertedBy")
-            Else
-                Me.Adapter.InsertCommand.Parameters(26).Value = CType(RecordInsertedBy,String)
-            End If
             If (EID Is Nothing) Then
                 Throw New Global.System.ArgumentNullException("EID")
             Else
-                Me.Adapter.InsertCommand.Parameters(27).Value = CType(EID,String)
+                Me.Adapter.InsertCommand.Parameters(25).Value = CType(EID,String)
             End If
             Dim previousConnectionState As Global.System.Data.ConnectionState = Me.Adapter.InsertCommand.Connection.State
             If ((Me.Adapter.InsertCommand.Connection.State And Global.System.Data.ConnectionState.Open)  _
@@ -4918,10 +4875,8 @@ Namespace WRST_CaribouDataSetTableAdapters
                     ByVal Comment As String,  _
                     ByVal SourceFilename As String,  _
                     ByVal FlightID As String,  _
-                    ByVal RecordInsertedDate As Date,  _
-                    ByVal RecordInsertedBy As String,  _
-                    ByVal EID As String,  _
-                    ByVal Original_EID As String) As Integer
+                    ByVal Original_EID As String,  _
+                    ByVal EID As String) As Integer
             Me.Adapter.UpdateCommand.Parameters(0).Value = CType(SightingDate,Date)
             If (SearchArea Is Nothing) Then
                 Throw New Global.System.ArgumentNullException("SearchArea")
@@ -5023,21 +4978,15 @@ Namespace WRST_CaribouDataSetTableAdapters
             Else
                 Me.Adapter.UpdateCommand.Parameters(24).Value = CType(FlightID,String)
             End If
-            Me.Adapter.UpdateCommand.Parameters(25).Value = CType(RecordInsertedDate,Date)
-            If (RecordInsertedBy Is Nothing) Then
-                Throw New Global.System.ArgumentNullException("RecordInsertedBy")
+            If (Original_EID Is Nothing) Then
+                Throw New Global.System.ArgumentNullException("Original_EID")
             Else
-                Me.Adapter.UpdateCommand.Parameters(26).Value = CType(RecordInsertedBy,String)
+                Me.Adapter.UpdateCommand.Parameters(25).Value = CType(Original_EID,String)
             End If
             If (EID Is Nothing) Then
                 Throw New Global.System.ArgumentNullException("EID")
             Else
-                Me.Adapter.UpdateCommand.Parameters(27).Value = CType(EID,String)
-            End If
-            If (Original_EID Is Nothing) Then
-                Throw New Global.System.ArgumentNullException("Original_EID")
-            Else
-                Me.Adapter.UpdateCommand.Parameters(28).Value = CType(Original_EID,String)
+                Me.Adapter.UpdateCommand.Parameters(26).Value = CType(EID,String)
             End If
             Dim previousConnectionState As Global.System.Data.ConnectionState = Me.Adapter.UpdateCommand.Connection.State
             If ((Me.Adapter.UpdateCommand.Connection.State And Global.System.Data.ConnectionState.Open)  _
@@ -5052,42 +5001,6 @@ Namespace WRST_CaribouDataSetTableAdapters
                     Me.Adapter.UpdateCommand.Connection.Close
                 End If
             End Try
-        End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
-         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
-         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Update, true)>  _
-        Public Overloads Overridable Function Update( _
-                    ByVal SightingDate As Date,  _
-                    ByVal SearchArea As String,  _
-                    ByVal GroupNumber As Integer,  _
-                    ByVal SmallBull As Global.System.Nullable(Of Integer),  _
-                    ByVal MediumBull As Global.System.Nullable(Of Integer),  _
-                    ByVal LargeBull As Global.System.Nullable(Of Integer),  _
-                    ByVal Bull As Global.System.Nullable(Of Integer),  _
-                    ByVal Cow As Global.System.Nullable(Of Integer),  _
-                    ByVal Calf As Global.System.Nullable(Of Integer),  _
-                    ByVal Adult As Global.System.Nullable(Of Integer),  _
-                    ByVal FrequenciesInGroup As String,  _
-                    ByVal Lat As Decimal,  _
-                    ByVal Lon As Decimal,  _
-                    ByVal Out As Global.System.Nullable(Of Boolean),  _
-                    ByVal Seen As Boolean,  _
-                    ByVal Marked As Boolean,  _
-                    ByVal Mode As String,  _
-                    ByVal Accuracy As Global.System.Nullable(Of Integer),  _
-                    ByVal RetainedAntler As Global.System.Nullable(Of Boolean),  _
-                    ByVal DistendedUdders As Global.System.Nullable(Of Boolean),  _
-                    ByVal CalvesAtHeel As Global.System.Nullable(Of Boolean),  _
-                    ByVal WaypointName As String,  _
-                    ByVal Comment As String,  _
-                    ByVal SourceFilename As String,  _
-                    ByVal FlightID As String,  _
-                    ByVal RecordInsertedDate As Date,  _
-                    ByVal RecordInsertedBy As String,  _
-                    ByVal Original_EID As String) As Integer
-            Return Me.Update(SightingDate, SearchArea, GroupNumber, SmallBull, MediumBull, LargeBull, Bull, Cow, Calf, Adult, FrequenciesInGroup, Lat, Lon, Out, Seen, Marked, Mode, Accuracy, RetainedAntler, DistendedUdders, CalvesAtHeel, WaypointName, Comment, SourceFilename, FlightID, RecordInsertedDate, RecordInsertedBy, Original_EID, Original_EID)
         End Function
     End Class
     
