@@ -113,6 +113,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>WRST_CaribouDataSet.xsd</DependentUpon>
     </Compile>
+    <Compile Include="WRST_CaribouDataSet.vb">
+      <DependentUpon>WRST_CaribouDataSet.xsd</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Form1.resx">
