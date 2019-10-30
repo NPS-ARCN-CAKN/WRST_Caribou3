@@ -1,4 +1,5 @@
-﻿Imports System.IO
+﻿Imports System.Data.SqlClient
+Imports System.IO
 Imports Janus.Windows.GridEX
 Imports SkeeterDataTablesTranslator
 
@@ -370,7 +371,7 @@ Public Class Form1
                 If Not CurrentFlightID.Trim.Length = 0 Or CurrentHerd.Trim.Length = 0 Then
 
                     'get the structure of the destination datatable, we only need one record since the translator will clear all records anyway
-                    Dim Sql As String = "SELECT TOP 1 [SightingDate],[SearchArea],[GroupNumber],[SmallBull],[MediumBull],[LargeBull],[Bull],[Cow],[Calf],[Adult],[FrequenciesInGroup],[Lat],[Lon],[InOrOut]
+                    Dim Sql As String = "SELECT TOP 1 [SightingDate],[SearchArea],[GroupNumber],[SmallBull],[MediumBull],[LargeBull],[Bull],[Cow],[Calf],[Adult],[FrequenciesInGroup],[Lat],[Lon],[Out]
 ,[Seen],[Marked],[Mode],[Accuracy],[RetainedAntler],[DistendedUdders],[CalvesAtHeel],[WaypointName],[Comment],[SourceFilename],[FlightID],[RecordInsertedDate],[RecordInsertedBy],[EID]
   FROM [dbo].[Surveys]"
 
@@ -415,8 +416,8 @@ Public Class Form1
     ''' <param name="DestinationDataTable">DataTable. The DataTable schema into which the source DataTable's columns should be matched.</param>
     Private Sub ImportSurveyDataFromFile(DestinationDataTable As DataTable, SurveyType As SurveyType, Herd As String, FlightID As String)
         Dim DataLossMessage As String = "Important warning! The Excel driver used in this import tool may cause data loss. To avoid data loss make sure the data type of each column in the source Excel sheet is explicitly set. Do not use the Excel 'General' data type."
-        'Try
-        If Not DestinationDataTable Is Nothing Then
+        Try
+            If Not DestinationDataTable Is Nothing Then
                 If SurveyType.ToString = "PopulationEstimate" Or SurveyType.ToString = "CompositionCounts" Or SurveyType.ToString = "Radiotracking" Then
                     If Herd = "Mentasta" Or Herd = "Chisana" Then
                         If FlightID.Trim.Length > 0 Then
@@ -455,18 +456,18 @@ Public Class Form1
                                 'these items will show up in the mappings datagridview's default values column to make things a little easier
                                 Dim DefaultValuesList As New List(Of String)
                                 With DefaultValuesList
-                                'add the search areas from my.settings to the default values
-                                For Each Item In My.Settings.SearchAreas.Split(",")
-                                    .Add(Item)
-                                Next
-                                .Add("TRUE")
-                                .Add("FALSE")
+                                    'add the search areas from my.settings to the default values
+                                    For Each Item In My.Settings.SearchAreas.Split(",")
+                                        .Add(Item)
+                                    Next
+                                    .Add("TRUE")
+                                    .Add("FALSE")
 
-                                'common default values
-                                .Add(GetCurrentGridEXCellValue(Me.SurveyFlightsGridEX, "FlightID")) 'the primary key of the currently selected flight
-                                .Add(GetCurrentGridEXCellValue(Me.SurveyFlightsGridEX, "Herd")) 'the currently selected herd in the campaigns table
-                                .Add(SourceFileInfo.Name) 'the import file name
-                            End With
+                                    'common default values
+                                    .Add(GetCurrentGridEXCellValue(Me.SurveyFlightsGridEX, "FlightID")) 'the primary key of the currently selected flight
+                                    .Add(GetCurrentGridEXCellValue(Me.SurveyFlightsGridEX, "Herd")) 'the currently selected herd in the campaigns table
+                                    .Add(SourceFileInfo.Name) 'the import file name
+                                End With
 
                                 'open up a datatable translator form to allow the user to map fields from the csv file to the destination datatable
                                 Dim TranslatorForm As New SkeeterDataTablesTranslatorForm(InputDataTable, DestinationDataTable, "Import data", "Use the tool on the left to map the fields from your source data table to the destination data table.", DefaultValuesList)
@@ -475,31 +476,31 @@ Public Class Form1
                                 'at this point we have transformed the csv into a clone of the destination datatable
                                 Dim ImportDataTable As DataTable = TranslatorForm.DestinationDataTable
 
-                            'the next step is to get the transformed data into the Surveys GridEX DataTable
-                            'loop through the waypoints datatable and try to insert them into the datatable
-                            Dim TableName As String = SurveyType.ToString
-                            For Each Row As DataRow In ImportDataTable.Rows
+                                'the next step is to get the transformed data into the Surveys GridEX DataTable
+                                'loop through the waypoints datatable and try to insert them into the datatable
+                                Dim TableName As String = SurveyType.ToString
+                                For Each Row As DataRow In ImportDataTable.Rows
 
-                                'make a new row
-                                Dim NewRow As DataRow = Me.WRST_CaribouDataSet.Tables("Surveys").NewRow
-                                For Each Column As DataColumn In ImportDataTable.Columns
-                                    NewRow.Item(Column.ColumnName) = Row.Item(Column.ColumnName)
+                                    'make a new row
+                                    Dim NewRow As DataRow = Me.WRST_CaribouDataSet.Tables("Surveys").NewRow
+                                    For Each Column As DataColumn In ImportDataTable.Columns
+                                        NewRow.Item(Column.ColumnName) = Row.Item(Column.ColumnName)
+                                    Next
+
+                                    'override any selections made on the translator form
+                                    NewRow.Item("FlightID") = FlightID
+                                    NewRow.Item("RecordInsertedDate") = Now
+                                    NewRow.Item("RecordInsertedBy") = My.User.Name
+                                    NewRow.Item("EID") = Guid.NewGuid.ToString
+
+                                    'add the row
+                                    Me.WRST_CaribouDataSet.Tables("Surveys").Rows.Add(NewRow)
+
+                                    'end the edit
+                                    Me.SurveysBindingSource.EndEdit()
                                 Next
 
-                                'override any selections made on the translator form
-                                NewRow.Item("FlightID") = FlightID
-                                NewRow.Item("RecordInsertedDate") = Now
-                                NewRow.Item("RecordInsertedBy") = My.User.Name
-                                NewRow.Item("EID") = Guid.NewGuid.ToString
-
-                                'add the row
-                                Me.WRST_CaribouDataSet.Tables("Surveys").Rows.Add(NewRow)
-
-                                'end the edit
-                                Me.SurveysBindingSource.EndEdit()
-                            Next
-
-                        Catch ex As Exception
+                            Catch ex As Exception
                                 MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name & ")")
                             End Try
                         Else
@@ -514,8 +515,23 @@ Public Class Form1
             Else
                 MsgBox("DestinationDataTable cannot be nothing.")
             End If
-        'Catch ex As Exception
-        '    MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name & ")")
-        'End Try
+        Catch ex As Exception
+            MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name & ")")
+        End Try
+    End Sub
+
+    Private Sub ExecuteStoredProcedure(ProcedureName As String)
+        Try
+            Dim MySqlConnection As New SqlConnection(My.Settings.WRST_CaribouConnectionString)
+            MySqlConnection.Open()
+
+            Dim MySqlCommand As New SqlCommand(ProcedureName, MySqlConnection)
+            MySqlCommand.CommandType = CommandType.StoredProcedure
+            MySqlCommand.ExecuteNonQuery()
+            MySqlCommand.Dispose()
+            MySqlConnection.Close()
+        Catch ex As Exception
+            MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name & ")")
+        End Try
     End Sub
 End Class
