@@ -4,27 +4,39 @@ Imports Janus.Windows.GridEX
 Imports SkeeterDataTablesTranslator
 
 Public Class Form1
-    Private Sub SurveyFlightsBindingNavigatorSaveItem_Click(sender As Object, e As EventArgs)
-
-
-    End Sub
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        LoadDataset()
-        FormatGridEX(Me.SurveyFlightsGridEX)
-        FormatGridEX(Me.SurveysGridEX)
-        FormatGridEX(Me.CollaredAnimalsInGroupsGridEX)
+        Try
+            'maximize
+            Me.WindowState = FormWindowState.Maximized
 
-        'set up default values for the flights grid
-        SetSurveyFlightsGridExDefaultValues()
-        SetSurveysGridEXDefaultValues()
+            'load in the data from the WRST_Caribou SQL Server database
+            LoadDataset()
 
-        'load the survey flights gridex dropdowns
-        SetSurveyFlightsGridEXDropDowns()
-        SetUpSurveysGridEXDropDowns()
+            'format all the data grids more or less the same
+            FormatGridEX(Me.SurveyFlightsGridEX)
+            FormatGridEX(Me.SurveysGridEX)
+            FormatGridEX(Me.CollaredAnimalsInGroupsGridEX)
 
-        'load the collared animal deployments from Animal Movement into the CollaredAnimalsGridEX
-        LoadAnimalIDSCombo()
+            'set up default values for the grids
+            SetSurveyFlightsGridExDefaultValues()
+            SetSurveysGridEXDefaultValues()
+
+            'load the default values for the grid columns
+            SetUpSurveyFlightsGridEXDropDowns()
+            SetUpSurveysGridEXDropDowns()
+
+            'for some reason the surveys grid loads data when the form first loads despite no parent record being selected.
+            'visibility is reversed on the flight grid's SelectionChanged event.
+            Me.SurveysGridEX.Visible = False
+
+            'load the collared animal deployments from Animal Movement into the CollaredAnimalsGridEX
+            LoadAnimalIDSCombo()
+        Catch ex As Exception
+            MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name)
+        End Try
+
+
 
     End Sub
 
@@ -120,7 +132,7 @@ Public Class Form1
     ''' <summary>
     ''' Sets up the Flights GridEX dropdowns
     ''' </summary>
-    Private Sub SetSurveyFlightsGridEXDropDowns()
+    Private Sub SetUpSurveyFlightsGridEXDropDowns()
         Try
             Dim Grid As GridEX = Me.SurveyFlightsGridEX
             'Set up dropdowns
@@ -477,6 +489,11 @@ ORDER BY Frequency"
         End Try
     End Sub
 
+    ''' <summary>
+    ''' Returns True if the current Survey record is Certified
+    ''' </summary>
+    ''' <param name="FlightID"></param>
+    ''' <returns>Boolean</returns>
     Private Function FlightContainsCertifiedRecords(FlightID As String) As Boolean
         Dim ContainsCertifiedRecords As Boolean = False
         Try
@@ -490,6 +507,10 @@ ORDER BY Frequency"
     End Function
 
     Private Sub SurveyFlightsGridEX_SelectionChanged(sender As Object, e As EventArgs) Handles SurveyFlightsGridEX.SelectionChanged
+
+        'make the surveys grid visible
+        Me.SurveysGridEX.Visible = True
+
         'renew default values, especially to generate a new primary key value
         SetSurveyFlightsGridExDefaultValues()
 
@@ -746,18 +767,36 @@ ORDER BY Frequency"
     End Sub
 
     Private Sub SurveysGridEX_CellEdited(sender As Object, e As ColumnActionEventArgs) Handles SurveysGridEX.CellEdited
-        Try
-            Dim Grid As GridEX = sender
-            If Grid.CurrentRow.Cells("CertificationLevel").Value.trim = "Certified" Then
-            Grid.CurrentRow.Cells("CertificationDate").Value = Now
-            Grid.CurrentRow.Cells("CertifiedBy").Value = My.User.Name
-        End If
-        Catch ex As Exception
-        MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name & ")")
-        End Try
+
+        'See if the user changed the CertificationLevel cell, if so, issue warnings and record metadata
+        Dim Grid As GridEX = sender
+        DoCertificationSteps(Grid, e)
     End Sub
 
+    Private Sub DoCertificationSteps(GridEX As GridEX, e As ColumnActionEventArgs)
+        'if the user changed CertificationLevel then the action must be logged in CertificationDate and CertifiedBy
+        Try
+            Dim Row As GridEXRow = GridEX.CurrentRow
+            'make sure the cells exist
+            If Not Row.Cells("CertificationLevel") Is Nothing And Not Row.Cells("CertifiedBy") Is Nothing And Not Row.Cells("CertificationDate") Is Nothing Then
+                'if the edit changed CertificationLevel to 'Certified' and the CertifiedBy and CertificationDate cells are empty then fill them out so we know who certified the record and when
+                If Row.Cells("CertificationLevel").Value.trim = "Certified" And (IsDBNull(Row.Cells("CertifiedBy").Value) And IsDBNull(Row.Cells("CertificationDate").Value)) Then
+                    'if we get this far then the user certified the record, add the metadata
+                    If MsgBox("Important: Certifying a record locks it. You will no longer be able to edit the certified record or any related records. Please ensure the parent flight record and any related collared animal records are of analytical quality and have all defects documented. Click Yes to continue, No to cancel.", MsgBoxStyle.YesNo, "Continue?") = MsgBoxResult.Yes Then
+                        Row.Cells("CertificationDate").Value = Now
+                        Row.Cells("CertifiedBy").Value = My.User.Name
+                    Else
+                        'user chose not to certify the record. reset the certification columns
+                        Row.Cells("CertificationLevel").Value = "Raw"
+                        Row.CancelEdit()
+                    End If
+                End If
+            End If
 
+        Catch ex As Exception
+            MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name & ")")
+        End Try
+    End Sub
 
     ''' <summary>
     ''' Pulls Animals and collar deployments from Animal Movements database and loads them into the 
@@ -766,7 +805,6 @@ ORDER BY Frequency"
     Private Sub LoadAnimalIDSCombo()
         'load the collared animal deployments from Animal Movement into the CollaredAnimalsGridEX
         Dim CurrentSightingDate As String = GetCurrentGridEXCellValue(Me.SurveysGridEX, "SightingDate")
-        Debug.Print(CurrentSightingDate)
         If IsDate(CurrentSightingDate) Then
             SetUpCollaredAnimalsInGroupsGridEXDropDowns(CDate(CurrentSightingDate))
         End If
