@@ -29,8 +29,6 @@ Partial Class Form1
         Dim CollaredAnimalsInGroupsGridEX_DesignTimeLayout As Janus.Windows.GridEX.GridEXLayout = New Janus.Windows.GridEX.GridEXLayout()
         Me.SplitContainer1 = New System.Windows.Forms.SplitContainer()
         Me.SurveyFlightsGridEX = New Janus.Windows.GridEX.GridEX()
-        Me.SurveyFlightsBindingSource = New System.Windows.Forms.BindingSource(Me.components)
-        Me.WRST_CaribouDataSet = New WRST_Caribou3.WRST_CaribouDataSet()
         Me.SurveyFlightsToolStrip = New System.Windows.Forms.ToolStrip()
         Me.SurveysSplitContainer = New System.Windows.Forms.SplitContainer()
         Me.SurveysGridEX = New Janus.Windows.GridEX.GridEX()
@@ -41,21 +39,24 @@ Partial Class Form1
         Me.CollaredAnimalsInGroupsBindingSource = New System.Windows.Forms.BindingSource(Me.components)
         Me.MainToolStrip = New System.Windows.Forms.ToolStrip()
         Me.SaveToolStripButton = New System.Windows.Forms.ToolStripButton()
-        Me.SurveyFlightsTableAdapter = New WRST_Caribou3.WRST_CaribouDataSetTableAdapters.SurveyFlightsTableAdapter()
-        Me.TableAdapterManager = New WRST_Caribou3.WRST_CaribouDataSetTableAdapters.TableAdapterManager()
-        Me.CollaredAnimalsInGroupsTableAdapter = New WRST_Caribou3.WRST_CaribouDataSetTableAdapters.CollaredAnimalsInGroupsTableAdapter()
-        Me.SurveysTableAdapter = New WRST_Caribou3.WRST_CaribouDataSetTableAdapters.SurveysTableAdapter()
         Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
         Me.AutoMatchFrequenciesToAnimalsToolStripButton = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator()
         Me.ChangeOrientationToolStripButton = New System.Windows.Forms.ToolStripButton()
+        Me.ReloadDatasetToolStripButton = New System.Windows.Forms.ToolStripButton()
+        Me.ToolStripSeparator3 = New System.Windows.Forms.ToolStripSeparator()
+        Me.ToolStripSeparator4 = New System.Windows.Forms.ToolStripSeparator()
+        Me.SurveyFlightsBindingSource = New System.Windows.Forms.BindingSource(Me.components)
+        Me.WRST_CaribouDataSet = New WRST_Caribou3.WRST_CaribouDataSet()
+        Me.SurveyFlightsTableAdapter = New WRST_Caribou3.WRST_CaribouDataSetTableAdapters.SurveyFlightsTableAdapter()
+        Me.TableAdapterManager = New WRST_Caribou3.WRST_CaribouDataSetTableAdapters.TableAdapterManager()
+        Me.CollaredAnimalsInGroupsTableAdapter = New WRST_Caribou3.WRST_CaribouDataSetTableAdapters.CollaredAnimalsInGroupsTableAdapter()
+        Me.SurveysTableAdapter = New WRST_Caribou3.WRST_CaribouDataSetTableAdapters.SurveysTableAdapter()
         CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SplitContainer1.Panel1.SuspendLayout()
         Me.SplitContainer1.Panel2.SuspendLayout()
         Me.SplitContainer1.SuspendLayout()
         CType(Me.SurveyFlightsGridEX, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.SurveyFlightsBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.WRST_CaribouDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.SurveysSplitContainer, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SurveysSplitContainer.Panel1.SuspendLayout()
         Me.SurveysSplitContainer.Panel2.SuspendLayout()
@@ -66,6 +67,8 @@ Partial Class Form1
         CType(Me.CollaredAnimalsInGroupsGridEX, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.CollaredAnimalsInGroupsBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.MainToolStrip.SuspendLayout()
+        CType(Me.SurveyFlightsBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.WRST_CaribouDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'SplitContainer1
@@ -83,8 +86,8 @@ Partial Class Form1
         'SplitContainer1.Panel2
         '
         Me.SplitContainer1.Panel2.Controls.Add(Me.SurveysSplitContainer)
-        Me.SplitContainer1.Size = New System.Drawing.Size(2323, 1452)
-        Me.SplitContainer1.SplitterDistance = 457
+        Me.SplitContainer1.Size = New System.Drawing.Size(1178, 712)
+        Me.SplitContainer1.SplitterDistance = 224
         Me.SplitContainer1.TabIndex = 0
         '
         'SurveyFlightsGridEX
@@ -102,26 +105,16 @@ Partial Class Form1
         Me.SurveyFlightsGridEX.Name = "SurveyFlightsGridEX"
         Me.SurveyFlightsGridEX.RecordNavigator = True
         Me.SurveyFlightsGridEX.RowHeaders = Janus.Windows.GridEX.InheritableBoolean.[True]
-        Me.SurveyFlightsGridEX.Size = New System.Drawing.Size(2323, 432)
+        Me.SurveyFlightsGridEX.Size = New System.Drawing.Size(1178, 199)
         Me.SurveyFlightsGridEX.TabIndex = 0
         Me.SurveyFlightsGridEX.TableHeaders = Janus.Windows.GridEX.InheritableBoolean.[True]
-        '
-        'SurveyFlightsBindingSource
-        '
-        Me.SurveyFlightsBindingSource.DataMember = "SurveyFlights"
-        Me.SurveyFlightsBindingSource.DataSource = Me.WRST_CaribouDataSet
-        '
-        'WRST_CaribouDataSet
-        '
-        Me.WRST_CaribouDataSet.DataSetName = "WRST_CaribouDataSet"
-        Me.WRST_CaribouDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
         '
         'SurveyFlightsToolStrip
         '
         Me.SurveyFlightsToolStrip.ImageScalingSize = New System.Drawing.Size(24, 24)
         Me.SurveyFlightsToolStrip.Location = New System.Drawing.Point(0, 0)
         Me.SurveyFlightsToolStrip.Name = "SurveyFlightsToolStrip"
-        Me.SurveyFlightsToolStrip.Size = New System.Drawing.Size(2323, 25)
+        Me.SurveyFlightsToolStrip.Size = New System.Drawing.Size(1178, 25)
         Me.SurveyFlightsToolStrip.TabIndex = 1
         Me.SurveyFlightsToolStrip.Text = "ToolStrip2"
         '
@@ -140,8 +133,8 @@ Partial Class Form1
         '
         Me.SurveysSplitContainer.Panel2.AutoScroll = True
         Me.SurveysSplitContainer.Panel2.Controls.Add(Me.CollaredAnimalsInGroupsGridEX)
-        Me.SurveysSplitContainer.Size = New System.Drawing.Size(2323, 991)
-        Me.SurveysSplitContainer.SplitterDistance = 1471
+        Me.SurveysSplitContainer.Size = New System.Drawing.Size(1178, 484)
+        Me.SurveysSplitContainer.SplitterDistance = 745
         Me.SurveysSplitContainer.TabIndex = 0
         '
         'SurveysGridEX
@@ -157,7 +150,7 @@ Partial Class Form1
         Me.SurveysGridEX.Name = "SurveysGridEX"
         Me.SurveysGridEX.RecordNavigator = True
         Me.SurveysGridEX.RowHeaders = Janus.Windows.GridEX.InheritableBoolean.[True]
-        Me.SurveysGridEX.Size = New System.Drawing.Size(1471, 959)
+        Me.SurveysGridEX.Size = New System.Drawing.Size(745, 452)
         Me.SurveysGridEX.TabIndex = 0
         Me.SurveysGridEX.TableHeaders = Janus.Windows.GridEX.InheritableBoolean.[True]
         Me.SurveysGridEX.TotalRow = Janus.Windows.GridEX.InheritableBoolean.[True]
@@ -175,7 +168,7 @@ Partial Class Form1
         Me.SurveysToolStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ImportSurveyDataFromFileToolStripButton, Me.ToolStripSeparator1, Me.AutoMatchFrequenciesToAnimalsToolStripButton, Me.ToolStripSeparator2, Me.ChangeOrientationToolStripButton})
         Me.SurveysToolStrip.Location = New System.Drawing.Point(0, 0)
         Me.SurveysToolStrip.Name = "SurveysToolStrip"
-        Me.SurveysToolStrip.Size = New System.Drawing.Size(1471, 32)
+        Me.SurveysToolStrip.Size = New System.Drawing.Size(745, 32)
         Me.SurveysToolStrip.TabIndex = 1
         Me.SurveysToolStrip.Text = "ToolStrip2"
         '
@@ -200,7 +193,7 @@ Partial Class Form1
         Me.CollaredAnimalsInGroupsGridEX.Name = "CollaredAnimalsInGroupsGridEX"
         Me.CollaredAnimalsInGroupsGridEX.RecordNavigator = True
         Me.CollaredAnimalsInGroupsGridEX.RowHeaders = Janus.Windows.GridEX.InheritableBoolean.[True]
-        Me.CollaredAnimalsInGroupsGridEX.Size = New System.Drawing.Size(848, 991)
+        Me.CollaredAnimalsInGroupsGridEX.Size = New System.Drawing.Size(429, 484)
         Me.CollaredAnimalsInGroupsGridEX.TabIndex = 0
         Me.CollaredAnimalsInGroupsGridEX.TableHeaders = Janus.Windows.GridEX.InheritableBoolean.[True]
         '
@@ -212,10 +205,10 @@ Partial Class Form1
         'MainToolStrip
         '
         Me.MainToolStrip.ImageScalingSize = New System.Drawing.Size(24, 24)
-        Me.MainToolStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.SaveToolStripButton})
+        Me.MainToolStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.SaveToolStripButton, Me.ToolStripSeparator3, Me.ReloadDatasetToolStripButton, Me.ToolStripSeparator4})
         Me.MainToolStrip.Location = New System.Drawing.Point(0, 0)
         Me.MainToolStrip.Name = "MainToolStrip"
-        Me.MainToolStrip.Size = New System.Drawing.Size(2323, 32)
+        Me.MainToolStrip.Size = New System.Drawing.Size(1178, 32)
         Me.MainToolStrip.TabIndex = 1
         Me.MainToolStrip.Text = "ToolStrip1"
         '
@@ -227,26 +220,6 @@ Partial Class Form1
         Me.SaveToolStripButton.Name = "SaveToolStripButton"
         Me.SaveToolStripButton.Size = New System.Drawing.Size(96, 29)
         Me.SaveToolStripButton.Text = "Save edits"
-        '
-        'SurveyFlightsTableAdapter
-        '
-        Me.SurveyFlightsTableAdapter.ClearBeforeFill = True
-        '
-        'TableAdapterManager
-        '
-        Me.TableAdapterManager.BackupDataSetBeforeUpdate = False
-        Me.TableAdapterManager.CollaredAnimalsInGroupsTableAdapter = Me.CollaredAnimalsInGroupsTableAdapter
-        Me.TableAdapterManager.SurveyFlightsTableAdapter = Me.SurveyFlightsTableAdapter
-        Me.TableAdapterManager.SurveysTableAdapter = Me.SurveysTableAdapter
-        Me.TableAdapterManager.UpdateOrder = WRST_Caribou3.WRST_CaribouDataSetTableAdapters.TableAdapterManager.UpdateOrderOption.InsertUpdateDelete
-        '
-        'CollaredAnimalsInGroupsTableAdapter
-        '
-        Me.CollaredAnimalsInGroupsTableAdapter.ClearBeforeFill = True
-        '
-        'SurveysTableAdapter
-        '
-        Me.SurveysTableAdapter.ClearBeforeFill = True
         '
         'ToolStripSeparator1
         '
@@ -275,11 +248,60 @@ Partial Class Form1
         Me.ChangeOrientationToolStripButton.Size = New System.Drawing.Size(191, 29)
         Me.ChangeOrientationToolStripButton.Text = "Change orientation"
         '
+        'ReloadDatasetToolStripButton
+        '
+        Me.ReloadDatasetToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
+        Me.ReloadDatasetToolStripButton.Image = CType(resources.GetObject("ReloadDatasetToolStripButton.Image"), System.Drawing.Image)
+        Me.ReloadDatasetToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.ReloadDatasetToolStripButton.Name = "ReloadDatasetToolStripButton"
+        Me.ReloadDatasetToolStripButton.Size = New System.Drawing.Size(133, 29)
+        Me.ReloadDatasetToolStripButton.Text = "Reload dataset"
+        '
+        'ToolStripSeparator3
+        '
+        Me.ToolStripSeparator3.Name = "ToolStripSeparator3"
+        Me.ToolStripSeparator3.Size = New System.Drawing.Size(6, 32)
+        '
+        'ToolStripSeparator4
+        '
+        Me.ToolStripSeparator4.Name = "ToolStripSeparator4"
+        Me.ToolStripSeparator4.Size = New System.Drawing.Size(6, 32)
+        '
+        'SurveyFlightsBindingSource
+        '
+        Me.SurveyFlightsBindingSource.DataMember = "SurveyFlights"
+        Me.SurveyFlightsBindingSource.DataSource = Me.WRST_CaribouDataSet
+        '
+        'WRST_CaribouDataSet
+        '
+        Me.WRST_CaribouDataSet.DataSetName = "WRST_CaribouDataSet"
+        Me.WRST_CaribouDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
+        '
+        'SurveyFlightsTableAdapter
+        '
+        Me.SurveyFlightsTableAdapter.ClearBeforeFill = True
+        '
+        'TableAdapterManager
+        '
+        Me.TableAdapterManager.BackupDataSetBeforeUpdate = False
+        Me.TableAdapterManager.CollaredAnimalsInGroupsTableAdapter = Me.CollaredAnimalsInGroupsTableAdapter
+        Me.TableAdapterManager.SurveyFlightsTableAdapter = Me.SurveyFlightsTableAdapter
+        Me.TableAdapterManager.SurveysTableAdapter = Me.SurveysTableAdapter
+        Me.TableAdapterManager.UpdateOrder = WRST_Caribou3.WRST_CaribouDataSetTableAdapters.TableAdapterManager.UpdateOrderOption.InsertUpdateDelete
+        '
+        'CollaredAnimalsInGroupsTableAdapter
+        '
+        Me.CollaredAnimalsInGroupsTableAdapter.ClearBeforeFill = True
+        '
+        'SurveysTableAdapter
+        '
+        Me.SurveysTableAdapter.ClearBeforeFill = True
+        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 20.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(2323, 1484)
+        Me.ClientSize = New System.Drawing.Size(1178, 744)
         Me.Controls.Add(Me.SplitContainer1)
         Me.Controls.Add(Me.MainToolStrip)
         Me.Name = "Form1"
@@ -290,8 +312,6 @@ Partial Class Form1
         CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.SplitContainer1.ResumeLayout(False)
         CType(Me.SurveyFlightsGridEX, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.SurveyFlightsBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.WRST_CaribouDataSet, System.ComponentModel.ISupportInitialize).EndInit()
         Me.SurveysSplitContainer.Panel1.ResumeLayout(False)
         Me.SurveysSplitContainer.Panel1.PerformLayout()
         Me.SurveysSplitContainer.Panel2.ResumeLayout(False)
@@ -305,6 +325,8 @@ Partial Class Form1
         CType(Me.CollaredAnimalsInGroupsBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
         Me.MainToolStrip.ResumeLayout(False)
         Me.MainToolStrip.PerformLayout()
+        CType(Me.SurveyFlightsBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.WRST_CaribouDataSet, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -332,4 +354,7 @@ Partial Class Form1
     Friend WithEvents AutoMatchFrequenciesToAnimalsToolStripButton As ToolStripButton
     Friend WithEvents ToolStripSeparator2 As ToolStripSeparator
     Friend WithEvents ChangeOrientationToolStripButton As ToolStripButton
+    Friend WithEvents ToolStripSeparator3 As ToolStripSeparator
+    Friend WithEvents ReloadDatasetToolStripButton As ToolStripButton
+    Friend WithEvents ToolStripSeparator4 As ToolStripSeparator
 End Class

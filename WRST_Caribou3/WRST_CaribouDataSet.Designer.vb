@@ -4513,17 +4513,16 @@ Namespace WRST_CaribouDataSetTableAdapters
                 "ll, MediumBull, LargeBull, Bull, Cow, Calf, Adult, FrequenciesInGroup, Lat, Lon,"& _ 
                 " Out, Seen, Marked, Mode, Accuracy, RetainedAntler, DistendedUdders, CalvesAtHee"& _ 
                 "l, WaypointName, Comment, SourceFilename, FlightID, EID, "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"             Certific"& _ 
-                "ationDate, CertifiedBy, CertificationLevel)"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"VALUES (@SightingDate,@SearchArea,@"& _ 
-                "GroupNumber,@SmallBull,@MediumBull,@LargeBull,@Bull,@Cow,@Calf,@Adult,@Frequenci"& _ 
-                "esInGroup,@Lat,@Lon,@Out,@Seen,@Marked,@Mode,@Accuracy,@RetainedAntler,@Distende"& _ 
-                "dUdders,@CalvesAtHeel,@WaypointName,@Comment,@SourceFilename,@FlightID,@EID,@Cer"& _ 
-                "tificationDate,@CertifiedBy,"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"              'Raw');  "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"SELECT SightingDate, Sear"& _ 
-                "chArea, GroupNumber, SmallBull, MediumBull, LargeBull, Bull, Cow, Calf, Adult, F"& _ 
-                "requenciesInGroup, Lat, Lon, Out, Seen, Marked, Mode, Accuracy, RetainedAntler, "& _ 
-                "DistendedUdders, CalvesAtHeel, WaypointName, Comment, SourceFilename, FlightID, "& _ 
-                "RecordInsertedDate, RecordInsertedBy, TS, EID, CertificationDate, CertifiedBy, C"& _ 
-                "ertificationLevel FROM Surveys WHERE (EID = @EID) ORDER BY SightingDate, GroupNu"& _ 
-                "mber"
+                "ationLevel)"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"VALUES (@SightingDate,@SearchArea,@GroupNumber,@SmallBull,@MediumBu"& _ 
+                "ll,@LargeBull,@Bull,@Cow,@Calf,@Adult,@FrequenciesInGroup,@Lat,@Lon,@Out,@Seen,@"& _ 
+                "Marked,@Mode,@Accuracy,@RetainedAntler,@DistendedUdders,@CalvesAtHeel,@WaypointN"& _ 
+                "ame,@Comment,@SourceFilename,@FlightID,@EID,"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"              'Raw');   "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"SELECT S"& _ 
+                "ightingDate, SearchArea, GroupNumber, SmallBull, MediumBull, LargeBull, Bull, Co"& _ 
+                "w, Calf, Adult, FrequenciesInGroup, Lat, Lon, Out, Seen, Marked, Mode, Accuracy,"& _ 
+                " RetainedAntler, DistendedUdders, CalvesAtHeel, WaypointName, Comment, SourceFil"& _ 
+                "ename, FlightID, RecordInsertedDate, RecordInsertedBy, TS, EID, CertificationDat"& _ 
+                "e, CertifiedBy, CertificationLevel FROM Surveys WHERE (EID = @EID) ORDER BY Sigh"& _ 
+                "tingDate, GroupNumber"
             Me._adapter.InsertCommand.CommandType = Global.System.Data.CommandType.Text
             Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@SightingDate", Global.System.Data.SqlDbType.DateTime, 8, Global.System.Data.ParameterDirection.Input, 0, 0, "SightingDate", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@SearchArea", Global.System.Data.SqlDbType.VarChar, 20, Global.System.Data.ParameterDirection.Input, 0, 0, "SearchArea", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
@@ -4551,8 +4550,6 @@ Namespace WRST_CaribouDataSetTableAdapters
             Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@SourceFilename", Global.System.Data.SqlDbType.VarChar, 255, Global.System.Data.ParameterDirection.Input, 0, 0, "SourceFilename", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@FlightID", Global.System.Data.SqlDbType.VarChar, 50, Global.System.Data.ParameterDirection.Input, 0, 0, "FlightID", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@EID", Global.System.Data.SqlDbType.VarChar, 50, Global.System.Data.ParameterDirection.Input, 0, 0, "EID", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@CertificationDate", Global.System.Data.SqlDbType.DateTime, 8, Global.System.Data.ParameterDirection.Input, 0, 0, "CertificationDate", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@CertifiedBy", Global.System.Data.SqlDbType.VarChar, 50, Global.System.Data.ParameterDirection.Input, 0, 0, "CertifiedBy", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.UpdateCommand = New Global.System.Data.SqlClient.SqlCommand()
             Me._adapter.UpdateCommand.Connection = Me.Connection
             Me._adapter.UpdateCommand.CommandText = "UPDATE Surveys"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"SET       SightingDate = @SightingDate, SearchArea = @SearchArea,"& _ 
@@ -4732,9 +4729,7 @@ Namespace WRST_CaribouDataSetTableAdapters
                     ByVal Comment As String,  _
                     ByVal SourceFilename As String,  _
                     ByVal FlightID As String,  _
-                    ByVal EID As String,  _
-                    ByVal CertificationDate As Global.System.Nullable(Of Date),  _
-                    ByVal CertifiedBy As String) As Integer
+                    ByVal EID As String) As Integer
             Me.Adapter.InsertCommand.Parameters(0).Value = CType(SightingDate,Date)
             If (SearchArea Is Nothing) Then
                 Throw New Global.System.ArgumentNullException("SearchArea")
@@ -4840,16 +4835,6 @@ Namespace WRST_CaribouDataSetTableAdapters
                 Throw New Global.System.ArgumentNullException("EID")
             Else
                 Me.Adapter.InsertCommand.Parameters(25).Value = CType(EID,String)
-            End If
-            If (CertificationDate.HasValue = true) Then
-                Me.Adapter.InsertCommand.Parameters(26).Value = CType(CertificationDate.Value,Date)
-            Else
-                Me.Adapter.InsertCommand.Parameters(26).Value = Global.System.DBNull.Value
-            End If
-            If (CertifiedBy Is Nothing) Then
-                Me.Adapter.InsertCommand.Parameters(27).Value = Global.System.DBNull.Value
-            Else
-                Me.Adapter.InsertCommand.Parameters(27).Value = CType(CertifiedBy,String)
             End If
             Dim previousConnectionState As Global.System.Data.ConnectionState = Me.Adapter.InsertCommand.Connection.State
             If ((Me.Adapter.InsertCommand.Connection.State And Global.System.Data.ConnectionState.Open)  _

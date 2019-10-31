@@ -13,6 +13,10 @@ Public Class Form1
             'load in the data from the WRST_Caribou SQL Server database
             LoadDataset()
 
+            'For Each col As DataColumn In WRST_CaribouDataSet.Tables("Surveys").Columns
+            '    Debug.Print("UPDATE Surveys SET " & col.ColumnName & " = NULL Where  " & col.ColumnName & " = 0;")
+            'Next
+
             'format all the data grids more or less the same
             FormatGridEX(Me.SurveyFlightsGridEX)
             FormatGridEX(Me.SurveysGridEX)
@@ -93,15 +97,7 @@ Public Class Form1
             Next
             Grid.RootTable.Columns("SOPVersion").DefaultValue = MaxSOPVersion
 
-            'set up default values for child tables and also set up a header for user context
-            'If Not Me.SurveyFlightsGridEX.CurrentRow Is Nothing Then
-            '    If Not Me.SurveyFlightsGridEX.CurrentRow.Cells("FlightID") Is Nothing Then
 
-            '        'set up flightid default values for child tables
-            '        Dim FlightID As String = GetCurrentGridEXCellValue(Me.SurveyFlightsGridEX, "FlightID")
-            '        Me.SurveysGridEX.RootTable.Columns("FlightID").DefaultValue = FlightID
-            '    End If
-            'End If
         Catch ex As Exception
             MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name & ")")
         End Try
@@ -248,7 +244,7 @@ Collars ON CollarDeployments.CollarManufacturer = Collars.CollarManufacturer AND
 WHERE        (Animals.ProjectId = 'WRST_Caribou') 
 And (DeploymentDate < '" & SightingDate & "') and (RetrievalDate IS NULL Or RetrievalDate > '" & SightingDate & "')
 ORDER BY Frequency"
-        Debug.Print(Sql)
+
         Dim CollaredAnimalsDataTable As DataTable = GetDataTable(My.Settings.Animal_MovementConnectionString, Sql)
 
         'set up the search area column to accept a dropdown
@@ -286,22 +282,24 @@ ORDER BY Frequency"
     ''' <returns></returns>
     Private Function GetCurrentGridEXCellValue(GridEX As GridEX, GridEXColumnKey As String) As String
         Dim CellValue As String = ""
-        Try
-            'get the current row of the VS GridEX
-            If Not GridEX.CurrentRow Is Nothing Then
-                Dim CurrentRow As GridEXRow = GridEX.CurrentRow
-                If Not CurrentRow.Cells(GridEXColumnKey) Is Nothing Then
-                    If Not IsDBNull(CurrentRow.Cells(GridEXColumnKey).Value) Then
-                        CellValue = CurrentRow.Cells(GridEXColumnKey).Value
-                    Else
-                        CellValue = ""
+        'Try
+        'get the current row of the VS GridEX
+        If Not GridEX Is Nothing Then
+                If Not GridEX.CurrentRow Is Nothing Then
+                    Dim CurrentRow As GridEXRow = GridEX.CurrentRow
+                    If Not CurrentRow.Cells(GridEXColumnKey) Is Nothing Then
+                        If Not IsDBNull(CurrentRow.Cells(GridEXColumnKey).Value) Then
+                            CellValue = CurrentRow.Cells(GridEXColumnKey).Value
+                        Else
+                            CellValue = ""
+                        End If
                     End If
                 End If
             End If
-        Catch ex As Exception
-            MsgBox(ex.Message & " " & System.Reflection.MethodBase.GetCurrentMethod.Name)
-        End Try
-        Return CellValue
+            'Catch ex As Exception
+            '    MsgBox(ex.Message & " " & System.Reflection.MethodBase.GetCurrentMethod.Name)
+            'End Try
+            Return CellValue
     End Function
 
     ''' <summary>
@@ -503,7 +501,7 @@ ORDER BY Frequency"
         Catch ex As Exception
             MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name & ")")
         End Try
-        Return False
+        Return ContainsCertifiedRecords
     End Function
 
     Private Sub SurveyFlightsGridEX_SelectionChanged(sender As Object, e As EventArgs) Handles SurveyFlightsGridEX.SelectionChanged
@@ -513,6 +511,12 @@ ORDER BY Frequency"
 
         'renew default values, especially to generate a new primary key value
         SetSurveyFlightsGridExDefaultValues()
+
+        'renew the dropdowns
+        SetUpSurveyFlightsGridEXDropDowns()
+
+        'update the SurveyFlights header
+        UpdateSurveyFlightsGridEXHeader()
 
         'lock editing on flight records if certified survey records exist
         LockCertifiedRecords()
@@ -525,18 +529,10 @@ ORDER BY Frequency"
         'disallow edits on certified records
         LockCertifiedRecords()
 
-        'update the collared animals gridex with any frequencies found in this caribou group. this makes matching frequencies to animals easier
-        Me.CollaredAnimalsInGroupsGridEX.RootTable.Caption = "Collared animals in group"
-        If Not IsDBNull(GetCurrentGridEXCellValue(Me.SurveysGridEX, "FrequenciesInGroup")) Then
-            If Not GetCurrentGridEXCellValue(Me.SurveysGridEX, "FrequenciesInGroup") Is Nothing Then
-                Dim FrequenciesInGroup As String = GetCurrentGridEXCellValue(Me.SurveysGridEX, "FrequenciesInGroup")
-                If FrequenciesInGroup.Trim.Length > 0 Then
-                    Me.CollaredAnimalsInGroupsGridEX.RootTable.Caption = "Collared animals in group (Current frequencies: " & FrequenciesInGroup
-                End If
-            End If
-        End If
+        'update the CollaredAnimalsInGroupsGridEX header
+        UpdateCollaredAnimalsInGroupsGridEXHeader()
 
-
+        PerformQCChecks()
     End Sub
 
     Private Sub CollaredAnimalsInGroupsGridEX_SelectionChanged(sender As Object, e As EventArgs) Handles CollaredAnimalsInGroupsGridEX.SelectionChanged
@@ -782,7 +778,13 @@ ORDER BY Frequency"
                 'if the edit changed CertificationLevel to 'Certified' and the CertifiedBy and CertificationDate cells are empty then fill them out so we know who certified the record and when
                 If Row.Cells("CertificationLevel").Value.trim = "Certified" And (IsDBNull(Row.Cells("CertifiedBy").Value) And IsDBNull(Row.Cells("CertificationDate").Value)) Then
                     'if we get this far then the user certified the record, add the metadata
-                    If MsgBox("Important: Certifying a record locks it. You will no longer be able to edit the certified record or any related records. Please ensure the parent flight record and any related collared animal records are of analytical quality and have all defects documented. Click Yes to continue, No to cancel.", MsgBoxStyle.YesNo, "Continue?") = MsgBoxResult.Yes Then
+                    If MsgBox("IMPORTANT: Certification should be the very last step of the data processing life cycle as it will lock the current record against future changes. You will not be able to undo this action using this interface.
+
+Also note that the parent Flight record and any related collared caribou association records will become locked as well. 
+
+Ensure this record and any related records are of finished analytical quality, with any defects addressed and documented, before proceeding.
+
+Click Yes to certify and lock the current record. Click No to cancel.", MsgBoxStyle.YesNo, "Certify this record?") = MsgBoxResult.Yes Then
                         Row.Cells("CertificationDate").Value = Now
                         Row.Cells("CertifiedBy").Value = My.User.Name
                     Else
@@ -811,6 +813,83 @@ ORDER BY Frequency"
     End Sub
 
     ''' <summary>
+    ''' Update the CollaredAnimalsInGroupsGridEX's caption
+    ''' </summary>
+    Private Sub UpdateCollaredAnimalsInGroupsGridEXHeader()
+        'update the collared animals gridex with any frequencies found in this caribou group. this makes matching frequencies to animals easier
+        Me.CollaredAnimalsInGroupsGridEX.RootTable.Caption = "Collared animals in group"
+        If Not IsDBNull(GetCurrentGridEXCellValue(Me.SurveysGridEX, "FrequenciesInGroup")) Then
+            If Not GetCurrentGridEXCellValue(Me.SurveysGridEX, "FrequenciesInGroup") Is Nothing Then
+                Dim FrequenciesInGroup As String = GetCurrentGridEXCellValue(Me.SurveysGridEX, "FrequenciesInGroup")
+                If FrequenciesInGroup.Trim.Length > 0 Then
+                    Me.CollaredAnimalsInGroupsGridEX.RootTable.Caption = "Collared animals in group (Current frequencies: " & FrequenciesInGroup
+                End If
+            End If
+        End If
+    End Sub
+
+    ''' <summary>
+    ''' Update the SurveyFlightsGridEX's caption
+    ''' </summary>
+    Private Sub UpdateSurveyFlightsGridEXHeader()
+        'update the collared animals gridex with any frequencies found in this caribou group. this makes matching frequencies to animals easier
+        Me.SurveyFlightsGridEX.RootTable.Caption = "Flights"
+
+        'update the caption with the info
+        If Not IsDBNull(GetCurrentGridEXCellValue(Me.SurveyFlightsGridEX, "TimeDepart")) And Not IsDBNull(GetCurrentGridEXCellValue(Me.SurveyFlightsGridEX, "Herd")) And Not IsDBNull(GetCurrentGridEXCellValue(Me.SurveyFlightsGridEX, "SurveyType")) And Not IsDBNull(GetCurrentGridEXCellValue(Me.SurveyFlightsGridEX, "Observer1")) And Not IsDBNull(GetCurrentGridEXCellValue(Me.SurveyFlightsGridEX, "TailNo")) Then
+            Dim TimeDepart As String = GetCurrentGridEXCellValue(Me.SurveyFlightsGridEX, "TimeDepart")
+            Dim Herd As String = GetCurrentGridEXCellValue(Me.SurveyFlightsGridEX, "Herd")
+            Dim SurveyType As String = GetCurrentGridEXCellValue(Me.SurveyFlightsGridEX, "SurveyType")
+            Dim TailNo As String = GetCurrentGridEXCellValue(Me.SurveyFlightsGridEX, "TailNo")
+            Dim Observer1 As String = GetCurrentGridEXCellValue(Me.SurveyFlightsGridEX, "Observer1")
+            Me.SurveyFlightsGridEX.RootTable.Caption = "Flight: " & TimeDepart & " " & Herd & " " & SurveyType & " " & TailNo & " " & Observer1
+        End If
+    End Sub
+
+    Private Sub ReconcileFrequencies()
+
+    End Sub
+
+    ''' <summary>
+    ''' Returns the number of comma separated frequencies in FrequenciesInGroup
+    ''' </summary>
+    ''' <param name="EID"></param>
+    ''' <returns></returns>
+    Private Function GetNumberOfFrequenciesInGroup(EID As String) As Integer
+
+    End Function
+
+    Private Sub PerformQCChecks()
+        'check that the number of frequencies in Surveys.FrequenciesInGroup column match the number of items in the CollaredAnimalsInGroups table for the record
+        'Try
+        For Each Row As GridEXRow In SurveysGridEX.GetRows
+            If Not IsDBNull(Row.Cells("FrequenciesInGroup").Value) Then
+                Dim FrequenciesInGroup As String = Row.Cells("FrequenciesInGroup").Value
+                Dim EID As String = Row.Cells("EID").Value
+                Dim NumberOfFrequencies As Integer = 0
+                Dim NumberOfAnimalIDs As Integer = 0
+                For Each Frequency In FrequenciesInGroup.Split(",")
+                    Frequency = Frequency.Trim
+                    If IsNumeric(Frequency.Trim) = True Then
+                        NumberOfFrequencies = NumberOfFrequencies + 1
+                        Dim Filter As String = "EID = '" & EID & "'"
+                        Dim AnimalIDsDataView As New DataView(WRST_CaribouDataSet.Tables("CollaredAnimalsInGroups"), Filter, "", DataViewRowState.CurrentRows)
+                        NumberOfAnimalIDs = AnimalIDsDataView.Count
+                    End If
+                Next
+                Row.BeginEdit()
+                Row.Cells("FrequenciesCount").Value = NumberOfFrequencies
+                Row.Cells("NumAnimalIDs").Value = NumberOfAnimalIDs
+                Row.EndEdit()
+            End If
+        Next
+
+        'Catch ex As Exception
+        '    Debug.Print(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name & ")")
+        'End Try
+    End Sub
+
+    ''' <summary>
     ''' Auto-matches a GPS collar Frequency to an AnimalID in the Animal Movement database. Helper sub to process GridEX rows from AutomatchFrequenciesToAnimals()
     ''' </summary>
     ''' <param name="Row"></param>
@@ -835,13 +914,13 @@ ORDER BY Frequency"
                             Frequency = Frequency.Trim
                             If IsNumeric(Frequency.Trim) = True Then
                                 Dim AnimalID As String = GetAnimalIDFromFrequencyAndObservationDate(Frequency, SightingDate)
-                                Dim Comment As String = ""
-                                If AnimalID.Length = 0 Then
-                                    'the collar was not found in the AM database, add to the list so we can inform the user of data quality issues.
-                                    MissingFrequenciesArrayList.Add(Frequency & "," & SightingDate)
-                                    AnimalID = "FRQ: " & Frequency
-                                    Comment = "Frequency not found in AM at time of insertion (" & My.User.Name & " " & Now & ")"
-                                End If
+                                'Dim Comment As String = ""
+                                'If AnimalID.Length = 0 Then
+                                '    'the collar was not found in the AM database, add to the list so we can inform the user of data quality issues.
+                                '    MissingFrequenciesArrayList.Add(Frequency & "," & SightingDate)
+                                '    AnimalID = "FRQ: " & Frequency
+                                '    Comment = "Frequency not found in AM at time of insertion (" & My.User.Name & " " & Now & ")"
+                                'End If
 
                                 'add the animalid to the XrefDataTable
                                 Dim XrefDataTable As DataTable = Me.WRST_CaribouDataSet.Tables("CollaredAnimalsInGroups")
@@ -854,17 +933,18 @@ ORDER BY Frequency"
                                     With XrefDataRow
                                         .Item("AnimalID") = AnimalID
                                         .Item("EID") = Row.Cells("EID").Value
-                                        .Item("Comment") = Comment
+                                        '.Item("Comment") = Comment
                                     End With
-                                    XrefDataTable.Rows.Add(XrefDataRow)
+                                    If AnimalID.Trim.Length > 0 Then
+                                        XrefDataTable.Rows.Add(XrefDataRow)
+                                    End If
+
                                 End If
                             End If
                         Next
                     End If
                 End If
             End If
-
-
         Catch ex As Exception
             MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name & ")")
         End Try
@@ -914,5 +994,10 @@ ORDER BY Frequency"
         Else
             SurveysSplitContainer.Orientation = Orientation.Vertical
         End If
+    End Sub
+
+    Private Sub ReloadDatasetToolStripButton_Click(sender As Object, e As EventArgs) Handles ReloadDatasetToolStripButton.Click
+        AskToSaveChanges()
+        LoadDataset()
     End Sub
 End Class
