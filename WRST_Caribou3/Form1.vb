@@ -24,7 +24,8 @@ Public Class Form1
         SetUpSurveysGridEXDropDowns()
 
         'load the collared animal deployments from Animal Movement into the CollaredAnimalsGridEX
-        SetUpCollaredAnimalsInGroupsGridEXDropDowns()
+        LoadAnimalIDSCombo()
+
     End Sub
 
     Private Sub LoadDataset()
@@ -216,21 +217,26 @@ Public Class Form1
     ''' <summary>
     ''' Sets up the SurveysGridEX default values and DropDowns/Combos
     ''' </summary>
-    Private Sub SetUpCollaredAnimalsInGroupsGridEXDropDowns()
+    Private Sub SetUpCollaredAnimalsInGroupsGridEXDropDowns(SightingDate As Date)
         'Try
         'Set up default values
         Dim Grid As GridEX = Me.CollaredAnimalsInGroupsGridEX
 
-        'search areas dropdown
-        'this line loads the csv list of search areas from my.settings into a datatable
-        Dim Sql As String = "SELECT Animals.AnimalId,   Collars.Frequency,CollarDeployments.DeploymentDate, CollarDeployments.RetrievalDate, 
+
+        Dim Sql As String = "SELECT Animals.AnimalId
+, CONVERT(Varchar(20), Collars.Frequency) + ' - ' + Animals.AnimalId + ' Deployed: ' + CONVERT(varchar(20),DeploymentDate)  +  ISNULL(' Collar retrieved: ' + CONVERT(varchar(20), RetrievalDate),'') +  ISNULL(' DEAD: ' + CONVERT(varchar(20), MortalityDate),'') AS CollaredCaribou
+,Collars.Frequency,CollarDeployments.DeploymentDate, CollarDeployments.RetrievalDate, 
 Animals.MortalityDate, Collars.DisposalDate, Collars.HasGps, CollarDeployments.CollarManufacturer, Collars.CollarModel, Collars.SerialNumber, Animals.Species, Animals.Gender, Animals.GroupName, 
-Animals.Description, Collars.Manager, Collars.Owner, Collars.Notes AS CollarNotes, CONVERT(Varchar(20), Collars.Frequency) + ' - ' + Animals.AnimalId AS CollaredCaribou, CollarDeployments.CollarId, Animals.ProjectId, CollarDeployments.DeploymentId
+Animals.Description, Collars.Manager, Collars.Owner, Collars.Notes AS CollarNotes
+
+, CollarDeployments.CollarId, Animals.ProjectId, CollarDeployments.DeploymentId
 FROM            Animals INNER JOIN
 CollarDeployments ON Animals.ProjectId = CollarDeployments.ProjectId AND Animals.AnimalId = CollarDeployments.AnimalId INNER JOIN
 Collars ON CollarDeployments.CollarManufacturer = Collars.CollarManufacturer AND CollarDeployments.CollarId = Collars.CollarId
-WHERE        (Animals.ProjectId = 'WRST_Caribou')
+WHERE        (Animals.ProjectId = 'WRST_Caribou') 
+And (DeploymentDate < '" & SightingDate & "') and (RetrievalDate IS NULL Or RetrievalDate > '" & SightingDate & "')
 ORDER BY Frequency"
+        Debug.Print(Sql)
         Dim CollaredAnimalsDataTable As DataTable = GetDataTable(My.Settings.Animal_MovementConnectionString, Sql)
 
         'set up the search area column to accept a dropdown
@@ -247,13 +253,13 @@ ORDER BY Frequency"
         If CollaredAnimalsDataTable.Rows.Count > 0 Then
             For Each Row As DataRow In CollaredAnimalsDataTable.Rows
                 Dim AnimalID As String = Row.Item("AnimalID")
-                Dim Frequency As String = Row.Item("Frequency")
-                AnimalsList.Add(AnimalID, AnimalID)
+                Dim CollaredCaribou As String = Row.Item("CollaredCaribou")
+                AnimalsList.Add(AnimalID, AnimalID & " (" & CollaredCaribou & ")")
             Next
-        Else
-            For i As Integer = 1 To 10
-                AnimalsList.Add("TEST " & i, "TEST " & i & " (Frequency: " & i & i + 6 & i + 5 & "." & i + 456789 & ")")
-            Next
+            'Else
+            '    For i As Integer = 1 To 10
+            '        AnimalsList.Add("TEST " & i, "TEST " & i & " (Frequency: " & i & i + 6 & i + 5 & "." & i + 456789 & ")")
+            '    Next
         End If
         'Catch ex As Exception
         '    MsgBox(ex.Message & " " & System.Reflection.MethodBase.GetCurrentMethod.Name)
@@ -273,8 +279,10 @@ ORDER BY Frequency"
             If Not GridEX.CurrentRow Is Nothing Then
                 Dim CurrentRow As GridEXRow = GridEX.CurrentRow
                 If Not CurrentRow.Cells(GridEXColumnKey) Is Nothing Then
-                    If Not IsDBNull(CurrentRow.Cells(GridEXColumnKey)) Then
+                    If Not IsDBNull(CurrentRow.Cells(GridEXColumnKey).Value) Then
                         CellValue = CurrentRow.Cells(GridEXColumnKey).Value
+                    Else
+                        CellValue = ""
                     End If
                 End If
             End If
@@ -389,6 +397,11 @@ ORDER BY Frequency"
     End Sub
 
     Private Sub Form1_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
+        AskToSaveChanges()
+    End Sub
+
+
+    Private Sub AskToSaveChanges()
         If WRST_CaribouDataSet.HasChanges = True Then
             If MsgBox("You have unsaved changes. Save to database?", MsgBoxStyle.YesNo, "Save changes?") = MsgBoxResult.Yes Then
                 SaveDataset()
@@ -396,87 +409,121 @@ ORDER BY Frequency"
         End If
     End Sub
 
-    Private Sub SurveysGridEX_SelectionChanged(sender As Object, e As EventArgs) Handles SurveysGridEX.SelectionChanged
-        'renew default values, especially to generate a new primary key value
-        SetSurveysGridEXDefaultValues()
-
-        'disallow edits on certified records
-        LockCertifiedSurveyRecordEdits()
-    End Sub
-
-    Private Sub LockFlightRecordsIfCertifiedDataExists()
-        Dim CurrentFlightID As String = GetCurrentGridEXCellValue(Me.SurveyFlightsGridEX, "FlightID")
-        Dim Filter As String = "FlightID='" & CurrentFlightID & "' And CertificationLevel = 'Certified'"
-        Dim DV As New DataView(WRST_CaribouDataSet.Tables("Surveys"), Filter, "", DataViewRowState.CurrentRows)
-        If DV.Count > 0 Then
-            'disallow survey edits
-            With Me.SurveyFlightsGridEX
-                .AllowAddNew = InheritableBoolean.True
-                .AllowDelete = InheritableBoolean.False
-                .AllowEdit = InheritableBoolean.False
-            End With
-        Else
-            'allow survey edits
-            With Me.SurveyFlightsGridEX
-                .AllowAddNew = InheritableBoolean.True
-                .AllowDelete = InheritableBoolean.True
-                .AllowEdit = InheritableBoolean.True
-            End With
-        End If
-    End Sub
 
     ''' <summary>
     ''' If the current Surveys record CertificationLevel value is Certified then lock all the Gridexes so nothing can be edited.
     ''' </summary>
-    Private Sub LockCertifiedSurveyRecordEdits()
-        ' CertificationLevel = 'Certified' means the record and related records should be locked
-        Dim RecordIsCertified As Boolean = GetCurrentGridEXCellValue(Me.SurveysGridEX, "CertificationLevel") = "Certified"
+    Private Sub LockCertifiedRecords()
+        Try
+            'first find out if any survey records are certified, if so then lock the parent flight GridEX so the flight record is unchanged
+            If FlightContainsCertifiedRecords(GetCurrentGridEXCellValue(Me.SurveyFlightsGridEX, "FlightID")) = True Then
 
-        'if the record is certified
-        If RecordIsCertified = True Then
+                'disallow survey edits
+                With Me.SurveyFlightsGridEX
+                    .AllowAddNew = InheritableBoolean.True
+                    .AllowDelete = InheritableBoolean.False
+                    .AllowEdit = InheritableBoolean.False
+                End With
 
-            'disallow survey edits
-            With Me.SurveysGridEX
-                .AllowAddNew = InheritableBoolean.False
-                .AllowDelete = InheritableBoolean.False
-                .AllowEdit = InheritableBoolean.False
-            End With
+            Else
 
-            'disable the collared animals grid also
-            With Me.CollaredAnimalsInGroupsGridEX
-                .AllowAddNew = InheritableBoolean.False
-                .AllowDelete = InheritableBoolean.False
-                .AllowEdit = InheritableBoolean.False
-            End With
-        Else
-            'allow survey edits
-            With Me.SurveysGridEX
-                .AllowAddNew = InheritableBoolean.True
-                .AllowDelete = InheritableBoolean.True
-                .AllowEdit = InheritableBoolean.True
-            End With
+                'allow survey edits
+                With Me.SurveyFlightsGridEX
+                    .AllowAddNew = InheritableBoolean.True
+                    .AllowDelete = InheritableBoolean.True
+                    .AllowEdit = InheritableBoolean.True
+                End With
+            End If
 
-            'allow edits to collared animals grid also
-            With Me.CollaredAnimalsInGroupsGridEX
-                .AllowAddNew = InheritableBoolean.True
-                .AllowDelete = InheritableBoolean.True
-                .AllowEdit = InheritableBoolean.True
-            End With
-        End If
+
+            'next, if the current Survey record is Certified then lock the GridEX
+            Dim RecordIsCertified As Boolean = GetCurrentGridEXCellValue(Me.SurveysGridEX, "CertificationLevel") = "Certified"
+
+            'if the record is certified
+            If RecordIsCertified = True Then
+
+                'disallow survey edits
+                With Me.SurveysGridEX
+                    .AllowAddNew = InheritableBoolean.False
+                    .AllowDelete = InheritableBoolean.False
+                    .AllowEdit = InheritableBoolean.False
+                End With
+
+                'disable the collared animals grid also
+                With Me.CollaredAnimalsInGroupsGridEX
+                    .AllowAddNew = InheritableBoolean.False
+                    .AllowDelete = InheritableBoolean.False
+                    .AllowEdit = InheritableBoolean.False
+                End With
+
+            Else
+
+                'allow survey edits
+                With Me.SurveysGridEX
+                    .AllowAddNew = InheritableBoolean.True
+                    .AllowDelete = InheritableBoolean.True
+                    .AllowEdit = InheritableBoolean.True
+                End With
+
+                'allow edits to collared animals grid also
+                With Me.CollaredAnimalsInGroupsGridEX
+                    .AllowAddNew = InheritableBoolean.True
+                    .AllowDelete = InheritableBoolean.True
+                    .AllowEdit = InheritableBoolean.True
+                End With
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name & ")")
+        End Try
     End Sub
 
+    Private Function FlightContainsCertifiedRecords(FlightID As String) As Boolean
+        Dim ContainsCertifiedRecords As Boolean = False
+        Try
+            Dim Filter As String = "FlightID='" & FlightID & "' And CertificationLevel = 'Certified'"
+            Dim DV As New DataView(WRST_CaribouDataSet.Tables("Surveys"), Filter, "", DataViewRowState.CurrentRows)
+            If DV.Count > 0 Then ContainsCertifiedRecords = True
+        Catch ex As Exception
+            MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name & ")")
+        End Try
+        Return False
+    End Function
 
     Private Sub SurveyFlightsGridEX_SelectionChanged(sender As Object, e As EventArgs) Handles SurveyFlightsGridEX.SelectionChanged
         'renew default values, especially to generate a new primary key value
         SetSurveyFlightsGridExDefaultValues()
 
         'lock editing on flight records if certified survey records exist
-        LockFlightRecordsIfCertifiedDataExists()
+        LockCertifiedRecords()
+    End Sub
+
+    Private Sub SurveysGridEX_SelectionChanged(sender As Object, e As EventArgs) Handles SurveysGridEX.SelectionChanged
+        'renew default values, especially to generate a new primary key value
+        SetSurveysGridEXDefaultValues()
+
+        'disallow edits on certified records
+        LockCertifiedRecords()
+
+        'update the collared animals gridex with any frequencies found in this caribou group. this makes matching frequencies to animals easier
+        Me.CollaredAnimalsInGroupsGridEX.RootTable.Caption = "Collared animals in group"
+        If Not IsDBNull(GetCurrentGridEXCellValue(Me.SurveysGridEX, "FrequenciesInGroup")) Then
+            If Not GetCurrentGridEXCellValue(Me.SurveysGridEX, "FrequenciesInGroup") Is Nothing Then
+                Dim FrequenciesInGroup As String = GetCurrentGridEXCellValue(Me.SurveysGridEX, "FrequenciesInGroup")
+                If FrequenciesInGroup.Trim.Length > 0 Then
+                    Me.CollaredAnimalsInGroupsGridEX.RootTable.Caption = "Collared animals in group (Current frequencies: " & FrequenciesInGroup
+                End If
+            End If
+        End If
+
+
     End Sub
 
     Private Sub CollaredAnimalsInGroupsGridEX_SelectionChanged(sender As Object, e As EventArgs) Handles CollaredAnimalsInGroupsGridEX.SelectionChanged
         'renew default values, especially to generate a new primary key value
+        LockCertifiedRecords()
 
+        'load the animalids from animal movements into the selector combo
+        LoadAnimalIDSCombo()
     End Sub
 
 
@@ -495,9 +542,38 @@ ORDER BY Frequency"
                 If Not CurrentFlightID.Trim.Length = 0 Or CurrentHerd.Trim.Length = 0 Then
 
                     'get the structure of the destination datatable, we only need one record since the translator will clear all records anyway
-                    Dim Sql As String = "SELECT TOP 1 [SightingDate],[SearchArea],[GroupNumber],[SmallBull],[MediumBull],[LargeBull],[Bull],[Cow],[Calf],[Adult],[FrequenciesInGroup],[Lat],[Lon],[Out]
-,[Seen],[Marked],[Mode],[Accuracy],[RetainedAntler],[DistendedUdders],[CalvesAtHeel],[WaypointName],[Comment],[SourceFilename],[FlightID],[RecordInsertedDate],[RecordInsertedBy],[EID]
-  FROM [dbo].[Surveys]"
+                    Dim Sql As String = "SELECT TOP 1 [SightingDate]
+,[SearchArea]
+,[GroupNumber]
+,[SmallBull]
+,[MediumBull]
+,[LargeBull]
+,[Bull]
+,[Cow]
+,[Calf]
+,[Adult]
+,[FrequenciesInGroup]
+,[Lat]
+,[Lon]
+,[Out]
+,[Seen]
+,[Marked]
+,[Mode]
+,[Accuracy]
+,[RetainedAntler]
+,[DistendedUdders]
+,[CalvesAtHeel]
+,[WaypointName]
+,[Comment]
+,[SourceFilename]
+,[FlightID]
+,[RecordInsertedDate]
+,[RecordInsertedBy]
+,[EID]
+,[CertificationDate]
+,[CertifiedBy]
+,[CertificationLevel]
+  FROM [dbo].[Surveys];"
 
                     'use the structure of the query above to build a skeleton datatable
                     Dim DestinationDataTable As DataTable = GetDataTable(My.Settings.WRST_CaribouConnectionString, Sql)
@@ -669,9 +745,136 @@ ORDER BY Frequency"
         End If
     End Sub
 
-    Private Sub SurveysGridEX_UpdatingRecord(sender As Object, e As System.ComponentModel.CancelEventArgs) Handles SurveysGridEX.UpdatingRecord
-        'Dim Grid As GridEX = sender
-        'MsgBox(GetCurrentGridEXCellValue(Grid, "CertificationDate"))
-        'Grid.CurrentRow.Cells("CertifiedBy").Value = "SKEETER"
+    Private Sub SurveysGridEX_CellEdited(sender As Object, e As ColumnActionEventArgs) Handles SurveysGridEX.CellEdited
+        Try
+            Dim Grid As GridEX = sender
+            If Grid.CurrentRow.Cells("CertificationLevel").Value.trim = "Certified" Then
+            Grid.CurrentRow.Cells("CertificationDate").Value = Now
+            Grid.CurrentRow.Cells("CertifiedBy").Value = My.User.Name
+        End If
+        Catch ex As Exception
+        MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name & ")")
+        End Try
+    End Sub
+
+
+
+    ''' <summary>
+    ''' Pulls Animals and collar deployments from Animal Movements database and loads them into the 
+    ''' combo selector of the CollaredAnimalsInGroupsGridEX
+    ''' </summary>
+    Private Sub LoadAnimalIDSCombo()
+        'load the collared animal deployments from Animal Movement into the CollaredAnimalsGridEX
+        Dim CurrentSightingDate As String = GetCurrentGridEXCellValue(Me.SurveysGridEX, "SightingDate")
+        Debug.Print(CurrentSightingDate)
+        If IsDate(CurrentSightingDate) Then
+            SetUpCollaredAnimalsInGroupsGridEXDropDowns(CDate(CurrentSightingDate))
+        End If
+    End Sub
+
+    ''' <summary>
+    ''' Auto-matches a GPS collar Frequency to an AnimalID in the Animal Movement database. Helper sub to process GridEX rows from AutomatchFrequenciesToAnimals()
+    ''' </summary>
+    ''' <param name="Row"></param>
+    ''' <param name="MissingFrequenciesArrayList"></param>
+    Private Sub AutomatchFrequencyToAnimal(Row As GridEXRow, MissingFrequenciesArrayList As ArrayList)
+
+        'resolve any changes to the database to avoid duplicate primary key problems
+        AskToSaveChanges()
+
+        Try
+            'extract the frequencies from the row's FrequenciesInGroup column and try to parse it, search for the correct animalid and insert it into the cross reference table
+            If Not Row Is Nothing Then
+                If Not Row.Cells("FrequenciesInGroup") Is Nothing And Not Row.Cells("SightingDate") Is Nothing And Not Row.Cells("EID") Is Nothing Then
+                    If Not IsDBNull(Row.Cells("FrequenciesInGroup").Value) And Not IsDBNull(Row.Cells("SightingDate").Value) And Not IsDBNull(Row.Cells("EID").Value) Then
+
+                        'get caribou group row values into variables
+                        Dim FrequenciesInGroup As String = Row.Cells("FrequenciesInGroup").Value
+                        Dim SightingDate As String = Row.Cells("SightingDate").Value
+
+                        'parse the comma separated frequencies so we can deal with them individually
+                        For Each Frequency In FrequenciesInGroup.Split(",")
+                            Frequency = Frequency.Trim
+                            If IsNumeric(Frequency.Trim) = True Then
+                                Dim AnimalID As String = GetAnimalIDFromFrequencyAndObservationDate(Frequency, SightingDate)
+                                Dim Comment As String = ""
+                                If AnimalID.Length = 0 Then
+                                    'the collar was not found in the AM database, add to the list so we can inform the user of data quality issues.
+                                    MissingFrequenciesArrayList.Add(Frequency & "," & SightingDate)
+                                    AnimalID = "FRQ: " & Frequency
+                                    Comment = "Frequency not found in AM at time of insertion (" & My.User.Name & " " & Now & ")"
+                                End If
+
+                                'add the animalid to the XrefDataTable
+                                Dim XrefDataTable As DataTable = Me.WRST_CaribouDataSet.Tables("CollaredAnimalsInGroups")
+                                'see if the AnimalID already exists
+                                Dim Filter As String = "EID" & " = '" & Row.Cells("EID").Value & "' And AnimalID='" & AnimalID & "'"
+                                Dim ExistenceCheck As DataRow() = XrefDataTable.Select(Filter)
+                                If ExistenceCheck.Count = 0 Then
+                                    'the animalid does not exist for the animal group
+                                    Dim XrefDataRow As DataRow = XrefDataTable.NewRow
+                                    With XrefDataRow
+                                        .Item("AnimalID") = AnimalID
+                                        .Item("EID") = Row.Cells("EID").Value
+                                        .Item("Comment") = Comment
+                                    End With
+                                    XrefDataTable.Rows.Add(XrefDataRow)
+                                End If
+                            End If
+                        Next
+                    End If
+                End If
+            End If
+
+
+        Catch ex As Exception
+            MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name & ")")
+        End Try
+    End Sub
+
+    Private Sub AutoMatchFrequenciesToAnimalsToolStripButton_Click(sender As Object, e As EventArgs) Handles AutoMatchFrequenciesToAnimalsToolStripButton.Click
+        Dim Explanation As String = "The application will cross reference the Group Frequencies for this record with GPS collar deployments found in the Animal Movement database.
+            Frequency records matching collar deployments will be inserted into the matching collared caribou table to the right. 
+            No existing records will be deleted. No duplicate records will be added.  
+            Yes to Continue. No to cancel."
+        If MsgBox(Explanation, MsgBoxStyle.YesNo, "Confirm") = MsgBoxResult.Yes Then
+            Try
+                'this arraylist will hold any frequencies not found in animal movement tool
+                Dim MissingFrequenciesArrayList As New ArrayList
+                Dim GridEX As GridEX = Me.SurveysGridEX
+                If Not GridEX.CurrentRow Is Nothing Then
+                    AutomatchFrequencyToAnimal(GridEX.CurrentRow, MissingFrequenciesArrayList)
+                    ShowMissingFrequenciesList(MissingFrequenciesArrayList)
+                Else
+                    MsgBox("Select a row")
+                End If
+            Catch ex As Exception
+                MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name & ")")
+            End Try
+        End If
+    End Sub
+
+    ''' <summary>
+    ''' Helper Sub to show which GPS collar frequencies were not matched to animal groups, most likely because the collar is not registered or deployed in the Animal Movement database.
+    ''' </summary>
+    ''' <param name="MissingFrequenciesArrayList"></param>
+    Private Sub ShowMissingFrequenciesList(MissingFrequenciesArrayList As ArrayList)
+        If MissingFrequenciesArrayList.Count > 1 Then
+            Dim Warning As String = "WARNING: The following Frequencies were not associated with any deployed collar on the date the caribou group was observed" & vbNewLine
+            Dim Message As String = ""
+            For Each Freq In MissingFrequenciesArrayList
+                Message = Message & Freq & vbNewLine
+            Next
+            Message = Message & vbNewLine & vbNewLine & "Ctl-C to copy this message to your clipboard."
+            MsgBox(Warning & Message, MsgBoxStyle.Exclamation, "WARNING")
+        End If
+    End Sub
+
+    Private Sub ChangeOrientationToolStripButton_Click(sender As Object, e As EventArgs) Handles ChangeOrientationToolStripButton.Click
+        If SurveysSplitContainer.Orientation = Orientation.Vertical Then
+            SurveysSplitContainer.Orientation = Orientation.Horizontal
+        Else
+            SurveysSplitContainer.Orientation = Orientation.Vertical
+        End If
     End Sub
 End Class
