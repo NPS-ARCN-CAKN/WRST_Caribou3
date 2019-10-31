@@ -532,7 +532,8 @@ ORDER BY Frequency"
         'update the CollaredAnimalsInGroupsGridEX header
         UpdateCollaredAnimalsInGroupsGridEXHeader()
 
-        PerformQCChecks()
+        'QC the number of frequencies matches the number of animalids
+        ReconcileFrequencies()
     End Sub
 
     Private Sub CollaredAnimalsInGroupsGridEX_SelectionChanged(sender As Object, e As EventArgs) Handles CollaredAnimalsInGroupsGridEX.SelectionChanged
@@ -846,47 +847,37 @@ Click Yes to certify and lock the current record. Click No to cancel.", MsgBoxSt
         End If
     End Sub
 
-    Private Sub ReconcileFrequencies()
-
-    End Sub
 
     ''' <summary>
-    ''' Returns the number of comma separated frequencies in FrequenciesInGroup
+    ''' Counts the number of FrequenciesInGroup and AnimalIDs in the CollaredAnimalsInGroups table. Loads the data into the SurveysGridEX.
     ''' </summary>
-    ''' <param name="EID"></param>
-    ''' <returns></returns>
-    Private Function GetNumberOfFrequenciesInGroup(EID As String) As Integer
-
-    End Function
-
-    Private Sub PerformQCChecks()
+    Private Sub ReconcileFrequencies()
         'check that the number of frequencies in Surveys.FrequenciesInGroup column match the number of items in the CollaredAnimalsInGroups table for the record
-        'Try
-        For Each Row As GridEXRow In SurveysGridEX.GetRows
-            If Not IsDBNull(Row.Cells("FrequenciesInGroup").Value) Then
-                Dim FrequenciesInGroup As String = Row.Cells("FrequenciesInGroup").Value
-                Dim EID As String = Row.Cells("EID").Value
-                Dim NumberOfFrequencies As Integer = 0
-                Dim NumberOfAnimalIDs As Integer = 0
-                For Each Frequency In FrequenciesInGroup.Split(",")
-                    Frequency = Frequency.Trim
-                    If IsNumeric(Frequency.Trim) = True Then
-                        NumberOfFrequencies = NumberOfFrequencies + 1
-                        Dim Filter As String = "EID = '" & EID & "'"
-                        Dim AnimalIDsDataView As New DataView(WRST_CaribouDataSet.Tables("CollaredAnimalsInGroups"), Filter, "", DataViewRowState.CurrentRows)
-                        NumberOfAnimalIDs = AnimalIDsDataView.Count
-                    End If
-                Next
-                Row.BeginEdit()
-                Row.Cells("FrequenciesCount").Value = NumberOfFrequencies
-                Row.Cells("NumAnimalIDs").Value = NumberOfAnimalIDs
-                Row.EndEdit()
-            End If
-        Next
-
-        'Catch ex As Exception
-        '    Debug.Print(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name & ")")
-        'End Try
+        Try
+            For Each Row As GridEXRow In SurveysGridEX.GetRows
+                If Not IsDBNull(Row.Cells("FrequenciesInGroup").Value) Then
+                    Dim FrequenciesInGroup As String = Row.Cells("FrequenciesInGroup").Value
+                    Dim EID As String = Row.Cells("EID").Value
+                    Dim NumberOfFrequencies As Integer = 0
+                    Dim NumberOfAnimalIDs As Integer = 0
+                    For Each Frequency In FrequenciesInGroup.Split(",")
+                        Frequency = Frequency.Trim
+                        If IsNumeric(Frequency.Trim) = True Then
+                            NumberOfFrequencies = NumberOfFrequencies + 1
+                            Dim Filter As String = "EID = '" & EID & "'"
+                            Dim AnimalIDsDataView As New DataView(WRST_CaribouDataSet.Tables("CollaredAnimalsInGroups"), Filter, "", DataViewRowState.CurrentRows)
+                            NumberOfAnimalIDs = AnimalIDsDataView.Count
+                        End If
+                    Next
+                    Row.BeginEdit()
+                    Row.Cells("FrequenciesCount").Value = NumberOfFrequencies
+                    Row.Cells("NumAnimalIDs").Value = NumberOfAnimalIDs
+                    Row.EndEdit()
+                End If
+            Next
+        Catch ex As Exception
+            Debug.Print(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name & ")")
+        End Try
     End Sub
 
     ''' <summary>
