@@ -21,6 +21,7 @@ Public Class Form1
             FormatGridEX(Me.SurveyFlightsGridEX)
             FormatGridEX(Me.SurveysGridEX)
             FormatGridEX(Me.CollaredAnimalsInGroupsGridEX)
+            FormatGridEX(Me.AnimalGridEX)
 
             'set up default values for the grids
             SetSurveyFlightsGridExDefaultValues()
@@ -33,9 +34,14 @@ Public Class Form1
             'for some reason the surveys grid loads data when the form first loads despite no parent record being selected.
             'visibility is reversed on the flight grid's SelectionChanged event.
             Me.SurveysGridEX.Visible = False
+            'Me.CollaredAnimalsInGroupsGridEX.Visible = False
+
+            'set the flights gridex caption to something generic
+            Me.SurveyFlightsGridEX.RootTable.Caption = "Caribou survey flights inventory"
 
             'load the collared animal deployments from Animal Movement into the CollaredAnimalsGridEX
             LoadAnimalIDSCombo()
+
         Catch ex As Exception
             MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name)
         End Try
@@ -232,18 +238,27 @@ Public Class Form1
 
 
         Dim Sql As String = "SELECT Animals.AnimalId
-, CONVERT(Varchar(20), Collars.Frequency) + ' - ' + Animals.AnimalId + ' Deployed: ' + CONVERT(varchar(20),DeploymentDate)  +  ISNULL(' Collar retrieved: ' + CONVERT(varchar(20), RetrievalDate),'') +  ISNULL(' DEAD: ' + CONVERT(varchar(20), MortalityDate),'') AS CollaredCaribou
-,Collars.Frequency,CollarDeployments.DeploymentDate, CollarDeployments.RetrievalDate, 
-Animals.MortalityDate, Collars.DisposalDate, Collars.HasGps, CollarDeployments.CollarManufacturer, Collars.CollarModel, Collars.SerialNumber, Animals.Species, Animals.Gender, Animals.GroupName, 
-Animals.Description, Collars.Manager, Collars.Owner, Collars.Notes AS CollarNotes
+        , CONVERT(Varchar(20), Collars.Frequency) + ' - ' + Animals.AnimalId + ' Deployed: ' + CONVERT(varchar(20),DeploymentDate)  +  ISNULL(' Collar retrieved: ' + CONVERT(varchar(20), RetrievalDate),'') +  ISNULL(' DEAD: ' + CONVERT(varchar(20), MortalityDate),'') AS CollaredCaribou
+        FROM            Animals INNER JOIN
+        CollarDeployments ON Animals.ProjectId = CollarDeployments.ProjectId AND Animals.AnimalId = CollarDeployments.AnimalId INNER JOIN
+        Collars ON CollarDeployments.CollarManufacturer = Collars.CollarManufacturer AND CollarDeployments.CollarId = Collars.CollarId
+        WHERE        (Animals.ProjectId = 'WRST_Caribou') 
+        And (DeploymentDate < '" & SightingDate & "') and (RetrievalDate IS NULL Or RetrievalDate > '" & SightingDate & "')
+        ORDER BY Frequency"
 
-, CollarDeployments.CollarId, Animals.ProjectId, CollarDeployments.DeploymentId
-FROM            Animals INNER JOIN
-CollarDeployments ON Animals.ProjectId = CollarDeployments.ProjectId AND Animals.AnimalId = CollarDeployments.AnimalId INNER JOIN
-Collars ON CollarDeployments.CollarManufacturer = Collars.CollarManufacturer AND CollarDeployments.CollarId = Collars.CollarId
-WHERE        (Animals.ProjectId = 'WRST_Caribou') 
-And (DeploymentDate < '" & SightingDate & "') and (RetrievalDate IS NULL Or RetrievalDate > '" & SightingDate & "')
-ORDER BY Frequency"
+        '"SELECT Animals.AnimalId
+        ', CONVERT(Varchar(20), Collars.Frequency) + ' - ' + Animals.AnimalId + ' Deployed: ' + CONVERT(varchar(20),DeploymentDate)  +  ISNULL(' Collar retrieved: ' + CONVERT(varchar(20), RetrievalDate),'') +  ISNULL(' DEAD: ' + CONVERT(varchar(20), MortalityDate),'') AS CollaredCaribou
+        ',Collars.Frequency,CollarDeployments.DeploymentDate, CollarDeployments.RetrievalDate, 
+        'Animals.MortalityDate, Collars.DisposalDate, Collars.HasGps, CollarDeployments.CollarManufacturer, Collars.CollarModel, Collars.SerialNumber, Animals.Species, Animals.Gender, Animals.GroupName, 
+        'Animals.Description, Collars.Manager, Collars.Owner, Collars.Notes AS CollarNotes
+
+        ', CollarDeployments.CollarId, Animals.ProjectId, CollarDeployments.DeploymentId
+        'FROM            Animals INNER JOIN
+        'CollarDeployments ON Animals.ProjectId = CollarDeployments.ProjectId AND Animals.AnimalId = CollarDeployments.AnimalId INNER JOIN
+        'Collars ON CollarDeployments.CollarManufacturer = Collars.CollarManufacturer AND CollarDeployments.CollarId = Collars.CollarId
+        'WHERE        (Animals.ProjectId = 'WRST_Caribou') 
+        'And (DeploymentDate < '" & SightingDate & "') and (RetrievalDate IS NULL Or RetrievalDate > '" & SightingDate & "')
+        'ORDER BY Frequency"
 
         Dim CollaredAnimalsDataTable As DataTable = GetDataTable(My.Settings.Animal_MovementConnectionString, Sql)
 
@@ -282,9 +297,9 @@ ORDER BY Frequency"
     ''' <returns></returns>
     Private Function GetCurrentGridEXCellValue(GridEX As GridEX, GridEXColumnKey As String) As String
         Dim CellValue As String = ""
-        'Try
-        'get the current row of the VS GridEX
-        If Not GridEX Is Nothing Then
+        Try
+            'get the current row of the VS GridEX
+            If Not GridEX Is Nothing Then
                 If Not GridEX.CurrentRow Is Nothing Then
                     Dim CurrentRow As GridEXRow = GridEX.CurrentRow
                     If Not CurrentRow.Cells(GridEXColumnKey) Is Nothing Then
@@ -296,10 +311,10 @@ ORDER BY Frequency"
                     End If
                 End If
             End If
-            'Catch ex As Exception
-            '    MsgBox(ex.Message & " " & System.Reflection.MethodBase.GetCurrentMethod.Name)
-            'End Try
-            Return CellValue
+        Catch ex As Exception
+        MsgBox(ex.Message & " " & System.Reflection.MethodBase.GetCurrentMethod.Name)
+        End Try
+        Return CellValue
     End Function
 
     ''' <summary>
@@ -319,14 +334,21 @@ ORDER BY Frequency"
         Return MaxGroupNumber
     End Function
 
-    Private Function GetFrequencyFromAnimalID(AnimalID As String) As Double
+    ''' <summary>
+    ''' Returns the collar frequency of animal designated AnimalID on a particular sample date
+    ''' </summary>
+    ''' <param name="AnimalID"></param>
+    ''' <param name="SampleDate"></param>
+    ''' <returns>Double</returns>
+    Private Function GetFrequencyFromAnimalIDAndDate(AnimalID As String, SampleDate As Date) As Double
         Dim Frequency As Double = 0
         Dim AnimalsDataTable As DataTable = GetAnimalsDataTable()
-        Dim DV As New DataView(AnimalsDataTable, "AnimalID = '" & AnimalID & "'", "", DataViewRowState.CurrentRows)
+        Dim Filter As String = "AnimalID = '" & AnimalID & "' And DeploypmentDate < '" & SampleDate & "' And RetrievalDate < '" & SampleDate & "'"
+        Dim DV As New DataView(AnimalsDataTable, Filter, "", DataViewRowState.CurrentRows)
         If DV.Count = 1 Then
             Frequency = DV(0).Item("Frequency")
         End If
-
+        Return Frequency
     End Function
 
     ''' <summary>
@@ -518,6 +540,7 @@ ORDER BY Frequency"
 
         'make the surveys grid visible
         Me.SurveysGridEX.Visible = True
+        Me.CollaredAnimalsInGroupsGridEX.Visible = True
 
         'renew default values, especially to generate a new primary key value
         SetSurveyFlightsGridExDefaultValues()
@@ -556,44 +579,48 @@ ORDER BY Frequency"
         'load the animalids from animal movements into the selector combo
         LoadAnimalIDSCombo()
 
+
+        'build animal object and load its data into AnimalGridEX
+        Me.AnimalGridEX.DataSource = Nothing
+
+        'load the grid
+        Try
+            If Not IsDBNull(Me.CollaredAnimalsInGroupsGridEX.CurrentRow.Cells("AnimalID").Value) Then
+                'If Not GetCurrentGridEXCellValue(Me.CollaredAnimalsInGroupsGridEX, "AnimalID") Is Nothing Then
+                Dim AnimalID As String = GetCurrentGridEXCellValue(Me.CollaredAnimalsInGroupsGridEX, "AnimalID")
+                If Not IsDBNull(AnimalID) Then
+                    Dim CurrentAnimal As New Animal(AnimalID)
+                    With Me.AnimalGridEX
+                        .DataSource = CurrentAnimal.AnimalDetails
+                        .RetrieveStructure()
+                        .RootTable.Caption = "Animal Movement: Animal details"
+                        .TableHeaders = InheritableBoolean.True
+                        .GroupByBoxVisible = False
+                        .AllowAddNew = InheritableBoolean.False
+                        .AllowDelete = InheritableBoolean.False
+                        .AllowEdit = InheritableBoolean.False
+                    End With
+                    With Me.DeploymentsGridEX
+                        .DataSource = CurrentAnimal.Deployments
+                        .RetrieveStructure()
+                        .RootTable.Caption = "Animal Movement: Deployments"
+                        .TableHeaders = InheritableBoolean.True
+                        .GroupByBoxVisible = False
+                        .AllowAddNew = InheritableBoolean.False
+                        .AllowDelete = InheritableBoolean.False
+                        .AllowEdit = InheritableBoolean.False
+                    End With
+
+                End If
+            End If
+        Catch nrefex As NullReferenceException
+            'can't seem to prevent this so ignore
+        Catch ex As Exception
+            MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name & ")")
+        End Try
+
         'QC the number of frequencies matches the number of animalids
         ReconcileFrequencies()
-
-
-
-        'this is not working! need an animalid to frequency translator
-        'Dim EID As String = GetCurrentGridEXCellValue(Me.CollaredAnimalsInGroupsGridEX, "EID")
-        'Dim AnimalID As String = GetCurrentGridEXCellValue(Me.CollaredAnimalsInGroupsGridEX, "AnimalID")
-        'Dim FrequenciesInGroup As String = GetCurrentGridEXCellValue(Me.SurveysGridEX, "FrequenciesInGroup")
-        'If Not IsDBNull(EID) And Not IsDBNull(AnimalID) And Not IsDBNull(FrequenciesInGroup) Then
-        '    Dim Filter As String = "EID = '" & EID
-        '    Dim AnimalIDsDataView As New DataView(WRST_CaribouDataSet.Tables("Surveys"), Filter, "", DataViewRowState.CurrentRows)
-        '    For Each Row As DataRowView In AnimalIDsDataView
-        '        Dim FrequencyExists As Boolean = False
-        '        'loop and count the comma separated frequencies
-        '        For Each Frequency In FrequenciesInGroup.Split(",")
-        '            Frequency = Frequency.Trim
-        '            If IsNumeric(Frequency.Trim) = True And Frequency.Trim = Row.Item(" Then
-
-        '            End If
-        '        Next
-        '    Next
-        'End If
-
-        'NumberOfAnimalIDs = AnimalIDsDataView.Count
-        'If Not IsDBNull(Row.Cells("FrequenciesInGroup").Value) Then
-
-        '    'get a count of the number of frequencies in the group
-        '    Dim FrequenciesInGroup As String = Row.Cells("FrequenciesInGroup").Value
-
-
-
-        'End If
-
-
-
-
-
     End Sub
 
 
@@ -869,13 +896,30 @@ Click Yes to certify and lock the current record. Click No to cancel.", MsgBoxSt
     ''' Update the CollaredAnimalsInGroupsGridEX's caption
     ''' </summary>
     Private Sub UpdateCollaredAnimalsInGroupsGridEXHeader()
-        'update the collared animals gridex with any frequencies found in this caribou group. this makes matching frequencies to animals easier
-        Me.CollaredAnimalsInGroupsGridEX.RootTable.Caption = "Collared animals in group"
-        If Not IsDBNull(GetCurrentGridEXCellValue(Me.SurveysGridEX, "FrequenciesInGroup")) Then
-            If Not GetCurrentGridEXCellValue(Me.SurveysGridEX, "FrequenciesInGroup") Is Nothing Then
-                Dim FrequenciesInGroup As String = GetCurrentGridEXCellValue(Me.SurveysGridEX, "FrequenciesInGroup")
-                If FrequenciesInGroup.Trim.Length > 0 Then
-                    Me.CollaredAnimalsInGroupsGridEX.RootTable.Caption = "Collared animals in group (Current frequencies: " & FrequenciesInGroup
+        'the gridexes don't make it easy to see which parent record is selected when on the child gridex
+        'Update the collared animals gridex header with the Surveys group number at least, and also frequencies if they exist
+        'this makes matching frequencies to animals easier
+
+        'generic starting caption
+        Me.CollaredAnimalsInGroupsGridEX.RootTable.Caption = "Frequencies in group"
+
+        'start by getting the groupnumber and frequencies data
+        If Not GetCurrentGridEXCellValue(Me.SurveysGridEX, "FrequenciesInGroup") Is Nothing Then
+            If Not IsDBNull(GetCurrentGridEXCellValue(Me.SurveysGridEX, "GroupNumber")) Then
+                Dim GroupNumber As String = GetCurrentGridEXCellValue(Me.SurveysGridEX, "GroupNumber")
+
+                'make the gridex caption more specific
+                Me.CollaredAnimalsInGroupsGridEX.RootTable.Caption = "Group " & GroupNumber
+
+                'next determine if the frequencies in group column has data
+                If Not IsDBNull(GetCurrentGridEXCellValue(Me.SurveysGridEX, "FrequenciesInGroup")) Then
+                    If Not GetCurrentGridEXCellValue(Me.SurveysGridEX, "FrequenciesInGroup") Is Nothing Then
+                        Dim FrequenciesInGroup As String = GetCurrentGridEXCellValue(Me.SurveysGridEX, "FrequenciesInGroup")
+                        If FrequenciesInGroup.Trim.Length > 0 Then
+                            'frequencies exist, update the gridex caption
+                            Me.CollaredAnimalsInGroupsGridEX.RootTable.Caption = "Frequencies detected in group " & GroupNumber & ": " & FrequenciesInGroup
+                        End If
+                    End If
                 End If
             End If
         End If
@@ -906,48 +950,63 @@ Click Yes to certify and lock the current record. Click No to cancel.", MsgBoxSt
     Private Sub ReconcileFrequencies()
         'check that the number of frequencies in Surveys.FrequenciesInGroup column match the number of items in the CollaredAnimalsInGroups table for the record
         Try
+            If SurveysGridEX.GetRows.Count > 0 Then
+                For Each Row As GridEXRow In SurveysGridEX.GetRows
+                    If Not Row.Cells("EID") Is Nothing Then
+                        If Not IsDBNull(Not IsDBNull(Row.Cells("EID").Value)) Then
+                            Dim EID As String = Row.Cells("EID").Value
+                            Dim NumberOfFrequencies As Integer = 0
+                            If Not IsDBNull(Row.Cells("FrequenciesInGroup").Value) Then
 
-            For Each Row As GridEXRow In SurveysGridEX.GetRows
-                If Not IsDBNull(Not IsDBNull(Row.Cells("EID").Value)) Then
-                    Dim EID As String = Row.Cells("EID").Value
-                    Dim NumberOfFrequencies As Integer = 0
-                    If Not IsDBNull(Row.Cells("FrequenciesInGroup").Value) Then
+                                'get a count of the number of frequencies in the group
+                                Dim FrequenciesInGroup As String = Row.Cells("FrequenciesInGroup").Value
 
-                        'get a count of the number of frequencies in the group
-                        Dim FrequenciesInGroup As String = Row.Cells("FrequenciesInGroup").Value
-
-
-                        'loop and count the comma separated frequencies
-                        For Each Frequency In FrequenciesInGroup.Split(",")
-                            Frequency = Frequency.Trim
-                            If IsNumeric(Frequency.Trim) = True Then
-                                NumberOfFrequencies = NumberOfFrequencies + 1
+                                'count the frequencies
+                                Dim FrequenciesList As List(Of Double) = GetListOfCSVFrequencies(FrequenciesInGroup)
+                                NumberOfFrequencies = FrequenciesList.Count
                             End If
-                        Next
+
+                            'now query the number of AnimalIDs in the CollaredAnimalsInGroups table
+                            Dim NumberOfAnimalIDs As Integer = 0
+                            Dim Filter As String = "EID = '" & EID & "'"
+                            Dim AnimalIDsDataView As New DataView(WRST_CaribouDataSet.Tables("CollaredAnimalsInGroups"), Filter, "", DataViewRowState.CurrentRows)
+                            NumberOfAnimalIDs = AnimalIDsDataView.Count
+
+                            'update the number of frequencies and number of animalids columns
+                            Row.BeginEdit()
+                            If NumberOfAnimalIDs > 0 Or NumberOfFrequencies > 0 Then
+                                Row.Cells("FrequenciesCount").Value = NumberOfFrequencies
+                                Row.Cells("NumAnimalIDs").Value = NumberOfAnimalIDs
+                            End If
+                            Row.EndEdit()
+                        End If
                     End If
-
-                    'now query the number of AnimalIDs in the CollaredAnimalsInGroups table
-                    Dim NumberOfAnimalIDs As Integer = 0
-                    Dim Filter As String = "EID = '" & EID & "'"
-                    Dim AnimalIDsDataView As New DataView(WRST_CaribouDataSet.Tables("CollaredAnimalsInGroups"), Filter, "", DataViewRowState.CurrentRows)
-                    NumberOfAnimalIDs = AnimalIDsDataView.Count
-
-                    'update the number of frequencies and number of animalids columns
-                    Row.BeginEdit()
-                    If NumberOfAnimalIDs > 0 Or NumberOfFrequencies > 0 Then
-                        Row.Cells("FrequenciesCount").Value = NumberOfFrequencies
-                        Row.Cells("NumAnimalIDs").Value = NumberOfAnimalIDs
-                    End If
-                    Row.EndEdit()
-                    Debug.Print(Row.Cells("FrequenciesInGroup").Value & " " & NumberOfFrequencies & " " & NumberOfAnimalIDs & " " & Filter)
-                End If
-
-            Next
+                Next
+            End If
         Catch ex As Exception
-            Debug.Print(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name & ")")
+        MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name & ")")
         End Try
     End Sub
 
+    ''' <summary>
+    ''' Converts a comma separated list of frequencies (typically FrequenciesInGroup from the Surveys table) to a List of numeric frequencies
+    ''' </summary>
+    ''' <param name="FrequenciesCSV"></param>
+    ''' <returns>List(Of Double)</returns>
+    Private Function GetListOfCSVFrequencies(FrequenciesCSV As String) As List(Of Double)
+        Dim FrequenciesList As New List(Of Double)
+        If Not FrequenciesCSV Is Nothing Then
+            If Not IsDBNull(FrequenciesCSV) Then
+                For Each Frequency In FrequenciesCSV.Split(",")
+                    Frequency = Frequency.Trim
+                    If IsNumeric(Frequency.Trim) = True Then
+                        FrequenciesList.Add(Frequency)
+                    End If
+                Next
+            End If
+        End If
+            Return FrequenciesList
+    End Function
 
     ''' <summary>
     ''' Auto-matches a GPS collar Frequency to an AnimalID in the Animal Movement database. Helper sub to process GridEX rows from AutomatchFrequenciesToAnimals()
@@ -970,41 +1029,40 @@ Click Yes to certify and lock the current record. Click No to cancel.", MsgBoxSt
                         Dim SightingDate As String = Row.Cells("SightingDate").Value
 
                         'parse the comma separated frequencies so we can deal with them individually
-                        For Each Frequency In FrequenciesInGroup.Split(",")
-                            Frequency = Frequency.Trim
-                            If IsNumeric(Frequency.Trim) = True Then
-                                Dim AnimalID As String = GetAnimalIDFromFrequencyAndObservationDate(Frequency, SightingDate)
-                                'Dim Comment As String = ""
-                                'If AnimalID.Length = 0 Then
-                                '    'the collar was not found in the AM database, add to the list so we can inform the user of data quality issues.
-                                '    MissingFrequenciesArrayList.Add(Frequency & "," & SightingDate)
-                                '    AnimalID = "FRQ: " & Frequency
-                                '    Comment = "Frequency not found in AM at time of insertion (" & My.User.Name & " " & Now & ")"
-                                'End If
+                        Dim FrequenciesList As List(Of Double) = GetListOfCSVFrequencies(FrequenciesInGroup)
+                        For Each Frequency In FrequenciesList ' FrequenciesInGroup.Split(",")
+                            Dim AnimalID As String = GetAnimalIDFromFrequencyAndObservationDate(Frequency, SightingDate)
+                                Dim Comment As String = ""
+                                If AnimalID.Length = 0 Then
+                                    'the collar was not found in the AM database, add to the list so we can inform the user of data quality issues.
+                                    MissingFrequenciesArrayList.Add(Frequency & "," & SightingDate)
+                                    AnimalID = Frequency
+                                    Comment = "Frequency not found in AM at time of insertion (" & My.User.Name & " " & Now & ")"
+                                End If
 
                                 'add the animalid to the XrefDataTable
                                 Dim XrefDataTable As DataTable = Me.WRST_CaribouDataSet.Tables("CollaredAnimalsInGroups")
                                 'see if the AnimalID already exists
                                 Dim Filter As String = "EID" & " = '" & Row.Cells("EID").Value & "' And AnimalID='" & AnimalID & "'"
                                 Dim ExistenceCheck As DataRow() = XrefDataTable.Select(Filter)
-                                If ExistenceCheck.Count = 0 Then
-                                    'the animalid does not exist for the animal group
-                                    Dim XrefDataRow As DataRow = XrefDataTable.NewRow
-                                    With XrefDataRow
-                                        .Item("AnimalID") = AnimalID
-                                        .Item("EID") = Row.Cells("EID").Value
-                                        '.Item("Comment") = Comment
-                                    End With
-                                    If AnimalID.Trim.Length > 0 Then
-                                        XrefDataTable.Rows.Add(XrefDataRow)
-                                    End If
-
+                            If ExistenceCheck.Count = 0 Then
+                                'the animalid does not exist for the animal group
+                                Dim XrefDataRow As DataRow = XrefDataTable.NewRow
+                                With XrefDataRow
+                                    .Item("AnimalID") = AnimalID
+                                    .Item("EID") = Row.Cells("EID").Value
+                                    '.Item("Comment") = Comment
+                                End With
+                                If AnimalID.Trim.Length > 0 Then
+                                    XrefDataTable.Rows.Add(XrefDataRow)
                                 End If
                             End If
                         Next
+                        ReconcileFrequencies()
                     End If
                 End If
             End If
+
         Catch ex As Exception
             MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name & ")")
         End Try
@@ -1061,5 +1119,7 @@ Click Yes to certify and lock the current record. Click No to cancel.", MsgBoxSt
         LoadDataset()
     End Sub
 
+    Private Sub ResultsViewerToolStripButton_Click(sender As Object, e As EventArgs) Handles ResultsViewerToolStripButton.Click
 
+    End Sub
 End Class

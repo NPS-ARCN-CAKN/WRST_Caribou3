@@ -87,9 +87,9 @@ Module Utilites
     ''' <param name="Sql"></param>
     ''' <returns>DataTable</returns>
     Public Function GetDataTable(ConnectionString As String, Sql As String) As DataTable
+
         'the DataTable to return
         Dim MyDataTable As New DataTable
-
         Try
             'make a SqlConnection using the supplied ConnectionString 
             Dim MySqlConnection As New SqlConnection(ConnectionString)
@@ -201,7 +201,8 @@ Module Utilites
     Public Function GetCollarDeploymentsDataTable() As DataTable
         Dim CollarDeploymentsDataTable As New DataTable
         Try
-            Dim Sql As String = "SELECT Animals.AnimalId,   Collars.Frequency,CollarDeployments.DeploymentDate, CollarDeployments.RetrievalDate, 
+            Dim Sql As String = "SELECT CONVERT(Varchar(20), Collars.Frequency) + ' - ' + Animals.AnimalId + ' Deployed: ' + CONVERT(varchar(20),DeploymentDate)  +  ISNULL(' Collar retrieved: ' + CONVERT(varchar(20), RetrievalDate),'') +  ISNULL(' DEAD: ' + CONVERT(varchar(20), MortalityDate),'') AS CollaredCaribou
+,Animals.AnimalId,   Collars.Frequency,CollarDeployments.DeploymentDate, CollarDeployments.RetrievalDate, 
                          Animals.MortalityDate, Collars.DisposalDate, Collars.HasGps, CollarDeployments.CollarManufacturer, Collars.CollarModel, Collars.SerialNumber, Animals.Species, Animals.Gender, Animals.GroupName, 
                          Animals.Description, Collars.Manager, Collars.Owner, Collars.Notes AS CollarNotes,       CONVERT(Varchar(20), Collars.Frequency) + ' - ' + Animals.AnimalId AS CollaredCaribou, CollarDeployments.CollarId, Animals.ProjectId, CollarDeployments.DeploymentId
 FROM            Animals INNER JOIN
@@ -209,6 +210,7 @@ FROM            Animals INNER JOIN
                          Collars ON CollarDeployments.CollarManufacturer = Collars.CollarManufacturer AND CollarDeployments.CollarId = Collars.CollarId
 WHERE        (Animals.ProjectId = 'WRST_Caribou')
 ORDER BY Frequency"
+
             CollarDeploymentsDataTable = GetDataTable(My.Settings.Animal_MovementConnectionString, Sql)
             CollarDeploymentsDataTable.TableName = "CollarDeployments"
         Catch ex As Exception
