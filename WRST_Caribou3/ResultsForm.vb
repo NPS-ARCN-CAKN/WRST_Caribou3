@@ -43,6 +43,7 @@ Public Class ResultsForm
                 With Me.ResultsGridEX
                     .DataSource = ResultsDataTable
                     .RetrieveStructure()
+                    .GroupTotals = GroupTotals.Always
                 End With
 
 

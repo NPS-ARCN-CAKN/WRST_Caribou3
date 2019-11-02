@@ -360,9 +360,9 @@ Public Class Form1
     ''' <param name="GridEXColumnName">Name of the GridEX column into which to load dropdown values</param>
     '''  <param name="LimitToList">Whether options for the dropdown should be limited to the list or not. Boolean.</param>
     Private Sub LoadGridEXDropDownWithDistinctDataTableValues(GridEX As GridEX, SourceDataTable As DataTable, SourceColumnName As String, GridEXColumnName As String, LimitToList As Boolean)
-        Try
-            'Ensure the GridEXColumn is configured for a DropDown
-            With GridEX.RootTable.Columns(GridEXColumnName)
+        'Try
+        'Ensure the GridEXColumn is configured for a DropDown
+        With GridEX.RootTable.Columns(GridEXColumnName)
                 .EditType = EditType.Combo
                 .HasValueList = True
                 .LimitToList = LimitToList
@@ -390,9 +390,9 @@ Public Class Form1
                 Next
             End If
 
-        Catch ex As Exception
-            MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name & ")")
-        End Try
+        'Catch ex As Exception
+        '    MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name & ")")
+        'End Try
     End Sub
 
     ''' <summary>
@@ -585,6 +585,8 @@ Public Class Form1
 
         'load the grid
         Try
+            Me.AnimalGridEX.DataSource = Nothing
+            Me.DeploymentsGridEX.DataSource = Nothing
             If Not IsDBNull(Me.CollaredAnimalsInGroupsGridEX.CurrentRow.Cells("AnimalID").Value) Then
                 'If Not GetCurrentGridEXCellValue(Me.CollaredAnimalsInGroupsGridEX, "AnimalID") Is Nothing Then
                 Dim AnimalID As String = GetCurrentGridEXCellValue(Me.CollaredAnimalsInGroupsGridEX, "AnimalID")
@@ -983,8 +985,11 @@ Click Yes to certify and lock the current record. Click No to cancel.", MsgBoxSt
                     End If
                 Next
             End If
+        Catch nrefex As NullReferenceException
+            'ignore
+            Debug.Print(nrefex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name & ")")
         Catch ex As Exception
-        MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name & ")")
+            MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name & ")")
         End Try
     End Sub
 
@@ -1037,7 +1042,7 @@ Click Yes to certify and lock the current record. Click No to cancel.", MsgBoxSt
                                     'the collar was not found in the AM database, add to the list so we can inform the user of data quality issues.
                                     MissingFrequenciesArrayList.Add(Frequency & "," & SightingDate)
                                     AnimalID = Frequency
-                                    Comment = "Frequency not found in AM at time of insertion (" & My.User.Name & " " & Now & ")"
+                                    Comment = "Frequency Not found In AM at time Of insertion (" & My.User.Name & " " & Now & ")"
                                 End If
 
                                 'add the animalid to the XrefDataTable
