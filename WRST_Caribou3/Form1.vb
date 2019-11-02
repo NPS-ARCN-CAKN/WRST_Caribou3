@@ -1120,6 +1120,7 @@ Click Yes to certify and lock the current record. Click No to cancel.", MsgBoxSt
     End Sub
 
     Private Sub ResultsViewerToolStripButton_Click(sender As Object, e As EventArgs) Handles ResultsViewerToolStripButton.Click
-
+        Dim ResultsForm As New ResultsForm
+        ResultsForm.ShowDialog()
     End Sub
 End Class
