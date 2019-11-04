@@ -8,7 +8,7 @@
   <Shapes>
     <Shape ID="DesignTable:CollaredAnimalsInGroups" ZOrder="2" X="1352" Y="204" Height="182" Width="300" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="115" />
     <Shape ID="DesignTable:SurveyFlights" ZOrder="5" X="105" Y="19" Height="1046" Width="300" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="954" />
-    <Shape ID="DesignTable:Surveys" ZOrder="1" X="626" Y="163" Height="938" Width="260" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="871" />
+    <Shape ID="DesignTable:Surveys" ZOrder="1" X="626" Y="163" Height="1181" Width="260" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="1089" />
   </Shapes>
   <Connectors>
     <Connector ID="DesignRelation:FK_CollaredAnimalsInGroups_Surveys" ZOrder="4" LineWidth="11">
