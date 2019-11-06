@@ -31,9 +31,13 @@ Partial Public Class WRST_CaribouDataSet
     
     Private tableSurveys As SurveysDataTable
     
+    Private tableCaptures As CapturesDataTable
+    
     Private relationFK_CollaredAnimalsInGroups_Surveys As Global.System.Data.DataRelation
     
     Private relationFK_Surveys_SurveyFlights As Global.System.Data.DataRelation
+    
+    Private relationFK_CollaredAnimalsInGroups_Captures As Global.System.Data.DataRelation
     
     Private _schemaSerializationMode As Global.System.Data.SchemaSerializationMode = Global.System.Data.SchemaSerializationMode.IncludeSchema
     
@@ -72,6 +76,9 @@ Partial Public Class WRST_CaribouDataSet
             End If
             If (Not (ds.Tables("Surveys")) Is Nothing) Then
                 MyBase.Tables.Add(New SurveysDataTable(ds.Tables("Surveys")))
+            End If
+            If (Not (ds.Tables("Captures")) Is Nothing) Then
+                MyBase.Tables.Add(New CapturesDataTable(ds.Tables("Captures")))
             End If
             Me.DataSetName = ds.DataSetName
             Me.Prefix = ds.Prefix
@@ -117,6 +124,16 @@ Partial Public Class WRST_CaribouDataSet
     Public ReadOnly Property Surveys() As SurveysDataTable
         Get
             Return Me.tableSurveys
+        End Get
+    End Property
+    
+    <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+     Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
+     Global.System.ComponentModel.Browsable(false),  _
+     Global.System.ComponentModel.DesignerSerializationVisibility(Global.System.ComponentModel.DesignerSerializationVisibility.Content)>  _
+    Public ReadOnly Property Captures() As CapturesDataTable
+        Get
+            Return Me.tableCaptures
         End Get
     End Property
     
@@ -196,6 +213,9 @@ Partial Public Class WRST_CaribouDataSet
             If (Not (ds.Tables("Surveys")) Is Nothing) Then
                 MyBase.Tables.Add(New SurveysDataTable(ds.Tables("Surveys")))
             End If
+            If (Not (ds.Tables("Captures")) Is Nothing) Then
+                MyBase.Tables.Add(New CapturesDataTable(ds.Tables("Captures")))
+            End If
             Me.DataSetName = ds.DataSetName
             Me.Prefix = ds.Prefix
             Me.Namespace = ds.Namespace
@@ -246,8 +266,15 @@ Partial Public Class WRST_CaribouDataSet
                 Me.tableSurveys.InitVars
             End If
         End If
+        Me.tableCaptures = CType(MyBase.Tables("Captures"),CapturesDataTable)
+        If (initTable = true) Then
+            If (Not (Me.tableCaptures) Is Nothing) Then
+                Me.tableCaptures.InitVars
+            End If
+        End If
         Me.relationFK_CollaredAnimalsInGroups_Surveys = Me.Relations("FK_CollaredAnimalsInGroups_Surveys")
         Me.relationFK_Surveys_SurveyFlights = Me.Relations("FK_Surveys_SurveyFlights")
+        Me.relationFK_CollaredAnimalsInGroups_Captures = Me.Relations("FK_CollaredAnimalsInGroups_Captures")
     End Sub
     
     <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -264,10 +291,14 @@ Partial Public Class WRST_CaribouDataSet
         MyBase.Tables.Add(Me.tableSurveyFlights)
         Me.tableSurveys = New SurveysDataTable()
         MyBase.Tables.Add(Me.tableSurveys)
+        Me.tableCaptures = New CapturesDataTable()
+        MyBase.Tables.Add(Me.tableCaptures)
         Me.relationFK_CollaredAnimalsInGroups_Surveys = New Global.System.Data.DataRelation("FK_CollaredAnimalsInGroups_Surveys", New Global.System.Data.DataColumn() {Me.tableSurveys.EIDColumn}, New Global.System.Data.DataColumn() {Me.tableCollaredAnimalsInGroups.EIDColumn}, false)
         Me.Relations.Add(Me.relationFK_CollaredAnimalsInGroups_Surveys)
         Me.relationFK_Surveys_SurveyFlights = New Global.System.Data.DataRelation("FK_Surveys_SurveyFlights", New Global.System.Data.DataColumn() {Me.tableSurveyFlights.FlightIDColumn}, New Global.System.Data.DataColumn() {Me.tableSurveys.FlightIDColumn}, false)
         Me.Relations.Add(Me.relationFK_Surveys_SurveyFlights)
+        Me.relationFK_CollaredAnimalsInGroups_Captures = New Global.System.Data.DataRelation("FK_CollaredAnimalsInGroups_Captures", New Global.System.Data.DataColumn() {Me.tableCaptures.AnimalIDColumn}, New Global.System.Data.DataColumn() {Me.tableCollaredAnimalsInGroups.AnimalIDColumn}, false)
+        Me.Relations.Add(Me.relationFK_CollaredAnimalsInGroups_Captures)
     End Sub
     
     <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -285,6 +316,12 @@ Partial Public Class WRST_CaribouDataSet
     <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
      Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
     Private Function ShouldSerializeSurveys() As Boolean
+        Return false
+    End Function
+    
+    <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+     Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+    Private Function ShouldSerializeCaptures() As Boolean
         Return false
     End Function
     
@@ -354,6 +391,9 @@ Partial Public Class WRST_CaribouDataSet
     
     <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
     Public Delegate Sub SurveysRowChangeEventHandler(ByVal sender As Object, ByVal e As SurveysRowChangeEvent)
+    
+    <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+    Public Delegate Sub CapturesRowChangeEventHandler(ByVal sender As Object, ByVal e As CapturesRowChangeEvent)
     
     '''<summary>
     '''Represents the strongly named DataTable class.
@@ -465,11 +505,14 @@ Partial Public Class WRST_CaribouDataSet
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Overloads Function AddCollaredAnimalsInGroupsRow(ByVal parentSurveysRowByFK_CollaredAnimalsInGroups_Surveys As SurveysRow, ByVal AnimalID As String, ByVal Comment As String) As CollaredAnimalsInGroupsRow
+        Public Overloads Function AddCollaredAnimalsInGroupsRow(ByVal parentSurveysRowByFK_CollaredAnimalsInGroups_Surveys As SurveysRow, ByVal parentCapturesRowByFK_CollaredAnimalsInGroups_Captures As CapturesRow, ByVal Comment As String) As CollaredAnimalsInGroupsRow
             Dim rowCollaredAnimalsInGroupsRow As CollaredAnimalsInGroupsRow = CType(Me.NewRow,CollaredAnimalsInGroupsRow)
-            Dim columnValuesArray() As Object = New Object() {Nothing, AnimalID, Comment}
+            Dim columnValuesArray() As Object = New Object() {Nothing, Nothing, Comment}
             If (Not (parentSurveysRowByFK_CollaredAnimalsInGroups_Surveys) Is Nothing) Then
                 columnValuesArray(0) = parentSurveysRowByFK_CollaredAnimalsInGroups_Surveys(28)
+            End If
+            If (Not (parentCapturesRowByFK_CollaredAnimalsInGroups_Captures) Is Nothing) Then
+                columnValuesArray(1) = parentCapturesRowByFK_CollaredAnimalsInGroups_Captures(0)
             End If
             rowCollaredAnimalsInGroupsRow.ItemArray = columnValuesArray
             Me.Rows.Add(rowCollaredAnimalsInGroupsRow)
@@ -1985,6 +2028,1363 @@ Partial Public Class WRST_CaribouDataSet
     End Class
     
     '''<summary>
+    '''Represents the strongly named DataTable class.
+    '''</summary>
+    <Global.System.Serializable(),  _
+     Global.System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")>  _
+    Partial Public Class CapturesDataTable
+        Inherits Global.System.Data.TypedTableBase(Of CapturesRow)
+        
+        Private columnAnimalID As Global.System.Data.DataColumn
+        
+        Private columnCaptureDate As Global.System.Data.DataColumn
+        
+        Private columnCrew As Global.System.Data.DataColumn
+        
+        Private columnShooter As Global.System.Data.DataColumn
+        
+        Private columnFrequency As Global.System.Data.DataColumn
+        
+        Private columnVisualCollar As Global.System.Data.DataColumn
+        
+        Private columnSerialNumber As Global.System.Data.DataColumn
+        
+        Private columnCaptureLatitude As Global.System.Data.DataColumn
+        
+        Private columnCaptureLongitude As Global.System.Data.DataColumn
+        
+        Private columnOldFrequency As Global.System.Data.DataColumn
+        
+        Private columnOldVisualCollar As Global.System.Data.DataColumn
+        
+        Private columnGeneralLocation As Global.System.Data.DataColumn
+        
+        Private columnTimeStartChase As Global.System.Data.DataColumn
+        
+        Private columnTimeFirstHitBounce As Global.System.Data.DataColumn
+        
+        Private columnTimeSecordHitBounce As Global.System.Data.DataColumn
+        
+        Private columnTimeThirdHitBounce As Global.System.Data.DataColumn
+        
+        Private columnTimeVisibleEffect As Global.System.Data.DataColumn
+        
+        Private columnTimeAnimalDown As Global.System.Data.DataColumn
+        
+        Private columnDartLocation As Global.System.Data.DataColumn
+        
+        Private columnAnesthetic As Global.System.Data.DataColumn
+        
+        Private columnAnestheticDosage_mg As Global.System.Data.DataColumn
+        
+        Private columnAnestheticConcentration_mg_ml As Global.System.Data.DataColumn
+        
+        Private columnSedative As Global.System.Data.DataColumn
+        
+        Private columnSedativeDosage_mg As Global.System.Data.DataColumn
+        
+        Private columnSedativeConcentration_mg_ml As Global.System.Data.DataColumn
+        
+        Private columnNumHits As Global.System.Data.DataColumn
+        
+        Private columnNumMisses As Global.System.Data.DataColumn
+        
+        Private columnDrugEffect As Global.System.Data.DataColumn
+        
+        Private columnInitialBodyTemp As Global.System.Data.DataColumn
+        
+        Private columnInitialBodyTempTime As Global.System.Data.DataColumn
+        
+        Private columnFinalBodyTemperature As Global.System.Data.DataColumn
+        
+        Private columnFinalBodyTemperatureTime As Global.System.Data.DataColumn
+        
+        Private columnAdditionalDrugs As Global.System.Data.DataColumn
+        
+        Private columnSex As Global.System.Data.DataColumn
+        
+        Private columnEstimatedAge As Global.System.Data.DataColumn
+        
+        Private columnWithCalf As Global.System.Data.DataColumn
+        
+        Private columnLactating As Global.System.Data.DataColumn
+        
+        Private columnBodyCondition As Global.System.Data.DataColumn
+        
+        Private columnWeight_Kg As Global.System.Data.DataColumn
+        
+        Private columnBodyLength As Global.System.Data.DataColumn
+        
+        Private columnNeckCircumference As Global.System.Data.DataColumn
+        
+        Private columnJaw As Global.System.Data.DataColumn
+        
+        Private columnMetatarsusLength As Global.System.Data.DataColumn
+        
+        Private columnHindfootLength As Global.System.Data.DataColumn
+        
+        Private columnChestGirth As Global.System.Data.DataColumn
+        
+        Private columnBloodSampleRed As Global.System.Data.DataColumn
+        
+        Private columnBloodSamplePurple As Global.System.Data.DataColumn
+        
+        Private columnBloodSampleGreen As Global.System.Data.DataColumn
+        
+        Private columnAnestheticReversal As Global.System.Data.DataColumn
+        
+        Private columnAnestheticReversalDosage_mg As Global.System.Data.DataColumn
+        
+        Private columnAnestheticReversalConcentration_mg_ml As Global.System.Data.DataColumn
+        
+        Private columnAnestheticReversalRoute As Global.System.Data.DataColumn
+        
+        Private columnAnestheticReversalTime As Global.System.Data.DataColumn
+        
+        Private columnSedativeReversal As Global.System.Data.DataColumn
+        
+        Private columnSedativeReversalDosage_mg As Global.System.Data.DataColumn
+        
+        Private columnSedativeReversalConcentration_mg_ml As Global.System.Data.DataColumn
+        
+        Private columnSedativeReversalRoute As Global.System.Data.DataColumn
+        
+        Private columnSedativeReversalTime As Global.System.Data.DataColumn
+        
+        Private columnTimeStanding As Global.System.Data.DataColumn
+        
+        Private columnTimeMobile As Global.System.Data.DataColumn
+        
+        Private columnComments As Global.System.Data.DataColumn
+        
+        Private columnCaptureID As Global.System.Data.DataColumn
+        
+        Private columnRecordInsertedDate As Global.System.Data.DataColumn
+        
+        Private columnRecordInsertedBy As Global.System.Data.DataColumn
+        
+        Private columnProjectID As Global.System.Data.DataColumn
+        
+        Private columnTS As Global.System.Data.DataColumn
+        
+        Private columnAnestheticDosage_ml As Global.System.Data.DataColumn
+        
+        Private columnSedativeDosage_ml As Global.System.Data.DataColumn
+        
+        Private columnAnestheticReversalDosage_ml As Global.System.Data.DataColumn
+        
+        Private columnSedativeReversalDosage_ml As Global.System.Data.DataColumn
+        
+        Private columnProtocolVersion As Global.System.Data.DataColumn
+        
+        Private columnSOPNumber As Global.System.Data.DataColumn
+        
+        Private columnSOPVersion As Global.System.Data.DataColumn
+        
+        Private columnCertificationDate As Global.System.Data.DataColumn
+        
+        Private columnCertifiedBy As Global.System.Data.DataColumn
+        
+        Private columnProtocolIRMAReference As Global.System.Data.DataColumn
+        
+        Private columnCertificationLevel As Global.System.Data.DataColumn
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub New()
+            MyBase.New
+            Me.TableName = "Captures"
+            Me.BeginInit
+            Me.InitClass
+            Me.EndInit
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Friend Sub New(ByVal table As Global.System.Data.DataTable)
+            MyBase.New
+            Me.TableName = table.TableName
+            If (table.CaseSensitive <> table.DataSet.CaseSensitive) Then
+                Me.CaseSensitive = table.CaseSensitive
+            End If
+            If (table.Locale.ToString <> table.DataSet.Locale.ToString) Then
+                Me.Locale = table.Locale
+            End If
+            If (table.Namespace <> table.DataSet.Namespace) Then
+                Me.Namespace = table.Namespace
+            End If
+            Me.Prefix = table.Prefix
+            Me.MinimumCapacity = table.MinimumCapacity
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Protected Sub New(ByVal info As Global.System.Runtime.Serialization.SerializationInfo, ByVal context As Global.System.Runtime.Serialization.StreamingContext)
+            MyBase.New(info, context)
+            Me.InitVars
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property AnimalIDColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnAnimalID
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property CaptureDateColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnCaptureDate
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property CrewColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnCrew
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property ShooterColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnShooter
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property FrequencyColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnFrequency
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property VisualCollarColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnVisualCollar
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property SerialNumberColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnSerialNumber
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property CaptureLatitudeColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnCaptureLatitude
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property CaptureLongitudeColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnCaptureLongitude
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property OldFrequencyColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnOldFrequency
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property OldVisualCollarColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnOldVisualCollar
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property GeneralLocationColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnGeneralLocation
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property TimeStartChaseColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnTimeStartChase
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property TimeFirstHitBounceColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnTimeFirstHitBounce
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property TimeSecordHitBounceColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnTimeSecordHitBounce
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property TimeThirdHitBounceColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnTimeThirdHitBounce
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property TimeVisibleEffectColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnTimeVisibleEffect
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property TimeAnimalDownColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnTimeAnimalDown
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property DartLocationColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnDartLocation
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property AnestheticColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnAnesthetic
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property AnestheticDosage_mgColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnAnestheticDosage_mg
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property AnestheticConcentration_mg_mlColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnAnestheticConcentration_mg_ml
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property SedativeColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnSedative
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property SedativeDosage_mgColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnSedativeDosage_mg
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property SedativeConcentration_mg_mlColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnSedativeConcentration_mg_ml
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property NumHitsColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnNumHits
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property NumMissesColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnNumMisses
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property DrugEffectColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnDrugEffect
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property InitialBodyTempColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnInitialBodyTemp
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property InitialBodyTempTimeColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnInitialBodyTempTime
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property FinalBodyTemperatureColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnFinalBodyTemperature
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property FinalBodyTemperatureTimeColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnFinalBodyTemperatureTime
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property AdditionalDrugsColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnAdditionalDrugs
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property SexColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnSex
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property EstimatedAgeColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnEstimatedAge
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property WithCalfColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnWithCalf
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property LactatingColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnLactating
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property BodyConditionColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnBodyCondition
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property Weight_KgColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnWeight_Kg
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property BodyLengthColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnBodyLength
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property NeckCircumferenceColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnNeckCircumference
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property JawColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnJaw
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property MetatarsusLengthColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnMetatarsusLength
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property HindfootLengthColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnHindfootLength
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property ChestGirthColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnChestGirth
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property BloodSampleRedColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnBloodSampleRed
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property BloodSamplePurpleColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnBloodSamplePurple
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property BloodSampleGreenColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnBloodSampleGreen
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property AnestheticReversalColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnAnestheticReversal
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property AnestheticReversalDosage_mgColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnAnestheticReversalDosage_mg
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property AnestheticReversalConcentration_mg_mlColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnAnestheticReversalConcentration_mg_ml
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property AnestheticReversalRouteColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnAnestheticReversalRoute
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property AnestheticReversalTimeColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnAnestheticReversalTime
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property SedativeReversalColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnSedativeReversal
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property SedativeReversalDosage_mgColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnSedativeReversalDosage_mg
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property SedativeReversalConcentration_mg_mlColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnSedativeReversalConcentration_mg_ml
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property SedativeReversalRouteColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnSedativeReversalRoute
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property SedativeReversalTimeColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnSedativeReversalTime
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property TimeStandingColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnTimeStanding
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property TimeMobileColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnTimeMobile
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property CommentsColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnComments
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property CaptureIDColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnCaptureID
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property RecordInsertedDateColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnRecordInsertedDate
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property RecordInsertedByColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnRecordInsertedBy
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property ProjectIDColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnProjectID
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property TSColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnTS
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property AnestheticDosage_mlColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnAnestheticDosage_ml
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property SedativeDosage_mlColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnSedativeDosage_ml
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property AnestheticReversalDosage_mlColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnAnestheticReversalDosage_ml
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property SedativeReversalDosage_mlColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnSedativeReversalDosage_ml
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property ProtocolVersionColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnProtocolVersion
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property SOPNumberColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnSOPNumber
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property SOPVersionColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnSOPVersion
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property CertificationDateColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnCertificationDate
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property CertifiedByColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnCertifiedBy
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property ProtocolIRMAReferenceColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnProtocolIRMAReference
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property CertificationLevelColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnCertificationLevel
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
+         Global.System.ComponentModel.Browsable(false)>  _
+        Public ReadOnly Property Count() As Integer
+            Get
+                Return Me.Rows.Count
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Default ReadOnly Property Item(ByVal index As Integer) As CapturesRow
+            Get
+                Return CType(Me.Rows(index),CapturesRow)
+            End Get
+        End Property
+        
+        <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Event CapturesRowChanging As CapturesRowChangeEventHandler
+        
+        <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Event CapturesRowChanged As CapturesRowChangeEventHandler
+        
+        <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Event CapturesRowDeleting As CapturesRowChangeEventHandler
+        
+        <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Event CapturesRowDeleted As CapturesRowChangeEventHandler
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Overloads Sub AddCapturesRow(ByVal row As CapturesRow)
+            Me.Rows.Add(row)
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Overloads Function AddCapturesRow( _
+                    ByVal AnimalID As String,  _
+                    ByVal CaptureDate As Date,  _
+                    ByVal Crew As String,  _
+                    ByVal Shooter As String,  _
+                    ByVal Frequency As Decimal,  _
+                    ByVal VisualCollar As String,  _
+                    ByVal SerialNumber As Integer,  _
+                    ByVal CaptureLatitude As Decimal,  _
+                    ByVal CaptureLongitude As Decimal,  _
+                    ByVal OldFrequency As Decimal,  _
+                    ByVal OldVisualCollar As String,  _
+                    ByVal GeneralLocation As String,  _
+                    ByVal TimeStartChase As System.TimeSpan,  _
+                    ByVal TimeFirstHitBounce As System.TimeSpan,  _
+                    ByVal TimeSecordHitBounce As System.TimeSpan,  _
+                    ByVal TimeThirdHitBounce As System.TimeSpan,  _
+                    ByVal TimeVisibleEffect As System.TimeSpan,  _
+                    ByVal TimeAnimalDown As System.TimeSpan,  _
+                    ByVal DartLocation As String,  _
+                    ByVal Anesthetic As String,  _
+                    ByVal AnestheticDosage_mg As Decimal,  _
+                    ByVal AnestheticConcentration_mg_ml As Integer,  _
+                    ByVal Sedative As String,  _
+                    ByVal SedativeDosage_mg As Decimal,  _
+                    ByVal SedativeConcentration_mg_ml As Integer,  _
+                    ByVal NumHits As Integer,  _
+                    ByVal NumMisses As Integer,  _
+                    ByVal DrugEffect As Integer,  _
+                    ByVal InitialBodyTemp As Decimal,  _
+                    ByVal InitialBodyTempTime As System.TimeSpan,  _
+                    ByVal FinalBodyTemperature As Decimal,  _
+                    ByVal FinalBodyTemperatureTime As System.TimeSpan,  _
+                    ByVal AdditionalDrugs As String,  _
+                    ByVal Sex As String,  _
+                    ByVal EstimatedAge As Integer,  _
+                    ByVal WithCalf As Integer,  _
+                    ByVal Lactating As Integer,  _
+                    ByVal BodyCondition As String,  _
+                    ByVal Weight_Kg As Decimal,  _
+                    ByVal BodyLength As Decimal,  _
+                    ByVal NeckCircumference As Decimal,  _
+                    ByVal Jaw As Decimal,  _
+                    ByVal MetatarsusLength As Decimal,  _
+                    ByVal HindfootLength As Decimal,  _
+                    ByVal ChestGirth As Decimal,  _
+                    ByVal BloodSampleRed As Integer,  _
+                    ByVal BloodSamplePurple As Integer,  _
+                    ByVal BloodSampleGreen As Integer,  _
+                    ByVal AnestheticReversal As String,  _
+                    ByVal AnestheticReversalDosage_mg As Decimal,  _
+                    ByVal AnestheticReversalConcentration_mg_ml As Integer,  _
+                    ByVal AnestheticReversalRoute As String,  _
+                    ByVal AnestheticReversalTime As System.TimeSpan,  _
+                    ByVal SedativeReversal As String,  _
+                    ByVal SedativeReversalDosage_mg As Decimal,  _
+                    ByVal SedativeReversalConcentration_mg_ml As Integer,  _
+                    ByVal SedativeReversalRoute As String,  _
+                    ByVal SedativeReversalTime As System.TimeSpan,  _
+                    ByVal TimeStanding As System.TimeSpan,  _
+                    ByVal TimeMobile As System.TimeSpan,  _
+                    ByVal Comments As String,  _
+                    ByVal CaptureID As String,  _
+                    ByVal RecordInsertedDate As Date,  _
+                    ByVal RecordInsertedBy As String,  _
+                    ByVal ProjectID As String,  _
+                    ByVal TS() As Byte,  _
+                    ByVal AnestheticDosage_ml As Decimal,  _
+                    ByVal SedativeDosage_ml As Decimal,  _
+                    ByVal AnestheticReversalDosage_ml As Decimal,  _
+                    ByVal SedativeReversalDosage_ml As Decimal,  _
+                    ByVal ProtocolVersion As Decimal,  _
+                    ByVal SOPNumber As Integer,  _
+                    ByVal SOPVersion As Decimal,  _
+                    ByVal CertificationDate As Date,  _
+                    ByVal CertifiedBy As String,  _
+                    ByVal ProtocolIRMAReference As Integer,  _
+                    ByVal CertificationLevel As String) As CapturesRow
+            Dim rowCapturesRow As CapturesRow = CType(Me.NewRow,CapturesRow)
+            Dim columnValuesArray() As Object = New Object() {AnimalID, CaptureDate, Crew, Shooter, Frequency, VisualCollar, SerialNumber, CaptureLatitude, CaptureLongitude, OldFrequency, OldVisualCollar, GeneralLocation, TimeStartChase, TimeFirstHitBounce, TimeSecordHitBounce, TimeThirdHitBounce, TimeVisibleEffect, TimeAnimalDown, DartLocation, Anesthetic, AnestheticDosage_mg, AnestheticConcentration_mg_ml, Sedative, SedativeDosage_mg, SedativeConcentration_mg_ml, NumHits, NumMisses, DrugEffect, InitialBodyTemp, InitialBodyTempTime, FinalBodyTemperature, FinalBodyTemperatureTime, AdditionalDrugs, Sex, EstimatedAge, WithCalf, Lactating, BodyCondition, Weight_Kg, BodyLength, NeckCircumference, Jaw, MetatarsusLength, HindfootLength, ChestGirth, BloodSampleRed, BloodSamplePurple, BloodSampleGreen, AnestheticReversal, AnestheticReversalDosage_mg, AnestheticReversalConcentration_mg_ml, AnestheticReversalRoute, AnestheticReversalTime, SedativeReversal, SedativeReversalDosage_mg, SedativeReversalConcentration_mg_ml, SedativeReversalRoute, SedativeReversalTime, TimeStanding, TimeMobile, Comments, CaptureID, RecordInsertedDate, RecordInsertedBy, ProjectID, TS, AnestheticDosage_ml, SedativeDosage_ml, AnestheticReversalDosage_ml, SedativeReversalDosage_ml, ProtocolVersion, SOPNumber, SOPVersion, CertificationDate, CertifiedBy, ProtocolIRMAReference, CertificationLevel}
+            rowCapturesRow.ItemArray = columnValuesArray
+            Me.Rows.Add(rowCapturesRow)
+            Return rowCapturesRow
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function FindByAnimalIDCaptureDate(ByVal AnimalID As String, ByVal CaptureDate As Date) As CapturesRow
+            Return CType(Me.Rows.Find(New Object() {AnimalID, CaptureDate}),CapturesRow)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Overrides Function Clone() As Global.System.Data.DataTable
+            Dim cln As CapturesDataTable = CType(MyBase.Clone,CapturesDataTable)
+            cln.InitVars
+            Return cln
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Protected Overrides Function CreateInstance() As Global.System.Data.DataTable
+            Return New CapturesDataTable()
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Friend Sub InitVars()
+            Me.columnAnimalID = MyBase.Columns("AnimalID")
+            Me.columnCaptureDate = MyBase.Columns("CaptureDate")
+            Me.columnCrew = MyBase.Columns("Crew")
+            Me.columnShooter = MyBase.Columns("Shooter")
+            Me.columnFrequency = MyBase.Columns("Frequency")
+            Me.columnVisualCollar = MyBase.Columns("VisualCollar")
+            Me.columnSerialNumber = MyBase.Columns("SerialNumber")
+            Me.columnCaptureLatitude = MyBase.Columns("CaptureLatitude")
+            Me.columnCaptureLongitude = MyBase.Columns("CaptureLongitude")
+            Me.columnOldFrequency = MyBase.Columns("OldFrequency")
+            Me.columnOldVisualCollar = MyBase.Columns("OldVisualCollar")
+            Me.columnGeneralLocation = MyBase.Columns("GeneralLocation")
+            Me.columnTimeStartChase = MyBase.Columns("TimeStartChase")
+            Me.columnTimeFirstHitBounce = MyBase.Columns("TimeFirstHitBounce")
+            Me.columnTimeSecordHitBounce = MyBase.Columns("TimeSecordHitBounce")
+            Me.columnTimeThirdHitBounce = MyBase.Columns("TimeThirdHitBounce")
+            Me.columnTimeVisibleEffect = MyBase.Columns("TimeVisibleEffect")
+            Me.columnTimeAnimalDown = MyBase.Columns("TimeAnimalDown")
+            Me.columnDartLocation = MyBase.Columns("DartLocation")
+            Me.columnAnesthetic = MyBase.Columns("Anesthetic")
+            Me.columnAnestheticDosage_mg = MyBase.Columns("AnestheticDosage_mg")
+            Me.columnAnestheticConcentration_mg_ml = MyBase.Columns("AnestheticConcentration_mg_ml")
+            Me.columnSedative = MyBase.Columns("Sedative")
+            Me.columnSedativeDosage_mg = MyBase.Columns("SedativeDosage_mg")
+            Me.columnSedativeConcentration_mg_ml = MyBase.Columns("SedativeConcentration_mg_ml")
+            Me.columnNumHits = MyBase.Columns("NumHits")
+            Me.columnNumMisses = MyBase.Columns("NumMisses")
+            Me.columnDrugEffect = MyBase.Columns("DrugEffect")
+            Me.columnInitialBodyTemp = MyBase.Columns("InitialBodyTemp")
+            Me.columnInitialBodyTempTime = MyBase.Columns("InitialBodyTempTime")
+            Me.columnFinalBodyTemperature = MyBase.Columns("FinalBodyTemperature")
+            Me.columnFinalBodyTemperatureTime = MyBase.Columns("FinalBodyTemperatureTime")
+            Me.columnAdditionalDrugs = MyBase.Columns("AdditionalDrugs")
+            Me.columnSex = MyBase.Columns("Sex")
+            Me.columnEstimatedAge = MyBase.Columns("EstimatedAge")
+            Me.columnWithCalf = MyBase.Columns("WithCalf")
+            Me.columnLactating = MyBase.Columns("Lactating")
+            Me.columnBodyCondition = MyBase.Columns("BodyCondition")
+            Me.columnWeight_Kg = MyBase.Columns("Weight_Kg")
+            Me.columnBodyLength = MyBase.Columns("BodyLength")
+            Me.columnNeckCircumference = MyBase.Columns("NeckCircumference")
+            Me.columnJaw = MyBase.Columns("Jaw")
+            Me.columnMetatarsusLength = MyBase.Columns("MetatarsusLength")
+            Me.columnHindfootLength = MyBase.Columns("HindfootLength")
+            Me.columnChestGirth = MyBase.Columns("ChestGirth")
+            Me.columnBloodSampleRed = MyBase.Columns("BloodSampleRed")
+            Me.columnBloodSamplePurple = MyBase.Columns("BloodSamplePurple")
+            Me.columnBloodSampleGreen = MyBase.Columns("BloodSampleGreen")
+            Me.columnAnestheticReversal = MyBase.Columns("AnestheticReversal")
+            Me.columnAnestheticReversalDosage_mg = MyBase.Columns("AnestheticReversalDosage_mg")
+            Me.columnAnestheticReversalConcentration_mg_ml = MyBase.Columns("AnestheticReversalConcentration_mg_ml")
+            Me.columnAnestheticReversalRoute = MyBase.Columns("AnestheticReversalRoute")
+            Me.columnAnestheticReversalTime = MyBase.Columns("AnestheticReversalTime")
+            Me.columnSedativeReversal = MyBase.Columns("SedativeReversal")
+            Me.columnSedativeReversalDosage_mg = MyBase.Columns("SedativeReversalDosage_mg")
+            Me.columnSedativeReversalConcentration_mg_ml = MyBase.Columns("SedativeReversalConcentration_mg_ml")
+            Me.columnSedativeReversalRoute = MyBase.Columns("SedativeReversalRoute")
+            Me.columnSedativeReversalTime = MyBase.Columns("SedativeReversalTime")
+            Me.columnTimeStanding = MyBase.Columns("TimeStanding")
+            Me.columnTimeMobile = MyBase.Columns("TimeMobile")
+            Me.columnComments = MyBase.Columns("Comments")
+            Me.columnCaptureID = MyBase.Columns("CaptureID")
+            Me.columnRecordInsertedDate = MyBase.Columns("RecordInsertedDate")
+            Me.columnRecordInsertedBy = MyBase.Columns("RecordInsertedBy")
+            Me.columnProjectID = MyBase.Columns("ProjectID")
+            Me.columnTS = MyBase.Columns("TS")
+            Me.columnAnestheticDosage_ml = MyBase.Columns("AnestheticDosage_ml")
+            Me.columnSedativeDosage_ml = MyBase.Columns("SedativeDosage_ml")
+            Me.columnAnestheticReversalDosage_ml = MyBase.Columns("AnestheticReversalDosage_ml")
+            Me.columnSedativeReversalDosage_ml = MyBase.Columns("SedativeReversalDosage_ml")
+            Me.columnProtocolVersion = MyBase.Columns("ProtocolVersion")
+            Me.columnSOPNumber = MyBase.Columns("SOPNumber")
+            Me.columnSOPVersion = MyBase.Columns("SOPVersion")
+            Me.columnCertificationDate = MyBase.Columns("CertificationDate")
+            Me.columnCertifiedBy = MyBase.Columns("CertifiedBy")
+            Me.columnProtocolIRMAReference = MyBase.Columns("ProtocolIRMAReference")
+            Me.columnCertificationLevel = MyBase.Columns("CertificationLevel")
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Private Sub InitClass()
+            Me.columnAnimalID = New Global.System.Data.DataColumn("AnimalID", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnAnimalID)
+            Me.columnCaptureDate = New Global.System.Data.DataColumn("CaptureDate", GetType(Date), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnCaptureDate)
+            Me.columnCrew = New Global.System.Data.DataColumn("Crew", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnCrew)
+            Me.columnShooter = New Global.System.Data.DataColumn("Shooter", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnShooter)
+            Me.columnFrequency = New Global.System.Data.DataColumn("Frequency", GetType(Decimal), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnFrequency)
+            Me.columnVisualCollar = New Global.System.Data.DataColumn("VisualCollar", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnVisualCollar)
+            Me.columnSerialNumber = New Global.System.Data.DataColumn("SerialNumber", GetType(Integer), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnSerialNumber)
+            Me.columnCaptureLatitude = New Global.System.Data.DataColumn("CaptureLatitude", GetType(Decimal), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnCaptureLatitude)
+            Me.columnCaptureLongitude = New Global.System.Data.DataColumn("CaptureLongitude", GetType(Decimal), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnCaptureLongitude)
+            Me.columnOldFrequency = New Global.System.Data.DataColumn("OldFrequency", GetType(Decimal), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnOldFrequency)
+            Me.columnOldVisualCollar = New Global.System.Data.DataColumn("OldVisualCollar", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnOldVisualCollar)
+            Me.columnGeneralLocation = New Global.System.Data.DataColumn("GeneralLocation", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnGeneralLocation)
+            Me.columnTimeStartChase = New Global.System.Data.DataColumn("TimeStartChase", GetType(Global.System.TimeSpan), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnTimeStartChase)
+            Me.columnTimeFirstHitBounce = New Global.System.Data.DataColumn("TimeFirstHitBounce", GetType(Global.System.TimeSpan), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnTimeFirstHitBounce)
+            Me.columnTimeSecordHitBounce = New Global.System.Data.DataColumn("TimeSecordHitBounce", GetType(Global.System.TimeSpan), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnTimeSecordHitBounce)
+            Me.columnTimeThirdHitBounce = New Global.System.Data.DataColumn("TimeThirdHitBounce", GetType(Global.System.TimeSpan), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnTimeThirdHitBounce)
+            Me.columnTimeVisibleEffect = New Global.System.Data.DataColumn("TimeVisibleEffect", GetType(Global.System.TimeSpan), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnTimeVisibleEffect)
+            Me.columnTimeAnimalDown = New Global.System.Data.DataColumn("TimeAnimalDown", GetType(Global.System.TimeSpan), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnTimeAnimalDown)
+            Me.columnDartLocation = New Global.System.Data.DataColumn("DartLocation", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnDartLocation)
+            Me.columnAnesthetic = New Global.System.Data.DataColumn("Anesthetic", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnAnesthetic)
+            Me.columnAnestheticDosage_mg = New Global.System.Data.DataColumn("AnestheticDosage_mg", GetType(Decimal), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnAnestheticDosage_mg)
+            Me.columnAnestheticConcentration_mg_ml = New Global.System.Data.DataColumn("AnestheticConcentration_mg_ml", GetType(Integer), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnAnestheticConcentration_mg_ml)
+            Me.columnSedative = New Global.System.Data.DataColumn("Sedative", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnSedative)
+            Me.columnSedativeDosage_mg = New Global.System.Data.DataColumn("SedativeDosage_mg", GetType(Decimal), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnSedativeDosage_mg)
+            Me.columnSedativeConcentration_mg_ml = New Global.System.Data.DataColumn("SedativeConcentration_mg_ml", GetType(Integer), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnSedativeConcentration_mg_ml)
+            Me.columnNumHits = New Global.System.Data.DataColumn("NumHits", GetType(Integer), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnNumHits)
+            Me.columnNumMisses = New Global.System.Data.DataColumn("NumMisses", GetType(Integer), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnNumMisses)
+            Me.columnDrugEffect = New Global.System.Data.DataColumn("DrugEffect", GetType(Integer), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnDrugEffect)
+            Me.columnInitialBodyTemp = New Global.System.Data.DataColumn("InitialBodyTemp", GetType(Decimal), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnInitialBodyTemp)
+            Me.columnInitialBodyTempTime = New Global.System.Data.DataColumn("InitialBodyTempTime", GetType(Global.System.TimeSpan), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnInitialBodyTempTime)
+            Me.columnFinalBodyTemperature = New Global.System.Data.DataColumn("FinalBodyTemperature", GetType(Decimal), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnFinalBodyTemperature)
+            Me.columnFinalBodyTemperatureTime = New Global.System.Data.DataColumn("FinalBodyTemperatureTime", GetType(Global.System.TimeSpan), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnFinalBodyTemperatureTime)
+            Me.columnAdditionalDrugs = New Global.System.Data.DataColumn("AdditionalDrugs", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnAdditionalDrugs)
+            Me.columnSex = New Global.System.Data.DataColumn("Sex", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnSex)
+            Me.columnEstimatedAge = New Global.System.Data.DataColumn("EstimatedAge", GetType(Integer), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnEstimatedAge)
+            Me.columnWithCalf = New Global.System.Data.DataColumn("WithCalf", GetType(Integer), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnWithCalf)
+            Me.columnLactating = New Global.System.Data.DataColumn("Lactating", GetType(Integer), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnLactating)
+            Me.columnBodyCondition = New Global.System.Data.DataColumn("BodyCondition", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnBodyCondition)
+            Me.columnWeight_Kg = New Global.System.Data.DataColumn("Weight_Kg", GetType(Decimal), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnWeight_Kg)
+            Me.columnBodyLength = New Global.System.Data.DataColumn("BodyLength", GetType(Decimal), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnBodyLength)
+            Me.columnNeckCircumference = New Global.System.Data.DataColumn("NeckCircumference", GetType(Decimal), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnNeckCircumference)
+            Me.columnJaw = New Global.System.Data.DataColumn("Jaw", GetType(Decimal), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnJaw)
+            Me.columnMetatarsusLength = New Global.System.Data.DataColumn("MetatarsusLength", GetType(Decimal), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnMetatarsusLength)
+            Me.columnHindfootLength = New Global.System.Data.DataColumn("HindfootLength", GetType(Decimal), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnHindfootLength)
+            Me.columnChestGirth = New Global.System.Data.DataColumn("ChestGirth", GetType(Decimal), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnChestGirth)
+            Me.columnBloodSampleRed = New Global.System.Data.DataColumn("BloodSampleRed", GetType(Integer), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnBloodSampleRed)
+            Me.columnBloodSamplePurple = New Global.System.Data.DataColumn("BloodSamplePurple", GetType(Integer), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnBloodSamplePurple)
+            Me.columnBloodSampleGreen = New Global.System.Data.DataColumn("BloodSampleGreen", GetType(Integer), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnBloodSampleGreen)
+            Me.columnAnestheticReversal = New Global.System.Data.DataColumn("AnestheticReversal", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnAnestheticReversal)
+            Me.columnAnestheticReversalDosage_mg = New Global.System.Data.DataColumn("AnestheticReversalDosage_mg", GetType(Decimal), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnAnestheticReversalDosage_mg)
+            Me.columnAnestheticReversalConcentration_mg_ml = New Global.System.Data.DataColumn("AnestheticReversalConcentration_mg_ml", GetType(Integer), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnAnestheticReversalConcentration_mg_ml)
+            Me.columnAnestheticReversalRoute = New Global.System.Data.DataColumn("AnestheticReversalRoute", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnAnestheticReversalRoute)
+            Me.columnAnestheticReversalTime = New Global.System.Data.DataColumn("AnestheticReversalTime", GetType(Global.System.TimeSpan), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnAnestheticReversalTime)
+            Me.columnSedativeReversal = New Global.System.Data.DataColumn("SedativeReversal", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnSedativeReversal)
+            Me.columnSedativeReversalDosage_mg = New Global.System.Data.DataColumn("SedativeReversalDosage_mg", GetType(Decimal), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnSedativeReversalDosage_mg)
+            Me.columnSedativeReversalConcentration_mg_ml = New Global.System.Data.DataColumn("SedativeReversalConcentration_mg_ml", GetType(Integer), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnSedativeReversalConcentration_mg_ml)
+            Me.columnSedativeReversalRoute = New Global.System.Data.DataColumn("SedativeReversalRoute", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnSedativeReversalRoute)
+            Me.columnSedativeReversalTime = New Global.System.Data.DataColumn("SedativeReversalTime", GetType(Global.System.TimeSpan), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnSedativeReversalTime)
+            Me.columnTimeStanding = New Global.System.Data.DataColumn("TimeStanding", GetType(Global.System.TimeSpan), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnTimeStanding)
+            Me.columnTimeMobile = New Global.System.Data.DataColumn("TimeMobile", GetType(Global.System.TimeSpan), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnTimeMobile)
+            Me.columnComments = New Global.System.Data.DataColumn("Comments", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnComments)
+            Me.columnCaptureID = New Global.System.Data.DataColumn("CaptureID", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnCaptureID)
+            Me.columnRecordInsertedDate = New Global.System.Data.DataColumn("RecordInsertedDate", GetType(Date), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnRecordInsertedDate)
+            Me.columnRecordInsertedBy = New Global.System.Data.DataColumn("RecordInsertedBy", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnRecordInsertedBy)
+            Me.columnProjectID = New Global.System.Data.DataColumn("ProjectID", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnProjectID)
+            Me.columnTS = New Global.System.Data.DataColumn("TS", GetType(Byte()), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnTS)
+            Me.columnAnestheticDosage_ml = New Global.System.Data.DataColumn("AnestheticDosage_ml", GetType(Decimal), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnAnestheticDosage_ml)
+            Me.columnSedativeDosage_ml = New Global.System.Data.DataColumn("SedativeDosage_ml", GetType(Decimal), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnSedativeDosage_ml)
+            Me.columnAnestheticReversalDosage_ml = New Global.System.Data.DataColumn("AnestheticReversalDosage_ml", GetType(Decimal), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnAnestheticReversalDosage_ml)
+            Me.columnSedativeReversalDosage_ml = New Global.System.Data.DataColumn("SedativeReversalDosage_ml", GetType(Decimal), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnSedativeReversalDosage_ml)
+            Me.columnProtocolVersion = New Global.System.Data.DataColumn("ProtocolVersion", GetType(Decimal), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnProtocolVersion)
+            Me.columnSOPNumber = New Global.System.Data.DataColumn("SOPNumber", GetType(Integer), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnSOPNumber)
+            Me.columnSOPVersion = New Global.System.Data.DataColumn("SOPVersion", GetType(Decimal), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnSOPVersion)
+            Me.columnCertificationDate = New Global.System.Data.DataColumn("CertificationDate", GetType(Date), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnCertificationDate)
+            Me.columnCertifiedBy = New Global.System.Data.DataColumn("CertifiedBy", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnCertifiedBy)
+            Me.columnProtocolIRMAReference = New Global.System.Data.DataColumn("ProtocolIRMAReference", GetType(Integer), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnProtocolIRMAReference)
+            Me.columnCertificationLevel = New Global.System.Data.DataColumn("CertificationLevel", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnCertificationLevel)
+            Me.Constraints.Add(New Global.System.Data.UniqueConstraint("Constraint1", New Global.System.Data.DataColumn() {Me.columnAnimalID, Me.columnCaptureDate}, true))
+            Me.columnAnimalID.AllowDBNull = false
+            Me.columnAnimalID.MaxLength = 16
+            Me.columnCaptureDate.AllowDBNull = false
+            Me.columnCrew.MaxLength = 255
+            Me.columnShooter.MaxLength = 20
+            Me.columnVisualCollar.MaxLength = 4
+            Me.columnOldVisualCollar.MaxLength = 4
+            Me.columnGeneralLocation.MaxLength = 255
+            Me.columnDartLocation.MaxLength = 50
+            Me.columnAnesthetic.MaxLength = 50
+            Me.columnSedative.MaxLength = 50
+            Me.columnAdditionalDrugs.MaxLength = 100
+            Me.columnSex.MaxLength = 1
+            Me.columnBodyCondition.MaxLength = 10
+            Me.columnAnestheticReversal.MaxLength = 50
+            Me.columnAnestheticReversalRoute.MaxLength = 50
+            Me.columnSedativeReversal.MaxLength = 50
+            Me.columnSedativeReversalRoute.MaxLength = 50
+            Me.columnComments.MaxLength = 1000
+            Me.columnCaptureID.AllowDBNull = false
+            Me.columnCaptureID.MaxLength = 50
+            Me.columnRecordInsertedDate.AllowDBNull = false
+            Me.columnRecordInsertedBy.AllowDBNull = false
+            Me.columnRecordInsertedBy.MaxLength = 50
+            Me.columnProjectID.AllowDBNull = false
+            Me.columnProjectID.MaxLength = 16
+            Me.columnTS.ReadOnly = true
+            Me.columnProtocolVersion.AllowDBNull = false
+            Me.columnSOPNumber.AllowDBNull = false
+            Me.columnSOPVersion.AllowDBNull = false
+            Me.columnCertifiedBy.MaxLength = 50
+            Me.columnCertificationLevel.AllowDBNull = false
+            Me.columnCertificationLevel.MaxLength = 15
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function NewCapturesRow() As CapturesRow
+            Return CType(Me.NewRow,CapturesRow)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Protected Overrides Function NewRowFromBuilder(ByVal builder As Global.System.Data.DataRowBuilder) As Global.System.Data.DataRow
+            Return New CapturesRow(builder)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Protected Overrides Function GetRowType() As Global.System.Type
+            Return GetType(CapturesRow)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Protected Overrides Sub OnRowChanged(ByVal e As Global.System.Data.DataRowChangeEventArgs)
+            MyBase.OnRowChanged(e)
+            If (Not (Me.CapturesRowChangedEvent) Is Nothing) Then
+                RaiseEvent CapturesRowChanged(Me, New CapturesRowChangeEvent(CType(e.Row,CapturesRow), e.Action))
+            End If
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Protected Overrides Sub OnRowChanging(ByVal e As Global.System.Data.DataRowChangeEventArgs)
+            MyBase.OnRowChanging(e)
+            If (Not (Me.CapturesRowChangingEvent) Is Nothing) Then
+                RaiseEvent CapturesRowChanging(Me, New CapturesRowChangeEvent(CType(e.Row,CapturesRow), e.Action))
+            End If
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Protected Overrides Sub OnRowDeleted(ByVal e As Global.System.Data.DataRowChangeEventArgs)
+            MyBase.OnRowDeleted(e)
+            If (Not (Me.CapturesRowDeletedEvent) Is Nothing) Then
+                RaiseEvent CapturesRowDeleted(Me, New CapturesRowChangeEvent(CType(e.Row,CapturesRow), e.Action))
+            End If
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Protected Overrides Sub OnRowDeleting(ByVal e As Global.System.Data.DataRowChangeEventArgs)
+            MyBase.OnRowDeleting(e)
+            If (Not (Me.CapturesRowDeletingEvent) Is Nothing) Then
+                RaiseEvent CapturesRowDeleting(Me, New CapturesRowChangeEvent(CType(e.Row,CapturesRow), e.Action))
+            End If
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub RemoveCapturesRow(ByVal row As CapturesRow)
+            Me.Rows.Remove(row)
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Shared Function GetTypedTableSchema(ByVal xs As Global.System.Xml.Schema.XmlSchemaSet) As Global.System.Xml.Schema.XmlSchemaComplexType
+            Dim type As Global.System.Xml.Schema.XmlSchemaComplexType = New Global.System.Xml.Schema.XmlSchemaComplexType()
+            Dim sequence As Global.System.Xml.Schema.XmlSchemaSequence = New Global.System.Xml.Schema.XmlSchemaSequence()
+            Dim ds As WRST_CaribouDataSet = New WRST_CaribouDataSet()
+            Dim any1 As Global.System.Xml.Schema.XmlSchemaAny = New Global.System.Xml.Schema.XmlSchemaAny()
+            any1.Namespace = "http://www.w3.org/2001/XMLSchema"
+            any1.MinOccurs = New Decimal(0)
+            any1.MaxOccurs = Decimal.MaxValue
+            any1.ProcessContents = Global.System.Xml.Schema.XmlSchemaContentProcessing.Lax
+            sequence.Items.Add(any1)
+            Dim any2 As Global.System.Xml.Schema.XmlSchemaAny = New Global.System.Xml.Schema.XmlSchemaAny()
+            any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1"
+            any2.MinOccurs = New Decimal(1)
+            any2.ProcessContents = Global.System.Xml.Schema.XmlSchemaContentProcessing.Lax
+            sequence.Items.Add(any2)
+            Dim attribute1 As Global.System.Xml.Schema.XmlSchemaAttribute = New Global.System.Xml.Schema.XmlSchemaAttribute()
+            attribute1.Name = "namespace"
+            attribute1.FixedValue = ds.Namespace
+            type.Attributes.Add(attribute1)
+            Dim attribute2 As Global.System.Xml.Schema.XmlSchemaAttribute = New Global.System.Xml.Schema.XmlSchemaAttribute()
+            attribute2.Name = "tableTypeName"
+            attribute2.FixedValue = "CapturesDataTable"
+            type.Attributes.Add(attribute2)
+            type.Particle = sequence
+            Dim dsSchema As Global.System.Xml.Schema.XmlSchema = ds.GetSchemaSerializable
+            If xs.Contains(dsSchema.TargetNamespace) Then
+                Dim s1 As Global.System.IO.MemoryStream = New Global.System.IO.MemoryStream()
+                Dim s2 As Global.System.IO.MemoryStream = New Global.System.IO.MemoryStream()
+                Try 
+                    Dim schema As Global.System.Xml.Schema.XmlSchema = Nothing
+                    dsSchema.Write(s1)
+                    Dim schemas As Global.System.Collections.IEnumerator = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator
+                    Do While schemas.MoveNext
+                        schema = CType(schemas.Current,Global.System.Xml.Schema.XmlSchema)
+                        s2.SetLength(0)
+                        schema.Write(s2)
+                        If (s1.Length = s2.Length) Then
+                            s1.Position = 0
+                            s2.Position = 0
+                            
+                            Do While ((s1.Position <> s1.Length)  _
+                                        AndAlso (s1.ReadByte = s2.ReadByte))
+                                
+                                
+                            Loop
+                            If (s1.Position = s1.Length) Then
+                                Return type
+                            End If
+                        End If
+                        
+                    Loop
+                Finally
+                    If (Not (s1) Is Nothing) Then
+                        s1.Close
+                    End If
+                    If (Not (s2) Is Nothing) Then
+                        s2.Close
+                    End If
+                End Try
+            End If
+            xs.Add(dsSchema)
+            Return type
+        End Function
+    End Class
+    
+    '''<summary>
     '''Represents strongly named DataRow class.
     '''</summary>
     Partial Public Class CollaredAnimalsInGroupsRow
@@ -2044,6 +3444,17 @@ Partial Public Class WRST_CaribouDataSet
             End Get
             Set
                 Me.SetParentRow(value, Me.Table.ParentRelations("FK_CollaredAnimalsInGroups_Surveys"))
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property CapturesRow() As CapturesRow
+            Get
+                Return CType(Me.GetParentRow(Me.Table.ParentRelations("FK_CollaredAnimalsInGroups_Captures")),CapturesRow)
+            End Get
+            Set
+                Me.SetParentRow(value, Me.Table.ParentRelations("FK_CollaredAnimalsInGroups_Captures"))
             End Set
         End Property
         
@@ -3268,6 +4679,1957 @@ Partial Public Class WRST_CaribouDataSet
     End Class
     
     '''<summary>
+    '''Represents strongly named DataRow class.
+    '''</summary>
+    Partial Public Class CapturesRow
+        Inherits Global.System.Data.DataRow
+        
+        Private tableCaptures As CapturesDataTable
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Friend Sub New(ByVal rb As Global.System.Data.DataRowBuilder)
+            MyBase.New(rb)
+            Me.tableCaptures = CType(Me.Table,CapturesDataTable)
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property AnimalID() As String
+            Get
+                Return CType(Me(Me.tableCaptures.AnimalIDColumn),String)
+            End Get
+            Set
+                Me(Me.tableCaptures.AnimalIDColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property CaptureDate() As Date
+            Get
+                Return CType(Me(Me.tableCaptures.CaptureDateColumn),Date)
+            End Get
+            Set
+                Me(Me.tableCaptures.CaptureDateColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property Crew() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tableCaptures.CrewColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'Crew' in table 'Captures' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableCaptures.CrewColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property Shooter() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tableCaptures.ShooterColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'Shooter' in table 'Captures' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableCaptures.ShooterColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property Frequency() As Decimal
+            Get
+                Try 
+                    Return CType(Me(Me.tableCaptures.FrequencyColumn),Decimal)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'Frequency' in table 'Captures' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableCaptures.FrequencyColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property VisualCollar() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tableCaptures.VisualCollarColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'VisualCollar' in table 'Captures' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableCaptures.VisualCollarColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property SerialNumber() As Integer
+            Get
+                Try 
+                    Return CType(Me(Me.tableCaptures.SerialNumberColumn),Integer)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'SerialNumber' in table 'Captures' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableCaptures.SerialNumberColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property CaptureLatitude() As Decimal
+            Get
+                Try 
+                    Return CType(Me(Me.tableCaptures.CaptureLatitudeColumn),Decimal)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'CaptureLatitude' in table 'Captures' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableCaptures.CaptureLatitudeColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property CaptureLongitude() As Decimal
+            Get
+                Try 
+                    Return CType(Me(Me.tableCaptures.CaptureLongitudeColumn),Decimal)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'CaptureLongitude' in table 'Captures' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableCaptures.CaptureLongitudeColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property OldFrequency() As Decimal
+            Get
+                Try 
+                    Return CType(Me(Me.tableCaptures.OldFrequencyColumn),Decimal)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'OldFrequency' in table 'Captures' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableCaptures.OldFrequencyColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property OldVisualCollar() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tableCaptures.OldVisualCollarColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'OldVisualCollar' in table 'Captures' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableCaptures.OldVisualCollarColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property GeneralLocation() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tableCaptures.GeneralLocationColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'GeneralLocation' in table 'Captures' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableCaptures.GeneralLocationColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property TimeStartChase() As System.TimeSpan
+            Get
+                Try 
+                    Return CType(Me(Me.tableCaptures.TimeStartChaseColumn),Global.System.TimeSpan)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'TimeStartChase' in table 'Captures' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableCaptures.TimeStartChaseColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property TimeFirstHitBounce() As System.TimeSpan
+            Get
+                Try 
+                    Return CType(Me(Me.tableCaptures.TimeFirstHitBounceColumn),Global.System.TimeSpan)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'TimeFirstHitBounce' in table 'Captures' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableCaptures.TimeFirstHitBounceColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property TimeSecordHitBounce() As System.TimeSpan
+            Get
+                Try 
+                    Return CType(Me(Me.tableCaptures.TimeSecordHitBounceColumn),Global.System.TimeSpan)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'TimeSecordHitBounce' in table 'Captures' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableCaptures.TimeSecordHitBounceColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property TimeThirdHitBounce() As System.TimeSpan
+            Get
+                Try 
+                    Return CType(Me(Me.tableCaptures.TimeThirdHitBounceColumn),Global.System.TimeSpan)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'TimeThirdHitBounce' in table 'Captures' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableCaptures.TimeThirdHitBounceColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property TimeVisibleEffect() As System.TimeSpan
+            Get
+                Try 
+                    Return CType(Me(Me.tableCaptures.TimeVisibleEffectColumn),Global.System.TimeSpan)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'TimeVisibleEffect' in table 'Captures' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableCaptures.TimeVisibleEffectColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property TimeAnimalDown() As System.TimeSpan
+            Get
+                Try 
+                    Return CType(Me(Me.tableCaptures.TimeAnimalDownColumn),Global.System.TimeSpan)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'TimeAnimalDown' in table 'Captures' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableCaptures.TimeAnimalDownColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property DartLocation() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tableCaptures.DartLocationColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'DartLocation' in table 'Captures' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableCaptures.DartLocationColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property Anesthetic() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tableCaptures.AnestheticColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'Anesthetic' in table 'Captures' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableCaptures.AnestheticColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property AnestheticDosage_mg() As Decimal
+            Get
+                Try 
+                    Return CType(Me(Me.tableCaptures.AnestheticDosage_mgColumn),Decimal)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'AnestheticDosage_mg' in table 'Captures' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableCaptures.AnestheticDosage_mgColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property AnestheticConcentration_mg_ml() As Integer
+            Get
+                Try 
+                    Return CType(Me(Me.tableCaptures.AnestheticConcentration_mg_mlColumn),Integer)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'AnestheticConcentration_mg_ml' in table 'Captures' is DBNul"& _ 
+                            "l.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableCaptures.AnestheticConcentration_mg_mlColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property Sedative() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tableCaptures.SedativeColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'Sedative' in table 'Captures' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableCaptures.SedativeColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property SedativeDosage_mg() As Decimal
+            Get
+                Try 
+                    Return CType(Me(Me.tableCaptures.SedativeDosage_mgColumn),Decimal)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'SedativeDosage_mg' in table 'Captures' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableCaptures.SedativeDosage_mgColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property SedativeConcentration_mg_ml() As Integer
+            Get
+                Try 
+                    Return CType(Me(Me.tableCaptures.SedativeConcentration_mg_mlColumn),Integer)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'SedativeConcentration_mg_ml' in table 'Captures' is DBNull."& _ 
+                            "", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableCaptures.SedativeConcentration_mg_mlColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property NumHits() As Integer
+            Get
+                Try 
+                    Return CType(Me(Me.tableCaptures.NumHitsColumn),Integer)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'NumHits' in table 'Captures' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableCaptures.NumHitsColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property NumMisses() As Integer
+            Get
+                Try 
+                    Return CType(Me(Me.tableCaptures.NumMissesColumn),Integer)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'NumMisses' in table 'Captures' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableCaptures.NumMissesColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property DrugEffect() As Integer
+            Get
+                Try 
+                    Return CType(Me(Me.tableCaptures.DrugEffectColumn),Integer)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'DrugEffect' in table 'Captures' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableCaptures.DrugEffectColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property InitialBodyTemp() As Decimal
+            Get
+                Try 
+                    Return CType(Me(Me.tableCaptures.InitialBodyTempColumn),Decimal)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'InitialBodyTemp' in table 'Captures' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableCaptures.InitialBodyTempColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property InitialBodyTempTime() As System.TimeSpan
+            Get
+                Try 
+                    Return CType(Me(Me.tableCaptures.InitialBodyTempTimeColumn),Global.System.TimeSpan)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'InitialBodyTempTime' in table 'Captures' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableCaptures.InitialBodyTempTimeColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property FinalBodyTemperature() As Decimal
+            Get
+                Try 
+                    Return CType(Me(Me.tableCaptures.FinalBodyTemperatureColumn),Decimal)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'FinalBodyTemperature' in table 'Captures' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableCaptures.FinalBodyTemperatureColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property FinalBodyTemperatureTime() As System.TimeSpan
+            Get
+                Try 
+                    Return CType(Me(Me.tableCaptures.FinalBodyTemperatureTimeColumn),Global.System.TimeSpan)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'FinalBodyTemperatureTime' in table 'Captures' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableCaptures.FinalBodyTemperatureTimeColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property AdditionalDrugs() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tableCaptures.AdditionalDrugsColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'AdditionalDrugs' in table 'Captures' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableCaptures.AdditionalDrugsColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property Sex() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tableCaptures.SexColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'Sex' in table 'Captures' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableCaptures.SexColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property EstimatedAge() As Integer
+            Get
+                Try 
+                    Return CType(Me(Me.tableCaptures.EstimatedAgeColumn),Integer)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'EstimatedAge' in table 'Captures' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableCaptures.EstimatedAgeColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property WithCalf() As Integer
+            Get
+                Try 
+                    Return CType(Me(Me.tableCaptures.WithCalfColumn),Integer)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'WithCalf' in table 'Captures' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableCaptures.WithCalfColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property Lactating() As Integer
+            Get
+                Try 
+                    Return CType(Me(Me.tableCaptures.LactatingColumn),Integer)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'Lactating' in table 'Captures' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableCaptures.LactatingColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property BodyCondition() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tableCaptures.BodyConditionColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'BodyCondition' in table 'Captures' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableCaptures.BodyConditionColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property Weight_Kg() As Decimal
+            Get
+                Try 
+                    Return CType(Me(Me.tableCaptures.Weight_KgColumn),Decimal)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'Weight_Kg' in table 'Captures' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableCaptures.Weight_KgColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property BodyLength() As Decimal
+            Get
+                Try 
+                    Return CType(Me(Me.tableCaptures.BodyLengthColumn),Decimal)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'BodyLength' in table 'Captures' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableCaptures.BodyLengthColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property NeckCircumference() As Decimal
+            Get
+                Try 
+                    Return CType(Me(Me.tableCaptures.NeckCircumferenceColumn),Decimal)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'NeckCircumference' in table 'Captures' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableCaptures.NeckCircumferenceColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property Jaw() As Decimal
+            Get
+                Try 
+                    Return CType(Me(Me.tableCaptures.JawColumn),Decimal)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'Jaw' in table 'Captures' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableCaptures.JawColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property MetatarsusLength() As Decimal
+            Get
+                Try 
+                    Return CType(Me(Me.tableCaptures.MetatarsusLengthColumn),Decimal)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'MetatarsusLength' in table 'Captures' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableCaptures.MetatarsusLengthColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property HindfootLength() As Decimal
+            Get
+                Try 
+                    Return CType(Me(Me.tableCaptures.HindfootLengthColumn),Decimal)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'HindfootLength' in table 'Captures' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableCaptures.HindfootLengthColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property ChestGirth() As Decimal
+            Get
+                Try 
+                    Return CType(Me(Me.tableCaptures.ChestGirthColumn),Decimal)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'ChestGirth' in table 'Captures' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableCaptures.ChestGirthColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property BloodSampleRed() As Integer
+            Get
+                Try 
+                    Return CType(Me(Me.tableCaptures.BloodSampleRedColumn),Integer)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'BloodSampleRed' in table 'Captures' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableCaptures.BloodSampleRedColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property BloodSamplePurple() As Integer
+            Get
+                Try 
+                    Return CType(Me(Me.tableCaptures.BloodSamplePurpleColumn),Integer)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'BloodSamplePurple' in table 'Captures' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableCaptures.BloodSamplePurpleColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property BloodSampleGreen() As Integer
+            Get
+                Try 
+                    Return CType(Me(Me.tableCaptures.BloodSampleGreenColumn),Integer)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'BloodSampleGreen' in table 'Captures' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableCaptures.BloodSampleGreenColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property AnestheticReversal() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tableCaptures.AnestheticReversalColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'AnestheticReversal' in table 'Captures' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableCaptures.AnestheticReversalColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property AnestheticReversalDosage_mg() As Decimal
+            Get
+                Try 
+                    Return CType(Me(Me.tableCaptures.AnestheticReversalDosage_mgColumn),Decimal)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'AnestheticReversalDosage_mg' in table 'Captures' is DBNull."& _ 
+                            "", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableCaptures.AnestheticReversalDosage_mgColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property AnestheticReversalConcentration_mg_ml() As Integer
+            Get
+                Try 
+                    Return CType(Me(Me.tableCaptures.AnestheticReversalConcentration_mg_mlColumn),Integer)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'AnestheticReversalConcentration_mg_ml' in table 'Captures' "& _ 
+                            "is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableCaptures.AnestheticReversalConcentration_mg_mlColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property AnestheticReversalRoute() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tableCaptures.AnestheticReversalRouteColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'AnestheticReversalRoute' in table 'Captures' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableCaptures.AnestheticReversalRouteColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property AnestheticReversalTime() As System.TimeSpan
+            Get
+                Try 
+                    Return CType(Me(Me.tableCaptures.AnestheticReversalTimeColumn),Global.System.TimeSpan)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'AnestheticReversalTime' in table 'Captures' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableCaptures.AnestheticReversalTimeColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property SedativeReversal() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tableCaptures.SedativeReversalColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'SedativeReversal' in table 'Captures' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableCaptures.SedativeReversalColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property SedativeReversalDosage_mg() As Decimal
+            Get
+                Try 
+                    Return CType(Me(Me.tableCaptures.SedativeReversalDosage_mgColumn),Decimal)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'SedativeReversalDosage_mg' in table 'Captures' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableCaptures.SedativeReversalDosage_mgColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property SedativeReversalConcentration_mg_ml() As Integer
+            Get
+                Try 
+                    Return CType(Me(Me.tableCaptures.SedativeReversalConcentration_mg_mlColumn),Integer)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'SedativeReversalConcentration_mg_ml' in table 'Captures' is"& _ 
+                            " DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableCaptures.SedativeReversalConcentration_mg_mlColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property SedativeReversalRoute() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tableCaptures.SedativeReversalRouteColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'SedativeReversalRoute' in table 'Captures' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableCaptures.SedativeReversalRouteColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property SedativeReversalTime() As System.TimeSpan
+            Get
+                Try 
+                    Return CType(Me(Me.tableCaptures.SedativeReversalTimeColumn),Global.System.TimeSpan)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'SedativeReversalTime' in table 'Captures' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableCaptures.SedativeReversalTimeColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property TimeStanding() As System.TimeSpan
+            Get
+                Try 
+                    Return CType(Me(Me.tableCaptures.TimeStandingColumn),Global.System.TimeSpan)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'TimeStanding' in table 'Captures' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableCaptures.TimeStandingColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property TimeMobile() As System.TimeSpan
+            Get
+                Try 
+                    Return CType(Me(Me.tableCaptures.TimeMobileColumn),Global.System.TimeSpan)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'TimeMobile' in table 'Captures' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableCaptures.TimeMobileColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property Comments() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tableCaptures.CommentsColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'Comments' in table 'Captures' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableCaptures.CommentsColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property CaptureID() As String
+            Get
+                Return CType(Me(Me.tableCaptures.CaptureIDColumn),String)
+            End Get
+            Set
+                Me(Me.tableCaptures.CaptureIDColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property RecordInsertedDate() As Date
+            Get
+                Return CType(Me(Me.tableCaptures.RecordInsertedDateColumn),Date)
+            End Get
+            Set
+                Me(Me.tableCaptures.RecordInsertedDateColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property RecordInsertedBy() As String
+            Get
+                Return CType(Me(Me.tableCaptures.RecordInsertedByColumn),String)
+            End Get
+            Set
+                Me(Me.tableCaptures.RecordInsertedByColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property ProjectID() As String
+            Get
+                Return CType(Me(Me.tableCaptures.ProjectIDColumn),String)
+            End Get
+            Set
+                Me(Me.tableCaptures.ProjectIDColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property TS() As Byte()
+            Get
+                Try 
+                    Return CType(Me(Me.tableCaptures.TSColumn),Byte())
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'TS' in table 'Captures' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableCaptures.TSColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property AnestheticDosage_ml() As Decimal
+            Get
+                Try 
+                    Return CType(Me(Me.tableCaptures.AnestheticDosage_mlColumn),Decimal)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'AnestheticDosage_ml' in table 'Captures' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableCaptures.AnestheticDosage_mlColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property SedativeDosage_ml() As Decimal
+            Get
+                Try 
+                    Return CType(Me(Me.tableCaptures.SedativeDosage_mlColumn),Decimal)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'SedativeDosage_ml' in table 'Captures' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableCaptures.SedativeDosage_mlColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property AnestheticReversalDosage_ml() As Decimal
+            Get
+                Try 
+                    Return CType(Me(Me.tableCaptures.AnestheticReversalDosage_mlColumn),Decimal)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'AnestheticReversalDosage_ml' in table 'Captures' is DBNull."& _ 
+                            "", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableCaptures.AnestheticReversalDosage_mlColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property SedativeReversalDosage_ml() As Decimal
+            Get
+                Try 
+                    Return CType(Me(Me.tableCaptures.SedativeReversalDosage_mlColumn),Decimal)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'SedativeReversalDosage_ml' in table 'Captures' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableCaptures.SedativeReversalDosage_mlColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property ProtocolVersion() As Decimal
+            Get
+                Return CType(Me(Me.tableCaptures.ProtocolVersionColumn),Decimal)
+            End Get
+            Set
+                Me(Me.tableCaptures.ProtocolVersionColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property SOPNumber() As Integer
+            Get
+                Return CType(Me(Me.tableCaptures.SOPNumberColumn),Integer)
+            End Get
+            Set
+                Me(Me.tableCaptures.SOPNumberColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property SOPVersion() As Decimal
+            Get
+                Return CType(Me(Me.tableCaptures.SOPVersionColumn),Decimal)
+            End Get
+            Set
+                Me(Me.tableCaptures.SOPVersionColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property CertificationDate() As Date
+            Get
+                Try 
+                    Return CType(Me(Me.tableCaptures.CertificationDateColumn),Date)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'CertificationDate' in table 'Captures' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableCaptures.CertificationDateColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property CertifiedBy() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tableCaptures.CertifiedByColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'CertifiedBy' in table 'Captures' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableCaptures.CertifiedByColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property ProtocolIRMAReference() As Integer
+            Get
+                Try 
+                    Return CType(Me(Me.tableCaptures.ProtocolIRMAReferenceColumn),Integer)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'ProtocolIRMAReference' in table 'Captures' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableCaptures.ProtocolIRMAReferenceColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property CertificationLevel() As String
+            Get
+                Return CType(Me(Me.tableCaptures.CertificationLevelColumn),String)
+            End Get
+            Set
+                Me(Me.tableCaptures.CertificationLevelColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function IsCrewNull() As Boolean
+            Return Me.IsNull(Me.tableCaptures.CrewColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub SetCrewNull()
+            Me(Me.tableCaptures.CrewColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function IsShooterNull() As Boolean
+            Return Me.IsNull(Me.tableCaptures.ShooterColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub SetShooterNull()
+            Me(Me.tableCaptures.ShooterColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function IsFrequencyNull() As Boolean
+            Return Me.IsNull(Me.tableCaptures.FrequencyColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub SetFrequencyNull()
+            Me(Me.tableCaptures.FrequencyColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function IsVisualCollarNull() As Boolean
+            Return Me.IsNull(Me.tableCaptures.VisualCollarColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub SetVisualCollarNull()
+            Me(Me.tableCaptures.VisualCollarColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function IsSerialNumberNull() As Boolean
+            Return Me.IsNull(Me.tableCaptures.SerialNumberColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub SetSerialNumberNull()
+            Me(Me.tableCaptures.SerialNumberColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function IsCaptureLatitudeNull() As Boolean
+            Return Me.IsNull(Me.tableCaptures.CaptureLatitudeColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub SetCaptureLatitudeNull()
+            Me(Me.tableCaptures.CaptureLatitudeColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function IsCaptureLongitudeNull() As Boolean
+            Return Me.IsNull(Me.tableCaptures.CaptureLongitudeColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub SetCaptureLongitudeNull()
+            Me(Me.tableCaptures.CaptureLongitudeColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function IsOldFrequencyNull() As Boolean
+            Return Me.IsNull(Me.tableCaptures.OldFrequencyColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub SetOldFrequencyNull()
+            Me(Me.tableCaptures.OldFrequencyColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function IsOldVisualCollarNull() As Boolean
+            Return Me.IsNull(Me.tableCaptures.OldVisualCollarColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub SetOldVisualCollarNull()
+            Me(Me.tableCaptures.OldVisualCollarColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function IsGeneralLocationNull() As Boolean
+            Return Me.IsNull(Me.tableCaptures.GeneralLocationColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub SetGeneralLocationNull()
+            Me(Me.tableCaptures.GeneralLocationColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function IsTimeStartChaseNull() As Boolean
+            Return Me.IsNull(Me.tableCaptures.TimeStartChaseColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub SetTimeStartChaseNull()
+            Me(Me.tableCaptures.TimeStartChaseColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function IsTimeFirstHitBounceNull() As Boolean
+            Return Me.IsNull(Me.tableCaptures.TimeFirstHitBounceColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub SetTimeFirstHitBounceNull()
+            Me(Me.tableCaptures.TimeFirstHitBounceColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function IsTimeSecordHitBounceNull() As Boolean
+            Return Me.IsNull(Me.tableCaptures.TimeSecordHitBounceColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub SetTimeSecordHitBounceNull()
+            Me(Me.tableCaptures.TimeSecordHitBounceColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function IsTimeThirdHitBounceNull() As Boolean
+            Return Me.IsNull(Me.tableCaptures.TimeThirdHitBounceColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub SetTimeThirdHitBounceNull()
+            Me(Me.tableCaptures.TimeThirdHitBounceColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function IsTimeVisibleEffectNull() As Boolean
+            Return Me.IsNull(Me.tableCaptures.TimeVisibleEffectColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub SetTimeVisibleEffectNull()
+            Me(Me.tableCaptures.TimeVisibleEffectColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function IsTimeAnimalDownNull() As Boolean
+            Return Me.IsNull(Me.tableCaptures.TimeAnimalDownColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub SetTimeAnimalDownNull()
+            Me(Me.tableCaptures.TimeAnimalDownColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function IsDartLocationNull() As Boolean
+            Return Me.IsNull(Me.tableCaptures.DartLocationColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub SetDartLocationNull()
+            Me(Me.tableCaptures.DartLocationColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function IsAnestheticNull() As Boolean
+            Return Me.IsNull(Me.tableCaptures.AnestheticColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub SetAnestheticNull()
+            Me(Me.tableCaptures.AnestheticColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function IsAnestheticDosage_mgNull() As Boolean
+            Return Me.IsNull(Me.tableCaptures.AnestheticDosage_mgColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub SetAnestheticDosage_mgNull()
+            Me(Me.tableCaptures.AnestheticDosage_mgColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function IsAnestheticConcentration_mg_mlNull() As Boolean
+            Return Me.IsNull(Me.tableCaptures.AnestheticConcentration_mg_mlColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub SetAnestheticConcentration_mg_mlNull()
+            Me(Me.tableCaptures.AnestheticConcentration_mg_mlColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function IsSedativeNull() As Boolean
+            Return Me.IsNull(Me.tableCaptures.SedativeColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub SetSedativeNull()
+            Me(Me.tableCaptures.SedativeColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function IsSedativeDosage_mgNull() As Boolean
+            Return Me.IsNull(Me.tableCaptures.SedativeDosage_mgColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub SetSedativeDosage_mgNull()
+            Me(Me.tableCaptures.SedativeDosage_mgColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function IsSedativeConcentration_mg_mlNull() As Boolean
+            Return Me.IsNull(Me.tableCaptures.SedativeConcentration_mg_mlColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub SetSedativeConcentration_mg_mlNull()
+            Me(Me.tableCaptures.SedativeConcentration_mg_mlColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function IsNumHitsNull() As Boolean
+            Return Me.IsNull(Me.tableCaptures.NumHitsColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub SetNumHitsNull()
+            Me(Me.tableCaptures.NumHitsColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function IsNumMissesNull() As Boolean
+            Return Me.IsNull(Me.tableCaptures.NumMissesColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub SetNumMissesNull()
+            Me(Me.tableCaptures.NumMissesColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function IsDrugEffectNull() As Boolean
+            Return Me.IsNull(Me.tableCaptures.DrugEffectColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub SetDrugEffectNull()
+            Me(Me.tableCaptures.DrugEffectColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function IsInitialBodyTempNull() As Boolean
+            Return Me.IsNull(Me.tableCaptures.InitialBodyTempColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub SetInitialBodyTempNull()
+            Me(Me.tableCaptures.InitialBodyTempColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function IsInitialBodyTempTimeNull() As Boolean
+            Return Me.IsNull(Me.tableCaptures.InitialBodyTempTimeColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub SetInitialBodyTempTimeNull()
+            Me(Me.tableCaptures.InitialBodyTempTimeColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function IsFinalBodyTemperatureNull() As Boolean
+            Return Me.IsNull(Me.tableCaptures.FinalBodyTemperatureColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub SetFinalBodyTemperatureNull()
+            Me(Me.tableCaptures.FinalBodyTemperatureColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function IsFinalBodyTemperatureTimeNull() As Boolean
+            Return Me.IsNull(Me.tableCaptures.FinalBodyTemperatureTimeColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub SetFinalBodyTemperatureTimeNull()
+            Me(Me.tableCaptures.FinalBodyTemperatureTimeColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function IsAdditionalDrugsNull() As Boolean
+            Return Me.IsNull(Me.tableCaptures.AdditionalDrugsColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub SetAdditionalDrugsNull()
+            Me(Me.tableCaptures.AdditionalDrugsColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function IsSexNull() As Boolean
+            Return Me.IsNull(Me.tableCaptures.SexColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub SetSexNull()
+            Me(Me.tableCaptures.SexColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function IsEstimatedAgeNull() As Boolean
+            Return Me.IsNull(Me.tableCaptures.EstimatedAgeColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub SetEstimatedAgeNull()
+            Me(Me.tableCaptures.EstimatedAgeColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function IsWithCalfNull() As Boolean
+            Return Me.IsNull(Me.tableCaptures.WithCalfColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub SetWithCalfNull()
+            Me(Me.tableCaptures.WithCalfColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function IsLactatingNull() As Boolean
+            Return Me.IsNull(Me.tableCaptures.LactatingColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub SetLactatingNull()
+            Me(Me.tableCaptures.LactatingColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function IsBodyConditionNull() As Boolean
+            Return Me.IsNull(Me.tableCaptures.BodyConditionColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub SetBodyConditionNull()
+            Me(Me.tableCaptures.BodyConditionColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function IsWeight_KgNull() As Boolean
+            Return Me.IsNull(Me.tableCaptures.Weight_KgColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub SetWeight_KgNull()
+            Me(Me.tableCaptures.Weight_KgColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function IsBodyLengthNull() As Boolean
+            Return Me.IsNull(Me.tableCaptures.BodyLengthColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub SetBodyLengthNull()
+            Me(Me.tableCaptures.BodyLengthColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function IsNeckCircumferenceNull() As Boolean
+            Return Me.IsNull(Me.tableCaptures.NeckCircumferenceColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub SetNeckCircumferenceNull()
+            Me(Me.tableCaptures.NeckCircumferenceColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function IsJawNull() As Boolean
+            Return Me.IsNull(Me.tableCaptures.JawColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub SetJawNull()
+            Me(Me.tableCaptures.JawColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function IsMetatarsusLengthNull() As Boolean
+            Return Me.IsNull(Me.tableCaptures.MetatarsusLengthColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub SetMetatarsusLengthNull()
+            Me(Me.tableCaptures.MetatarsusLengthColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function IsHindfootLengthNull() As Boolean
+            Return Me.IsNull(Me.tableCaptures.HindfootLengthColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub SetHindfootLengthNull()
+            Me(Me.tableCaptures.HindfootLengthColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function IsChestGirthNull() As Boolean
+            Return Me.IsNull(Me.tableCaptures.ChestGirthColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub SetChestGirthNull()
+            Me(Me.tableCaptures.ChestGirthColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function IsBloodSampleRedNull() As Boolean
+            Return Me.IsNull(Me.tableCaptures.BloodSampleRedColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub SetBloodSampleRedNull()
+            Me(Me.tableCaptures.BloodSampleRedColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function IsBloodSamplePurpleNull() As Boolean
+            Return Me.IsNull(Me.tableCaptures.BloodSamplePurpleColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub SetBloodSamplePurpleNull()
+            Me(Me.tableCaptures.BloodSamplePurpleColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function IsBloodSampleGreenNull() As Boolean
+            Return Me.IsNull(Me.tableCaptures.BloodSampleGreenColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub SetBloodSampleGreenNull()
+            Me(Me.tableCaptures.BloodSampleGreenColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function IsAnestheticReversalNull() As Boolean
+            Return Me.IsNull(Me.tableCaptures.AnestheticReversalColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub SetAnestheticReversalNull()
+            Me(Me.tableCaptures.AnestheticReversalColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function IsAnestheticReversalDosage_mgNull() As Boolean
+            Return Me.IsNull(Me.tableCaptures.AnestheticReversalDosage_mgColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub SetAnestheticReversalDosage_mgNull()
+            Me(Me.tableCaptures.AnestheticReversalDosage_mgColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function IsAnestheticReversalConcentration_mg_mlNull() As Boolean
+            Return Me.IsNull(Me.tableCaptures.AnestheticReversalConcentration_mg_mlColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub SetAnestheticReversalConcentration_mg_mlNull()
+            Me(Me.tableCaptures.AnestheticReversalConcentration_mg_mlColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function IsAnestheticReversalRouteNull() As Boolean
+            Return Me.IsNull(Me.tableCaptures.AnestheticReversalRouteColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub SetAnestheticReversalRouteNull()
+            Me(Me.tableCaptures.AnestheticReversalRouteColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function IsAnestheticReversalTimeNull() As Boolean
+            Return Me.IsNull(Me.tableCaptures.AnestheticReversalTimeColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub SetAnestheticReversalTimeNull()
+            Me(Me.tableCaptures.AnestheticReversalTimeColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function IsSedativeReversalNull() As Boolean
+            Return Me.IsNull(Me.tableCaptures.SedativeReversalColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub SetSedativeReversalNull()
+            Me(Me.tableCaptures.SedativeReversalColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function IsSedativeReversalDosage_mgNull() As Boolean
+            Return Me.IsNull(Me.tableCaptures.SedativeReversalDosage_mgColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub SetSedativeReversalDosage_mgNull()
+            Me(Me.tableCaptures.SedativeReversalDosage_mgColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function IsSedativeReversalConcentration_mg_mlNull() As Boolean
+            Return Me.IsNull(Me.tableCaptures.SedativeReversalConcentration_mg_mlColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub SetSedativeReversalConcentration_mg_mlNull()
+            Me(Me.tableCaptures.SedativeReversalConcentration_mg_mlColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function IsSedativeReversalRouteNull() As Boolean
+            Return Me.IsNull(Me.tableCaptures.SedativeReversalRouteColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub SetSedativeReversalRouteNull()
+            Me(Me.tableCaptures.SedativeReversalRouteColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function IsSedativeReversalTimeNull() As Boolean
+            Return Me.IsNull(Me.tableCaptures.SedativeReversalTimeColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub SetSedativeReversalTimeNull()
+            Me(Me.tableCaptures.SedativeReversalTimeColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function IsTimeStandingNull() As Boolean
+            Return Me.IsNull(Me.tableCaptures.TimeStandingColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub SetTimeStandingNull()
+            Me(Me.tableCaptures.TimeStandingColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function IsTimeMobileNull() As Boolean
+            Return Me.IsNull(Me.tableCaptures.TimeMobileColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub SetTimeMobileNull()
+            Me(Me.tableCaptures.TimeMobileColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function IsCommentsNull() As Boolean
+            Return Me.IsNull(Me.tableCaptures.CommentsColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub SetCommentsNull()
+            Me(Me.tableCaptures.CommentsColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function IsTSNull() As Boolean
+            Return Me.IsNull(Me.tableCaptures.TSColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub SetTSNull()
+            Me(Me.tableCaptures.TSColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function IsAnestheticDosage_mlNull() As Boolean
+            Return Me.IsNull(Me.tableCaptures.AnestheticDosage_mlColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub SetAnestheticDosage_mlNull()
+            Me(Me.tableCaptures.AnestheticDosage_mlColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function IsSedativeDosage_mlNull() As Boolean
+            Return Me.IsNull(Me.tableCaptures.SedativeDosage_mlColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub SetSedativeDosage_mlNull()
+            Me(Me.tableCaptures.SedativeDosage_mlColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function IsAnestheticReversalDosage_mlNull() As Boolean
+            Return Me.IsNull(Me.tableCaptures.AnestheticReversalDosage_mlColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub SetAnestheticReversalDosage_mlNull()
+            Me(Me.tableCaptures.AnestheticReversalDosage_mlColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function IsSedativeReversalDosage_mlNull() As Boolean
+            Return Me.IsNull(Me.tableCaptures.SedativeReversalDosage_mlColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub SetSedativeReversalDosage_mlNull()
+            Me(Me.tableCaptures.SedativeReversalDosage_mlColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function IsCertificationDateNull() As Boolean
+            Return Me.IsNull(Me.tableCaptures.CertificationDateColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub SetCertificationDateNull()
+            Me(Me.tableCaptures.CertificationDateColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function IsCertifiedByNull() As Boolean
+            Return Me.IsNull(Me.tableCaptures.CertifiedByColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub SetCertifiedByNull()
+            Me(Me.tableCaptures.CertifiedByColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function IsProtocolIRMAReferenceNull() As Boolean
+            Return Me.IsNull(Me.tableCaptures.ProtocolIRMAReferenceColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub SetProtocolIRMAReferenceNull()
+            Me(Me.tableCaptures.ProtocolIRMAReferenceColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function GetCollaredAnimalsInGroupsRows() As CollaredAnimalsInGroupsRow()
+            If (Me.Table.ChildRelations("FK_CollaredAnimalsInGroups_Captures") Is Nothing) Then
+                Return New CollaredAnimalsInGroupsRow(-1) {}
+            Else
+                Return CType(MyBase.GetChildRows(Me.Table.ChildRelations("FK_CollaredAnimalsInGroups_Captures")),CollaredAnimalsInGroupsRow())
+            End If
+        End Function
+    End Class
+    
+    '''<summary>
     '''Row event argument class
     '''</summary>
     <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
@@ -3361,6 +6723,42 @@ Partial Public Class WRST_CaribouDataSet
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Public ReadOnly Property Row() As SurveysRow
+            Get
+                Return Me.eventRow
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property Action() As Global.System.Data.DataRowAction
+            Get
+                Return Me.eventAction
+            End Get
+        End Property
+    End Class
+    
+    '''<summary>
+    '''Row event argument class
+    '''</summary>
+    <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+    Public Class CapturesRowChangeEvent
+        Inherits Global.System.EventArgs
+        
+        Private eventRow As CapturesRow
+        
+        Private eventAction As Global.System.Data.DataRowAction
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub New(ByVal row As CapturesRow, ByVal action As Global.System.Data.DataRowAction)
+            MyBase.New
+            Me.eventRow = row
+            Me.eventAction = action
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property Row() As CapturesRow
             Get
                 Return Me.eventRow
             End Get
@@ -5029,6 +8427,1563 @@ Namespace WRST_CaribouDataSetTableAdapters
     End Class
     
     '''<summary>
+    '''Represents the connection and commands used to retrieve and save data.
+    '''</summary>
+    <Global.System.ComponentModel.DesignerCategoryAttribute("code"),  _
+     Global.System.ComponentModel.ToolboxItem(true),  _
+     Global.System.ComponentModel.DataObjectAttribute(true),  _
+     Global.System.ComponentModel.DesignerAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterDesigner, Microsoft.VSDesigner"& _ 
+        ", Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"),  _
+     Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")>  _
+    Partial Public Class CapturesTableAdapter
+        Inherits Global.System.ComponentModel.Component
+        
+        Private WithEvents _adapter As Global.System.Data.SqlClient.SqlDataAdapter
+        
+        Private _connection As Global.System.Data.SqlClient.SqlConnection
+        
+        Private _transaction As Global.System.Data.SqlClient.SqlTransaction
+        
+        Private _commandCollection() As Global.System.Data.SqlClient.SqlCommand
+        
+        Private _clearBeforeFill As Boolean
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub New()
+            MyBase.New
+            Me.ClearBeforeFill = true
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Protected Friend ReadOnly Property Adapter() As Global.System.Data.SqlClient.SqlDataAdapter
+            Get
+                If (Me._adapter Is Nothing) Then
+                    Me.InitAdapter
+                End If
+                Return Me._adapter
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Friend Property Connection() As Global.System.Data.SqlClient.SqlConnection
+            Get
+                If (Me._connection Is Nothing) Then
+                    Me.InitConnection
+                End If
+                Return Me._connection
+            End Get
+            Set
+                Me._connection = value
+                If (Not (Me.Adapter.InsertCommand) Is Nothing) Then
+                    Me.Adapter.InsertCommand.Connection = value
+                End If
+                If (Not (Me.Adapter.DeleteCommand) Is Nothing) Then
+                    Me.Adapter.DeleteCommand.Connection = value
+                End If
+                If (Not (Me.Adapter.UpdateCommand) Is Nothing) Then
+                    Me.Adapter.UpdateCommand.Connection = value
+                End If
+                Dim i As Integer = 0
+                Do While (i < Me.CommandCollection.Length)
+                    If (Not (Me.CommandCollection(i)) Is Nothing) Then
+                        CType(Me.CommandCollection(i),Global.System.Data.SqlClient.SqlCommand).Connection = value
+                    End If
+                    i = (i + 1)
+                Loop
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Friend Property Transaction() As Global.System.Data.SqlClient.SqlTransaction
+            Get
+                Return Me._transaction
+            End Get
+            Set
+                Me._transaction = value
+                Dim i As Integer = 0
+                Do While (i < Me.CommandCollection.Length)
+                    Me.CommandCollection(i).Transaction = Me._transaction
+                    i = (i + 1)
+                Loop
+                If ((Not (Me.Adapter) Is Nothing)  _
+                            AndAlso (Not (Me.Adapter.DeleteCommand) Is Nothing)) Then
+                    Me.Adapter.DeleteCommand.Transaction = Me._transaction
+                End If
+                If ((Not (Me.Adapter) Is Nothing)  _
+                            AndAlso (Not (Me.Adapter.InsertCommand) Is Nothing)) Then
+                    Me.Adapter.InsertCommand.Transaction = Me._transaction
+                End If
+                If ((Not (Me.Adapter) Is Nothing)  _
+                            AndAlso (Not (Me.Adapter.UpdateCommand) Is Nothing)) Then
+                    Me.Adapter.UpdateCommand.Transaction = Me._transaction
+                End If
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Protected ReadOnly Property CommandCollection() As Global.System.Data.SqlClient.SqlCommand()
+            Get
+                If (Me._commandCollection Is Nothing) Then
+                    Me.InitCommandCollection
+                End If
+                Return Me._commandCollection
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property ClearBeforeFill() As Boolean
+            Get
+                Return Me._clearBeforeFill
+            End Get
+            Set
+                Me._clearBeforeFill = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Private Sub InitAdapter()
+            Me._adapter = New Global.System.Data.SqlClient.SqlDataAdapter()
+            Dim tableMapping As Global.System.Data.Common.DataTableMapping = New Global.System.Data.Common.DataTableMapping()
+            tableMapping.SourceTable = "Table"
+            tableMapping.DataSetTable = "Captures"
+            tableMapping.ColumnMappings.Add("AnimalID", "AnimalID")
+            tableMapping.ColumnMappings.Add("CaptureDate", "CaptureDate")
+            tableMapping.ColumnMappings.Add("Crew", "Crew")
+            tableMapping.ColumnMappings.Add("Shooter", "Shooter")
+            tableMapping.ColumnMappings.Add("Frequency", "Frequency")
+            tableMapping.ColumnMappings.Add("VisualCollar", "VisualCollar")
+            tableMapping.ColumnMappings.Add("SerialNumber", "SerialNumber")
+            tableMapping.ColumnMappings.Add("CaptureLatitude", "CaptureLatitude")
+            tableMapping.ColumnMappings.Add("CaptureLongitude", "CaptureLongitude")
+            tableMapping.ColumnMappings.Add("OldFrequency", "OldFrequency")
+            tableMapping.ColumnMappings.Add("OldVisualCollar", "OldVisualCollar")
+            tableMapping.ColumnMappings.Add("GeneralLocation", "GeneralLocation")
+            tableMapping.ColumnMappings.Add("TimeStartChase", "TimeStartChase")
+            tableMapping.ColumnMappings.Add("TimeFirstHitBounce", "TimeFirstHitBounce")
+            tableMapping.ColumnMappings.Add("TimeSecordHitBounce", "TimeSecordHitBounce")
+            tableMapping.ColumnMappings.Add("TimeThirdHitBounce", "TimeThirdHitBounce")
+            tableMapping.ColumnMappings.Add("TimeVisibleEffect", "TimeVisibleEffect")
+            tableMapping.ColumnMappings.Add("TimeAnimalDown", "TimeAnimalDown")
+            tableMapping.ColumnMappings.Add("DartLocation", "DartLocation")
+            tableMapping.ColumnMappings.Add("Anesthetic", "Anesthetic")
+            tableMapping.ColumnMappings.Add("AnestheticDosage_mg", "AnestheticDosage_mg")
+            tableMapping.ColumnMappings.Add("AnestheticConcentration_mg_ml", "AnestheticConcentration_mg_ml")
+            tableMapping.ColumnMappings.Add("Sedative", "Sedative")
+            tableMapping.ColumnMappings.Add("SedativeDosage_mg", "SedativeDosage_mg")
+            tableMapping.ColumnMappings.Add("SedativeConcentration_mg_ml", "SedativeConcentration_mg_ml")
+            tableMapping.ColumnMappings.Add("NumHits", "NumHits")
+            tableMapping.ColumnMappings.Add("NumMisses", "NumMisses")
+            tableMapping.ColumnMappings.Add("DrugEffect", "DrugEffect")
+            tableMapping.ColumnMappings.Add("InitialBodyTemp", "InitialBodyTemp")
+            tableMapping.ColumnMappings.Add("InitialBodyTempTime", "InitialBodyTempTime")
+            tableMapping.ColumnMappings.Add("FinalBodyTemperature", "FinalBodyTemperature")
+            tableMapping.ColumnMappings.Add("FinalBodyTemperatureTime", "FinalBodyTemperatureTime")
+            tableMapping.ColumnMappings.Add("AdditionalDrugs", "AdditionalDrugs")
+            tableMapping.ColumnMappings.Add("Sex", "Sex")
+            tableMapping.ColumnMappings.Add("EstimatedAge", "EstimatedAge")
+            tableMapping.ColumnMappings.Add("WithCalf", "WithCalf")
+            tableMapping.ColumnMappings.Add("Lactating", "Lactating")
+            tableMapping.ColumnMappings.Add("BodyCondition", "BodyCondition")
+            tableMapping.ColumnMappings.Add("Weight_Kg", "Weight_Kg")
+            tableMapping.ColumnMappings.Add("BodyLength", "BodyLength")
+            tableMapping.ColumnMappings.Add("NeckCircumference", "NeckCircumference")
+            tableMapping.ColumnMappings.Add("Jaw", "Jaw")
+            tableMapping.ColumnMappings.Add("MetatarsusLength", "MetatarsusLength")
+            tableMapping.ColumnMappings.Add("HindfootLength", "HindfootLength")
+            tableMapping.ColumnMappings.Add("ChestGirth", "ChestGirth")
+            tableMapping.ColumnMappings.Add("BloodSampleRed", "BloodSampleRed")
+            tableMapping.ColumnMappings.Add("BloodSamplePurple", "BloodSamplePurple")
+            tableMapping.ColumnMappings.Add("BloodSampleGreen", "BloodSampleGreen")
+            tableMapping.ColumnMappings.Add("AnestheticReversal", "AnestheticReversal")
+            tableMapping.ColumnMappings.Add("AnestheticReversalDosage_mg", "AnestheticReversalDosage_mg")
+            tableMapping.ColumnMappings.Add("AnestheticReversalConcentration_mg_ml", "AnestheticReversalConcentration_mg_ml")
+            tableMapping.ColumnMappings.Add("AnestheticReversalRoute", "AnestheticReversalRoute")
+            tableMapping.ColumnMappings.Add("AnestheticReversalTime", "AnestheticReversalTime")
+            tableMapping.ColumnMappings.Add("SedativeReversal", "SedativeReversal")
+            tableMapping.ColumnMappings.Add("SedativeReversalDosage_mg", "SedativeReversalDosage_mg")
+            tableMapping.ColumnMappings.Add("SedativeReversalConcentration_mg_ml", "SedativeReversalConcentration_mg_ml")
+            tableMapping.ColumnMappings.Add("SedativeReversalRoute", "SedativeReversalRoute")
+            tableMapping.ColumnMappings.Add("SedativeReversalTime", "SedativeReversalTime")
+            tableMapping.ColumnMappings.Add("TimeStanding", "TimeStanding")
+            tableMapping.ColumnMappings.Add("TimeMobile", "TimeMobile")
+            tableMapping.ColumnMappings.Add("Comments", "Comments")
+            tableMapping.ColumnMappings.Add("CaptureID", "CaptureID")
+            tableMapping.ColumnMappings.Add("RecordInsertedDate", "RecordInsertedDate")
+            tableMapping.ColumnMappings.Add("RecordInsertedBy", "RecordInsertedBy")
+            tableMapping.ColumnMappings.Add("ProjectID", "ProjectID")
+            tableMapping.ColumnMappings.Add("TS", "TS")
+            tableMapping.ColumnMappings.Add("AnestheticDosage_ml", "AnestheticDosage_ml")
+            tableMapping.ColumnMappings.Add("SedativeDosage_ml", "SedativeDosage_ml")
+            tableMapping.ColumnMappings.Add("AnestheticReversalDosage_ml", "AnestheticReversalDosage_ml")
+            tableMapping.ColumnMappings.Add("SedativeReversalDosage_ml", "SedativeReversalDosage_ml")
+            tableMapping.ColumnMappings.Add("ProtocolVersion", "ProtocolVersion")
+            tableMapping.ColumnMappings.Add("SOPNumber", "SOPNumber")
+            tableMapping.ColumnMappings.Add("SOPVersion", "SOPVersion")
+            tableMapping.ColumnMappings.Add("CertificationDate", "CertificationDate")
+            tableMapping.ColumnMappings.Add("CertifiedBy", "CertifiedBy")
+            tableMapping.ColumnMappings.Add("ProtocolIRMAReference", "ProtocolIRMAReference")
+            tableMapping.ColumnMappings.Add("CertificationLevel", "CertificationLevel")
+            Me._adapter.TableMappings.Add(tableMapping)
+            Me._adapter.DeleteCommand = New Global.System.Data.SqlClient.SqlCommand()
+            Me._adapter.DeleteCommand.Connection = Me.Connection
+            Me._adapter.DeleteCommand.CommandText = "DELETE FROM Captures"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"WHERE (AnimalID = @Original_AnimalID)"
+            Me._adapter.DeleteCommand.CommandType = Global.System.Data.CommandType.Text
+            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_AnimalID", Global.System.Data.SqlDbType.VarChar, 16, Global.System.Data.ParameterDirection.Input, 0, 0, "AnimalID", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand = New Global.System.Data.SqlClient.SqlCommand()
+            Me._adapter.InsertCommand.Connection = Me.Connection
+            Me._adapter.InsertCommand.CommandText = "INSERT INTO Captures"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"             (AnimalID, CaptureDate, Crew, Shooter, Frequen"& _ 
+                "cy, VisualCollar, SerialNumber, CaptureLatitude, CaptureLongitude, OldFrequency,"& _ 
+                " OldVisualCollar, GeneralLocation, TimeStartChase, TimeFirstHitBounce, TimeSecor"& _ 
+                "dHitBounce, TimeThirdHitBounce, TimeVisibleEffect, "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"             TimeAnimalDown"& _ 
+                ", DartLocation, Anesthetic, AnestheticDosage_mg, AnestheticConcentration_mg_ml, "& _ 
+                "Sedative, SedativeDosage_mg, SedativeConcentration_mg_ml, NumHits, NumMisses, Dr"& _ 
+                "ugEffect, InitialBodyTemp, InitialBodyTempTime, FinalBodyTemperature, "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"        "& _ 
+                "     FinalBodyTemperatureTime, AdditionalDrugs, Sex, EstimatedAge, WithCalf, Lac"& _ 
+                "tating, BodyCondition, Weight_Kg, BodyLength, NeckCircumference, Jaw, Metatarsus"& _ 
+                "Length, HindfootLength, ChestGirth, BloodSampleRed, BloodSamplePurple, BloodSamp"& _ 
+                "leGreen, AnestheticReversal, "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"             AnestheticReversalDosage_mg, Anesthe"& _ 
+                "ticReversalConcentration_mg_ml, AnestheticReversalRoute, AnestheticReversalTime,"& _ 
+                " SedativeReversal, SedativeReversalDosage_mg, SedativeReversalConcentration_mg_m"& _ 
+                "l, SedativeReversalRoute, SedativeReversalTime, TimeStanding, "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"             Tim"& _ 
+                "eMobile, Comments, CaptureID, ProjectID, AnestheticDosage_ml, SedativeDosage_ml,"& _ 
+                " AnestheticReversalDosage_ml, SedativeReversalDosage_ml, ProtocolVersion, SOPNum"& _ 
+                "ber, SOPVersion, ProtocolIRMAReference)"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"VALUES (@AnimalID,@CaptureDate,@Crew,@S"& _ 
+                "hooter,@Frequency,@VisualCollar,@SerialNumber,@CaptureLatitude,@CaptureLongitude"& _ 
+                ",@OldFrequency,@OldVisualCollar,@GeneralLocation,@TimeStartChase,@TimeFirstHitBo"& _ 
+                "unce,@TimeSecordHitBounce,@TimeThirdHitBounce,@TimeVisibleEffect,@TimeAnimalDown"& _ 
+                ",@DartLocation,@Anesthetic,@AnestheticDosage_mg,@AnestheticConcentration_mg_ml,@"& _ 
+                "Sedative,@SedativeDosage_mg,@SedativeConcentration_mg_ml,@NumHits,@NumMisses,@Dr"& _ 
+                "ugEffect,@InitialBodyTemp,@InitialBodyTempTime,@FinalBodyTemperature,@FinalBodyT"& _ 
+                "emperatureTime,@AdditionalDrugs,@Sex,@EstimatedAge,@WithCalf,@Lactating,@BodyCon"& _ 
+                "dition,@Weight_Kg,@BodyLength,@NeckCircumference,@Jaw,@MetatarsusLength,@Hindfoo"& _ 
+                "tLength,@ChestGirth,@BloodSampleRed,@BloodSamplePurple,@BloodSampleGreen,@Anesth"& _ 
+                "eticReversal,@AnestheticReversalDosage_mg,@AnestheticReversalConcentration_mg_ml"& _ 
+                ",@AnestheticReversalRoute,@AnestheticReversalTime,@SedativeReversal,@SedativeRev"& _ 
+                "ersalDosage_mg,@SedativeReversalConcentration_mg_ml,@SedativeReversalRoute,@Seda"& _ 
+                "tiveReversalTime,@TimeStanding,@TimeMobile,@Comments,@CaptureID,@ProjectID,@Anes"& _ 
+                "theticDosage_ml,@SedativeDosage_ml,@AnestheticReversalDosage_ml,@SedativeReversa"& _ 
+                "lDosage_ml,@ProtocolVersion,@SOPNumber,@SOPVersion,@ProtocolIRMAReference); "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"SE"& _ 
+                "LECT AnimalID, CaptureDate, Crew, Shooter, Frequency, VisualCollar, SerialNumber"& _ 
+                ", CaptureLatitude, CaptureLongitude, OldFrequency, OldVisualCollar, GeneralLocat"& _ 
+                "ion, TimeStartChase, TimeFirstHitBounce, TimeSecordHitBounce, TimeThirdHitBounce"& _ 
+                ", TimeVisibleEffect, TimeAnimalDown, DartLocation, Anesthetic, AnestheticDosage_"& _ 
+                "mg, AnestheticConcentration_mg_ml, Sedative, SedativeDosage_mg, SedativeConcentr"& _ 
+                "ation_mg_ml, NumHits, NumMisses, DrugEffect, InitialBodyTemp, InitialBodyTempTim"& _ 
+                "e, FinalBodyTemperature, FinalBodyTemperatureTime, AdditionalDrugs, Sex, Estimat"& _ 
+                "edAge, WithCalf, Lactating, BodyCondition, Weight_Kg, BodyLength, NeckCircumfere"& _ 
+                "nce, Jaw, MetatarsusLength, HindfootLength, ChestGirth, BloodSampleRed, BloodSam"& _ 
+                "plePurple, BloodSampleGreen, AnestheticReversal, AnestheticReversalDosage_mg, An"& _ 
+                "estheticReversalConcentration_mg_ml, AnestheticReversalRoute, AnestheticReversal"& _ 
+                "Time, SedativeReversal, SedativeReversalDosage_mg, SedativeReversalConcentration"& _ 
+                "_mg_ml, SedativeReversalRoute, SedativeReversalTime, TimeStanding, TimeMobile, C"& _ 
+                "omments, CaptureID, RecordInsertedDate, RecordInsertedBy, ProjectID, TS, Anesthe"& _ 
+                "ticDosage_ml, SedativeDosage_ml, AnestheticReversalDosage_ml, SedativeReversalDo"& _ 
+                "sage_ml, ProtocolVersion, SOPNumber, SOPVersion, CertificationDate, CertifiedBy,"& _ 
+                " ProtocolIRMAReference, CertificationLevel FROM Captures WHERE (AnimalID = @Anim"& _ 
+                "alID)"
+            Me._adapter.InsertCommand.CommandType = Global.System.Data.CommandType.Text
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@AnimalID", Global.System.Data.SqlDbType.VarChar, 16, Global.System.Data.ParameterDirection.Input, 0, 0, "AnimalID", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@CaptureDate", Global.System.Data.SqlDbType.DateTime, 8, Global.System.Data.ParameterDirection.Input, 0, 0, "CaptureDate", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Crew", Global.System.Data.SqlDbType.VarChar, 255, Global.System.Data.ParameterDirection.Input, 0, 0, "Crew", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Shooter", Global.System.Data.SqlDbType.VarChar, 20, Global.System.Data.ParameterDirection.Input, 0, 0, "Shooter", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Frequency", Global.System.Data.SqlDbType.[Decimal], 5, Global.System.Data.ParameterDirection.Input, 7, 3, "Frequency", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@VisualCollar", Global.System.Data.SqlDbType.VarChar, 4, Global.System.Data.ParameterDirection.Input, 0, 0, "VisualCollar", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@SerialNumber", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 0, 0, "SerialNumber", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@CaptureLatitude", Global.System.Data.SqlDbType.[Decimal], 9, Global.System.Data.ParameterDirection.Input, 18, 9, "CaptureLatitude", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@CaptureLongitude", Global.System.Data.SqlDbType.[Decimal], 9, Global.System.Data.ParameterDirection.Input, 18, 9, "CaptureLongitude", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@OldFrequency", Global.System.Data.SqlDbType.[Decimal], 5, Global.System.Data.ParameterDirection.Input, 6, 3, "OldFrequency", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@OldVisualCollar", Global.System.Data.SqlDbType.VarChar, 4, Global.System.Data.ParameterDirection.Input, 0, 0, "OldVisualCollar", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@GeneralLocation", Global.System.Data.SqlDbType.VarChar, 255, Global.System.Data.ParameterDirection.Input, 0, 0, "GeneralLocation", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@TimeStartChase", Global.System.Data.SqlDbType.Time, 5, Global.System.Data.ParameterDirection.Input, 0, 0, "TimeStartChase", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@TimeFirstHitBounce", Global.System.Data.SqlDbType.Time, 5, Global.System.Data.ParameterDirection.Input, 0, 0, "TimeFirstHitBounce", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@TimeSecordHitBounce", Global.System.Data.SqlDbType.Time, 5, Global.System.Data.ParameterDirection.Input, 0, 0, "TimeSecordHitBounce", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@TimeThirdHitBounce", Global.System.Data.SqlDbType.Time, 5, Global.System.Data.ParameterDirection.Input, 0, 0, "TimeThirdHitBounce", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@TimeVisibleEffect", Global.System.Data.SqlDbType.Time, 5, Global.System.Data.ParameterDirection.Input, 0, 0, "TimeVisibleEffect", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@TimeAnimalDown", Global.System.Data.SqlDbType.Time, 5, Global.System.Data.ParameterDirection.Input, 0, 0, "TimeAnimalDown", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@DartLocation", Global.System.Data.SqlDbType.VarChar, 50, Global.System.Data.ParameterDirection.Input, 0, 0, "DartLocation", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Anesthetic", Global.System.Data.SqlDbType.VarChar, 50, Global.System.Data.ParameterDirection.Input, 0, 0, "Anesthetic", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@AnestheticDosage_mg", Global.System.Data.SqlDbType.[Decimal], 5, Global.System.Data.ParameterDirection.Input, 5, 2, "AnestheticDosage_mg", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@AnestheticConcentration_mg_ml", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 0, 0, "AnestheticConcentration_mg_ml", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Sedative", Global.System.Data.SqlDbType.VarChar, 50, Global.System.Data.ParameterDirection.Input, 0, 0, "Sedative", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@SedativeDosage_mg", Global.System.Data.SqlDbType.[Decimal], 5, Global.System.Data.ParameterDirection.Input, 5, 2, "SedativeDosage_mg", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@SedativeConcentration_mg_ml", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 0, 0, "SedativeConcentration_mg_ml", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@NumHits", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 0, 0, "NumHits", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@NumMisses", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 0, 0, "NumMisses", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@DrugEffect", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 0, 0, "DrugEffect", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@InitialBodyTemp", Global.System.Data.SqlDbType.[Decimal], 5, Global.System.Data.ParameterDirection.Input, 6, 2, "InitialBodyTemp", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@InitialBodyTempTime", Global.System.Data.SqlDbType.Time, 5, Global.System.Data.ParameterDirection.Input, 0, 0, "InitialBodyTempTime", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@FinalBodyTemperature", Global.System.Data.SqlDbType.[Decimal], 5, Global.System.Data.ParameterDirection.Input, 6, 2, "FinalBodyTemperature", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@FinalBodyTemperatureTime", Global.System.Data.SqlDbType.Time, 5, Global.System.Data.ParameterDirection.Input, 0, 0, "FinalBodyTemperatureTime", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@AdditionalDrugs", Global.System.Data.SqlDbType.VarChar, 100, Global.System.Data.ParameterDirection.Input, 0, 0, "AdditionalDrugs", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Sex", Global.System.Data.SqlDbType.[Char], 1, Global.System.Data.ParameterDirection.Input, 0, 0, "Sex", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@EstimatedAge", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 0, 0, "EstimatedAge", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@WithCalf", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 0, 0, "WithCalf", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Lactating", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 0, 0, "Lactating", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@BodyCondition", Global.System.Data.SqlDbType.VarChar, 10, Global.System.Data.ParameterDirection.Input, 0, 0, "BodyCondition", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Weight_Kg", Global.System.Data.SqlDbType.[Decimal], 5, Global.System.Data.ParameterDirection.Input, 6, 1, "Weight_Kg", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@BodyLength", Global.System.Data.SqlDbType.[Decimal], 5, Global.System.Data.ParameterDirection.Input, 6, 1, "BodyLength", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@NeckCircumference", Global.System.Data.SqlDbType.[Decimal], 5, Global.System.Data.ParameterDirection.Input, 6, 1, "NeckCircumference", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Jaw", Global.System.Data.SqlDbType.[Decimal], 5, Global.System.Data.ParameterDirection.Input, 6, 1, "Jaw", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@MetatarsusLength", Global.System.Data.SqlDbType.[Decimal], 5, Global.System.Data.ParameterDirection.Input, 6, 1, "MetatarsusLength", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@HindfootLength", Global.System.Data.SqlDbType.[Decimal], 5, Global.System.Data.ParameterDirection.Input, 6, 1, "HindfootLength", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@ChestGirth", Global.System.Data.SqlDbType.[Decimal], 5, Global.System.Data.ParameterDirection.Input, 6, 1, "ChestGirth", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@BloodSampleRed", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 0, 0, "BloodSampleRed", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@BloodSamplePurple", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 0, 0, "BloodSamplePurple", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@BloodSampleGreen", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 0, 0, "BloodSampleGreen", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@AnestheticReversal", Global.System.Data.SqlDbType.VarChar, 50, Global.System.Data.ParameterDirection.Input, 0, 0, "AnestheticReversal", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@AnestheticReversalDosage_mg", Global.System.Data.SqlDbType.[Decimal], 5, Global.System.Data.ParameterDirection.Input, 5, 2, "AnestheticReversalDosage_mg", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@AnestheticReversalConcentration_mg_ml", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 0, 0, "AnestheticReversalConcentration_mg_ml", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@AnestheticReversalRoute", Global.System.Data.SqlDbType.VarChar, 50, Global.System.Data.ParameterDirection.Input, 0, 0, "AnestheticReversalRoute", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@AnestheticReversalTime", Global.System.Data.SqlDbType.Time, 5, Global.System.Data.ParameterDirection.Input, 0, 0, "AnestheticReversalTime", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@SedativeReversal", Global.System.Data.SqlDbType.VarChar, 50, Global.System.Data.ParameterDirection.Input, 0, 0, "SedativeReversal", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@SedativeReversalDosage_mg", Global.System.Data.SqlDbType.[Decimal], 5, Global.System.Data.ParameterDirection.Input, 5, 2, "SedativeReversalDosage_mg", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@SedativeReversalConcentration_mg_ml", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 0, 0, "SedativeReversalConcentration_mg_ml", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@SedativeReversalRoute", Global.System.Data.SqlDbType.VarChar, 50, Global.System.Data.ParameterDirection.Input, 0, 0, "SedativeReversalRoute", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@SedativeReversalTime", Global.System.Data.SqlDbType.Time, 5, Global.System.Data.ParameterDirection.Input, 0, 0, "SedativeReversalTime", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@TimeStanding", Global.System.Data.SqlDbType.Time, 5, Global.System.Data.ParameterDirection.Input, 0, 0, "TimeStanding", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@TimeMobile", Global.System.Data.SqlDbType.Time, 5, Global.System.Data.ParameterDirection.Input, 0, 0, "TimeMobile", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Comments", Global.System.Data.SqlDbType.VarChar, 1000, Global.System.Data.ParameterDirection.Input, 0, 0, "Comments", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@CaptureID", Global.System.Data.SqlDbType.VarChar, 50, Global.System.Data.ParameterDirection.Input, 0, 0, "CaptureID", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@ProjectID", Global.System.Data.SqlDbType.VarChar, 16, Global.System.Data.ParameterDirection.Input, 0, 0, "ProjectID", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@AnestheticDosage_ml", Global.System.Data.SqlDbType.[Decimal], 5, Global.System.Data.ParameterDirection.Input, 5, 2, "AnestheticDosage_ml", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@SedativeDosage_ml", Global.System.Data.SqlDbType.[Decimal], 5, Global.System.Data.ParameterDirection.Input, 5, 2, "SedativeDosage_ml", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@AnestheticReversalDosage_ml", Global.System.Data.SqlDbType.[Decimal], 5, Global.System.Data.ParameterDirection.Input, 5, 2, "AnestheticReversalDosage_ml", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@SedativeReversalDosage_ml", Global.System.Data.SqlDbType.[Decimal], 5, Global.System.Data.ParameterDirection.Input, 5, 2, "SedativeReversalDosage_ml", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@ProtocolVersion", Global.System.Data.SqlDbType.[Decimal], 5, Global.System.Data.ParameterDirection.Input, 6, 2, "ProtocolVersion", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@SOPNumber", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 0, 0, "SOPNumber", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@SOPVersion", Global.System.Data.SqlDbType.[Decimal], 5, Global.System.Data.ParameterDirection.Input, 6, 2, "SOPVersion", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@ProtocolIRMAReference", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 0, 0, "ProtocolIRMAReference", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand = New Global.System.Data.SqlClient.SqlCommand()
+            Me._adapter.UpdateCommand.Connection = Me.Connection
+            Me._adapter.UpdateCommand.CommandText = "UPDATE Captures"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"SET       AnimalID = @AnimalID, CaptureDate = @CaptureDate, Crew"& _ 
+                " = @Crew, Shooter = @Shooter, Frequency = @Frequency, VisualCollar = @VisualColl"& _ 
+                "ar, SerialNumber = @SerialNumber, CaptureLatitude = @CaptureLatitude, CaptureLon"& _ 
+                "gitude = @CaptureLongitude, "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"             OldFrequency = @OldFrequency, OldVisu"& _ 
+                "alCollar = @OldVisualCollar, GeneralLocation = @GeneralLocation, TimeStartChase "& _ 
+                "= @TimeStartChase, TimeFirstHitBounce = @TimeFirstHitBounce, TimeSecordHitBounce"& _ 
+                " = @TimeSecordHitBounce, "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"             TimeThirdHitBounce = @TimeThirdHitBounce"& _ 
+                ", TimeVisibleEffect = @TimeVisibleEffect, TimeAnimalDown = @TimeAnimalDown, Dart"& _ 
+                "Location = @DartLocation, Anesthetic = @Anesthetic, AnestheticDosage_mg = @Anest"& _ 
+                "heticDosage_mg, "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"             AnestheticConcentration_mg_ml = @AnestheticConcen"& _ 
+                "tration_mg_ml, Sedative = @Sedative, SedativeDosage_mg = @SedativeDosage_mg, Sed"& _ 
+                "ativeConcentration_mg_ml = @SedativeConcentration_mg_ml, NumHits = @NumHits, Num"& _ 
+                "Misses = @NumMisses, "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"             DrugEffect = @DrugEffect, InitialBodyTemp = "& _ 
+                "@InitialBodyTemp, InitialBodyTempTime = @InitialBodyTempTime, FinalBodyTemperatu"& _ 
+                "re = @FinalBodyTemperature, FinalBodyTemperatureTime = @FinalBodyTemperatureTime"& _ 
+                ", AdditionalDrugs = @AdditionalDrugs, Sex = @Sex, "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"             EstimatedAge = "& _ 
+                "@EstimatedAge, WithCalf = @WithCalf, Lactating = @Lactating, BodyCondition = @Bo"& _ 
+                "dyCondition, Weight_Kg = @Weight_Kg, BodyLength = @BodyLength, NeckCircumference"& _ 
+                " = @NeckCircumference, Jaw = @Jaw, MetatarsusLength = @MetatarsusLength, "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"     "& _ 
+                "        HindfootLength = @HindfootLength, ChestGirth = @ChestGirth, BloodSampleR"& _ 
+                "ed = @BloodSampleRed, BloodSamplePurple = @BloodSamplePurple, BloodSampleGreen ="& _ 
+                " @BloodSampleGreen, AnestheticReversal = @AnestheticReversal, "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"             Ane"& _ 
+                "stheticReversalDosage_mg = @AnestheticReversalDosage_mg, AnestheticReversalConce"& _ 
+                "ntration_mg_ml = @AnestheticReversalConcentration_mg_ml, AnestheticReversalRoute"& _ 
+                " = @AnestheticReversalRoute, AnestheticReversalTime = @AnestheticReversalTime, "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"             SedativeReversal = @SedativeReversal, SedativeReversalDosage_mg = "& _ 
+                "@SedativeReversalDosage_mg, SedativeReversalConcentration_mg_ml = @SedativeRever"& _ 
+                "salConcentration_mg_ml, SedativeReversalRoute = @SedativeReversalRoute, "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"      "& _ 
+                "       SedativeReversalTime = @SedativeReversalTime, TimeStanding = @TimeStandin"& _ 
+                "g, TimeMobile = @TimeMobile, Comments = @Comments, CaptureID = @CaptureID, Recor"& _ 
+                "dInsertedDate = @RecordInsertedDate, RecordInsertedBy = @RecordInsertedBy, Proje"& _ 
+                "ctID = @ProjectID, "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"             AnestheticDosage_ml = @AnestheticDosage_ml, Se"& _ 
+                "dativeDosage_ml = @SedativeDosage_ml, AnestheticReversalDosage_ml = @AnestheticR"& _ 
+                "eversalDosage_ml, SedativeReversalDosage_ml = @SedativeReversalDosage_ml, Protoc"& _ 
+                "olVersion = @ProtocolVersion, "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"             SOPNumber = @SOPNumber, SOPVersion "& _ 
+                "= @SOPVersion, CertificationDate = @CertificationDate, CertifiedBy = @CertifiedB"& _ 
+                "y, ProtocolIRMAReference = @ProtocolIRMAReference, CertificationLevel = @Certifi"& _ 
+                "cationLevel"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"WHERE (AnimalID = @Original_AnimalID); "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"SELECT AnimalID, CaptureDa"& _ 
+                "te, Crew, Shooter, Frequency, VisualCollar, SerialNumber, CaptureLatitude, Captu"& _ 
+                "reLongitude, OldFrequency, OldVisualCollar, GeneralLocation, TimeStartChase, Tim"& _ 
+                "eFirstHitBounce, TimeSecordHitBounce, TimeThirdHitBounce, TimeVisibleEffect, Tim"& _ 
+                "eAnimalDown, DartLocation, Anesthetic, AnestheticDosage_mg, AnestheticConcentrat"& _ 
+                "ion_mg_ml, Sedative, SedativeDosage_mg, SedativeConcentration_mg_ml, NumHits, Nu"& _ 
+                "mMisses, DrugEffect, InitialBodyTemp, InitialBodyTempTime, FinalBodyTemperature,"& _ 
+                " FinalBodyTemperatureTime, AdditionalDrugs, Sex, EstimatedAge, WithCalf, Lactati"& _ 
+                "ng, BodyCondition, Weight_Kg, BodyLength, NeckCircumference, Jaw, MetatarsusLeng"& _ 
+                "th, HindfootLength, ChestGirth, BloodSampleRed, BloodSamplePurple, BloodSampleGr"& _ 
+                "een, AnestheticReversal, AnestheticReversalDosage_mg, AnestheticReversalConcentr"& _ 
+                "ation_mg_ml, AnestheticReversalRoute, AnestheticReversalTime, SedativeReversal, "& _ 
+                "SedativeReversalDosage_mg, SedativeReversalConcentration_mg_ml, SedativeReversal"& _ 
+                "Route, SedativeReversalTime, TimeStanding, TimeMobile, Comments, CaptureID, Reco"& _ 
+                "rdInsertedDate, RecordInsertedBy, ProjectID, TS, AnestheticDosage_ml, SedativeDo"& _ 
+                "sage_ml, AnestheticReversalDosage_ml, SedativeReversalDosage_ml, ProtocolVersion"& _ 
+                ", SOPNumber, SOPVersion, CertificationDate, CertifiedBy, ProtocolIRMAReference, "& _ 
+                "CertificationLevel FROM Captures WHERE (AnimalID = @AnimalID)"
+            Me._adapter.UpdateCommand.CommandType = Global.System.Data.CommandType.Text
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@AnimalID", Global.System.Data.SqlDbType.VarChar, 16, Global.System.Data.ParameterDirection.Input, 0, 0, "AnimalID", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@CaptureDate", Global.System.Data.SqlDbType.DateTime, 8, Global.System.Data.ParameterDirection.Input, 0, 0, "CaptureDate", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Crew", Global.System.Data.SqlDbType.VarChar, 255, Global.System.Data.ParameterDirection.Input, 0, 0, "Crew", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Shooter", Global.System.Data.SqlDbType.VarChar, 20, Global.System.Data.ParameterDirection.Input, 0, 0, "Shooter", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Frequency", Global.System.Data.SqlDbType.[Decimal], 5, Global.System.Data.ParameterDirection.Input, 7, 3, "Frequency", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@VisualCollar", Global.System.Data.SqlDbType.VarChar, 4, Global.System.Data.ParameterDirection.Input, 0, 0, "VisualCollar", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@SerialNumber", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 0, 0, "SerialNumber", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@CaptureLatitude", Global.System.Data.SqlDbType.[Decimal], 9, Global.System.Data.ParameterDirection.Input, 18, 9, "CaptureLatitude", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@CaptureLongitude", Global.System.Data.SqlDbType.[Decimal], 9, Global.System.Data.ParameterDirection.Input, 18, 9, "CaptureLongitude", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@OldFrequency", Global.System.Data.SqlDbType.[Decimal], 5, Global.System.Data.ParameterDirection.Input, 6, 3, "OldFrequency", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@OldVisualCollar", Global.System.Data.SqlDbType.VarChar, 4, Global.System.Data.ParameterDirection.Input, 0, 0, "OldVisualCollar", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@GeneralLocation", Global.System.Data.SqlDbType.VarChar, 255, Global.System.Data.ParameterDirection.Input, 0, 0, "GeneralLocation", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@TimeStartChase", Global.System.Data.SqlDbType.Time, 5, Global.System.Data.ParameterDirection.Input, 0, 0, "TimeStartChase", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@TimeFirstHitBounce", Global.System.Data.SqlDbType.Time, 5, Global.System.Data.ParameterDirection.Input, 0, 0, "TimeFirstHitBounce", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@TimeSecordHitBounce", Global.System.Data.SqlDbType.Time, 5, Global.System.Data.ParameterDirection.Input, 0, 0, "TimeSecordHitBounce", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@TimeThirdHitBounce", Global.System.Data.SqlDbType.Time, 5, Global.System.Data.ParameterDirection.Input, 0, 0, "TimeThirdHitBounce", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@TimeVisibleEffect", Global.System.Data.SqlDbType.Time, 5, Global.System.Data.ParameterDirection.Input, 0, 0, "TimeVisibleEffect", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@TimeAnimalDown", Global.System.Data.SqlDbType.Time, 5, Global.System.Data.ParameterDirection.Input, 0, 0, "TimeAnimalDown", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@DartLocation", Global.System.Data.SqlDbType.VarChar, 50, Global.System.Data.ParameterDirection.Input, 0, 0, "DartLocation", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Anesthetic", Global.System.Data.SqlDbType.VarChar, 50, Global.System.Data.ParameterDirection.Input, 0, 0, "Anesthetic", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@AnestheticDosage_mg", Global.System.Data.SqlDbType.[Decimal], 5, Global.System.Data.ParameterDirection.Input, 5, 2, "AnestheticDosage_mg", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@AnestheticConcentration_mg_ml", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 0, 0, "AnestheticConcentration_mg_ml", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Sedative", Global.System.Data.SqlDbType.VarChar, 50, Global.System.Data.ParameterDirection.Input, 0, 0, "Sedative", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@SedativeDosage_mg", Global.System.Data.SqlDbType.[Decimal], 5, Global.System.Data.ParameterDirection.Input, 5, 2, "SedativeDosage_mg", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@SedativeConcentration_mg_ml", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 0, 0, "SedativeConcentration_mg_ml", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@NumHits", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 0, 0, "NumHits", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@NumMisses", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 0, 0, "NumMisses", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@DrugEffect", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 0, 0, "DrugEffect", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@InitialBodyTemp", Global.System.Data.SqlDbType.[Decimal], 5, Global.System.Data.ParameterDirection.Input, 6, 2, "InitialBodyTemp", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@InitialBodyTempTime", Global.System.Data.SqlDbType.Time, 5, Global.System.Data.ParameterDirection.Input, 0, 0, "InitialBodyTempTime", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@FinalBodyTemperature", Global.System.Data.SqlDbType.[Decimal], 5, Global.System.Data.ParameterDirection.Input, 6, 2, "FinalBodyTemperature", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@FinalBodyTemperatureTime", Global.System.Data.SqlDbType.Time, 5, Global.System.Data.ParameterDirection.Input, 0, 0, "FinalBodyTemperatureTime", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@AdditionalDrugs", Global.System.Data.SqlDbType.VarChar, 100, Global.System.Data.ParameterDirection.Input, 0, 0, "AdditionalDrugs", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Sex", Global.System.Data.SqlDbType.[Char], 1, Global.System.Data.ParameterDirection.Input, 0, 0, "Sex", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@EstimatedAge", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 0, 0, "EstimatedAge", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@WithCalf", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 0, 0, "WithCalf", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Lactating", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 0, 0, "Lactating", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@BodyCondition", Global.System.Data.SqlDbType.VarChar, 10, Global.System.Data.ParameterDirection.Input, 0, 0, "BodyCondition", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Weight_Kg", Global.System.Data.SqlDbType.[Decimal], 5, Global.System.Data.ParameterDirection.Input, 6, 1, "Weight_Kg", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@BodyLength", Global.System.Data.SqlDbType.[Decimal], 5, Global.System.Data.ParameterDirection.Input, 6, 1, "BodyLength", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@NeckCircumference", Global.System.Data.SqlDbType.[Decimal], 5, Global.System.Data.ParameterDirection.Input, 6, 1, "NeckCircumference", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Jaw", Global.System.Data.SqlDbType.[Decimal], 5, Global.System.Data.ParameterDirection.Input, 6, 1, "Jaw", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@MetatarsusLength", Global.System.Data.SqlDbType.[Decimal], 5, Global.System.Data.ParameterDirection.Input, 6, 1, "MetatarsusLength", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@HindfootLength", Global.System.Data.SqlDbType.[Decimal], 5, Global.System.Data.ParameterDirection.Input, 6, 1, "HindfootLength", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@ChestGirth", Global.System.Data.SqlDbType.[Decimal], 5, Global.System.Data.ParameterDirection.Input, 6, 1, "ChestGirth", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@BloodSampleRed", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 0, 0, "BloodSampleRed", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@BloodSamplePurple", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 0, 0, "BloodSamplePurple", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@BloodSampleGreen", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 0, 0, "BloodSampleGreen", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@AnestheticReversal", Global.System.Data.SqlDbType.VarChar, 50, Global.System.Data.ParameterDirection.Input, 0, 0, "AnestheticReversal", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@AnestheticReversalDosage_mg", Global.System.Data.SqlDbType.[Decimal], 5, Global.System.Data.ParameterDirection.Input, 5, 2, "AnestheticReversalDosage_mg", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@AnestheticReversalConcentration_mg_ml", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 0, 0, "AnestheticReversalConcentration_mg_ml", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@AnestheticReversalRoute", Global.System.Data.SqlDbType.VarChar, 50, Global.System.Data.ParameterDirection.Input, 0, 0, "AnestheticReversalRoute", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@AnestheticReversalTime", Global.System.Data.SqlDbType.Time, 5, Global.System.Data.ParameterDirection.Input, 0, 0, "AnestheticReversalTime", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@SedativeReversal", Global.System.Data.SqlDbType.VarChar, 50, Global.System.Data.ParameterDirection.Input, 0, 0, "SedativeReversal", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@SedativeReversalDosage_mg", Global.System.Data.SqlDbType.[Decimal], 5, Global.System.Data.ParameterDirection.Input, 5, 2, "SedativeReversalDosage_mg", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@SedativeReversalConcentration_mg_ml", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 0, 0, "SedativeReversalConcentration_mg_ml", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@SedativeReversalRoute", Global.System.Data.SqlDbType.VarChar, 50, Global.System.Data.ParameterDirection.Input, 0, 0, "SedativeReversalRoute", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@SedativeReversalTime", Global.System.Data.SqlDbType.Time, 5, Global.System.Data.ParameterDirection.Input, 0, 0, "SedativeReversalTime", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@TimeStanding", Global.System.Data.SqlDbType.Time, 5, Global.System.Data.ParameterDirection.Input, 0, 0, "TimeStanding", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@TimeMobile", Global.System.Data.SqlDbType.Time, 5, Global.System.Data.ParameterDirection.Input, 0, 0, "TimeMobile", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Comments", Global.System.Data.SqlDbType.VarChar, 1000, Global.System.Data.ParameterDirection.Input, 0, 0, "Comments", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@CaptureID", Global.System.Data.SqlDbType.VarChar, 50, Global.System.Data.ParameterDirection.Input, 0, 0, "CaptureID", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@RecordInsertedDate", Global.System.Data.SqlDbType.DateTime, 8, Global.System.Data.ParameterDirection.Input, 0, 0, "RecordInsertedDate", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@RecordInsertedBy", Global.System.Data.SqlDbType.NVarChar, 50, Global.System.Data.ParameterDirection.Input, 0, 0, "RecordInsertedBy", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@ProjectID", Global.System.Data.SqlDbType.VarChar, 16, Global.System.Data.ParameterDirection.Input, 0, 0, "ProjectID", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@AnestheticDosage_ml", Global.System.Data.SqlDbType.[Decimal], 5, Global.System.Data.ParameterDirection.Input, 5, 2, "AnestheticDosage_ml", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@SedativeDosage_ml", Global.System.Data.SqlDbType.[Decimal], 5, Global.System.Data.ParameterDirection.Input, 5, 2, "SedativeDosage_ml", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@AnestheticReversalDosage_ml", Global.System.Data.SqlDbType.[Decimal], 5, Global.System.Data.ParameterDirection.Input, 5, 2, "AnestheticReversalDosage_ml", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@SedativeReversalDosage_ml", Global.System.Data.SqlDbType.[Decimal], 5, Global.System.Data.ParameterDirection.Input, 5, 2, "SedativeReversalDosage_ml", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@ProtocolVersion", Global.System.Data.SqlDbType.[Decimal], 5, Global.System.Data.ParameterDirection.Input, 6, 2, "ProtocolVersion", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@SOPNumber", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 0, 0, "SOPNumber", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@SOPVersion", Global.System.Data.SqlDbType.[Decimal], 5, Global.System.Data.ParameterDirection.Input, 6, 2, "SOPVersion", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@CertificationDate", Global.System.Data.SqlDbType.DateTime, 8, Global.System.Data.ParameterDirection.Input, 0, 0, "CertificationDate", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@CertifiedBy", Global.System.Data.SqlDbType.VarChar, 50, Global.System.Data.ParameterDirection.Input, 0, 0, "CertifiedBy", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@ProtocolIRMAReference", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 0, 0, "ProtocolIRMAReference", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@CertificationLevel", Global.System.Data.SqlDbType.VarChar, 15, Global.System.Data.ParameterDirection.Input, 0, 0, "CertificationLevel", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_AnimalID", Global.System.Data.SqlDbType.VarChar, 16, Global.System.Data.ParameterDirection.Input, 0, 0, "AnimalID", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Private Sub InitConnection()
+            Me._connection = New Global.System.Data.SqlClient.SqlConnection()
+            Me._connection.ConnectionString = Global.WRST_Caribou3.My.MySettings.Default.WRST_CaribouConnectionString
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Private Sub InitCommandCollection()
+            Me._commandCollection = New Global.System.Data.SqlClient.SqlCommand(0) {}
+            Me._commandCollection(0) = New Global.System.Data.SqlClient.SqlCommand()
+            Me._commandCollection(0).Connection = Me.Connection
+            Me._commandCollection(0).CommandText = "SELECT AnimalID, CaptureDate, Crew, Shooter, Frequency, VisualCollar, SerialNumbe"& _ 
+                "r, CaptureLatitude, CaptureLongitude, OldFrequency, OldVisualCollar, GeneralLoca"& _ 
+                "tion, TimeStartChase, TimeFirstHitBounce, TimeSecordHitBounce, TimeThirdHitBounc"& _ 
+                "e, TimeVisibleEffect, TimeAnimalDown, DartLocation, Anesthetic, AnestheticDosage"& _ 
+                "_mg, AnestheticConcentration_mg_ml, Sedative, SedativeDosage_mg, SedativeConcent"& _ 
+                "ration_mg_ml, NumHits, NumMisses, DrugEffect, InitialBodyTemp, InitialBodyTempTi"& _ 
+                "me, FinalBodyTemperature, FinalBodyTemperatureTime, AdditionalDrugs, Sex, Estima"& _ 
+                "tedAge, WithCalf, Lactating, BodyCondition, Weight_Kg, BodyLength, NeckCircumfer"& _ 
+                "ence, Jaw, MetatarsusLength, HindfootLength, ChestGirth, BloodSampleRed, BloodSa"& _ 
+                "mplePurple, BloodSampleGreen, AnestheticReversal, AnestheticReversalDosage_mg, A"& _ 
+                "nestheticReversalConcentration_mg_ml, AnestheticReversalRoute, AnestheticReversa"& _ 
+                "lTime, SedativeReversal, SedativeReversalDosage_mg, SedativeReversalConcentratio"& _ 
+                "n_mg_ml, SedativeReversalRoute, SedativeReversalTime, TimeStanding, TimeMobile, "& _ 
+                "Comments, CaptureID, RecordInsertedDate, RecordInsertedBy, ProjectID, TS, Anesth"& _ 
+                "eticDosage_ml, SedativeDosage_ml, AnestheticReversalDosage_ml, SedativeReversalD"& _ 
+                "osage_ml, ProtocolVersion, SOPNumber, SOPVersion, CertificationDate, CertifiedBy"& _ 
+                ", ProtocolIRMAReference, CertificationLevel FROM dbo.Captures"
+            Me._commandCollection(0).CommandType = Global.System.Data.CommandType.Text
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Fill, true)>  _
+        Public Overloads Overridable Function Fill(ByVal dataTable As WRST_CaribouDataSet.CapturesDataTable) As Integer
+            Me.Adapter.SelectCommand = Me.CommandCollection(0)
+            If (Me.ClearBeforeFill = true) Then
+                dataTable.Clear
+            End If
+            Dim returnValue As Integer = Me.Adapter.Fill(dataTable)
+            Return returnValue
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.[Select], true)>  _
+        Public Overloads Overridable Function GetData() As WRST_CaribouDataSet.CapturesDataTable
+            Me.Adapter.SelectCommand = Me.CommandCollection(0)
+            Dim dataTable As WRST_CaribouDataSet.CapturesDataTable = New WRST_CaribouDataSet.CapturesDataTable()
+            Me.Adapter.Fill(dataTable)
+            Return dataTable
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")>  _
+        Public Overloads Overridable Function Update(ByVal dataTable As WRST_CaribouDataSet.CapturesDataTable) As Integer
+            Return Me.Adapter.Update(dataTable)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")>  _
+        Public Overloads Overridable Function Update(ByVal dataSet As WRST_CaribouDataSet) As Integer
+            Return Me.Adapter.Update(dataSet, "Captures")
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")>  _
+        Public Overloads Overridable Function Update(ByVal dataRow As Global.System.Data.DataRow) As Integer
+            Return Me.Adapter.Update(New Global.System.Data.DataRow() {dataRow})
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")>  _
+        Public Overloads Overridable Function Update(ByVal dataRows() As Global.System.Data.DataRow) As Integer
+            Return Me.Adapter.Update(dataRows)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Delete, true)>  _
+        Public Overloads Overridable Function Delete(ByVal Original_AnimalID As String) As Integer
+            If (Original_AnimalID Is Nothing) Then
+                Throw New Global.System.ArgumentNullException("Original_AnimalID")
+            Else
+                Me.Adapter.DeleteCommand.Parameters(0).Value = CType(Original_AnimalID,String)
+            End If
+            Dim previousConnectionState As Global.System.Data.ConnectionState = Me.Adapter.DeleteCommand.Connection.State
+            If ((Me.Adapter.DeleteCommand.Connection.State And Global.System.Data.ConnectionState.Open)  _
+                        <> Global.System.Data.ConnectionState.Open) Then
+                Me.Adapter.DeleteCommand.Connection.Open
+            End If
+            Try 
+                Dim returnValue As Integer = Me.Adapter.DeleteCommand.ExecuteNonQuery
+                Return returnValue
+            Finally
+                If (previousConnectionState = Global.System.Data.ConnectionState.Closed) Then
+                    Me.Adapter.DeleteCommand.Connection.Close
+                End If
+            End Try
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Insert, true)>  _
+        Public Overloads Overridable Function Insert( _
+                    ByVal AnimalID As String,  _
+                    ByVal CaptureDate As Date,  _
+                    ByVal Crew As String,  _
+                    ByVal Shooter As String,  _
+                    ByVal Frequency As Global.System.Nullable(Of Decimal),  _
+                    ByVal VisualCollar As String,  _
+                    ByVal SerialNumber As Global.System.Nullable(Of Integer),  _
+                    ByVal CaptureLatitude As Global.System.Nullable(Of Decimal),  _
+                    ByVal CaptureLongitude As Global.System.Nullable(Of Decimal),  _
+                    ByVal OldFrequency As Global.System.Nullable(Of Decimal),  _
+                    ByVal OldVisualCollar As String,  _
+                    ByVal GeneralLocation As String,  _
+                    ByVal TimeStartChase As String,  _
+                    ByVal TimeFirstHitBounce As String,  _
+                    ByVal TimeSecordHitBounce As String,  _
+                    ByVal TimeThirdHitBounce As String,  _
+                    ByVal TimeVisibleEffect As String,  _
+                    ByVal TimeAnimalDown As String,  _
+                    ByVal DartLocation As String,  _
+                    ByVal Anesthetic As String,  _
+                    ByVal AnestheticDosage_mg As Global.System.Nullable(Of Decimal),  _
+                    ByVal AnestheticConcentration_mg_ml As Global.System.Nullable(Of Integer),  _
+                    ByVal Sedative As String,  _
+                    ByVal SedativeDosage_mg As Global.System.Nullable(Of Decimal),  _
+                    ByVal SedativeConcentration_mg_ml As Global.System.Nullable(Of Integer),  _
+                    ByVal NumHits As Global.System.Nullable(Of Integer),  _
+                    ByVal NumMisses As Global.System.Nullable(Of Integer),  _
+                    ByVal DrugEffect As Global.System.Nullable(Of Integer),  _
+                    ByVal InitialBodyTemp As Global.System.Nullable(Of Decimal),  _
+                    ByVal InitialBodyTempTime As String,  _
+                    ByVal FinalBodyTemperature As Global.System.Nullable(Of Decimal),  _
+                    ByVal FinalBodyTemperatureTime As String,  _
+                    ByVal AdditionalDrugs As String,  _
+                    ByVal Sex As String,  _
+                    ByVal EstimatedAge As Global.System.Nullable(Of Integer),  _
+                    ByVal WithCalf As Global.System.Nullable(Of Integer),  _
+                    ByVal Lactating As Global.System.Nullable(Of Integer),  _
+                    ByVal BodyCondition As String,  _
+                    ByVal Weight_Kg As Global.System.Nullable(Of Decimal),  _
+                    ByVal BodyLength As Global.System.Nullable(Of Decimal),  _
+                    ByVal NeckCircumference As Global.System.Nullable(Of Decimal),  _
+                    ByVal Jaw As Global.System.Nullable(Of Decimal),  _
+                    ByVal MetatarsusLength As Global.System.Nullable(Of Decimal),  _
+                    ByVal HindfootLength As Global.System.Nullable(Of Decimal),  _
+                    ByVal ChestGirth As Global.System.Nullable(Of Decimal),  _
+                    ByVal BloodSampleRed As Global.System.Nullable(Of Integer),  _
+                    ByVal BloodSamplePurple As Global.System.Nullable(Of Integer),  _
+                    ByVal BloodSampleGreen As Global.System.Nullable(Of Integer),  _
+                    ByVal AnestheticReversal As String,  _
+                    ByVal AnestheticReversalDosage_mg As Global.System.Nullable(Of Decimal),  _
+                    ByVal AnestheticReversalConcentration_mg_ml As Global.System.Nullable(Of Integer),  _
+                    ByVal AnestheticReversalRoute As String,  _
+                    ByVal AnestheticReversalTime As String,  _
+                    ByVal SedativeReversal As String,  _
+                    ByVal SedativeReversalDosage_mg As Global.System.Nullable(Of Decimal),  _
+                    ByVal SedativeReversalConcentration_mg_ml As Global.System.Nullable(Of Integer),  _
+                    ByVal SedativeReversalRoute As String,  _
+                    ByVal SedativeReversalTime As String,  _
+                    ByVal TimeStanding As String,  _
+                    ByVal TimeMobile As String,  _
+                    ByVal Comments As String,  _
+                    ByVal CaptureID As String,  _
+                    ByVal ProjectID As String,  _
+                    ByVal AnestheticDosage_ml As Global.System.Nullable(Of Decimal),  _
+                    ByVal SedativeDosage_ml As Global.System.Nullable(Of Decimal),  _
+                    ByVal AnestheticReversalDosage_ml As Global.System.Nullable(Of Decimal),  _
+                    ByVal SedativeReversalDosage_ml As Global.System.Nullable(Of Decimal),  _
+                    ByVal ProtocolVersion As Decimal,  _
+                    ByVal SOPNumber As Integer,  _
+                    ByVal SOPVersion As Decimal,  _
+                    ByVal ProtocolIRMAReference As Global.System.Nullable(Of Integer)) As Integer
+            If (AnimalID Is Nothing) Then
+                Throw New Global.System.ArgumentNullException("AnimalID")
+            Else
+                Me.Adapter.InsertCommand.Parameters(0).Value = CType(AnimalID,String)
+            End If
+            Me.Adapter.InsertCommand.Parameters(1).Value = CType(CaptureDate,Date)
+            If (Crew Is Nothing) Then
+                Me.Adapter.InsertCommand.Parameters(2).Value = Global.System.DBNull.Value
+            Else
+                Me.Adapter.InsertCommand.Parameters(2).Value = CType(Crew,String)
+            End If
+            If (Shooter Is Nothing) Then
+                Me.Adapter.InsertCommand.Parameters(3).Value = Global.System.DBNull.Value
+            Else
+                Me.Adapter.InsertCommand.Parameters(3).Value = CType(Shooter,String)
+            End If
+            If (Frequency.HasValue = true) Then
+                Me.Adapter.InsertCommand.Parameters(4).Value = CType(Frequency.Value,Decimal)
+            Else
+                Me.Adapter.InsertCommand.Parameters(4).Value = Global.System.DBNull.Value
+            End If
+            If (VisualCollar Is Nothing) Then
+                Me.Adapter.InsertCommand.Parameters(5).Value = Global.System.DBNull.Value
+            Else
+                Me.Adapter.InsertCommand.Parameters(5).Value = CType(VisualCollar,String)
+            End If
+            If (SerialNumber.HasValue = true) Then
+                Me.Adapter.InsertCommand.Parameters(6).Value = CType(SerialNumber.Value,Integer)
+            Else
+                Me.Adapter.InsertCommand.Parameters(6).Value = Global.System.DBNull.Value
+            End If
+            If (CaptureLatitude.HasValue = true) Then
+                Me.Adapter.InsertCommand.Parameters(7).Value = CType(CaptureLatitude.Value,Decimal)
+            Else
+                Me.Adapter.InsertCommand.Parameters(7).Value = Global.System.DBNull.Value
+            End If
+            If (CaptureLongitude.HasValue = true) Then
+                Me.Adapter.InsertCommand.Parameters(8).Value = CType(CaptureLongitude.Value,Decimal)
+            Else
+                Me.Adapter.InsertCommand.Parameters(8).Value = Global.System.DBNull.Value
+            End If
+            If (OldFrequency.HasValue = true) Then
+                Me.Adapter.InsertCommand.Parameters(9).Value = CType(OldFrequency.Value,Decimal)
+            Else
+                Me.Adapter.InsertCommand.Parameters(9).Value = Global.System.DBNull.Value
+            End If
+            If (OldVisualCollar Is Nothing) Then
+                Me.Adapter.InsertCommand.Parameters(10).Value = Global.System.DBNull.Value
+            Else
+                Me.Adapter.InsertCommand.Parameters(10).Value = CType(OldVisualCollar,String)
+            End If
+            If (GeneralLocation Is Nothing) Then
+                Me.Adapter.InsertCommand.Parameters(11).Value = Global.System.DBNull.Value
+            Else
+                Me.Adapter.InsertCommand.Parameters(11).Value = CType(GeneralLocation,String)
+            End If
+            If (TimeStartChase Is Nothing) Then
+                Me.Adapter.InsertCommand.Parameters(12).Value = Global.System.DBNull.Value
+            Else
+                Me.Adapter.InsertCommand.Parameters(12).Value = CType(TimeStartChase,String)
+            End If
+            If (TimeFirstHitBounce Is Nothing) Then
+                Me.Adapter.InsertCommand.Parameters(13).Value = Global.System.DBNull.Value
+            Else
+                Me.Adapter.InsertCommand.Parameters(13).Value = CType(TimeFirstHitBounce,String)
+            End If
+            If (TimeSecordHitBounce Is Nothing) Then
+                Me.Adapter.InsertCommand.Parameters(14).Value = Global.System.DBNull.Value
+            Else
+                Me.Adapter.InsertCommand.Parameters(14).Value = CType(TimeSecordHitBounce,String)
+            End If
+            If (TimeThirdHitBounce Is Nothing) Then
+                Me.Adapter.InsertCommand.Parameters(15).Value = Global.System.DBNull.Value
+            Else
+                Me.Adapter.InsertCommand.Parameters(15).Value = CType(TimeThirdHitBounce,String)
+            End If
+            If (TimeVisibleEffect Is Nothing) Then
+                Me.Adapter.InsertCommand.Parameters(16).Value = Global.System.DBNull.Value
+            Else
+                Me.Adapter.InsertCommand.Parameters(16).Value = CType(TimeVisibleEffect,String)
+            End If
+            If (TimeAnimalDown Is Nothing) Then
+                Me.Adapter.InsertCommand.Parameters(17).Value = Global.System.DBNull.Value
+            Else
+                Me.Adapter.InsertCommand.Parameters(17).Value = CType(TimeAnimalDown,String)
+            End If
+            If (DartLocation Is Nothing) Then
+                Me.Adapter.InsertCommand.Parameters(18).Value = Global.System.DBNull.Value
+            Else
+                Me.Adapter.InsertCommand.Parameters(18).Value = CType(DartLocation,String)
+            End If
+            If (Anesthetic Is Nothing) Then
+                Me.Adapter.InsertCommand.Parameters(19).Value = Global.System.DBNull.Value
+            Else
+                Me.Adapter.InsertCommand.Parameters(19).Value = CType(Anesthetic,String)
+            End If
+            If (AnestheticDosage_mg.HasValue = true) Then
+                Me.Adapter.InsertCommand.Parameters(20).Value = CType(AnestheticDosage_mg.Value,Decimal)
+            Else
+                Me.Adapter.InsertCommand.Parameters(20).Value = Global.System.DBNull.Value
+            End If
+            If (AnestheticConcentration_mg_ml.HasValue = true) Then
+                Me.Adapter.InsertCommand.Parameters(21).Value = CType(AnestheticConcentration_mg_ml.Value,Integer)
+            Else
+                Me.Adapter.InsertCommand.Parameters(21).Value = Global.System.DBNull.Value
+            End If
+            If (Sedative Is Nothing) Then
+                Me.Adapter.InsertCommand.Parameters(22).Value = Global.System.DBNull.Value
+            Else
+                Me.Adapter.InsertCommand.Parameters(22).Value = CType(Sedative,String)
+            End If
+            If (SedativeDosage_mg.HasValue = true) Then
+                Me.Adapter.InsertCommand.Parameters(23).Value = CType(SedativeDosage_mg.Value,Decimal)
+            Else
+                Me.Adapter.InsertCommand.Parameters(23).Value = Global.System.DBNull.Value
+            End If
+            If (SedativeConcentration_mg_ml.HasValue = true) Then
+                Me.Adapter.InsertCommand.Parameters(24).Value = CType(SedativeConcentration_mg_ml.Value,Integer)
+            Else
+                Me.Adapter.InsertCommand.Parameters(24).Value = Global.System.DBNull.Value
+            End If
+            If (NumHits.HasValue = true) Then
+                Me.Adapter.InsertCommand.Parameters(25).Value = CType(NumHits.Value,Integer)
+            Else
+                Me.Adapter.InsertCommand.Parameters(25).Value = Global.System.DBNull.Value
+            End If
+            If (NumMisses.HasValue = true) Then
+                Me.Adapter.InsertCommand.Parameters(26).Value = CType(NumMisses.Value,Integer)
+            Else
+                Me.Adapter.InsertCommand.Parameters(26).Value = Global.System.DBNull.Value
+            End If
+            If (DrugEffect.HasValue = true) Then
+                Me.Adapter.InsertCommand.Parameters(27).Value = CType(DrugEffect.Value,Integer)
+            Else
+                Me.Adapter.InsertCommand.Parameters(27).Value = Global.System.DBNull.Value
+            End If
+            If (InitialBodyTemp.HasValue = true) Then
+                Me.Adapter.InsertCommand.Parameters(28).Value = CType(InitialBodyTemp.Value,Decimal)
+            Else
+                Me.Adapter.InsertCommand.Parameters(28).Value = Global.System.DBNull.Value
+            End If
+            If (InitialBodyTempTime Is Nothing) Then
+                Me.Adapter.InsertCommand.Parameters(29).Value = Global.System.DBNull.Value
+            Else
+                Me.Adapter.InsertCommand.Parameters(29).Value = CType(InitialBodyTempTime,String)
+            End If
+            If (FinalBodyTemperature.HasValue = true) Then
+                Me.Adapter.InsertCommand.Parameters(30).Value = CType(FinalBodyTemperature.Value,Decimal)
+            Else
+                Me.Adapter.InsertCommand.Parameters(30).Value = Global.System.DBNull.Value
+            End If
+            If (FinalBodyTemperatureTime Is Nothing) Then
+                Me.Adapter.InsertCommand.Parameters(31).Value = Global.System.DBNull.Value
+            Else
+                Me.Adapter.InsertCommand.Parameters(31).Value = CType(FinalBodyTemperatureTime,String)
+            End If
+            If (AdditionalDrugs Is Nothing) Then
+                Me.Adapter.InsertCommand.Parameters(32).Value = Global.System.DBNull.Value
+            Else
+                Me.Adapter.InsertCommand.Parameters(32).Value = CType(AdditionalDrugs,String)
+            End If
+            If (Sex Is Nothing) Then
+                Me.Adapter.InsertCommand.Parameters(33).Value = Global.System.DBNull.Value
+            Else
+                Me.Adapter.InsertCommand.Parameters(33).Value = CType(Sex,String)
+            End If
+            If (EstimatedAge.HasValue = true) Then
+                Me.Adapter.InsertCommand.Parameters(34).Value = CType(EstimatedAge.Value,Integer)
+            Else
+                Me.Adapter.InsertCommand.Parameters(34).Value = Global.System.DBNull.Value
+            End If
+            If (WithCalf.HasValue = true) Then
+                Me.Adapter.InsertCommand.Parameters(35).Value = CType(WithCalf.Value,Integer)
+            Else
+                Me.Adapter.InsertCommand.Parameters(35).Value = Global.System.DBNull.Value
+            End If
+            If (Lactating.HasValue = true) Then
+                Me.Adapter.InsertCommand.Parameters(36).Value = CType(Lactating.Value,Integer)
+            Else
+                Me.Adapter.InsertCommand.Parameters(36).Value = Global.System.DBNull.Value
+            End If
+            If (BodyCondition Is Nothing) Then
+                Me.Adapter.InsertCommand.Parameters(37).Value = Global.System.DBNull.Value
+            Else
+                Me.Adapter.InsertCommand.Parameters(37).Value = CType(BodyCondition,String)
+            End If
+            If (Weight_Kg.HasValue = true) Then
+                Me.Adapter.InsertCommand.Parameters(38).Value = CType(Weight_Kg.Value,Decimal)
+            Else
+                Me.Adapter.InsertCommand.Parameters(38).Value = Global.System.DBNull.Value
+            End If
+            If (BodyLength.HasValue = true) Then
+                Me.Adapter.InsertCommand.Parameters(39).Value = CType(BodyLength.Value,Decimal)
+            Else
+                Me.Adapter.InsertCommand.Parameters(39).Value = Global.System.DBNull.Value
+            End If
+            If (NeckCircumference.HasValue = true) Then
+                Me.Adapter.InsertCommand.Parameters(40).Value = CType(NeckCircumference.Value,Decimal)
+            Else
+                Me.Adapter.InsertCommand.Parameters(40).Value = Global.System.DBNull.Value
+            End If
+            If (Jaw.HasValue = true) Then
+                Me.Adapter.InsertCommand.Parameters(41).Value = CType(Jaw.Value,Decimal)
+            Else
+                Me.Adapter.InsertCommand.Parameters(41).Value = Global.System.DBNull.Value
+            End If
+            If (MetatarsusLength.HasValue = true) Then
+                Me.Adapter.InsertCommand.Parameters(42).Value = CType(MetatarsusLength.Value,Decimal)
+            Else
+                Me.Adapter.InsertCommand.Parameters(42).Value = Global.System.DBNull.Value
+            End If
+            If (HindfootLength.HasValue = true) Then
+                Me.Adapter.InsertCommand.Parameters(43).Value = CType(HindfootLength.Value,Decimal)
+            Else
+                Me.Adapter.InsertCommand.Parameters(43).Value = Global.System.DBNull.Value
+            End If
+            If (ChestGirth.HasValue = true) Then
+                Me.Adapter.InsertCommand.Parameters(44).Value = CType(ChestGirth.Value,Decimal)
+            Else
+                Me.Adapter.InsertCommand.Parameters(44).Value = Global.System.DBNull.Value
+            End If
+            If (BloodSampleRed.HasValue = true) Then
+                Me.Adapter.InsertCommand.Parameters(45).Value = CType(BloodSampleRed.Value,Integer)
+            Else
+                Me.Adapter.InsertCommand.Parameters(45).Value = Global.System.DBNull.Value
+            End If
+            If (BloodSamplePurple.HasValue = true) Then
+                Me.Adapter.InsertCommand.Parameters(46).Value = CType(BloodSamplePurple.Value,Integer)
+            Else
+                Me.Adapter.InsertCommand.Parameters(46).Value = Global.System.DBNull.Value
+            End If
+            If (BloodSampleGreen.HasValue = true) Then
+                Me.Adapter.InsertCommand.Parameters(47).Value = CType(BloodSampleGreen.Value,Integer)
+            Else
+                Me.Adapter.InsertCommand.Parameters(47).Value = Global.System.DBNull.Value
+            End If
+            If (AnestheticReversal Is Nothing) Then
+                Me.Adapter.InsertCommand.Parameters(48).Value = Global.System.DBNull.Value
+            Else
+                Me.Adapter.InsertCommand.Parameters(48).Value = CType(AnestheticReversal,String)
+            End If
+            If (AnestheticReversalDosage_mg.HasValue = true) Then
+                Me.Adapter.InsertCommand.Parameters(49).Value = CType(AnestheticReversalDosage_mg.Value,Decimal)
+            Else
+                Me.Adapter.InsertCommand.Parameters(49).Value = Global.System.DBNull.Value
+            End If
+            If (AnestheticReversalConcentration_mg_ml.HasValue = true) Then
+                Me.Adapter.InsertCommand.Parameters(50).Value = CType(AnestheticReversalConcentration_mg_ml.Value,Integer)
+            Else
+                Me.Adapter.InsertCommand.Parameters(50).Value = Global.System.DBNull.Value
+            End If
+            If (AnestheticReversalRoute Is Nothing) Then
+                Me.Adapter.InsertCommand.Parameters(51).Value = Global.System.DBNull.Value
+            Else
+                Me.Adapter.InsertCommand.Parameters(51).Value = CType(AnestheticReversalRoute,String)
+            End If
+            If (AnestheticReversalTime Is Nothing) Then
+                Me.Adapter.InsertCommand.Parameters(52).Value = Global.System.DBNull.Value
+            Else
+                Me.Adapter.InsertCommand.Parameters(52).Value = CType(AnestheticReversalTime,String)
+            End If
+            If (SedativeReversal Is Nothing) Then
+                Me.Adapter.InsertCommand.Parameters(53).Value = Global.System.DBNull.Value
+            Else
+                Me.Adapter.InsertCommand.Parameters(53).Value = CType(SedativeReversal,String)
+            End If
+            If (SedativeReversalDosage_mg.HasValue = true) Then
+                Me.Adapter.InsertCommand.Parameters(54).Value = CType(SedativeReversalDosage_mg.Value,Decimal)
+            Else
+                Me.Adapter.InsertCommand.Parameters(54).Value = Global.System.DBNull.Value
+            End If
+            If (SedativeReversalConcentration_mg_ml.HasValue = true) Then
+                Me.Adapter.InsertCommand.Parameters(55).Value = CType(SedativeReversalConcentration_mg_ml.Value,Integer)
+            Else
+                Me.Adapter.InsertCommand.Parameters(55).Value = Global.System.DBNull.Value
+            End If
+            If (SedativeReversalRoute Is Nothing) Then
+                Me.Adapter.InsertCommand.Parameters(56).Value = Global.System.DBNull.Value
+            Else
+                Me.Adapter.InsertCommand.Parameters(56).Value = CType(SedativeReversalRoute,String)
+            End If
+            If (SedativeReversalTime Is Nothing) Then
+                Me.Adapter.InsertCommand.Parameters(57).Value = Global.System.DBNull.Value
+            Else
+                Me.Adapter.InsertCommand.Parameters(57).Value = CType(SedativeReversalTime,String)
+            End If
+            If (TimeStanding Is Nothing) Then
+                Me.Adapter.InsertCommand.Parameters(58).Value = Global.System.DBNull.Value
+            Else
+                Me.Adapter.InsertCommand.Parameters(58).Value = CType(TimeStanding,String)
+            End If
+            If (TimeMobile Is Nothing) Then
+                Me.Adapter.InsertCommand.Parameters(59).Value = Global.System.DBNull.Value
+            Else
+                Me.Adapter.InsertCommand.Parameters(59).Value = CType(TimeMobile,String)
+            End If
+            If (Comments Is Nothing) Then
+                Me.Adapter.InsertCommand.Parameters(60).Value = Global.System.DBNull.Value
+            Else
+                Me.Adapter.InsertCommand.Parameters(60).Value = CType(Comments,String)
+            End If
+            If (CaptureID Is Nothing) Then
+                Throw New Global.System.ArgumentNullException("CaptureID")
+            Else
+                Me.Adapter.InsertCommand.Parameters(61).Value = CType(CaptureID,String)
+            End If
+            If (ProjectID Is Nothing) Then
+                Throw New Global.System.ArgumentNullException("ProjectID")
+            Else
+                Me.Adapter.InsertCommand.Parameters(62).Value = CType(ProjectID,String)
+            End If
+            If (AnestheticDosage_ml.HasValue = true) Then
+                Me.Adapter.InsertCommand.Parameters(63).Value = CType(AnestheticDosage_ml.Value,Decimal)
+            Else
+                Me.Adapter.InsertCommand.Parameters(63).Value = Global.System.DBNull.Value
+            End If
+            If (SedativeDosage_ml.HasValue = true) Then
+                Me.Adapter.InsertCommand.Parameters(64).Value = CType(SedativeDosage_ml.Value,Decimal)
+            Else
+                Me.Adapter.InsertCommand.Parameters(64).Value = Global.System.DBNull.Value
+            End If
+            If (AnestheticReversalDosage_ml.HasValue = true) Then
+                Me.Adapter.InsertCommand.Parameters(65).Value = CType(AnestheticReversalDosage_ml.Value,Decimal)
+            Else
+                Me.Adapter.InsertCommand.Parameters(65).Value = Global.System.DBNull.Value
+            End If
+            If (SedativeReversalDosage_ml.HasValue = true) Then
+                Me.Adapter.InsertCommand.Parameters(66).Value = CType(SedativeReversalDosage_ml.Value,Decimal)
+            Else
+                Me.Adapter.InsertCommand.Parameters(66).Value = Global.System.DBNull.Value
+            End If
+            Me.Adapter.InsertCommand.Parameters(67).Value = CType(ProtocolVersion,Decimal)
+            Me.Adapter.InsertCommand.Parameters(68).Value = CType(SOPNumber,Integer)
+            Me.Adapter.InsertCommand.Parameters(69).Value = CType(SOPVersion,Decimal)
+            If (ProtocolIRMAReference.HasValue = true) Then
+                Me.Adapter.InsertCommand.Parameters(70).Value = CType(ProtocolIRMAReference.Value,Integer)
+            Else
+                Me.Adapter.InsertCommand.Parameters(70).Value = Global.System.DBNull.Value
+            End If
+            Dim previousConnectionState As Global.System.Data.ConnectionState = Me.Adapter.InsertCommand.Connection.State
+            If ((Me.Adapter.InsertCommand.Connection.State And Global.System.Data.ConnectionState.Open)  _
+                        <> Global.System.Data.ConnectionState.Open) Then
+                Me.Adapter.InsertCommand.Connection.Open
+            End If
+            Try 
+                Dim returnValue As Integer = Me.Adapter.InsertCommand.ExecuteNonQuery
+                Return returnValue
+            Finally
+                If (previousConnectionState = Global.System.Data.ConnectionState.Closed) Then
+                    Me.Adapter.InsertCommand.Connection.Close
+                End If
+            End Try
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Update, true)>  _
+        Public Overloads Overridable Function Update( _
+                    ByVal AnimalID As String,  _
+                    ByVal CaptureDate As Date,  _
+                    ByVal Crew As String,  _
+                    ByVal Shooter As String,  _
+                    ByVal Frequency As Global.System.Nullable(Of Decimal),  _
+                    ByVal VisualCollar As String,  _
+                    ByVal SerialNumber As Global.System.Nullable(Of Integer),  _
+                    ByVal CaptureLatitude As Global.System.Nullable(Of Decimal),  _
+                    ByVal CaptureLongitude As Global.System.Nullable(Of Decimal),  _
+                    ByVal OldFrequency As Global.System.Nullable(Of Decimal),  _
+                    ByVal OldVisualCollar As String,  _
+                    ByVal GeneralLocation As String,  _
+                    ByVal TimeStartChase As String,  _
+                    ByVal TimeFirstHitBounce As String,  _
+                    ByVal TimeSecordHitBounce As String,  _
+                    ByVal TimeThirdHitBounce As String,  _
+                    ByVal TimeVisibleEffect As String,  _
+                    ByVal TimeAnimalDown As String,  _
+                    ByVal DartLocation As String,  _
+                    ByVal Anesthetic As String,  _
+                    ByVal AnestheticDosage_mg As Global.System.Nullable(Of Decimal),  _
+                    ByVal AnestheticConcentration_mg_ml As Global.System.Nullable(Of Integer),  _
+                    ByVal Sedative As String,  _
+                    ByVal SedativeDosage_mg As Global.System.Nullable(Of Decimal),  _
+                    ByVal SedativeConcentration_mg_ml As Global.System.Nullable(Of Integer),  _
+                    ByVal NumHits As Global.System.Nullable(Of Integer),  _
+                    ByVal NumMisses As Global.System.Nullable(Of Integer),  _
+                    ByVal DrugEffect As Global.System.Nullable(Of Integer),  _
+                    ByVal InitialBodyTemp As Global.System.Nullable(Of Decimal),  _
+                    ByVal InitialBodyTempTime As String,  _
+                    ByVal FinalBodyTemperature As Global.System.Nullable(Of Decimal),  _
+                    ByVal FinalBodyTemperatureTime As String,  _
+                    ByVal AdditionalDrugs As String,  _
+                    ByVal Sex As String,  _
+                    ByVal EstimatedAge As Global.System.Nullable(Of Integer),  _
+                    ByVal WithCalf As Global.System.Nullable(Of Integer),  _
+                    ByVal Lactating As Global.System.Nullable(Of Integer),  _
+                    ByVal BodyCondition As String,  _
+                    ByVal Weight_Kg As Global.System.Nullable(Of Decimal),  _
+                    ByVal BodyLength As Global.System.Nullable(Of Decimal),  _
+                    ByVal NeckCircumference As Global.System.Nullable(Of Decimal),  _
+                    ByVal Jaw As Global.System.Nullable(Of Decimal),  _
+                    ByVal MetatarsusLength As Global.System.Nullable(Of Decimal),  _
+                    ByVal HindfootLength As Global.System.Nullable(Of Decimal),  _
+                    ByVal ChestGirth As Global.System.Nullable(Of Decimal),  _
+                    ByVal BloodSampleRed As Global.System.Nullable(Of Integer),  _
+                    ByVal BloodSamplePurple As Global.System.Nullable(Of Integer),  _
+                    ByVal BloodSampleGreen As Global.System.Nullable(Of Integer),  _
+                    ByVal AnestheticReversal As String,  _
+                    ByVal AnestheticReversalDosage_mg As Global.System.Nullable(Of Decimal),  _
+                    ByVal AnestheticReversalConcentration_mg_ml As Global.System.Nullable(Of Integer),  _
+                    ByVal AnestheticReversalRoute As String,  _
+                    ByVal AnestheticReversalTime As String,  _
+                    ByVal SedativeReversal As String,  _
+                    ByVal SedativeReversalDosage_mg As Global.System.Nullable(Of Decimal),  _
+                    ByVal SedativeReversalConcentration_mg_ml As Global.System.Nullable(Of Integer),  _
+                    ByVal SedativeReversalRoute As String,  _
+                    ByVal SedativeReversalTime As String,  _
+                    ByVal TimeStanding As String,  _
+                    ByVal TimeMobile As String,  _
+                    ByVal Comments As String,  _
+                    ByVal CaptureID As String,  _
+                    ByVal RecordInsertedDate As Date,  _
+                    ByVal RecordInsertedBy As String,  _
+                    ByVal ProjectID As String,  _
+                    ByVal AnestheticDosage_ml As Global.System.Nullable(Of Decimal),  _
+                    ByVal SedativeDosage_ml As Global.System.Nullable(Of Decimal),  _
+                    ByVal AnestheticReversalDosage_ml As Global.System.Nullable(Of Decimal),  _
+                    ByVal SedativeReversalDosage_ml As Global.System.Nullable(Of Decimal),  _
+                    ByVal ProtocolVersion As Decimal,  _
+                    ByVal SOPNumber As Integer,  _
+                    ByVal SOPVersion As Decimal,  _
+                    ByVal CertificationDate As Global.System.Nullable(Of Date),  _
+                    ByVal CertifiedBy As String,  _
+                    ByVal ProtocolIRMAReference As Global.System.Nullable(Of Integer),  _
+                    ByVal CertificationLevel As String,  _
+                    ByVal Original_AnimalID As String) As Integer
+            If (AnimalID Is Nothing) Then
+                Throw New Global.System.ArgumentNullException("AnimalID")
+            Else
+                Me.Adapter.UpdateCommand.Parameters(0).Value = CType(AnimalID,String)
+            End If
+            Me.Adapter.UpdateCommand.Parameters(1).Value = CType(CaptureDate,Date)
+            If (Crew Is Nothing) Then
+                Me.Adapter.UpdateCommand.Parameters(2).Value = Global.System.DBNull.Value
+            Else
+                Me.Adapter.UpdateCommand.Parameters(2).Value = CType(Crew,String)
+            End If
+            If (Shooter Is Nothing) Then
+                Me.Adapter.UpdateCommand.Parameters(3).Value = Global.System.DBNull.Value
+            Else
+                Me.Adapter.UpdateCommand.Parameters(3).Value = CType(Shooter,String)
+            End If
+            If (Frequency.HasValue = true) Then
+                Me.Adapter.UpdateCommand.Parameters(4).Value = CType(Frequency.Value,Decimal)
+            Else
+                Me.Adapter.UpdateCommand.Parameters(4).Value = Global.System.DBNull.Value
+            End If
+            If (VisualCollar Is Nothing) Then
+                Me.Adapter.UpdateCommand.Parameters(5).Value = Global.System.DBNull.Value
+            Else
+                Me.Adapter.UpdateCommand.Parameters(5).Value = CType(VisualCollar,String)
+            End If
+            If (SerialNumber.HasValue = true) Then
+                Me.Adapter.UpdateCommand.Parameters(6).Value = CType(SerialNumber.Value,Integer)
+            Else
+                Me.Adapter.UpdateCommand.Parameters(6).Value = Global.System.DBNull.Value
+            End If
+            If (CaptureLatitude.HasValue = true) Then
+                Me.Adapter.UpdateCommand.Parameters(7).Value = CType(CaptureLatitude.Value,Decimal)
+            Else
+                Me.Adapter.UpdateCommand.Parameters(7).Value = Global.System.DBNull.Value
+            End If
+            If (CaptureLongitude.HasValue = true) Then
+                Me.Adapter.UpdateCommand.Parameters(8).Value = CType(CaptureLongitude.Value,Decimal)
+            Else
+                Me.Adapter.UpdateCommand.Parameters(8).Value = Global.System.DBNull.Value
+            End If
+            If (OldFrequency.HasValue = true) Then
+                Me.Adapter.UpdateCommand.Parameters(9).Value = CType(OldFrequency.Value,Decimal)
+            Else
+                Me.Adapter.UpdateCommand.Parameters(9).Value = Global.System.DBNull.Value
+            End If
+            If (OldVisualCollar Is Nothing) Then
+                Me.Adapter.UpdateCommand.Parameters(10).Value = Global.System.DBNull.Value
+            Else
+                Me.Adapter.UpdateCommand.Parameters(10).Value = CType(OldVisualCollar,String)
+            End If
+            If (GeneralLocation Is Nothing) Then
+                Me.Adapter.UpdateCommand.Parameters(11).Value = Global.System.DBNull.Value
+            Else
+                Me.Adapter.UpdateCommand.Parameters(11).Value = CType(GeneralLocation,String)
+            End If
+            If (TimeStartChase Is Nothing) Then
+                Me.Adapter.UpdateCommand.Parameters(12).Value = Global.System.DBNull.Value
+            Else
+                Me.Adapter.UpdateCommand.Parameters(12).Value = CType(TimeStartChase,String)
+            End If
+            If (TimeFirstHitBounce Is Nothing) Then
+                Me.Adapter.UpdateCommand.Parameters(13).Value = Global.System.DBNull.Value
+            Else
+                Me.Adapter.UpdateCommand.Parameters(13).Value = CType(TimeFirstHitBounce,String)
+            End If
+            If (TimeSecordHitBounce Is Nothing) Then
+                Me.Adapter.UpdateCommand.Parameters(14).Value = Global.System.DBNull.Value
+            Else
+                Me.Adapter.UpdateCommand.Parameters(14).Value = CType(TimeSecordHitBounce,String)
+            End If
+            If (TimeThirdHitBounce Is Nothing) Then
+                Me.Adapter.UpdateCommand.Parameters(15).Value = Global.System.DBNull.Value
+            Else
+                Me.Adapter.UpdateCommand.Parameters(15).Value = CType(TimeThirdHitBounce,String)
+            End If
+            If (TimeVisibleEffect Is Nothing) Then
+                Me.Adapter.UpdateCommand.Parameters(16).Value = Global.System.DBNull.Value
+            Else
+                Me.Adapter.UpdateCommand.Parameters(16).Value = CType(TimeVisibleEffect,String)
+            End If
+            If (TimeAnimalDown Is Nothing) Then
+                Me.Adapter.UpdateCommand.Parameters(17).Value = Global.System.DBNull.Value
+            Else
+                Me.Adapter.UpdateCommand.Parameters(17).Value = CType(TimeAnimalDown,String)
+            End If
+            If (DartLocation Is Nothing) Then
+                Me.Adapter.UpdateCommand.Parameters(18).Value = Global.System.DBNull.Value
+            Else
+                Me.Adapter.UpdateCommand.Parameters(18).Value = CType(DartLocation,String)
+            End If
+            If (Anesthetic Is Nothing) Then
+                Me.Adapter.UpdateCommand.Parameters(19).Value = Global.System.DBNull.Value
+            Else
+                Me.Adapter.UpdateCommand.Parameters(19).Value = CType(Anesthetic,String)
+            End If
+            If (AnestheticDosage_mg.HasValue = true) Then
+                Me.Adapter.UpdateCommand.Parameters(20).Value = CType(AnestheticDosage_mg.Value,Decimal)
+            Else
+                Me.Adapter.UpdateCommand.Parameters(20).Value = Global.System.DBNull.Value
+            End If
+            If (AnestheticConcentration_mg_ml.HasValue = true) Then
+                Me.Adapter.UpdateCommand.Parameters(21).Value = CType(AnestheticConcentration_mg_ml.Value,Integer)
+            Else
+                Me.Adapter.UpdateCommand.Parameters(21).Value = Global.System.DBNull.Value
+            End If
+            If (Sedative Is Nothing) Then
+                Me.Adapter.UpdateCommand.Parameters(22).Value = Global.System.DBNull.Value
+            Else
+                Me.Adapter.UpdateCommand.Parameters(22).Value = CType(Sedative,String)
+            End If
+            If (SedativeDosage_mg.HasValue = true) Then
+                Me.Adapter.UpdateCommand.Parameters(23).Value = CType(SedativeDosage_mg.Value,Decimal)
+            Else
+                Me.Adapter.UpdateCommand.Parameters(23).Value = Global.System.DBNull.Value
+            End If
+            If (SedativeConcentration_mg_ml.HasValue = true) Then
+                Me.Adapter.UpdateCommand.Parameters(24).Value = CType(SedativeConcentration_mg_ml.Value,Integer)
+            Else
+                Me.Adapter.UpdateCommand.Parameters(24).Value = Global.System.DBNull.Value
+            End If
+            If (NumHits.HasValue = true) Then
+                Me.Adapter.UpdateCommand.Parameters(25).Value = CType(NumHits.Value,Integer)
+            Else
+                Me.Adapter.UpdateCommand.Parameters(25).Value = Global.System.DBNull.Value
+            End If
+            If (NumMisses.HasValue = true) Then
+                Me.Adapter.UpdateCommand.Parameters(26).Value = CType(NumMisses.Value,Integer)
+            Else
+                Me.Adapter.UpdateCommand.Parameters(26).Value = Global.System.DBNull.Value
+            End If
+            If (DrugEffect.HasValue = true) Then
+                Me.Adapter.UpdateCommand.Parameters(27).Value = CType(DrugEffect.Value,Integer)
+            Else
+                Me.Adapter.UpdateCommand.Parameters(27).Value = Global.System.DBNull.Value
+            End If
+            If (InitialBodyTemp.HasValue = true) Then
+                Me.Adapter.UpdateCommand.Parameters(28).Value = CType(InitialBodyTemp.Value,Decimal)
+            Else
+                Me.Adapter.UpdateCommand.Parameters(28).Value = Global.System.DBNull.Value
+            End If
+            If (InitialBodyTempTime Is Nothing) Then
+                Me.Adapter.UpdateCommand.Parameters(29).Value = Global.System.DBNull.Value
+            Else
+                Me.Adapter.UpdateCommand.Parameters(29).Value = CType(InitialBodyTempTime,String)
+            End If
+            If (FinalBodyTemperature.HasValue = true) Then
+                Me.Adapter.UpdateCommand.Parameters(30).Value = CType(FinalBodyTemperature.Value,Decimal)
+            Else
+                Me.Adapter.UpdateCommand.Parameters(30).Value = Global.System.DBNull.Value
+            End If
+            If (FinalBodyTemperatureTime Is Nothing) Then
+                Me.Adapter.UpdateCommand.Parameters(31).Value = Global.System.DBNull.Value
+            Else
+                Me.Adapter.UpdateCommand.Parameters(31).Value = CType(FinalBodyTemperatureTime,String)
+            End If
+            If (AdditionalDrugs Is Nothing) Then
+                Me.Adapter.UpdateCommand.Parameters(32).Value = Global.System.DBNull.Value
+            Else
+                Me.Adapter.UpdateCommand.Parameters(32).Value = CType(AdditionalDrugs,String)
+            End If
+            If (Sex Is Nothing) Then
+                Me.Adapter.UpdateCommand.Parameters(33).Value = Global.System.DBNull.Value
+            Else
+                Me.Adapter.UpdateCommand.Parameters(33).Value = CType(Sex,String)
+            End If
+            If (EstimatedAge.HasValue = true) Then
+                Me.Adapter.UpdateCommand.Parameters(34).Value = CType(EstimatedAge.Value,Integer)
+            Else
+                Me.Adapter.UpdateCommand.Parameters(34).Value = Global.System.DBNull.Value
+            End If
+            If (WithCalf.HasValue = true) Then
+                Me.Adapter.UpdateCommand.Parameters(35).Value = CType(WithCalf.Value,Integer)
+            Else
+                Me.Adapter.UpdateCommand.Parameters(35).Value = Global.System.DBNull.Value
+            End If
+            If (Lactating.HasValue = true) Then
+                Me.Adapter.UpdateCommand.Parameters(36).Value = CType(Lactating.Value,Integer)
+            Else
+                Me.Adapter.UpdateCommand.Parameters(36).Value = Global.System.DBNull.Value
+            End If
+            If (BodyCondition Is Nothing) Then
+                Me.Adapter.UpdateCommand.Parameters(37).Value = Global.System.DBNull.Value
+            Else
+                Me.Adapter.UpdateCommand.Parameters(37).Value = CType(BodyCondition,String)
+            End If
+            If (Weight_Kg.HasValue = true) Then
+                Me.Adapter.UpdateCommand.Parameters(38).Value = CType(Weight_Kg.Value,Decimal)
+            Else
+                Me.Adapter.UpdateCommand.Parameters(38).Value = Global.System.DBNull.Value
+            End If
+            If (BodyLength.HasValue = true) Then
+                Me.Adapter.UpdateCommand.Parameters(39).Value = CType(BodyLength.Value,Decimal)
+            Else
+                Me.Adapter.UpdateCommand.Parameters(39).Value = Global.System.DBNull.Value
+            End If
+            If (NeckCircumference.HasValue = true) Then
+                Me.Adapter.UpdateCommand.Parameters(40).Value = CType(NeckCircumference.Value,Decimal)
+            Else
+                Me.Adapter.UpdateCommand.Parameters(40).Value = Global.System.DBNull.Value
+            End If
+            If (Jaw.HasValue = true) Then
+                Me.Adapter.UpdateCommand.Parameters(41).Value = CType(Jaw.Value,Decimal)
+            Else
+                Me.Adapter.UpdateCommand.Parameters(41).Value = Global.System.DBNull.Value
+            End If
+            If (MetatarsusLength.HasValue = true) Then
+                Me.Adapter.UpdateCommand.Parameters(42).Value = CType(MetatarsusLength.Value,Decimal)
+            Else
+                Me.Adapter.UpdateCommand.Parameters(42).Value = Global.System.DBNull.Value
+            End If
+            If (HindfootLength.HasValue = true) Then
+                Me.Adapter.UpdateCommand.Parameters(43).Value = CType(HindfootLength.Value,Decimal)
+            Else
+                Me.Adapter.UpdateCommand.Parameters(43).Value = Global.System.DBNull.Value
+            End If
+            If (ChestGirth.HasValue = true) Then
+                Me.Adapter.UpdateCommand.Parameters(44).Value = CType(ChestGirth.Value,Decimal)
+            Else
+                Me.Adapter.UpdateCommand.Parameters(44).Value = Global.System.DBNull.Value
+            End If
+            If (BloodSampleRed.HasValue = true) Then
+                Me.Adapter.UpdateCommand.Parameters(45).Value = CType(BloodSampleRed.Value,Integer)
+            Else
+                Me.Adapter.UpdateCommand.Parameters(45).Value = Global.System.DBNull.Value
+            End If
+            If (BloodSamplePurple.HasValue = true) Then
+                Me.Adapter.UpdateCommand.Parameters(46).Value = CType(BloodSamplePurple.Value,Integer)
+            Else
+                Me.Adapter.UpdateCommand.Parameters(46).Value = Global.System.DBNull.Value
+            End If
+            If (BloodSampleGreen.HasValue = true) Then
+                Me.Adapter.UpdateCommand.Parameters(47).Value = CType(BloodSampleGreen.Value,Integer)
+            Else
+                Me.Adapter.UpdateCommand.Parameters(47).Value = Global.System.DBNull.Value
+            End If
+            If (AnestheticReversal Is Nothing) Then
+                Me.Adapter.UpdateCommand.Parameters(48).Value = Global.System.DBNull.Value
+            Else
+                Me.Adapter.UpdateCommand.Parameters(48).Value = CType(AnestheticReversal,String)
+            End If
+            If (AnestheticReversalDosage_mg.HasValue = true) Then
+                Me.Adapter.UpdateCommand.Parameters(49).Value = CType(AnestheticReversalDosage_mg.Value,Decimal)
+            Else
+                Me.Adapter.UpdateCommand.Parameters(49).Value = Global.System.DBNull.Value
+            End If
+            If (AnestheticReversalConcentration_mg_ml.HasValue = true) Then
+                Me.Adapter.UpdateCommand.Parameters(50).Value = CType(AnestheticReversalConcentration_mg_ml.Value,Integer)
+            Else
+                Me.Adapter.UpdateCommand.Parameters(50).Value = Global.System.DBNull.Value
+            End If
+            If (AnestheticReversalRoute Is Nothing) Then
+                Me.Adapter.UpdateCommand.Parameters(51).Value = Global.System.DBNull.Value
+            Else
+                Me.Adapter.UpdateCommand.Parameters(51).Value = CType(AnestheticReversalRoute,String)
+            End If
+            If (AnestheticReversalTime Is Nothing) Then
+                Me.Adapter.UpdateCommand.Parameters(52).Value = Global.System.DBNull.Value
+            Else
+                Me.Adapter.UpdateCommand.Parameters(52).Value = CType(AnestheticReversalTime,String)
+            End If
+            If (SedativeReversal Is Nothing) Then
+                Me.Adapter.UpdateCommand.Parameters(53).Value = Global.System.DBNull.Value
+            Else
+                Me.Adapter.UpdateCommand.Parameters(53).Value = CType(SedativeReversal,String)
+            End If
+            If (SedativeReversalDosage_mg.HasValue = true) Then
+                Me.Adapter.UpdateCommand.Parameters(54).Value = CType(SedativeReversalDosage_mg.Value,Decimal)
+            Else
+                Me.Adapter.UpdateCommand.Parameters(54).Value = Global.System.DBNull.Value
+            End If
+            If (SedativeReversalConcentration_mg_ml.HasValue = true) Then
+                Me.Adapter.UpdateCommand.Parameters(55).Value = CType(SedativeReversalConcentration_mg_ml.Value,Integer)
+            Else
+                Me.Adapter.UpdateCommand.Parameters(55).Value = Global.System.DBNull.Value
+            End If
+            If (SedativeReversalRoute Is Nothing) Then
+                Me.Adapter.UpdateCommand.Parameters(56).Value = Global.System.DBNull.Value
+            Else
+                Me.Adapter.UpdateCommand.Parameters(56).Value = CType(SedativeReversalRoute,String)
+            End If
+            If (SedativeReversalTime Is Nothing) Then
+                Me.Adapter.UpdateCommand.Parameters(57).Value = Global.System.DBNull.Value
+            Else
+                Me.Adapter.UpdateCommand.Parameters(57).Value = CType(SedativeReversalTime,String)
+            End If
+            If (TimeStanding Is Nothing) Then
+                Me.Adapter.UpdateCommand.Parameters(58).Value = Global.System.DBNull.Value
+            Else
+                Me.Adapter.UpdateCommand.Parameters(58).Value = CType(TimeStanding,String)
+            End If
+            If (TimeMobile Is Nothing) Then
+                Me.Adapter.UpdateCommand.Parameters(59).Value = Global.System.DBNull.Value
+            Else
+                Me.Adapter.UpdateCommand.Parameters(59).Value = CType(TimeMobile,String)
+            End If
+            If (Comments Is Nothing) Then
+                Me.Adapter.UpdateCommand.Parameters(60).Value = Global.System.DBNull.Value
+            Else
+                Me.Adapter.UpdateCommand.Parameters(60).Value = CType(Comments,String)
+            End If
+            If (CaptureID Is Nothing) Then
+                Throw New Global.System.ArgumentNullException("CaptureID")
+            Else
+                Me.Adapter.UpdateCommand.Parameters(61).Value = CType(CaptureID,String)
+            End If
+            Me.Adapter.UpdateCommand.Parameters(62).Value = CType(RecordInsertedDate,Date)
+            If (RecordInsertedBy Is Nothing) Then
+                Throw New Global.System.ArgumentNullException("RecordInsertedBy")
+            Else
+                Me.Adapter.UpdateCommand.Parameters(63).Value = CType(RecordInsertedBy,String)
+            End If
+            If (ProjectID Is Nothing) Then
+                Throw New Global.System.ArgumentNullException("ProjectID")
+            Else
+                Me.Adapter.UpdateCommand.Parameters(64).Value = CType(ProjectID,String)
+            End If
+            If (AnestheticDosage_ml.HasValue = true) Then
+                Me.Adapter.UpdateCommand.Parameters(65).Value = CType(AnestheticDosage_ml.Value,Decimal)
+            Else
+                Me.Adapter.UpdateCommand.Parameters(65).Value = Global.System.DBNull.Value
+            End If
+            If (SedativeDosage_ml.HasValue = true) Then
+                Me.Adapter.UpdateCommand.Parameters(66).Value = CType(SedativeDosage_ml.Value,Decimal)
+            Else
+                Me.Adapter.UpdateCommand.Parameters(66).Value = Global.System.DBNull.Value
+            End If
+            If (AnestheticReversalDosage_ml.HasValue = true) Then
+                Me.Adapter.UpdateCommand.Parameters(67).Value = CType(AnestheticReversalDosage_ml.Value,Decimal)
+            Else
+                Me.Adapter.UpdateCommand.Parameters(67).Value = Global.System.DBNull.Value
+            End If
+            If (SedativeReversalDosage_ml.HasValue = true) Then
+                Me.Adapter.UpdateCommand.Parameters(68).Value = CType(SedativeReversalDosage_ml.Value,Decimal)
+            Else
+                Me.Adapter.UpdateCommand.Parameters(68).Value = Global.System.DBNull.Value
+            End If
+            Me.Adapter.UpdateCommand.Parameters(69).Value = CType(ProtocolVersion,Decimal)
+            Me.Adapter.UpdateCommand.Parameters(70).Value = CType(SOPNumber,Integer)
+            Me.Adapter.UpdateCommand.Parameters(71).Value = CType(SOPVersion,Decimal)
+            If (CertificationDate.HasValue = true) Then
+                Me.Adapter.UpdateCommand.Parameters(72).Value = CType(CertificationDate.Value,Date)
+            Else
+                Me.Adapter.UpdateCommand.Parameters(72).Value = Global.System.DBNull.Value
+            End If
+            If (CertifiedBy Is Nothing) Then
+                Me.Adapter.UpdateCommand.Parameters(73).Value = Global.System.DBNull.Value
+            Else
+                Me.Adapter.UpdateCommand.Parameters(73).Value = CType(CertifiedBy,String)
+            End If
+            If (ProtocolIRMAReference.HasValue = true) Then
+                Me.Adapter.UpdateCommand.Parameters(74).Value = CType(ProtocolIRMAReference.Value,Integer)
+            Else
+                Me.Adapter.UpdateCommand.Parameters(74).Value = Global.System.DBNull.Value
+            End If
+            If (CertificationLevel Is Nothing) Then
+                Throw New Global.System.ArgumentNullException("CertificationLevel")
+            Else
+                Me.Adapter.UpdateCommand.Parameters(75).Value = CType(CertificationLevel,String)
+            End If
+            If (Original_AnimalID Is Nothing) Then
+                Throw New Global.System.ArgumentNullException("Original_AnimalID")
+            Else
+                Me.Adapter.UpdateCommand.Parameters(76).Value = CType(Original_AnimalID,String)
+            End If
+            Dim previousConnectionState As Global.System.Data.ConnectionState = Me.Adapter.UpdateCommand.Connection.State
+            If ((Me.Adapter.UpdateCommand.Connection.State And Global.System.Data.ConnectionState.Open)  _
+                        <> Global.System.Data.ConnectionState.Open) Then
+                Me.Adapter.UpdateCommand.Connection.Open
+            End If
+            Try 
+                Dim returnValue As Integer = Me.Adapter.UpdateCommand.ExecuteNonQuery
+                Return returnValue
+            Finally
+                If (previousConnectionState = Global.System.Data.ConnectionState.Closed) Then
+                    Me.Adapter.UpdateCommand.Connection.Close
+                End If
+            End Try
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Update, true)>  _
+        Public Overloads Overridable Function Update( _
+                    ByVal CaptureDate As Date,  _
+                    ByVal Crew As String,  _
+                    ByVal Shooter As String,  _
+                    ByVal Frequency As Global.System.Nullable(Of Decimal),  _
+                    ByVal VisualCollar As String,  _
+                    ByVal SerialNumber As Global.System.Nullable(Of Integer),  _
+                    ByVal CaptureLatitude As Global.System.Nullable(Of Decimal),  _
+                    ByVal CaptureLongitude As Global.System.Nullable(Of Decimal),  _
+                    ByVal OldFrequency As Global.System.Nullable(Of Decimal),  _
+                    ByVal OldVisualCollar As String,  _
+                    ByVal GeneralLocation As String,  _
+                    ByVal TimeStartChase As String,  _
+                    ByVal TimeFirstHitBounce As String,  _
+                    ByVal TimeSecordHitBounce As String,  _
+                    ByVal TimeThirdHitBounce As String,  _
+                    ByVal TimeVisibleEffect As String,  _
+                    ByVal TimeAnimalDown As String,  _
+                    ByVal DartLocation As String,  _
+                    ByVal Anesthetic As String,  _
+                    ByVal AnestheticDosage_mg As Global.System.Nullable(Of Decimal),  _
+                    ByVal AnestheticConcentration_mg_ml As Global.System.Nullable(Of Integer),  _
+                    ByVal Sedative As String,  _
+                    ByVal SedativeDosage_mg As Global.System.Nullable(Of Decimal),  _
+                    ByVal SedativeConcentration_mg_ml As Global.System.Nullable(Of Integer),  _
+                    ByVal NumHits As Global.System.Nullable(Of Integer),  _
+                    ByVal NumMisses As Global.System.Nullable(Of Integer),  _
+                    ByVal DrugEffect As Global.System.Nullable(Of Integer),  _
+                    ByVal InitialBodyTemp As Global.System.Nullable(Of Decimal),  _
+                    ByVal InitialBodyTempTime As String,  _
+                    ByVal FinalBodyTemperature As Global.System.Nullable(Of Decimal),  _
+                    ByVal FinalBodyTemperatureTime As String,  _
+                    ByVal AdditionalDrugs As String,  _
+                    ByVal Sex As String,  _
+                    ByVal EstimatedAge As Global.System.Nullable(Of Integer),  _
+                    ByVal WithCalf As Global.System.Nullable(Of Integer),  _
+                    ByVal Lactating As Global.System.Nullable(Of Integer),  _
+                    ByVal BodyCondition As String,  _
+                    ByVal Weight_Kg As Global.System.Nullable(Of Decimal),  _
+                    ByVal BodyLength As Global.System.Nullable(Of Decimal),  _
+                    ByVal NeckCircumference As Global.System.Nullable(Of Decimal),  _
+                    ByVal Jaw As Global.System.Nullable(Of Decimal),  _
+                    ByVal MetatarsusLength As Global.System.Nullable(Of Decimal),  _
+                    ByVal HindfootLength As Global.System.Nullable(Of Decimal),  _
+                    ByVal ChestGirth As Global.System.Nullable(Of Decimal),  _
+                    ByVal BloodSampleRed As Global.System.Nullable(Of Integer),  _
+                    ByVal BloodSamplePurple As Global.System.Nullable(Of Integer),  _
+                    ByVal BloodSampleGreen As Global.System.Nullable(Of Integer),  _
+                    ByVal AnestheticReversal As String,  _
+                    ByVal AnestheticReversalDosage_mg As Global.System.Nullable(Of Decimal),  _
+                    ByVal AnestheticReversalConcentration_mg_ml As Global.System.Nullable(Of Integer),  _
+                    ByVal AnestheticReversalRoute As String,  _
+                    ByVal AnestheticReversalTime As String,  _
+                    ByVal SedativeReversal As String,  _
+                    ByVal SedativeReversalDosage_mg As Global.System.Nullable(Of Decimal),  _
+                    ByVal SedativeReversalConcentration_mg_ml As Global.System.Nullable(Of Integer),  _
+                    ByVal SedativeReversalRoute As String,  _
+                    ByVal SedativeReversalTime As String,  _
+                    ByVal TimeStanding As String,  _
+                    ByVal TimeMobile As String,  _
+                    ByVal Comments As String,  _
+                    ByVal CaptureID As String,  _
+                    ByVal RecordInsertedDate As Date,  _
+                    ByVal RecordInsertedBy As String,  _
+                    ByVal ProjectID As String,  _
+                    ByVal AnestheticDosage_ml As Global.System.Nullable(Of Decimal),  _
+                    ByVal SedativeDosage_ml As Global.System.Nullable(Of Decimal),  _
+                    ByVal AnestheticReversalDosage_ml As Global.System.Nullable(Of Decimal),  _
+                    ByVal SedativeReversalDosage_ml As Global.System.Nullable(Of Decimal),  _
+                    ByVal ProtocolVersion As Decimal,  _
+                    ByVal SOPNumber As Integer,  _
+                    ByVal SOPVersion As Decimal,  _
+                    ByVal CertificationDate As Global.System.Nullable(Of Date),  _
+                    ByVal CertifiedBy As String,  _
+                    ByVal ProtocolIRMAReference As Global.System.Nullable(Of Integer),  _
+                    ByVal CertificationLevel As String,  _
+                    ByVal Original_AnimalID As String) As Integer
+            Return Me.Update(Original_AnimalID, CaptureDate, Crew, Shooter, Frequency, VisualCollar, SerialNumber, CaptureLatitude, CaptureLongitude, OldFrequency, OldVisualCollar, GeneralLocation, TimeStartChase, TimeFirstHitBounce, TimeSecordHitBounce, TimeThirdHitBounce, TimeVisibleEffect, TimeAnimalDown, DartLocation, Anesthetic, AnestheticDosage_mg, AnestheticConcentration_mg_ml, Sedative, SedativeDosage_mg, SedativeConcentration_mg_ml, NumHits, NumMisses, DrugEffect, InitialBodyTemp, InitialBodyTempTime, FinalBodyTemperature, FinalBodyTemperatureTime, AdditionalDrugs, Sex, EstimatedAge, WithCalf, Lactating, BodyCondition, Weight_Kg, BodyLength, NeckCircumference, Jaw, MetatarsusLength, HindfootLength, ChestGirth, BloodSampleRed, BloodSamplePurple, BloodSampleGreen, AnestheticReversal, AnestheticReversalDosage_mg, AnestheticReversalConcentration_mg_ml, AnestheticReversalRoute, AnestheticReversalTime, SedativeReversal, SedativeReversalDosage_mg, SedativeReversalConcentration_mg_ml, SedativeReversalRoute, SedativeReversalTime, TimeStanding, TimeMobile, Comments, CaptureID, RecordInsertedDate, RecordInsertedBy, ProjectID, AnestheticDosage_ml, SedativeDosage_ml, AnestheticReversalDosage_ml, SedativeReversalDosage_ml, ProtocolVersion, SOPNumber, SOPVersion, CertificationDate, CertifiedBy, ProtocolIRMAReference, CertificationLevel, Original_AnimalID)
+        End Function
+    End Class
+    
+    '''<summary>
     '''TableAdapterManager is used to coordinate TableAdapters in the dataset to enable Hierarchical Update scenarios
     '''</summary>
     <Global.System.ComponentModel.DesignerCategoryAttribute("code"),  _
@@ -5046,6 +10001,8 @@ Namespace WRST_CaribouDataSetTableAdapters
         Private _surveyFlightsTableAdapter As SurveyFlightsTableAdapter
         
         Private _surveysTableAdapter As SurveysTableAdapter
+        
+        Private _capturesTableAdapter As CapturesTableAdapter
         
         Private _backupDataSetBeforeUpdate As Boolean
         
@@ -5105,6 +10062,20 @@ Namespace WRST_CaribouDataSetTableAdapters
         End Property
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
+         Global.System.ComponentModel.EditorAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterManagerPropertyEditor, Microso"& _ 
+            "ft.VSDesigner, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3"& _ 
+            "a", "System.Drawing.Design.UITypeEditor")>  _
+        Public Property CapturesTableAdapter() As CapturesTableAdapter
+            Get
+                Return Me._capturesTableAdapter
+            End Get
+            Set
+                Me._capturesTableAdapter = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Public Property BackupDataSetBeforeUpdate() As Boolean
             Get
@@ -5135,6 +10106,10 @@ Namespace WRST_CaribouDataSetTableAdapters
                             AndAlso (Not (Me._surveysTableAdapter.Connection) Is Nothing)) Then
                     Return Me._surveysTableAdapter.Connection
                 End If
+                If ((Not (Me._capturesTableAdapter) Is Nothing)  _
+                            AndAlso (Not (Me._capturesTableAdapter.Connection) Is Nothing)) Then
+                    Return Me._capturesTableAdapter.Connection
+                End If
                 Return Nothing
             End Get
             Set
@@ -5155,6 +10130,9 @@ Namespace WRST_CaribouDataSetTableAdapters
                     count = (count + 1)
                 End If
                 If (Not (Me._surveysTableAdapter) Is Nothing) Then
+                    count = (count + 1)
+                End If
+                If (Not (Me._capturesTableAdapter) Is Nothing) Then
                     count = (count + 1)
                 End If
                 Return count
@@ -5183,6 +10161,15 @@ Namespace WRST_CaribouDataSetTableAdapters
                 If ((Not (updatedRows) Is Nothing)  _
                             AndAlso (0 < updatedRows.Length)) Then
                     result = (result + Me._surveysTableAdapter.Update(updatedRows))
+                    allChangedRows.AddRange(updatedRows)
+                End If
+            End If
+            If (Not (Me._capturesTableAdapter) Is Nothing) Then
+                Dim updatedRows() As Global.System.Data.DataRow = dataSet.Captures.Select(Nothing, Nothing, Global.System.Data.DataViewRowState.ModifiedCurrent)
+                updatedRows = Me.GetRealUpdatedRows(updatedRows, allAddedRows)
+                If ((Not (updatedRows) Is Nothing)  _
+                            AndAlso (0 < updatedRows.Length)) Then
+                    result = (result + Me._capturesTableAdapter.Update(updatedRows))
                     allChangedRows.AddRange(updatedRows)
                 End If
             End If
@@ -5221,6 +10208,14 @@ Namespace WRST_CaribouDataSetTableAdapters
                     allAddedRows.AddRange(addedRows)
                 End If
             End If
+            If (Not (Me._capturesTableAdapter) Is Nothing) Then
+                Dim addedRows() As Global.System.Data.DataRow = dataSet.Captures.Select(Nothing, Nothing, Global.System.Data.DataViewRowState.Added)
+                If ((Not (addedRows) Is Nothing)  _
+                            AndAlso (0 < addedRows.Length)) Then
+                    result = (result + Me._capturesTableAdapter.Update(addedRows))
+                    allAddedRows.AddRange(addedRows)
+                End If
+            End If
             If (Not (Me._collaredAnimalsInGroupsTableAdapter) Is Nothing) Then
                 Dim addedRows() As Global.System.Data.DataRow = dataSet.CollaredAnimalsInGroups.Select(Nothing, Nothing, Global.System.Data.DataViewRowState.Added)
                 If ((Not (addedRows) Is Nothing)  _
@@ -5244,6 +10239,14 @@ Namespace WRST_CaribouDataSetTableAdapters
                 If ((Not (deletedRows) Is Nothing)  _
                             AndAlso (0 < deletedRows.Length)) Then
                     result = (result + Me._collaredAnimalsInGroupsTableAdapter.Update(deletedRows))
+                    allChangedRows.AddRange(deletedRows)
+                End If
+            End If
+            If (Not (Me._capturesTableAdapter) Is Nothing) Then
+                Dim deletedRows() As Global.System.Data.DataRow = dataSet.Captures.Select(Nothing, Nothing, Global.System.Data.DataViewRowState.Deleted)
+                If ((Not (deletedRows) Is Nothing)  _
+                            AndAlso (0 < deletedRows.Length)) Then
+                    result = (result + Me._capturesTableAdapter.Update(deletedRows))
                     allChangedRows.AddRange(deletedRows)
                 End If
             End If
@@ -5319,6 +10322,11 @@ Namespace WRST_CaribouDataSetTableAdapters
                 Throw New Global.System.ArgumentException("All TableAdapters managed by a TableAdapterManager must use the same connection s"& _ 
                         "tring.")
             End If
+            If ((Not (Me._capturesTableAdapter) Is Nothing)  _
+                        AndAlso (Me.MatchTableAdapterConnection(Me._capturesTableAdapter.Connection) = false)) Then
+                Throw New Global.System.ArgumentException("All TableAdapters managed by a TableAdapterManager must use the same connection s"& _ 
+                        "tring.")
+            End If
             Dim workConnection As Global.System.Data.IDbConnection = Me.Connection
             If (workConnection Is Nothing) Then
                 Throw New Global.System.ApplicationException("TableAdapterManager contains no connection information. Set each TableAdapterMana"& _ 
@@ -5376,6 +10384,15 @@ Namespace WRST_CaribouDataSetTableAdapters
                     If Me._surveysTableAdapter.Adapter.AcceptChangesDuringUpdate Then
                         Me._surveysTableAdapter.Adapter.AcceptChangesDuringUpdate = false
                         adaptersWithAcceptChangesDuringUpdate.Add(Me._surveysTableAdapter.Adapter)
+                    End If
+                End If
+                If (Not (Me._capturesTableAdapter) Is Nothing) Then
+                    revertConnections.Add(Me._capturesTableAdapter, Me._capturesTableAdapter.Connection)
+                    Me._capturesTableAdapter.Connection = CType(workConnection,Global.System.Data.SqlClient.SqlConnection)
+                    Me._capturesTableAdapter.Transaction = CType(workTransaction,Global.System.Data.SqlClient.SqlTransaction)
+                    If Me._capturesTableAdapter.Adapter.AcceptChangesDuringUpdate Then
+                        Me._capturesTableAdapter.Adapter.AcceptChangesDuringUpdate = false
+                        adaptersWithAcceptChangesDuringUpdate.Add(Me._capturesTableAdapter.Adapter)
                     End If
                 End If
                 '
@@ -5449,6 +10466,10 @@ Namespace WRST_CaribouDataSetTableAdapters
                 If (Not (Me._surveysTableAdapter) Is Nothing) Then
                     Me._surveysTableAdapter.Connection = CType(revertConnections(Me._surveysTableAdapter),Global.System.Data.SqlClient.SqlConnection)
                     Me._surveysTableAdapter.Transaction = Nothing
+                End If
+                If (Not (Me._capturesTableAdapter) Is Nothing) Then
+                    Me._capturesTableAdapter.Connection = CType(revertConnections(Me._capturesTableAdapter),Global.System.Data.SqlClient.SqlConnection)
+                    Me._capturesTableAdapter.Transaction = Nothing
                 End If
                 If (0 < adaptersWithAcceptChangesDuringUpdate.Count) Then
                     Dim adapters((adaptersWithAcceptChangesDuringUpdate.Count) - 1) As Global.System.Data.Common.DataAdapter

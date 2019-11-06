@@ -6,6 +6,8 @@ Imports SkeeterDataTablesTranslator
 Public Class Form1
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        'TODO: This line of code loads data into the 'WRST_CaribouDataSet.Captures' table. You can move, or remove it, as needed.
+
         Try
             'maximize
             Me.WindowState = FormWindowState.Maximized
@@ -22,6 +24,7 @@ Public Class Form1
             FormatGridEX(Me.SurveysGridEX)
             FormatGridEX(Me.CollaredAnimalsInGroupsGridEX)
             FormatGridEX(Me.AnimalGridEX)
+            FormatGridEX(Me.CapturesGridEX)
 
             'set up default values for the grids
             SetSurveyFlightsGridExDefaultValues()
@@ -33,8 +36,7 @@ Public Class Form1
 
             'for some reason the surveys grid loads data when the form first loads despite no parent record being selected.
             'visibility is reversed on the flight grid's SelectionChanged event.
-            Me.SurveysGridEX.Visible = False
-            'Me.CollaredAnimalsInGroupsGridEX.Visible = False
+            SetGridEXesVisible(False)
 
             'set the flights gridex caption to something generic
             Me.SurveyFlightsGridEX.RootTable.Caption = "Caribou survey flights inventory"
@@ -50,11 +52,27 @@ Public Class Form1
 
     End Sub
 
+    ''' <summary>
+    ''' The GridEXes tend to show data before any parent or related records have been selected. I like to set the child GridEXes invisible at start up and then toggle them visible as the first parent record is selected.
+    ''' </summary>
+    ''' <param name="Visible"></param>
+    Private Sub SetGridEXesVisible(Visible As Boolean)
+        Me.SurveysGridEX.Visible = Visible
+        Me.CollaredAnimalsInGroupsGridEX.Visible = Visible
+        Me.AnimalGridEX.Visible = Visible
+        Me.DeploymentsGridEX.Visible = Visible
+        Me.CapturesGridEX.Visible = Visible
+        Me.SurveysToolStrip.Visible = Visible
+    End Sub
+
+
+
     Private Sub LoadDataset()
         Try
             Me.SurveyFlightsTableAdapter.Fill(Me.WRST_CaribouDataSet.SurveyFlights)
             Me.SurveysTableAdapter.Fill(Me.WRST_CaribouDataSet.Surveys)
             Me.CollaredAnimalsInGroupsTableAdapter.Fill(Me.WRST_CaribouDataSet.CollaredAnimalsInGroups)
+            Me.CapturesTableAdapter.Fill(Me.WRST_CaribouDataSet.Captures)
         Catch ex As Exception
             MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name)
         End Try
@@ -121,11 +139,13 @@ Public Class Form1
             GridEX.RootTable.Columns("GroupNumber").DefaultValue = GetMaximumGroupNumber(GridEX) + 1
             GridEX.RootTable.Columns("CertificationLevel").DefaultValue = "Raw"
 
-            'set the collaredanimalsingroupsgridex eid value to the current group EID
-            'Dim EID As String = GetCurrentGridEXCellValue(Me.SurveysGridEX, "EID")
-            'If EID.Trim.Length > 0 Then
-            '    Me.CollaredAnimalsInGroupsGridEX.RootTable.Columns("EID").DefaultValue = EID.Trim
-            'End If
+            'set the default survey date to the current surveyflights date  
+            Dim FlightDate As String = GetCurrentGridEXCellValue(Me.SurveyFlightsGridEX, "TimeDepart")
+            If Not IsDBNull(FlightDate) Then
+                If IsDate(FlightDate) = True Then
+                    Me.SurveysGridEX.RootTable.Columns("SightingDate").DefaultValue = FlightDate
+                End If
+            End If
         Catch ex As Exception
             MsgBox(ex.Message & " " & System.Reflection.MethodBase.GetCurrentMethod.Name)
         End Try
@@ -343,12 +363,29 @@ Public Class Form1
     Private Function GetFrequencyFromAnimalIDAndDate(AnimalID As String, SampleDate As Date) As Double
         Dim Frequency As Double = 0
         Dim AnimalsDataTable As DataTable = GetAnimalsDataTable()
-        Dim Filter As String = "AnimalID = '" & AnimalID & "' And DeploypmentDate < '" & SampleDate & "' And RetrievalDate < '" & SampleDate & "'"
+        Dim Filter As String = "(AnimalID = '" & AnimalID & "') And (DeploypmentDate < '" & SampleDate & "' And RetrievalDate < '" & SampleDate & "')"
         Dim DV As New DataView(AnimalsDataTable, Filter, "", DataViewRowState.CurrentRows)
         If DV.Count = 1 Then
             Frequency = DV(0).Item("Frequency")
         End If
         Return Frequency
+    End Function
+
+    ''' <summary>
+    ''' Untested 2019-11-06. Returns the AnimalID for a Frequency detected at a certain SampleDate
+    ''' </summary>
+    ''' <param name="Frequency">Frequency. Double.</param>
+    ''' <param name="SampleDate">SampleDate. Date.</param>
+    ''' <returns></returns>
+    Private Function GetAnimalIDFromFrequencyAndDate(Frequency As Double, SampleDate As Date) As Double
+        Dim AnimalID As Double = 0
+        Dim AnimalsDataTable As DataTable = GetAnimalsDataTable()
+        Dim Filter As String = "(Frequency = " & Frequency & ") And (DeploypmentDate < '" & SampleDate & "' And RetrievalDate < '" & SampleDate & "')"
+        Dim DV As New DataView(AnimalsDataTable, Filter, "", DataViewRowState.CurrentRows)
+        If DV.Count = 1 Then
+            AnimalID = DV(0).Item("AnimalID")
+        End If
+        Return AnimalID
     End Function
 
     ''' <summary>
@@ -429,9 +466,18 @@ Public Class Form1
                 .SelectedInactiveFormatStyle.ForeColor = Color.White
                 .SelectedInactiveFormatStyle.FontBold = TriState.False
             End With
+
+            'get rid of stupic autoformat of number columns as currency
+            'For Each Col As GridEXColumn In GridEX.RootTable.Columns
+            '    If Col.FormatString = "c" Then Col.FormatString = ""
+            '    If Col.DefaultGroupFormatString = "c" Then Col.DefaultGroupFormatString = ""
+            '    Debug.Print(GridEX.RootTable.Caption & " " & Col.Key & " " & Col.FormatString)
+            'Next
+
         Catch ex As Exception
             MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name & ")")
         End Try
+
     End Sub
 
     Private Sub SaveToolStripButton_Click(sender As Object, e As EventArgs) Handles SaveToolStripButton.Click
@@ -539,8 +585,7 @@ Public Class Form1
     Private Sub SurveyFlightsGridEX_SelectionChanged(sender As Object, e As EventArgs) Handles SurveyFlightsGridEX.SelectionChanged
 
         'make the surveys grid visible
-        Me.SurveysGridEX.Visible = True
-        Me.CollaredAnimalsInGroupsGridEX.Visible = True
+        SetGridEXesVisible(True)
 
         'renew default values, especially to generate a new primary key value
         SetSurveyFlightsGridExDefaultValues()
@@ -550,6 +595,9 @@ Public Class Form1
 
         'update the SurveyFlights header
         UpdateSurveyFlightsGridEXHeader()
+
+        'renew default values, especially to generate a new primary key value
+        SetSurveysGridEXDefaultValues()
 
         'QC the number of frequencies matches the number of animalids
         ReconcileFrequencies()
@@ -579,33 +627,41 @@ Public Class Form1
         'load the animalids from animal movements into the selector combo
         LoadAnimalIDSCombo()
 
+        'load animal movement grids
+        LoadAnimalMovementGrids()
 
-        'build animal object and load its data into AnimalGridEX
-        Me.AnimalGridEX.DataSource = Nothing
 
-        'load the grid
+
+
+        'QC the number of frequencies matches the number of animalids
+        ReconcileFrequencies()
+    End Sub
+
+    Private Sub LoadAnimalMovementGrids()
+        'load the animal movements grids to show info about the collared animal
         Try
+            'build animal object and load its data into AnimalGridEX
             Me.AnimalGridEX.DataSource = Nothing
             Me.DeploymentsGridEX.DataSource = Nothing
+            Me.CapturesGridEX.DataSource = Nothing
+
+            'if we have a valid animalid
             If Not IsDBNull(Me.CollaredAnimalsInGroupsGridEX.CurrentRow.Cells("AnimalID").Value) Then
-                'If Not GetCurrentGridEXCellValue(Me.CollaredAnimalsInGroupsGridEX, "AnimalID") Is Nothing Then
+
+                'get the current animalid from the collared animals  gridex
                 Dim AnimalID As String = GetCurrentGridEXCellValue(Me.CollaredAnimalsInGroupsGridEX, "AnimalID")
+
+                'if animalid is not null
                 If Not IsDBNull(AnimalID) Then
+
+                    'create an Animal object
                     Dim CurrentAnimal As New Animal(AnimalID)
+
+                    'details about the animal in AM database
                     With Me.AnimalGridEX
                         .DataSource = CurrentAnimal.AnimalDetails
                         .RetrieveStructure()
-                        .RootTable.Caption = "Animal Movement: Animal details"
-                        .TableHeaders = InheritableBoolean.True
-                        .GroupByBoxVisible = False
-                        .AllowAddNew = InheritableBoolean.False
-                        .AllowDelete = InheritableBoolean.False
-                        .AllowEdit = InheritableBoolean.False
-                    End With
-                    With Me.DeploymentsGridEX
-                        .DataSource = CurrentAnimal.Deployments
-                        .RetrieveStructure()
-                        .RootTable.Caption = "Animal Movement: Deployments"
+                        .RootTable.Caption = "Animal details (Animal Movement)"
                         .TableHeaders = InheritableBoolean.True
                         .GroupByBoxVisible = False
                         .AllowAddNew = InheritableBoolean.False
@@ -613,6 +669,40 @@ Public Class Form1
                         .AllowEdit = InheritableBoolean.False
                     End With
 
+                    'collar deployments history
+                    With Me.DeploymentsGridEX
+                        .DataSource = CurrentAnimal.Deployments
+                        .RetrieveStructure()
+                        .RootTable.Caption = "Collar Deployments (Animal Movement)"
+                        .TableHeaders = InheritableBoolean.True
+                        .GroupByBoxVisible = False
+                        .AllowAddNew = InheritableBoolean.False
+                        .AllowDelete = InheritableBoolean.False
+                        .AllowEdit = InheritableBoolean.False
+                    End With
+
+                    'captures
+                    Dim Filter As String = "AnimalID = '" & CurrentAnimal.AnimalID & "'"
+                    Dim CapturesDataView As New DataView(WRST_CaribouDataSet.Tables("Captures"), Filter, "CaptureDate DESC", DataViewRowState.CurrentRows)
+
+                    'load the captures grid header with info
+                    Dim CapturesCaption As String = "No capture data is available for caribou " & AnimalID
+                    If CapturesDataView.Count > 0 Then
+                        CapturesCaption = CapturesDataView.Count & " capture records are available for caribou " & AnimalID
+                    End If
+
+                    'set up the captures grid
+                    With Me.CapturesGridEX
+                        .RootTable.Columns("AnimalID").DefaultValue = AnimalID
+                        .DataSource = CapturesDataView
+                        .RetrieveStructure()
+                        .RootTable.Caption = CapturesCaption
+                        .TableHeaders = InheritableBoolean.True
+                        .GroupByBoxVisible = False
+                        .AllowAddNew = InheritableBoolean.False
+                        .AllowDelete = InheritableBoolean.False
+                        .AllowEdit = InheritableBoolean.False
+                    End With
                 End If
             End If
         Catch nrefex As NullReferenceException
@@ -620,10 +710,9 @@ Public Class Form1
         Catch ex As Exception
             MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name & ")")
         End Try
-
-        'QC the number of frequencies matches the number of animalids
-        ReconcileFrequencies()
     End Sub
+
+
 
 
     Private Sub ImportSurveyDataFromFileToolStripButton_Click(sender As Object, e As EventArgs) Handles ImportSurveyDataFromFileToolStripButton.Click
@@ -903,7 +992,7 @@ Click Yes to certify and lock the current record. Click No to cancel.", MsgBoxSt
         'this makes matching frequencies to animals easier
 
         'generic starting caption
-        Me.CollaredAnimalsInGroupsGridEX.RootTable.Caption = "Frequencies in group"
+        Me.CollaredAnimalsInGroupsGridEX.RootTable.Caption = "Collared caribou in group"
 
         'start by getting the groupnumber and frequencies data
         If Not GetCurrentGridEXCellValue(Me.SurveysGridEX, "FrequenciesInGroup") Is Nothing Then
@@ -911,7 +1000,7 @@ Click Yes to certify and lock the current record. Click No to cancel.", MsgBoxSt
                 Dim GroupNumber As String = GetCurrentGridEXCellValue(Me.SurveysGridEX, "GroupNumber")
 
                 'make the gridex caption more specific
-                Me.CollaredAnimalsInGroupsGridEX.RootTable.Caption = "Group " & GroupNumber
+                Me.CollaredAnimalsInGroupsGridEX.RootTable.Caption = "No collared caribou detected in group " & GroupNumber
 
                 'next determine if the frequencies in group column has data
                 If Not IsDBNull(GetCurrentGridEXCellValue(Me.SurveysGridEX, "FrequenciesInGroup")) Then
@@ -919,7 +1008,7 @@ Click Yes to certify and lock the current record. Click No to cancel.", MsgBoxSt
                         Dim FrequenciesInGroup As String = GetCurrentGridEXCellValue(Me.SurveysGridEX, "FrequenciesInGroup")
                         If FrequenciesInGroup.Trim.Length > 0 Then
                             'frequencies exist, update the gridex caption
-                            Me.CollaredAnimalsInGroupsGridEX.RootTable.Caption = "Frequencies detected in group " & GroupNumber & ": " & FrequenciesInGroup
+                            Me.CollaredAnimalsInGroupsGridEX.RootTable.Caption = "Collared caribou in group " & GroupNumber & " by frequency: " & FrequenciesInGroup
                         End If
                     End If
                 End If

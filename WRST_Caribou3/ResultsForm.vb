@@ -7,6 +7,8 @@ Public Class ResultsForm
     Private Sub ResultsForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         LoadDatabaseViewsComboBox()
 
+        Me.ResultsGridEX.GroupByBoxVisible = False
+        Me.CollapseGroupsCheckBox.Visible = False
     End Sub
 
 
@@ -33,19 +35,31 @@ Public Class ResultsForm
     ''' </summary>
     Private Sub LoadResultsGrid()
 
+        'get the view name
         Dim ViewName As String = Me.ViewsListBox.Text
-            If ViewName.Trim.Length > 0 Then
-                Try
-                    Dim Filter As String = ""
-                    Dim Sql As String = "SELECT * FROM " & ViewName.Trim & Filter
-                    ResultsDataTable = GetDataTable(My.Settings.WRST_CaribouConnectionString, Sql)
+        If ViewName.Trim.Length > 0 Then
+            Try
+                Me.DataSummariesLabel.Text = ViewName
 
+                'get the view description
+                Dim ViewDescription As String = ViewName
+                Dim ViewDT As DataTable = GetDataTable(My.Settings.WRST_CaribouConnectionString, "SELECT [Table],[TableDescription] FROM [WRST_Caribou].[dbo].[DatabaseTableDescriptions] where [table]='dbo." & ViewName & "'")
+                If ViewDT.Rows.Count = 1 Then
+                    ViewDescription = ViewDT.Rows(0).Item("TableDescription")
+                End If
+                Me.ViewDescriptionTextBox.Text = ViewDescription
+
+                'get the data from the selected view into a datatable
+                Dim Filter As String = ""
+                Dim Sql As String = "SELECT * FROM " & ViewName.Trim & Filter
+                ResultsDataTable = GetDataTable(My.Settings.WRST_CaribouConnectionString, Sql)
+
+                'load the datatable into the gridex
                 With Me.ResultsGridEX
                     .DataSource = ResultsDataTable
                     .RetrieveStructure()
                     .GroupTotals = GroupTotals.Always
                 End With
-
 
                 'format total rows
                 For Each Col As GridEXColumn In Me.ResultsGridEX.RootTable.Columns
@@ -63,10 +77,10 @@ Public Class ResultsForm
                     Col.FormatString = ""
                 Next
             Catch ex As Exception
-                    MsgBox("Could not load the database view " & ViewName.Trim & ". " & ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name & " a)")
-                End Try
-            Else
-                MsgBox("Select a database view.", MsgBoxStyle.Information, "View not selected")
+                MsgBox("Could not load the database view " & ViewName.Trim & ". " & ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name & " a)")
+            End Try
+        Else
+            MsgBox("Select a database view.", MsgBoxStyle.Information, "View not selected")
             End If
         Try
         Catch ex As Exception
@@ -100,5 +114,10 @@ Public Class ResultsForm
             Me.ResultsGridEX.ExpandRecords()
             Me.CollapseGroupsCheckBox.Text = "Collapse groups"
         End If
+    End Sub
+
+    Private Sub GroupByBoxVisibleCheckBox_CheckedChanged(sender As Object, e As EventArgs) Handles GroupByBoxVisibleCheckBox.CheckedChanged
+        Me.ResultsGridEX.GroupByBoxVisible = Me.GroupByBoxVisibleCheckBox.Checked
+        Me.CollapseGroupsCheckBox.Visible = Me.GroupByBoxVisibleCheckBox.Checked
     End Sub
 End Class

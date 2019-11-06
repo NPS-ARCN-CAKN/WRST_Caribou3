@@ -2,6 +2,7 @@
 ''' Represents an animal in the NPS Alaska Region GIS Animal Movements Database
 ''' </summary>
 Public Class Animal
+
     Private _AnimalID As String
     Public Property AnimalID() As String
         Get
@@ -36,8 +37,8 @@ Public Class Animal
 
 
     Public Sub New(AnimalID As String)
-        _AnimalID = AnimalID
         If Not IsDBNull(AnimalID) Then
+            _AnimalID = AnimalID
             If AnimalID.Trim.Length > 0 Then
                 Me.AnimalDetails = GetAnimalDataTable(_AnimalID)
                 Me.Deployments = GetCollarDeploymentsDataTable(_AnimalID)
