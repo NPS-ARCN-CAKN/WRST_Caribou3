@@ -509,7 +509,7 @@ Partial Public Class WRST_CaribouDataSet
             Dim rowCollaredAnimalsInGroupsRow As CollaredAnimalsInGroupsRow = CType(Me.NewRow,CollaredAnimalsInGroupsRow)
             Dim columnValuesArray() As Object = New Object() {Nothing, Nothing, Comment}
             If (Not (parentSurveysRowByFK_CollaredAnimalsInGroups_Surveys) Is Nothing) Then
-                columnValuesArray(0) = parentSurveysRowByFK_CollaredAnimalsInGroups_Surveys(28)
+                columnValuesArray(0) = parentSurveysRowByFK_CollaredAnimalsInGroups_Surveys(27)
             End If
             If (Not (parentCapturesRowByFK_CollaredAnimalsInGroups_Captures) Is Nothing) Then
                 columnValuesArray(1) = parentCapturesRowByFK_CollaredAnimalsInGroups_Captures(0)
@@ -745,8 +745,6 @@ Partial Public Class WRST_CaribouDataSet
         
         Private columnFlightID As Global.System.Data.DataColumn
         
-        Private columnTS As Global.System.Data.DataColumn
-        
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Public Sub New()
@@ -967,14 +965,6 @@ Partial Public Class WRST_CaribouDataSet
         End Property
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public ReadOnly Property TSColumn() As Global.System.Data.DataColumn
-            Get
-                Return Me.columnTS
-            End Get
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
          Global.System.ComponentModel.Browsable(false)>  _
         Public ReadOnly Property Count() As Integer
@@ -1034,10 +1024,9 @@ Partial Public Class WRST_CaribouDataSet
                     ByVal SOPVersion As Decimal,  _
                     ByVal RecordInsertedDate As Date,  _
                     ByVal RecordInsertedBy As String,  _
-                    ByVal FlightID As String,  _
-                    ByVal TS() As Byte) As SurveyFlightsRow
+                    ByVal FlightID As String) As SurveyFlightsRow
             Dim rowSurveyFlightsRow As SurveyFlightsRow = CType(Me.NewRow,SurveyFlightsRow)
-            Dim columnValuesArray() As Object = New Object() {Year, SurveyType, CrewNumber, Pilot, Observer1, Observer2, AircraftType, TailNo, TimeDepart, TimeReturn, IsFollowUpFlight, SpotterPlaneTailNo, SpotterPlaneType, SpotterPlanePilot, WeatherConditions, SnowConditions, Notes, Herd, SOPNumber, SOPVersion, RecordInsertedDate, RecordInsertedBy, FlightID, TS}
+            Dim columnValuesArray() As Object = New Object() {Year, SurveyType, CrewNumber, Pilot, Observer1, Observer2, AircraftType, TailNo, TimeDepart, TimeReturn, IsFollowUpFlight, SpotterPlaneTailNo, SpotterPlaneType, SpotterPlanePilot, WeatherConditions, SnowConditions, Notes, Herd, SOPNumber, SOPVersion, RecordInsertedDate, RecordInsertedBy, FlightID}
             rowSurveyFlightsRow.ItemArray = columnValuesArray
             Me.Rows.Add(rowSurveyFlightsRow)
             Return rowSurveyFlightsRow
@@ -1089,7 +1078,6 @@ Partial Public Class WRST_CaribouDataSet
             Me.columnRecordInsertedDate = MyBase.Columns("RecordInsertedDate")
             Me.columnRecordInsertedBy = MyBase.Columns("RecordInsertedBy")
             Me.columnFlightID = MyBase.Columns("FlightID")
-            Me.columnTS = MyBase.Columns("TS")
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -1141,8 +1129,6 @@ Partial Public Class WRST_CaribouDataSet
             MyBase.Columns.Add(Me.columnRecordInsertedBy)
             Me.columnFlightID = New Global.System.Data.DataColumn("FlightID", GetType(String), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnFlightID)
-            Me.columnTS = New Global.System.Data.DataColumn("TS", GetType(Byte()), Nothing, Global.System.Data.MappingType.Element)
-            MyBase.Columns.Add(Me.columnTS)
             Me.Constraints.Add(New Global.System.Data.UniqueConstraint("Constraint1", New Global.System.Data.DataColumn() {Me.columnFlightID}, true))
             Me.columnYear.AllowDBNull = false
             Me.columnSurveyType.AllowDBNull = false
@@ -1170,7 +1156,6 @@ Partial Public Class WRST_CaribouDataSet
             Me.columnFlightID.AllowDBNull = false
             Me.columnFlightID.Unique = true
             Me.columnFlightID.MaxLength = 50
-            Me.columnTS.ReadOnly = true
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -1361,8 +1346,6 @@ Partial Public Class WRST_CaribouDataSet
         Private columnRecordInsertedDate As Global.System.Data.DataColumn
         
         Private columnRecordInsertedBy As Global.System.Data.DataColumn
-        
-        Private columnTS As Global.System.Data.DataColumn
         
         Private columnEID As Global.System.Data.DataColumn
         
@@ -1625,14 +1608,6 @@ Partial Public Class WRST_CaribouDataSet
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public ReadOnly Property TSColumn() As Global.System.Data.DataColumn
-            Get
-                Return Me.columnTS
-            End Get
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Public ReadOnly Property EIDColumn() As Global.System.Data.DataColumn
             Get
                 Return Me.columnEID
@@ -1728,13 +1703,12 @@ Partial Public Class WRST_CaribouDataSet
                     ByVal parentSurveyFlightsRowByFK_Surveys_SurveyFlights As SurveyFlightsRow,  _
                     ByVal RecordInsertedDate As Date,  _
                     ByVal RecordInsertedBy As String,  _
-                    ByVal TS() As Byte,  _
                     ByVal EID As String,  _
                     ByVal CertificationDate As Date,  _
                     ByVal CertifiedBy As String,  _
                     ByVal CertificationLevel As String) As SurveysRow
             Dim rowSurveysRow As SurveysRow = CType(Me.NewRow,SurveysRow)
-            Dim columnValuesArray() As Object = New Object() {SightingDate, SearchArea, GroupNumber, SmallBull, MediumBull, LargeBull, Bull, Cow, Calf, Adult, FrequenciesInGroup, Lat, Lon, Out, Seen, Marked, Mode, Accuracy, RetainedAntler, DistendedUdders, CalvesAtHeel, WaypointName, Comment, SourceFilename, Nothing, RecordInsertedDate, RecordInsertedBy, TS, EID, CertificationDate, CertifiedBy, CertificationLevel}
+            Dim columnValuesArray() As Object = New Object() {SightingDate, SearchArea, GroupNumber, SmallBull, MediumBull, LargeBull, Bull, Cow, Calf, Adult, FrequenciesInGroup, Lat, Lon, Out, Seen, Marked, Mode, Accuracy, RetainedAntler, DistendedUdders, CalvesAtHeel, WaypointName, Comment, SourceFilename, Nothing, RecordInsertedDate, RecordInsertedBy, EID, CertificationDate, CertifiedBy, CertificationLevel}
             If (Not (parentSurveyFlightsRowByFK_Surveys_SurveyFlights) Is Nothing) Then
                 columnValuesArray(24) = parentSurveyFlightsRowByFK_Surveys_SurveyFlights(22)
             End If
@@ -1793,7 +1767,6 @@ Partial Public Class WRST_CaribouDataSet
             Me.columnFlightID = MyBase.Columns("FlightID")
             Me.columnRecordInsertedDate = MyBase.Columns("RecordInsertedDate")
             Me.columnRecordInsertedBy = MyBase.Columns("RecordInsertedBy")
-            Me.columnTS = MyBase.Columns("TS")
             Me.columnEID = MyBase.Columns("EID")
             Me.columnCertificationDate = MyBase.Columns("CertificationDate")
             Me.columnCertifiedBy = MyBase.Columns("CertifiedBy")
@@ -1857,8 +1830,6 @@ Partial Public Class WRST_CaribouDataSet
             MyBase.Columns.Add(Me.columnRecordInsertedDate)
             Me.columnRecordInsertedBy = New Global.System.Data.DataColumn("RecordInsertedBy", GetType(String), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnRecordInsertedBy)
-            Me.columnTS = New Global.System.Data.DataColumn("TS", GetType(Byte()), Nothing, Global.System.Data.MappingType.Element)
-            MyBase.Columns.Add(Me.columnTS)
             Me.columnEID = New Global.System.Data.DataColumn("EID", GetType(String), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnEID)
             Me.columnCertificationDate = New Global.System.Data.DataColumn("CertificationDate", GetType(Date), Nothing, Global.System.Data.MappingType.Element)
@@ -1887,7 +1858,6 @@ Partial Public Class WRST_CaribouDataSet
             Me.columnRecordInsertedDate.AllowDBNull = false
             Me.columnRecordInsertedBy.AllowDBNull = false
             Me.columnRecordInsertedBy.MaxLength = 50
-            Me.columnTS.ReadOnly = true
             Me.columnEID.AllowDBNull = false
             Me.columnEID.Unique = true
             Me.columnEID.MaxLength = 50
@@ -2188,6 +2158,20 @@ Partial Public Class WRST_CaribouDataSet
         Private columnProtocolIRMAReference As Global.System.Data.DataColumn
         
         Private columnCertificationLevel As Global.System.Data.DataColumn
+        
+        Private columnPark As Global.System.Data.DataColumn
+        
+        Private columnPilot As Global.System.Data.DataColumn
+        
+        Private columnHandler As Global.System.Data.DataColumn
+        
+        Private columnCaptureGroupSize As Global.System.Data.DataColumn
+        
+        Private columnAircraftType As Global.System.Data.DataColumn
+        
+        Private columnNasalSwab As Global.System.Data.DataColumn
+        
+        Private columnHairSample As Global.System.Data.DataColumn
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
@@ -2841,6 +2825,62 @@ Partial Public Class WRST_CaribouDataSet
         End Property
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property ParkColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnPark
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property PilotColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnPilot
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property HandlerColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnHandler
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property CaptureGroupSizeColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnCaptureGroupSize
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property AircraftTypeColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnAircraftType
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property NasalSwabColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnNasalSwab
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property HairSampleColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnHairSample
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
          Global.System.ComponentModel.Browsable(false)>  _
         Public ReadOnly Property Count() As Integer
@@ -2954,9 +2994,16 @@ Partial Public Class WRST_CaribouDataSet
                     ByVal CertificationDate As Date,  _
                     ByVal CertifiedBy As String,  _
                     ByVal ProtocolIRMAReference As Integer,  _
-                    ByVal CertificationLevel As String) As CapturesRow
+                    ByVal CertificationLevel As String,  _
+                    ByVal Park As String,  _
+                    ByVal Pilot As String,  _
+                    ByVal Handler As String,  _
+                    ByVal CaptureGroupSize As Integer,  _
+                    ByVal AircraftType As String,  _
+                    ByVal NasalSwab As Boolean,  _
+                    ByVal HairSample As Boolean) As CapturesRow
             Dim rowCapturesRow As CapturesRow = CType(Me.NewRow,CapturesRow)
-            Dim columnValuesArray() As Object = New Object() {AnimalID, CaptureDate, Crew, Shooter, Frequency, VisualCollar, SerialNumber, CaptureLatitude, CaptureLongitude, OldFrequency, OldVisualCollar, GeneralLocation, TimeStartChase, TimeFirstHitBounce, TimeSecordHitBounce, TimeThirdHitBounce, TimeVisibleEffect, TimeAnimalDown, DartLocation, Anesthetic, AnestheticDosage_mg, AnestheticConcentration_mg_ml, Sedative, SedativeDosage_mg, SedativeConcentration_mg_ml, NumHits, NumMisses, DrugEffect, InitialBodyTemp, InitialBodyTempTime, FinalBodyTemperature, FinalBodyTemperatureTime, AdditionalDrugs, Sex, EstimatedAge, WithCalf, Lactating, BodyCondition, Weight_Kg, BodyLength, NeckCircumference, Jaw, MetatarsusLength, HindfootLength, ChestGirth, BloodSampleRed, BloodSamplePurple, BloodSampleGreen, AnestheticReversal, AnestheticReversalDosage_mg, AnestheticReversalConcentration_mg_ml, AnestheticReversalRoute, AnestheticReversalTime, SedativeReversal, SedativeReversalDosage_mg, SedativeReversalConcentration_mg_ml, SedativeReversalRoute, SedativeReversalTime, TimeStanding, TimeMobile, Comments, CaptureID, RecordInsertedDate, RecordInsertedBy, ProjectID, TS, AnestheticDosage_ml, SedativeDosage_ml, AnestheticReversalDosage_ml, SedativeReversalDosage_ml, ProtocolVersion, SOPNumber, SOPVersion, CertificationDate, CertifiedBy, ProtocolIRMAReference, CertificationLevel}
+            Dim columnValuesArray() As Object = New Object() {AnimalID, CaptureDate, Crew, Shooter, Frequency, VisualCollar, SerialNumber, CaptureLatitude, CaptureLongitude, OldFrequency, OldVisualCollar, GeneralLocation, TimeStartChase, TimeFirstHitBounce, TimeSecordHitBounce, TimeThirdHitBounce, TimeVisibleEffect, TimeAnimalDown, DartLocation, Anesthetic, AnestheticDosage_mg, AnestheticConcentration_mg_ml, Sedative, SedativeDosage_mg, SedativeConcentration_mg_ml, NumHits, NumMisses, DrugEffect, InitialBodyTemp, InitialBodyTempTime, FinalBodyTemperature, FinalBodyTemperatureTime, AdditionalDrugs, Sex, EstimatedAge, WithCalf, Lactating, BodyCondition, Weight_Kg, BodyLength, NeckCircumference, Jaw, MetatarsusLength, HindfootLength, ChestGirth, BloodSampleRed, BloodSamplePurple, BloodSampleGreen, AnestheticReversal, AnestheticReversalDosage_mg, AnestheticReversalConcentration_mg_ml, AnestheticReversalRoute, AnestheticReversalTime, SedativeReversal, SedativeReversalDosage_mg, SedativeReversalConcentration_mg_ml, SedativeReversalRoute, SedativeReversalTime, TimeStanding, TimeMobile, Comments, CaptureID, RecordInsertedDate, RecordInsertedBy, ProjectID, TS, AnestheticDosage_ml, SedativeDosage_ml, AnestheticReversalDosage_ml, SedativeReversalDosage_ml, ProtocolVersion, SOPNumber, SOPVersion, CertificationDate, CertifiedBy, ProtocolIRMAReference, CertificationLevel, Park, Pilot, Handler, CaptureGroupSize, AircraftType, NasalSwab, HairSample}
             rowCapturesRow.ItemArray = columnValuesArray
             Me.Rows.Add(rowCapturesRow)
             Return rowCapturesRow
@@ -3062,6 +3109,13 @@ Partial Public Class WRST_CaribouDataSet
             Me.columnCertifiedBy = MyBase.Columns("CertifiedBy")
             Me.columnProtocolIRMAReference = MyBase.Columns("ProtocolIRMAReference")
             Me.columnCertificationLevel = MyBase.Columns("CertificationLevel")
+            Me.columnPark = MyBase.Columns("Park")
+            Me.columnPilot = MyBase.Columns("Pilot")
+            Me.columnHandler = MyBase.Columns("Handler")
+            Me.columnCaptureGroupSize = MyBase.Columns("CaptureGroupSize")
+            Me.columnAircraftType = MyBase.Columns("AircraftType")
+            Me.columnNasalSwab = MyBase.Columns("NasalSwab")
+            Me.columnHairSample = MyBase.Columns("HairSample")
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -3221,6 +3275,20 @@ Partial Public Class WRST_CaribouDataSet
             MyBase.Columns.Add(Me.columnProtocolIRMAReference)
             Me.columnCertificationLevel = New Global.System.Data.DataColumn("CertificationLevel", GetType(String), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnCertificationLevel)
+            Me.columnPark = New Global.System.Data.DataColumn("Park", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnPark)
+            Me.columnPilot = New Global.System.Data.DataColumn("Pilot", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnPilot)
+            Me.columnHandler = New Global.System.Data.DataColumn("Handler", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnHandler)
+            Me.columnCaptureGroupSize = New Global.System.Data.DataColumn("CaptureGroupSize", GetType(Integer), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnCaptureGroupSize)
+            Me.columnAircraftType = New Global.System.Data.DataColumn("AircraftType", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnAircraftType)
+            Me.columnNasalSwab = New Global.System.Data.DataColumn("NasalSwab", GetType(Boolean), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnNasalSwab)
+            Me.columnHairSample = New Global.System.Data.DataColumn("HairSample", GetType(Boolean), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnHairSample)
             Me.Constraints.Add(New Global.System.Data.UniqueConstraint("Constraint1", New Global.System.Data.DataColumn() {Me.columnAnimalID, Me.columnCaptureDate}, true))
             Me.columnAnimalID.AllowDBNull = false
             Me.columnAnimalID.MaxLength = 16
@@ -3255,6 +3323,11 @@ Partial Public Class WRST_CaribouDataSet
             Me.columnCertifiedBy.MaxLength = 50
             Me.columnCertificationLevel.AllowDBNull = false
             Me.columnCertificationLevel.MaxLength = 15
+            Me.columnPark.AllowDBNull = false
+            Me.columnPark.MaxLength = 4
+            Me.columnPilot.MaxLength = 50
+            Me.columnHandler.MaxLength = 50
+            Me.columnAircraftType.MaxLength = 20
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -3793,21 +3866,6 @@ Partial Public Class WRST_CaribouDataSet
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Property TS() As Byte()
-            Get
-                Try 
-                    Return CType(Me(Me.tableSurveyFlights.TSColumn),Byte())
-                Catch e As Global.System.InvalidCastException
-                    Throw New Global.System.Data.StrongTypingException("The value for column 'TS' in table 'SurveyFlights' is DBNull.", e)
-                End Try
-            End Get
-            Set
-                Me(Me.tableSurveyFlights.TSColumn) = value
-            End Set
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Public Function IsCrewNumberNull() As Boolean
             Return Me.IsNull(Me.tableSurveyFlights.CrewNumberColumn)
         End Function
@@ -3960,18 +4018,6 @@ Partial Public Class WRST_CaribouDataSet
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Public Sub SetSOPVersionNull()
             Me(Me.tableSurveyFlights.SOPVersionColumn) = Global.System.Convert.DBNull
-        End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Function IsTSNull() As Boolean
-            Return Me.IsNull(Me.tableSurveyFlights.TSColumn)
-        End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Sub SetTSNull()
-            Me(Me.tableSurveyFlights.TSColumn) = Global.System.Convert.DBNull
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -4363,21 +4409,6 @@ Partial Public Class WRST_CaribouDataSet
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Property TS() As Byte()
-            Get
-                Try 
-                    Return CType(Me(Me.tableSurveys.TSColumn),Byte())
-                Catch e As Global.System.InvalidCastException
-                    Throw New Global.System.Data.StrongTypingException("The value for column 'TS' in table 'Surveys' is DBNull.", e)
-                End Try
-            End Get
-            Set
-                Me(Me.tableSurveys.TSColumn) = value
-            End Set
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Public Property EID() As String
             Get
                 Return CType(Me(Me.tableSurveys.EIDColumn),String)
@@ -4629,18 +4660,6 @@ Partial Public Class WRST_CaribouDataSet
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Public Sub SetSourceFilenameNull()
             Me(Me.tableSurveys.SourceFilenameColumn) = Global.System.Convert.DBNull
-        End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Function IsTSNull() As Boolean
-            Return Me.IsNull(Me.tableSurveys.TSColumn)
-        End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Sub SetTSNull()
-            Me(Me.tableSurveys.TSColumn) = Global.System.Convert.DBNull
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -5816,6 +5835,107 @@ Partial Public Class WRST_CaribouDataSet
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property Park() As String
+            Get
+                Return CType(Me(Me.tableCaptures.ParkColumn),String)
+            End Get
+            Set
+                Me(Me.tableCaptures.ParkColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property Pilot() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tableCaptures.PilotColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'Pilot' in table 'Captures' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableCaptures.PilotColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property Handler() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tableCaptures.HandlerColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'Handler' in table 'Captures' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableCaptures.HandlerColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property CaptureGroupSize() As Integer
+            Get
+                Try 
+                    Return CType(Me(Me.tableCaptures.CaptureGroupSizeColumn),Integer)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'CaptureGroupSize' in table 'Captures' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableCaptures.CaptureGroupSizeColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property AircraftType() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tableCaptures.AircraftTypeColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'AircraftType' in table 'Captures' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableCaptures.AircraftTypeColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property NasalSwab() As Boolean
+            Get
+                Try 
+                    Return CType(Me(Me.tableCaptures.NasalSwabColumn),Boolean)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'NasalSwab' in table 'Captures' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableCaptures.NasalSwabColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property HairSample() As Boolean
+            Get
+                Try 
+                    Return CType(Me(Me.tableCaptures.HairSampleColumn),Boolean)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'HairSample' in table 'Captures' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableCaptures.HairSampleColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Public Function IsCrewNull() As Boolean
             Return Me.IsNull(Me.tableCaptures.CrewColumn)
         End Function
@@ -6620,6 +6740,78 @@ Partial Public Class WRST_CaribouDataSet
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function IsPilotNull() As Boolean
+            Return Me.IsNull(Me.tableCaptures.PilotColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub SetPilotNull()
+            Me(Me.tableCaptures.PilotColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function IsHandlerNull() As Boolean
+            Return Me.IsNull(Me.tableCaptures.HandlerColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub SetHandlerNull()
+            Me(Me.tableCaptures.HandlerColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function IsCaptureGroupSizeNull() As Boolean
+            Return Me.IsNull(Me.tableCaptures.CaptureGroupSizeColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub SetCaptureGroupSizeNull()
+            Me(Me.tableCaptures.CaptureGroupSizeColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function IsAircraftTypeNull() As Boolean
+            Return Me.IsNull(Me.tableCaptures.AircraftTypeColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub SetAircraftTypeNull()
+            Me(Me.tableCaptures.AircraftTypeColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function IsNasalSwabNull() As Boolean
+            Return Me.IsNull(Me.tableCaptures.NasalSwabColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub SetNasalSwabNull()
+            Me(Me.tableCaptures.NasalSwabColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function IsHairSampleNull() As Boolean
+            Return Me.IsNull(Me.tableCaptures.HairSampleColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub SetHairSampleNull()
+            Me(Me.tableCaptures.HairSampleColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Public Function GetCollaredAnimalsInGroupsRows() As CollaredAnimalsInGroupsRow()
             If (Me.Table.ChildRelations("FK_CollaredAnimalsInGroups_Captures") Is Nothing) Then
                 Return New CollaredAnimalsInGroupsRow(-1) {}
@@ -6927,8 +7119,8 @@ Namespace WRST_CaribouDataSetTableAdapters
             Me._adapter.UpdateCommand.Connection = Me.Connection
             Me._adapter.UpdateCommand.CommandText = "UPDATE CollaredAnimalsInGroups"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"SET       EID = @EID, AnimalID = @AnimalID, Comme"& _ 
                 "nt = @Comment"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"WHERE (EID = @Original_EID) AND (AnimalID = @Original_AnimalID); "& _ 
-                ""&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"SELECT EID, AnimalID, Comment FROM CollaredAnimalsInGroups WHERE (AnimalID = @"& _ 
-                "AnimalID) AND (EID = @EID)"
+                " "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"SELECT EID, AnimalID, Comment FROM CollaredAnimalsInGroups WHERE (AnimalID = "& _ 
+                "@AnimalID) AND (EID = @EID)"
             Me._adapter.UpdateCommand.CommandType = Global.System.Data.CommandType.Text
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@EID", Global.System.Data.SqlDbType.VarChar, 50, Global.System.Data.ParameterDirection.Input, 0, 0, "EID", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@AnimalID", Global.System.Data.SqlDbType.VarChar, 16, Global.System.Data.ParameterDirection.Input, 0, 0, "AnimalID", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
@@ -7275,49 +7467,52 @@ Namespace WRST_CaribouDataSetTableAdapters
             tableMapping.ColumnMappings.Add("RecordInsertedDate", "RecordInsertedDate")
             tableMapping.ColumnMappings.Add("RecordInsertedBy", "RecordInsertedBy")
             tableMapping.ColumnMappings.Add("FlightID", "FlightID")
-            tableMapping.ColumnMappings.Add("TS", "TS")
             Me._adapter.TableMappings.Add(tableMapping)
             Me._adapter.DeleteCommand = New Global.System.Data.SqlClient.SqlCommand()
             Me._adapter.DeleteCommand.Connection = Me.Connection
-            Me._adapter.DeleteCommand.CommandText = "DELETE FROM SurveyFlights"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"WHERE (FlightID = @Original_FlightID)"
+            Me._adapter.DeleteCommand.CommandText = "DELETE FROM [SurveyFlights] WHERE (([FlightID] = @Original_FlightID))"
             Me._adapter.DeleteCommand.CommandType = Global.System.Data.CommandType.Text
-            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_FlightID", Global.System.Data.SqlDbType.VarChar, 50, Global.System.Data.ParameterDirection.Input, 0, 0, "FlightID", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
+            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_FlightID", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "FlightID", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
             Me._adapter.InsertCommand = New Global.System.Data.SqlClient.SqlCommand()
             Me._adapter.InsertCommand.Connection = Me.Connection
-            Me._adapter.InsertCommand.CommandText = "INSERT INTO SurveyFlights"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"             (Year, SurveyType, CrewNumber, Pilot, Obs"& _ 
-                "erver1, Observer2, AircraftType, TailNo, TimeDepart, TimeReturn, IsFollowUpFligh"& _ 
-                "t, SpotterPlaneTailNo, SpotterPlaneType, SpotterPlanePilot, WeatherConditions, S"& _ 
-                "nowConditions, Notes, Herd, SOPNumber, SOPVersion, FlightID)"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"VALUES (@Year,@Sur"& _ 
-                "veyType,@CrewNumber,@Pilot,@Observer1,@Observer2,@AircraftType,@TailNo,@TimeDepa"& _ 
-                "rt,@TimeReturn,@IsFollowUpFlight,@SpotterPlaneTailNo,@SpotterPlaneType,@SpotterP"& _ 
-                "lanePilot,@WeatherConditions,@SnowConditions,@Notes,@Herd,@SOPNumber,@SOPVersion"& _ 
-                ",@FlightID); "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"SELECT Year, SurveyType, CrewNumber, Pilot, Observer1, Observer2,"& _ 
-                " AircraftType, TailNo, TimeDepart, TimeReturn, IsFollowUpFlight, SpotterPlaneTai"& _ 
-                "lNo, SpotterPlaneType, SpotterPlanePilot, WeatherConditions, SnowConditions, Not"& _ 
-                "es, Herd, SOPNumber, SOPVersion, RecordInsertedDate, RecordInsertedBy, FlightID,"& _ 
-                " TS FROM SurveyFlights WHERE (FlightID = @FlightID)"
+            Me._adapter.InsertCommand.CommandText = "INSERT INTO [SurveyFlights] ([Year], [SurveyType], [CrewNumber], [Pilot], [Observ"& _ 
+                "er1], [Observer2], [AircraftType], [TailNo], [TimeDepart], [TimeReturn], [IsFoll"& _ 
+                "owUpFlight], [SpotterPlaneTailNo], [SpotterPlaneType], [SpotterPlanePilot], [Wea"& _ 
+                "therConditions], [SnowConditions], [Notes], [Herd], [SOPNumber], [SOPVersion], ["& _ 
+                "RecordInsertedDate], [RecordInsertedBy], [FlightID]) VALUES (@Year, @SurveyType,"& _ 
+                " @CrewNumber, @Pilot, @Observer1, @Observer2, @AircraftType, @TailNo, @TimeDepar"& _ 
+                "t, @TimeReturn, @IsFollowUpFlight, @SpotterPlaneTailNo, @SpotterPlaneType, @Spot"& _ 
+                "terPlanePilot, @WeatherConditions, @SnowConditions, @Notes, @Herd, @SOPNumber, @"& _ 
+                "SOPVersion, @RecordInsertedDate, @RecordInsertedBy, @FlightID);"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"SELECT Year, Su"& _ 
+                "rveyType, CrewNumber, Pilot, Observer1, Observer2, AircraftType, TailNo, TimeDep"& _ 
+                "art, TimeReturn, IsFollowUpFlight, SpotterPlaneTailNo, SpotterPlaneType, Spotter"& _ 
+                "PlanePilot, WeatherConditions, SnowConditions, Notes, Herd, SOPNumber, SOPVersio"& _ 
+                "n, RecordInsertedDate, RecordInsertedBy, FlightID FROM SurveyFlights WHERE (Flig"& _ 
+                "htID = @FlightID)"
             Me._adapter.InsertCommand.CommandType = Global.System.Data.CommandType.Text
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Year", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 0, 0, "Year", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@SurveyType", Global.System.Data.SqlDbType.VarChar, 2, Global.System.Data.ParameterDirection.Input, 0, 0, "SurveyType", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@CrewNumber", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 0, 0, "CrewNumber", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Pilot", Global.System.Data.SqlDbType.VarChar, 20, Global.System.Data.ParameterDirection.Input, 0, 0, "Pilot", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Observer1", Global.System.Data.SqlDbType.VarChar, 20, Global.System.Data.ParameterDirection.Input, 0, 0, "Observer1", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Observer2", Global.System.Data.SqlDbType.VarChar, 20, Global.System.Data.ParameterDirection.Input, 0, 0, "Observer2", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@AircraftType", Global.System.Data.SqlDbType.VarChar, 20, Global.System.Data.ParameterDirection.Input, 0, 0, "AircraftType", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@TailNo", Global.System.Data.SqlDbType.VarChar, 10, Global.System.Data.ParameterDirection.Input, 0, 0, "TailNo", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@TimeDepart", Global.System.Data.SqlDbType.DateTime, 8, Global.System.Data.ParameterDirection.Input, 0, 0, "TimeDepart", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@TimeReturn", Global.System.Data.SqlDbType.DateTime, 8, Global.System.Data.ParameterDirection.Input, 0, 0, "TimeReturn", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@IsFollowUpFlight", Global.System.Data.SqlDbType.Bit, 1, Global.System.Data.ParameterDirection.Input, 0, 0, "IsFollowUpFlight", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@SpotterPlaneTailNo", Global.System.Data.SqlDbType.VarChar, 10, Global.System.Data.ParameterDirection.Input, 0, 0, "SpotterPlaneTailNo", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@SpotterPlaneType", Global.System.Data.SqlDbType.VarChar, 30, Global.System.Data.ParameterDirection.Input, 0, 0, "SpotterPlaneType", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@SpotterPlanePilot", Global.System.Data.SqlDbType.VarChar, 40, Global.System.Data.ParameterDirection.Input, 0, 0, "SpotterPlanePilot", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@WeatherConditions", Global.System.Data.SqlDbType.VarChar, 1000, Global.System.Data.ParameterDirection.Input, 0, 0, "WeatherConditions", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@SnowConditions", Global.System.Data.SqlDbType.VarChar, 255, Global.System.Data.ParameterDirection.Input, 0, 0, "SnowConditions", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Notes", Global.System.Data.SqlDbType.VarChar, 1000, Global.System.Data.ParameterDirection.Input, 0, 0, "Notes", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Herd", Global.System.Data.SqlDbType.VarChar, 8, Global.System.Data.ParameterDirection.Input, 0, 0, "Herd", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@SOPNumber", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 0, 0, "SOPNumber", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@SOPVersion", Global.System.Data.SqlDbType.[Decimal], 5, Global.System.Data.ParameterDirection.Input, 6, 2, "SOPVersion", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@FlightID", Global.System.Data.SqlDbType.VarChar, 50, Global.System.Data.ParameterDirection.Input, 0, 0, "FlightID", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Year", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Year", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@SurveyType", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "SurveyType", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@CrewNumber", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "CrewNumber", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Pilot", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Pilot", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Observer1", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Observer1", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Observer2", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Observer2", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@AircraftType", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "AircraftType", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@TailNo", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "TailNo", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@TimeDepart", Global.System.Data.SqlDbType.DateTime, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "TimeDepart", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@TimeReturn", Global.System.Data.SqlDbType.DateTime, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "TimeReturn", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@IsFollowUpFlight", Global.System.Data.SqlDbType.Bit, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "IsFollowUpFlight", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@SpotterPlaneTailNo", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "SpotterPlaneTailNo", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@SpotterPlaneType", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "SpotterPlaneType", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@SpotterPlanePilot", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "SpotterPlanePilot", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@WeatherConditions", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "WeatherConditions", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@SnowConditions", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "SnowConditions", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Notes", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Notes", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Herd", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Herd", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@SOPNumber", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "SOPNumber", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@SOPVersion", Global.System.Data.SqlDbType.[Decimal], 0, Global.System.Data.ParameterDirection.Input, 6, 2, "SOPVersion", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@RecordInsertedDate", Global.System.Data.SqlDbType.DateTime, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "RecordInsertedDate", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@RecordInsertedBy", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "RecordInsertedBy", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@FlightID", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "FlightID", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.UpdateCommand = New Global.System.Data.SqlClient.SqlCommand()
             Me._adapter.UpdateCommand.Connection = Me.Connection
             Me._adapter.UpdateCommand.CommandText = "UPDATE SurveyFlights"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"SET       Year = @Year, SurveyType = @SurveyType, CrewNumbe"& _ 
@@ -7327,12 +7522,13 @@ Namespace WRST_CaribouDataSetTableAdapters
                 "rPlaneTailNo = @SpotterPlaneTailNo, SpotterPlaneType = @SpotterPlaneType, Spotte"& _ 
                 "rPlanePilot = @SpotterPlanePilot, WeatherConditions = @WeatherConditions, SnowCo"& _ 
                 "nditions = @SnowConditions, Notes = @Notes, Herd = @Herd, "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"             SOPNumb"& _ 
-                "er = @SOPNumber, SOPVersion = @SOPVersion"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"WHERE (FlightID = @Original_FlightID)"& _ 
-                "; "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"SELECT Year, SurveyType, CrewNumber, Pilot, Observer1, Observer2, AircraftTy"& _ 
-                "pe, TailNo, TimeDepart, TimeReturn, IsFollowUpFlight, SpotterPlaneTailNo, Spotte"& _ 
-                "rPlaneType, SpotterPlanePilot, WeatherConditions, SnowConditions, Notes, Herd, S"& _ 
-                "OPNumber, SOPVersion, RecordInsertedDate, RecordInsertedBy, FlightID, TS FROM Su"& _ 
-                "rveyFlights WHERE (FlightID = @FlightID)"
+                "er = @SOPNumber, SOPVersion = @SOPVersion, RecordInsertedDate = @RecordInsertedD"& _ 
+                "ate, RecordInsertedBy = @RecordInsertedBy, FlightID = @FlightID"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"WHERE (FlightID"& _ 
+                " = @Original_FlightID); "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"SELECT Year, SurveyType, CrewNumber, Pilot, Observer1,"& _ 
+                " Observer2, AircraftType, TailNo, TimeDepart, TimeReturn, IsFollowUpFlight, Spot"& _ 
+                "terPlaneTailNo, SpotterPlaneType, SpotterPlanePilot, WeatherConditions, SnowCond"& _ 
+                "itions, Notes, Herd, SOPNumber, SOPVersion, RecordInsertedDate, RecordInsertedBy"& _ 
+                ", FlightID FROM SurveyFlights WHERE (FlightID = @FlightID)"
             Me._adapter.UpdateCommand.CommandType = Global.System.Data.CommandType.Text
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Year", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 0, 0, "Year", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@SurveyType", Global.System.Data.SqlDbType.VarChar, 2, Global.System.Data.ParameterDirection.Input, 0, 0, "SurveyType", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
@@ -7354,8 +7550,10 @@ Namespace WRST_CaribouDataSetTableAdapters
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Herd", Global.System.Data.SqlDbType.VarChar, 8, Global.System.Data.ParameterDirection.Input, 0, 0, "Herd", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@SOPNumber", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 0, 0, "SOPNumber", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@SOPVersion", Global.System.Data.SqlDbType.[Decimal], 5, Global.System.Data.ParameterDirection.Input, 6, 2, "SOPVersion", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@RecordInsertedDate", Global.System.Data.SqlDbType.DateTime, 8, Global.System.Data.ParameterDirection.Input, 0, 0, "RecordInsertedDate", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@RecordInsertedBy", Global.System.Data.SqlDbType.NVarChar, 50, Global.System.Data.ParameterDirection.Input, 0, 0, "RecordInsertedBy", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@FlightID", Global.System.Data.SqlDbType.VarChar, 50, Global.System.Data.ParameterDirection.Input, 0, 0, "FlightID", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_FlightID", Global.System.Data.SqlDbType.VarChar, 50, Global.System.Data.ParameterDirection.Input, 0, 0, "FlightID", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@FlightID", Global.System.Data.SqlDbType.VarChar, 50, Global.System.Data.ParameterDirection.Input, 0, 0, "FlightID", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -7374,8 +7572,8 @@ Namespace WRST_CaribouDataSetTableAdapters
             Me._commandCollection(0).CommandText = "SELECT Year, SurveyType, CrewNumber, Pilot, Observer1, Observer2, AircraftType, T"& _ 
                 "ailNo, TimeDepart, TimeReturn, IsFollowUpFlight, SpotterPlaneTailNo, SpotterPlan"& _ 
                 "eType, SpotterPlanePilot, WeatherConditions, SnowConditions, Notes, Herd, SOPNum"& _ 
-                "ber, SOPVersion, "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"             RecordInsertedDate, RecordInsertedBy, FlightID, "& _ 
-                "TS"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"FROM   SurveyFlights"
+                "ber, SOPVersion, "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"             RecordInsertedDate, RecordInsertedBy, FlightID"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)& _ 
+                "FROM   SurveyFlights"
             Me._commandCollection(0).CommandType = Global.System.Data.CommandType.Text
         End Sub
         
@@ -7481,6 +7679,8 @@ Namespace WRST_CaribouDataSetTableAdapters
                     ByVal Herd As String,  _
                     ByVal SOPNumber As Global.System.Nullable(Of Integer),  _
                     ByVal SOPVersion As Global.System.Nullable(Of Decimal),  _
+                    ByVal RecordInsertedDate As Date,  _
+                    ByVal RecordInsertedBy As String,  _
                     ByVal FlightID As String) As Integer
             Me.Adapter.InsertCommand.Parameters(0).Value = CType(Year,Integer)
             If (SurveyType Is Nothing) Then
@@ -7574,10 +7774,16 @@ Namespace WRST_CaribouDataSetTableAdapters
             Else
                 Me.Adapter.InsertCommand.Parameters(19).Value = Global.System.DBNull.Value
             End If
+            Me.Adapter.InsertCommand.Parameters(20).Value = CType(RecordInsertedDate,Date)
+            If (RecordInsertedBy Is Nothing) Then
+                Throw New Global.System.ArgumentNullException("RecordInsertedBy")
+            Else
+                Me.Adapter.InsertCommand.Parameters(21).Value = CType(RecordInsertedBy,String)
+            End If
             If (FlightID Is Nothing) Then
                 Throw New Global.System.ArgumentNullException("FlightID")
             Else
-                Me.Adapter.InsertCommand.Parameters(20).Value = CType(FlightID,String)
+                Me.Adapter.InsertCommand.Parameters(22).Value = CType(FlightID,String)
             End If
             Dim previousConnectionState As Global.System.Data.ConnectionState = Me.Adapter.InsertCommand.Connection.State
             If ((Me.Adapter.InsertCommand.Connection.State And Global.System.Data.ConnectionState.Open)  _
@@ -7619,8 +7825,10 @@ Namespace WRST_CaribouDataSetTableAdapters
                     ByVal Herd As String,  _
                     ByVal SOPNumber As Global.System.Nullable(Of Integer),  _
                     ByVal SOPVersion As Global.System.Nullable(Of Decimal),  _
-                    ByVal Original_FlightID As String,  _
-                    ByVal FlightID As String) As Integer
+                    ByVal RecordInsertedDate As Date,  _
+                    ByVal RecordInsertedBy As String,  _
+                    ByVal FlightID As String,  _
+                    ByVal Original_FlightID As String) As Integer
             Me.Adapter.UpdateCommand.Parameters(0).Value = CType(Year,Integer)
             If (SurveyType Is Nothing) Then
                 Throw New Global.System.ArgumentNullException("SurveyType")
@@ -7713,15 +7921,21 @@ Namespace WRST_CaribouDataSetTableAdapters
             Else
                 Me.Adapter.UpdateCommand.Parameters(19).Value = Global.System.DBNull.Value
             End If
-            If (Original_FlightID Is Nothing) Then
-                Throw New Global.System.ArgumentNullException("Original_FlightID")
+            Me.Adapter.UpdateCommand.Parameters(20).Value = CType(RecordInsertedDate,Date)
+            If (RecordInsertedBy Is Nothing) Then
+                Throw New Global.System.ArgumentNullException("RecordInsertedBy")
             Else
-                Me.Adapter.UpdateCommand.Parameters(20).Value = CType(Original_FlightID,String)
+                Me.Adapter.UpdateCommand.Parameters(21).Value = CType(RecordInsertedBy,String)
             End If
             If (FlightID Is Nothing) Then
                 Throw New Global.System.ArgumentNullException("FlightID")
             Else
-                Me.Adapter.UpdateCommand.Parameters(21).Value = CType(FlightID,String)
+                Me.Adapter.UpdateCommand.Parameters(22).Value = CType(FlightID,String)
+            End If
+            If (Original_FlightID Is Nothing) Then
+                Throw New Global.System.ArgumentNullException("Original_FlightID")
+            Else
+                Me.Adapter.UpdateCommand.Parameters(23).Value = CType(Original_FlightID,String)
             End If
             Dim previousConnectionState As Global.System.Data.ConnectionState = Me.Adapter.UpdateCommand.Connection.State
             If ((Me.Adapter.UpdateCommand.Connection.State And Global.System.Data.ConnectionState.Open)  _
@@ -7736,6 +7950,37 @@ Namespace WRST_CaribouDataSetTableAdapters
                     Me.Adapter.UpdateCommand.Connection.Close
                 End If
             End Try
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Update, true)>  _
+        Public Overloads Overridable Function Update( _
+                    ByVal Year As Integer,  _
+                    ByVal SurveyType As String,  _
+                    ByVal CrewNumber As Global.System.Nullable(Of Integer),  _
+                    ByVal Pilot As String,  _
+                    ByVal Observer1 As String,  _
+                    ByVal Observer2 As String,  _
+                    ByVal AircraftType As String,  _
+                    ByVal TailNo As String,  _
+                    ByVal TimeDepart As Global.System.Nullable(Of Date),  _
+                    ByVal TimeReturn As Global.System.Nullable(Of Date),  _
+                    ByVal IsFollowUpFlight As Boolean,  _
+                    ByVal SpotterPlaneTailNo As String,  _
+                    ByVal SpotterPlaneType As String,  _
+                    ByVal SpotterPlanePilot As String,  _
+                    ByVal WeatherConditions As String,  _
+                    ByVal SnowConditions As String,  _
+                    ByVal Notes As String,  _
+                    ByVal Herd As String,  _
+                    ByVal SOPNumber As Global.System.Nullable(Of Integer),  _
+                    ByVal SOPVersion As Global.System.Nullable(Of Decimal),  _
+                    ByVal RecordInsertedDate As Date,  _
+                    ByVal RecordInsertedBy As String,  _
+                    ByVal Original_FlightID As String) As Integer
+            Return Me.Update(Year, SurveyType, CrewNumber, Pilot, Observer1, Observer2, AircraftType, TailNo, TimeDepart, TimeReturn, IsFollowUpFlight, SpotterPlaneTailNo, SpotterPlaneType, SpotterPlanePilot, WeatherConditions, SnowConditions, Notes, Herd, SOPNumber, SOPVersion, RecordInsertedDate, RecordInsertedBy, Original_FlightID, Original_FlightID)
         End Function
     End Class
     
@@ -7893,7 +8138,6 @@ Namespace WRST_CaribouDataSetTableAdapters
             tableMapping.ColumnMappings.Add("FlightID", "FlightID")
             tableMapping.ColumnMappings.Add("RecordInsertedDate", "RecordInsertedDate")
             tableMapping.ColumnMappings.Add("RecordInsertedBy", "RecordInsertedBy")
-            tableMapping.ColumnMappings.Add("TS", "TS")
             tableMapping.ColumnMappings.Add("EID", "EID")
             tableMapping.ColumnMappings.Add("Out", "Out")
             tableMapping.ColumnMappings.Add("CertificationDate", "CertificationDate")
@@ -7902,52 +8146,59 @@ Namespace WRST_CaribouDataSetTableAdapters
             Me._adapter.TableMappings.Add(tableMapping)
             Me._adapter.DeleteCommand = New Global.System.Data.SqlClient.SqlCommand()
             Me._adapter.DeleteCommand.Connection = Me.Connection
-            Me._adapter.DeleteCommand.CommandText = "DELETE FROM Surveys"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"WHERE (EID = @Original_EID)"
+            Me._adapter.DeleteCommand.CommandText = "DELETE FROM [Surveys] WHERE (([EID] = @Original_EID))"
             Me._adapter.DeleteCommand.CommandType = Global.System.Data.CommandType.Text
-            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_EID", Global.System.Data.SqlDbType.VarChar, 50, Global.System.Data.ParameterDirection.Input, 0, 0, "EID", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
+            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_EID", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "EID", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
             Me._adapter.InsertCommand = New Global.System.Data.SqlClient.SqlCommand()
             Me._adapter.InsertCommand.Connection = Me.Connection
-            Me._adapter.InsertCommand.CommandText = "INSERT INTO Surveys"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"             (SightingDate, SearchArea, GroupNumber, SmallBu"& _ 
-                "ll, MediumBull, LargeBull, Bull, Cow, Calf, Adult, FrequenciesInGroup, Lat, Lon,"& _ 
-                " Out, Seen, Marked, Mode, Accuracy, RetainedAntler, DistendedUdders, CalvesAtHee"& _ 
-                "l, WaypointName, Comment, SourceFilename, FlightID, EID, "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"             Certific"& _ 
-                "ationLevel)"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"VALUES (@SightingDate,@SearchArea,@GroupNumber,@SmallBull,@MediumBu"& _ 
-                "ll,@LargeBull,@Bull,@Cow,@Calf,@Adult,@FrequenciesInGroup,@Lat,@Lon,@Out,@Seen,@"& _ 
-                "Marked,@Mode,@Accuracy,@RetainedAntler,@DistendedUdders,@CalvesAtHeel,@WaypointN"& _ 
-                "ame,@Comment,@SourceFilename,@FlightID,@EID,"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"              'Raw');   "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"SELECT S"& _ 
-                "ightingDate, SearchArea, GroupNumber, SmallBull, MediumBull, LargeBull, Bull, Co"& _ 
-                "w, Calf, Adult, FrequenciesInGroup, Lat, Lon, Out, Seen, Marked, Mode, Accuracy,"& _ 
-                " RetainedAntler, DistendedUdders, CalvesAtHeel, WaypointName, Comment, SourceFil"& _ 
-                "ename, FlightID, RecordInsertedDate, RecordInsertedBy, TS, EID, CertificationDat"& _ 
-                "e, CertifiedBy, CertificationLevel FROM Surveys WHERE (EID = @EID) ORDER BY Sigh"& _ 
-                "tingDate, GroupNumber"
+            Me._adapter.InsertCommand.CommandText = "INSERT INTO [Surveys] ([SightingDate], [SearchArea], [GroupNumber], [SmallBull], "& _ 
+                "[MediumBull], [LargeBull], [Bull], [Cow], [Calf], [Adult], [FrequenciesInGroup],"& _ 
+                " [Lat], [Lon], [Out], [Seen], [Marked], [Mode], [Accuracy], [RetainedAntler], [D"& _ 
+                "istendedUdders], [CalvesAtHeel], [WaypointName], [Comment], [SourceFilename], [F"& _ 
+                "lightID], [RecordInsertedDate], [RecordInsertedBy], [EID], [CertificationDate], "& _ 
+                "[CertifiedBy], [CertificationLevel]) VALUES (@SightingDate, @SearchArea, @GroupN"& _ 
+                "umber, @SmallBull, @MediumBull, @LargeBull, @Bull, @Cow, @Calf, @Adult, @Frequen"& _ 
+                "ciesInGroup, @Lat, @Lon, @Out, @Seen, @Marked, @Mode, @Accuracy, @RetainedAntler"& _ 
+                ", @DistendedUdders, @CalvesAtHeel, @WaypointName, @Comment, @SourceFilename, @Fl"& _ 
+                "ightID, @RecordInsertedDate, @RecordInsertedBy, @EID, @CertificationDate, @Certi"& _ 
+                "fiedBy, @CertificationLevel);"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"SELECT SightingDate, SearchArea, GroupNumber, Sma"& _ 
+                "llBull, MediumBull, LargeBull, Bull, Cow, Calf, Adult, FrequenciesInGroup, Lat, "& _ 
+                "Lon, Out, Seen, Marked, Mode, Accuracy, RetainedAntler, DistendedUdders, CalvesA"& _ 
+                "tHeel, WaypointName, Comment, SourceFilename, FlightID, RecordInsertedDate, Reco"& _ 
+                "rdInsertedBy, EID, CertificationDate, CertifiedBy, CertificationLevel FROM Surve"& _ 
+                "ys WHERE (EID = @EID) ORDER BY SightingDate, GroupNumber"
             Me._adapter.InsertCommand.CommandType = Global.System.Data.CommandType.Text
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@SightingDate", Global.System.Data.SqlDbType.DateTime, 8, Global.System.Data.ParameterDirection.Input, 0, 0, "SightingDate", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@SearchArea", Global.System.Data.SqlDbType.VarChar, 20, Global.System.Data.ParameterDirection.Input, 0, 0, "SearchArea", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@GroupNumber", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 0, 0, "GroupNumber", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@SmallBull", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 0, 0, "SmallBull", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@MediumBull", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 0, 0, "MediumBull", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@LargeBull", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 0, 0, "LargeBull", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Bull", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 0, 0, "Bull", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Cow", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 0, 0, "Cow", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Calf", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 0, 0, "Calf", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Adult", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 0, 0, "Adult", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@FrequenciesInGroup", Global.System.Data.SqlDbType.VarChar, 4000, Global.System.Data.ParameterDirection.Input, 0, 0, "FrequenciesInGroup", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Lat", Global.System.Data.SqlDbType.[Decimal], 9, Global.System.Data.ParameterDirection.Input, 13, 9, "Lat", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Lon", Global.System.Data.SqlDbType.[Decimal], 9, Global.System.Data.ParameterDirection.Input, 13, 9, "Lon", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Out", Global.System.Data.SqlDbType.Bit, 1, Global.System.Data.ParameterDirection.Input, 0, 0, "Out", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Seen", Global.System.Data.SqlDbType.Bit, 1, Global.System.Data.ParameterDirection.Input, 0, 0, "Seen", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Marked", Global.System.Data.SqlDbType.Bit, 1, Global.System.Data.ParameterDirection.Input, 0, 0, "Marked", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Mode", Global.System.Data.SqlDbType.VarChar, 1, Global.System.Data.ParameterDirection.Input, 0, 0, "Mode", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Accuracy", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 0, 0, "Accuracy", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@RetainedAntler", Global.System.Data.SqlDbType.Bit, 1, Global.System.Data.ParameterDirection.Input, 0, 0, "RetainedAntler", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@DistendedUdders", Global.System.Data.SqlDbType.Bit, 1, Global.System.Data.ParameterDirection.Input, 0, 0, "DistendedUdders", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@CalvesAtHeel", Global.System.Data.SqlDbType.Bit, 1, Global.System.Data.ParameterDirection.Input, 0, 0, "CalvesAtHeel", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@WaypointName", Global.System.Data.SqlDbType.VarChar, 20, Global.System.Data.ParameterDirection.Input, 0, 0, "WaypointName", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Comment", Global.System.Data.SqlDbType.VarChar, 255, Global.System.Data.ParameterDirection.Input, 0, 0, "Comment", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@SourceFilename", Global.System.Data.SqlDbType.VarChar, 255, Global.System.Data.ParameterDirection.Input, 0, 0, "SourceFilename", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@FlightID", Global.System.Data.SqlDbType.VarChar, 50, Global.System.Data.ParameterDirection.Input, 0, 0, "FlightID", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@EID", Global.System.Data.SqlDbType.VarChar, 50, Global.System.Data.ParameterDirection.Input, 0, 0, "EID", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@SightingDate", Global.System.Data.SqlDbType.DateTime, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "SightingDate", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@SearchArea", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "SearchArea", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@GroupNumber", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "GroupNumber", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@SmallBull", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "SmallBull", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@MediumBull", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "MediumBull", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@LargeBull", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "LargeBull", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Bull", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Bull", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Cow", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Cow", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Calf", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Calf", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Adult", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Adult", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@FrequenciesInGroup", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "FrequenciesInGroup", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Lat", Global.System.Data.SqlDbType.[Decimal], 0, Global.System.Data.ParameterDirection.Input, 13, 9, "Lat", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Lon", Global.System.Data.SqlDbType.[Decimal], 0, Global.System.Data.ParameterDirection.Input, 13, 9, "Lon", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Out", Global.System.Data.SqlDbType.Bit, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Out", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Seen", Global.System.Data.SqlDbType.Bit, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Seen", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Marked", Global.System.Data.SqlDbType.Bit, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Marked", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Mode", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Mode", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Accuracy", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Accuracy", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@RetainedAntler", Global.System.Data.SqlDbType.Bit, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "RetainedAntler", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@DistendedUdders", Global.System.Data.SqlDbType.Bit, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "DistendedUdders", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@CalvesAtHeel", Global.System.Data.SqlDbType.Bit, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "CalvesAtHeel", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@WaypointName", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "WaypointName", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Comment", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Comment", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@SourceFilename", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "SourceFilename", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@FlightID", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "FlightID", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@RecordInsertedDate", Global.System.Data.SqlDbType.DateTime, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "RecordInsertedDate", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@RecordInsertedBy", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "RecordInsertedBy", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@EID", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "EID", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@CertificationDate", Global.System.Data.SqlDbType.DateTime, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "CertificationDate", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@CertifiedBy", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "CertifiedBy", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@CertificationLevel", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "CertificationLevel", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.UpdateCommand = New Global.System.Data.SqlClient.SqlCommand()
             Me._adapter.UpdateCommand.Connection = Me.Connection
             Me._adapter.UpdateCommand.CommandText = "UPDATE Surveys"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"SET       SightingDate = @SightingDate, SearchArea = @SearchArea,"& _ 
@@ -7957,14 +8208,15 @@ Namespace WRST_CaribouDataSetTableAdapters
                 "Out = @Out, Seen = @Seen, Marked = @Marked, Mode = @Mode, Accuracy = @Accuracy, "& _ 
                 "RetainedAntler = @RetainedAntler, DistendedUdders = @DistendedUdders, CalvesAtHe"& _ 
                 "el = @CalvesAtHeel, WaypointName = @WaypointName, Comment = @Comment, "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"        "& _ 
-                "     SourceFilename = @SourceFilename, FlightID = @FlightID, CertificationDate ="& _ 
-                " @CertificationDate, CertifiedBy = @CertifiedBy, CertificationLevel = @Certifica"& _ 
-                "tionLevel"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"WHERE (EID = @Original_EID);  "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"SELECT SightingDate, SearchArea, Grou"& _ 
-                "pNumber, SmallBull, MediumBull, LargeBull, Bull, Cow, Calf, Adult, FrequenciesIn"& _ 
-                "Group, Lat, Lon, Out, Seen, Marked, Mode, Accuracy, RetainedAntler, DistendedUdd"& _ 
-                "ers, CalvesAtHeel, WaypointName, Comment, SourceFilename, FlightID, RecordInsert"& _ 
-                "edDate, RecordInsertedBy, TS, EID, CertificationDate, CertifiedBy, Certification"& _ 
-                "Level FROM Surveys WHERE (EID = @EID) ORDER BY SightingDate, GroupNumber"
+                "     SourceFilename = @SourceFilename, FlightID = @FlightID, RecordInsertedDate "& _ 
+                "= @RecordInsertedDate, RecordInsertedBy = @RecordInsertedBy, EID = @EID, Certifi"& _ 
+                "cationDate = @CertificationDate, CertifiedBy = @CertifiedBy, CertificationLevel "& _ 
+                "= @CertificationLevel"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"WHERE (EID = @Original_EID); "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"SELECT SightingDate, Searc"& _ 
+                "hArea, GroupNumber, SmallBull, MediumBull, LargeBull, Bull, Cow, Calf, Adult, Fr"& _ 
+                "equenciesInGroup, Lat, Lon, Out, Seen, Marked, Mode, Accuracy, RetainedAntler, D"& _ 
+                "istendedUdders, CalvesAtHeel, WaypointName, Comment, SourceFilename, FlightID, R"& _ 
+                "ecordInsertedDate, RecordInsertedBy, EID, CertificationDate, CertifiedBy, Certif"& _ 
+                "icationLevel FROM Surveys WHERE (EID = @EID) ORDER BY SightingDate, GroupNumber"
             Me._adapter.UpdateCommand.CommandType = Global.System.Data.CommandType.Text
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@SightingDate", Global.System.Data.SqlDbType.DateTime, 8, Global.System.Data.ParameterDirection.Input, 0, 0, "SightingDate", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@SearchArea", Global.System.Data.SqlDbType.VarChar, 20, Global.System.Data.ParameterDirection.Input, 0, 0, "SearchArea", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
@@ -7991,11 +8243,13 @@ Namespace WRST_CaribouDataSetTableAdapters
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Comment", Global.System.Data.SqlDbType.VarChar, 255, Global.System.Data.ParameterDirection.Input, 0, 0, "Comment", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@SourceFilename", Global.System.Data.SqlDbType.VarChar, 255, Global.System.Data.ParameterDirection.Input, 0, 0, "SourceFilename", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@FlightID", Global.System.Data.SqlDbType.VarChar, 50, Global.System.Data.ParameterDirection.Input, 0, 0, "FlightID", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@RecordInsertedDate", Global.System.Data.SqlDbType.DateTime, 8, Global.System.Data.ParameterDirection.Input, 0, 0, "RecordInsertedDate", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@RecordInsertedBy", Global.System.Data.SqlDbType.NVarChar, 50, Global.System.Data.ParameterDirection.Input, 0, 0, "RecordInsertedBy", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@EID", Global.System.Data.SqlDbType.VarChar, 50, Global.System.Data.ParameterDirection.Input, 0, 0, "EID", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@CertificationDate", Global.System.Data.SqlDbType.DateTime, 8, Global.System.Data.ParameterDirection.Input, 0, 0, "CertificationDate", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@CertifiedBy", Global.System.Data.SqlDbType.VarChar, 50, Global.System.Data.ParameterDirection.Input, 0, 0, "CertifiedBy", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@CertificationLevel", Global.System.Data.SqlDbType.VarChar, 15, Global.System.Data.ParameterDirection.Input, 0, 0, "CertificationLevel", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_EID", Global.System.Data.SqlDbType.VarChar, 50, Global.System.Data.ParameterDirection.Input, 0, 0, "EID", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@EID", Global.System.Data.SqlDbType.VarChar, 50, Global.System.Data.ParameterDirection.Input, 0, 0, "EID", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -8014,9 +8268,9 @@ Namespace WRST_CaribouDataSetTableAdapters
             Me._commandCollection(0).CommandText = "SELECT SightingDate, SearchArea, GroupNumber, SmallBull, MediumBull, LargeBull, B"& _ 
                 "ull, Cow, Calf, Adult, FrequenciesInGroup, Lat, Lon, Out, Seen, Marked, Mode, Ac"& _ 
                 "curacy, RetainedAntler, DistendedUdders, CalvesAtHeel, WaypointName, Comment, So"& _ 
-                "urceFilename, FlightID, "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"             RecordInsertedDate, RecordInsertedBy, TS,"& _ 
-                " EID, CertificationDate, CertifiedBy, CertificationLevel"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"FROM   Surveys"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"ORDER "& _ 
-                "BY SightingDate, GroupNumber"
+                "urceFilename, FlightID, "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"             RecordInsertedDate, RecordInsertedBy, EID"& _ 
+                ", CertificationDate, CertifiedBy, CertificationLevel"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"FROM   Surveys"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"ORDER BY S"& _ 
+                "ightingDate, GroupNumber"
             Me._commandCollection(0).CommandType = Global.System.Data.CommandType.Text
         End Sub
         
@@ -8127,7 +8381,12 @@ Namespace WRST_CaribouDataSetTableAdapters
                     ByVal Comment As String,  _
                     ByVal SourceFilename As String,  _
                     ByVal FlightID As String,  _
-                    ByVal EID As String) As Integer
+                    ByVal RecordInsertedDate As Date,  _
+                    ByVal RecordInsertedBy As String,  _
+                    ByVal EID As String,  _
+                    ByVal CertificationDate As Global.System.Nullable(Of Date),  _
+                    ByVal CertifiedBy As String,  _
+                    ByVal CertificationLevel As String) As Integer
             Me.Adapter.InsertCommand.Parameters(0).Value = CType(SightingDate,Date)
             If (SearchArea Is Nothing) Then
                 Throw New Global.System.ArgumentNullException("SearchArea")
@@ -8229,10 +8488,31 @@ Namespace WRST_CaribouDataSetTableAdapters
             Else
                 Me.Adapter.InsertCommand.Parameters(24).Value = CType(FlightID,String)
             End If
+            Me.Adapter.InsertCommand.Parameters(25).Value = CType(RecordInsertedDate,Date)
+            If (RecordInsertedBy Is Nothing) Then
+                Throw New Global.System.ArgumentNullException("RecordInsertedBy")
+            Else
+                Me.Adapter.InsertCommand.Parameters(26).Value = CType(RecordInsertedBy,String)
+            End If
             If (EID Is Nothing) Then
                 Throw New Global.System.ArgumentNullException("EID")
             Else
-                Me.Adapter.InsertCommand.Parameters(25).Value = CType(EID,String)
+                Me.Adapter.InsertCommand.Parameters(27).Value = CType(EID,String)
+            End If
+            If (CertificationDate.HasValue = true) Then
+                Me.Adapter.InsertCommand.Parameters(28).Value = CType(CertificationDate.Value,Date)
+            Else
+                Me.Adapter.InsertCommand.Parameters(28).Value = Global.System.DBNull.Value
+            End If
+            If (CertifiedBy Is Nothing) Then
+                Me.Adapter.InsertCommand.Parameters(29).Value = Global.System.DBNull.Value
+            Else
+                Me.Adapter.InsertCommand.Parameters(29).Value = CType(CertifiedBy,String)
+            End If
+            If (CertificationLevel Is Nothing) Then
+                Throw New Global.System.ArgumentNullException("CertificationLevel")
+            Else
+                Me.Adapter.InsertCommand.Parameters(30).Value = CType(CertificationLevel,String)
             End If
             Dim previousConnectionState As Global.System.Data.ConnectionState = Me.Adapter.InsertCommand.Connection.State
             If ((Me.Adapter.InsertCommand.Connection.State And Global.System.Data.ConnectionState.Open)  _
@@ -8279,11 +8559,13 @@ Namespace WRST_CaribouDataSetTableAdapters
                     ByVal Comment As String,  _
                     ByVal SourceFilename As String,  _
                     ByVal FlightID As String,  _
+                    ByVal RecordInsertedDate As Date,  _
+                    ByVal RecordInsertedBy As String,  _
+                    ByVal EID As String,  _
                     ByVal CertificationDate As Global.System.Nullable(Of Date),  _
                     ByVal CertifiedBy As String,  _
                     ByVal CertificationLevel As String,  _
-                    ByVal Original_EID As String,  _
-                    ByVal EID As String) As Integer
+                    ByVal Original_EID As String) As Integer
             Me.Adapter.UpdateCommand.Parameters(0).Value = CType(SightingDate,Date)
             If (SearchArea Is Nothing) Then
                 Throw New Global.System.ArgumentNullException("SearchArea")
@@ -8385,30 +8667,36 @@ Namespace WRST_CaribouDataSetTableAdapters
             Else
                 Me.Adapter.UpdateCommand.Parameters(24).Value = CType(FlightID,String)
             End If
-            If (CertificationDate.HasValue = true) Then
-                Me.Adapter.UpdateCommand.Parameters(25).Value = CType(CertificationDate.Value,Date)
+            Me.Adapter.UpdateCommand.Parameters(25).Value = CType(RecordInsertedDate,Date)
+            If (RecordInsertedBy Is Nothing) Then
+                Throw New Global.System.ArgumentNullException("RecordInsertedBy")
             Else
-                Me.Adapter.UpdateCommand.Parameters(25).Value = Global.System.DBNull.Value
-            End If
-            If (CertifiedBy Is Nothing) Then
-                Me.Adapter.UpdateCommand.Parameters(26).Value = Global.System.DBNull.Value
-            Else
-                Me.Adapter.UpdateCommand.Parameters(26).Value = CType(CertifiedBy,String)
-            End If
-            If (CertificationLevel Is Nothing) Then
-                Throw New Global.System.ArgumentNullException("CertificationLevel")
-            Else
-                Me.Adapter.UpdateCommand.Parameters(27).Value = CType(CertificationLevel,String)
-            End If
-            If (Original_EID Is Nothing) Then
-                Throw New Global.System.ArgumentNullException("Original_EID")
-            Else
-                Me.Adapter.UpdateCommand.Parameters(28).Value = CType(Original_EID,String)
+                Me.Adapter.UpdateCommand.Parameters(26).Value = CType(RecordInsertedBy,String)
             End If
             If (EID Is Nothing) Then
                 Throw New Global.System.ArgumentNullException("EID")
             Else
-                Me.Adapter.UpdateCommand.Parameters(29).Value = CType(EID,String)
+                Me.Adapter.UpdateCommand.Parameters(27).Value = CType(EID,String)
+            End If
+            If (CertificationDate.HasValue = true) Then
+                Me.Adapter.UpdateCommand.Parameters(28).Value = CType(CertificationDate.Value,Date)
+            Else
+                Me.Adapter.UpdateCommand.Parameters(28).Value = Global.System.DBNull.Value
+            End If
+            If (CertifiedBy Is Nothing) Then
+                Me.Adapter.UpdateCommand.Parameters(29).Value = Global.System.DBNull.Value
+            Else
+                Me.Adapter.UpdateCommand.Parameters(29).Value = CType(CertifiedBy,String)
+            End If
+            If (CertificationLevel Is Nothing) Then
+                Throw New Global.System.ArgumentNullException("CertificationLevel")
+            Else
+                Me.Adapter.UpdateCommand.Parameters(30).Value = CType(CertificationLevel,String)
+            End If
+            If (Original_EID Is Nothing) Then
+                Throw New Global.System.ArgumentNullException("Original_EID")
+            Else
+                Me.Adapter.UpdateCommand.Parameters(31).Value = CType(Original_EID,String)
             End If
             Dim previousConnectionState As Global.System.Data.ConnectionState = Me.Adapter.UpdateCommand.Connection.State
             If ((Me.Adapter.UpdateCommand.Connection.State And Global.System.Data.ConnectionState.Open)  _
@@ -8423,6 +8711,45 @@ Namespace WRST_CaribouDataSetTableAdapters
                     Me.Adapter.UpdateCommand.Connection.Close
                 End If
             End Try
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Update, true)>  _
+        Public Overloads Overridable Function Update( _
+                    ByVal SightingDate As Date,  _
+                    ByVal SearchArea As String,  _
+                    ByVal GroupNumber As Integer,  _
+                    ByVal SmallBull As Global.System.Nullable(Of Integer),  _
+                    ByVal MediumBull As Global.System.Nullable(Of Integer),  _
+                    ByVal LargeBull As Global.System.Nullable(Of Integer),  _
+                    ByVal Bull As Global.System.Nullable(Of Integer),  _
+                    ByVal Cow As Global.System.Nullable(Of Integer),  _
+                    ByVal Calf As Global.System.Nullable(Of Integer),  _
+                    ByVal Adult As Global.System.Nullable(Of Integer),  _
+                    ByVal FrequenciesInGroup As String,  _
+                    ByVal Lat As Decimal,  _
+                    ByVal Lon As Decimal,  _
+                    ByVal Out As Global.System.Nullable(Of Boolean),  _
+                    ByVal Seen As Boolean,  _
+                    ByVal Marked As Boolean,  _
+                    ByVal Mode As String,  _
+                    ByVal Accuracy As Global.System.Nullable(Of Integer),  _
+                    ByVal RetainedAntler As Global.System.Nullable(Of Boolean),  _
+                    ByVal DistendedUdders As Global.System.Nullable(Of Boolean),  _
+                    ByVal CalvesAtHeel As Global.System.Nullable(Of Boolean),  _
+                    ByVal WaypointName As String,  _
+                    ByVal Comment As String,  _
+                    ByVal SourceFilename As String,  _
+                    ByVal FlightID As String,  _
+                    ByVal RecordInsertedDate As Date,  _
+                    ByVal RecordInsertedBy As String,  _
+                    ByVal CertificationDate As Global.System.Nullable(Of Date),  _
+                    ByVal CertifiedBy As String,  _
+                    ByVal CertificationLevel As String,  _
+                    ByVal Original_EID As String) As Integer
+            Return Me.Update(SightingDate, SearchArea, GroupNumber, SmallBull, MediumBull, LargeBull, Bull, Cow, Calf, Adult, FrequenciesInGroup, Lat, Lon, Out, Seen, Marked, Mode, Accuracy, RetainedAntler, DistendedUdders, CalvesAtHeel, WaypointName, Comment, SourceFilename, FlightID, RecordInsertedDate, RecordInsertedBy, Original_EID, CertificationDate, CertifiedBy, CertificationLevel, Original_EID)
         End Function
     End Class
     
@@ -8630,136 +8957,164 @@ Namespace WRST_CaribouDataSetTableAdapters
             tableMapping.ColumnMappings.Add("CertifiedBy", "CertifiedBy")
             tableMapping.ColumnMappings.Add("ProtocolIRMAReference", "ProtocolIRMAReference")
             tableMapping.ColumnMappings.Add("CertificationLevel", "CertificationLevel")
+            tableMapping.ColumnMappings.Add("Park", "Park")
+            tableMapping.ColumnMappings.Add("Pilot", "Pilot")
+            tableMapping.ColumnMappings.Add("Handler", "Handler")
+            tableMapping.ColumnMappings.Add("CaptureGroupSize", "CaptureGroupSize")
+            tableMapping.ColumnMappings.Add("AircraftType", "AircraftType")
+            tableMapping.ColumnMappings.Add("NasalSwab", "NasalSwab")
+            tableMapping.ColumnMappings.Add("HairSample", "HairSample")
             Me._adapter.TableMappings.Add(tableMapping)
             Me._adapter.DeleteCommand = New Global.System.Data.SqlClient.SqlCommand()
             Me._adapter.DeleteCommand.Connection = Me.Connection
-            Me._adapter.DeleteCommand.CommandText = "DELETE FROM Captures"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"WHERE (AnimalID = @Original_AnimalID)"
+            Me._adapter.DeleteCommand.CommandText = "DELETE FROM [Captures] WHERE (([AnimalID] = @Original_AnimalID) AND ([CaptureDate"& _ 
+                "] = @Original_CaptureDate))"
             Me._adapter.DeleteCommand.CommandType = Global.System.Data.CommandType.Text
-            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_AnimalID", Global.System.Data.SqlDbType.VarChar, 16, Global.System.Data.ParameterDirection.Input, 0, 0, "AnimalID", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
+            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_AnimalID", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "AnimalID", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
+            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_CaptureDate", Global.System.Data.SqlDbType.DateTime, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "CaptureDate", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
             Me._adapter.InsertCommand = New Global.System.Data.SqlClient.SqlCommand()
             Me._adapter.InsertCommand.Connection = Me.Connection
-            Me._adapter.InsertCommand.CommandText = "INSERT INTO Captures"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"             (AnimalID, CaptureDate, Crew, Shooter, Frequen"& _ 
-                "cy, VisualCollar, SerialNumber, CaptureLatitude, CaptureLongitude, OldFrequency,"& _ 
-                " OldVisualCollar, GeneralLocation, TimeStartChase, TimeFirstHitBounce, TimeSecor"& _ 
-                "dHitBounce, TimeThirdHitBounce, TimeVisibleEffect, "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"             TimeAnimalDown"& _ 
-                ", DartLocation, Anesthetic, AnestheticDosage_mg, AnestheticConcentration_mg_ml, "& _ 
-                "Sedative, SedativeDosage_mg, SedativeConcentration_mg_ml, NumHits, NumMisses, Dr"& _ 
-                "ugEffect, InitialBodyTemp, InitialBodyTempTime, FinalBodyTemperature, "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"        "& _ 
-                "     FinalBodyTemperatureTime, AdditionalDrugs, Sex, EstimatedAge, WithCalf, Lac"& _ 
-                "tating, BodyCondition, Weight_Kg, BodyLength, NeckCircumference, Jaw, Metatarsus"& _ 
-                "Length, HindfootLength, ChestGirth, BloodSampleRed, BloodSamplePurple, BloodSamp"& _ 
-                "leGreen, AnestheticReversal, "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"             AnestheticReversalDosage_mg, Anesthe"& _ 
-                "ticReversalConcentration_mg_ml, AnestheticReversalRoute, AnestheticReversalTime,"& _ 
-                " SedativeReversal, SedativeReversalDosage_mg, SedativeReversalConcentration_mg_m"& _ 
-                "l, SedativeReversalRoute, SedativeReversalTime, TimeStanding, "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"             Tim"& _ 
-                "eMobile, Comments, CaptureID, ProjectID, AnestheticDosage_ml, SedativeDosage_ml,"& _ 
-                " AnestheticReversalDosage_ml, SedativeReversalDosage_ml, ProtocolVersion, SOPNum"& _ 
-                "ber, SOPVersion, ProtocolIRMAReference)"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"VALUES (@AnimalID,@CaptureDate,@Crew,@S"& _ 
-                "hooter,@Frequency,@VisualCollar,@SerialNumber,@CaptureLatitude,@CaptureLongitude"& _ 
-                ",@OldFrequency,@OldVisualCollar,@GeneralLocation,@TimeStartChase,@TimeFirstHitBo"& _ 
-                "unce,@TimeSecordHitBounce,@TimeThirdHitBounce,@TimeVisibleEffect,@TimeAnimalDown"& _ 
-                ",@DartLocation,@Anesthetic,@AnestheticDosage_mg,@AnestheticConcentration_mg_ml,@"& _ 
-                "Sedative,@SedativeDosage_mg,@SedativeConcentration_mg_ml,@NumHits,@NumMisses,@Dr"& _ 
-                "ugEffect,@InitialBodyTemp,@InitialBodyTempTime,@FinalBodyTemperature,@FinalBodyT"& _ 
-                "emperatureTime,@AdditionalDrugs,@Sex,@EstimatedAge,@WithCalf,@Lactating,@BodyCon"& _ 
-                "dition,@Weight_Kg,@BodyLength,@NeckCircumference,@Jaw,@MetatarsusLength,@Hindfoo"& _ 
-                "tLength,@ChestGirth,@BloodSampleRed,@BloodSamplePurple,@BloodSampleGreen,@Anesth"& _ 
-                "eticReversal,@AnestheticReversalDosage_mg,@AnestheticReversalConcentration_mg_ml"& _ 
-                ",@AnestheticReversalRoute,@AnestheticReversalTime,@SedativeReversal,@SedativeRev"& _ 
-                "ersalDosage_mg,@SedativeReversalConcentration_mg_ml,@SedativeReversalRoute,@Seda"& _ 
-                "tiveReversalTime,@TimeStanding,@TimeMobile,@Comments,@CaptureID,@ProjectID,@Anes"& _ 
-                "theticDosage_ml,@SedativeDosage_ml,@AnestheticReversalDosage_ml,@SedativeReversa"& _ 
-                "lDosage_ml,@ProtocolVersion,@SOPNumber,@SOPVersion,@ProtocolIRMAReference); "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"SE"& _ 
-                "LECT AnimalID, CaptureDate, Crew, Shooter, Frequency, VisualCollar, SerialNumber"& _ 
-                ", CaptureLatitude, CaptureLongitude, OldFrequency, OldVisualCollar, GeneralLocat"& _ 
-                "ion, TimeStartChase, TimeFirstHitBounce, TimeSecordHitBounce, TimeThirdHitBounce"& _ 
-                ", TimeVisibleEffect, TimeAnimalDown, DartLocation, Anesthetic, AnestheticDosage_"& _ 
-                "mg, AnestheticConcentration_mg_ml, Sedative, SedativeDosage_mg, SedativeConcentr"& _ 
-                "ation_mg_ml, NumHits, NumMisses, DrugEffect, InitialBodyTemp, InitialBodyTempTim"& _ 
-                "e, FinalBodyTemperature, FinalBodyTemperatureTime, AdditionalDrugs, Sex, Estimat"& _ 
-                "edAge, WithCalf, Lactating, BodyCondition, Weight_Kg, BodyLength, NeckCircumfere"& _ 
-                "nce, Jaw, MetatarsusLength, HindfootLength, ChestGirth, BloodSampleRed, BloodSam"& _ 
-                "plePurple, BloodSampleGreen, AnestheticReversal, AnestheticReversalDosage_mg, An"& _ 
-                "estheticReversalConcentration_mg_ml, AnestheticReversalRoute, AnestheticReversal"& _ 
-                "Time, SedativeReversal, SedativeReversalDosage_mg, SedativeReversalConcentration"& _ 
-                "_mg_ml, SedativeReversalRoute, SedativeReversalTime, TimeStanding, TimeMobile, C"& _ 
-                "omments, CaptureID, RecordInsertedDate, RecordInsertedBy, ProjectID, TS, Anesthe"& _ 
-                "ticDosage_ml, SedativeDosage_ml, AnestheticReversalDosage_ml, SedativeReversalDo"& _ 
-                "sage_ml, ProtocolVersion, SOPNumber, SOPVersion, CertificationDate, CertifiedBy,"& _ 
-                " ProtocolIRMAReference, CertificationLevel FROM Captures WHERE (AnimalID = @Anim"& _ 
-                "alID)"
+            Me._adapter.InsertCommand.CommandText = "INSERT INTO [Captures] ([AnimalID], [CaptureDate], [Crew], [Shooter], [Frequency]"& _ 
+                ", [VisualCollar], [SerialNumber], [CaptureLatitude], [CaptureLongitude], [OldFre"& _ 
+                "quency], [OldVisualCollar], [GeneralLocation], [TimeStartChase], [TimeFirstHitBo"& _ 
+                "unce], [TimeSecordHitBounce], [TimeThirdHitBounce], [TimeVisibleEffect], [TimeAn"& _ 
+                "imalDown], [DartLocation], [Anesthetic], [AnestheticDosage_mg], [AnestheticConce"& _ 
+                "ntration_mg_ml], [Sedative], [SedativeDosage_mg], [SedativeConcentration_mg_ml],"& _ 
+                " [NumHits], [NumMisses], [DrugEffect], [InitialBodyTemp], [InitialBodyTempTime],"& _ 
+                " [FinalBodyTemperature], [FinalBodyTemperatureTime], [AdditionalDrugs], [Sex], ["& _ 
+                "EstimatedAge], [WithCalf], [Lactating], [BodyCondition], [Weight_Kg], [BodyLengt"& _ 
+                "h], [NeckCircumference], [Jaw], [MetatarsusLength], [HindfootLength], [ChestGirt"& _ 
+                "h], [BloodSampleRed], [BloodSamplePurple], [BloodSampleGreen], [AnestheticRevers"& _ 
+                "al], [AnestheticReversalDosage_mg], [AnestheticReversalConcentration_mg_ml], [An"& _ 
+                "estheticReversalRoute], [AnestheticReversalTime], [SedativeReversal], [SedativeR"& _ 
+                "eversalDosage_mg], [SedativeReversalConcentration_mg_ml], [SedativeReversalRoute"& _ 
+                "], [SedativeReversalTime], [TimeStanding], [TimeMobile], [Comments], [CaptureID]"& _ 
+                ", [RecordInsertedDate], [RecordInsertedBy], [ProjectID], [AnestheticDosage_ml], "& _ 
+                "[SedativeDosage_ml], [AnestheticReversalDosage_ml], [SedativeReversalDosage_ml],"& _ 
+                " [ProtocolVersion], [SOPNumber], [SOPVersion], [CertificationDate], [CertifiedBy"& _ 
+                "], [ProtocolIRMAReference], [CertificationLevel], [Park], [Pilot], [Handler], [C"& _ 
+                "aptureGroupSize], [AircraftType], [NasalSwab], [HairSample]) VALUES (@AnimalID, "& _ 
+                "@CaptureDate, @Crew, @Shooter, @Frequency, @VisualCollar, @SerialNumber, @Captur"& _ 
+                "eLatitude, @CaptureLongitude, @OldFrequency, @OldVisualCollar, @GeneralLocation,"& _ 
+                " @TimeStartChase, @TimeFirstHitBounce, @TimeSecordHitBounce, @TimeThirdHitBounce"& _ 
+                ", @TimeVisibleEffect, @TimeAnimalDown, @DartLocation, @Anesthetic, @AnestheticDo"& _ 
+                "sage_mg, @AnestheticConcentration_mg_ml, @Sedative, @SedativeDosage_mg, @Sedativ"& _ 
+                "eConcentration_mg_ml, @NumHits, @NumMisses, @DrugEffect, @InitialBodyTemp, @Init"& _ 
+                "ialBodyTempTime, @FinalBodyTemperature, @FinalBodyTemperatureTime, @AdditionalDr"& _ 
+                "ugs, @Sex, @EstimatedAge, @WithCalf, @Lactating, @BodyCondition, @Weight_Kg, @Bo"& _ 
+                "dyLength, @NeckCircumference, @Jaw, @MetatarsusLength, @HindfootLength, @ChestGi"& _ 
+                "rth, @BloodSampleRed, @BloodSamplePurple, @BloodSampleGreen, @AnestheticReversal"& _ 
+                ", @AnestheticReversalDosage_mg, @AnestheticReversalConcentration_mg_ml, @Anesthe"& _ 
+                "ticReversalRoute, @AnestheticReversalTime, @SedativeReversal, @SedativeReversalD"& _ 
+                "osage_mg, @SedativeReversalConcentration_mg_ml, @SedativeReversalRoute, @Sedativ"& _ 
+                "eReversalTime, @TimeStanding, @TimeMobile, @Comments, @CaptureID, @RecordInserte"& _ 
+                "dDate, @RecordInsertedBy, @ProjectID, @AnestheticDosage_ml, @SedativeDosage_ml, "& _ 
+                "@AnestheticReversalDosage_ml, @SedativeReversalDosage_ml, @ProtocolVersion, @SOP"& _ 
+                "Number, @SOPVersion, @CertificationDate, @CertifiedBy, @ProtocolIRMAReference, @"& _ 
+                "CertificationLevel, @Park, @Pilot, @Handler, @CaptureGroupSize, @AircraftType, @"& _ 
+                "NasalSwab, @HairSample);"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"SELECT AnimalID, CaptureDate, Crew, Shooter, Frequency"& _ 
+                ", VisualCollar, SerialNumber, CaptureLatitude, CaptureLongitude, OldFrequency, O"& _ 
+                "ldVisualCollar, GeneralLocation, TimeStartChase, TimeFirstHitBounce, TimeSecordH"& _ 
+                "itBounce, TimeThirdHitBounce, TimeVisibleEffect, TimeAnimalDown, DartLocation, A"& _ 
+                "nesthetic, AnestheticDosage_mg, AnestheticConcentration_mg_ml, Sedative, Sedativ"& _ 
+                "eDosage_mg, SedativeConcentration_mg_ml, NumHits, NumMisses, DrugEffect, Initial"& _ 
+                "BodyTemp, InitialBodyTempTime, FinalBodyTemperature, FinalBodyTemperatureTime, A"& _ 
+                "dditionalDrugs, Sex, EstimatedAge, WithCalf, Lactating, BodyCondition, Weight_Kg"& _ 
+                ", BodyLength, NeckCircumference, Jaw, MetatarsusLength, HindfootLength, ChestGir"& _ 
+                "th, BloodSampleRed, BloodSamplePurple, BloodSampleGreen, AnestheticReversal, Ane"& _ 
+                "stheticReversalDosage_mg, AnestheticReversalConcentration_mg_ml, AnestheticRever"& _ 
+                "salRoute, AnestheticReversalTime, SedativeReversal, SedativeReversalDosage_mg, S"& _ 
+                "edativeReversalConcentration_mg_ml, SedativeReversalRoute, SedativeReversalTime,"& _ 
+                " TimeStanding, TimeMobile, Comments, CaptureID, RecordInsertedDate, RecordInsert"& _ 
+                "edBy, ProjectID, TS, AnestheticDosage_ml, SedativeDosage_ml, AnestheticReversalD"& _ 
+                "osage_ml, SedativeReversalDosage_ml, ProtocolVersion, SOPNumber, SOPVersion, Cer"& _ 
+                "tificationDate, CertifiedBy, ProtocolIRMAReference, CertificationLevel, Park, Pi"& _ 
+                "lot, Handler, CaptureGroupSize, AircraftType, NasalSwab, HairSample FROM Capture"& _ 
+                "s WHERE (AnimalID = @AnimalID) AND (CaptureDate = @CaptureDate)"
             Me._adapter.InsertCommand.CommandType = Global.System.Data.CommandType.Text
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@AnimalID", Global.System.Data.SqlDbType.VarChar, 16, Global.System.Data.ParameterDirection.Input, 0, 0, "AnimalID", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@CaptureDate", Global.System.Data.SqlDbType.DateTime, 8, Global.System.Data.ParameterDirection.Input, 0, 0, "CaptureDate", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Crew", Global.System.Data.SqlDbType.VarChar, 255, Global.System.Data.ParameterDirection.Input, 0, 0, "Crew", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Shooter", Global.System.Data.SqlDbType.VarChar, 20, Global.System.Data.ParameterDirection.Input, 0, 0, "Shooter", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Frequency", Global.System.Data.SqlDbType.[Decimal], 5, Global.System.Data.ParameterDirection.Input, 7, 3, "Frequency", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@VisualCollar", Global.System.Data.SqlDbType.VarChar, 4, Global.System.Data.ParameterDirection.Input, 0, 0, "VisualCollar", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@SerialNumber", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 0, 0, "SerialNumber", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@CaptureLatitude", Global.System.Data.SqlDbType.[Decimal], 9, Global.System.Data.ParameterDirection.Input, 18, 9, "CaptureLatitude", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@CaptureLongitude", Global.System.Data.SqlDbType.[Decimal], 9, Global.System.Data.ParameterDirection.Input, 18, 9, "CaptureLongitude", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@OldFrequency", Global.System.Data.SqlDbType.[Decimal], 5, Global.System.Data.ParameterDirection.Input, 6, 3, "OldFrequency", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@OldVisualCollar", Global.System.Data.SqlDbType.VarChar, 4, Global.System.Data.ParameterDirection.Input, 0, 0, "OldVisualCollar", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@GeneralLocation", Global.System.Data.SqlDbType.VarChar, 255, Global.System.Data.ParameterDirection.Input, 0, 0, "GeneralLocation", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@TimeStartChase", Global.System.Data.SqlDbType.Time, 5, Global.System.Data.ParameterDirection.Input, 0, 0, "TimeStartChase", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@TimeFirstHitBounce", Global.System.Data.SqlDbType.Time, 5, Global.System.Data.ParameterDirection.Input, 0, 0, "TimeFirstHitBounce", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@TimeSecordHitBounce", Global.System.Data.SqlDbType.Time, 5, Global.System.Data.ParameterDirection.Input, 0, 0, "TimeSecordHitBounce", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@TimeThirdHitBounce", Global.System.Data.SqlDbType.Time, 5, Global.System.Data.ParameterDirection.Input, 0, 0, "TimeThirdHitBounce", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@TimeVisibleEffect", Global.System.Data.SqlDbType.Time, 5, Global.System.Data.ParameterDirection.Input, 0, 0, "TimeVisibleEffect", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@TimeAnimalDown", Global.System.Data.SqlDbType.Time, 5, Global.System.Data.ParameterDirection.Input, 0, 0, "TimeAnimalDown", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@DartLocation", Global.System.Data.SqlDbType.VarChar, 50, Global.System.Data.ParameterDirection.Input, 0, 0, "DartLocation", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Anesthetic", Global.System.Data.SqlDbType.VarChar, 50, Global.System.Data.ParameterDirection.Input, 0, 0, "Anesthetic", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@AnestheticDosage_mg", Global.System.Data.SqlDbType.[Decimal], 5, Global.System.Data.ParameterDirection.Input, 5, 2, "AnestheticDosage_mg", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@AnestheticConcentration_mg_ml", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 0, 0, "AnestheticConcentration_mg_ml", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Sedative", Global.System.Data.SqlDbType.VarChar, 50, Global.System.Data.ParameterDirection.Input, 0, 0, "Sedative", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@SedativeDosage_mg", Global.System.Data.SqlDbType.[Decimal], 5, Global.System.Data.ParameterDirection.Input, 5, 2, "SedativeDosage_mg", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@SedativeConcentration_mg_ml", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 0, 0, "SedativeConcentration_mg_ml", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@NumHits", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 0, 0, "NumHits", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@NumMisses", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 0, 0, "NumMisses", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@DrugEffect", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 0, 0, "DrugEffect", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@InitialBodyTemp", Global.System.Data.SqlDbType.[Decimal], 5, Global.System.Data.ParameterDirection.Input, 6, 2, "InitialBodyTemp", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@InitialBodyTempTime", Global.System.Data.SqlDbType.Time, 5, Global.System.Data.ParameterDirection.Input, 0, 0, "InitialBodyTempTime", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@FinalBodyTemperature", Global.System.Data.SqlDbType.[Decimal], 5, Global.System.Data.ParameterDirection.Input, 6, 2, "FinalBodyTemperature", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@FinalBodyTemperatureTime", Global.System.Data.SqlDbType.Time, 5, Global.System.Data.ParameterDirection.Input, 0, 0, "FinalBodyTemperatureTime", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@AdditionalDrugs", Global.System.Data.SqlDbType.VarChar, 100, Global.System.Data.ParameterDirection.Input, 0, 0, "AdditionalDrugs", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Sex", Global.System.Data.SqlDbType.[Char], 1, Global.System.Data.ParameterDirection.Input, 0, 0, "Sex", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@EstimatedAge", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 0, 0, "EstimatedAge", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@WithCalf", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 0, 0, "WithCalf", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Lactating", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 0, 0, "Lactating", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@BodyCondition", Global.System.Data.SqlDbType.VarChar, 10, Global.System.Data.ParameterDirection.Input, 0, 0, "BodyCondition", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Weight_Kg", Global.System.Data.SqlDbType.[Decimal], 5, Global.System.Data.ParameterDirection.Input, 6, 1, "Weight_Kg", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@BodyLength", Global.System.Data.SqlDbType.[Decimal], 5, Global.System.Data.ParameterDirection.Input, 6, 1, "BodyLength", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@NeckCircumference", Global.System.Data.SqlDbType.[Decimal], 5, Global.System.Data.ParameterDirection.Input, 6, 1, "NeckCircumference", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Jaw", Global.System.Data.SqlDbType.[Decimal], 5, Global.System.Data.ParameterDirection.Input, 6, 1, "Jaw", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@MetatarsusLength", Global.System.Data.SqlDbType.[Decimal], 5, Global.System.Data.ParameterDirection.Input, 6, 1, "MetatarsusLength", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@HindfootLength", Global.System.Data.SqlDbType.[Decimal], 5, Global.System.Data.ParameterDirection.Input, 6, 1, "HindfootLength", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@ChestGirth", Global.System.Data.SqlDbType.[Decimal], 5, Global.System.Data.ParameterDirection.Input, 6, 1, "ChestGirth", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@BloodSampleRed", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 0, 0, "BloodSampleRed", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@BloodSamplePurple", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 0, 0, "BloodSamplePurple", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@BloodSampleGreen", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 0, 0, "BloodSampleGreen", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@AnestheticReversal", Global.System.Data.SqlDbType.VarChar, 50, Global.System.Data.ParameterDirection.Input, 0, 0, "AnestheticReversal", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@AnestheticReversalDosage_mg", Global.System.Data.SqlDbType.[Decimal], 5, Global.System.Data.ParameterDirection.Input, 5, 2, "AnestheticReversalDosage_mg", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@AnestheticReversalConcentration_mg_ml", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 0, 0, "AnestheticReversalConcentration_mg_ml", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@AnestheticReversalRoute", Global.System.Data.SqlDbType.VarChar, 50, Global.System.Data.ParameterDirection.Input, 0, 0, "AnestheticReversalRoute", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@AnestheticReversalTime", Global.System.Data.SqlDbType.Time, 5, Global.System.Data.ParameterDirection.Input, 0, 0, "AnestheticReversalTime", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@SedativeReversal", Global.System.Data.SqlDbType.VarChar, 50, Global.System.Data.ParameterDirection.Input, 0, 0, "SedativeReversal", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@SedativeReversalDosage_mg", Global.System.Data.SqlDbType.[Decimal], 5, Global.System.Data.ParameterDirection.Input, 5, 2, "SedativeReversalDosage_mg", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@SedativeReversalConcentration_mg_ml", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 0, 0, "SedativeReversalConcentration_mg_ml", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@SedativeReversalRoute", Global.System.Data.SqlDbType.VarChar, 50, Global.System.Data.ParameterDirection.Input, 0, 0, "SedativeReversalRoute", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@SedativeReversalTime", Global.System.Data.SqlDbType.Time, 5, Global.System.Data.ParameterDirection.Input, 0, 0, "SedativeReversalTime", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@TimeStanding", Global.System.Data.SqlDbType.Time, 5, Global.System.Data.ParameterDirection.Input, 0, 0, "TimeStanding", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@TimeMobile", Global.System.Data.SqlDbType.Time, 5, Global.System.Data.ParameterDirection.Input, 0, 0, "TimeMobile", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Comments", Global.System.Data.SqlDbType.VarChar, 1000, Global.System.Data.ParameterDirection.Input, 0, 0, "Comments", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@CaptureID", Global.System.Data.SqlDbType.VarChar, 50, Global.System.Data.ParameterDirection.Input, 0, 0, "CaptureID", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@ProjectID", Global.System.Data.SqlDbType.VarChar, 16, Global.System.Data.ParameterDirection.Input, 0, 0, "ProjectID", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@AnestheticDosage_ml", Global.System.Data.SqlDbType.[Decimal], 5, Global.System.Data.ParameterDirection.Input, 5, 2, "AnestheticDosage_ml", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@SedativeDosage_ml", Global.System.Data.SqlDbType.[Decimal], 5, Global.System.Data.ParameterDirection.Input, 5, 2, "SedativeDosage_ml", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@AnestheticReversalDosage_ml", Global.System.Data.SqlDbType.[Decimal], 5, Global.System.Data.ParameterDirection.Input, 5, 2, "AnestheticReversalDosage_ml", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@SedativeReversalDosage_ml", Global.System.Data.SqlDbType.[Decimal], 5, Global.System.Data.ParameterDirection.Input, 5, 2, "SedativeReversalDosage_ml", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@ProtocolVersion", Global.System.Data.SqlDbType.[Decimal], 5, Global.System.Data.ParameterDirection.Input, 6, 2, "ProtocolVersion", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@SOPNumber", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 0, 0, "SOPNumber", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@SOPVersion", Global.System.Data.SqlDbType.[Decimal], 5, Global.System.Data.ParameterDirection.Input, 6, 2, "SOPVersion", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@ProtocolIRMAReference", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 0, 0, "ProtocolIRMAReference", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@AnimalID", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "AnimalID", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@CaptureDate", Global.System.Data.SqlDbType.DateTime, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "CaptureDate", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Crew", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Crew", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Shooter", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Shooter", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Frequency", Global.System.Data.SqlDbType.[Decimal], 0, Global.System.Data.ParameterDirection.Input, 7, 3, "Frequency", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@VisualCollar", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "VisualCollar", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@SerialNumber", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "SerialNumber", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@CaptureLatitude", Global.System.Data.SqlDbType.[Decimal], 0, Global.System.Data.ParameterDirection.Input, 18, 9, "CaptureLatitude", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@CaptureLongitude", Global.System.Data.SqlDbType.[Decimal], 0, Global.System.Data.ParameterDirection.Input, 18, 9, "CaptureLongitude", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@OldFrequency", Global.System.Data.SqlDbType.[Decimal], 0, Global.System.Data.ParameterDirection.Input, 6, 3, "OldFrequency", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@OldVisualCollar", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "OldVisualCollar", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@GeneralLocation", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "GeneralLocation", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@TimeStartChase", Global.System.Data.SqlDbType.Time, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "TimeStartChase", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@TimeFirstHitBounce", Global.System.Data.SqlDbType.Time, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "TimeFirstHitBounce", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@TimeSecordHitBounce", Global.System.Data.SqlDbType.Time, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "TimeSecordHitBounce", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@TimeThirdHitBounce", Global.System.Data.SqlDbType.Time, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "TimeThirdHitBounce", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@TimeVisibleEffect", Global.System.Data.SqlDbType.Time, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "TimeVisibleEffect", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@TimeAnimalDown", Global.System.Data.SqlDbType.Time, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "TimeAnimalDown", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@DartLocation", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "DartLocation", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Anesthetic", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Anesthetic", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@AnestheticDosage_mg", Global.System.Data.SqlDbType.[Decimal], 0, Global.System.Data.ParameterDirection.Input, 5, 2, "AnestheticDosage_mg", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@AnestheticConcentration_mg_ml", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "AnestheticConcentration_mg_ml", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Sedative", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Sedative", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@SedativeDosage_mg", Global.System.Data.SqlDbType.[Decimal], 0, Global.System.Data.ParameterDirection.Input, 5, 2, "SedativeDosage_mg", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@SedativeConcentration_mg_ml", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "SedativeConcentration_mg_ml", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@NumHits", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "NumHits", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@NumMisses", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "NumMisses", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@DrugEffect", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "DrugEffect", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@InitialBodyTemp", Global.System.Data.SqlDbType.[Decimal], 0, Global.System.Data.ParameterDirection.Input, 6, 2, "InitialBodyTemp", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@InitialBodyTempTime", Global.System.Data.SqlDbType.Time, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "InitialBodyTempTime", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@FinalBodyTemperature", Global.System.Data.SqlDbType.[Decimal], 0, Global.System.Data.ParameterDirection.Input, 6, 2, "FinalBodyTemperature", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@FinalBodyTemperatureTime", Global.System.Data.SqlDbType.Time, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "FinalBodyTemperatureTime", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@AdditionalDrugs", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "AdditionalDrugs", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Sex", Global.System.Data.SqlDbType.[Char], 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Sex", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@EstimatedAge", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "EstimatedAge", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@WithCalf", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "WithCalf", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Lactating", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Lactating", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@BodyCondition", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "BodyCondition", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Weight_Kg", Global.System.Data.SqlDbType.[Decimal], 0, Global.System.Data.ParameterDirection.Input, 6, 1, "Weight_Kg", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@BodyLength", Global.System.Data.SqlDbType.[Decimal], 0, Global.System.Data.ParameterDirection.Input, 6, 1, "BodyLength", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@NeckCircumference", Global.System.Data.SqlDbType.[Decimal], 0, Global.System.Data.ParameterDirection.Input, 6, 1, "NeckCircumference", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Jaw", Global.System.Data.SqlDbType.[Decimal], 0, Global.System.Data.ParameterDirection.Input, 6, 1, "Jaw", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@MetatarsusLength", Global.System.Data.SqlDbType.[Decimal], 0, Global.System.Data.ParameterDirection.Input, 6, 1, "MetatarsusLength", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@HindfootLength", Global.System.Data.SqlDbType.[Decimal], 0, Global.System.Data.ParameterDirection.Input, 6, 1, "HindfootLength", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@ChestGirth", Global.System.Data.SqlDbType.[Decimal], 0, Global.System.Data.ParameterDirection.Input, 6, 1, "ChestGirth", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@BloodSampleRed", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "BloodSampleRed", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@BloodSamplePurple", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "BloodSamplePurple", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@BloodSampleGreen", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "BloodSampleGreen", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@AnestheticReversal", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "AnestheticReversal", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@AnestheticReversalDosage_mg", Global.System.Data.SqlDbType.[Decimal], 0, Global.System.Data.ParameterDirection.Input, 5, 2, "AnestheticReversalDosage_mg", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@AnestheticReversalConcentration_mg_ml", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "AnestheticReversalConcentration_mg_ml", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@AnestheticReversalRoute", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "AnestheticReversalRoute", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@AnestheticReversalTime", Global.System.Data.SqlDbType.Time, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "AnestheticReversalTime", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@SedativeReversal", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "SedativeReversal", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@SedativeReversalDosage_mg", Global.System.Data.SqlDbType.[Decimal], 0, Global.System.Data.ParameterDirection.Input, 5, 2, "SedativeReversalDosage_mg", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@SedativeReversalConcentration_mg_ml", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "SedativeReversalConcentration_mg_ml", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@SedativeReversalRoute", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "SedativeReversalRoute", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@SedativeReversalTime", Global.System.Data.SqlDbType.Time, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "SedativeReversalTime", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@TimeStanding", Global.System.Data.SqlDbType.Time, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "TimeStanding", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@TimeMobile", Global.System.Data.SqlDbType.Time, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "TimeMobile", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Comments", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Comments", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@CaptureID", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "CaptureID", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@RecordInsertedDate", Global.System.Data.SqlDbType.DateTime, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "RecordInsertedDate", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@RecordInsertedBy", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "RecordInsertedBy", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@ProjectID", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "ProjectID", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@AnestheticDosage_ml", Global.System.Data.SqlDbType.[Decimal], 0, Global.System.Data.ParameterDirection.Input, 5, 2, "AnestheticDosage_ml", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@SedativeDosage_ml", Global.System.Data.SqlDbType.[Decimal], 0, Global.System.Data.ParameterDirection.Input, 5, 2, "SedativeDosage_ml", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@AnestheticReversalDosage_ml", Global.System.Data.SqlDbType.[Decimal], 0, Global.System.Data.ParameterDirection.Input, 5, 2, "AnestheticReversalDosage_ml", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@SedativeReversalDosage_ml", Global.System.Data.SqlDbType.[Decimal], 0, Global.System.Data.ParameterDirection.Input, 5, 2, "SedativeReversalDosage_ml", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@ProtocolVersion", Global.System.Data.SqlDbType.[Decimal], 0, Global.System.Data.ParameterDirection.Input, 6, 2, "ProtocolVersion", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@SOPNumber", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "SOPNumber", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@SOPVersion", Global.System.Data.SqlDbType.[Decimal], 0, Global.System.Data.ParameterDirection.Input, 6, 2, "SOPVersion", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@CertificationDate", Global.System.Data.SqlDbType.DateTime, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "CertificationDate", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@CertifiedBy", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "CertifiedBy", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@ProtocolIRMAReference", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "ProtocolIRMAReference", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@CertificationLevel", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "CertificationLevel", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Park", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Park", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Pilot", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Pilot", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Handler", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Handler", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@CaptureGroupSize", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "CaptureGroupSize", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@AircraftType", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "AircraftType", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@NasalSwab", Global.System.Data.SqlDbType.Bit, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "NasalSwab", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@HairSample", Global.System.Data.SqlDbType.Bit, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "HairSample", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.UpdateCommand = New Global.System.Data.SqlClient.SqlCommand()
             Me._adapter.UpdateCommand.Connection = Me.Connection
             Me._adapter.UpdateCommand.CommandText = "UPDATE Captures"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"SET       AnimalID = @AnimalID, CaptureDate = @CaptureDate, Crew"& _ 
@@ -8798,24 +9153,28 @@ Namespace WRST_CaribouDataSetTableAdapters
                 "olVersion = @ProtocolVersion, "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"             SOPNumber = @SOPNumber, SOPVersion "& _ 
                 "= @SOPVersion, CertificationDate = @CertificationDate, CertifiedBy = @CertifiedB"& _ 
                 "y, ProtocolIRMAReference = @ProtocolIRMAReference, CertificationLevel = @Certifi"& _ 
-                "cationLevel"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"WHERE (AnimalID = @Original_AnimalID); "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"SELECT AnimalID, CaptureDa"& _ 
-                "te, Crew, Shooter, Frequency, VisualCollar, SerialNumber, CaptureLatitude, Captu"& _ 
-                "reLongitude, OldFrequency, OldVisualCollar, GeneralLocation, TimeStartChase, Tim"& _ 
-                "eFirstHitBounce, TimeSecordHitBounce, TimeThirdHitBounce, TimeVisibleEffect, Tim"& _ 
-                "eAnimalDown, DartLocation, Anesthetic, AnestheticDosage_mg, AnestheticConcentrat"& _ 
-                "ion_mg_ml, Sedative, SedativeDosage_mg, SedativeConcentration_mg_ml, NumHits, Nu"& _ 
-                "mMisses, DrugEffect, InitialBodyTemp, InitialBodyTempTime, FinalBodyTemperature,"& _ 
-                " FinalBodyTemperatureTime, AdditionalDrugs, Sex, EstimatedAge, WithCalf, Lactati"& _ 
-                "ng, BodyCondition, Weight_Kg, BodyLength, NeckCircumference, Jaw, MetatarsusLeng"& _ 
-                "th, HindfootLength, ChestGirth, BloodSampleRed, BloodSamplePurple, BloodSampleGr"& _ 
-                "een, AnestheticReversal, AnestheticReversalDosage_mg, AnestheticReversalConcentr"& _ 
-                "ation_mg_ml, AnestheticReversalRoute, AnestheticReversalTime, SedativeReversal, "& _ 
-                "SedativeReversalDosage_mg, SedativeReversalConcentration_mg_ml, SedativeReversal"& _ 
-                "Route, SedativeReversalTime, TimeStanding, TimeMobile, Comments, CaptureID, Reco"& _ 
-                "rdInsertedDate, RecordInsertedBy, ProjectID, TS, AnestheticDosage_ml, SedativeDo"& _ 
-                "sage_ml, AnestheticReversalDosage_ml, SedativeReversalDosage_ml, ProtocolVersion"& _ 
-                ", SOPNumber, SOPVersion, CertificationDate, CertifiedBy, ProtocolIRMAReference, "& _ 
-                "CertificationLevel FROM Captures WHERE (AnimalID = @AnimalID)"
+                "cationLevel, Park = @Park, Pilot = @Pilot, Handler = @Handler, "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"             Ca"& _ 
+                "ptureGroupSize = @CaptureGroupSize, AircraftType = @AircraftType, NasalSwab = @N"& _ 
+                "asalSwab, HairSample = @HairSample"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"WHERE (AnimalID = @Original_AnimalID) AND (C"& _ 
+                "aptureDate = @Original_CaptureDate);  "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"SELECT AnimalID, CaptureDate, Crew, Shoo"& _ 
+                "ter, Frequency, VisualCollar, SerialNumber, CaptureLatitude, CaptureLongitude, O"& _ 
+                "ldFrequency, OldVisualCollar, GeneralLocation, TimeStartChase, TimeFirstHitBounc"& _ 
+                "e, TimeSecordHitBounce, TimeThirdHitBounce, TimeVisibleEffect, TimeAnimalDown, D"& _ 
+                "artLocation, Anesthetic, AnestheticDosage_mg, AnestheticConcentration_mg_ml, Sed"& _ 
+                "ative, SedativeDosage_mg, SedativeConcentration_mg_ml, NumHits, NumMisses, DrugE"& _ 
+                "ffect, InitialBodyTemp, InitialBodyTempTime, FinalBodyTemperature, FinalBodyTemp"& _ 
+                "eratureTime, AdditionalDrugs, Sex, EstimatedAge, WithCalf, Lactating, BodyCondit"& _ 
+                "ion, Weight_Kg, BodyLength, NeckCircumference, Jaw, MetatarsusLength, HindfootLe"& _ 
+                "ngth, ChestGirth, BloodSampleRed, BloodSamplePurple, BloodSampleGreen, Anestheti"& _ 
+                "cReversal, AnestheticReversalDosage_mg, AnestheticReversalConcentration_mg_ml, A"& _ 
+                "nestheticReversalRoute, AnestheticReversalTime, SedativeReversal, SedativeRevers"& _ 
+                "alDosage_mg, SedativeReversalConcentration_mg_ml, SedativeReversalRoute, Sedativ"& _ 
+                "eReversalTime, TimeStanding, TimeMobile, Comments, CaptureID, RecordInsertedDate"& _ 
+                ", RecordInsertedBy, ProjectID, TS, AnestheticDosage_ml, SedativeDosage_ml, Anest"& _ 
+                "heticReversalDosage_ml, SedativeReversalDosage_ml, ProtocolVersion, SOPNumber, S"& _ 
+                "OPVersion, CertificationDate, CertifiedBy, ProtocolIRMAReference, CertificationL"& _ 
+                "evel, Park, Pilot, Handler, CaptureGroupSize, AircraftType, NasalSwab, HairSampl"& _ 
+                "e FROM Captures WHERE (AnimalID = @AnimalID) AND (CaptureDate = @CaptureDate)"
             Me._adapter.UpdateCommand.CommandType = Global.System.Data.CommandType.Text
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@AnimalID", Global.System.Data.SqlDbType.VarChar, 16, Global.System.Data.ParameterDirection.Input, 0, 0, "AnimalID", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@CaptureDate", Global.System.Data.SqlDbType.DateTime, 8, Global.System.Data.ParameterDirection.Input, 0, 0, "CaptureDate", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
@@ -8877,7 +9236,7 @@ Namespace WRST_CaribouDataSetTableAdapters
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@SedativeReversalTime", Global.System.Data.SqlDbType.Time, 5, Global.System.Data.ParameterDirection.Input, 0, 0, "SedativeReversalTime", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@TimeStanding", Global.System.Data.SqlDbType.Time, 5, Global.System.Data.ParameterDirection.Input, 0, 0, "TimeStanding", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@TimeMobile", Global.System.Data.SqlDbType.Time, 5, Global.System.Data.ParameterDirection.Input, 0, 0, "TimeMobile", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Comments", Global.System.Data.SqlDbType.VarChar, 1000, Global.System.Data.ParameterDirection.Input, 0, 0, "Comments", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Comments", Global.System.Data.SqlDbType.VarChar, 3000, Global.System.Data.ParameterDirection.Input, 0, 0, "Comments", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@CaptureID", Global.System.Data.SqlDbType.VarChar, 50, Global.System.Data.ParameterDirection.Input, 0, 0, "CaptureID", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@RecordInsertedDate", Global.System.Data.SqlDbType.DateTime, 8, Global.System.Data.ParameterDirection.Input, 0, 0, "RecordInsertedDate", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@RecordInsertedBy", Global.System.Data.SqlDbType.NVarChar, 50, Global.System.Data.ParameterDirection.Input, 0, 0, "RecordInsertedBy", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
@@ -8893,7 +9252,15 @@ Namespace WRST_CaribouDataSetTableAdapters
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@CertifiedBy", Global.System.Data.SqlDbType.VarChar, 50, Global.System.Data.ParameterDirection.Input, 0, 0, "CertifiedBy", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@ProtocolIRMAReference", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 0, 0, "ProtocolIRMAReference", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@CertificationLevel", Global.System.Data.SqlDbType.VarChar, 15, Global.System.Data.ParameterDirection.Input, 0, 0, "CertificationLevel", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Park", Global.System.Data.SqlDbType.VarChar, 4, Global.System.Data.ParameterDirection.Input, 0, 0, "Park", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Pilot", Global.System.Data.SqlDbType.VarChar, 50, Global.System.Data.ParameterDirection.Input, 0, 0, "Pilot", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Handler", Global.System.Data.SqlDbType.VarChar, 50, Global.System.Data.ParameterDirection.Input, 0, 0, "Handler", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@CaptureGroupSize", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 0, 0, "CaptureGroupSize", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@AircraftType", Global.System.Data.SqlDbType.VarChar, 20, Global.System.Data.ParameterDirection.Input, 0, 0, "AircraftType", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@NasalSwab", Global.System.Data.SqlDbType.Bit, 1, Global.System.Data.ParameterDirection.Input, 0, 0, "NasalSwab", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@HairSample", Global.System.Data.SqlDbType.Bit, 1, Global.System.Data.ParameterDirection.Input, 0, 0, "HairSample", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_AnimalID", Global.System.Data.SqlDbType.VarChar, 16, Global.System.Data.ParameterDirection.Input, 0, 0, "AnimalID", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_CaptureDate", Global.System.Data.SqlDbType.DateTime, 8, Global.System.Data.ParameterDirection.Input, 0, 0, "CaptureDate", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -8912,20 +9279,22 @@ Namespace WRST_CaribouDataSetTableAdapters
             Me._commandCollection(0).CommandText = "SELECT AnimalID, CaptureDate, Crew, Shooter, Frequency, VisualCollar, SerialNumbe"& _ 
                 "r, CaptureLatitude, CaptureLongitude, OldFrequency, OldVisualCollar, GeneralLoca"& _ 
                 "tion, TimeStartChase, TimeFirstHitBounce, TimeSecordHitBounce, TimeThirdHitBounc"& _ 
-                "e, TimeVisibleEffect, TimeAnimalDown, DartLocation, Anesthetic, AnestheticDosage"& _ 
-                "_mg, AnestheticConcentration_mg_ml, Sedative, SedativeDosage_mg, SedativeConcent"& _ 
-                "ration_mg_ml, NumHits, NumMisses, DrugEffect, InitialBodyTemp, InitialBodyTempTi"& _ 
-                "me, FinalBodyTemperature, FinalBodyTemperatureTime, AdditionalDrugs, Sex, Estima"& _ 
-                "tedAge, WithCalf, Lactating, BodyCondition, Weight_Kg, BodyLength, NeckCircumfer"& _ 
-                "ence, Jaw, MetatarsusLength, HindfootLength, ChestGirth, BloodSampleRed, BloodSa"& _ 
-                "mplePurple, BloodSampleGreen, AnestheticReversal, AnestheticReversalDosage_mg, A"& _ 
-                "nestheticReversalConcentration_mg_ml, AnestheticReversalRoute, AnestheticReversa"& _ 
-                "lTime, SedativeReversal, SedativeReversalDosage_mg, SedativeReversalConcentratio"& _ 
-                "n_mg_ml, SedativeReversalRoute, SedativeReversalTime, TimeStanding, TimeMobile, "& _ 
-                "Comments, CaptureID, RecordInsertedDate, RecordInsertedBy, ProjectID, TS, Anesth"& _ 
-                "eticDosage_ml, SedativeDosage_ml, AnestheticReversalDosage_ml, SedativeReversalD"& _ 
-                "osage_ml, ProtocolVersion, SOPNumber, SOPVersion, CertificationDate, CertifiedBy"& _ 
-                ", ProtocolIRMAReference, CertificationLevel FROM dbo.Captures"
+                "e, TimeVisibleEffect, "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"             TimeAnimalDown, DartLocation, Anesthetic, A"& _ 
+                "nestheticDosage_mg, AnestheticConcentration_mg_ml, Sedative, SedativeDosage_mg, "& _ 
+                "SedativeConcentration_mg_ml, NumHits, NumMisses, DrugEffect, InitialBodyTemp, In"& _ 
+                "itialBodyTempTime, FinalBodyTemperature, "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"             FinalBodyTemperatureTime"& _ 
+                ", AdditionalDrugs, Sex, EstimatedAge, WithCalf, Lactating, BodyCondition, Weight"& _ 
+                "_Kg, BodyLength, NeckCircumference, Jaw, MetatarsusLength, HindfootLength, Chest"& _ 
+                "Girth, BloodSampleRed, BloodSamplePurple, BloodSampleGreen, AnestheticReversal, "& _ 
+                ""&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"             AnestheticReversalDosage_mg, AnestheticReversalConcentration_mg_m"& _ 
+                "l, AnestheticReversalRoute, AnestheticReversalTime, SedativeReversal, SedativeRe"& _ 
+                "versalDosage_mg, SedativeReversalConcentration_mg_ml, SedativeReversalRoute, Sed"& _ 
+                "ativeReversalTime, TimeStanding, "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"             TimeMobile, Comments, CaptureID,"& _ 
+                " RecordInsertedDate, RecordInsertedBy, ProjectID, TS, AnestheticDosage_ml, Sedat"& _ 
+                "iveDosage_ml, AnestheticReversalDosage_ml, SedativeReversalDosage_ml, ProtocolVe"& _ 
+                "rsion, SOPNumber, SOPVersion, CertificationDate, CertifiedBy, "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"             Pro"& _ 
+                "tocolIRMAReference, CertificationLevel, Park, Pilot, Handler, CaptureGroupSize, "& _ 
+                "AircraftType, NasalSwab, HairSample"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"FROM   Captures"
             Me._commandCollection(0).CommandType = Global.System.Data.CommandType.Text
         End Sub
         
@@ -8985,12 +9354,13 @@ Namespace WRST_CaribouDataSetTableAdapters
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
          Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
          Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Delete, true)>  _
-        Public Overloads Overridable Function Delete(ByVal Original_AnimalID As String) As Integer
+        Public Overloads Overridable Function Delete(ByVal Original_AnimalID As String, ByVal Original_CaptureDate As Date) As Integer
             If (Original_AnimalID Is Nothing) Then
                 Throw New Global.System.ArgumentNullException("Original_AnimalID")
             Else
                 Me.Adapter.DeleteCommand.Parameters(0).Value = CType(Original_AnimalID,String)
             End If
+            Me.Adapter.DeleteCommand.Parameters(1).Value = CType(Original_CaptureDate,Date)
             Dim previousConnectionState As Global.System.Data.ConnectionState = Me.Adapter.DeleteCommand.Connection.State
             If ((Me.Adapter.DeleteCommand.Connection.State And Global.System.Data.ConnectionState.Open)  _
                         <> Global.System.Data.ConnectionState.Open) Then
@@ -9023,12 +9393,12 @@ Namespace WRST_CaribouDataSetTableAdapters
                     ByVal OldFrequency As Global.System.Nullable(Of Decimal),  _
                     ByVal OldVisualCollar As String,  _
                     ByVal GeneralLocation As String,  _
-                    ByVal TimeStartChase As String,  _
-                    ByVal TimeFirstHitBounce As String,  _
-                    ByVal TimeSecordHitBounce As String,  _
-                    ByVal TimeThirdHitBounce As String,  _
-                    ByVal TimeVisibleEffect As String,  _
-                    ByVal TimeAnimalDown As String,  _
+                    ByVal TimeStartChase As Global.System.Nullable(Of Global.System.TimeSpan),  _
+                    ByVal TimeFirstHitBounce As Global.System.Nullable(Of Global.System.TimeSpan),  _
+                    ByVal TimeSecordHitBounce As Global.System.Nullable(Of Global.System.TimeSpan),  _
+                    ByVal TimeThirdHitBounce As Global.System.Nullable(Of Global.System.TimeSpan),  _
+                    ByVal TimeVisibleEffect As Global.System.Nullable(Of Global.System.TimeSpan),  _
+                    ByVal TimeAnimalDown As Global.System.Nullable(Of Global.System.TimeSpan),  _
                     ByVal DartLocation As String,  _
                     ByVal Anesthetic As String,  _
                     ByVal AnestheticDosage_mg As Global.System.Nullable(Of Decimal),  _
@@ -9040,9 +9410,9 @@ Namespace WRST_CaribouDataSetTableAdapters
                     ByVal NumMisses As Global.System.Nullable(Of Integer),  _
                     ByVal DrugEffect As Global.System.Nullable(Of Integer),  _
                     ByVal InitialBodyTemp As Global.System.Nullable(Of Decimal),  _
-                    ByVal InitialBodyTempTime As String,  _
+                    ByVal InitialBodyTempTime As Global.System.Nullable(Of Global.System.TimeSpan),  _
                     ByVal FinalBodyTemperature As Global.System.Nullable(Of Decimal),  _
-                    ByVal FinalBodyTemperatureTime As String,  _
+                    ByVal FinalBodyTemperatureTime As Global.System.Nullable(Of Global.System.TimeSpan),  _
                     ByVal AdditionalDrugs As String,  _
                     ByVal Sex As String,  _
                     ByVal EstimatedAge As Global.System.Nullable(Of Integer),  _
@@ -9063,16 +9433,18 @@ Namespace WRST_CaribouDataSetTableAdapters
                     ByVal AnestheticReversalDosage_mg As Global.System.Nullable(Of Decimal),  _
                     ByVal AnestheticReversalConcentration_mg_ml As Global.System.Nullable(Of Integer),  _
                     ByVal AnestheticReversalRoute As String,  _
-                    ByVal AnestheticReversalTime As String,  _
+                    ByVal AnestheticReversalTime As Global.System.Nullable(Of Global.System.TimeSpan),  _
                     ByVal SedativeReversal As String,  _
                     ByVal SedativeReversalDosage_mg As Global.System.Nullable(Of Decimal),  _
                     ByVal SedativeReversalConcentration_mg_ml As Global.System.Nullable(Of Integer),  _
                     ByVal SedativeReversalRoute As String,  _
-                    ByVal SedativeReversalTime As String,  _
-                    ByVal TimeStanding As String,  _
-                    ByVal TimeMobile As String,  _
+                    ByVal SedativeReversalTime As Global.System.Nullable(Of Global.System.TimeSpan),  _
+                    ByVal TimeStanding As Global.System.Nullable(Of Global.System.TimeSpan),  _
+                    ByVal TimeMobile As Global.System.Nullable(Of Global.System.TimeSpan),  _
                     ByVal Comments As String,  _
                     ByVal CaptureID As String,  _
+                    ByVal RecordInsertedDate As Date,  _
+                    ByVal RecordInsertedBy As String,  _
                     ByVal ProjectID As String,  _
                     ByVal AnestheticDosage_ml As Global.System.Nullable(Of Decimal),  _
                     ByVal SedativeDosage_ml As Global.System.Nullable(Of Decimal),  _
@@ -9081,7 +9453,17 @@ Namespace WRST_CaribouDataSetTableAdapters
                     ByVal ProtocolVersion As Decimal,  _
                     ByVal SOPNumber As Integer,  _
                     ByVal SOPVersion As Decimal,  _
-                    ByVal ProtocolIRMAReference As Global.System.Nullable(Of Integer)) As Integer
+                    ByVal CertificationDate As Global.System.Nullable(Of Date),  _
+                    ByVal CertifiedBy As String,  _
+                    ByVal ProtocolIRMAReference As Global.System.Nullable(Of Integer),  _
+                    ByVal CertificationLevel As String,  _
+                    ByVal Park As String,  _
+                    ByVal Pilot As String,  _
+                    ByVal Handler As String,  _
+                    ByVal CaptureGroupSize As Global.System.Nullable(Of Integer),  _
+                    ByVal AircraftType As String,  _
+                    ByVal NasalSwab As Global.System.Nullable(Of Boolean),  _
+                    ByVal HairSample As Global.System.Nullable(Of Boolean)) As Integer
             If (AnimalID Is Nothing) Then
                 Throw New Global.System.ArgumentNullException("AnimalID")
             Else
@@ -9138,35 +9520,35 @@ Namespace WRST_CaribouDataSetTableAdapters
             Else
                 Me.Adapter.InsertCommand.Parameters(11).Value = CType(GeneralLocation,String)
             End If
-            If (TimeStartChase Is Nothing) Then
+            If (TimeStartChase.HasValue = true) Then
+                Me.Adapter.InsertCommand.Parameters(12).Value = CType(TimeStartChase.Value,System.TimeSpan)
+            Else
                 Me.Adapter.InsertCommand.Parameters(12).Value = Global.System.DBNull.Value
-            Else
-                Me.Adapter.InsertCommand.Parameters(12).Value = CType(TimeStartChase,String)
             End If
-            If (TimeFirstHitBounce Is Nothing) Then
+            If (TimeFirstHitBounce.HasValue = true) Then
+                Me.Adapter.InsertCommand.Parameters(13).Value = CType(TimeFirstHitBounce.Value,System.TimeSpan)
+            Else
                 Me.Adapter.InsertCommand.Parameters(13).Value = Global.System.DBNull.Value
-            Else
-                Me.Adapter.InsertCommand.Parameters(13).Value = CType(TimeFirstHitBounce,String)
             End If
-            If (TimeSecordHitBounce Is Nothing) Then
+            If (TimeSecordHitBounce.HasValue = true) Then
+                Me.Adapter.InsertCommand.Parameters(14).Value = CType(TimeSecordHitBounce.Value,System.TimeSpan)
+            Else
                 Me.Adapter.InsertCommand.Parameters(14).Value = Global.System.DBNull.Value
-            Else
-                Me.Adapter.InsertCommand.Parameters(14).Value = CType(TimeSecordHitBounce,String)
             End If
-            If (TimeThirdHitBounce Is Nothing) Then
+            If (TimeThirdHitBounce.HasValue = true) Then
+                Me.Adapter.InsertCommand.Parameters(15).Value = CType(TimeThirdHitBounce.Value,System.TimeSpan)
+            Else
                 Me.Adapter.InsertCommand.Parameters(15).Value = Global.System.DBNull.Value
-            Else
-                Me.Adapter.InsertCommand.Parameters(15).Value = CType(TimeThirdHitBounce,String)
             End If
-            If (TimeVisibleEffect Is Nothing) Then
+            If (TimeVisibleEffect.HasValue = true) Then
+                Me.Adapter.InsertCommand.Parameters(16).Value = CType(TimeVisibleEffect.Value,System.TimeSpan)
+            Else
                 Me.Adapter.InsertCommand.Parameters(16).Value = Global.System.DBNull.Value
-            Else
-                Me.Adapter.InsertCommand.Parameters(16).Value = CType(TimeVisibleEffect,String)
             End If
-            If (TimeAnimalDown Is Nothing) Then
-                Me.Adapter.InsertCommand.Parameters(17).Value = Global.System.DBNull.Value
+            If (TimeAnimalDown.HasValue = true) Then
+                Me.Adapter.InsertCommand.Parameters(17).Value = CType(TimeAnimalDown.Value,System.TimeSpan)
             Else
-                Me.Adapter.InsertCommand.Parameters(17).Value = CType(TimeAnimalDown,String)
+                Me.Adapter.InsertCommand.Parameters(17).Value = Global.System.DBNull.Value
             End If
             If (DartLocation Is Nothing) Then
                 Me.Adapter.InsertCommand.Parameters(18).Value = Global.System.DBNull.Value
@@ -9223,20 +9605,20 @@ Namespace WRST_CaribouDataSetTableAdapters
             Else
                 Me.Adapter.InsertCommand.Parameters(28).Value = Global.System.DBNull.Value
             End If
-            If (InitialBodyTempTime Is Nothing) Then
-                Me.Adapter.InsertCommand.Parameters(29).Value = Global.System.DBNull.Value
+            If (InitialBodyTempTime.HasValue = true) Then
+                Me.Adapter.InsertCommand.Parameters(29).Value = CType(InitialBodyTempTime.Value,System.TimeSpan)
             Else
-                Me.Adapter.InsertCommand.Parameters(29).Value = CType(InitialBodyTempTime,String)
+                Me.Adapter.InsertCommand.Parameters(29).Value = Global.System.DBNull.Value
             End If
             If (FinalBodyTemperature.HasValue = true) Then
                 Me.Adapter.InsertCommand.Parameters(30).Value = CType(FinalBodyTemperature.Value,Decimal)
             Else
                 Me.Adapter.InsertCommand.Parameters(30).Value = Global.System.DBNull.Value
             End If
-            If (FinalBodyTemperatureTime Is Nothing) Then
-                Me.Adapter.InsertCommand.Parameters(31).Value = Global.System.DBNull.Value
+            If (FinalBodyTemperatureTime.HasValue = true) Then
+                Me.Adapter.InsertCommand.Parameters(31).Value = CType(FinalBodyTemperatureTime.Value,System.TimeSpan)
             Else
-                Me.Adapter.InsertCommand.Parameters(31).Value = CType(FinalBodyTemperatureTime,String)
+                Me.Adapter.InsertCommand.Parameters(31).Value = Global.System.DBNull.Value
             End If
             If (AdditionalDrugs Is Nothing) Then
                 Me.Adapter.InsertCommand.Parameters(32).Value = Global.System.DBNull.Value
@@ -9338,10 +9720,10 @@ Namespace WRST_CaribouDataSetTableAdapters
             Else
                 Me.Adapter.InsertCommand.Parameters(51).Value = CType(AnestheticReversalRoute,String)
             End If
-            If (AnestheticReversalTime Is Nothing) Then
-                Me.Adapter.InsertCommand.Parameters(52).Value = Global.System.DBNull.Value
+            If (AnestheticReversalTime.HasValue = true) Then
+                Me.Adapter.InsertCommand.Parameters(52).Value = CType(AnestheticReversalTime.Value,System.TimeSpan)
             Else
-                Me.Adapter.InsertCommand.Parameters(52).Value = CType(AnestheticReversalTime,String)
+                Me.Adapter.InsertCommand.Parameters(52).Value = Global.System.DBNull.Value
             End If
             If (SedativeReversal Is Nothing) Then
                 Me.Adapter.InsertCommand.Parameters(53).Value = Global.System.DBNull.Value
@@ -9363,20 +9745,20 @@ Namespace WRST_CaribouDataSetTableAdapters
             Else
                 Me.Adapter.InsertCommand.Parameters(56).Value = CType(SedativeReversalRoute,String)
             End If
-            If (SedativeReversalTime Is Nothing) Then
+            If (SedativeReversalTime.HasValue = true) Then
+                Me.Adapter.InsertCommand.Parameters(57).Value = CType(SedativeReversalTime.Value,System.TimeSpan)
+            Else
                 Me.Adapter.InsertCommand.Parameters(57).Value = Global.System.DBNull.Value
-            Else
-                Me.Adapter.InsertCommand.Parameters(57).Value = CType(SedativeReversalTime,String)
             End If
-            If (TimeStanding Is Nothing) Then
+            If (TimeStanding.HasValue = true) Then
+                Me.Adapter.InsertCommand.Parameters(58).Value = CType(TimeStanding.Value,System.TimeSpan)
+            Else
                 Me.Adapter.InsertCommand.Parameters(58).Value = Global.System.DBNull.Value
-            Else
-                Me.Adapter.InsertCommand.Parameters(58).Value = CType(TimeStanding,String)
             End If
-            If (TimeMobile Is Nothing) Then
-                Me.Adapter.InsertCommand.Parameters(59).Value = Global.System.DBNull.Value
+            If (TimeMobile.HasValue = true) Then
+                Me.Adapter.InsertCommand.Parameters(59).Value = CType(TimeMobile.Value,System.TimeSpan)
             Else
-                Me.Adapter.InsertCommand.Parameters(59).Value = CType(TimeMobile,String)
+                Me.Adapter.InsertCommand.Parameters(59).Value = Global.System.DBNull.Value
             End If
             If (Comments Is Nothing) Then
                 Me.Adapter.InsertCommand.Parameters(60).Value = Global.System.DBNull.Value
@@ -9388,38 +9770,94 @@ Namespace WRST_CaribouDataSetTableAdapters
             Else
                 Me.Adapter.InsertCommand.Parameters(61).Value = CType(CaptureID,String)
             End If
+            Me.Adapter.InsertCommand.Parameters(62).Value = CType(RecordInsertedDate,Date)
+            If (RecordInsertedBy Is Nothing) Then
+                Throw New Global.System.ArgumentNullException("RecordInsertedBy")
+            Else
+                Me.Adapter.InsertCommand.Parameters(63).Value = CType(RecordInsertedBy,String)
+            End If
             If (ProjectID Is Nothing) Then
                 Throw New Global.System.ArgumentNullException("ProjectID")
             Else
-                Me.Adapter.InsertCommand.Parameters(62).Value = CType(ProjectID,String)
+                Me.Adapter.InsertCommand.Parameters(64).Value = CType(ProjectID,String)
             End If
             If (AnestheticDosage_ml.HasValue = true) Then
-                Me.Adapter.InsertCommand.Parameters(63).Value = CType(AnestheticDosage_ml.Value,Decimal)
-            Else
-                Me.Adapter.InsertCommand.Parameters(63).Value = Global.System.DBNull.Value
-            End If
-            If (SedativeDosage_ml.HasValue = true) Then
-                Me.Adapter.InsertCommand.Parameters(64).Value = CType(SedativeDosage_ml.Value,Decimal)
-            Else
-                Me.Adapter.InsertCommand.Parameters(64).Value = Global.System.DBNull.Value
-            End If
-            If (AnestheticReversalDosage_ml.HasValue = true) Then
-                Me.Adapter.InsertCommand.Parameters(65).Value = CType(AnestheticReversalDosage_ml.Value,Decimal)
+                Me.Adapter.InsertCommand.Parameters(65).Value = CType(AnestheticDosage_ml.Value,Decimal)
             Else
                 Me.Adapter.InsertCommand.Parameters(65).Value = Global.System.DBNull.Value
             End If
-            If (SedativeReversalDosage_ml.HasValue = true) Then
-                Me.Adapter.InsertCommand.Parameters(66).Value = CType(SedativeReversalDosage_ml.Value,Decimal)
+            If (SedativeDosage_ml.HasValue = true) Then
+                Me.Adapter.InsertCommand.Parameters(66).Value = CType(SedativeDosage_ml.Value,Decimal)
             Else
                 Me.Adapter.InsertCommand.Parameters(66).Value = Global.System.DBNull.Value
             End If
-            Me.Adapter.InsertCommand.Parameters(67).Value = CType(ProtocolVersion,Decimal)
-            Me.Adapter.InsertCommand.Parameters(68).Value = CType(SOPNumber,Integer)
-            Me.Adapter.InsertCommand.Parameters(69).Value = CType(SOPVersion,Decimal)
-            If (ProtocolIRMAReference.HasValue = true) Then
-                Me.Adapter.InsertCommand.Parameters(70).Value = CType(ProtocolIRMAReference.Value,Integer)
+            If (AnestheticReversalDosage_ml.HasValue = true) Then
+                Me.Adapter.InsertCommand.Parameters(67).Value = CType(AnestheticReversalDosage_ml.Value,Decimal)
             Else
-                Me.Adapter.InsertCommand.Parameters(70).Value = Global.System.DBNull.Value
+                Me.Adapter.InsertCommand.Parameters(67).Value = Global.System.DBNull.Value
+            End If
+            If (SedativeReversalDosage_ml.HasValue = true) Then
+                Me.Adapter.InsertCommand.Parameters(68).Value = CType(SedativeReversalDosage_ml.Value,Decimal)
+            Else
+                Me.Adapter.InsertCommand.Parameters(68).Value = Global.System.DBNull.Value
+            End If
+            Me.Adapter.InsertCommand.Parameters(69).Value = CType(ProtocolVersion,Decimal)
+            Me.Adapter.InsertCommand.Parameters(70).Value = CType(SOPNumber,Integer)
+            Me.Adapter.InsertCommand.Parameters(71).Value = CType(SOPVersion,Decimal)
+            If (CertificationDate.HasValue = true) Then
+                Me.Adapter.InsertCommand.Parameters(72).Value = CType(CertificationDate.Value,Date)
+            Else
+                Me.Adapter.InsertCommand.Parameters(72).Value = Global.System.DBNull.Value
+            End If
+            If (CertifiedBy Is Nothing) Then
+                Me.Adapter.InsertCommand.Parameters(73).Value = Global.System.DBNull.Value
+            Else
+                Me.Adapter.InsertCommand.Parameters(73).Value = CType(CertifiedBy,String)
+            End If
+            If (ProtocolIRMAReference.HasValue = true) Then
+                Me.Adapter.InsertCommand.Parameters(74).Value = CType(ProtocolIRMAReference.Value,Integer)
+            Else
+                Me.Adapter.InsertCommand.Parameters(74).Value = Global.System.DBNull.Value
+            End If
+            If (CertificationLevel Is Nothing) Then
+                Throw New Global.System.ArgumentNullException("CertificationLevel")
+            Else
+                Me.Adapter.InsertCommand.Parameters(75).Value = CType(CertificationLevel,String)
+            End If
+            If (Park Is Nothing) Then
+                Throw New Global.System.ArgumentNullException("Park")
+            Else
+                Me.Adapter.InsertCommand.Parameters(76).Value = CType(Park,String)
+            End If
+            If (Pilot Is Nothing) Then
+                Me.Adapter.InsertCommand.Parameters(77).Value = Global.System.DBNull.Value
+            Else
+                Me.Adapter.InsertCommand.Parameters(77).Value = CType(Pilot,String)
+            End If
+            If (Handler Is Nothing) Then
+                Me.Adapter.InsertCommand.Parameters(78).Value = Global.System.DBNull.Value
+            Else
+                Me.Adapter.InsertCommand.Parameters(78).Value = CType(Handler,String)
+            End If
+            If (CaptureGroupSize.HasValue = true) Then
+                Me.Adapter.InsertCommand.Parameters(79).Value = CType(CaptureGroupSize.Value,Integer)
+            Else
+                Me.Adapter.InsertCommand.Parameters(79).Value = Global.System.DBNull.Value
+            End If
+            If (AircraftType Is Nothing) Then
+                Me.Adapter.InsertCommand.Parameters(80).Value = Global.System.DBNull.Value
+            Else
+                Me.Adapter.InsertCommand.Parameters(80).Value = CType(AircraftType,String)
+            End If
+            If (NasalSwab.HasValue = true) Then
+                Me.Adapter.InsertCommand.Parameters(81).Value = CType(NasalSwab.Value,Boolean)
+            Else
+                Me.Adapter.InsertCommand.Parameters(81).Value = Global.System.DBNull.Value
+            End If
+            If (HairSample.HasValue = true) Then
+                Me.Adapter.InsertCommand.Parameters(82).Value = CType(HairSample.Value,Boolean)
+            Else
+                Me.Adapter.InsertCommand.Parameters(82).Value = Global.System.DBNull.Value
             End If
             Dim previousConnectionState As Global.System.Data.ConnectionState = Me.Adapter.InsertCommand.Connection.State
             If ((Me.Adapter.InsertCommand.Connection.State And Global.System.Data.ConnectionState.Open)  _
@@ -9517,7 +9955,15 @@ Namespace WRST_CaribouDataSetTableAdapters
                     ByVal CertifiedBy As String,  _
                     ByVal ProtocolIRMAReference As Global.System.Nullable(Of Integer),  _
                     ByVal CertificationLevel As String,  _
-                    ByVal Original_AnimalID As String) As Integer
+                    ByVal Park As String,  _
+                    ByVal Pilot As String,  _
+                    ByVal Handler As String,  _
+                    ByVal CaptureGroupSize As Global.System.Nullable(Of Integer),  _
+                    ByVal AircraftType As String,  _
+                    ByVal NasalSwab As Global.System.Nullable(Of Boolean),  _
+                    ByVal HairSample As Global.System.Nullable(Of Boolean),  _
+                    ByVal Original_AnimalID As String,  _
+                    ByVal Original_CaptureDate As Date) As Integer
             If (AnimalID Is Nothing) Then
                 Throw New Global.System.ArgumentNullException("AnimalID")
             Else
@@ -9878,11 +10324,47 @@ Namespace WRST_CaribouDataSetTableAdapters
             Else
                 Me.Adapter.UpdateCommand.Parameters(75).Value = CType(CertificationLevel,String)
             End If
+            If (Park Is Nothing) Then
+                Throw New Global.System.ArgumentNullException("Park")
+            Else
+                Me.Adapter.UpdateCommand.Parameters(76).Value = CType(Park,String)
+            End If
+            If (Pilot Is Nothing) Then
+                Me.Adapter.UpdateCommand.Parameters(77).Value = Global.System.DBNull.Value
+            Else
+                Me.Adapter.UpdateCommand.Parameters(77).Value = CType(Pilot,String)
+            End If
+            If (Handler Is Nothing) Then
+                Me.Adapter.UpdateCommand.Parameters(78).Value = Global.System.DBNull.Value
+            Else
+                Me.Adapter.UpdateCommand.Parameters(78).Value = CType(Handler,String)
+            End If
+            If (CaptureGroupSize.HasValue = true) Then
+                Me.Adapter.UpdateCommand.Parameters(79).Value = CType(CaptureGroupSize.Value,Integer)
+            Else
+                Me.Adapter.UpdateCommand.Parameters(79).Value = Global.System.DBNull.Value
+            End If
+            If (AircraftType Is Nothing) Then
+                Me.Adapter.UpdateCommand.Parameters(80).Value = Global.System.DBNull.Value
+            Else
+                Me.Adapter.UpdateCommand.Parameters(80).Value = CType(AircraftType,String)
+            End If
+            If (NasalSwab.HasValue = true) Then
+                Me.Adapter.UpdateCommand.Parameters(81).Value = CType(NasalSwab.Value,Boolean)
+            Else
+                Me.Adapter.UpdateCommand.Parameters(81).Value = Global.System.DBNull.Value
+            End If
+            If (HairSample.HasValue = true) Then
+                Me.Adapter.UpdateCommand.Parameters(82).Value = CType(HairSample.Value,Boolean)
+            Else
+                Me.Adapter.UpdateCommand.Parameters(82).Value = Global.System.DBNull.Value
+            End If
             If (Original_AnimalID Is Nothing) Then
                 Throw New Global.System.ArgumentNullException("Original_AnimalID")
             Else
-                Me.Adapter.UpdateCommand.Parameters(76).Value = CType(Original_AnimalID,String)
+                Me.Adapter.UpdateCommand.Parameters(83).Value = CType(Original_AnimalID,String)
             End If
+            Me.Adapter.UpdateCommand.Parameters(84).Value = CType(Original_CaptureDate,Date)
             Dim previousConnectionState As Global.System.Data.ConnectionState = Me.Adapter.UpdateCommand.Connection.State
             If ((Me.Adapter.UpdateCommand.Connection.State And Global.System.Data.ConnectionState.Open)  _
                         <> Global.System.Data.ConnectionState.Open) Then
@@ -9903,7 +10385,6 @@ Namespace WRST_CaribouDataSetTableAdapters
          Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
          Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Update, true)>  _
         Public Overloads Overridable Function Update( _
-                    ByVal CaptureDate As Date,  _
                     ByVal Crew As String,  _
                     ByVal Shooter As String,  _
                     ByVal Frequency As Global.System.Nullable(Of Decimal),  _
@@ -9978,8 +10459,16 @@ Namespace WRST_CaribouDataSetTableAdapters
                     ByVal CertifiedBy As String,  _
                     ByVal ProtocolIRMAReference As Global.System.Nullable(Of Integer),  _
                     ByVal CertificationLevel As String,  _
-                    ByVal Original_AnimalID As String) As Integer
-            Return Me.Update(Original_AnimalID, CaptureDate, Crew, Shooter, Frequency, VisualCollar, SerialNumber, CaptureLatitude, CaptureLongitude, OldFrequency, OldVisualCollar, GeneralLocation, TimeStartChase, TimeFirstHitBounce, TimeSecordHitBounce, TimeThirdHitBounce, TimeVisibleEffect, TimeAnimalDown, DartLocation, Anesthetic, AnestheticDosage_mg, AnestheticConcentration_mg_ml, Sedative, SedativeDosage_mg, SedativeConcentration_mg_ml, NumHits, NumMisses, DrugEffect, InitialBodyTemp, InitialBodyTempTime, FinalBodyTemperature, FinalBodyTemperatureTime, AdditionalDrugs, Sex, EstimatedAge, WithCalf, Lactating, BodyCondition, Weight_Kg, BodyLength, NeckCircumference, Jaw, MetatarsusLength, HindfootLength, ChestGirth, BloodSampleRed, BloodSamplePurple, BloodSampleGreen, AnestheticReversal, AnestheticReversalDosage_mg, AnestheticReversalConcentration_mg_ml, AnestheticReversalRoute, AnestheticReversalTime, SedativeReversal, SedativeReversalDosage_mg, SedativeReversalConcentration_mg_ml, SedativeReversalRoute, SedativeReversalTime, TimeStanding, TimeMobile, Comments, CaptureID, RecordInsertedDate, RecordInsertedBy, ProjectID, AnestheticDosage_ml, SedativeDosage_ml, AnestheticReversalDosage_ml, SedativeReversalDosage_ml, ProtocolVersion, SOPNumber, SOPVersion, CertificationDate, CertifiedBy, ProtocolIRMAReference, CertificationLevel, Original_AnimalID)
+                    ByVal Park As String,  _
+                    ByVal Pilot As String,  _
+                    ByVal Handler As String,  _
+                    ByVal CaptureGroupSize As Global.System.Nullable(Of Integer),  _
+                    ByVal AircraftType As String,  _
+                    ByVal NasalSwab As Global.System.Nullable(Of Boolean),  _
+                    ByVal HairSample As Global.System.Nullable(Of Boolean),  _
+                    ByVal Original_AnimalID As String,  _
+                    ByVal Original_CaptureDate As Date) As Integer
+            Return Me.Update(Original_AnimalID, Original_CaptureDate, Crew, Shooter, Frequency, VisualCollar, SerialNumber, CaptureLatitude, CaptureLongitude, OldFrequency, OldVisualCollar, GeneralLocation, TimeStartChase, TimeFirstHitBounce, TimeSecordHitBounce, TimeThirdHitBounce, TimeVisibleEffect, TimeAnimalDown, DartLocation, Anesthetic, AnestheticDosage_mg, AnestheticConcentration_mg_ml, Sedative, SedativeDosage_mg, SedativeConcentration_mg_ml, NumHits, NumMisses, DrugEffect, InitialBodyTemp, InitialBodyTempTime, FinalBodyTemperature, FinalBodyTemperatureTime, AdditionalDrugs, Sex, EstimatedAge, WithCalf, Lactating, BodyCondition, Weight_Kg, BodyLength, NeckCircumference, Jaw, MetatarsusLength, HindfootLength, ChestGirth, BloodSampleRed, BloodSamplePurple, BloodSampleGreen, AnestheticReversal, AnestheticReversalDosage_mg, AnestheticReversalConcentration_mg_ml, AnestheticReversalRoute, AnestheticReversalTime, SedativeReversal, SedativeReversalDosage_mg, SedativeReversalConcentration_mg_ml, SedativeReversalRoute, SedativeReversalTime, TimeStanding, TimeMobile, Comments, CaptureID, RecordInsertedDate, RecordInsertedBy, ProjectID, AnestheticDosage_ml, SedativeDosage_ml, AnestheticReversalDosage_ml, SedativeReversalDosage_ml, ProtocolVersion, SOPNumber, SOPVersion, CertificationDate, CertifiedBy, ProtocolIRMAReference, CertificationLevel, Park, Pilot, Handler, CaptureGroupSize, AircraftType, NasalSwab, HairSample, Original_AnimalID, Original_CaptureDate)
         End Function
     End Class
     
