@@ -108,8 +108,8 @@ Partial Class Form1
         'SplitContainer1.Panel2
         '
         Me.SplitContainer1.Panel2.Controls.Add(Me.SurveysSplitContainer)
-        Me.SplitContainer1.Size = New System.Drawing.Size(1874, 1223)
-        Me.SplitContainer1.SplitterDistance = 289
+        Me.SplitContainer1.Size = New System.Drawing.Size(2645, 1279)
+        Me.SplitContainer1.SplitterDistance = 302
         Me.SplitContainer1.TabIndex = 0
         '
         'SurveyFlightsGridEX
@@ -127,7 +127,7 @@ Partial Class Form1
         Me.SurveyFlightsGridEX.Name = "SurveyFlightsGridEX"
         Me.SurveyFlightsGridEX.RecordNavigator = True
         Me.SurveyFlightsGridEX.RowHeaders = Janus.Windows.GridEX.InheritableBoolean.[True]
-        Me.SurveyFlightsGridEX.Size = New System.Drawing.Size(1874, 264)
+        Me.SurveyFlightsGridEX.Size = New System.Drawing.Size(2645, 277)
         Me.SurveyFlightsGridEX.TabIndex = 0
         Me.SurveyFlightsGridEX.TableHeaders = Janus.Windows.GridEX.InheritableBoolean.[True]
         '
@@ -146,7 +146,7 @@ Partial Class Form1
         Me.SurveyFlightsToolStrip.ImageScalingSize = New System.Drawing.Size(24, 24)
         Me.SurveyFlightsToolStrip.Location = New System.Drawing.Point(0, 0)
         Me.SurveyFlightsToolStrip.Name = "SurveyFlightsToolStrip"
-        Me.SurveyFlightsToolStrip.Size = New System.Drawing.Size(1874, 25)
+        Me.SurveyFlightsToolStrip.Size = New System.Drawing.Size(2645, 25)
         Me.SurveyFlightsToolStrip.TabIndex = 1
         Me.SurveyFlightsToolStrip.Text = "ToolStrip2"
         '
@@ -166,8 +166,8 @@ Partial Class Form1
         '
         Me.SurveysSplitContainer.Panel2.AutoScroll = True
         Me.SurveysSplitContainer.Panel2.Controls.Add(Me.CollaredAnimalsSplitContainer)
-        Me.SurveysSplitContainer.Size = New System.Drawing.Size(1874, 930)
-        Me.SurveysSplitContainer.SplitterDistance = 258
+        Me.SurveysSplitContainer.Size = New System.Drawing.Size(2645, 973)
+        Me.SurveysSplitContainer.SplitterDistance = 269
         Me.SurveysSplitContainer.TabIndex = 0
         '
         'SurveysGridEX
@@ -183,7 +183,7 @@ Partial Class Form1
         Me.SurveysGridEX.Name = "SurveysGridEX"
         Me.SurveysGridEX.RecordNavigator = True
         Me.SurveysGridEX.RowHeaders = Janus.Windows.GridEX.InheritableBoolean.[True]
-        Me.SurveysGridEX.Size = New System.Drawing.Size(1874, 226)
+        Me.SurveysGridEX.Size = New System.Drawing.Size(2645, 237)
         Me.SurveysGridEX.TabIndex = 0
         Me.SurveysGridEX.TableHeaders = Janus.Windows.GridEX.InheritableBoolean.[True]
         Me.SurveysGridEX.TotalRow = Janus.Windows.GridEX.InheritableBoolean.[True]
@@ -201,7 +201,7 @@ Partial Class Form1
         Me.SurveysToolStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ImportSurveyDataFromFileToolStripButton, Me.ToolStripSeparator1, Me.AutoMatchFrequenciesToAnimalsToolStripButton, Me.ToolStripSeparator2, Me.ChangeOrientationToolStripButton})
         Me.SurveysToolStrip.Location = New System.Drawing.Point(0, 0)
         Me.SurveysToolStrip.Name = "SurveysToolStrip"
-        Me.SurveysToolStrip.Size = New System.Drawing.Size(1874, 32)
+        Me.SurveysToolStrip.Size = New System.Drawing.Size(2645, 32)
         Me.SurveysToolStrip.TabIndex = 1
         Me.SurveysToolStrip.Text = "ToolStrip2"
         '
@@ -253,8 +253,8 @@ Partial Class Form1
         'CollaredAnimalsSplitContainer.Panel2
         '
         Me.CollaredAnimalsSplitContainer.Panel2.Controls.Add(Me.SplitContainer2)
-        Me.CollaredAnimalsSplitContainer.Size = New System.Drawing.Size(1874, 668)
-        Me.CollaredAnimalsSplitContainer.SplitterDistance = 538
+        Me.CollaredAnimalsSplitContainer.Size = New System.Drawing.Size(2645, 700)
+        Me.CollaredAnimalsSplitContainer.SplitterDistance = 759
         Me.CollaredAnimalsSplitContainer.TabIndex = 1
         '
         'CollaredAnimalsInGroupsGridEX
@@ -265,12 +265,13 @@ Partial Class Form1
         CollaredAnimalsInGroupsGridEX_DesignTimeLayout.LayoutString = resources.GetString("CollaredAnimalsInGroupsGridEX_DesignTimeLayout.LayoutString")
         Me.CollaredAnimalsInGroupsGridEX.DesignTimeLayout = CollaredAnimalsInGroupsGridEX_DesignTimeLayout
         Me.CollaredAnimalsInGroupsGridEX.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.CollaredAnimalsInGroupsGridEX.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.CollaredAnimalsInGroupsGridEX.GroupByBoxVisible = False
         Me.CollaredAnimalsInGroupsGridEX.Location = New System.Drawing.Point(0, 0)
         Me.CollaredAnimalsInGroupsGridEX.Name = "CollaredAnimalsInGroupsGridEX"
         Me.CollaredAnimalsInGroupsGridEX.RecordNavigator = True
         Me.CollaredAnimalsInGroupsGridEX.RowHeaders = Janus.Windows.GridEX.InheritableBoolean.[True]
-        Me.CollaredAnimalsInGroupsGridEX.Size = New System.Drawing.Size(538, 668)
+        Me.CollaredAnimalsInGroupsGridEX.Size = New System.Drawing.Size(759, 700)
         Me.CollaredAnimalsInGroupsGridEX.TabIndex = 0
         Me.CollaredAnimalsInGroupsGridEX.TableHeaders = Janus.Windows.GridEX.InheritableBoolean.[True]
         '
@@ -294,8 +295,8 @@ Partial Class Form1
         '
         Me.SplitContainer2.Panel2.Controls.Add(Me.DeploymentsGridEX)
         Me.SplitContainer2.Panel2.Controls.Add(Me.AnimalGridEX)
-        Me.SplitContainer2.Size = New System.Drawing.Size(1332, 668)
-        Me.SplitContainer2.SplitterDistance = 274
+        Me.SplitContainer2.Size = New System.Drawing.Size(1882, 700)
+        Me.SplitContainer2.SplitterDistance = 287
         Me.SplitContainer2.TabIndex = 2
         '
         'CapturesGridEX
@@ -309,7 +310,7 @@ Partial Class Form1
         Me.CapturesGridEX.GroupByBoxVisible = False
         Me.CapturesGridEX.Location = New System.Drawing.Point(0, 0)
         Me.CapturesGridEX.Name = "CapturesGridEX"
-        Me.CapturesGridEX.Size = New System.Drawing.Size(1332, 274)
+        Me.CapturesGridEX.Size = New System.Drawing.Size(1882, 287)
         Me.CapturesGridEX.TabIndex = 0
         Me.CapturesGridEX.TableHeaderFormatStyle.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.CapturesGridEX.TableHeaders = Janus.Windows.GridEX.InheritableBoolean.[True]
@@ -326,7 +327,7 @@ Partial Class Form1
         Me.DeploymentsGridEX.Location = New System.Drawing.Point(0, 189)
         Me.DeploymentsGridEX.Name = "DeploymentsGridEX"
         Me.DeploymentsGridEX.RowFormatStyle.BackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
-        Me.DeploymentsGridEX.Size = New System.Drawing.Size(1332, 201)
+        Me.DeploymentsGridEX.Size = New System.Drawing.Size(1882, 220)
         Me.DeploymentsGridEX.TabIndex = 1
         Me.DeploymentsGridEX.TableHeaderFormatStyle.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         '
@@ -337,7 +338,7 @@ Partial Class Form1
         Me.AnimalGridEX.Location = New System.Drawing.Point(0, 0)
         Me.AnimalGridEX.Name = "AnimalGridEX"
         Me.AnimalGridEX.RowFormatStyle.BackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
-        Me.AnimalGridEX.Size = New System.Drawing.Size(1332, 189)
+        Me.AnimalGridEX.Size = New System.Drawing.Size(1882, 189)
         Me.AnimalGridEX.TabIndex = 0
         Me.AnimalGridEX.TableHeaderFormatStyle.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         '
@@ -348,7 +349,7 @@ Partial Class Form1
         Me.MainToolStrip.Location = New System.Drawing.Point(0, 0)
         Me.MainToolStrip.Name = "MainToolStrip"
         Me.HelpProvider.SetShowHelp(Me.MainToolStrip, True)
-        Me.MainToolStrip.Size = New System.Drawing.Size(1874, 32)
+        Me.MainToolStrip.Size = New System.Drawing.Size(2645, 32)
         Me.MainToolStrip.TabIndex = 1
         Me.MainToolStrip.Text = "ToolStrip1"
         '
@@ -423,7 +424,7 @@ Partial Class Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 20.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1874, 1255)
+        Me.ClientSize = New System.Drawing.Size(2645, 1311)
         Me.Controls.Add(Me.SplitContainer1)
         Me.Controls.Add(Me.MainToolStrip)
         Me.HelpButton = True

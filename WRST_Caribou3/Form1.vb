@@ -6,7 +6,10 @@ Imports SkeeterDataTablesTranslator
 Public Class Form1
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        'TODO: This line of code loads data into the 'WRST_CaribouDataSet.Captures' table. You can move, or remove it, as needed.
+
+        'make the form a reasonable size if not maximized
+        Me.Width = 1200
+        Me.Height = 800
 
         Try
             'maximize
@@ -447,7 +450,8 @@ Parameter name: key" Then
                 .AutomaticSort = True
                 .CardBorders = False
                 .CardHeaders = True
-                '.ColumnAutoSizeMode = ColumnAutoSizeMode.AllCells
+                .ColumnAutoResize = False
+                .ColumnAutoSizeMode = ColumnAutoSizeMode.DiaplayedCells
                 .ColumnHeaders = InheritableBoolean.True
                 .Font = MyFont
                 .FilterMode = FilterMode.None
@@ -465,12 +469,19 @@ Parameter name: key" Then
                 .SelectedInactiveFormatStyle.FontBold = TriState.False
             End With
 
-            'get rid of stupic autoformat of number columns as currency
-            'For Each Col As GridEXColumn In GridEX.RootTable.Columns
-            '    If Col.FormatString = "c" Then Col.FormatString = ""
-            '    If Col.DefaultGroupFormatString = "c" Then Col.DefaultGroupFormatString = ""
-            '    Debug.Print(GridEX.RootTable.Caption & " " & Col.Key & " " & Col.FormatString)
-            'Next
+            'gridex automotically formats doubles as currency. revert. also extend dates with time
+            If Not GridEX Is Nothing Then
+                If Not GridEX.RootTable Is Nothing Then
+                    For Each Col As GridEXColumn In GridEX.RootTable.Columns
+
+                        If Col.FormatString = "c" Then
+                            Col.FormatString = ""
+                        ElseIf Col.FormatString = "d" Then
+                            Col.FormatString = "yyyy-MM-dd HH:mm:ss"
+                        End If
+                    Next
+                End If
+            End If
 
         Catch ex As Exception
             MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name & ")")
