@@ -2120,8 +2120,6 @@ Partial Public Class WRST_CaribouDataSet
         
         Private columnProjectID As Global.System.Data.DataColumn
         
-        Private columnTS As Global.System.Data.DataColumn
-        
         Private columnAnestheticDosage_ml As Global.System.Data.DataColumn
         
         Private columnSedativeDosage_ml As Global.System.Data.DataColumn
@@ -2715,14 +2713,6 @@ Partial Public Class WRST_CaribouDataSet
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public ReadOnly Property TSColumn() As Global.System.Data.DataColumn
-            Get
-                Return Me.columnTS
-            End Get
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Public ReadOnly Property AnestheticDosage_mlColumn() As Global.System.Data.DataColumn
             Get
                 Return Me.columnAnestheticDosage_ml
@@ -2968,7 +2958,6 @@ Partial Public Class WRST_CaribouDataSet
                     ByVal RecordInsertedDate As Date,  _
                     ByVal RecordInsertedBy As String,  _
                     ByVal ProjectID As String,  _
-                    ByVal TS() As Byte,  _
                     ByVal AnestheticDosage_ml As Decimal,  _
                     ByVal SedativeDosage_ml As Decimal,  _
                     ByVal AnestheticReversalDosage_ml As Decimal,  _
@@ -2988,7 +2977,7 @@ Partial Public Class WRST_CaribouDataSet
                     ByVal NasalSwab As Boolean,  _
                     ByVal HairSample As Boolean) As CapturesRow
             Dim rowCapturesRow As CapturesRow = CType(Me.NewRow,CapturesRow)
-            Dim columnValuesArray() As Object = New Object() {AnimalID, CaptureDate, Crew, Shooter, Frequency, VisualCollar, SerialNumber, CaptureLatitude, CaptureLongitude, OldFrequency, OldVisualCollar, GeneralLocation, TimeStartChase, TimeFirstHitBounce, TimeSecordHitBounce, TimeThirdHitBounce, TimeVisibleEffect, TimeAnimalDown, DartLocation, Anesthetic, AnestheticDosage_mg, AnestheticConcentration_mg_ml, Sedative, SedativeDosage_mg, SedativeConcentration_mg_ml, NumHits, NumMisses, DrugEffect, InitialBodyTemp, InitialBodyTempTime, FinalBodyTemperature, FinalBodyTemperatureTime, AdditionalDrugs, Sex, EstimatedAge, WithCalf, Lactating, BodyCondition, Weight_Kg, BodyLength, NeckCircumference, Jaw, MetatarsusLength, HindfootLength, ChestGirth, BloodSampleRed, BloodSamplePurple, BloodSampleGreen, AnestheticReversal, AnestheticReversalDosage_mg, AnestheticReversalConcentration_mg_ml, AnestheticReversalRoute, AnestheticReversalTime, SedativeReversal, SedativeReversalDosage_mg, SedativeReversalConcentration_mg_ml, SedativeReversalRoute, SedativeReversalTime, TimeStanding, TimeMobile, Comments, CaptureID, RecordInsertedDate, RecordInsertedBy, ProjectID, TS, AnestheticDosage_ml, SedativeDosage_ml, AnestheticReversalDosage_ml, SedativeReversalDosage_ml, ProtocolVersion, SOPNumber, SOPVersion, CertificationDate, CertifiedBy, ProtocolIRMAReference, CertificationLevel, Park, Pilot, Handler, CaptureGroupSize, AircraftType, NasalSwab, HairSample}
+            Dim columnValuesArray() As Object = New Object() {AnimalID, CaptureDate, Crew, Shooter, Frequency, VisualCollar, SerialNumber, CaptureLatitude, CaptureLongitude, OldFrequency, OldVisualCollar, GeneralLocation, TimeStartChase, TimeFirstHitBounce, TimeSecordHitBounce, TimeThirdHitBounce, TimeVisibleEffect, TimeAnimalDown, DartLocation, Anesthetic, AnestheticDosage_mg, AnestheticConcentration_mg_ml, Sedative, SedativeDosage_mg, SedativeConcentration_mg_ml, NumHits, NumMisses, DrugEffect, InitialBodyTemp, InitialBodyTempTime, FinalBodyTemperature, FinalBodyTemperatureTime, AdditionalDrugs, Sex, EstimatedAge, WithCalf, Lactating, BodyCondition, Weight_Kg, BodyLength, NeckCircumference, Jaw, MetatarsusLength, HindfootLength, ChestGirth, BloodSampleRed, BloodSamplePurple, BloodSampleGreen, AnestheticReversal, AnestheticReversalDosage_mg, AnestheticReversalConcentration_mg_ml, AnestheticReversalRoute, AnestheticReversalTime, SedativeReversal, SedativeReversalDosage_mg, SedativeReversalConcentration_mg_ml, SedativeReversalRoute, SedativeReversalTime, TimeStanding, TimeMobile, Comments, CaptureID, RecordInsertedDate, RecordInsertedBy, ProjectID, AnestheticDosage_ml, SedativeDosage_ml, AnestheticReversalDosage_ml, SedativeReversalDosage_ml, ProtocolVersion, SOPNumber, SOPVersion, CertificationDate, CertifiedBy, ProtocolIRMAReference, CertificationLevel, Park, Pilot, Handler, CaptureGroupSize, AircraftType, NasalSwab, HairSample}
             rowCapturesRow.ItemArray = columnValuesArray
             Me.Rows.Add(rowCapturesRow)
             Return rowCapturesRow
@@ -3082,7 +3071,6 @@ Partial Public Class WRST_CaribouDataSet
             Me.columnRecordInsertedDate = MyBase.Columns("RecordInsertedDate")
             Me.columnRecordInsertedBy = MyBase.Columns("RecordInsertedBy")
             Me.columnProjectID = MyBase.Columns("ProjectID")
-            Me.columnTS = MyBase.Columns("TS")
             Me.columnAnestheticDosage_ml = MyBase.Columns("AnestheticDosage_ml")
             Me.columnSedativeDosage_ml = MyBase.Columns("SedativeDosage_ml")
             Me.columnAnestheticReversalDosage_ml = MyBase.Columns("AnestheticReversalDosage_ml")
@@ -3236,8 +3224,6 @@ Partial Public Class WRST_CaribouDataSet
             MyBase.Columns.Add(Me.columnRecordInsertedBy)
             Me.columnProjectID = New Global.System.Data.DataColumn("ProjectID", GetType(String), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnProjectID)
-            Me.columnTS = New Global.System.Data.DataColumn("TS", GetType(Byte()), Nothing, Global.System.Data.MappingType.Element)
-            MyBase.Columns.Add(Me.columnTS)
             Me.columnAnestheticDosage_ml = New Global.System.Data.DataColumn("AnestheticDosage_ml", GetType(Decimal), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnAnestheticDosage_ml)
             Me.columnSedativeDosage_ml = New Global.System.Data.DataColumn("SedativeDosage_ml", GetType(Decimal), Nothing, Global.System.Data.MappingType.Element)
@@ -3301,7 +3287,6 @@ Partial Public Class WRST_CaribouDataSet
             Me.columnRecordInsertedBy.MaxLength = 50
             Me.columnProjectID.AllowDBNull = false
             Me.columnProjectID.MaxLength = 16
-            Me.columnTS.ReadOnly = true
             Me.columnProtocolVersion.AllowDBNull = false
             Me.columnSOPNumber.AllowDBNull = false
             Me.columnSOPVersion.AllowDBNull = false
@@ -5644,21 +5629,6 @@ Partial Public Class WRST_CaribouDataSet
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Property TS() As Byte()
-            Get
-                Try 
-                    Return CType(Me(Me.tableCaptures.TSColumn),Byte())
-                Catch e As Global.System.InvalidCastException
-                    Throw New Global.System.Data.StrongTypingException("The value for column 'TS' in table 'Captures' is DBNull.", e)
-                End Try
-            End Get
-            Set
-                Me(Me.tableCaptures.TSColumn) = value
-            End Set
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Public Property AnestheticDosage_ml() As Decimal
             Get
                 Try 
@@ -6614,18 +6584,6 @@ Partial Public Class WRST_CaribouDataSet
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Public Sub SetCommentsNull()
             Me(Me.tableCaptures.CommentsColumn) = Global.System.Convert.DBNull
-        End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Function IsTSNull() As Boolean
-            Return Me.IsNull(Me.tableCaptures.TSColumn)
-        End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Sub SetTSNull()
-            Me(Me.tableCaptures.TSColumn) = Global.System.Convert.DBNull
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -8913,7 +8871,6 @@ Namespace WRST_CaribouDataSetTableAdapters
             tableMapping.ColumnMappings.Add("RecordInsertedDate", "RecordInsertedDate")
             tableMapping.ColumnMappings.Add("RecordInsertedBy", "RecordInsertedBy")
             tableMapping.ColumnMappings.Add("ProjectID", "ProjectID")
-            tableMapping.ColumnMappings.Add("TS", "TS")
             tableMapping.ColumnMappings.Add("AnestheticDosage_ml", "AnestheticDosage_ml")
             tableMapping.ColumnMappings.Add("SedativeDosage_ml", "SedativeDosage_ml")
             tableMapping.ColumnMappings.Add("AnestheticReversalDosage_ml", "AnestheticReversalDosage_ml")
@@ -8994,11 +8951,11 @@ Namespace WRST_CaribouDataSetTableAdapters
                 "salRoute, AnestheticReversalTime, SedativeReversal, SedativeReversalDosage_mg, S"& _ 
                 "edativeReversalConcentration_mg_ml, SedativeReversalRoute, SedativeReversalTime,"& _ 
                 " TimeStanding, TimeMobile, Comments, CaptureID, RecordInsertedDate, RecordInsert"& _ 
-                "edBy, ProjectID, TS, AnestheticDosage_ml, SedativeDosage_ml, AnestheticReversalD"& _ 
-                "osage_ml, SedativeReversalDosage_ml, ProtocolVersion, SOPNumber, SOPVersion, Cer"& _ 
-                "tificationDate, CertifiedBy, ProtocolIRMAReference, CertificationLevel, Park, Pi"& _ 
-                "lot, Handler, CaptureGroupSize, AircraftType, NasalSwab, HairSample FROM Capture"& _ 
-                "s WHERE (AnimalID = @AnimalID) AND (CaptureDate = @CaptureDate)"
+                "edBy, ProjectID, AnestheticDosage_ml, SedativeDosage_ml, AnestheticReversalDosag"& _ 
+                "e_ml, SedativeReversalDosage_ml, ProtocolVersion, SOPNumber, SOPVersion, Certifi"& _ 
+                "cationDate, CertifiedBy, ProtocolIRMAReference, CertificationLevel, Park, Pilot,"& _ 
+                " Handler, CaptureGroupSize, AircraftType, NasalSwab, HairSample FROM Captures WH"& _ 
+                "ERE (AnimalID = @AnimalID) AND (CaptureDate = @CaptureDate)"
             Me._adapter.InsertCommand.CommandType = Global.System.Data.CommandType.Text
             Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@AnimalID", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "AnimalID", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@CaptureDate", Global.System.Data.SqlDbType.DateTime, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "CaptureDate", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
@@ -9247,22 +9204,21 @@ Namespace WRST_CaribouDataSetTableAdapters
             Me._commandCollection(0).CommandText = "SELECT AnimalID, CaptureDate, Crew, Shooter, Frequency, VisualCollar, SerialNumbe"& _ 
                 "r, CaptureLatitude, CaptureLongitude, OldFrequency, OldVisualCollar, GeneralLoca"& _ 
                 "tion, TimeStartChase, TimeFirstHitBounce, TimeSecordHitBounce, TimeThirdHitBounc"& _ 
-                "e, TimeVisibleEffect, "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"             TimeAnimalDown, DartLocation, Anesthetic, A"& _ 
-                "nestheticDosage_mg, AnestheticConcentration_mg_ml, Sedative, SedativeDosage_mg, "& _ 
-                "SedativeConcentration_mg_ml, NumHits, NumMisses, DrugEffect, InitialBodyTemp, In"& _ 
-                "itialBodyTempTime, FinalBodyTemperature, "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"             FinalBodyTemperatureTime"& _ 
-                ", AdditionalDrugs, Sex, EstimatedAge, WithCalf, Lactating, BodyCondition, Weight"& _ 
-                "_Kg, BodyLength, NeckCircumference, Jaw, MetatarsusLength, HindfootLength, Chest"& _ 
-                "Girth, BloodSampleRed, BloodSamplePurple, BloodSampleGreen, AnestheticReversal, "& _ 
-                ""&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"             AnestheticReversalDosage_mg, AnestheticReversalConcentration_mg_m"& _ 
-                "l, AnestheticReversalRoute, AnestheticReversalTime, SedativeReversal, SedativeRe"& _ 
-                "versalDosage_mg, SedativeReversalConcentration_mg_ml, SedativeReversalRoute, Sed"& _ 
-                "ativeReversalTime, TimeStanding, "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"             TimeMobile, Comments, CaptureID,"& _ 
-                " RecordInsertedDate, RecordInsertedBy, ProjectID, TS, AnestheticDosage_ml, Sedat"& _ 
-                "iveDosage_ml, AnestheticReversalDosage_ml, SedativeReversalDosage_ml, ProtocolVe"& _ 
-                "rsion, SOPNumber, SOPVersion, CertificationDate, CertifiedBy, "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"             Pro"& _ 
-                "tocolIRMAReference, CertificationLevel, Park, Pilot, Handler, CaptureGroupSize, "& _ 
-                "AircraftType, NasalSwab, HairSample"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"FROM   Captures"
+                "e, TimeVisibleEffect, TimeAnimalDown, DartLocation, Anesthetic, AnestheticDosage"& _ 
+                "_mg, AnestheticConcentration_mg_ml, Sedative, SedativeDosage_mg, SedativeConcent"& _ 
+                "ration_mg_ml, NumHits, NumMisses, DrugEffect, InitialBodyTemp, InitialBodyTempTi"& _ 
+                "me, FinalBodyTemperature, FinalBodyTemperatureTime, AdditionalDrugs, Sex, Estima"& _ 
+                "tedAge, WithCalf, Lactating, BodyCondition, Weight_Kg, BodyLength, NeckCircumfer"& _ 
+                "ence, Jaw, MetatarsusLength, HindfootLength, ChestGirth, BloodSampleRed, BloodSa"& _ 
+                "mplePurple, BloodSampleGreen, AnestheticReversal, AnestheticReversalDosage_mg, A"& _ 
+                "nestheticReversalConcentration_mg_ml, AnestheticReversalRoute, AnestheticReversa"& _ 
+                "lTime, SedativeReversal, SedativeReversalDosage_mg, SedativeReversalConcentratio"& _ 
+                "n_mg_ml, SedativeReversalRoute, SedativeReversalTime, TimeStanding, TimeMobile, "& _ 
+                "Comments, CaptureID, RecordInsertedDate, RecordInsertedBy, ProjectID, Anesthetic"& _ 
+                "Dosage_ml, SedativeDosage_ml, AnestheticReversalDosage_ml, SedativeReversalDosag"& _ 
+                "e_ml, ProtocolVersion, SOPNumber, SOPVersion, CertificationDate, CertifiedBy, Pr"& _ 
+                "otocolIRMAReference, CertificationLevel, Park, Pilot, Handler, CaptureGroupSize,"& _ 
+                " AircraftType, NasalSwab, HairSample FROM Captures"
             Me._commandCollection(0).CommandType = Global.System.Data.CommandType.Text
         End Sub
         
