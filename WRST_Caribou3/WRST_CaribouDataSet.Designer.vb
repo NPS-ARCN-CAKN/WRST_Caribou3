@@ -719,8 +719,6 @@ Partial Public Class WRST_CaribouDataSet
         
         Private columnTimeReturn As Global.System.Data.DataColumn
         
-        Private columnIsFollowUpFlight As Global.System.Data.DataColumn
-        
         Private columnSpotterPlaneTailNo As Global.System.Data.DataColumn
         
         Private columnSpotterPlaneType As Global.System.Data.DataColumn
@@ -857,14 +855,6 @@ Partial Public Class WRST_CaribouDataSet
         Public ReadOnly Property TimeReturnColumn() As Global.System.Data.DataColumn
             Get
                 Return Me.columnTimeReturn
-            End Get
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public ReadOnly Property IsFollowUpFlightColumn() As Global.System.Data.DataColumn
-            Get
-                Return Me.columnIsFollowUpFlight
             End Get
         End Property
         
@@ -1012,7 +1002,6 @@ Partial Public Class WRST_CaribouDataSet
                     ByVal TailNo As String,  _
                     ByVal TimeDepart As Date,  _
                     ByVal TimeReturn As Date,  _
-                    ByVal IsFollowUpFlight As Boolean,  _
                     ByVal SpotterPlaneTailNo As String,  _
                     ByVal SpotterPlaneType As String,  _
                     ByVal SpotterPlanePilot As String,  _
@@ -1026,7 +1015,7 @@ Partial Public Class WRST_CaribouDataSet
                     ByVal RecordInsertedBy As String,  _
                     ByVal FlightID As String) As SurveyFlightsRow
             Dim rowSurveyFlightsRow As SurveyFlightsRow = CType(Me.NewRow,SurveyFlightsRow)
-            Dim columnValuesArray() As Object = New Object() {Year, SurveyType, CrewNumber, Pilot, Observer1, Observer2, AircraftType, TailNo, TimeDepart, TimeReturn, IsFollowUpFlight, SpotterPlaneTailNo, SpotterPlaneType, SpotterPlanePilot, WeatherConditions, SnowConditions, Notes, Herd, SOPNumber, SOPVersion, RecordInsertedDate, RecordInsertedBy, FlightID}
+            Dim columnValuesArray() As Object = New Object() {Year, SurveyType, CrewNumber, Pilot, Observer1, Observer2, AircraftType, TailNo, TimeDepart, TimeReturn, SpotterPlaneTailNo, SpotterPlaneType, SpotterPlanePilot, WeatherConditions, SnowConditions, Notes, Herd, SOPNumber, SOPVersion, RecordInsertedDate, RecordInsertedBy, FlightID}
             rowSurveyFlightsRow.ItemArray = columnValuesArray
             Me.Rows.Add(rowSurveyFlightsRow)
             Return rowSurveyFlightsRow
@@ -1065,7 +1054,6 @@ Partial Public Class WRST_CaribouDataSet
             Me.columnTailNo = MyBase.Columns("TailNo")
             Me.columnTimeDepart = MyBase.Columns("TimeDepart")
             Me.columnTimeReturn = MyBase.Columns("TimeReturn")
-            Me.columnIsFollowUpFlight = MyBase.Columns("IsFollowUpFlight")
             Me.columnSpotterPlaneTailNo = MyBase.Columns("SpotterPlaneTailNo")
             Me.columnSpotterPlaneType = MyBase.Columns("SpotterPlaneType")
             Me.columnSpotterPlanePilot = MyBase.Columns("SpotterPlanePilot")
@@ -1103,8 +1091,6 @@ Partial Public Class WRST_CaribouDataSet
             MyBase.Columns.Add(Me.columnTimeDepart)
             Me.columnTimeReturn = New Global.System.Data.DataColumn("TimeReturn", GetType(Date), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnTimeReturn)
-            Me.columnIsFollowUpFlight = New Global.System.Data.DataColumn("IsFollowUpFlight", GetType(Boolean), Nothing, Global.System.Data.MappingType.Element)
-            MyBase.Columns.Add(Me.columnIsFollowUpFlight)
             Me.columnSpotterPlaneTailNo = New Global.System.Data.DataColumn("SpotterPlaneTailNo", GetType(String), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnSpotterPlaneTailNo)
             Me.columnSpotterPlaneType = New Global.System.Data.DataColumn("SpotterPlaneType", GetType(String), Nothing, Global.System.Data.MappingType.Element)
@@ -1141,7 +1127,6 @@ Partial Public Class WRST_CaribouDataSet
             Me.columnAircraftType.MaxLength = 20
             Me.columnTailNo.AllowDBNull = false
             Me.columnTailNo.MaxLength = 10
-            Me.columnIsFollowUpFlight.AllowDBNull = false
             Me.columnSpotterPlaneTailNo.MaxLength = 10
             Me.columnSpotterPlaneType.MaxLength = 30
             Me.columnSpotterPlanePilot.MaxLength = 40
@@ -1710,7 +1695,7 @@ Partial Public Class WRST_CaribouDataSet
             Dim rowSurveysRow As SurveysRow = CType(Me.NewRow,SurveysRow)
             Dim columnValuesArray() As Object = New Object() {SightingDate, SearchArea, GroupNumber, SmallBull, MediumBull, LargeBull, Bull, Cow, Calf, Adult, FrequenciesInGroup, Lat, Lon, Out, Seen, Marked, Mode, Accuracy, RetainedAntler, DistendedUdders, CalvesAtHeel, WaypointName, Comment, SourceFilename, Nothing, RecordInsertedDate, RecordInsertedBy, EID, CertificationDate, CertifiedBy, CertificationLevel}
             If (Not (parentSurveyFlightsRowByFK_Surveys_SurveyFlights) Is Nothing) Then
-                columnValuesArray(24) = parentSurveyFlightsRowByFK_Surveys_SurveyFlights(22)
+                columnValuesArray(24) = parentSurveyFlightsRowByFK_Surveys_SurveyFlights(21)
             End If
             rowSurveysRow.ItemArray = columnValuesArray
             Me.Rows.Add(rowSurveysRow)
@@ -3686,17 +3671,6 @@ Partial Public Class WRST_CaribouDataSet
             End Get
             Set
                 Me(Me.tableSurveyFlights.TimeReturnColumn) = value
-            End Set
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Property IsFollowUpFlight() As Boolean
-            Get
-                Return CType(Me(Me.tableSurveyFlights.IsFollowUpFlightColumn),Boolean)
-            End Get
-            Set
-                Me(Me.tableSurveyFlights.IsFollowUpFlightColumn) = value
             End Set
         End Property
         
@@ -7454,7 +7428,6 @@ Namespace WRST_CaribouDataSetTableAdapters
             tableMapping.ColumnMappings.Add("TailNo", "TailNo")
             tableMapping.ColumnMappings.Add("TimeDepart", "TimeDepart")
             tableMapping.ColumnMappings.Add("TimeReturn", "TimeReturn")
-            tableMapping.ColumnMappings.Add("IsFollowUpFlight", "IsFollowUpFlight")
             tableMapping.ColumnMappings.Add("SpotterPlaneTailNo", "SpotterPlaneTailNo")
             tableMapping.ColumnMappings.Add("SpotterPlaneType", "SpotterPlaneType")
             tableMapping.ColumnMappings.Add("SpotterPlanePilot", "SpotterPlanePilot")
@@ -7476,19 +7449,18 @@ Namespace WRST_CaribouDataSetTableAdapters
             Me._adapter.InsertCommand = New Global.System.Data.SqlClient.SqlCommand()
             Me._adapter.InsertCommand.Connection = Me.Connection
             Me._adapter.InsertCommand.CommandText = "INSERT INTO [SurveyFlights] ([Year], [SurveyType], [CrewNumber], [Pilot], [Observ"& _ 
-                "er1], [Observer2], [AircraftType], [TailNo], [TimeDepart], [TimeReturn], [IsFoll"& _ 
-                "owUpFlight], [SpotterPlaneTailNo], [SpotterPlaneType], [SpotterPlanePilot], [Wea"& _ 
-                "therConditions], [SnowConditions], [Notes], [Herd], [SOPNumber], [SOPVersion], ["& _ 
-                "RecordInsertedDate], [RecordInsertedBy], [FlightID]) VALUES (@Year, @SurveyType,"& _ 
-                " @CrewNumber, @Pilot, @Observer1, @Observer2, @AircraftType, @TailNo, @TimeDepar"& _ 
-                "t, @TimeReturn, @IsFollowUpFlight, @SpotterPlaneTailNo, @SpotterPlaneType, @Spot"& _ 
-                "terPlanePilot, @WeatherConditions, @SnowConditions, @Notes, @Herd, @SOPNumber, @"& _ 
-                "SOPVersion, @RecordInsertedDate, @RecordInsertedBy, @FlightID);"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"SELECT Year, Su"& _ 
-                "rveyType, CrewNumber, Pilot, Observer1, Observer2, AircraftType, TailNo, TimeDep"& _ 
-                "art, TimeReturn, IsFollowUpFlight, SpotterPlaneTailNo, SpotterPlaneType, Spotter"& _ 
-                "PlanePilot, WeatherConditions, SnowConditions, Notes, Herd, SOPNumber, SOPVersio"& _ 
-                "n, RecordInsertedDate, RecordInsertedBy, FlightID FROM SurveyFlights WHERE (Flig"& _ 
-                "htID = @FlightID)"
+                "er1], [Observer2], [AircraftType], [TailNo], [TimeDepart], [TimeReturn], [Spotte"& _ 
+                "rPlaneTailNo], [SpotterPlaneType], [SpotterPlanePilot], [WeatherConditions], [Sn"& _ 
+                "owConditions], [Notes], [Herd], [SOPNumber], [SOPVersion], [RecordInsertedDate],"& _ 
+                " [RecordInsertedBy], [FlightID]) VALUES (@Year, @SurveyType, @CrewNumber, @Pilot"& _ 
+                ", @Observer1, @Observer2, @AircraftType, @TailNo, @TimeDepart, @TimeReturn, @Spo"& _ 
+                "tterPlaneTailNo, @SpotterPlaneType, @SpotterPlanePilot, @WeatherConditions, @Sno"& _ 
+                "wConditions, @Notes, @Herd, @SOPNumber, @SOPVersion, @RecordInsertedDate, @Recor"& _ 
+                "dInsertedBy, @FlightID);"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"SELECT Year, SurveyType, CrewNumber, Pilot, Observer1,"& _ 
+                " Observer2, AircraftType, TailNo, TimeDepart, TimeReturn, SpotterPlaneTailNo, Sp"& _ 
+                "otterPlaneType, SpotterPlanePilot, WeatherConditions, SnowConditions, Notes, Her"& _ 
+                "d, SOPNumber, SOPVersion, RecordInsertedDate, RecordInsertedBy, FlightID FROM Su"& _ 
+                "rveyFlights WHERE (FlightID = @FlightID)"
             Me._adapter.InsertCommand.CommandType = Global.System.Data.CommandType.Text
             Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Year", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Year", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@SurveyType", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "SurveyType", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
@@ -7500,7 +7472,6 @@ Namespace WRST_CaribouDataSetTableAdapters
             Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@TailNo", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "TailNo", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@TimeDepart", Global.System.Data.SqlDbType.DateTime, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "TimeDepart", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@TimeReturn", Global.System.Data.SqlDbType.DateTime, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "TimeReturn", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@IsFollowUpFlight", Global.System.Data.SqlDbType.Bit, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "IsFollowUpFlight", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@SpotterPlaneTailNo", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "SpotterPlaneTailNo", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@SpotterPlaneType", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "SpotterPlaneType", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@SpotterPlanePilot", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "SpotterPlanePilot", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
@@ -7570,10 +7541,9 @@ Namespace WRST_CaribouDataSetTableAdapters
             Me._commandCollection(0) = New Global.System.Data.SqlClient.SqlCommand()
             Me._commandCollection(0).Connection = Me.Connection
             Me._commandCollection(0).CommandText = "SELECT Year, SurveyType, CrewNumber, Pilot, Observer1, Observer2, AircraftType, T"& _ 
-                "ailNo, TimeDepart, TimeReturn, IsFollowUpFlight, SpotterPlaneTailNo, SpotterPlan"& _ 
-                "eType, SpotterPlanePilot, WeatherConditions, SnowConditions, Notes, Herd, SOPNum"& _ 
-                "ber, SOPVersion, "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"             RecordInsertedDate, RecordInsertedBy, FlightID"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)& _ 
-                "FROM   SurveyFlights"
+                "ailNo, TimeDepart, TimeReturn, SpotterPlaneTailNo, SpotterPlaneType, SpotterPlan"& _ 
+                "ePilot, WeatherConditions, SnowConditions, Notes, Herd, SOPNumber, SOPVersion, R"& _ 
+                "ecordInsertedDate, RecordInsertedBy, FlightID FROM SurveyFlights"
             Me._commandCollection(0).CommandType = Global.System.Data.CommandType.Text
         End Sub
         
@@ -7669,7 +7639,6 @@ Namespace WRST_CaribouDataSetTableAdapters
                     ByVal TailNo As String,  _
                     ByVal TimeDepart As Global.System.Nullable(Of Date),  _
                     ByVal TimeReturn As Global.System.Nullable(Of Date),  _
-                    ByVal IsFollowUpFlight As Boolean,  _
                     ByVal SpotterPlaneTailNo As String,  _
                     ByVal SpotterPlaneType As String,  _
                     ByVal SpotterPlanePilot As String,  _
@@ -7728,62 +7697,61 @@ Namespace WRST_CaribouDataSetTableAdapters
             Else
                 Me.Adapter.InsertCommand.Parameters(9).Value = Global.System.DBNull.Value
             End If
-            Me.Adapter.InsertCommand.Parameters(10).Value = CType(IsFollowUpFlight,Boolean)
             If (SpotterPlaneTailNo Is Nothing) Then
-                Me.Adapter.InsertCommand.Parameters(11).Value = Global.System.DBNull.Value
+                Me.Adapter.InsertCommand.Parameters(10).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.InsertCommand.Parameters(11).Value = CType(SpotterPlaneTailNo,String)
+                Me.Adapter.InsertCommand.Parameters(10).Value = CType(SpotterPlaneTailNo,String)
             End If
             If (SpotterPlaneType Is Nothing) Then
-                Me.Adapter.InsertCommand.Parameters(12).Value = Global.System.DBNull.Value
+                Me.Adapter.InsertCommand.Parameters(11).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.InsertCommand.Parameters(12).Value = CType(SpotterPlaneType,String)
+                Me.Adapter.InsertCommand.Parameters(11).Value = CType(SpotterPlaneType,String)
             End If
             If (SpotterPlanePilot Is Nothing) Then
-                Me.Adapter.InsertCommand.Parameters(13).Value = Global.System.DBNull.Value
+                Me.Adapter.InsertCommand.Parameters(12).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.InsertCommand.Parameters(13).Value = CType(SpotterPlanePilot,String)
+                Me.Adapter.InsertCommand.Parameters(12).Value = CType(SpotterPlanePilot,String)
             End If
             If (WeatherConditions Is Nothing) Then
-                Me.Adapter.InsertCommand.Parameters(14).Value = Global.System.DBNull.Value
+                Me.Adapter.InsertCommand.Parameters(13).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.InsertCommand.Parameters(14).Value = CType(WeatherConditions,String)
+                Me.Adapter.InsertCommand.Parameters(13).Value = CType(WeatherConditions,String)
             End If
             If (SnowConditions Is Nothing) Then
-                Me.Adapter.InsertCommand.Parameters(15).Value = Global.System.DBNull.Value
+                Me.Adapter.InsertCommand.Parameters(14).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.InsertCommand.Parameters(15).Value = CType(SnowConditions,String)
+                Me.Adapter.InsertCommand.Parameters(14).Value = CType(SnowConditions,String)
             End If
             If (Notes Is Nothing) Then
-                Me.Adapter.InsertCommand.Parameters(16).Value = Global.System.DBNull.Value
+                Me.Adapter.InsertCommand.Parameters(15).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.InsertCommand.Parameters(16).Value = CType(Notes,String)
+                Me.Adapter.InsertCommand.Parameters(15).Value = CType(Notes,String)
             End If
             If (Herd Is Nothing) Then
                 Throw New Global.System.ArgumentNullException("Herd")
             Else
-                Me.Adapter.InsertCommand.Parameters(17).Value = CType(Herd,String)
+                Me.Adapter.InsertCommand.Parameters(16).Value = CType(Herd,String)
             End If
             If (SOPNumber.HasValue = true) Then
-                Me.Adapter.InsertCommand.Parameters(18).Value = CType(SOPNumber.Value,Integer)
+                Me.Adapter.InsertCommand.Parameters(17).Value = CType(SOPNumber.Value,Integer)
+            Else
+                Me.Adapter.InsertCommand.Parameters(17).Value = Global.System.DBNull.Value
+            End If
+            If (SOPVersion.HasValue = true) Then
+                Me.Adapter.InsertCommand.Parameters(18).Value = CType(SOPVersion.Value,Decimal)
             Else
                 Me.Adapter.InsertCommand.Parameters(18).Value = Global.System.DBNull.Value
             End If
-            If (SOPVersion.HasValue = true) Then
-                Me.Adapter.InsertCommand.Parameters(19).Value = CType(SOPVersion.Value,Decimal)
-            Else
-                Me.Adapter.InsertCommand.Parameters(19).Value = Global.System.DBNull.Value
-            End If
-            Me.Adapter.InsertCommand.Parameters(20).Value = CType(RecordInsertedDate,Date)
+            Me.Adapter.InsertCommand.Parameters(19).Value = CType(RecordInsertedDate,Date)
             If (RecordInsertedBy Is Nothing) Then
                 Throw New Global.System.ArgumentNullException("RecordInsertedBy")
             Else
-                Me.Adapter.InsertCommand.Parameters(21).Value = CType(RecordInsertedBy,String)
+                Me.Adapter.InsertCommand.Parameters(20).Value = CType(RecordInsertedBy,String)
             End If
             If (FlightID Is Nothing) Then
                 Throw New Global.System.ArgumentNullException("FlightID")
             Else
-                Me.Adapter.InsertCommand.Parameters(22).Value = CType(FlightID,String)
+                Me.Adapter.InsertCommand.Parameters(21).Value = CType(FlightID,String)
             End If
             Dim previousConnectionState As Global.System.Data.ConnectionState = Me.Adapter.InsertCommand.Connection.State
             If ((Me.Adapter.InsertCommand.Connection.State And Global.System.Data.ConnectionState.Open)  _

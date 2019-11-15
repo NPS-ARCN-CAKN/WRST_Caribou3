@@ -30,9 +30,7 @@ Public Class Form1
             SetSurveyFlightsGridExDefaultValues()
             SetSurveysGridEXDefaultValues()
 
-            'load the default values for the grid columns
-            SetUpSurveyFlightsGridEXDropDowns()
-            SetUpSurveysGridEXDropDowns()
+
 
             'for some reason the surveys grid loads data when the form first loads despite no parent record being selected.
             'visibility is reversed on the flight grid's SelectionChanged event.
@@ -44,6 +42,9 @@ Public Class Form1
             'load the collared animal deployments from Animal Movement into the CollaredAnimalsGridEX
             LoadAnimalIDSCombo()
 
+            'load the default values for the grid columns
+            SetUpSurveyFlightsGridEXDropDowns()
+            SetUpSurveysGridEXDropDowns()
         Catch ex As Exception
             MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name)
         End Try
@@ -98,19 +99,9 @@ Public Class Form1
             'Set up default values
             Dim Grid As GridEX = Me.SurveyFlightsGridEX
             Grid.RootTable.Columns("FlightID").DefaultValue = Guid.NewGuid.ToString
-            Grid.RootTable.Columns("IsFollowUpFlight").DefaultValue = 0
             Grid.RootTable.Columns("SOPNumber").DefaultValue = 0
             Grid.RootTable.Columns("RecordInsertedDate").DefaultValue = Now
             Grid.RootTable.Columns("RecordInsertedBy").DefaultValue = My.User.Name
-
-            'CrewNumber default value
-            Dim MaxCrewNumber As Integer = 0
-            For Each row As GridEXRow In Grid.GetRows()
-                If row.Cells("CrewNumber").Value > MaxCrewNumber Then
-                    MaxCrewNumber = row.Cells("CrewNumber").Value
-                End If
-            Next
-            Grid.RootTable.Columns("CrewNumber").DefaultValue = MaxCrewNumber + 1
 
             'SOPVersion default value
             Dim MaxSOPVersion As Integer = 0
@@ -400,6 +391,7 @@ Public Class Form1
                                         .AllowSort = True
                                         .AutoComplete = True
                                         .ValueList.Clear()
+                                        .Key = GridEXColumnName
                                     End With
 
                                     'Get the distinct items from a DataTable
@@ -427,7 +419,14 @@ Public Class Form1
                 End If
             End If
         Catch ex As Exception
-            MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name & ")")
+            'this conditional is a workaround for a problem where when the dataset is refreshed from the database we get errors: ""Value cannot be null. Parameter Name: key"
+            If ex.Message = "Value cannot be null.
+Parameter name: key" Then
+                'do nothing, it seems to work fine failing
+                'Debug.Print(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name & ")")
+            Else
+                MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name & ")")
+            End If
         End Try
     End Sub
 
@@ -448,7 +447,7 @@ Public Class Form1
                 .AutomaticSort = True
                 .CardBorders = False
                 .CardHeaders = True
-                .ColumnAutoSizeMode = ColumnAutoSizeMode.AllCells
+                '.ColumnAutoSizeMode = ColumnAutoSizeMode.AllCells
                 .ColumnHeaders = InheritableBoolean.True
                 .Font = MyFont
                 .FilterMode = FilterMode.None
@@ -1232,4 +1231,46 @@ Click Yes to certify and lock the current record. Click No to cancel.", MsgBoxSt
         Dim ResultsForm As New ResultsForm
         ResultsForm.ShowDialog()
     End Sub
+
+    'Private Sub AutoLoadSurveyFlightCells()
+    'THIS JUST DIDN'T WORK WELL, HARD TO TELL IF YOU ARE ON A NEW RECORD OR NOT TO AVOID OVERWRITING EXISTING DATA
+    '    'CrewNumber default value. figure out the maximum crewnumber for a given year/herd/surveytype and increment by one
+    '    Dim Grid As GridEX = Me.SurveyFlightsGridEX
+    '    Dim MaxCrewNumber As Integer = 0
+    '    Dim Year As String = GetCurrentGridEXCellValue(Grid, "Year")
+    '    Dim Herd As String = GetCurrentGridEXCellValue(Grid, "Herd")
+    '    Dim SurveyType As String = GetCurrentGridEXCellValue(Grid, "SurveyType")
+    '    Dim TimeDepart As String = GetCurrentGridEXCellValue(Grid, "TimeDepart")
+    '    Dim TimeReturn As String = GetCurrentGridEXCellValue(Grid, "TimeReturn")
+
+    '    'if crew number is null or blank (we don't want to overwrite existing values)
+    '    If Grid.CurrentRow.Cells("CrewNumber").Value Is Nothing Then
+    '        If Not Year Is Nothing And Not Herd Is Nothing And Not SurveyType Is Nothing Then
+    '            ' if the other parts are available then auto fill crewnumber with the highest value plus one
+    '            If Not Year.Trim = "" And IsNumeric(Year) And Not Herd.Trim = "" And Not SurveyType = "" Then
+    '                Dim CrewNumberDataView As New DataView(WRST_CaribouDataSet.Tables("SurveyFlights"), "Year=" & CInt(Year) & " And Herd='" & Herd & "' and SurveyType='" & SurveyType & "'", "CrewNumber", DataViewRowState.CurrentRows)
+    '                For Each Row As DataRowView In CrewNumberDataView
+    '                    If Row.Item("CrewNumber") > MaxCrewNumber Then
+    '                        MaxCrewNumber = Row.Item("CrewNumber")
+    '                    End If
+    '                Next
+    '                Grid.CurrentRow.EndEdit()
+    '                Grid.CurrentRow.Cells("CrewNumber").Value = MaxCrewNumber + 1
+    '            End If
+    '        End If
+    '    End If
+
+    '    ''set TimeReturn to be the same day as timedepart
+    '    'If Not TimeDepart Is Nothing Then
+    '    '    'if we have a valid timedepart
+    '    '    If (Not IsDBNull(TimeDepart) And IsDate(TimeDepart)) And TimeReturn.Trim = "" Then
+    '    '        Grid.CurrentRow.Cells("TimeReturn").Value = TimeDepart
+    '    '    End If
+    '    'End If
+    'End Sub
+
+    'Private Sub SurveyFlightsGridEX_CellUpdated(sender As Object, e As ColumnActionEventArgs) Handles SurveyFlightsGridEX.CellUpdated
+    '    'pre-load cells on data entry
+    '    AutoLoadSurveyFlightCells()
+    'End Sub
 End Class
