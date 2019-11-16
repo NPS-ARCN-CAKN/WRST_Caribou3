@@ -291,8 +291,7 @@ Partial Class Form1
         '
         'CapturesGridEX
         '
-        Me.CapturesGridEX.AllowAddNew = Janus.Windows.GridEX.InheritableBoolean.[True]
-        Me.CapturesGridEX.AllowDelete = Janus.Windows.GridEX.InheritableBoolean.[True]
+        Me.CapturesGridEX.AllowEdit = Janus.Windows.GridEX.InheritableBoolean.[False]
         Me.CapturesGridEX.DataSource = Me.CapturesBindingSource
         CapturesGridEX_DesignTimeLayout.LayoutString = resources.GetString("CapturesGridEX_DesignTimeLayout.LayoutString")
         Me.CapturesGridEX.DesignTimeLayout = CapturesGridEX_DesignTimeLayout
