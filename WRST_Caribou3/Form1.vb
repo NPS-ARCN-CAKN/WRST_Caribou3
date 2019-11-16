@@ -27,6 +27,7 @@ Public Class Form1
             FormatGridEX(Me.SurveysGridEX)
             FormatGridEX(Me.CollaredAnimalsInGroupsGridEX)
             FormatGridEX(Me.AnimalGridEX)
+            FormatGridEX(Me.DeploymentsGridEX)
             FormatGridEX(Me.CapturesGridEX)
 
             'set up default values for the grids
@@ -435,60 +436,7 @@ Parameter name: key" Then
         End Try
     End Sub
 
-    ''' <summary>
-    ''' Standardizes the look, feel and function of a GridEX
-    ''' </summary>
-    ''' <param name="GridEX">The GridEX to set up</param>
-    Private Sub FormatGridEX(GridEX As GridEX)
-        Try
-            Dim MyFont As New Font("Sans Serif", 10, FontStyle.Regular)
-            If Not GridEX Is Nothing Then
-                With GridEX
-                    'by default make grids readonly; toggle editability using ToggleGridEXReadOnly function
-                    .AllowAddNew = InheritableBoolean.True
-                    .AllowDelete = InheritableBoolean.True
-                    .AllowEdit = InheritableBoolean.True
-                    .AlternatingColors = True
-                    .AutoEdit = False
-                    .AutomaticSort = True
-                    .CardBorders = False
-                    .CardHeaders = True
-                    .ColumnAutoResize = False
-                    .ColumnAutoSizeMode = ColumnAutoSizeMode.DiaplayedCells
-                    .ColumnHeaders = InheritableBoolean.True
-                    .Font = MyFont
-                    .FilterMode = FilterMode.None
-                    .NewRowPosition = NewRowPosition.BottomRow
-                    .RecordNavigator = True
-                    .RowHeaders = InheritableBoolean.True
-                    .SelectionMode = SelectionMode.MultipleSelection
-                    .SelectOnExpand = False
-                    .TotalRowPosition = TotalRowPosition.BottomFixed
-                    .SelectedFormatStyle.BackColor = Color.SteelBlue
-                    .SelectedFormatStyle.ForeColor = Color.White
-                    .SelectedFormatStyle.FontBold = TriState.False
-                    .SelectedInactiveFormatStyle.BackColor = Color.SteelBlue
-                    .SelectedInactiveFormatStyle.ForeColor = Color.White
-                    .SelectedInactiveFormatStyle.FontBold = TriState.False
-                End With
 
-                'gridex automotically formats doubles as currency. revert. also extend dates with time
-                If Not GridEX.RootTable Is Nothing Then
-                    For Each Col As GridEXColumn In GridEX.RootTable.Columns
-                        If Col.FormatString = "c" Then
-                            Col.FormatString = ""
-                        ElseIf Col.FormatString = "d" Then
-                            Col.FormatString = "yyyy-MM-dd HH:mm:ss"
-                        End If
-                    Next
-                End If
-            End If
-
-        Catch ex As Exception
-            MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name & ")")
-        End Try
-
-    End Sub
 
     Private Sub SaveToolStripButton_Click(sender As Object, e As EventArgs) Handles SaveToolStripButton.Click
         SaveDataset()
