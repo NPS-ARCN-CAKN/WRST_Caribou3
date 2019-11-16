@@ -186,7 +186,7 @@ Public Class Form1
             With Grid.RootTable.Columns("Herd")
                 .EditType = EditType.Combo
                 .HasValueList = True
-                .LimitToList = True
+                .LimitToList = False
                 .AllowSort = True
                 .AutoComplete = True
                 .ValueList.Clear()
@@ -203,60 +203,62 @@ Public Class Form1
     ''' Sets up the SurveysGridEX default values and DropDowns/Combos
     ''' </summary>
     Private Sub SetUpSurveysGridEXDropDowns()
+        Try
+            'Set up default values
+            Dim Grid As GridEX = Me.SurveysGridEX
+            Grid.RootTable.Columns("EID").DefaultValue = Guid.NewGuid.ToString
+            Grid.RootTable.Columns("RecordInsertedDate").DefaultValue = Now
+            Grid.RootTable.Columns("RecordInsertedBy").DefaultValue = My.User.Name
 
-        'Set up default values
-        Dim Grid As GridEX = Me.SurveysGridEX
-        Grid.RootTable.Columns("EID").DefaultValue = Guid.NewGuid.ToString
-        Grid.RootTable.Columns("RecordInsertedDate").DefaultValue = Now
-        Grid.RootTable.Columns("RecordInsertedBy").DefaultValue = My.User.Name
+            'search areas dropdown
+            'this line loads the csv list of search areas from my.settings into a datatable
+            Dim SearchAreasDataTable As DataTable = GetSearchAreasDataTable()
 
-        'search areas dropdown
-        'this line loads the csv list of search areas from my.settings into a datatable
-        Dim SearchAreasDataTable As DataTable = GetSearchAreasDataTable()
+            'set up the search area column to accept a dropdown
+            With Grid.RootTable.Columns("SearchArea")
+                .EditType = EditType.Combo
+                .HasValueList = True
+                .LimitToList = False
+                .AllowSort = True
+                .AutoComplete = True
+                .ValueList.Clear()
+            End With
+            Dim SearchAreasList As GridEXValueListItemCollection = Grid.RootTable.Columns("SearchArea").ValueList
+            'load in the searcharea items into the combobox
+            For Each Row As DataRow In SearchAreasDataTable.Rows
+                Dim SearchArea As String = Row.Item("SearchArea")
+                SearchAreasList.Add(SearchArea, SearchArea)
+            Next
 
-        'set up the search area column to accept a dropdown
-        With Grid.RootTable.Columns("SearchArea")
-            .EditType = EditType.Combo
-            .HasValueList = True
-            .LimitToList = True
-            .AllowSort = True
-            .AutoComplete = True
-            .ValueList.Clear()
-        End With
-        Dim SearchAreasList As GridEXValueListItemCollection = Grid.RootTable.Columns("SearchArea").ValueList
-        'load in the searcharea items into the combobox
-        For Each Row As DataRow In SearchAreasDataTable.Rows
-            Dim SearchArea As String = Row.Item("SearchArea")
-            SearchAreasList.Add(SearchArea, SearchArea)
-        Next
-
-        'CertificationLevel dropdown
-        With Grid.RootTable.Columns("CertificationLevel")
-            .EditType = EditType.Combo
-            .HasValueList = True
-            .LimitToList = True
-            .AllowSort = True
-            .AutoComplete = True
-            .ValueList.Clear()
-        End With
-        Dim CertificationLevelList As GridEXValueListItemCollection = Grid.RootTable.Columns("CertificationLevel").ValueList
-        CertificationLevelList.Add("Raw", "Raw")
-        CertificationLevelList.Add("Provisional", "Provisional")
-        CertificationLevelList.Add("Accepted", "Accepted")
-        CertificationLevelList.Add("Certified", "Certified")
-
+            'CertificationLevel dropdown
+            With Grid.RootTable.Columns("CertificationLevel")
+                .EditType = EditType.Combo
+                .HasValueList = True
+                .LimitToList = True
+                .AllowSort = True
+                .AutoComplete = True
+                .ValueList.Clear()
+            End With
+            Dim CertificationLevelList As GridEXValueListItemCollection = Grid.RootTable.Columns("CertificationLevel").ValueList
+            CertificationLevelList.Add("Raw", "Raw")
+            CertificationLevelList.Add("Provisional", "Provisional")
+            CertificationLevelList.Add("Accepted", "Accepted")
+            CertificationLevelList.Add("Certified", "Certified")
+        Catch ex As Exception
+            MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name & ")")
+        End Try
     End Sub
 
     ''' <summary>
     ''' Sets up the SurveysGridEX default values and DropDowns/Combos
     ''' </summary>
     Private Sub SetUpCollaredAnimalsInGroupsGridEXDropDowns(SightingDate As Date)
-        'Try
-        'Set up default values
-        Dim Grid As GridEX = Me.CollaredAnimalsInGroupsGridEX
+        Try
+            'Set up default values
+            Dim Grid As GridEX = Me.CollaredAnimalsInGroupsGridEX
 
 
-        Dim Sql As String = "SELECT Animals.AnimalId
+            Dim Sql As String = "SELECT Animals.AnimalId
         , CONVERT(Varchar(20), Collars.Frequency) + ' - ' + Animals.AnimalId + ' Deployed: ' + CONVERT(varchar(20),DeploymentDate)  +  ISNULL(' Collar retrieved: ' + CONVERT(varchar(20), RetrievalDate),'') +  ISNULL(' DEAD: ' + CONVERT(varchar(20), MortalityDate),'') AS CollaredCaribou
         FROM            Animals INNER JOIN
         CollarDeployments ON Animals.ProjectId = CollarDeployments.ProjectId AND Animals.AnimalId = CollarDeployments.AnimalId INNER JOIN
@@ -265,62 +267,32 @@ Public Class Form1
         And (DeploymentDate < '" & SightingDate & "') and (RetrievalDate IS NULL Or RetrievalDate > '" & SightingDate & "')
         ORDER BY Frequency"
 
-        Dim CollaredAnimalsDataTable As DataTable = GetDataTable(My.Settings.Animal_MovementConnectionString, Sql)
+            Dim CollaredAnimalsDataTable As DataTable = GetDataTable(My.Settings.Animal_MovementConnectionString, Sql)
 
-        'set up the search area column to accept a dropdown
-        With Grid.RootTable.Columns("AnimalID")
-            .EditType = EditType.Combo
-            .HasValueList = True
-            .LimitToList = True
-            .AllowSort = True
-            .AutoComplete = True
-            .ValueList.Clear()
-        End With
-        Dim AnimalsList As GridEXValueListItemCollection = Grid.RootTable.Columns("AnimalID").ValueList
-        'load in the searcharea items into the combobox
-        If CollaredAnimalsDataTable.Rows.Count > 0 Then
-            For Each Row As DataRow In CollaredAnimalsDataTable.Rows
-                Dim AnimalID As String = Row.Item("AnimalID")
-                Dim CollaredCaribou As String = Row.Item("CollaredCaribou")
-                AnimalsList.Add(AnimalID, AnimalID & " (" & CollaredCaribou & ")")
-            Next
-            'Else
-            '    For i As Integer = 1 To 10
-            '        AnimalsList.Add("TEST " & i, "TEST " & i & " (Frequency: " & i & i + 6 & i + 5 & "." & i + 456789 & ")")
-            '    Next
-        End If
-        'Catch ex As Exception
-        '    MsgBox(ex.Message & " " & System.Reflection.MethodBase.GetCurrentMethod.Name)
-        'End Try
-    End Sub
-
-    ''' <summary>
-    ''' Returns the current value of the cell specified by GridEXColumnKey of the current row of GridEX.
-    ''' </summary>
-    ''' <param name="GridEX">GridEX to search. GridEX</param>
-    ''' <param name="GridEXColumnKey">The key (name) of the GridEX column from which you would like the current value. String.</param>
-    ''' <returns></returns>
-    Private Function GetCurrentGridEXCellValue(GridEX As GridEX, GridEXColumnKey As String) As String
-        Dim CellValue As String = ""
-        Try
-            'get the current row of the VS GridEX
-            If Not GridEX Is Nothing Then
-                If Not GridEX.CurrentRow Is Nothing Then
-                    Dim CurrentRow As GridEXRow = GridEX.CurrentRow
-                    If Not CurrentRow.Cells(GridEXColumnKey) Is Nothing Then
-                        If Not IsDBNull(CurrentRow.Cells(GridEXColumnKey).Value) Then
-                            CellValue = CurrentRow.Cells(GridEXColumnKey).Value
-                        Else
-                            CellValue = ""
-                        End If
-                    End If
-                End If
+            'set up the search area column to accept a dropdown
+            With Grid.RootTable.Columns("AnimalID")
+                .EditType = EditType.Combo
+                .HasValueList = True
+                .LimitToList = True
+                .AllowSort = True
+                .AutoComplete = True
+                .ValueList.Clear()
+            End With
+            Dim AnimalsList As GridEXValueListItemCollection = Grid.RootTable.Columns("AnimalID").ValueList
+            'load in the searcharea items into the combobox
+            If CollaredAnimalsDataTable.Rows.Count > 0 Then
+                For Each Row As DataRow In CollaredAnimalsDataTable.Rows
+                    Dim AnimalID As String = Row.Item("AnimalID")
+                    Dim CollaredCaribou As String = Row.Item("CollaredCaribou")
+                    AnimalsList.Add(AnimalID, AnimalID & " (" & CollaredCaribou & ")")
+                Next
             End If
         Catch ex As Exception
-        MsgBox(ex.Message & " " & System.Reflection.MethodBase.GetCurrentMethod.Name)
+            MsgBox(ex.Message & " " & System.Reflection.MethodBase.GetCurrentMethod.Name)
         End Try
-        Return CellValue
-    End Function
+    End Sub
+
+
 
     ''' <summary>
     ''' Returns the maximum value of GridEX's column named GroupNumber. Used to increment GroupNumber as a default value for new records by adding 1.
@@ -328,14 +300,18 @@ Public Class Form1
     ''' <returns></returns>
     Private Function GetMaximumGroupNumber(GridEX As GridEX) As Integer
         Dim MaxGroupNumber As Integer = 0
-        If Not GridEX Is Nothing Then
-            'determine the maximum group number
-            For Each Row As GridEXRow In GridEX.GetRows()
-                If Row.Cells("GroupNumber").Value > MaxGroupNumber Then
-                    MaxGroupNumber = Row.Cells("GroupNumber").Value
-                End If
-            Next
-        End If
+        Try
+            If Not GridEX Is Nothing Then
+                'determine the maximum group number
+                For Each Row As GridEXRow In GridEX.GetRows()
+                    If Row.Cells("GroupNumber").Value > MaxGroupNumber Then
+                        MaxGroupNumber = Row.Cells("GroupNumber").Value
+                    End If
+                Next
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message & " " & System.Reflection.MethodBase.GetCurrentMethod.Name)
+        End Try
         Return MaxGroupNumber
     End Function
 
@@ -347,12 +323,16 @@ Public Class Form1
     ''' <returns>Double</returns>
     Private Function GetFrequencyFromAnimalIDAndDate(AnimalID As String, SampleDate As Date) As Double
         Dim Frequency As Double = 0
-        Dim AnimalsDataTable As DataTable = GetAnimalsDataTable()
-        Dim Filter As String = "(AnimalID = '" & AnimalID & "') And (DeploypmentDate < '" & SampleDate & "' And RetrievalDate < '" & SampleDate & "')"
-        Dim DV As New DataView(AnimalsDataTable, Filter, "", DataViewRowState.CurrentRows)
-        If DV.Count = 1 Then
-            Frequency = DV(0).Item("Frequency")
-        End If
+        Try
+            Dim AnimalsDataTable As DataTable = GetAnimalsDataTable()
+            Dim Filter As String = "(AnimalID = '" & AnimalID & "') And (DeploypmentDate < '" & SampleDate & "' And RetrievalDate < '" & SampleDate & "')"
+            Dim DV As New DataView(AnimalsDataTable, Filter, "", DataViewRowState.CurrentRows)
+            If DV.Count = 1 Then
+                Frequency = DV(0).Item("Frequency")
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message & " " & System.Reflection.MethodBase.GetCurrentMethod.Name)
+        End Try
         Return Frequency
     End Function
 
@@ -364,12 +344,16 @@ Public Class Form1
     ''' <returns></returns>
     Private Function GetAnimalIDFromFrequencyAndDate(Frequency As Double, SampleDate As Date) As Double
         Dim AnimalID As Double = 0
-        Dim AnimalsDataTable As DataTable = GetAnimalsDataTable()
-        Dim Filter As String = "(Frequency = " & Frequency & ") And (DeploypmentDate < '" & SampleDate & "' And RetrievalDate < '" & SampleDate & "')"
-        Dim DV As New DataView(AnimalsDataTable, Filter, "", DataViewRowState.CurrentRows)
-        If DV.Count = 1 Then
-            AnimalID = DV(0).Item("AnimalID")
-        End If
+        Try
+            Dim AnimalsDataTable As DataTable = GetAnimalsDataTable()
+            Dim Filter As String = "(Frequency = " & Frequency & ") And (DeploypmentDate < '" & SampleDate & "' And RetrievalDate < '" & SampleDate & "')"
+            Dim DV As New DataView(AnimalsDataTable, Filter, "", DataViewRowState.CurrentRows)
+            If DV.Count = 1 Then
+                AnimalID = DV(0).Item("AnimalID")
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message & " " & System.Reflection.MethodBase.GetCurrentMethod.Name)
+        End Try
         Return AnimalID
     End Function
 
@@ -447,6 +431,9 @@ Parameter name: key" Then
     End Sub
 
 
+    ''' <summary>
+    ''' If the Dataset has changes ask the user for permission to save edits.
+    ''' </summary>
     Private Sub AskToSaveChanges()
         If WRST_CaribouDataSet.HasChanges = True Then
             If MsgBox("You have unsaved changes. Save to database?", MsgBoxStyle.YesNo, "Save changes?") = MsgBoxResult.Yes Then
@@ -588,9 +575,6 @@ Parameter name: key" Then
         'load animal movement grids
         LoadAnimalMovementGrids()
 
-
-
-
         'QC the number of frequencies matches the number of animalids
         ReconcileFrequencies()
     End Sub
@@ -674,21 +658,21 @@ Parameter name: key" Then
 
 
     Private Sub ImportSurveyDataFromFileToolStripButton_Click(sender As Object, e As EventArgs) Handles ImportSurveyDataFromFileToolStripButton.Click
+        Try
+            'get the current flightid from the survey flights grid
+            Dim CurrentFlightID As String = GetCurrentGridEXCellValue(Me.SurveyFlightsGridEX, "FlightID")
 
-        'get the current flightid from the survey flights grid
-        Dim CurrentFlightID As String = GetCurrentGridEXCellValue(Me.SurveyFlightsGridEX, "FlightID")
+            'get the current herd from the surveys grid
+            Dim CurrentHerd As String = GetCurrentGridEXCellValue(Me.SurveyFlightsGridEX, "Herd")
 
-        'get the current herd from the surveys grid
-        Dim CurrentHerd As String = GetCurrentGridEXCellValue(Me.SurveyFlightsGridEX, "Herd")
+            'if valid
+            If Not CurrentFlightID Is Nothing And Not CurrentHerd Is Nothing Then
 
-        'if valid
-        If Not CurrentFlightID Is Nothing And Not CurrentHerd Is Nothing Then
+                If Not IsDBNull(CurrentFlightID) And Not IsDBNull(CurrentHerd) Then
+                    If Not CurrentFlightID.Trim.Length = 0 Or CurrentHerd.Trim.Length = 0 Then
 
-            If Not IsDBNull(CurrentFlightID) And Not IsDBNull(CurrentHerd) Then
-                If Not CurrentFlightID.Trim.Length = 0 Or CurrentHerd.Trim.Length = 0 Then
-
-                    'get the structure of the destination datatable, we only need one record since the translator will clear all records anyway
-                    Dim Sql As String = "SELECT TOP 1 [SightingDate]
+                        'get the structure of the destination datatable, we only need one record since the translator will clear all records anyway
+                        Dim Sql As String = "SELECT TOP 1 [SightingDate]
 ,[SearchArea]
 ,[GroupNumber]
 ,[SmallBull]
@@ -721,29 +705,32 @@ Parameter name: key" Then
 ,[CertificationLevel]
   FROM [dbo].[Surveys];"
 
-                    'use the structure of the query above to build a skeleton datatable
-                    Dim DestinationDataTable As DataTable = GetDataTable(My.Settings.WRST_CaribouConnectionString, Sql)
+                        'use the structure of the query above to build a skeleton datatable
+                        Dim DestinationDataTable As DataTable = GetDataTable(My.Settings.WRST_CaribouConnectionString, Sql)
 
-                    'import the data from the selected file
-                    ImportSurveyDataFromFile(DestinationDataTable, CurrentHerd, CurrentFlightID)
+                        'import the data from the selected file
+                        ImportSurveyDataFromFile(DestinationDataTable, CurrentHerd, CurrentFlightID)
 
-                    'save the dataset
-                    'SaveDataset()
+                        'save the dataset
+                        'SaveDataset()
 
-                    'convert any animal counts of zero to null
-                    'ExecuteStoredProcedure("SP_CaribouGroupsZeroesToNulls")
+                        'convert any animal counts of zero to null
+                        'ExecuteStoredProcedure("SP_CaribouGroupsZeroesToNulls")
 
-                    'reload the corrected dataset
-                    'LoadDataset()
+                        'reload the corrected dataset
+                        'LoadDataset()
+                    Else
+                        MsgBox("There is no currently selected Flight to associate with any imported points (Zero length FlightID or Herd).")
+                    End If
                 Else
-                    MsgBox("There is no currently selected Flight to associate with any imported points (Zero length FlightID or Herd).")
+                    MsgBox("There is no currently selected Flight to associate with any imported points (FlightID or Herd is Null).")
                 End If
             Else
-                MsgBox("There is no currently selected Flight to associate with any imported points (FlightID or Herd is Null).")
+                MsgBox("There is no currently selected Flight to associate with any imported points (FlightID or Herd is Nothing).")
             End If
-        Else
-            MsgBox("There is no currently selected Flight to associate with any imported points (FlightID or Herd is Nothing).")
-        End If
+        Catch ex As Exception
+            MsgBox(ex.Message & " " & System.Reflection.MethodBase.GetCurrentMethod.Name)
+        End Try
     End Sub
 
 
@@ -948,11 +935,15 @@ Click Yes to certify and lock the current record. Click No to cancel.", MsgBoxSt
     ''' combo selector of the CollaredAnimalsInGroupsGridEX
     ''' </summary>
     Private Sub LoadAnimalIDSCombo()
-        'load the collared animal deployments from Animal Movement into the CollaredAnimalsGridEX
-        Dim CurrentSightingDate As String = GetCurrentGridEXCellValue(Me.SurveysGridEX, "SightingDate")
-        If IsDate(CurrentSightingDate) Then
-            SetUpCollaredAnimalsInGroupsGridEXDropDowns(CDate(CurrentSightingDate))
-        End If
+        Try
+            'load the collared animal deployments from Animal Movement into the CollaredAnimalsGridEX
+            Dim CurrentSightingDate As String = GetCurrentGridEXCellValue(Me.SurveysGridEX, "SightingDate")
+            If IsDate(CurrentSightingDate) Then
+                SetUpCollaredAnimalsInGroupsGridEXDropDowns(CDate(CurrentSightingDate))
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message & " " & System.Reflection.MethodBase.GetCurrentMethod.Name)
+        End Try
     End Sub
 
     ''' <summary>
@@ -963,29 +954,33 @@ Click Yes to certify and lock the current record. Click No to cancel.", MsgBoxSt
         'Update the collared animals gridex header with the Surveys group number at least, and also frequencies if they exist
         'this makes matching frequencies to animals easier
 
-        'generic starting caption
-        Me.CollaredAnimalsInGroupsGridEX.RootTable.Caption = "Collared caribou in group"
+        Try
+            'generic starting caption
+            Me.CollaredAnimalsInGroupsGridEX.RootTable.Caption = "Collared caribou in group"
 
-        'start by getting the groupnumber and frequencies data
-        If Not GetCurrentGridEXCellValue(Me.SurveysGridEX, "FrequenciesInGroup") Is Nothing Then
-            If Not IsDBNull(GetCurrentGridEXCellValue(Me.SurveysGridEX, "GroupNumber")) Then
-                Dim GroupNumber As String = GetCurrentGridEXCellValue(Me.SurveysGridEX, "GroupNumber")
+            'start by getting the groupnumber and frequencies data
+            If Not GetCurrentGridEXCellValue(Me.SurveysGridEX, "FrequenciesInGroup") Is Nothing Then
+                If Not IsDBNull(GetCurrentGridEXCellValue(Me.SurveysGridEX, "GroupNumber")) Then
+                    Dim GroupNumber As String = GetCurrentGridEXCellValue(Me.SurveysGridEX, "GroupNumber")
 
-                'make the gridex caption more specific
-                Me.CollaredAnimalsInGroupsGridEX.RootTable.Caption = "No collared caribou detected in group " & GroupNumber
+                    'make the gridex caption more specific
+                    Me.CollaredAnimalsInGroupsGridEX.RootTable.Caption = "No collared caribou detected in group " & GroupNumber
 
-                'next determine if the frequencies in group column has data
-                If Not IsDBNull(GetCurrentGridEXCellValue(Me.SurveysGridEX, "FrequenciesInGroup")) Then
-                    If Not GetCurrentGridEXCellValue(Me.SurveysGridEX, "FrequenciesInGroup") Is Nothing Then
-                        Dim FrequenciesInGroup As String = GetCurrentGridEXCellValue(Me.SurveysGridEX, "FrequenciesInGroup")
-                        If FrequenciesInGroup.Trim.Length > 0 Then
-                            'frequencies exist, update the gridex caption
-                            Me.CollaredAnimalsInGroupsGridEX.RootTable.Caption = "Collared caribou in group " & GroupNumber & " by frequency: " & FrequenciesInGroup
+                    'next determine if the frequencies in group column has data
+                    If Not IsDBNull(GetCurrentGridEXCellValue(Me.SurveysGridEX, "FrequenciesInGroup")) Then
+                        If Not GetCurrentGridEXCellValue(Me.SurveysGridEX, "FrequenciesInGroup") Is Nothing Then
+                            Dim FrequenciesInGroup As String = GetCurrentGridEXCellValue(Me.SurveysGridEX, "FrequenciesInGroup")
+                            If FrequenciesInGroup.Trim.Length > 0 Then
+                                'frequencies exist, update the gridex caption
+                                Me.CollaredAnimalsInGroupsGridEX.RootTable.Caption = "Collared caribou in group " & GroupNumber & " by frequency: " & FrequenciesInGroup
+                            End If
                         End If
                     End If
                 End If
             End If
-        End If
+        Catch ex As Exception
+            MsgBox(ex.Message & " " & System.Reflection.MethodBase.GetCurrentMethod.Name)
+        End Try
     End Sub
 
     ''' <summary>
@@ -994,16 +989,19 @@ Click Yes to certify and lock the current record. Click No to cancel.", MsgBoxSt
     Private Sub UpdateSurveyFlightsGridEXHeader()
         'update the collared animals gridex with any frequencies found in this caribou group. this makes matching frequencies to animals easier
         Me.SurveyFlightsGridEX.RootTable.Caption = "Flights"
-
-        'update the caption with the info
-        If Not IsDBNull(GetCurrentGridEXCellValue(Me.SurveyFlightsGridEX, "TimeDepart")) And Not IsDBNull(GetCurrentGridEXCellValue(Me.SurveyFlightsGridEX, "Herd")) And Not IsDBNull(GetCurrentGridEXCellValue(Me.SurveyFlightsGridEX, "SurveyType")) And Not IsDBNull(GetCurrentGridEXCellValue(Me.SurveyFlightsGridEX, "Observer1")) And Not IsDBNull(GetCurrentGridEXCellValue(Me.SurveyFlightsGridEX, "TailNo")) Then
-            Dim TimeDepart As String = GetCurrentGridEXCellValue(Me.SurveyFlightsGridEX, "TimeDepart")
-            Dim Herd As String = GetCurrentGridEXCellValue(Me.SurveyFlightsGridEX, "Herd")
-            Dim SurveyType As String = GetCurrentGridEXCellValue(Me.SurveyFlightsGridEX, "SurveyType")
-            Dim TailNo As String = GetCurrentGridEXCellValue(Me.SurveyFlightsGridEX, "TailNo")
-            Dim Observer1 As String = GetCurrentGridEXCellValue(Me.SurveyFlightsGridEX, "Observer1")
-            Me.SurveyFlightsGridEX.RootTable.Caption = "Flight: " & TimeDepart & " " & Herd & " " & SurveyType & " " & TailNo & " " & Observer1
-        End If
+        Try
+            'update the caption with the info
+            If Not IsDBNull(GetCurrentGridEXCellValue(Me.SurveyFlightsGridEX, "TimeDepart")) And Not IsDBNull(GetCurrentGridEXCellValue(Me.SurveyFlightsGridEX, "Herd")) And Not IsDBNull(GetCurrentGridEXCellValue(Me.SurveyFlightsGridEX, "SurveyType")) And Not IsDBNull(GetCurrentGridEXCellValue(Me.SurveyFlightsGridEX, "Observer1")) And Not IsDBNull(GetCurrentGridEXCellValue(Me.SurveyFlightsGridEX, "TailNo")) Then
+                Dim TimeDepart As String = GetCurrentGridEXCellValue(Me.SurveyFlightsGridEX, "TimeDepart")
+                Dim Herd As String = GetCurrentGridEXCellValue(Me.SurveyFlightsGridEX, "Herd")
+                Dim SurveyType As String = GetCurrentGridEXCellValue(Me.SurveyFlightsGridEX, "SurveyType")
+                Dim TailNo As String = GetCurrentGridEXCellValue(Me.SurveyFlightsGridEX, "TailNo")
+                Dim Observer1 As String = GetCurrentGridEXCellValue(Me.SurveyFlightsGridEX, "Observer1")
+                Me.SurveyFlightsGridEX.RootTable.Caption = "Flight: " & TimeDepart & " " & Herd & " " & SurveyType & " " & TailNo & " " & Observer1
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message & " " & System.Reflection.MethodBase.GetCurrentMethod.Name)
+        End Try
     End Sub
 
 
@@ -1062,17 +1060,21 @@ Click Yes to certify and lock the current record. Click No to cancel.", MsgBoxSt
     ''' <returns>List(Of Double)</returns>
     Private Function GetListOfCSVFrequencies(FrequenciesCSV As String) As List(Of Double)
         Dim FrequenciesList As New List(Of Double)
-        If Not FrequenciesCSV Is Nothing Then
-            If Not IsDBNull(FrequenciesCSV) Then
-                For Each Frequency In FrequenciesCSV.Split(",")
-                    Frequency = Frequency.Trim
-                    If IsNumeric(Frequency.Trim) = True Then
-                        FrequenciesList.Add(Frequency)
-                    End If
-                Next
+        Try
+            If Not FrequenciesCSV Is Nothing Then
+                If Not IsDBNull(FrequenciesCSV) Then
+                    For Each Frequency In FrequenciesCSV.Split(",")
+                        Frequency = Frequency.Trim
+                        If IsNumeric(Frequency.Trim) = True Then
+                            FrequenciesList.Add(Frequency)
+                        End If
+                    Next
+                End If
             End If
-        End If
-            Return FrequenciesList
+        Catch ex As Exception
+            MsgBox(ex.Message & " " & System.Reflection.MethodBase.GetCurrentMethod.Name)
+        End Try
+        Return FrequenciesList
     End Function
 
     ''' <summary>
@@ -1163,15 +1165,19 @@ Click Yes to certify and lock the current record. Click No to cancel.", MsgBoxSt
     ''' </summary>
     ''' <param name="MissingFrequenciesArrayList"></param>
     Private Sub ShowMissingFrequenciesList(MissingFrequenciesArrayList As ArrayList)
-        If MissingFrequenciesArrayList.Count > 1 Then
-            Dim Warning As String = "WARNING: The following Frequencies were not associated with any deployed collar on the date the caribou group was observed" & vbNewLine
-            Dim Message As String = ""
-            For Each Freq In MissingFrequenciesArrayList
-                Message = Message & Freq & vbNewLine
-            Next
-            Message = Message & vbNewLine & vbNewLine & "Ctl-C to copy this message to your clipboard."
-            MsgBox(Warning & Message, MsgBoxStyle.Exclamation, "WARNING")
-        End If
+        Try
+            If MissingFrequenciesArrayList.Count > 1 Then
+                Dim Warning As String = "WARNING: The following Frequencies were not associated with any deployed collar on the date the caribou group was observed" & vbNewLine
+                Dim Message As String = ""
+                For Each Freq In MissingFrequenciesArrayList
+                    Message = Message & Freq & vbNewLine
+                Next
+                Message = Message & vbNewLine & vbNewLine & "Ctl-C to copy this message to your clipboard."
+                MsgBox(Warning & Message, MsgBoxStyle.Exclamation, "WARNING")
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message & " " & System.Reflection.MethodBase.GetCurrentMethod.Name)
+        End Try
     End Sub
 
     Private Sub ChangeOrientationToolStripButton_Click(sender As Object, e As EventArgs) Handles ChangeOrientationToolStripButton.Click

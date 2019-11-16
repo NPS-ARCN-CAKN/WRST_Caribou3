@@ -180,19 +180,23 @@ Module Utilites
     Public Function GetFile(Title As String, Filter As String) As String
         'allow user to open an openfiledialog to select a csv file
         Dim File As String = ""
-        Dim OFD As New OpenFileDialog
-        With OFD
-            .AddExtension = True
-            .CheckFileExists = True
-            .Filter = Filter
-            .Multiselect = False
-            .Title = Title
-        End With
+        Try
+            Dim OFD As New OpenFileDialog
+            With OFD
+                .AddExtension = True
+                .CheckFileExists = True
+                .Filter = Filter
+                .Multiselect = False
+                .Title = Title
+            End With
 
-        'show the ofd and get the filename and path
-        If OFD.ShowDialog = DialogResult.OK Then
-            File = OFD.FileName
-        End If
+            'show the ofd and get the filename and path
+            If OFD.ShowDialog = DialogResult.OK Then
+                File = OFD.FileName
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message & " " & System.Reflection.MethodBase.GetCurrentMethod.Name)
+        End Try
         Return File
     End Function
 
@@ -375,6 +379,36 @@ ORDER BY DeploymentDate DESC"
         End Try
 
     End Sub
+
+
+    ''' <summary>
+    ''' Returns the current value of the cell specified by GridEXColumnKey of the current row of GridEX.
+    ''' </summary>
+    ''' <param name="GridEX">GridEX to search. GridEX</param>
+    ''' <param name="GridEXColumnKey">The key (name) of the GridEX column from which you would like the current value. String.</param>
+    ''' <returns></returns>
+    Public Function GetCurrentGridEXCellValue(GridEX As GridEX, GridEXColumnKey As String) As String
+        Dim CellValue As String = ""
+        Try
+            'get the current row of the VS GridEX
+            If Not GridEX Is Nothing Then
+                If Not GridEX.CurrentRow Is Nothing Then
+                    Dim CurrentRow As GridEXRow = GridEX.CurrentRow
+                    If Not CurrentRow.Cells(GridEXColumnKey) Is Nothing Then
+                        If Not IsDBNull(CurrentRow.Cells(GridEXColumnKey).Value) Then
+                            CellValue = CurrentRow.Cells(GridEXColumnKey).Value
+                        Else
+                            CellValue = ""
+                        End If
+                    End If
+                End If
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message & " " & System.Reflection.MethodBase.GetCurrentMethod.Name)
+        End Try
+        Return CellValue
+    End Function
+
 
     '''' <summary>
     '''' 

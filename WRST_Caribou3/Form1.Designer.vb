@@ -376,8 +376,8 @@ Partial Class Form1
         '
         'HelpProvider
         '
-        Me.HelpProvider.HelpNamespace = "C:\Work\Code\WRST_Caribou3\WRST_Caribou3\Help\WRST Caribou Monitoring Database Ap" &
-    "plication.chm"
+        Me.HelpProvider.HelpNamespace = "C:\Work\Code\WRST_Caribou3\WRST_Caribou3\WRST Caribou Monitoring Database Applica" &
+    "tion.chm"
         '
         'SurveyFlightsBindingSource
         '
