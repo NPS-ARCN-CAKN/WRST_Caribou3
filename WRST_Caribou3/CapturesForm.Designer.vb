@@ -32,6 +32,9 @@ Partial Class CapturesForm
         Me.CapturesGridEX = New Janus.Windows.GridEX.GridEX()
         Me.CapturesToolStrip = New System.Windows.Forms.ToolStrip()
         Me.SaveToolStripButton = New System.Windows.Forms.ToolStripButton()
+        Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
+        Me.AllowFilteringToolStripButton = New System.Windows.Forms.ToolStripButton()
+        Me.ToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator()
         CType(Me.WRST_CaribouDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.CapturesBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.CapturesGridEX, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -75,7 +78,7 @@ Partial Class CapturesForm
         'CapturesToolStrip
         '
         Me.CapturesToolStrip.ImageScalingSize = New System.Drawing.Size(24, 24)
-        Me.CapturesToolStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.SaveToolStripButton})
+        Me.CapturesToolStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.SaveToolStripButton, Me.ToolStripSeparator1, Me.AllowFilteringToolStripButton, Me.ToolStripSeparator2})
         Me.CapturesToolStrip.Location = New System.Drawing.Point(0, 0)
         Me.CapturesToolStrip.Name = "CapturesToolStrip"
         Me.CapturesToolStrip.Size = New System.Drawing.Size(2080, 32)
@@ -90,6 +93,25 @@ Partial Class CapturesForm
         Me.SaveToolStripButton.Name = "SaveToolStripButton"
         Me.SaveToolStripButton.Size = New System.Drawing.Size(53, 29)
         Me.SaveToolStripButton.Text = "Save"
+        '
+        'ToolStripSeparator1
+        '
+        Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
+        Me.ToolStripSeparator1.Size = New System.Drawing.Size(6, 32)
+        '
+        'AllowFilteringToolStripButton
+        '
+        Me.AllowFilteringToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
+        Me.AllowFilteringToolStripButton.Image = CType(resources.GetObject("AllowFilteringToolStripButton.Image"), System.Drawing.Image)
+        Me.AllowFilteringToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.AllowFilteringToolStripButton.Name = "AllowFilteringToolStripButton"
+        Me.AllowFilteringToolStripButton.Size = New System.Drawing.Size(170, 29)
+        Me.AllowFilteringToolStripButton.Text = "Show filtering tools"
+        '
+        'ToolStripSeparator2
+        '
+        Me.ToolStripSeparator2.Name = "ToolStripSeparator2"
+        Me.ToolStripSeparator2.Size = New System.Drawing.Size(6, 32)
         '
         'CapturesForm
         '
@@ -117,4 +139,7 @@ Partial Class CapturesForm
     Friend WithEvents CapturesGridEX As Janus.Windows.GridEX.GridEX
     Friend WithEvents CapturesToolStrip As ToolStrip
     Friend WithEvents SaveToolStripButton As ToolStripButton
+    Friend WithEvents ToolStripSeparator1 As ToolStripSeparator
+    Friend WithEvents AllowFilteringToolStripButton As ToolStripButton
+    Friend WithEvents ToolStripSeparator2 As ToolStripSeparator
 End Class

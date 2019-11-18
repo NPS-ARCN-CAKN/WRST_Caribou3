@@ -36,6 +36,9 @@ Public Class CapturesForm
 
             'load the animal movements frequencies into the captures grid
             ' LoadAnimalMovementFrequenciesIntoCapturesGrid()
+
+            'set up filtering tools
+            Me.CapturesGridEX.FilterMode = FilterMode.None
         Catch ex As Exception
             MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name & ")")
         End Try
@@ -418,6 +421,23 @@ WHERE (CollarDeployments.AnimalId = '" & AnimalID & "') AND ('" & CaptureDate & 
         '    AnimalsList.Add(AnimalID, AnimalID)
         'Next
         'Me.CapturesGridEX.RootTable.Columns("Frequency")
+    End Sub
+
+    Private Sub AllowFilteringToolStripButton_Click(sender As Object, e As EventArgs) Handles AllowFilteringToolStripButton.Click
+        ToggleFilteringTools()
+    End Sub
+
+    ''' <summary>
+    ''' Allows user to turn the CapturesGridEX's filtering tools on or off.
+    ''' </summary>
+    Private Sub ToggleFilteringTools()
+        If Me.AllowFilteringToolStripButton.Text = "Hide filtering tools" Then
+            Me.CapturesGridEX.FilterMode = FilterMode.None
+            Me.AllowFilteringToolStripButton.Text = "Show filtering tools"
+        Else
+            Me.CapturesGridEX.FilterMode = FilterMode.Automatic
+            Me.AllowFilteringToolStripButton.Text = "Hide filtering tools"
+        End If
     End Sub
 
     'Private Sub CheckFrequenciesToolStripButton_Click(sender As Object, e As EventArgs) Handles CheckFrequenciesToolStripButton.Click
