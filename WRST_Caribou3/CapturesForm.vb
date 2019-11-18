@@ -2,20 +2,6 @@
 
 Public Class CapturesForm
 
-    'Private Sub CapturesBindingNavigatorSaveItem_Click(sender As Object, e As EventArgs)
-    '    Me.Validate()
-    '    Me.CapturesBindingSource.EndEdit()
-    '    Me.TableAdapterManager.UpdateAll(Me.WRST_CaribouDataSet)
-
-    'End Sub
-
-    'Private Sub CapturesForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-    '    Me.CapturesTableAdapter.Fill(Me.WRST_CaribouDataSet.Captures)
-
-    '    Me.CapturesGridEX.GroupByBoxVisible = False
-    '    FormatGridEX(Me.CapturesGridEX)
-    'End Sub
-
     Private Sub CapturesForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
         Try
@@ -39,6 +25,7 @@ Public Class CapturesForm
 
             'set up filtering tools
             Me.CapturesGridEX.FilterMode = FilterMode.None
+
         Catch ex As Exception
             MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name & ")")
         End Try
@@ -93,8 +80,104 @@ Public Class CapturesForm
                 AnimalsList.Add(AnimalID, AnimalID)
             Next
 
+            'body condition
+            Dim ColumnName As String = "BodyCondition"
+            With Grid.RootTable.Columns(ColumnName)
+                .EditType = EditType.Combo
+                .HasValueList = True
+                .LimitToList = True
+                .AllowSort = True
+                .AutoComplete = True
+                .ValueList.Clear()
+                .ValueList.Add("", "")
+            End With
+
+
             'Set up dropdowns
-            'LoadGridEXDropDownWithDistinctDataTableValues(Grid, Me.WRST_CaribouDataSet.Tables("SurveyFlights"), "Pilot", "Pilot", False)
+            Dim CapturesDataTable As DataTable = Me.WRST_CaribouDataSet.Tables("Captures")
+            LoadGridEXDropDownWithDistinctDataTableValues(Grid, CapturesDataTable, "AdditionalDrugs", "AdditionalDrugs", False)
+            LoadGridEXDropDownWithDistinctDataTableValues(Grid, CapturesDataTable, "AircraftType", "AircraftType", False)
+            LoadGridEXDropDownWithDistinctDataTableValues(Grid, CapturesDataTable, "Anesthetic", "Anesthetic", False)
+            'LoadGridEXDropDownWithDistinctDataTableValues(Grid, CapturesDataTable, "AnestheticConcentration_mg_ml", "AnestheticConcentration_mg_ml", False)
+            'LoadGridEXDropDownWithDistinctDataTableValues(Grid, CapturesDataTable, "AnestheticDosage_mg", "AnestheticDosage_mg", False)
+            'LoadGridEXDropDownWithDistinctDataTableValues(Grid, CapturesDataTable, "AnestheticDosage_ml", "AnestheticDosage_ml", False)
+            LoadGridEXDropDownWithDistinctDataTableValues(Grid, CapturesDataTable, "AnestheticReversal", "AnestheticReversal", False)
+            'LoadGridEXDropDownWithDistinctDataTableValues(Grid, CapturesDataTable, "AnestheticReversalConcentration_mg_ml", "AnestheticReversalConcentration_mg_ml", False)
+            'LoadGridEXDropDownWithDistinctDataTableValues(Grid, CapturesDataTable, "AnestheticReversalDosage_mg", "AnestheticReversalDosage_mg", False)
+            'LoadGridEXDropDownWithDistinctDataTableValues(Grid, CapturesDataTable, "AnestheticReversalDosage_ml", "AnestheticReversalDosage_ml", False)
+            LoadGridEXDropDownWithDistinctDataTableValues(Grid, CapturesDataTable, "AnestheticReversalRoute", "AnestheticReversalRoute", False)
+            'LoadGridEXDropDownWithDistinctDataTableValues(Grid, CapturesDataTable, "AnestheticReversalTime", "AnestheticReversalTime", False)
+            'LoadGridEXDropDownWithDistinctDataTableValues(Grid, CapturesDataTable, "AnimalID", "AnimalID", False)
+            'LoadGridEXDropDownWithDistinctDataTableValues(Grid, CapturesDataTable, "BloodSampleGreen", "BloodSampleGreen", False)
+            'LoadGridEXDropDownWithDistinctDataTableValues(Grid, CapturesDataTable, "BloodSamplePurple", "BloodSamplePurple", False)
+            'LoadGridEXDropDownWithDistinctDataTableValues(Grid, CapturesDataTable, "BloodSampleRed", "BloodSampleRed", False)
+            LoadGridEXDropDownWithDistinctDataTableValues(Grid, CapturesDataTable, "BodyCondition", "BodyCondition", False)
+            'LoadGridEXDropDownWithDistinctDataTableValues(Grid, CapturesDataTable, "BodyLength", "BodyLength", False)
+            LoadGridEXDropDownWithDistinctDataTableValues(Grid, CapturesDataTable, "CaptureDate", "CaptureDate", False)
+            'LoadGridEXDropDownWithDistinctDataTableValues(Grid, CapturesDataTable, "CaptureGroupSize", "CaptureGroupSize", False)
+            'LoadGridEXDropDownWithDistinctDataTableValues(Grid, CapturesDataTable, "CaptureID", "CaptureID", False)
+            'LoadGridEXDropDownWithDistinctDataTableValues(Grid, CapturesDataTable, "CaptureLatitude", "CaptureLatitude", False)
+            'LoadGridEXDropDownWithDistinctDataTableValues(Grid, CapturesDataTable, "CaptureLongitude", "CaptureLongitude", False)
+            'LoadGridEXDropDownWithDistinctDataTableValues(Grid, CapturesDataTable, "CertificationDate", "CertificationDate", False)
+            'LoadGridEXDropDownWithDistinctDataTableValues(Grid, CapturesDataTable, "CertificationLevel", "CertificationLevel", False)
+            'LoadGridEXDropDownWithDistinctDataTableValues(Grid, CapturesDataTable, "CertifiedBy", "CertifiedBy", False)
+            'LoadGridEXDropDownWithDistinctDataTableValues(Grid, CapturesDataTable, "ChestGirth", "ChestGirth", False)
+            'LoadGridEXDropDownWithDistinctDataTableValues(Grid, CapturesDataTable, "Comments", "Comments", False)
+            LoadGridEXDropDownWithDistinctDataTableValues(Grid, CapturesDataTable, "Crew", "Crew", False)
+            LoadGridEXDropDownWithDistinctDataTableValues(Grid, CapturesDataTable, "DartLocation", "DartLocation", False)
+            LoadGridEXDropDownWithDistinctDataTableValues(Grid, CapturesDataTable, "DrugEffect", "DrugEffect", False)
+            'LoadGridEXDropDownWithDistinctDataTableValues(Grid, CapturesDataTable, "EstimatedAge", "EstimatedAge", False)
+            'LoadGridEXDropDownWithDistinctDataTableValues(Grid, CapturesDataTable, "FinalBodyTemperature", "FinalBodyTemperature", False)
+            'LoadGridEXDropDownWithDistinctDataTableValues(Grid, CapturesDataTable, "FinalBodyTemperatureTime", "FinalBodyTemperatureTime", False)
+            'LoadGridEXDropDownWithDistinctDataTableValues(Grid, CapturesDataTable, "Frequency", "Frequency", False)
+            LoadGridEXDropDownWithDistinctDataTableValues(Grid, CapturesDataTable, "GeneralLocation", "GeneralLocation", False)
+            'LoadGridEXDropDownWithDistinctDataTableValues(Grid, CapturesDataTable, "HairSample", "HairSample", False)
+            LoadGridEXDropDownWithDistinctDataTableValues(Grid, CapturesDataTable, "Handler", "Handler", False)
+            'LoadGridEXDropDownWithDistinctDataTableValues(Grid, CapturesDataTable, "HindfootLength", "HindfootLength", False)
+            'LoadGridEXDropDownWithDistinctDataTableValues(Grid, CapturesDataTable, "InitialBodyTemp", "InitialBodyTemp", False)
+            'LoadGridEXDropDownWithDistinctDataTableValues(Grid, CapturesDataTable, "InitialBodyTempTime", "InitialBodyTempTime", False)
+            'LoadGridEXDropDownWithDistinctDataTableValues(Grid, CapturesDataTable, "Jaw", "Jaw", False)
+            'LoadGridEXDropDownWithDistinctDataTableValues(Grid, CapturesDataTable, "Lactating", "Lactating", False)
+            'LoadGridEXDropDownWithDistinctDataTableValues(Grid, CapturesDataTable, "MetatarsusLength", "MetatarsusLength", False)
+            'LoadGridEXDropDownWithDistinctDataTableValues(Grid, CapturesDataTable, "NasalSwab", "NasalSwab", False)
+            'LoadGridEXDropDownWithDistinctDataTableValues(Grid, CapturesDataTable, "NeckCircumference", "NeckCircumference", False)
+            'LoadGridEXDropDownWithDistinctDataTableValues(Grid, CapturesDataTable, "NumHits", "NumHits", False)
+            'LoadGridEXDropDownWithDistinctDataTableValues(Grid, CapturesDataTable, "NumMisses", "NumMisses", False)
+            'LoadGridEXDropDownWithDistinctDataTableValues(Grid, CapturesDataTable, "OldFrequency", "OldFrequency", False)
+            'LoadGridEXDropDownWithDistinctDataTableValues(Grid, CapturesDataTable, "OldVisualCollar", "OldVisualCollar", False)
+            LoadGridEXDropDownWithDistinctDataTableValues(Grid, CapturesDataTable, "Park", "Park", False)
+            LoadGridEXDropDownWithDistinctDataTableValues(Grid, CapturesDataTable, "Pilot", "Pilot", False)
+            'LoadGridEXDropDownWithDistinctDataTableValues(Grid, CapturesDataTable, "ProjectID", "ProjectID", False)
+            LoadGridEXDropDownWithDistinctDataTableValues(Grid, CapturesDataTable, "ProtocolIRMAReference", "ProtocolIRMAReference", False)
+            LoadGridEXDropDownWithDistinctDataTableValues(Grid, CapturesDataTable, "ProtocolVersion", "ProtocolVersion", False)
+            'LoadGridEXDropDownWithDistinctDataTableValues(Grid, CapturesDataTable, "RecordInsertedBy", "RecordInsertedBy", False)
+            'LoadGridEXDropDownWithDistinctDataTableValues(Grid, CapturesDataTable, "RecordInsertedDate", "RecordInsertedDate", False)
+            LoadGridEXDropDownWithDistinctDataTableValues(Grid, CapturesDataTable, "Sedative", "Sedative", False)
+            'LoadGridEXDropDownWithDistinctDataTableValues(Grid, CapturesDataTable, "SedativeConcentration_mg_ml", "SedativeConcentration_mg_ml", False)
+            'LoadGridEXDropDownWithDistinctDataTableValues(Grid, CapturesDataTable, "SedativeDosage_mg", "SedativeDosage_mg", False)
+            'LoadGridEXDropDownWithDistinctDataTableValues(Grid, CapturesDataTable, "SedativeDosage_ml", "SedativeDosage_ml", False)
+            LoadGridEXDropDownWithDistinctDataTableValues(Grid, CapturesDataTable, "SedativeReversal", "SedativeReversal", False)
+            'LoadGridEXDropDownWithDistinctDataTableValues(Grid, CapturesDataTable, "SedativeReversalConcentration_mg_ml", "SedativeReversalConcentration_mg_ml", False)
+            'LoadGridEXDropDownWithDistinctDataTableValues(Grid, CapturesDataTable, "SedativeReversalDosage_mg", "SedativeReversalDosage_mg", False)
+            'LoadGridEXDropDownWithDistinctDataTableValues(Grid, CapturesDataTable, "SedativeReversalDosage_ml", "SedativeReversalDosage_ml", False)
+            LoadGridEXDropDownWithDistinctDataTableValues(Grid, CapturesDataTable, "SedativeReversalRoute", "SedativeReversalRoute", False)
+            'LoadGridEXDropDownWithDistinctDataTableValues(Grid, CapturesDataTable, "SedativeReversalTime", "SedativeReversalTime", False)
+            'LoadGridEXDropDownWithDistinctDataTableValues(Grid, CapturesDataTable, "SerialNumber", "SerialNumber", False)
+            LoadGridEXDropDownWithDistinctDataTableValues(Grid, CapturesDataTable, "Sex", "Sex", False)
+            LoadGridEXDropDownWithDistinctDataTableValues(Grid, CapturesDataTable, "Shooter", "Shooter", False)
+            LoadGridEXDropDownWithDistinctDataTableValues(Grid, CapturesDataTable, "SOPNumber", "SOPNumber", False)
+            LoadGridEXDropDownWithDistinctDataTableValues(Grid, CapturesDataTable, "SOPVersion", "SOPVersion", False)
+            'LoadGridEXDropDownWithDistinctDataTableValues(Grid, CapturesDataTable, "TimeAnimalDown", "TimeAnimalDown", False)
+            'LoadGridEXDropDownWithDistinctDataTableValues(Grid, CapturesDataTable, "TimeFirstHitBounce", "TimeFirstHitBounce", False)
+            'LoadGridEXDropDownWithDistinctDataTableValues(Grid, CapturesDataTable, "TimeMobile", "TimeMobile", False)
+            'LoadGridEXDropDownWithDistinctDataTableValues(Grid, CapturesDataTable, "TimeSecordHitBounce", "TimeSecordHitBounce", False)
+            'LoadGridEXDropDownWithDistinctDataTableValues(Grid, CapturesDataTable, "TimeStanding", "TimeStanding", False)
+            'LoadGridEXDropDownWithDistinctDataTableValues(Grid, CapturesDataTable, "TimeStartChase", "TimeStartChase", False)
+            'LoadGridEXDropDownWithDistinctDataTableValues(Grid, CapturesDataTable, "TimeThirdHitBounce", "TimeThirdHitBounce", False)
+            'LoadGridEXDropDownWithDistinctDataTableValues(Grid, CapturesDataTable, "TimeVisibleEffect", "TimeVisibleEffect", False)
+            'LoadGridEXDropDownWithDistinctDataTableValues(Grid, CapturesDataTable, "VisualCollar", "VisualCollar", False)
+            'LoadGridEXDropDownWithDistinctDataTableValues(Grid, CapturesDataTable, "Weight_Kg", "Weight_Kg", False)
+            'LoadGridEXDropDownWithDistinctDataTableValues(Grid, CapturesDataTable, "WithCalf", "WithCalf", False)
 
         Catch ex As Exception
             MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name & ")")
@@ -438,6 +521,10 @@ WHERE (CollarDeployments.AnimalId = '" & AnimalID & "') AND ('" & CaptureDate & 
             Me.CapturesGridEX.FilterMode = FilterMode.Automatic
             Me.AllowFilteringToolStripButton.Text = "Hide filtering tools"
         End If
+    End Sub
+
+    Private Sub CapturesGridEX_SelectionChanged(sender As Object, e As EventArgs) Handles CapturesGridEX.SelectionChanged
+        SetUpCapturesGridEXDropDowns(Me.CapturesGridEX)
     End Sub
 
     'Private Sub CheckFrequenciesToolStripButton_Click(sender As Object, e As EventArgs) Handles CheckFrequenciesToolStripButton.Click
