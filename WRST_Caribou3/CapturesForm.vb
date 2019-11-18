@@ -60,6 +60,38 @@ Public Class CapturesForm
         AskToSaveChanges()
     End Sub
 
+    ''' <summary>
+    ''' Sets default values for CapturesGridEX columns requiring them
+    ''' </summary>
+    Private Sub SetCapturesGridEXDefaultValues()
+        Try
+            'Set up default values
+            Dim Grid As GridEX = Me.CapturesGridEX
+            Grid.RootTable.Columns("CaptureID").DefaultValue = Guid.NewGuid.ToString
+            Grid.RootTable.Columns("SOPNumber").DefaultValue = 0
+            Grid.RootTable.Columns("RecordInsertedDate").DefaultValue = Now
+            Grid.RootTable.Columns("RecordInsertedBy").DefaultValue = My.User.Name
+            Grid.RootTable.Columns("CertificationLevel").DefaultValue = "Raw"
+
+            'SOPVersion default value
+            Dim MaxSOPVersion As Integer = 0
+            For Each row As GridEXRow In Grid.GetRows()
+                If row.Cells("SOPVersion").Value > MaxSOPVersion Then
+                    MaxSOPVersion = row.Cells("SOPVersion").Value
+                End If
+            Next
+            Grid.RootTable.Columns("SOPVersion").DefaultValue = MaxSOPVersion
+
+
+        Catch ex As Exception
+            MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name & ")")
+        End Try
+    End Sub
+
+    ''' <summary>
+    ''' Loads GridEX's columns with dropdown options
+    ''' </summary>
+    ''' <param name="Grid"></param>
     Private Sub SetUpCapturesGridEXDropDowns(Grid As GridEX)
         Try
             'load AnimalIDs from Animal Movements:Animals table into the AnimalID drop downs
