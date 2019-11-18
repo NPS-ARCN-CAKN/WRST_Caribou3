@@ -49,6 +49,8 @@ Public Class Form1
             'load the default values for the grid columns
             SetUpSurveyFlightsGridEXDropDowns()
             SetUpSurveysGridEXDropDowns()
+
+
         Catch ex As Exception
             MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name)
         End Try
@@ -83,6 +85,9 @@ Public Class Form1
         End Try
     End Sub
 
+    ''' <summary>
+    ''' Saves the local Dataset to the WRST_Caribou Sql Server database
+    ''' </summary>
     Private Sub SaveDataset()
         Try
             Me.Validate()
@@ -1196,6 +1201,11 @@ Click Yes to certify and lock the current record. Click No to cancel.", MsgBoxSt
     Private Sub ResultsViewerToolStripButton_Click(sender As Object, e As EventArgs) Handles ResultsViewerToolStripButton.Click
         Dim ResultsForm As New ResultsForm
         ResultsForm.ShowDialog()
+    End Sub
+
+    Private Sub OpenCapturesFormToolStripButton_Click(sender As Object, e As EventArgs) Handles OpenCapturesFormToolStripButton.Click
+        Dim CapturesForm As New CapturesForm
+        CapturesForm.ShowDialog()
     End Sub
 
     'Private Sub AutoLoadSurveyFlightCells()
