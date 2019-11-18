@@ -362,68 +362,6 @@ Public Class Form1
         Return AnimalID
     End Function
 
-    ''' <summary>
-    ''' Loads distinct items from a DataTable's DataColumn into a GridEX GridEXColumn's DropDown ValueList
-    ''' </summary>
-    ''' <param name="GridEX">The GridEX containing the GridEXColumn requiring a DropDown ValueList</param>
-    ''' <param name="SourceDataTable">Name of the DataTable containing the DataColumn from which distinct values will be drawn</param>
-    ''' <param name="SourceColumnName">Name of the source DataTable's DataColumn from which distinct values will be drawn</param>
-    ''' <param name="GridEXColumnName">Name of the GridEX column into which to load dropdown values</param>
-    '''  <param name="LimitToList">Whether options for the dropdown should be limited to the list or not. Boolean.</param>
-    Private Sub LoadGridEXDropDownWithDistinctDataTableValues(GridEX As GridEX, SourceDataTable As DataTable, SourceColumnName As String, GridEXColumnName As String, LimitToList As Boolean)
-        Try
-            If Not GridEX Is Nothing Then
-                If Not SourceDataTable Is Nothing Then
-                    If Not SourceColumnName Is Nothing Then
-                        If Not SourceColumnName.Trim.Length = 0 Then
-                            If Not GridEXColumnName Is Nothing Then
-                                If Not GridEXColumnName.Trim.Length = 0 Then
-                                    'Ensure the GridEXColumn is configured for a DropDown
-                                    With GridEX.RootTable.Columns(GridEXColumnName)
-                                        .EditType = EditType.Combo
-                                        .HasValueList = True
-                                        .LimitToList = LimitToList
-                                        .AllowSort = True
-                                        .AutoComplete = True
-                                        .ValueList.Clear()
-                                        .Key = GridEXColumnName
-                                    End With
-
-                                    'Get the distinct items from a DataTable
-                                    Dim DistinctItemsDataTable As DataTable = SourceDataTable.DefaultView.ToTable(True, SourceColumnName)
-
-                                    'Sort the DataView
-                                    Dim DistinctItemsDataView As New DataView(DistinctItemsDataTable, "", SourceColumnName, DataRowState.Unchanged)
-
-                                    'Make a GridEXValueListItemCollection to hold the distinct items
-                                    Dim ItemsList As GridEXValueListItemCollection = GridEX.RootTable.Columns(GridEXColumnName).ValueList
-
-                                    'Add the distinct items from the DataView into the GridEXValueListItemCollection
-                                    If DistinctItemsDataView.Table.Rows.Count > 0 Then
-                                        For Each Row As DataRow In DistinctItemsDataView.Table.Rows
-                                            If Not IsDBNull(Row.Item(SourceColumnName)) Then
-                                                Dim Item As String = Row.Item(SourceColumnName)
-                                                ItemsList.Add(Item, Item)
-                                            End If
-                                        Next
-                                    End If
-                                End If
-                            End If
-                        End If
-                    End If
-                End If
-            End If
-        Catch ex As Exception
-            'this conditional is a workaround for a problem where when the dataset is refreshed from the database we get errors: ""Value cannot be null. Parameter Name: key"
-            If ex.Message = "Value cannot be null.
-Parameter name: key" Then
-                'do nothing, it seems to work fine failing
-                'Debug.Print(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name & ")")
-            Else
-                MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name & ")")
-            End If
-        End Try
-    End Sub
 
 
 
