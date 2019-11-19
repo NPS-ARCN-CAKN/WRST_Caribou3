@@ -20,6 +20,9 @@ Public Class CapturesForm
             'set up dropdowns
             SetUpCapturesGridEXDropDowns(Me.CapturesGridEX)
 
+            'set captures grid default values
+            SetCapturesGridEXDefaultValues()
+
             'load the animal movements frequencies into the captures grid
             ' LoadAnimalMovementFrequenciesIntoCapturesGrid()
 
@@ -36,7 +39,9 @@ Public Class CapturesForm
             If WRST_CaribouDataSet.HasChanges = True Then
                 Me.Validate()
                 Me.CapturesBindingSource.EndEdit()
-                Me.TableAdapterManager.UpdateAll(Me.WRST_CaribouDataSet)
+                'Me.TableAdapterManager.UpdateAll(Me.WRST_CaribouDataSet)
+                Dim CapturesDataTable As DataTable = WRST_CaribouDataSet.Tables("Captures")
+                Debug.Print(Me.CapturesTableAdapter.Adapter.UpdateCommand.CommandText)
             End If
         Catch ex As Exception
             MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name & ")")
@@ -316,7 +321,6 @@ Public Class CapturesForm
     '    ,[RecordInsertedDate]
     '    ,[RecordInsertedBy]
     '    ,[ProjectID]
-    '    ,[TS]
     '    ,[AnestheticDosage_ml]
     '    ,[SedativeDosage_ml]
     '    ,[AnestheticReversalDosage_ml]
@@ -571,7 +575,10 @@ WHERE (CollarDeployments.AnimalId = '" & AnimalID & "') AND ('" & CaptureDate & 
 
     Private Sub CapturesGridEX_SelectionChanged(sender As Object, e As EventArgs) Handles CapturesGridEX.SelectionChanged
         SetUpCapturesGridEXDropDowns(Me.CapturesGridEX)
+        SetCapturesGridEXDefaultValues()
     End Sub
+
+
 
     'Private Sub CheckFrequenciesToolStripButton_Click(sender As Object, e As EventArgs) Handles CheckFrequenciesToolStripButton.Click
     '    LoadAnimalMovementFrequenciesIntoCapturesGrid()

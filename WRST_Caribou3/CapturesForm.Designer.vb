@@ -70,6 +70,7 @@ Partial Class CapturesForm
         CapturesGridEX_DesignTimeLayout.LayoutString = resources.GetString("CapturesGridEX_DesignTimeLayout.LayoutString")
         Me.CapturesGridEX.DesignTimeLayout = CapturesGridEX_DesignTimeLayout
         Me.CapturesGridEX.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.CapturesGridEX.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.CapturesGridEX.GroupByBoxVisible = False
         Me.CapturesGridEX.Location = New System.Drawing.Point(0, 32)
         Me.CapturesGridEX.Name = "CapturesGridEX"
