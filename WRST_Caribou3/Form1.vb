@@ -563,10 +563,29 @@ Public Class Form1
                                     .AllowDelete = InheritableBoolean.False
                                     .AllowEdit = InheritableBoolean.False
                                     .ExpandRecords()
-                                    .Tables(0).Caption = "Animal details (Animal_Movement)"
+                                    .Tables("Animal").Caption = "Animal details (Animal_Movement)"
                                     .Tables(1).Caption = "Collar deployments (Animal_Movement)"
                                     .Tables(2).Caption = "Captures (WRST_Caribou)"
                                 End With
+
+                                'gridex automotically formats doubles as currency. revert. also extend dates with time
+                                For Each GridEXTable As GridEXTable In AnimalGridEX.Tables
+                                    'Debug.Print(GridEXTable.Key)
+                                    If Not GridEXTable Is Nothing Then
+                                        For Each Col As GridEXColumn In GridEXTable.Columns
+                                            'Debug.Print(GridEXTable.Key & vbTab & Col.Key & vbTab & Col.DataTypeCode.ToString & vbTab & Col.FormatString)
+                                            'Col.FormatMode = FormatMode.UseDefault
+                                            'Col.FormatString = ""
+                                            If Col.FormatString = "c" Then
+                                                Col.FormatString = ""
+                                            ElseIf Col.FormatString = "d" Then
+                                                Col.FormatString = "yyyy-MM-dd HH:mm:ss"
+                                            End If
+                                        Next
+                                    End If
+                                Next
+
+
                                 'Dim CapturesCaption As String = "No capture data is available for caribou " & AnimalID
                                 'If CapturesDataView.Count > 0 Then
                                 '    CapturesCaption = CapturesDataView.Count & " capture records are available for caribou " & AnimalID

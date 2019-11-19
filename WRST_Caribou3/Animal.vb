@@ -131,7 +131,7 @@ WHERE ProjectID='WRST_Caribou' AND AnimalID='" & _AnimalID & "' ORDER BY Deploym
         Return AnimalDataset
     End Function
 
-    Function GetCapturesDataTable(AnimalID As String) As DataTable
+    Private Function GetCapturesDataTable(AnimalID As String) As DataTable
         Dim DT As New DataTable("Captures")
         DT.TableName = "Captures"
         Try
