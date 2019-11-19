@@ -27,8 +27,6 @@ Public Class Form1
             FormatGridEX(Me.SurveysGridEX)
             FormatGridEX(Me.CollaredAnimalsInGroupsGridEX)
             FormatGridEX(Me.AnimalGridEX)
-            FormatGridEX(Me.DeploymentsGridEX)
-            FormatGridEX(Me.CapturesGridEX)
 
             'set up default values for the grids
             SetSurveyFlightsGridExDefaultValues()
@@ -67,8 +65,8 @@ Public Class Form1
         Me.SurveysGridEX.Visible = Visible
         Me.CollaredAnimalsInGroupsGridEX.Visible = Visible
         Me.AnimalGridEX.Visible = Visible
-        Me.DeploymentsGridEX.Visible = Visible
-        Me.CapturesGridEX.Visible = Visible
+        'Me.DeploymentsGridEX.Visible = Visible
+        'Me.CapturesGridEX.Visible = Visible
         Me.SurveysToolStrip.Visible = Visible
     End Sub
 
@@ -506,6 +504,9 @@ Public Class Form1
 
         'QC the number of frequencies matches the number of animalids
         ReconcileFrequencies()
+
+        'clear the animal grid
+        LoadAnimalMovementGrids()
     End Sub
 
     Private Sub CollaredAnimalsInGroupsGridEX_SelectionChanged(sender As Object, e As EventArgs) Handles CollaredAnimalsInGroupsGridEX.SelectionChanged
@@ -527,8 +528,8 @@ Public Class Form1
         'Try
         'build animal object and load its data into AnimalGridEX
         Me.AnimalGridEX.DataSource = Nothing
-            Me.DeploymentsGridEX.DataSource = Nothing
-            Me.CapturesGridEX.DataSource = Nothing
+        'Me.DeploymentsGridEX.DataSource = Nothing
+        'Me.CapturesGridEX.DataSource = Nothing
 
         'if we have a current row
         If Not Me.CollaredAnimalsInGroupsGridEX.CurrentRow Is Nothing Then
@@ -552,53 +553,56 @@ Public Class Form1
 
                                 'details about the animal in AM database
                                 With Me.AnimalGridEX
-                                    .DataSource = CurrentAnimal.AnimalDataset.Tables(0)
-                                    '.DataBindings.Add("AnimalToCollarDeploymentsDataRelation", CurrentAnimal.AnimalDataset, "Animal", False)
+                                    .DataSource = CurrentAnimal.AnimalDataset.Tables("Animal")
                                     .Hierarchical = True
                                     .RetrieveStructure(True)
-                                    .RootTable.Caption = "Animal details (Animal Movement)"
+                                    .RootTable.Caption = "Animal details (Animal_Movement)"
                                     .TableHeaders = InheritableBoolean.True
                                     .GroupByBoxVisible = False
                                     .AllowAddNew = InheritableBoolean.False
                                     .AllowDelete = InheritableBoolean.False
                                     .AllowEdit = InheritableBoolean.False
+                                    .ExpandRecords()
+                                    .Tables(0).Caption = "Animal details (Animal_Movement)"
+                                    .Tables(1).Caption = "Collar deployments (Animal_Movement)"
+                                    .Tables(2).Caption = "Captures (WRST_Caribou)"
                                 End With
-
+                                'Dim CapturesCaption As String = "No capture data is available for caribou " & AnimalID
+                                'If CapturesDataView.Count > 0 Then
+                                '    CapturesCaption = CapturesDataView.Count & " capture records are available for caribou " & AnimalID
+                                'End If
 
                                 'collar deployments history
-                                With Me.DeploymentsGridEX
-                                    .DataSource = CurrentAnimal.Deployments
-                                    .RetrieveStructure()
-                                    .RootTable.Caption = "Collar Deployments (Animal Movement)"
-                                    .TableHeaders = InheritableBoolean.True
-                                    .GroupByBoxVisible = False
-                                    .AllowAddNew = InheritableBoolean.False
-                                    .AllowDelete = InheritableBoolean.False
-                                    .AllowEdit = InheritableBoolean.False
-                                End With
+                                'With Me.DeploymentsGridEX
+                                '    .DataSource = CurrentAnimal.Deployments
+                                '    .RetrieveStructure()
+                                '    .RootTable.Caption = "Collar Deployments (Animal Movement)"
+                                '    .TableHeaders = InheritableBoolean.True
+                                '    .GroupByBoxVisible = False
+                                '    .AllowAddNew = InheritableBoolean.False
+                                '    .AllowDelete = InheritableBoolean.False
+                                '    .AllowEdit = InheritableBoolean.False
+                                'End With
 
                                 'captures
-                                Dim Filter As String = "AnimalID = '" & CurrentAnimal.AnimalID & "'"
-                                Dim CapturesDataView As New DataView(WRST_CaribouDataSet.Tables("Captures"), Filter, "CaptureDate DESC", DataViewRowState.CurrentRows)
+                                'Dim Filter As String = "AnimalID = '" & CurrentAnimal.AnimalID & "'"
+                                'Dim CapturesDataView As New DataView(WRST_CaribouDataSet.Tables("Captures"), Filter, "CaptureDate DESC", DataViewRowState.CurrentRows)
 
                                 'load the captures grid header with info
-                                Dim CapturesCaption As String = "No capture data is available for caribou " & AnimalID
-                                If CapturesDataView.Count > 0 Then
-                                    CapturesCaption = CapturesDataView.Count & " capture records are available for caribou " & AnimalID
-                                End If
 
-                                'set up the captures grid
-                                With Me.CapturesGridEX
-                                    .RootTable.Columns("AnimalID").DefaultValue = AnimalID
-                                    .DataSource = CapturesDataView
-                                    .RetrieveStructure()
-                                    .RootTable.Caption = CapturesCaption
-                                    .TableHeaders = InheritableBoolean.True
-                                    .GroupByBoxVisible = False
-                                    .AllowAddNew = InheritableBoolean.False
-                                    .AllowDelete = InheritableBoolean.False
-                                    .AllowEdit = InheritableBoolean.False
-                                End With
+
+                                ''set up the captures grid
+                                'With Me.CapturesGridEX
+                                '    .RootTable.Columns("AnimalID").DefaultValue = AnimalID
+                                '    .DataSource = CapturesDataView
+                                '    .RetrieveStructure()
+                                '    .RootTable.Caption = CapturesCaption
+                                '    .TableHeaders = InheritableBoolean.True
+                                '    .GroupByBoxVisible = False
+                                '    .AllowAddNew = InheritableBoolean.False
+                                '    .AllowDelete = InheritableBoolean.False
+                                '    .AllowEdit = InheritableBoolean.False
+                                'End With
                             End If
                         End If
                     End If
