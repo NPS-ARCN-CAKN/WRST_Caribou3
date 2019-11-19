@@ -940,7 +940,17 @@ Click Yes to certify and lock the current record. Click No to cancel.", MsgBoxSt
                 Dim SurveyType As String = GetCurrentGridEXCellValue(Me.SurveyFlightsGridEX, "SurveyType")
                 Dim TailNo As String = GetCurrentGridEXCellValue(Me.SurveyFlightsGridEX, "TailNo")
                 Dim Observer1 As String = GetCurrentGridEXCellValue(Me.SurveyFlightsGridEX, "Observer1")
-                Me.SurveyFlightsGridEX.RootTable.Caption = "Flight: " & TimeDepart & " " & Herd & " " & SurveyType & " " & TailNo & " " & Observer1
+                Select Case SurveyType
+                    Case "CC"
+                        SurveyType = "Composition Count"
+                    Case "PE"
+                        SurveyType = "Population Estimate"
+                    Case "RT"
+                        SurveyType = "Radiotracking"
+                End Select
+
+
+                Me.SurveyFlightsGridEX.RootTable.Caption = "Flight: " & TimeDepart & " " & Herd & " " & SurveyType & " " & TailNo '& " " & Observer1
             End If
         Catch ex As Exception
             MsgBox(ex.Message & " " & System.Reflection.MethodBase.GetCurrentMethod.Name)

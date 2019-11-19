@@ -41,6 +41,7 @@ Public Class CapturesForm
                 Me.CapturesBindingSource.EndEdit()
                 'Me.TableAdapterManager.UpdateAll(Me.WRST_CaribouDataSet)
                 Dim CapturesDataTable As DataTable = WRST_CaribouDataSet.Tables("Captures")
+                Me.CapturesTableAdapter.Update(CapturesDataTable)
                 Debug.Print(Me.CapturesTableAdapter.Adapter.UpdateCommand.CommandText)
             End If
         Catch ex As Exception

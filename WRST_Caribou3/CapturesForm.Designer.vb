@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class CapturesForm
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,14 +20,13 @@ Partial Class CapturesForm
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim CapturesGridEX_DesignTimeLayout As Janus.Windows.GridEX.GridEXLayout = New Janus.Windows.GridEX.GridEXLayout()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(CapturesForm))
         Me.WRST_CaribouDataSet = New WRST_Caribou3.WRST_CaribouDataSet()
         Me.CapturesBindingSource = New System.Windows.Forms.BindingSource(Me.components)
-        Me.CapturesTableAdapter = New WRST_Caribou3.WRST_CaribouDataSetTableAdapters.CapturesTableAdapter()
         Me.TableAdapterManager = New WRST_Caribou3.WRST_CaribouDataSetTableAdapters.TableAdapterManager()
         Me.CapturesGridEX = New Janus.Windows.GridEX.GridEX()
         Me.CapturesToolStrip = New System.Windows.Forms.ToolStrip()
@@ -35,6 +34,7 @@ Partial Class CapturesForm
         Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
         Me.AllowFilteringToolStripButton = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator()
+        Me.CapturesTableAdapter = New WRST_Caribou3.WRST_CaribouDataSetTableAdapters.CapturesTableAdapter()
         CType(Me.WRST_CaribouDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.CapturesBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.CapturesGridEX, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -51,15 +51,12 @@ Partial Class CapturesForm
         Me.CapturesBindingSource.DataMember = "Captures"
         Me.CapturesBindingSource.DataSource = Me.WRST_CaribouDataSet
         '
-        'CapturesTableAdapter
-        '
-        Me.CapturesTableAdapter.ClearBeforeFill = True
-        '
         'TableAdapterManager
         '
         Me.TableAdapterManager.BackupDataSetBeforeUpdate = False
-        Me.TableAdapterManager.CapturesTableAdapter = Me.CapturesTableAdapter
+        Me.TableAdapterManager.CapturesTableAdapter = Nothing
         Me.TableAdapterManager.CollaredAnimalsInGroupsTableAdapter = Nothing
+        Me.TableAdapterManager.Connection = Nothing
         Me.TableAdapterManager.SurveyFlightsTableAdapter = Nothing
         Me.TableAdapterManager.SurveysTableAdapter = Nothing
         Me.TableAdapterManager.UpdateOrder = WRST_Caribou3.WRST_CaribouDataSetTableAdapters.TableAdapterManager.UpdateOrderOption.InsertUpdateDelete
@@ -74,6 +71,8 @@ Partial Class CapturesForm
         Me.CapturesGridEX.GroupByBoxVisible = False
         Me.CapturesGridEX.Location = New System.Drawing.Point(0, 32)
         Me.CapturesGridEX.Name = "CapturesGridEX"
+        Me.CapturesGridEX.NewRowPosition = Janus.Windows.GridEX.NewRowPosition.BottomRow
+        Me.CapturesGridEX.RecordNavigator = True
         Me.CapturesGridEX.Size = New System.Drawing.Size(2080, 1284)
         Me.CapturesGridEX.TabIndex = 1
         '
@@ -115,6 +114,10 @@ Partial Class CapturesForm
         Me.ToolStripSeparator2.Name = "ToolStripSeparator2"
         Me.ToolStripSeparator2.Size = New System.Drawing.Size(6, 32)
         '
+        'CapturesTableAdapter
+        '
+        Me.CapturesTableAdapter.ClearBeforeFill = True
+        '
         'CapturesForm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 20.0!)
@@ -136,7 +139,6 @@ Partial Class CapturesForm
 
     Friend WithEvents WRST_CaribouDataSet As WRST_CaribouDataSet
     Friend WithEvents CapturesBindingSource As BindingSource
-    Friend WithEvents CapturesTableAdapter As WRST_CaribouDataSetTableAdapters.CapturesTableAdapter
     Friend WithEvents TableAdapterManager As WRST_CaribouDataSetTableAdapters.TableAdapterManager
     Friend WithEvents CapturesGridEX As Janus.Windows.GridEX.GridEX
     Friend WithEvents CapturesToolStrip As ToolStrip
@@ -144,4 +146,5 @@ Partial Class CapturesForm
     Friend WithEvents ToolStripSeparator1 As ToolStripSeparator
     Friend WithEvents AllowFilteringToolStripButton As ToolStripButton
     Friend WithEvents ToolStripSeparator2 As ToolStripSeparator
+    Friend WithEvents CapturesTableAdapter As WRST_CaribouDataSetTableAdapters.CapturesTableAdapter
 End Class
