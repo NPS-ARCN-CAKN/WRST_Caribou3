@@ -25,41 +25,21 @@ Partial Class CapturesForm
         Me.components = New System.ComponentModel.Container()
         Dim CapturesGridEX_DesignTimeLayout As Janus.Windows.GridEX.GridEXLayout = New Janus.Windows.GridEX.GridEXLayout()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(CapturesForm))
-        Me.WRST_CaribouDataSet = New WRST_Caribou3.WRST_CaribouDataSet()
-        Me.CapturesBindingSource = New System.Windows.Forms.BindingSource(Me.components)
-        Me.TableAdapterManager = New WRST_Caribou3.WRST_CaribouDataSetTableAdapters.TableAdapterManager()
         Me.CapturesGridEX = New Janus.Windows.GridEX.GridEX()
         Me.CapturesToolStrip = New System.Windows.Forms.ToolStrip()
         Me.SaveToolStripButton = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
         Me.AllowFilteringToolStripButton = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator()
+        Me.CapturesBindingSource = New System.Windows.Forms.BindingSource(Me.components)
+        Me.WRST_CaribouDataSet = New WRST_Caribou3.WRST_CaribouDataSet()
+        Me.TableAdapterManager = New WRST_Caribou3.WRST_CaribouDataSetTableAdapters.TableAdapterManager()
         Me.CapturesTableAdapter = New WRST_Caribou3.WRST_CaribouDataSetTableAdapters.CapturesTableAdapter()
-        CType(Me.WRST_CaribouDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.CapturesBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.CapturesGridEX, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.CapturesToolStrip.SuspendLayout()
+        CType(Me.CapturesBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.WRST_CaribouDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
-        '
-        'WRST_CaribouDataSet
-        '
-        Me.WRST_CaribouDataSet.DataSetName = "WRST_CaribouDataSet"
-        Me.WRST_CaribouDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
-        '
-        'CapturesBindingSource
-        '
-        Me.CapturesBindingSource.DataMember = "Captures"
-        Me.CapturesBindingSource.DataSource = Me.WRST_CaribouDataSet
-        '
-        'TableAdapterManager
-        '
-        Me.TableAdapterManager.BackupDataSetBeforeUpdate = False
-        Me.TableAdapterManager.CapturesTableAdapter = Nothing
-        Me.TableAdapterManager.CollaredAnimalsInGroupsTableAdapter = Nothing
-        Me.TableAdapterManager.Connection = Nothing
-        Me.TableAdapterManager.SurveyFlightsTableAdapter = Nothing
-        Me.TableAdapterManager.SurveysTableAdapter = Nothing
-        Me.TableAdapterManager.UpdateOrder = WRST_Caribou3.WRST_CaribouDataSetTableAdapters.TableAdapterManager.UpdateOrderOption.InsertUpdateDelete
         '
         'CapturesGridEX
         '
@@ -114,6 +94,26 @@ Partial Class CapturesForm
         Me.ToolStripSeparator2.Name = "ToolStripSeparator2"
         Me.ToolStripSeparator2.Size = New System.Drawing.Size(6, 32)
         '
+        'CapturesBindingSource
+        '
+        Me.CapturesBindingSource.DataMember = "Captures"
+        Me.CapturesBindingSource.DataSource = Me.WRST_CaribouDataSet
+        '
+        'WRST_CaribouDataSet
+        '
+        Me.WRST_CaribouDataSet.DataSetName = "WRST_CaribouDataSet"
+        Me.WRST_CaribouDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
+        '
+        'TableAdapterManager
+        '
+        Me.TableAdapterManager.BackupDataSetBeforeUpdate = False
+        Me.TableAdapterManager.CapturesTableAdapter = Nothing
+        Me.TableAdapterManager.CollaredAnimalsInGroupsTableAdapter = Nothing
+        Me.TableAdapterManager.Connection = Nothing
+        Me.TableAdapterManager.SurveyFlightsTableAdapter = Nothing
+        Me.TableAdapterManager.SurveysTableAdapter = Nothing
+        Me.TableAdapterManager.UpdateOrder = WRST_Caribou3.WRST_CaribouDataSetTableAdapters.TableAdapterManager.UpdateOrderOption.InsertUpdateDelete
+        '
         'CapturesTableAdapter
         '
         Me.CapturesTableAdapter.ClearBeforeFill = True
@@ -127,11 +127,11 @@ Partial Class CapturesForm
         Me.Controls.Add(Me.CapturesToolStrip)
         Me.Name = "CapturesForm"
         Me.Text = "CapturesForm"
-        CType(Me.WRST_CaribouDataSet, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.CapturesBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.CapturesGridEX, System.ComponentModel.ISupportInitialize).EndInit()
         Me.CapturesToolStrip.ResumeLayout(False)
         Me.CapturesToolStrip.PerformLayout()
+        CType(Me.CapturesBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.WRST_CaribouDataSet, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 

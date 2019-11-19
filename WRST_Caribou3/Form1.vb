@@ -524,77 +524,90 @@ Public Class Form1
 
     Private Sub LoadAnimalMovementGrids()
         'load the animal movements grids to show info about the collared animal
-        Try
-            'build animal object and load its data into AnimalGridEX
-            Me.AnimalGridEX.DataSource = Nothing
+        'Try
+        'build animal object and load its data into AnimalGridEX
+        Me.AnimalGridEX.DataSource = Nothing
             Me.DeploymentsGridEX.DataSource = Nothing
             Me.CapturesGridEX.DataSource = Nothing
 
-            'if we have a valid animalid
-            If Not IsDBNull(Me.CollaredAnimalsInGroupsGridEX.CurrentRow.Cells("AnimalID").Value) Then
+        'if we have a current row
+        If Not Me.CollaredAnimalsInGroupsGridEX.CurrentRow Is Nothing Then
+            'if we have a current row with the cell AnimalID
+            If Not Me.CollaredAnimalsInGroupsGridEX.CurrentRow.Cells("AnimalID") Is Nothing Then
+                'if we have a current row with a cell AnimalID with a value
+                If Not Me.CollaredAnimalsInGroupsGridEX.CurrentRow.Cells("AnimalID").Value Is Nothing Then
+                    'if the current row's value is not null
+                    If Not IsDBNull(Me.CollaredAnimalsInGroupsGridEX.CurrentRow.Cells("AnimalID").Value) Then
+                        'if current row's value is not blank
+                        If Me.CollaredAnimalsInGroupsGridEX.CurrentRow.Cells("AnimalID").Value.ToString.Trim.Length > 0 Then
 
-                'get the current animalid from the collared animals  gridex
-                Dim AnimalID As String = GetCurrentGridEXCellValue(Me.CollaredAnimalsInGroupsGridEX, "AnimalID")
+                            'get the current animalid from the collared animals  gridex
+                            Dim AnimalID As String = Me.CollaredAnimalsInGroupsGridEX.CurrentRow.Cells("AnimalID").Value.ToString.Trim
 
-                'if animalid is not null
-                If Not IsDBNull(AnimalID) Then
+                            'if animalid is not null
+                            If Not IsDBNull(AnimalID) Then
 
-                    'create an Animal object
-                    Dim CurrentAnimal As New Animal(AnimalID)
+                                'create an Animal object
+                                Dim CurrentAnimal As New Animal(AnimalID)
 
-                    'details about the animal in AM database
-                    With Me.AnimalGridEX
-                        .DataSource = CurrentAnimal.AnimalDetails
-                        .RetrieveStructure()
-                        .RootTable.Caption = "Animal details (Animal Movement)"
-                        .TableHeaders = InheritableBoolean.True
-                        .GroupByBoxVisible = False
-                        .AllowAddNew = InheritableBoolean.False
-                        .AllowDelete = InheritableBoolean.False
-                        .AllowEdit = InheritableBoolean.False
-                    End With
+                                'details about the animal in AM database
+                                With Me.AnimalGridEX
+                                    .DataSource = CurrentAnimal.AnimalDataset.Tables(0)
+                                    '.DataBindings.Add("AnimalToCollarDeploymentsDataRelation", CurrentAnimal.AnimalDataset, "Animal", False)
+                                    .Hierarchical = True
+                                    .RetrieveStructure(True)
+                                    .RootTable.Caption = "Animal details (Animal Movement)"
+                                    .TableHeaders = InheritableBoolean.True
+                                    .GroupByBoxVisible = False
+                                    .AllowAddNew = InheritableBoolean.False
+                                    .AllowDelete = InheritableBoolean.False
+                                    .AllowEdit = InheritableBoolean.False
+                                End With
 
-                    'collar deployments history
-                    With Me.DeploymentsGridEX
-                        .DataSource = CurrentAnimal.Deployments
-                        .RetrieveStructure()
-                        .RootTable.Caption = "Collar Deployments (Animal Movement)"
-                        .TableHeaders = InheritableBoolean.True
-                        .GroupByBoxVisible = False
-                        .AllowAddNew = InheritableBoolean.False
-                        .AllowDelete = InheritableBoolean.False
-                        .AllowEdit = InheritableBoolean.False
-                    End With
 
-                    'captures
-                    Dim Filter As String = "AnimalID = '" & CurrentAnimal.AnimalID & "'"
-                    Dim CapturesDataView As New DataView(WRST_CaribouDataSet.Tables("Captures"), Filter, "CaptureDate DESC", DataViewRowState.CurrentRows)
+                                'collar deployments history
+                                With Me.DeploymentsGridEX
+                                    .DataSource = CurrentAnimal.Deployments
+                                    .RetrieveStructure()
+                                    .RootTable.Caption = "Collar Deployments (Animal Movement)"
+                                    .TableHeaders = InheritableBoolean.True
+                                    .GroupByBoxVisible = False
+                                    .AllowAddNew = InheritableBoolean.False
+                                    .AllowDelete = InheritableBoolean.False
+                                    .AllowEdit = InheritableBoolean.False
+                                End With
 
-                    'load the captures grid header with info
-                    Dim CapturesCaption As String = "No capture data is available for caribou " & AnimalID
-                    If CapturesDataView.Count > 0 Then
-                        CapturesCaption = CapturesDataView.Count & " capture records are available for caribou " & AnimalID
+                                'captures
+                                Dim Filter As String = "AnimalID = '" & CurrentAnimal.AnimalID & "'"
+                                Dim CapturesDataView As New DataView(WRST_CaribouDataSet.Tables("Captures"), Filter, "CaptureDate DESC", DataViewRowState.CurrentRows)
+
+                                'load the captures grid header with info
+                                Dim CapturesCaption As String = "No capture data is available for caribou " & AnimalID
+                                If CapturesDataView.Count > 0 Then
+                                    CapturesCaption = CapturesDataView.Count & " capture records are available for caribou " & AnimalID
+                                End If
+
+                                'set up the captures grid
+                                With Me.CapturesGridEX
+                                    .RootTable.Columns("AnimalID").DefaultValue = AnimalID
+                                    .DataSource = CapturesDataView
+                                    .RetrieveStructure()
+                                    .RootTable.Caption = CapturesCaption
+                                    .TableHeaders = InheritableBoolean.True
+                                    .GroupByBoxVisible = False
+                                    .AllowAddNew = InheritableBoolean.False
+                                    .AllowDelete = InheritableBoolean.False
+                                    .AllowEdit = InheritableBoolean.False
+                                End With
+                            End If
+                        End If
                     End If
-
-                    'set up the captures grid
-                    With Me.CapturesGridEX
-                        .RootTable.Columns("AnimalID").DefaultValue = AnimalID
-                        .DataSource = CapturesDataView
-                        .RetrieveStructure()
-                        .RootTable.Caption = CapturesCaption
-                        .TableHeaders = InheritableBoolean.True
-                        .GroupByBoxVisible = False
-                        .AllowAddNew = InheritableBoolean.False
-                        .AllowDelete = InheritableBoolean.False
-                        .AllowEdit = InheritableBoolean.False
-                    End With
                 End If
             End If
-        Catch nrefex As NullReferenceException
-            'can't seem to prevent this so ignore
-        Catch ex As Exception
-            MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name & ")")
-        End Try
+        End If
+        'Catch ex As Exception
+        '    MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name & ")")
+        'End Try
     End Sub
 
 
