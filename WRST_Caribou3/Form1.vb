@@ -250,12 +250,38 @@ Public Class Form1
                 .AllowSort = True
                 .AutoComplete = True
                 .ValueList.Clear()
+                .ValueList.Add("Raw", "Raw")
+                .ValueList.Add("Provisional", "Provisional")
+                .ValueList.Add("Accepted", "Accepted")
+                .ValueList.Add("Certified", "Certified")
             End With
-            Dim CertificationLevelList As GridEXValueListItemCollection = Grid.RootTable.Columns("CertificationLevel").ValueList
-            CertificationLevelList.Add("Raw", "Raw")
-            CertificationLevelList.Add("Provisional", "Provisional")
-            CertificationLevelList.Add("Accepted", "Accepted")
-            CertificationLevelList.Add("Certified", "Certified")
+
+            'Mode dropdown
+            With Grid.RootTable.Columns("Mode")
+                .EditType = EditType.Combo
+                .HasValueList = True
+                .LimitToList = True
+                .AllowSort = True
+                .AutoComplete = True
+                .ValueList.Clear()
+                .ValueList.Add("A", "Active")
+                .ValueList.Add("M", "Mortality")
+            End With
+
+
+            'Accuracy is recorded as a 1 (low latitude, can see caribou and collar), 2(low altitude without visual confirmation), And 3 (high altitude without visual confirmation)
+            With Grid.RootTable.Columns("Accuracy")
+                .EditType = EditType.Combo
+                .HasValueList = True
+                .LimitToList = True
+                .AllowSort = True
+                .AutoComplete = True
+                .ValueList.Clear()
+                .ValueList.Add("1", "1-Low altitude, can see caribou and collar")
+                .ValueList.Add("2", "2-Low altitude without visual confirmation")
+                .ValueList.Add("3", "3-high altitude without visual confirmation")
+            End With
+
         Catch ex As Exception
             MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name & ")")
         End Try
@@ -679,7 +705,7 @@ Public Class Form1
 ,[Seen]
 ,[Marked]
 ,[Mode]
-,[Accuracy]
+,[.ValueList]
 ,[RetainedAntler]
 ,[DistendedUdders]
 ,[CalvesAtHeel]
