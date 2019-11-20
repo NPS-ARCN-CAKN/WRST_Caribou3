@@ -61,6 +61,9 @@ Partial Class Form1
         Me.CollaredAnimalsInGroupsTableAdapter = New WRST_Caribou3.WRST_CaribouDataSetTableAdapters.CollaredAnimalsInGroupsTableAdapter()
         Me.SurveysTableAdapter = New WRST_Caribou3.WRST_CaribouDataSetTableAdapters.SurveysTableAdapter()
         Me.CapturesTableAdapter = New WRST_Caribou3.WRST_CaribouDataSetTableAdapters.CapturesTableAdapter()
+        Me.ToolStripSeparator7 = New System.Windows.Forms.ToolStripSeparator()
+        Me.BottomToolStrip = New System.Windows.Forms.ToolStrip()
+        Me.CurrentDatabaseToolStripLabel = New System.Windows.Forms.ToolStripLabel()
         CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SplitContainer1.Panel1.SuspendLayout()
         Me.SplitContainer1.Panel2.SuspendLayout()
@@ -84,6 +87,7 @@ Partial Class Form1
         CType(Me.AnimalGridEX, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.CapturesBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.MainToolStrip.SuspendLayout()
+        Me.BottomToolStrip.SuspendLayout()
         Me.SuspendLayout()
         '
         'SplitContainer1
@@ -100,8 +104,8 @@ Partial Class Form1
         'SplitContainer1.Panel2
         '
         Me.SplitContainer1.Panel2.Controls.Add(Me.SurveysSplitContainer)
-        Me.SplitContainer1.Size = New System.Drawing.Size(2645, 1279)
-        Me.SplitContainer1.SplitterDistance = 301
+        Me.SplitContainer1.Size = New System.Drawing.Size(2645, 1251)
+        Me.SplitContainer1.SplitterDistance = 286
         Me.SplitContainer1.TabIndex = 0
         '
         'SurveyFlightsGridEX
@@ -119,7 +123,7 @@ Partial Class Form1
         Me.SurveyFlightsGridEX.Name = "SurveyFlightsGridEX"
         Me.SurveyFlightsGridEX.RecordNavigator = True
         Me.SurveyFlightsGridEX.RowHeaders = Janus.Windows.GridEX.InheritableBoolean.[True]
-        Me.SurveyFlightsGridEX.Size = New System.Drawing.Size(2645, 301)
+        Me.SurveyFlightsGridEX.Size = New System.Drawing.Size(2645, 286)
         Me.SurveyFlightsGridEX.TabIndex = 0
         Me.SurveyFlightsGridEX.TableHeaders = Janus.Windows.GridEX.InheritableBoolean.[True]
         '
@@ -149,8 +153,8 @@ Partial Class Form1
         '
         Me.SurveysSplitContainer.Panel2.AutoScroll = True
         Me.SurveysSplitContainer.Panel2.Controls.Add(Me.CollaredAnimalsSplitContainer)
-        Me.SurveysSplitContainer.Size = New System.Drawing.Size(2645, 974)
-        Me.SurveysSplitContainer.SplitterDistance = 269
+        Me.SurveysSplitContainer.Size = New System.Drawing.Size(2645, 961)
+        Me.SurveysSplitContainer.SplitterDistance = 258
         Me.SurveysSplitContainer.TabIndex = 0
         '
         'SurveysGridEX
@@ -167,7 +171,7 @@ Partial Class Form1
         Me.SurveysGridEX.Name = "SurveysGridEX"
         Me.SurveysGridEX.RecordNavigator = True
         Me.SurveysGridEX.RowHeaders = Janus.Windows.GridEX.InheritableBoolean.[True]
-        Me.SurveysGridEX.Size = New System.Drawing.Size(2645, 237)
+        Me.SurveysGridEX.Size = New System.Drawing.Size(2645, 226)
         Me.SurveysGridEX.TabIndex = 0
         Me.SurveysGridEX.TableHeaders = Janus.Windows.GridEX.InheritableBoolean.[True]
         Me.SurveysGridEX.TotalRow = Janus.Windows.GridEX.InheritableBoolean.[True]
@@ -237,7 +241,7 @@ Partial Class Form1
         'CollaredAnimalsSplitContainer.Panel2
         '
         Me.CollaredAnimalsSplitContainer.Panel2.Controls.Add(Me.AnimalGridEX)
-        Me.CollaredAnimalsSplitContainer.Size = New System.Drawing.Size(2645, 701)
+        Me.CollaredAnimalsSplitContainer.Size = New System.Drawing.Size(2645, 699)
         Me.CollaredAnimalsSplitContainer.SplitterDistance = 366
         Me.CollaredAnimalsSplitContainer.TabIndex = 1
         '
@@ -255,7 +259,7 @@ Partial Class Form1
         Me.CollaredAnimalsInGroupsGridEX.Name = "CollaredAnimalsInGroupsGridEX"
         Me.CollaredAnimalsInGroupsGridEX.RecordNavigator = True
         Me.CollaredAnimalsInGroupsGridEX.RowHeaders = Janus.Windows.GridEX.InheritableBoolean.[True]
-        Me.CollaredAnimalsInGroupsGridEX.Size = New System.Drawing.Size(366, 701)
+        Me.CollaredAnimalsInGroupsGridEX.Size = New System.Drawing.Size(366, 699)
         Me.CollaredAnimalsInGroupsGridEX.TabIndex = 0
         Me.CollaredAnimalsInGroupsGridEX.TableHeaders = Janus.Windows.GridEX.InheritableBoolean.[True]
         '
@@ -272,7 +276,7 @@ Partial Class Form1
         Me.AnimalGridEX.Location = New System.Drawing.Point(0, 0)
         Me.AnimalGridEX.Name = "AnimalGridEX"
         Me.AnimalGridEX.RowFormatStyle.BackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
-        Me.AnimalGridEX.Size = New System.Drawing.Size(2275, 701)
+        Me.AnimalGridEX.Size = New System.Drawing.Size(2275, 699)
         Me.AnimalGridEX.TabIndex = 0
         Me.AnimalGridEX.TableHeaderFormatStyle.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         '
@@ -284,7 +288,7 @@ Partial Class Form1
         'MainToolStrip
         '
         Me.MainToolStrip.ImageScalingSize = New System.Drawing.Size(24, 24)
-        Me.MainToolStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.SaveToolStripButton, Me.ToolStripSeparator3, Me.ReloadDatasetToolStripButton, Me.ToolStripSeparator4, Me.ResultsViewerToolStripButton, Me.ToolStripSeparator5, Me.OpenCapturesFormToolStripButton, Me.ToolStripSeparator6, Me.AllowEditsToolStripButton})
+        Me.MainToolStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.SaveToolStripButton, Me.ToolStripSeparator3, Me.ReloadDatasetToolStripButton, Me.ToolStripSeparator4, Me.ResultsViewerToolStripButton, Me.ToolStripSeparator5, Me.OpenCapturesFormToolStripButton, Me.ToolStripSeparator6, Me.AllowEditsToolStripButton, Me.ToolStripSeparator7})
         Me.MainToolStrip.Location = New System.Drawing.Point(0, 0)
         Me.MainToolStrip.Name = "MainToolStrip"
         Me.HelpProvider.SetShowHelp(Me.MainToolStrip, True)
@@ -388,12 +392,35 @@ Partial Class Form1
         '
         Me.CapturesTableAdapter.ClearBeforeFill = True
         '
+        'ToolStripSeparator7
+        '
+        Me.ToolStripSeparator7.Name = "ToolStripSeparator7"
+        Me.ToolStripSeparator7.Size = New System.Drawing.Size(6, 32)
+        '
+        'BottomToolStrip
+        '
+        Me.BottomToolStrip.Dock = System.Windows.Forms.DockStyle.Bottom
+        Me.BottomToolStrip.ImageScalingSize = New System.Drawing.Size(24, 24)
+        Me.BottomToolStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CurrentDatabaseToolStripLabel})
+        Me.BottomToolStrip.Location = New System.Drawing.Point(0, 1283)
+        Me.BottomToolStrip.Name = "BottomToolStrip"
+        Me.BottomToolStrip.Size = New System.Drawing.Size(2645, 28)
+        Me.BottomToolStrip.TabIndex = 1
+        Me.BottomToolStrip.Text = "ToolStrip1"
+        '
+        'CurrentDatabaseToolStripLabel
+        '
+        Me.CurrentDatabaseToolStripLabel.Name = "CurrentDatabaseToolStripLabel"
+        Me.CurrentDatabaseToolStripLabel.Size = New System.Drawing.Size(235, 25)
+        Me.CurrentDatabaseToolStripLabel.Text = "Connected to: Disconnected"
+        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 20.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(2645, 1311)
         Me.Controls.Add(Me.SplitContainer1)
+        Me.Controls.Add(Me.BottomToolStrip)
         Me.Controls.Add(Me.MainToolStrip)
         Me.HelpButton = True
         Me.HelpProvider.SetHelpKeyword(Me, "")
@@ -428,6 +455,8 @@ Partial Class Form1
         CType(Me.CapturesBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
         Me.MainToolStrip.ResumeLayout(False)
         Me.MainToolStrip.PerformLayout()
+        Me.BottomToolStrip.ResumeLayout(False)
+        Me.BottomToolStrip.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -467,4 +496,7 @@ Partial Class Form1
     Friend WithEvents OpenCapturesFormToolStripButton As ToolStripButton
     Friend WithEvents ToolStripSeparator6 As ToolStripSeparator
     Friend WithEvents AllowEditsToolStripButton As ToolStripButton
+    Friend WithEvents ToolStripSeparator7 As ToolStripSeparator
+    Friend WithEvents BottomToolStrip As ToolStrip
+    Friend WithEvents CurrentDatabaseToolStripLabel As ToolStripLabel
 End Class

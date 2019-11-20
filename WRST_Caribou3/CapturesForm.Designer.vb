@@ -36,6 +36,8 @@ Partial Class CapturesForm
         Me.TableAdapterManager = New WRST_Caribou3.WRST_CaribouDataSetTableAdapters.TableAdapterManager()
         Me.CapturesTableAdapter = New WRST_Caribou3.WRST_CaribouDataSetTableAdapters.CapturesTableAdapter()
         Me.AllowEditsToolStripButton = New System.Windows.Forms.ToolStripButton()
+        Me.ToolStripSeparator3 = New System.Windows.Forms.ToolStripSeparator()
+        Me.CurrentDatabaseToolStripLabel = New System.Windows.Forms.ToolStripLabel()
         CType(Me.CapturesGridEX, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.CapturesToolStrip.SuspendLayout()
         CType(Me.CapturesBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -64,7 +66,7 @@ Partial Class CapturesForm
         'CapturesToolStrip
         '
         Me.CapturesToolStrip.ImageScalingSize = New System.Drawing.Size(24, 24)
-        Me.CapturesToolStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.SaveToolStripButton, Me.ToolStripSeparator1, Me.AllowFilteringToolStripButton, Me.ToolStripSeparator2, Me.AllowEditsToolStripButton})
+        Me.CapturesToolStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.SaveToolStripButton, Me.ToolStripSeparator1, Me.AllowFilteringToolStripButton, Me.ToolStripSeparator2, Me.AllowEditsToolStripButton, Me.ToolStripSeparator3, Me.CurrentDatabaseToolStripLabel})
         Me.CapturesToolStrip.Location = New System.Drawing.Point(0, 0)
         Me.CapturesToolStrip.Name = "CapturesToolStrip"
         Me.CapturesToolStrip.Size = New System.Drawing.Size(2080, 32)
@@ -132,6 +134,17 @@ Partial Class CapturesForm
         Me.AllowEditsToolStripButton.Size = New System.Drawing.Size(103, 29)
         Me.AllowEditsToolStripButton.Text = "Allow edits"
         '
+        'ToolStripSeparator3
+        '
+        Me.ToolStripSeparator3.Name = "ToolStripSeparator3"
+        Me.ToolStripSeparator3.Size = New System.Drawing.Size(6, 32)
+        '
+        'CurrentDatabaseToolStripLabel
+        '
+        Me.CurrentDatabaseToolStripLabel.Name = "CurrentDatabaseToolStripLabel"
+        Me.CurrentDatabaseToolStripLabel.Size = New System.Drawing.Size(124, 29)
+        Me.CurrentDatabaseToolStripLabel.Text = "Connected to "
+        '
         'CapturesForm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 20.0!)
@@ -162,4 +175,6 @@ Partial Class CapturesForm
     Friend WithEvents ToolStripSeparator2 As ToolStripSeparator
     Friend WithEvents CapturesTableAdapter As WRST_CaribouDataSetTableAdapters.CapturesTableAdapter
     Friend WithEvents AllowEditsToolStripButton As ToolStripButton
+    Friend WithEvents ToolStripSeparator3 As ToolStripSeparator
+    Friend WithEvents CurrentDatabaseToolStripLabel As ToolStripLabel
 End Class

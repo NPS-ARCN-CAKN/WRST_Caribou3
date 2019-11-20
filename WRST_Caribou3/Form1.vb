@@ -58,8 +58,15 @@ Public Class Form1
             MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name)
         End Try
 
+        'update the database connection label
+        UpdateDatabaseConnectionLabel()
 
+    End Sub
 
+    Private Sub UpdateDatabaseConnectionLabel()
+        Dim DBConnectionStringBuilder As New SqlConnectionStringBuilder(My.Settings.WRST_CaribouConnectionString)
+        Dim DB As String = DBConnectionStringBuilder.DataSource & ":" & DBConnectionStringBuilder.InitialCatalog
+        Me.CurrentDatabaseToolStripLabel.Text = "Connected to " & DB.ToUpper & " as " & My.User.Name
     End Sub
 
     ''' <summary>
