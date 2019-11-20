@@ -334,9 +334,9 @@ ORDER BY DeploymentDate DESC"
             If Not GridEX Is Nothing Then
                 With GridEX
                     'by default make grids readonly; toggle editability using ToggleGridEXReadOnly function
-                    .AllowAddNew = InheritableBoolean.True
-                    .AllowDelete = InheritableBoolean.True
-                    .AllowEdit = InheritableBoolean.True
+                    '.AllowAddNew = InheritableBoolean.False
+                    '.AllowDelete = InheritableBoolean.False
+                    '.AllowEdit = InheritableBoolean.False
                     .AlternatingColors = True
                     .AutoEdit = False
                     .AutomaticSort = True
@@ -353,12 +353,12 @@ ORDER BY DeploymentDate DESC"
                     .SelectionMode = SelectionMode.MultipleSelection
                     .SelectOnExpand = False
                     .TotalRowPosition = TotalRowPosition.BottomFixed
-                    .SelectedFormatStyle.BackColor = Color.SteelBlue
-                    .SelectedFormatStyle.ForeColor = Color.White
-                    .SelectedFormatStyle.FontBold = TriState.False
-                    .SelectedInactiveFormatStyle.BackColor = Color.SteelBlue
-                    .SelectedInactiveFormatStyle.ForeColor = Color.White
-                    .SelectedInactiveFormatStyle.FontBold = TriState.False
+                    '.SelectedFormatStyle.BackColor = Color.SteelBlue
+                    '.SelectedFormatStyle.ForeColor = Color.White
+                    '.SelectedFormatStyle.FontBold = TriState.False
+                    '.SelectedInactiveFormatStyle.BackColor = Color.SteelBlue
+                    '.SelectedInactiveFormatStyle.ForeColor = Color.White
+                    '.SelectedInactiveFormatStyle.FontBold = TriState.False
                 End With
 
                 'gridex automotically formats doubles as currency. revert. also extend dates with time

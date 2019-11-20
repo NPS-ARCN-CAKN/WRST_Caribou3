@@ -35,6 +35,7 @@ Partial Class CapturesForm
         Me.WRST_CaribouDataSet = New WRST_Caribou3.WRST_CaribouDataSet()
         Me.TableAdapterManager = New WRST_Caribou3.WRST_CaribouDataSetTableAdapters.TableAdapterManager()
         Me.CapturesTableAdapter = New WRST_Caribou3.WRST_CaribouDataSetTableAdapters.CapturesTableAdapter()
+        Me.AllowEditsToolStripButton = New System.Windows.Forms.ToolStripButton()
         CType(Me.CapturesGridEX, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.CapturesToolStrip.SuspendLayout()
         CType(Me.CapturesBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -43,6 +44,8 @@ Partial Class CapturesForm
         '
         'CapturesGridEX
         '
+        Me.CapturesGridEX.AllowAddNew = Janus.Windows.GridEX.InheritableBoolean.[True]
+        Me.CapturesGridEX.AllowDelete = Janus.Windows.GridEX.InheritableBoolean.[True]
         Me.CapturesGridEX.DataSource = Me.CapturesBindingSource
         CapturesGridEX_DesignTimeLayout.LayoutString = resources.GetString("CapturesGridEX_DesignTimeLayout.LayoutString")
         Me.CapturesGridEX.DesignTimeLayout = CapturesGridEX_DesignTimeLayout
@@ -59,7 +62,7 @@ Partial Class CapturesForm
         'CapturesToolStrip
         '
         Me.CapturesToolStrip.ImageScalingSize = New System.Drawing.Size(24, 24)
-        Me.CapturesToolStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.SaveToolStripButton, Me.ToolStripSeparator1, Me.AllowFilteringToolStripButton, Me.ToolStripSeparator2})
+        Me.CapturesToolStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.SaveToolStripButton, Me.ToolStripSeparator1, Me.AllowFilteringToolStripButton, Me.ToolStripSeparator2, Me.AllowEditsToolStripButton})
         Me.CapturesToolStrip.Location = New System.Drawing.Point(0, 0)
         Me.CapturesToolStrip.Name = "CapturesToolStrip"
         Me.CapturesToolStrip.Size = New System.Drawing.Size(2080, 32)
@@ -118,6 +121,15 @@ Partial Class CapturesForm
         '
         Me.CapturesTableAdapter.ClearBeforeFill = True
         '
+        'AllowEditsToolStripButton
+        '
+        Me.AllowEditsToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
+        Me.AllowEditsToolStripButton.Image = CType(resources.GetObject("AllowEditsToolStripButton.Image"), System.Drawing.Image)
+        Me.AllowEditsToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.AllowEditsToolStripButton.Name = "AllowEditsToolStripButton"
+        Me.AllowEditsToolStripButton.Size = New System.Drawing.Size(103, 29)
+        Me.AllowEditsToolStripButton.Text = "Allow edits"
+        '
         'CapturesForm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 20.0!)
@@ -147,4 +159,5 @@ Partial Class CapturesForm
     Friend WithEvents AllowFilteringToolStripButton As ToolStripButton
     Friend WithEvents ToolStripSeparator2 As ToolStripSeparator
     Friend WithEvents CapturesTableAdapter As WRST_CaribouDataSetTableAdapters.CapturesTableAdapter
+    Friend WithEvents AllowEditsToolStripButton As ToolStripButton
 End Class

@@ -48,7 +48,12 @@ Public Class Form1
             SetUpSurveyFlightsGridEXDropDowns()
             SetUpSurveysGridEXDropDowns()
 
-
+            'make grids readonly to start
+            With Me.SurveyFlightsGridEX
+                .AllowAddNew = InheritableBoolean.False
+                .AllowEdit = InheritableBoolean.False
+                .AllowDelete = InheritableBoolean.False
+            End With
         Catch ex As Exception
             MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name)
         End Try
@@ -389,63 +394,64 @@ Public Class Form1
     ''' </summary>
     Private Sub LockCertifiedRecords()
         Try
-            'first find out if any survey records are certified, if so then lock the parent flight GridEX so the flight record is unchanged
-            If FlightContainsCertifiedRecords(GetCurrentGridEXCellValue(Me.SurveyFlightsGridEX, "FlightID")) = True Then
 
-                'disallow survey edits
-                With Me.SurveyFlightsGridEX
-                    .AllowAddNew = InheritableBoolean.True
-                    .AllowDelete = InheritableBoolean.False
-                    .AllowEdit = InheritableBoolean.False
-                End With
+            ' find out if any survey records are certified, if so then lock the parent flight GridEX so the flight record is unchanged
+            'If FlightContainsCertifiedRecords(GetCurrentGridEXCellValue(Me.SurveyFlightsGridEX, "FlightID")) = True Then
 
-            Else
+            '    'disallow survey edits
+            '    With Me.SurveyFlightsGridEX
+            '        .AllowAddNew = InheritableBoolean.True
+            '        .AllowDelete = InheritableBoolean.False
+            '        .AllowEdit = InheritableBoolean.False
+            '    End With
 
-                'allow survey edits
-                With Me.SurveyFlightsGridEX
-                    .AllowAddNew = InheritableBoolean.True
-                    .AllowDelete = InheritableBoolean.True
-                    .AllowEdit = InheritableBoolean.True
-                End With
-            End If
+            'Else
+
+            '    'allow survey edits
+            '    With Me.SurveyFlightsGridEX
+            '        .AllowAddNew = InheritableBoolean.True
+            '        .AllowDelete = InheritableBoolean.True
+            '        .AllowEdit = InheritableBoolean.True
+            '    End With
+            'End If
 
 
-            'next, if the current Survey record is Certified then lock the GridEX
-            Dim RecordIsCertified As Boolean = GetCurrentGridEXCellValue(Me.SurveysGridEX, "CertificationLevel") = "Certified"
+            ''next, if the current Survey record is Certified then lock the GridEX
+            'Dim RecordIsCertified As Boolean = GetCurrentGridEXCellValue(Me.SurveysGridEX, "CertificationLevel") = "Certified"
 
-            'if the record is certified
-            If RecordIsCertified = True Then
+            ''if the record is certified
+            'If RecordIsCertified = True Then
 
-                'disallow survey edits
-                With Me.SurveysGridEX
-                    .AllowAddNew = InheritableBoolean.False
-                    .AllowDelete = InheritableBoolean.False
-                    .AllowEdit = InheritableBoolean.False
-                End With
+            '    'disallow survey edits
+            '    With Me.SurveysGridEX
+            '        .AllowAddNew = InheritableBoolean.False
+            '        .AllowDelete = InheritableBoolean.False
+            '        .AllowEdit = InheritableBoolean.False
+            '    End With
 
-                'disable the collared animals grid also
-                With Me.CollaredAnimalsInGroupsGridEX
-                    .AllowAddNew = InheritableBoolean.False
-                    .AllowDelete = InheritableBoolean.False
-                    .AllowEdit = InheritableBoolean.False
-                End With
+            '    'disable the collared animals grid also
+            '    With Me.CollaredAnimalsInGroupsGridEX
+            '        .AllowAddNew = InheritableBoolean.False
+            '        .AllowDelete = InheritableBoolean.False
+            '        .AllowEdit = InheritableBoolean.False
+            '    End With
 
-            Else
+            'Else
 
-                'allow survey edits
-                With Me.SurveysGridEX
-                    .AllowAddNew = InheritableBoolean.True
-                    .AllowDelete = InheritableBoolean.True
-                    .AllowEdit = InheritableBoolean.True
-                End With
+            '    'allow survey edits
+            '    With Me.SurveysGridEX
+            '        .AllowAddNew = InheritableBoolean.True
+            '        .AllowDelete = InheritableBoolean.True
+            '        .AllowEdit = InheritableBoolean.True
+            '    End With
 
-                'allow edits to collared animals grid also
-                With Me.CollaredAnimalsInGroupsGridEX
-                    .AllowAddNew = InheritableBoolean.True
-                    .AllowDelete = InheritableBoolean.True
-                    .AllowEdit = InheritableBoolean.True
-                End With
-            End If
+            '    'allow edits to collared animals grid also
+            '    With Me.CollaredAnimalsInGroupsGridEX
+            '        .AllowAddNew = InheritableBoolean.True
+            '        .AllowDelete = InheritableBoolean.True
+            '        .AllowEdit = InheritableBoolean.True
+            '    End With
+            'End If
         Catch ex As Exception
             MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name & ")")
         End Try
@@ -488,8 +494,25 @@ Public Class Form1
         'QC the number of frequencies matches the number of animalids
         ReconcileFrequencies()
 
+
+
+        'make the grids readonly or editable according to the tool on the main form
+        ReadOnlyCheck()
+
         'lock editing on flight records if certified survey records exist
         LockCertifiedRecords()
+
+        'if we are on a blank survey then blank out the other grids
+        'sometimes data lingers when user clicks on the new record row
+        Dim Year As String = GetCurrentGridEXCellValue(Me.SurveyFlightsGridEX, "Year")
+        Dim Herd As String = GetCurrentGridEXCellValue(Me.SurveyFlightsGridEX, "Herd")
+        Dim SurveyType As String = GetCurrentGridEXCellValue(Me.SurveyFlightsGridEX, "SurveyType")
+        If Year Is Nothing Or Herd Is Nothing Or SurveyType Is Nothing Then
+            SetGridEXesVisible(False)
+        Else
+            SetGridEXesVisible(True)
+        End If
+
     End Sub
 
     Private Sub SurveysGridEX_SelectionChanged(sender As Object, e As EventArgs) Handles SurveysGridEX.SelectionChanged
@@ -523,114 +546,98 @@ Public Class Form1
         ReconcileFrequencies()
     End Sub
 
+    ''' <summary>
+    ''' LoadAnimalMovementGrids builds an Animal Object by querying the Animal Movement and WRST_Caribou databases for information about the currently selected caribou
+    ''' in the Surveys grid. AnimalGridEX tree grid is loaded with the data from the Animal Object. See Animal.vb.
+    ''' </summary>
     Private Sub LoadAnimalMovementGrids()
-        'load the animal movements grids to show info about the collared animal
-        'Try
-        'build animal object and load its data into AnimalGridEX
+        'clear any residual data out of the animal grid
         Me.AnimalGridEX.DataSource = Nothing
-        'Me.DeploymentsGridEX.DataSource = Nothing
-        'Me.CapturesGridEX.DataSource = Nothing
 
-        'if we have a current row
-        If Not Me.CollaredAnimalsInGroupsGridEX.CurrentRow Is Nothing Then
-            'if we have a current row with the cell AnimalID
-            If Not Me.CollaredAnimalsInGroupsGridEX.CurrentRow.Cells("AnimalID") Is Nothing Then
-                'if we have a current row with a cell AnimalID with a value
-                If Not Me.CollaredAnimalsInGroupsGridEX.CurrentRow.Cells("AnimalID").Value Is Nothing Then
-                    'if the current row's value is not null
-                    If Not IsDBNull(Me.CollaredAnimalsInGroupsGridEX.CurrentRow.Cells("AnimalID").Value) Then
-                        'if current row's value is not blank
-                        If Me.CollaredAnimalsInGroupsGridEX.CurrentRow.Cells("AnimalID").Value.ToString.Trim.Length > 0 Then
+        'load the animal movements grids to show info about the collared animal
+        Try
+            'build animal object and load its data into AnimalGridEX
+            'lots of ifs below to be sure we have a valid current AnimalID and current Surveys row
+            If Not Me.CollaredAnimalsInGroupsGridEX.CurrentRow Is Nothing Then
+                'if we have a current row with the cell AnimalID
+                If Not Me.CollaredAnimalsInGroupsGridEX.CurrentRow.Cells("AnimalID") Is Nothing Then
+                    'if we have a current row with a cell AnimalID with a value
+                    If Not Me.CollaredAnimalsInGroupsGridEX.CurrentRow.Cells("AnimalID").Value Is Nothing Then
+                        'if the current row's value is not null
+                        If Not IsDBNull(Me.CollaredAnimalsInGroupsGridEX.CurrentRow.Cells("AnimalID").Value) Then
+                            'if current row's value is not blank
+                            If Me.CollaredAnimalsInGroupsGridEX.CurrentRow.Cells("AnimalID").Value.ToString.Trim.Length > 0 Then
 
-                            'get the current animalid from the collared animals  gridex
-                            Dim AnimalID As String = Me.CollaredAnimalsInGroupsGridEX.CurrentRow.Cells("AnimalID").Value.ToString.Trim
+                                'get the current animalid from the collared animals  gridex
+                                Dim AnimalID As String = Me.CollaredAnimalsInGroupsGridEX.CurrentRow.Cells("AnimalID").Value.ToString.Trim
 
-                            'if animalid is not null
-                            If Not IsDBNull(AnimalID) Then
+                                'if animalid is not null
+                                If Not IsDBNull(AnimalID) Then
 
-                                'create an Animal object
-                                Dim CurrentAnimal As New Animal(AnimalID)
+                                    'create an Animal object
+                                    Dim CurrentAnimal As New Animal(AnimalID)
 
-                                'details about the animal in AM database
-                                With Me.AnimalGridEX
-                                    .DataSource = CurrentAnimal.AnimalDataset.Tables("Animal")
-                                    .Hierarchical = True
-                                    .RetrieveStructure(True)
-                                    .RootTable.Caption = "Animal details (Animal_Movement)"
-                                    .TableHeaders = InheritableBoolean.True
-                                    .GroupByBoxVisible = False
-                                    .AllowAddNew = InheritableBoolean.False
-                                    .AllowDelete = InheritableBoolean.False
-                                    .AllowEdit = InheritableBoolean.False
-                                    .ExpandRecords()
-                                    .Tables("Animal").Caption = "Animal details (Animal_Movement)"
-                                    .Tables(1).Caption = "Collar deployments (Animal_Movement)"
-                                    .Tables(2).Caption = "Captures (WRST_Caribou)"
-                                End With
+                                    'details about the animal in AM database
+                                    With Me.AnimalGridEX
+                                        .DataSource = CurrentAnimal.AnimalDataset.Tables("Animal")
+                                        .Hierarchical = True 'this will load all the AnimalDataset's tables into a tree grid format
+                                        .RetrieveStructure(True) 'true for hierarchical
+                                        .RootTable.Caption = "Animal details (Animal_Movement) for " & AnimalID
+                                        .TableHeaders = InheritableBoolean.True
+                                        .GroupByBoxVisible = False
+                                        '.AllowAddNew = InheritableBoolean.False
+                                        '.AllowDelete = InheritableBoolean.False
+                                        '.AllowEdit = InheritableBoolean.False
+                                        .ExpandRecords()
+                                        .ColumnAutoResize = False
+                                        .ColumnAutoSizeMode = ColumnAutoSizeMode.ColumnHeader
+                                    End With
 
-                                'gridex automotically formats doubles as currency. revert. also extend dates with time
-                                For Each GridEXTable As GridEXTable In AnimalGridEX.Tables
-                                    'Debug.Print(GridEXTable.Key)
-                                    If Not GridEXTable Is Nothing Then
-                                        For Each Col As GridEXColumn In GridEXTable.Columns
-                                            'Debug.Print(GridEXTable.Key & vbTab & Col.Key & vbTab & Col.DataTypeCode.ToString & vbTab & Col.FormatString)
-                                            'Col.FormatMode = FormatMode.UseDefault
-                                            'Col.FormatString = ""
-                                            If Col.FormatString = "c" Then
-                                                Col.FormatString = ""
-                                            ElseIf Col.FormatString = "d" Then
-                                                Col.FormatString = "yyyy-MM-dd HH:mm:ss"
-                                            End If
-                                        Next
+                                    'set deployments table header (note, had to reference the table using the datarelation name, not table name)
+                                    Dim TableKey As String = "AnimalToCollarDeploymentsDataRelation"
+                                    If Not AnimalGridEX.Tables(TableKey) Is Nothing Then
+                                        AnimalGridEX.Tables(TableKey).Caption = "Collar Deployments (Animal_Movement)"
                                     End If
-                                Next
 
+                                    'Set captures table header (note, had to reference the table using the datarelation name, not table name)
+                                    TableKey = "AnimalToCapturesDataRelation"
+                                    If Not AnimalGridEX.Tables(TableKey) Is Nothing Then
+                                        AnimalGridEX.Tables(TableKey).Caption = "Captures (WRST_Caribou)"
+                                    End If
 
-                                'Dim CapturesCaption As String = "No capture data is available for caribou " & AnimalID
-                                'If CapturesDataView.Count > 0 Then
-                                '    CapturesCaption = CapturesDataView.Count & " capture records are available for caribou " & AnimalID
-                                'End If
+                                    'fix gridex automatic formatting problems
+                                    'loop through the tables
+                                    For Each GridEXTable As GridEXTable In AnimalGridEX.RootTable.ChildTables
+                                        'if a table exists                                    
+                                        If Not GridEXTable Is Nothing Then
 
-                                'collar deployments history
-                                'With Me.DeploymentsGridEX
-                                '    .DataSource = CurrentAnimal.Deployments
-                                '    .RetrieveStructure()
-                                '    .RootTable.Caption = "Collar Deployments (Animal Movement)"
-                                '    .TableHeaders = InheritableBoolean.True
-                                '    .GroupByBoxVisible = False
-                                '    .AllowAddNew = InheritableBoolean.False
-                                '    .AllowDelete = InheritableBoolean.False
-                                '    .AllowEdit = InheritableBoolean.False
-                                'End With
+                                            'loop through each of the table's columns
+                                            For Each Col As GridEXColumn In GridEXTable.Columns
+                                                If Not Col Is Nothing Then
+                                                    'gridex is abysmal at automatically calculating column widths so do it manually so that 
+                                                    'it is likely the column header is fully visible
+                                                    Col.Width = Col.Key.ToString.Length * 20
 
-                                'captures
-                                'Dim Filter As String = "AnimalID = '" & CurrentAnimal.AnimalID & "'"
-                                'Dim CapturesDataView As New DataView(WRST_CaribouDataSet.Tables("Captures"), Filter, "CaptureDate DESC", DataViewRowState.CurrentRows)
-
-                                'load the captures grid header with info
-
-
-                                ''set up the captures grid
-                                'With Me.CapturesGridEX
-                                '    .RootTable.Columns("AnimalID").DefaultValue = AnimalID
-                                '    .DataSource = CapturesDataView
-                                '    .RetrieveStructure()
-                                '    .RootTable.Caption = CapturesCaption
-                                '    .TableHeaders = InheritableBoolean.True
-                                '    .GroupByBoxVisible = False
-                                '    .AllowAddNew = InheritableBoolean.False
-                                '    .AllowDelete = InheritableBoolean.False
-                                '    .AllowEdit = InheritableBoolean.False
-                                'End With
+                                                    'gridex likes to format all numbers as currency, fix
+                                                    If Col.FormatString = "c" Then
+                                                        Col.FormatString = ""
+                                                        '    'and fix dates while we are in here
+                                                    ElseIf Col.FormatString = "d" Then
+                                                        Col.FormatString = "yyyy-MM-dd HH:mm:ss"
+                                                    End If
+                                                End If
+                                            Next
+                                        End If
+                                    Next
+                                End If
                             End If
                         End If
                     End If
                 End If
             End If
-        End If
-        'Catch ex As Exception
-        '    MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name & ")")
-        'End Try
+        Catch ex As Exception
+            MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name & ")")
+        End Try
     End Sub
 
 
@@ -1002,33 +1009,41 @@ Click Yes to certify and lock the current record. Click No to cancel.", MsgBoxSt
         Try
             If SurveysGridEX.GetRows.Count > 0 Then
                 For Each Row As GridEXRow In SurveysGridEX.GetRows
-                    If Not Row.Cells("EID") Is Nothing Then
-                        If Not IsDBNull(Not IsDBNull(Row.Cells("EID").Value)) Then
-                            Dim EID As String = Row.Cells("EID").Value
-                            Dim NumberOfFrequencies As Integer = 0
-                            If Not IsDBNull(Row.Cells("FrequenciesInGroup").Value) Then
+                    If Not Row Is Nothing Then
+                        If Not Row.Cells("EID") Is Nothing Then
+                            If Not Row.Cells("EID").Value Is Nothing Then
+                                'If Not Row.Cells("EID").Value.ToString.Trim <> "" Then 'nothing got past here when it was enabled, i don't know why
+                                If Not IsDBNull(Row.Cells("EID").Value) Then
+                                    Dim EID As String = Row.Cells("EID").Value
+                                    'Debug.Print(EID)
 
-                                'get a count of the number of frequencies in the group
-                                Dim FrequenciesInGroup As String = Row.Cells("FrequenciesInGroup").Value
+                                    Dim NumberOfFrequencies As Integer = 0
+                                    If Not IsDBNull(Row.Cells("FrequenciesInGroup").Value) Then
 
-                                'count the frequencies
-                                Dim FrequenciesList As List(Of Double) = GetListOfCSVFrequencies(FrequenciesInGroup)
-                                NumberOfFrequencies = FrequenciesList.Count
+                                        'get a count of the number of frequencies in the group
+                                        Dim FrequenciesInGroup As String = Row.Cells("FrequenciesInGroup").Value
+
+                                        'count the frequencies
+                                        Dim FrequenciesList As List(Of Double) = GetListOfCSVFrequencies(FrequenciesInGroup)
+                                        NumberOfFrequencies = FrequenciesList.Count
+                                    End If
+
+                                    'now query the number of AnimalIDs in the CollaredAnimalsInGroups table
+                                    Dim NumberOfAnimalIDs As Integer = 0
+                                    Dim Filter As String = "EID = '" & EID & "'"
+                                    Dim AnimalIDsDataView As New DataView(WRST_CaribouDataSet.Tables("CollaredAnimalsInGroups"), Filter, "", DataViewRowState.CurrentRows)
+                                    NumberOfAnimalIDs = AnimalIDsDataView.Count
+
+                                    'update the number of frequencies and number of animalids columns
+                                    Row.BeginEdit()
+                                    If NumberOfAnimalIDs > 0 Or NumberOfFrequencies > 0 Then
+                                        Row.Cells("FrequenciesCount").Value = NumberOfFrequencies
+                                        Row.Cells("NumAnimalIDs").Value = NumberOfAnimalIDs
+                                    End If
+                                    Row.EndEdit()
+                                End If
                             End If
-
-                            'now query the number of AnimalIDs in the CollaredAnimalsInGroups table
-                            Dim NumberOfAnimalIDs As Integer = 0
-                            Dim Filter As String = "EID = '" & EID & "'"
-                            Dim AnimalIDsDataView As New DataView(WRST_CaribouDataSet.Tables("CollaredAnimalsInGroups"), Filter, "", DataViewRowState.CurrentRows)
-                            NumberOfAnimalIDs = AnimalIDsDataView.Count
-
-                            'update the number of frequencies and number of animalids columns
-                            Row.BeginEdit()
-                            If NumberOfAnimalIDs > 0 Or NumberOfFrequencies > 0 Then
-                                Row.Cells("FrequenciesCount").Value = NumberOfFrequencies
-                                Row.Cells("NumAnimalIDs").Value = NumberOfAnimalIDs
-                            End If
-                            Row.EndEdit()
+                            'End If
                         End If
                     End If
                 Next
@@ -1190,6 +1205,49 @@ Click Yes to certify and lock the current record. Click No to cancel.", MsgBoxSt
     Private Sub OpenCapturesFormToolStripButton_Click(sender As Object, e As EventArgs) Handles OpenCapturesFormToolStripButton.Click
         Dim CapturesForm As New CapturesForm
         CapturesForm.ShowDialog()
+    End Sub
+
+
+
+
+    Private Sub ReadOnlyCheck()
+        With Me.SurveyFlightsGridEX
+            If Me.AllowEditsToolStripButton.Text = "Disallow edits" Then
+                .AllowAddNew = InheritableBoolean.True
+                .AllowEdit = InheritableBoolean.True
+                .AllowDelete = InheritableBoolean.True
+                Me.SurveysGridEX.AllowAddNew = InheritableBoolean.True
+                Me.SurveysGridEX.AllowEdit = InheritableBoolean.True
+                Me.SurveysGridEX.AllowDelete = InheritableBoolean.True
+                Me.CollaredAnimalsInGroupsGridEX.AllowAddNew = InheritableBoolean.True
+                Me.CollaredAnimalsInGroupsGridEX.AllowEdit = InheritableBoolean.True
+                Me.CollaredAnimalsInGroupsGridEX.AllowDelete = InheritableBoolean.True
+                Me.ImportSurveyDataFromFileToolStripButton.Enabled = True
+                Me.AutoMatchFrequenciesToAnimalsToolStripButton.Enabled = True
+            ElseIf Me.AllowEditsToolStripButton.Text = "Allow edits" Then
+                .AllowAddNew = InheritableBoolean.False
+                .AllowEdit = InheritableBoolean.False
+                .AllowDelete = InheritableBoolean.False
+                Me.SurveysGridEX.AllowAddNew = InheritableBoolean.False
+                Me.SurveysGridEX.AllowEdit = InheritableBoolean.False
+                Me.SurveysGridEX.AllowDelete = InheritableBoolean.False
+                Me.CollaredAnimalsInGroupsGridEX.AllowAddNew = InheritableBoolean.False
+                Me.CollaredAnimalsInGroupsGridEX.AllowEdit = InheritableBoolean.False
+                Me.CollaredAnimalsInGroupsGridEX.AllowDelete = InheritableBoolean.False
+                Me.ImportSurveyDataFromFileToolStripButton.Enabled = False
+                Me.AutoMatchFrequenciesToAnimalsToolStripButton.Enabled = False
+            End If
+        End With
+    End Sub
+
+    Private Sub AllowEditsToolStripButton_Click(sender As Object, e As EventArgs) Handles AllowEditsToolStripButton.Click
+        '
+        If Me.AllowEditsToolStripButton.Text = "Disallow edits" Then
+            Me.AllowEditsToolStripButton.Text = "Allow edits"
+        Else
+            Me.AllowEditsToolStripButton.Text = "Disallow edits"
+        End If
+        ReadOnlyCheck()
     End Sub
 
     'Private Sub AutoLoadSurveyFlightCells()

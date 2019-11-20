@@ -11,6 +11,12 @@ Public Class CapturesForm
             'standard gridex formatting
             FormatGridEX(Me.CapturesGridEX)
 
+            With Me.CapturesGridEX
+                .AllowAddNew = InheritableBoolean.False
+                .AllowEdit = InheritableBoolean.False
+                .AllowDelete = InheritableBoolean.False
+            End With
+
             'turn off group by box, add filtering
             With Me.CapturesGridEX
                 .GroupByBoxVisible = False
@@ -577,9 +583,31 @@ WHERE (CollarDeployments.AnimalId = '" & AnimalID & "') AND ('" & CaptureDate & 
     Private Sub CapturesGridEX_SelectionChanged(sender As Object, e As EventArgs) Handles CapturesGridEX.SelectionChanged
         SetUpCapturesGridEXDropDowns(Me.CapturesGridEX)
         SetCapturesGridEXDefaultValues()
+        ReadOnlyCheck()
     End Sub
 
+    Private Sub AllowEditsToolStripButton_Click(sender As Object, e As EventArgs) Handles AllowEditsToolStripButton.Click
+        If Me.AllowEditsToolStripButton.Text = "Disallow edits" Then
+            Me.AllowEditsToolStripButton.Text = "Allow edits"
+        Else
+            Me.AllowEditsToolStripButton.Text = "Disallow edits"
+        End If
+        ReadOnlyCheck()
+    End Sub
 
+    Private Sub ReadOnlyCheck()
+        With Me.CapturesGridEX
+            If Me.AllowEditsToolStripButton.Text = "Disallow edits" Then
+                .AllowAddNew = InheritableBoolean.True
+                .AllowEdit = InheritableBoolean.True
+                .AllowDelete = InheritableBoolean.True
+            ElseIf Me.AllowEditsToolStripButton.Text = "Allow edits" Then
+                .AllowAddNew = InheritableBoolean.False
+                .AllowEdit = InheritableBoolean.False
+                .AllowDelete = InheritableBoolean.False
+            End If
+        End With
+    End Sub
 
     'Private Sub CheckFrequenciesToolStripButton_Click(sender As Object, e As EventArgs) Handles CheckFrequenciesToolStripButton.Click
     '    LoadAnimalMovementFrequenciesIntoCapturesGrid()
