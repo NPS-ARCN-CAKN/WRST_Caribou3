@@ -1831,8 +1831,6 @@ Partial Public Class WRST_CaribouDataSet
             Me.columnFrequenciesInGroup.MaxLength = 4000
             Me.columnLat.AllowDBNull = false
             Me.columnLon.AllowDBNull = false
-            Me.columnSeen.AllowDBNull = false
-            Me.columnMarked.AllowDBNull = false
             Me.columnMode.MaxLength = 1
             Me.columnWaypointName.AllowDBNull = false
             Me.columnWaypointName.MaxLength = 20
@@ -4199,7 +4197,11 @@ Partial Public Class WRST_CaribouDataSet
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Public Property Seen() As Boolean
             Get
-                Return CType(Me(Me.tableSurveys.SeenColumn),Boolean)
+                Try 
+                    Return CType(Me(Me.tableSurveys.SeenColumn),Boolean)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'Seen' in table 'Surveys' is DBNull.", e)
+                End Try
             End Get
             Set
                 Me(Me.tableSurveys.SeenColumn) = value
@@ -4210,7 +4212,11 @@ Partial Public Class WRST_CaribouDataSet
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Public Property Marked() As Boolean
             Get
-                Return CType(Me(Me.tableSurveys.MarkedColumn),Boolean)
+                Try 
+                    Return CType(Me(Me.tableSurveys.MarkedColumn),Boolean)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'Marked' in table 'Surveys' is DBNull.", e)
+                End Try
             End Get
             Set
                 Me(Me.tableSurveys.MarkedColumn) = value
@@ -4535,6 +4541,30 @@ Partial Public Class WRST_CaribouDataSet
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Public Sub SetOutNull()
             Me(Me.tableSurveys.OutColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function IsSeenNull() As Boolean
+            Return Me.IsNull(Me.tableSurveys.SeenColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub SetSeenNull()
+            Me(Me.tableSurveys.SeenColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function IsMarkedNull() As Boolean
+            Return Me.IsNull(Me.tableSurveys.MarkedColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub SetMarkedNull()
+            Me(Me.tableSurveys.MarkedColumn) = Global.System.Convert.DBNull
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -8292,8 +8322,8 @@ Namespace WRST_CaribouDataSetTableAdapters
                     ByVal Lat As Decimal,  _
                     ByVal Lon As Decimal,  _
                     ByVal Out As Global.System.Nullable(Of Boolean),  _
-                    ByVal Seen As Boolean,  _
-                    ByVal Marked As Boolean,  _
+                    ByVal Seen As Global.System.Nullable(Of Boolean),  _
+                    ByVal Marked As Global.System.Nullable(Of Boolean),  _
                     ByVal Mode As String,  _
                     ByVal Accuracy As Global.System.Nullable(Of Integer),  _
                     ByVal RetainedAntler As Global.System.Nullable(Of Boolean),  _
@@ -8363,8 +8393,16 @@ Namespace WRST_CaribouDataSetTableAdapters
             Else
                 Me.Adapter.InsertCommand.Parameters(13).Value = Global.System.DBNull.Value
             End If
-            Me.Adapter.InsertCommand.Parameters(14).Value = CType(Seen,Boolean)
-            Me.Adapter.InsertCommand.Parameters(15).Value = CType(Marked,Boolean)
+            If (Seen.HasValue = true) Then
+                Me.Adapter.InsertCommand.Parameters(14).Value = CType(Seen.Value,Boolean)
+            Else
+                Me.Adapter.InsertCommand.Parameters(14).Value = Global.System.DBNull.Value
+            End If
+            If (Marked.HasValue = true) Then
+                Me.Adapter.InsertCommand.Parameters(15).Value = CType(Marked.Value,Boolean)
+            Else
+                Me.Adapter.InsertCommand.Parameters(15).Value = Global.System.DBNull.Value
+            End If
             If (Mode Is Nothing) Then
                 Me.Adapter.InsertCommand.Parameters(16).Value = Global.System.DBNull.Value
             Else
@@ -8470,8 +8508,8 @@ Namespace WRST_CaribouDataSetTableAdapters
                     ByVal Lat As Decimal,  _
                     ByVal Lon As Decimal,  _
                     ByVal Out As Global.System.Nullable(Of Boolean),  _
-                    ByVal Seen As Boolean,  _
-                    ByVal Marked As Boolean,  _
+                    ByVal Seen As Global.System.Nullable(Of Boolean),  _
+                    ByVal Marked As Global.System.Nullable(Of Boolean),  _
                     ByVal Mode As String,  _
                     ByVal Accuracy As Global.System.Nullable(Of Integer),  _
                     ByVal RetainedAntler As Global.System.Nullable(Of Boolean),  _
@@ -8542,8 +8580,16 @@ Namespace WRST_CaribouDataSetTableAdapters
             Else
                 Me.Adapter.UpdateCommand.Parameters(13).Value = Global.System.DBNull.Value
             End If
-            Me.Adapter.UpdateCommand.Parameters(14).Value = CType(Seen,Boolean)
-            Me.Adapter.UpdateCommand.Parameters(15).Value = CType(Marked,Boolean)
+            If (Seen.HasValue = true) Then
+                Me.Adapter.UpdateCommand.Parameters(14).Value = CType(Seen.Value,Boolean)
+            Else
+                Me.Adapter.UpdateCommand.Parameters(14).Value = Global.System.DBNull.Value
+            End If
+            If (Marked.HasValue = true) Then
+                Me.Adapter.UpdateCommand.Parameters(15).Value = CType(Marked.Value,Boolean)
+            Else
+                Me.Adapter.UpdateCommand.Parameters(15).Value = Global.System.DBNull.Value
+            End If
             If (Mode Is Nothing) Then
                 Me.Adapter.UpdateCommand.Parameters(16).Value = Global.System.DBNull.Value
             Else
@@ -8654,8 +8700,8 @@ Namespace WRST_CaribouDataSetTableAdapters
                     ByVal Lat As Decimal,  _
                     ByVal Lon As Decimal,  _
                     ByVal Out As Global.System.Nullable(Of Boolean),  _
-                    ByVal Seen As Boolean,  _
-                    ByVal Marked As Boolean,  _
+                    ByVal Seen As Global.System.Nullable(Of Boolean),  _
+                    ByVal Marked As Global.System.Nullable(Of Boolean),  _
                     ByVal Mode As String,  _
                     ByVal Accuracy As Global.System.Nullable(Of Integer),  _
                     ByVal RetainedAntler As Global.System.Nullable(Of Boolean),  _

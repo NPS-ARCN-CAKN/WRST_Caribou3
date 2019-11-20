@@ -36,7 +36,7 @@ Public Class Form1
 
             'for some reason the surveys grid loads data when the form first loads despite no parent record being selected.
             'visibility is reversed on the flight grid's SelectionChanged event.
-            SetGridEXesVisible(False)
+            SetGridEXesVisible(True)
 
             'set the flights gridex caption to something generic
             Me.SurveyFlightsGridEX.RootTable.Caption = "Caribou survey flights inventory"
