@@ -705,7 +705,7 @@ Public Class Form1
 ,[Seen]
 ,[Marked]
 ,[Mode]
-,[.ValueList]
+,[Accuracy]
 ,[RetainedAntler]
 ,[DistendedUdders]
 ,[CalvesAtHeel]
