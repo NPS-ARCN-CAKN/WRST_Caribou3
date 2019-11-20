@@ -35,6 +35,10 @@ Public Class CapturesForm
             'set up filtering tools
             Me.CapturesGridEX.FilterMode = FilterMode.None
 
+            'make the form a reasonable size if not maximized
+            Me.Width = 1200
+            Me.Height = 800
+
         Catch ex As Exception
             MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name & ")")
         End Try
@@ -194,6 +198,18 @@ Public Class CapturesForm
                 .ValueList.Add("5", "5-Heavy")
             End With
 
+            'Sex
+            With Grid.RootTable.Columns("Sex")
+                .EditType = EditType.Combo
+                .HasValueList = True
+                .LimitToList = True
+                .AllowSort = True
+                .AutoComplete = True
+                .ValueList.Clear()
+                .ValueList.Add("F", "F")
+                .ValueList.Add("M", "M")
+            End With
+
             'Set up dropdowns to regurgitate previous data entry options
             Dim CapturesDataTable As DataTable = Me.WRST_CaribouDataSet.Tables("Captures")
             LoadGridEXDropDownWithDistinctDataTableValues(Grid, CapturesDataTable, "AdditionalDrugs", "AdditionalDrugs", False)
@@ -216,7 +232,7 @@ Public Class CapturesForm
             LoadGridEXDropDownWithDistinctDataTableValues(Grid, CapturesDataTable, "Sedative", "Sedative", False)
             LoadGridEXDropDownWithDistinctDataTableValues(Grid, CapturesDataTable, "SedativeReversal", "SedativeReversal", False)
             'LoadGridEXDropDownWithDistinctDataTableValues(Grid, CapturesDataTable, "SedativeReversalRoute", "SedativeReversalRoute", False)
-            LoadGridEXDropDownWithDistinctDataTableValues(Grid, CapturesDataTable, "Sex", "Sex", False)
+            'LoadGridEXDropDownWithDistinctDataTableValues(Grid, CapturesDataTable, "Sex", "Sex", False)
             LoadGridEXDropDownWithDistinctDataTableValues(Grid, CapturesDataTable, "Shooter", "Shooter", False)
             LoadGridEXDropDownWithDistinctDataTableValues(Grid, CapturesDataTable, "SOPNumber", "SOPNumber", False)
             LoadGridEXDropDownWithDistinctDataTableValues(Grid, CapturesDataTable, "SOPVersion", "SOPVersion", False)
