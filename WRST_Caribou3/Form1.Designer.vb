@@ -113,6 +113,7 @@ Partial Class Form1
         Me.SurveyFlightsGridEX.Dock = System.Windows.Forms.DockStyle.Fill
         Me.SurveyFlightsGridEX.FilterMode = Janus.Windows.GridEX.FilterMode.Automatic
         Me.SurveyFlightsGridEX.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.SurveyFlightsGridEX.FrozenColumns = 4
         Me.SurveyFlightsGridEX.GroupByBoxVisible = False
         Me.SurveyFlightsGridEX.Location = New System.Drawing.Point(0, 0)
         Me.SurveyFlightsGridEX.Name = "SurveyFlightsGridEX"
@@ -160,6 +161,7 @@ Partial Class Form1
         SurveysGridEX_DesignTimeLayout.LayoutString = resources.GetString("SurveysGridEX_DesignTimeLayout.LayoutString")
         Me.SurveysGridEX.DesignTimeLayout = SurveysGridEX_DesignTimeLayout
         Me.SurveysGridEX.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.SurveysGridEX.FrozenColumns = 3
         Me.SurveysGridEX.GroupByBoxVisible = False
         Me.SurveysGridEX.Location = New System.Drawing.Point(0, 32)
         Me.SurveysGridEX.Name = "SurveysGridEX"
