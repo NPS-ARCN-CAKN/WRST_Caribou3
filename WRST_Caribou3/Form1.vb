@@ -59,15 +59,11 @@ Public Class Form1
         End Try
 
         'update the database connection label
-        UpdateDatabaseConnectionLabel()
+        Me.CurrentDatabaseToolStripLabel.Text = GetDatabaseConnectionText()
 
     End Sub
 
-    Private Sub UpdateDatabaseConnectionLabel()
-        Dim DBConnectionStringBuilder As New SqlConnectionStringBuilder(My.Settings.WRST_CaribouConnectionString)
-        Dim DB As String = DBConnectionStringBuilder.DataSource & ":" & DBConnectionStringBuilder.InitialCatalog
-        Me.CurrentDatabaseToolStripLabel.Text = "Connected to " & DB.ToUpper & " as " & My.User.Name
-    End Sub
+
 
     ''' <summary>
     ''' The GridEXes tend to show data before any parent or related records have been selected. I like to set the child GridEXes invisible at start up and then toggle them visible as the first parent record is selected.
@@ -91,7 +87,8 @@ Public Class Form1
             Me.CollaredAnimalsInGroupsTableAdapter.Fill(Me.WRST_CaribouDataSet.CollaredAnimalsInGroups)
             Me.CapturesTableAdapter.Fill(Me.WRST_CaribouDataSet.Captures)
         Catch ex As Exception
-            MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name)
+            Me.CurrentDatabaseToolStripLabel.Text = ex.Message
+            MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name & ")")
         End Try
     End Sub
 
@@ -880,9 +877,7 @@ Avoid the General data type. You may proceed but if you have problems importing 
     End Sub
 
     Private Sub SurveyFlightsGridEX_DeletingRecords(sender As Object, e As System.ComponentModel.CancelEventArgs) Handles SurveyFlightsGridEX.DeletingRecords
-        If MsgBox("Delete this flight record and all related survey data?", MsgBoxStyle.YesNo, "Confirm") = MsgBoxResult.No Then
-            e.Cancel() = True
-        End If
+        ConfirmDelete(e)
     End Sub
 
     Private Sub SurveysGridEX_CellEdited(sender As Object, e As ColumnActionEventArgs) Handles SurveysGridEX.CellEdited
@@ -1255,6 +1250,16 @@ Click Yes to certify and lock the current record. Click No to cancel.", MsgBoxSt
             Me.AllowEditsToolStripButton.Text = "Disallow edits"
         End If
         ReadOnlyCheck()
+    End Sub
+
+
+
+    Private Sub SurveysGridEX_DeletingRecords(sender As Object, e As System.ComponentModel.CancelEventArgs) Handles SurveysGridEX.DeletingRecords
+        ConfirmDelete(e)
+    End Sub
+
+    Private Sub CollaredAnimalsInGroupsGridEX_DeletingRecords(sender As Object, e As System.ComponentModel.CancelEventArgs) Handles CollaredAnimalsInGroupsGridEX.DeletingRecords
+        ConfirmDelete(e)
     End Sub
 
     'Private Sub AutoLoadSurveyFlightCells()

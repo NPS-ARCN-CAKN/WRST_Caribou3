@@ -6,7 +6,7 @@ Public Class CapturesForm
 
         Try
             'load the captures table from database
-            Me.CapturesTableAdapter.Fill(Me.WRST_CaribouDataSet.Captures)
+            LoadDataset()
 
             'standard gridex formatting
             FormatGridEX(Me.CapturesGridEX)
@@ -36,6 +36,17 @@ Public Class CapturesForm
             Me.CapturesGridEX.FilterMode = FilterMode.None
 
         Catch ex As Exception
+            MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name & ")")
+        End Try
+    End Sub
+
+    Private Sub LoadDataset()
+        Try
+            'load the captures table from database
+            Me.CapturesTableAdapter.Fill(Me.WRST_CaribouDataSet.Captures)
+            Me.CurrentDatabaseToolStripLabel.Text = GetDatabaseConnectionText()
+        Catch ex As Exception
+            Me.CurrentDatabaseToolStripLabel.Text = ex.Message
             MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name & ")")
         End Try
     End Sub
@@ -607,6 +618,10 @@ WHERE (CollarDeployments.AnimalId = '" & AnimalID & "') AND ('" & CaptureDate & 
                 .AllowDelete = InheritableBoolean.False
             End If
         End With
+    End Sub
+
+    Private Sub CapturesGridEX_DeletingRecords(sender As Object, e As System.ComponentModel.CancelEventArgs) Handles CapturesGridEX.DeletingRecords
+        ConfirmDelete(e)
     End Sub
 
     'Private Sub CheckFrequenciesToolStripButton_Click(sender As Object, e As EventArgs) Handles CheckFrequenciesToolStripButton.Click

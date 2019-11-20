@@ -472,6 +472,29 @@ Parameter name: key" Then
         End Try
     End Sub
 
+    ''' <summary>
+    ''' It's far to easy to accidentally delete records from a GridEX. This Sub is designed to avoid this through confirmation before deleting. Attach this Sub
+    ''' to a GridEX's GridEX_DeletingRecords event.
+    ''' </summary>
+    ''' <param name="e"></param>
+    Public Sub ConfirmDelete(e As System.ComponentModel.CancelEventArgs)
+        If MsgBox("Delete this record and all related data?", MsgBoxStyle.YesNo, "Confirm") = MsgBoxResult.No Then
+            e.Cancel() = True
+        End If
+    End Sub
+
+
+    Public Function GetDatabaseConnectionText() As String
+        Dim Label As String = "Database: Disconnected"
+        Try
+            Dim DBConnectionStringBuilder As New SqlConnectionStringBuilder(My.Settings.WRST_CaribouConnectionString)
+            Dim DB As String = DBConnectionStringBuilder.DataSource & ":" & DBConnectionStringBuilder.InitialCatalog
+            Label = "Connected to " & DB.ToUpper & " as " & My.User.Name
+        Catch ex As Exception
+            MsgBox(ex.Message & " " & System.Reflection.MethodBase.GetCurrentMethod.Name)
+        End Try
+        Return Label
+    End Function
 
     '''' <summary>
     '''' 

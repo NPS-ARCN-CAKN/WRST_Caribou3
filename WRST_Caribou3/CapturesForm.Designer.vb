@@ -37,11 +37,13 @@ Partial Class CapturesForm
         Me.CapturesTableAdapter = New WRST_Caribou3.WRST_CaribouDataSetTableAdapters.CapturesTableAdapter()
         Me.AllowEditsToolStripButton = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripSeparator3 = New System.Windows.Forms.ToolStripSeparator()
+        Me.BottomToolStrip = New System.Windows.Forms.ToolStrip()
         Me.CurrentDatabaseToolStripLabel = New System.Windows.Forms.ToolStripLabel()
         CType(Me.CapturesGridEX, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.CapturesToolStrip.SuspendLayout()
         CType(Me.CapturesBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.WRST_CaribouDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.BottomToolStrip.SuspendLayout()
         Me.SuspendLayout()
         '
         'CapturesGridEX
@@ -60,13 +62,13 @@ Partial Class CapturesForm
         Me.CapturesGridEX.Name = "CapturesGridEX"
         Me.CapturesGridEX.NewRowPosition = Janus.Windows.GridEX.NewRowPosition.BottomRow
         Me.CapturesGridEX.RecordNavigator = True
-        Me.CapturesGridEX.Size = New System.Drawing.Size(2080, 1284)
+        Me.CapturesGridEX.Size = New System.Drawing.Size(2080, 1256)
         Me.CapturesGridEX.TabIndex = 1
         '
         'CapturesToolStrip
         '
         Me.CapturesToolStrip.ImageScalingSize = New System.Drawing.Size(24, 24)
-        Me.CapturesToolStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.SaveToolStripButton, Me.ToolStripSeparator1, Me.AllowFilteringToolStripButton, Me.ToolStripSeparator2, Me.AllowEditsToolStripButton, Me.ToolStripSeparator3, Me.CurrentDatabaseToolStripLabel})
+        Me.CapturesToolStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.SaveToolStripButton, Me.ToolStripSeparator1, Me.AllowFilteringToolStripButton, Me.ToolStripSeparator2, Me.AllowEditsToolStripButton, Me.ToolStripSeparator3})
         Me.CapturesToolStrip.Location = New System.Drawing.Point(0, 0)
         Me.CapturesToolStrip.Name = "CapturesToolStrip"
         Me.CapturesToolStrip.Size = New System.Drawing.Size(2080, 32)
@@ -139,11 +141,22 @@ Partial Class CapturesForm
         Me.ToolStripSeparator3.Name = "ToolStripSeparator3"
         Me.ToolStripSeparator3.Size = New System.Drawing.Size(6, 32)
         '
+        'BottomToolStrip
+        '
+        Me.BottomToolStrip.Dock = System.Windows.Forms.DockStyle.Bottom
+        Me.BottomToolStrip.ImageScalingSize = New System.Drawing.Size(24, 24)
+        Me.BottomToolStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CurrentDatabaseToolStripLabel})
+        Me.BottomToolStrip.Location = New System.Drawing.Point(0, 1288)
+        Me.BottomToolStrip.Name = "BottomToolStrip"
+        Me.BottomToolStrip.Size = New System.Drawing.Size(2080, 28)
+        Me.BottomToolStrip.TabIndex = 3
+        Me.BottomToolStrip.Text = "ToolStrip1"
+        '
         'CurrentDatabaseToolStripLabel
         '
         Me.CurrentDatabaseToolStripLabel.Name = "CurrentDatabaseToolStripLabel"
-        Me.CurrentDatabaseToolStripLabel.Size = New System.Drawing.Size(124, 29)
-        Me.CurrentDatabaseToolStripLabel.Text = "Connected to "
+        Me.CurrentDatabaseToolStripLabel.Size = New System.Drawing.Size(202, 25)
+        Me.CurrentDatabaseToolStripLabel.Text = "Database: Disconnected"
         '
         'CapturesForm
         '
@@ -151,6 +164,7 @@ Partial Class CapturesForm
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(2080, 1316)
         Me.Controls.Add(Me.CapturesGridEX)
+        Me.Controls.Add(Me.BottomToolStrip)
         Me.Controls.Add(Me.CapturesToolStrip)
         Me.Name = "CapturesForm"
         Me.Text = "CapturesForm"
@@ -159,6 +173,8 @@ Partial Class CapturesForm
         Me.CapturesToolStrip.PerformLayout()
         CType(Me.CapturesBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.WRST_CaribouDataSet, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.BottomToolStrip.ResumeLayout(False)
+        Me.BottomToolStrip.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -176,5 +192,6 @@ Partial Class CapturesForm
     Friend WithEvents CapturesTableAdapter As WRST_CaribouDataSetTableAdapters.CapturesTableAdapter
     Friend WithEvents AllowEditsToolStripButton As ToolStripButton
     Friend WithEvents ToolStripSeparator3 As ToolStripSeparator
+    Friend WithEvents BottomToolStrip As ToolStrip
     Friend WithEvents CurrentDatabaseToolStripLabel As ToolStripLabel
 End Class

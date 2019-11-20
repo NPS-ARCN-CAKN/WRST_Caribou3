@@ -55,13 +55,13 @@ Partial Class Form1
         Me.OpenCapturesFormToolStripButton = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripSeparator6 = New System.Windows.Forms.ToolStripSeparator()
         Me.AllowEditsToolStripButton = New System.Windows.Forms.ToolStripButton()
+        Me.ToolStripSeparator7 = New System.Windows.Forms.ToolStripSeparator()
         Me.HelpProvider = New System.Windows.Forms.HelpProvider()
         Me.SurveyFlightsTableAdapter = New WRST_Caribou3.WRST_CaribouDataSetTableAdapters.SurveyFlightsTableAdapter()
         Me.TableAdapterManager = New WRST_Caribou3.WRST_CaribouDataSetTableAdapters.TableAdapterManager()
         Me.CollaredAnimalsInGroupsTableAdapter = New WRST_Caribou3.WRST_CaribouDataSetTableAdapters.CollaredAnimalsInGroupsTableAdapter()
         Me.SurveysTableAdapter = New WRST_Caribou3.WRST_CaribouDataSetTableAdapters.SurveysTableAdapter()
         Me.CapturesTableAdapter = New WRST_Caribou3.WRST_CaribouDataSetTableAdapters.CapturesTableAdapter()
-        Me.ToolStripSeparator7 = New System.Windows.Forms.ToolStripSeparator()
         Me.BottomToolStrip = New System.Windows.Forms.ToolStrip()
         Me.CurrentDatabaseToolStripLabel = New System.Windows.Forms.ToolStripLabel()
         CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -362,6 +362,11 @@ Partial Class Form1
         Me.AllowEditsToolStripButton.Tag = "False"
         Me.AllowEditsToolStripButton.Text = "Allow edits"
         '
+        'ToolStripSeparator7
+        '
+        Me.ToolStripSeparator7.Name = "ToolStripSeparator7"
+        Me.ToolStripSeparator7.Size = New System.Drawing.Size(6, 32)
+        '
         'HelpProvider
         '
         Me.HelpProvider.HelpNamespace = "C:\Work\Code\WRST_Caribou3\WRST_Caribou3\WRST Caribou Monitoring Database Applica" &
@@ -392,11 +397,6 @@ Partial Class Form1
         '
         Me.CapturesTableAdapter.ClearBeforeFill = True
         '
-        'ToolStripSeparator7
-        '
-        Me.ToolStripSeparator7.Name = "ToolStripSeparator7"
-        Me.ToolStripSeparator7.Size = New System.Drawing.Size(6, 32)
-        '
         'BottomToolStrip
         '
         Me.BottomToolStrip.Dock = System.Windows.Forms.DockStyle.Bottom
@@ -411,8 +411,8 @@ Partial Class Form1
         'CurrentDatabaseToolStripLabel
         '
         Me.CurrentDatabaseToolStripLabel.Name = "CurrentDatabaseToolStripLabel"
-        Me.CurrentDatabaseToolStripLabel.Size = New System.Drawing.Size(235, 25)
-        Me.CurrentDatabaseToolStripLabel.Text = "Connected to: Disconnected"
+        Me.CurrentDatabaseToolStripLabel.Size = New System.Drawing.Size(202, 25)
+        Me.CurrentDatabaseToolStripLabel.Text = "Database: Disconnected"
         '
         'Form1
         '
