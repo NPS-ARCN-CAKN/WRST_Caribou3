@@ -16,5 +16,8 @@
     <Setting Name="SearchAreas" Type="System.String" Scope="User">
       <Value Profile="(Default)">Alaska,Copper River,Mt. Drum,Mt. Sanford,Yukon</Value>
     </Setting>
+    <Setting Name="SharedDirectory" Type="System.String" Scope="User">
+      <Value Profile="(Default)">J:\Monitoring\Caribou\WRST</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

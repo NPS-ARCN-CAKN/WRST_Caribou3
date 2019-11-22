@@ -89,6 +89,18 @@ Namespace My
                 Me("SearchAreas") = value
             End Set
         End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("J:\Monitoring\Caribou\WRST")>  _
+        Public Property SharedDirectory() As String
+            Get
+                Return CType(Me("SharedDirectory"),String)
+            End Get
+            Set
+                Me("SharedDirectory") = value
+            End Set
+        End Property
     End Class
 End Namespace
 

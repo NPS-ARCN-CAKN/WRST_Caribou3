@@ -61,7 +61,7 @@
     </Reference>
     <Reference Include="SkeeterDataTablesTranslator, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\SkeeterDataTablesTranslator\SkeeterDataTablesTranslator\bin\Debug\SkeeterDataTablesTranslator.dll</HintPath>
+      <HintPath>..\..\SkeeterDataTablesTranslator\SkeeterDataTablesTranslator\bin\Release\SkeeterDataTablesTranslator.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />

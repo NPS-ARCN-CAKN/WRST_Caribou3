@@ -1,4 +1,6 @@
-﻿Imports Janus.Windows.GridEX
+﻿Imports System.IO
+Imports Janus.Windows.GridEX
+Imports SkeeterDataTablesTranslator
 
 Public Class CapturesForm
 
@@ -415,8 +417,8 @@ Public Class CapturesForm
     '              '.Add("FALSE")
 
     '              'common default values
-    '              '.Add(GetCurrentGridEXCellValue(Me.SurveyFlightsGridEX, "FlightID")) 'the primary key of the currently selected flight
-    '              '.Add(GetCurrentGridEXCellValue(Me.SurveyFlightsGridEX, "Herd")) 'the currently selected herd in the campaigns table
+    '              '.Add(GetCurrentGridEXCellValue(Me.CapturesGridEX, "FlightID")) 'the primary key of the currently selected flight
+    '              '.Add(GetCurrentGridEXCellValue(Me.CapturesGridEX, "Herd")) 'the currently selected herd in the campaigns table
     '              .Add(SourceFileInfo.Name) 'the import file name
     '          End With
 
@@ -628,10 +630,12 @@ WHERE (CollarDeployments.AnimalId = '" & AnimalID & "') AND ('" & CaptureDate & 
                 .AllowAddNew = InheritableBoolean.True
                 .AllowEdit = InheritableBoolean.True
                 .AllowDelete = InheritableBoolean.True
+                Me.ImportToolStripButton.Enabled = True
             ElseIf Me.AllowEditsToolStripButton.Text = "Allow edits" Then
                 .AllowAddNew = InheritableBoolean.False
                 .AllowEdit = InheritableBoolean.False
                 .AllowDelete = InheritableBoolean.False
+                Me.ImportToolStripButton.Enabled = False
             End If
         End With
     End Sub
@@ -640,7 +644,138 @@ WHERE (CollarDeployments.AnimalId = '" & AnimalID & "') AND ('" & CaptureDate & 
         ConfirmDelete(e)
     End Sub
 
-    'Private Sub CheckFrequenciesToolStripButton_Click(sender As Object, e As EventArgs) Handles CheckFrequenciesToolStripButton.Click
-    '    LoadAnimalMovementFrequenciesIntoCapturesGrid()
-    'End Sub
+    Private Sub ImportToolStripButton_Click(sender As Object, e As EventArgs) Handles ImportToolStripButton.Click
+        Try
+
+            'get the structure of the destination datatable, we only need one record since the translator will clear all records anyway
+            Dim Sql As String = "select * from captures"
+
+            'use the structure of the query above to build a skeleton datatable
+            Dim DestinationDataTable As DataTable = GetDataTable(My.Settings.WRST_CaribouConnectionString, Sql)
+
+            'import the data from the selected file
+            ImportSurveyDataFromFile(DestinationDataTable)
+        Catch ex As Exception
+            MsgBox(ex.Message & " " & System.Reflection.MethodBase.GetCurrentMethod.Name)
+        End Try
+    End Sub
+
+    ''' <summary>
+    ''' Loads a source file of waypoints and an intended destination DataTable, then opens a translator form to map the source columns into the destination datatable schema.
+    ''' Finally, loads the transformed data into the DestinationDataTable.
+    ''' </summary>
+    ''' <param name="DestinationDataTable">DataTable. The DataTable schema into which the source DataTable's columns should be matched.</param>
+    Private Sub ImportSurveyDataFromFile(DestinationDataTable As DataTable)
+
+        'we should have a clean dataset matching the database before we import points
+        AskToSaveChanges()
+
+        'General data types in Excel cause problems, this message will appear if user tries to import from Excel
+        '        Dim DataLossMessage As String = "For best results when importing from Excel spreadsheets set each column's data type explicitly (Text, Date, Number, etc). 
+        'Avoid the General data type. You may proceed but if you have problems importing data try modifying your spreadsheet and re-importing."
+
+        Try
+            'destination datatable is the structure of the table into which we'd like to import waypoints, cannot be nothing
+            If Not DestinationDataTable Is Nothing Then
+
+                Try
+                    'get the data fileinfo to import
+                    Dim SourceFileInfo As New FileInfo(GetFile("Select a data file to open. If Excel workbook the data to be imported must be in the first worksheet (tab).", "Survey data file (.csv;.xls;.xlsx)|*.csv;*.xls;*.xlsx|Comma separated values (.csv)|*.csv|Excel worksheet (.xlsx)|*.xlsx|Excel worksheet (.xls)|*.xls"))
+
+                    'convert the file into a datatable so we can work with it
+                    Dim InputDataTable As DataTable = Nothing
+
+                    'determine if the input file is csv or excel
+                    If SourceFileInfo.Extension = ".csv" Then
+
+                        'convert the data file into a datatable
+                        InputDataTable = GetDataTableFromDelimitedTextFile(SourceFileInfo, ",")
+
+                    ElseIf SourceFileInfo.Extension = ".xlsx" Then
+
+                        'General data types in Excel cause big problems
+                        ' MsgBox(DataLossMessage, MsgBoxStyle.Information, "Important note on Excel spreadsheets")
+
+                        'IMEX=1 means all data will be treated as text. we had problems with group frequencies column being treated as numeric so it omitted any 
+                        'cells with commas separating frequencies
+                        'the Excel General data type confused .NET as to what kind of data to expect.
+                        'see https://www.connectionstrings.com/excel/
+                        Dim ExcelConnectionString As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" & SourceFileInfo.FullName & ";Extended Properties=""Excel 12.0 Xml;HDR=YES;IMEX=1"";"
+                        Dim ExcelDataset As DataSet = GetDatasetFromExcelWorkbook(ExcelConnectionString)
+                        InputDataTable = ExcelDataset.Tables(0) 'can only grab the first worksheet (tab)
+
+                    ElseIf SourceFileInfo.Extension = ".xls" Then
+
+                        'General data types in Excel cause big problems
+                        'MsgBox(DataLossMessage, MsgBoxStyle.Information, "Important note on Excel spreadsheets")
+
+                        'convert the excel sheet into a datatable
+                        Dim ExcelConnectionString As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" & SourceFileInfo.FullName & ";Extended Properties=""Excel 8.0;HDR=YES;IMEX=1"";"
+                        Dim ExcelDataset As DataSet = GetDatasetFromExcelWorkbook(ExcelConnectionString)
+                        InputDataTable = ExcelDataset.Tables(0) 'first worksheet
+
+                    End If
+
+                    'make a list of desired default values to pass into the data tables translator form
+                    'these items will show up in the mappings datagridview's default values column to make things a little easier
+                    Dim DefaultValuesList As New List(Of String)
+                    With DefaultValuesList
+                        'add the search areas from my.settings to the default values
+                        'For Each Item In My.Settings.SearchAreas.Split(",")
+                        '    .Add(Item)
+                        'Next
+                        '.Add("TRUE")
+                        '.Add("FALSE")
+                        '.Add("Raw")
+
+                        ''common default values
+                        '.Add(GetCurrentGridEXCellValue(Me.CapturesGridEX, "FlightID")) 'the primary key of the currently selected flight
+                        '.Add(GetCurrentGridEXCellValue(Me.CapturesGridEX, "Herd")) 'the currently selected herd in the campaigns table
+                        '.Add(SourceFileInfo.Name) 'the import file name
+
+                    End With
+
+                    'open up a datatable translator form to allow the user to map fields from the csv file to the destination datatable
+                    Dim TranslatorForm As New SkeeterDataTablesTranslatorForm(InputDataTable, DestinationDataTable, "Import data", "Use the tool on the left to map the fields from your source data table to the destination data table.", DefaultValuesList)
+                    TranslatorForm.ShowDialog()
+
+                    'at this point we have transformed the csv into a clone of the destination datatable
+                    Dim ImportDataTable As DataTable = TranslatorForm.DestinationDataTable
+
+                    'the next step is to get the transformed data into the Surveys GridEX DataTable
+                    'loop through the imported data datatable and try to insert them into the datatable
+                    For Each Row As DataRow In ImportDataTable.Rows
+
+                        'make a new row
+                        Dim NewRow As DataRow = Me.WRST_CaribouDataSet.Tables("Surveys").NewRow
+                        For Each Column As DataColumn In ImportDataTable.Columns
+                            NewRow.Item(Column.ColumnName) = Row.Item(Column.ColumnName)
+                        Next
+
+                        'override any selections made on the translator form
+                        NewRow.Item("RecordInsertedDate") = Now
+                        NewRow.Item("RecordInsertedBy") = My.User.Name
+                        NewRow.Item("CaptureID") = Guid.NewGuid.ToString
+                        NewRow.Item("CertificationLevel") = "Raw"
+
+                        'add the row
+                        Me.WRST_CaribouDataSet.Tables("Captures").Rows.Add(NewRow)
+
+                        'end the edit
+                        Me.CapturesBindingSource.EndEdit()
+                    Next
+
+                    'end any remaining edits
+                    Me.CapturesBindingSource.EndEdit()
+
+                Catch ex As Exception
+                    MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name & ")")
+                End Try
+            Else
+                MsgBox("DestinationDataTable cannot be nothing.")
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name & ")")
+        End Try
+    End Sub
 End Class

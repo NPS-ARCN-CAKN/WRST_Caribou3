@@ -98,12 +98,27 @@ Public Class Form1
     Private Sub SaveDataset()
         Try
             Me.Validate()
+        Catch ex As Exception
+            MsgBox(ex.Message & "Validation (" & System.Reflection.MethodBase.GetCurrentMethod.Name)
+        End Try
+
+        Try
             Me.CollaredAnimalsInGroupsBindingSource.EndEdit()
             Me.SurveysBindingSource.EndEdit()
             Me.SurveyFlightsBindingSource.EndEdit()
             Me.TableAdapterManager.UpdateAll(Me.WRST_CaribouDataSet)
+        Catch DBCEx As DBConcurrencyException
+            If MsgBox("Concurrency violation. " & DBCEx.Message & " Merge your edits into the database?", MsgBoxStyle.YesNo, "Concurrency violation.") = MsgBoxResult.Yes Then
+                Me.WRST_CaribouDataSet.Merge(WRST_CaribouDataSet.Tables("Surveys"))
+                SaveDataset()
+            Else
+                MsgBox("Save canceled.")
+                Exit Sub
+            End If
+            Exit Sub
+            ' northwindDataSet.Merge(tempCustomersDataTable, True, MissingSchemaAction.Ignore);
         Catch ex As Exception
-            MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name)
+            MsgBox(ex.Message & "Database update (" & System.Reflection.MethodBase.GetCurrentMethod.Name)
         End Try
     End Sub
 
@@ -1115,10 +1130,6 @@ Click Yes to certify and lock the current record. Click No to cancel.", MsgBoxSt
     ''' <param name="Row"></param>
     ''' <param name="MissingFrequenciesArrayList"></param>
     Private Sub AutomatchFrequencyToAnimal(Row As GridEXRow, MissingFrequenciesArrayList As ArrayList)
-
-        'resolve any changes to the database to avoid duplicate primary key problems
-        AskToSaveChanges()
-
         Try
             'extract the frequencies from the row's FrequenciesInGroup column and try to parse it, search for the correct animalid and insert it into the cross reference table
             If Not Row Is Nothing Then
@@ -1134,29 +1145,34 @@ Click Yes to certify and lock the current record. Click No to cancel.", MsgBoxSt
                         For Each Frequency In FrequenciesList ' FrequenciesInGroup.Split(",")
                             Dim AnimalID As String = GetAnimalIDFromFrequencyAndObservationDate(Frequency, SightingDate)
                             Dim Comment As String = ""
-                            If AnimalID.Length = 0 Then
-                                'the collar was not found in the AM database, add to the list so we can inform the user of data quality issues.
-                                MissingFrequenciesArrayList.Add(Frequency & "," & SightingDate)
-                                AnimalID = Frequency
-                                Comment = "Frequency Not found In AM at time Of insertion (" & My.User.Name & " " & Now & ")"
-                            End If
+                            If AnimalID.Length > 0 Then
+                                'the collar was  found in the AM database.
+                                '
+                                'AnimalID = Frequency
+                                'Comment = "Frequency Not found In AM at time Of insertion (" & My.User.Name & " " & Now & ")"
 
-                            'add the animalid to the XrefDataTable
-                            Dim XrefDataTable As DataTable = Me.WRST_CaribouDataSet.Tables("CollaredAnimalsInGroups")
-                            'see if the AnimalID already exists
-                            Dim Filter As String = "EID" & " = '" & Row.Cells("EID").Value & "' And AnimalID='" & AnimalID & "'"
-                            Dim ExistenceCheck As DataRow() = XrefDataTable.Select(Filter)
-                            If ExistenceCheck.Count = 0 Then
-                                'the animalid does not exist for the animal group
-                                Dim XrefDataRow As DataRow = XrefDataTable.NewRow
-                                With XrefDataRow
-                                    .Item("AnimalID") = AnimalID
-                                    .Item("EID") = Row.Cells("EID").Value
-                                    '.Item("Comment") = Comment
-                                End With
-                                If AnimalID.Trim.Length > 0 Then
-                                    XrefDataTable.Rows.Add(XrefDataRow)
+                                'add the animalid to the XrefDataTable
+                                Dim XrefDataTable As DataTable = Me.WRST_CaribouDataSet.Tables("CollaredAnimalsInGroups")
+
+                                'see if the AnimalID already exists
+                                Dim Filter As String = "EID" & " = '" & Row.Cells("EID").Value & "' And AnimalID='" & AnimalID & "'"
+                                Dim ExistenceCheck As DataRow() = XrefDataTable.Select(Filter)
+                                If ExistenceCheck.Count = 0 Then
+
+                                    'the animalid does not exist for the animal group
+                                    Dim XrefDataRow As DataRow = XrefDataTable.NewRow
+                                    With XrefDataRow
+                                        .Item("AnimalID") = AnimalID
+                                        .Item("EID") = Row.Cells("EID").Value
+                                        '.Item("Comment") = Comment
+                                    End With
+                                    If AnimalID.Trim.Length > 0 Then
+                                        XrefDataTable.Rows.Add(XrefDataRow)
+                                    End If
                                 End If
+                            Else
+                                'animal id was not found in animal movement database, add it to the list of missing frequencies
+                                MissingFrequenciesArrayList.Add(Frequency & "," & SightingDate)
                             End If
                         Next
                         CollaredAnimalsInGroupsBindingSource.EndEdit()
@@ -1170,26 +1186,8 @@ Click Yes to certify and lock the current record. Click No to cancel.", MsgBoxSt
         End Try
     End Sub
 
-    Private Sub AutoMatchFrequenciesToAnimalsToolStripButton_Click(sender As Object, e As EventArgs) Handles AutoMatchFrequenciesToAnimalsToolStripButton.Click
-        Dim Explanation As String = "The application will cross reference the Group Frequencies for this record with GPS collar deployments found in the Animal Movement database.
-            Frequency records matching collar deployments will be inserted into the matching collared caribou table to the right. 
-            No existing records will be deleted. No duplicate records will be added.  
-            Yes to Continue. No to cancel."
-        If MsgBox(Explanation, MsgBoxStyle.YesNo, "Confirm") = MsgBoxResult.Yes Then
-            Try
-                'this arraylist will hold any frequencies not found in animal movement tool
-                Dim MissingFrequenciesArrayList As New ArrayList
-                Dim GridEX As GridEX = Me.SurveysGridEX
-                If Not GridEX.CurrentRow Is Nothing Then
-                    AutomatchFrequencyToAnimal(GridEX.CurrentRow, MissingFrequenciesArrayList)
-                    ShowMissingFrequenciesList(MissingFrequenciesArrayList)
-                Else
-                    MsgBox("Select a row")
-                End If
-            Catch ex As Exception
-                MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name & ")")
-            End Try
-        End If
+    Private Sub AutoMatchFrequenciesToAnimalsToolStripButton_Click(sender As Object, e As EventArgs)
+
     End Sub
 
     ''' <summary>
@@ -1251,7 +1249,7 @@ Click Yes to certify and lock the current record. Click No to cancel.", MsgBoxSt
                 Me.CollaredAnimalsInGroupsGridEX.AllowEdit = InheritableBoolean.True
                 Me.CollaredAnimalsInGroupsGridEX.AllowDelete = InheritableBoolean.True
                 Me.ImportSurveyDataFromFileToolStripButton.Enabled = True
-                Me.AutoMatchFrequenciesToAnimalsToolStripButton.Enabled = True
+                Me.AutomatchToolStripSplitButton.Enabled = True
             ElseIf Me.AllowEditsToolStripButton.Text = "Allow edits" Then
                 .AllowAddNew = InheritableBoolean.False
                 .AllowEdit = InheritableBoolean.False
@@ -1263,7 +1261,7 @@ Click Yes to certify and lock the current record. Click No to cancel.", MsgBoxSt
                 Me.CollaredAnimalsInGroupsGridEX.AllowEdit = InheritableBoolean.False
                 Me.CollaredAnimalsInGroupsGridEX.AllowDelete = InheritableBoolean.False
                 Me.ImportSurveyDataFromFileToolStripButton.Enabled = False
-                Me.AutoMatchFrequenciesToAnimalsToolStripButton.Enabled = False
+                Me.AutomatchToolStripSplitButton.Enabled = False
             End If
         End With
     End Sub
@@ -1286,6 +1284,62 @@ Click Yes to certify and lock the current record. Click No to cancel.", MsgBoxSt
 
     Private Sub CollaredAnimalsInGroupsGridEX_DeletingRecords(sender As Object, e As System.ComponentModel.CancelEventArgs) Handles CollaredAnimalsInGroupsGridEX.DeletingRecords
         ConfirmDelete(e)
+    End Sub
+
+    Private Sub OpenWRSTCaribouDirectoryToolStripButton_Click(sender As Object, e As EventArgs) Handles OpenWRSTCaribouDirectoryToolStripButton.Click
+        Try
+            If My.Computer.FileSystem.DirectoryExists(My.Settings.SharedDirectory) Then
+                Process.Start("J:\Monitoring\Caribou\WRST")
+            Else
+                MsgBox("Directory " & My.Settings.SharedDirectory & " does not exist. Modify the path to the WRST Caribou shared drive in the application settings.")
+            End If
+        Catch ex As Exception
+
+        End Try
+    End Sub
+
+    Private Sub CurrentRowToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CurrentRowToolStripMenuItem.Click
+        'Dim Explanation As String = "The application will cross reference the Group Frequencies for this record with GPS collar deployments found in the Animal Movement database.
+        '    Frequency records matching collar deployments will be inserted into the matching collared caribou table to the right. 
+        '    No existing records will be deleted. No duplicate records will be added.  
+        '    Yes to Continue. No to cancel."
+        'If MsgBox(Explanation, MsgBoxStyle.YesNo, "Confirm") = MsgBoxResult.Yes Then
+        Try
+            'resolve any changes to the database to avoid duplicate primary key problems
+            AskToSaveChanges()
+
+            'this arraylist will hold any frequencies not found in animal movement tool
+            Dim MissingFrequenciesArrayList As New ArrayList
+            Dim GridEX As GridEX = Me.SurveysGridEX
+            If Not GridEX.CurrentRow Is Nothing Then
+                AutomatchFrequencyToAnimal(GridEX.CurrentRow, MissingFrequenciesArrayList)
+                ShowMissingFrequenciesList(MissingFrequenciesArrayList)
+            Else
+                MsgBox("Select a row")
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name & ")")
+            End Try
+        'End If
+    End Sub
+
+    Private Sub AllRowsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AllRowsToolStripMenuItem.Click
+        Try
+            'resolve any changes to the database to avoid duplicate primary key problems
+            AskToSaveChanges()
+
+            'this arraylist will hold any frequencies not found in animal movement tool
+            Dim MissingFrequenciesArrayList As New ArrayList
+            Dim GridEX As GridEX = Me.SurveysGridEX
+            For Each Row As GridEXRow In GridEX.GetRows
+                If Not GridEX.CurrentRow Is Nothing Then
+                    AutomatchFrequencyToAnimal(Row, MissingFrequenciesArrayList)
+                End If
+            Next
+            ShowMissingFrequenciesList(MissingFrequenciesArrayList)
+        Catch ex As Exception
+            MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name & ")")
+        End Try
     End Sub
 
     'Private Sub AutoLoadSurveyFlightCells()
