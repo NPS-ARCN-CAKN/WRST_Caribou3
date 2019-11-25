@@ -82,9 +82,11 @@ Module Utilites
     End Function
 
     Public Sub ExportDataTable(DataTable As DataTable)
+        'not working, freezes the app
         Try
             Dim SFD As New SaveFileDialog()
             With SFD
+                .ShowHelp = True
                 .Filter = "CSV file (Comma separated values text file)|*.csv"
                 .OverwritePrompt = True
                 .Title = "Export"
@@ -200,6 +202,7 @@ Module Utilites
         Try
             Dim OFD As New OpenFileDialog
             With OFD
+                .ShowHelp = True
                 .AddExtension = True
                 .CheckFileExists = True
                 .Filter = Filter
