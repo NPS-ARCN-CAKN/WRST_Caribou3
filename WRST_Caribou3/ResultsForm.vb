@@ -41,13 +41,19 @@ Public Class ResultsForm
             Try
                 Me.DataSummariesLabel.Text = ViewName
 
+
                 'get the view description
-                Dim ViewDescription As String = ViewName
-                Dim ViewDT As DataTable = GetDataTable(My.Settings.WRST_CaribouConnectionString, "SELECT [Table],[TableDescription] FROM [WRST_Caribou].[dbo].[DatabaseTableDescriptions] where [table]='dbo." & ViewName & "'")
-                If ViewDT.Rows.Count = 1 Then
-                    ViewDescription = ViewDT.Rows(0).Item("TableDescription")
-                End If
-                Me.ViewDescriptionTextBox.Text = ViewDescription
+                Try
+                    Dim ViewDescription As String = ViewName
+                    Dim ViewDT As DataTable = GetDataTable(My.Settings.WRST_CaribouConnectionString, "SELECT [Table],[TableDescription] FROM [WRST_Caribou].[dbo].[DatabaseTableDescriptions] where [table]='dbo." & ViewName & "'")
+                    If ViewDT.Rows.Count = 1 Then
+                        ViewDescription = ViewDT.Rows(0).Item("TableDescription")
+                    End If
+                    Me.ViewDescriptionTextBox.Text = ViewDescription
+                Catch ex As Exception
+                    Me.ViewDescriptionTextBox.Text = ex.Message
+                End Try
+
 
                 'get the data from the selected view into a datatable
                 Dim Filter As String = ""
@@ -58,20 +64,20 @@ Public Class ResultsForm
                 With Me.ResultsGridEX
                     .DataSource = ResultsDataTable
                     .RetrieveStructure()
-                    .GroupTotals = GroupTotals.Always
+                    '.GroupTotals = GroupTotals.Always
                 End With
 
                 'format total rows
                 For Each Col As GridEXColumn In Me.ResultsGridEX.RootTable.Columns
-                    If Col.Key <> "Year" And Col.Key <> "Lat" And Col.Key <> "Long" Then
-                        If Col.DataTypeCode = TypeCode.Int16 Or Col.DataTypeCode = TypeCode.Int32 Or Col.DataTypeCode = TypeCode.Int64 Then
-                            Col.AggregateFunction = AggregateFunction.Sum
-                        ElseIf Col.DataTypeCode = TypeCode.Double Or Col.DataTypeCode = TypeCode.Decimal Or Col.DataTypeCode Then
-                            Col.AggregateFunction = AggregateFunction.Average
-                        Else
-                            Col.AggregateFunction = AggregateFunction.None
-                        End If
-                    End If
+                    'If Col.Key <> "Year" And Col.Key <> "Lat" And Col.Key <> "Long" Then
+                    '    If Col.DataTypeCode = TypeCode.Int16 Or Col.DataTypeCode = TypeCode.Int32 Or Col.DataTypeCode = TypeCode.Int64 Then
+                    '        Col.AggregateFunction = AggregateFunction.Sum
+                    '    ElseIf Col.DataTypeCode = TypeCode.Double Or Col.DataTypeCode = TypeCode.Decimal Or Col.DataTypeCode Then
+                    '        Col.AggregateFunction = AggregateFunction.Average
+                    '    Else
+                    '        Col.AggregateFunction = AggregateFunction.None
+                    '    End If
+                    'End If
 
                     'other things
                     Col.FormatString = ""
@@ -120,4 +126,14 @@ Public Class ResultsForm
         Me.ResultsGridEX.GroupByBoxVisible = Me.GroupByBoxVisibleCheckBox.Checked
         Me.CollapseGroupsCheckBox.Visible = Me.GroupByBoxVisibleCheckBox.Checked
     End Sub
+
+    Private Sub ExportToCSVToolStripButton_Click(sender As Object, e As EventArgs) Handles ExportToCSVToolStripButton.Click
+        Try
+            ExportDataTable(ResultsDataTable)
+        Catch ex As Exception
+            MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name & ")")
+        End Try
+    End Sub
+
+
 End Class

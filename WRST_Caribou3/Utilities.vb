@@ -81,6 +81,23 @@ Module Utilites
         Return CSV
     End Function
 
+    Public Sub ExportDataTable(DataTable As DataTable)
+        Try
+            Dim SFD As New SaveFileDialog()
+            With SFD
+                .Filter = "CSV file (Comma separated values text file)|*.csv"
+                .OverwritePrompt = True
+                .Title = "Export"
+            End With
+            If SFD.ShowDialog = DialogResult.OK Then
+                My.Computer.FileSystem.WriteAllText(SFD.FileName, DataTableToCSV(DataTable, ","), False)
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message & " " & System.Reflection.MethodBase.GetCurrentMethod.Name)
+        End Try
+
+    End Sub
+
 
     ''' <summary>
     ''' Runs the query in Sql against a database using ConnectionString and returns the results as a DataTable

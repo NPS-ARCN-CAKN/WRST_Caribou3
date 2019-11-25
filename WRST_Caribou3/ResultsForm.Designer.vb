@@ -25,6 +25,7 @@ Partial Class ResultsForm
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(ResultsForm))
         Me.SplitContainer1 = New System.Windows.Forms.SplitContainer()
         Me.ViewsListBox = New System.Windows.Forms.ListBox()
+        Me.Label1 = New System.Windows.Forms.Label()
         Me.ResultsGridEX = New Janus.Windows.GridEX.GridEX()
         Me.ResultsToolStrip = New System.Windows.Forms.ToolStrip()
         Me.ExportToCSVToolStripButton = New System.Windows.Forms.ToolStripButton()
@@ -34,7 +35,6 @@ Partial Class ResultsForm
         Me.DataSummariesLabel = New System.Windows.Forms.Label()
         Me.ViewDescriptionTextBox = New System.Windows.Forms.TextBox()
         Me.Panel1 = New System.Windows.Forms.Panel()
-        Me.Label1 = New System.Windows.Forms.Label()
         CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SplitContainer1.Panel1.SuspendLayout()
         Me.SplitContainer1.Panel2.SuspendLayout()
@@ -72,6 +72,17 @@ Partial Class ResultsForm
         Me.ViewsListBox.Name = "ViewsListBox"
         Me.ViewsListBox.Size = New System.Drawing.Size(128, 1154)
         Me.ViewsListBox.TabIndex = 0
+        '
+        'Label1
+        '
+        Me.Label1.AutoSize = True
+        Me.Label1.Dock = System.Windows.Forms.DockStyle.Top
+        Me.Label1.Location = New System.Drawing.Point(0, 0)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Padding = New System.Windows.Forms.Padding(8)
+        Me.Label1.Size = New System.Drawing.Size(130, 36)
+        Me.Label1.TabIndex = 1
+        Me.Label1.Text = "Select a query:"
         '
         'ResultsGridEX
         '
@@ -173,17 +184,6 @@ Partial Class ResultsForm
         Me.Panel1.Name = "Panel1"
         Me.Panel1.Size = New System.Drawing.Size(1741, 175)
         Me.Panel1.TabIndex = 2
-        '
-        'Label1
-        '
-        Me.Label1.AutoSize = True
-        Me.Label1.Dock = System.Windows.Forms.DockStyle.Top
-        Me.Label1.Location = New System.Drawing.Point(0, 0)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Padding = New System.Windows.Forms.Padding(8)
-        Me.Label1.Size = New System.Drawing.Size(130, 36)
-        Me.Label1.TabIndex = 1
-        Me.Label1.Text = "Select a query:"
         '
         'ResultsForm
         '
