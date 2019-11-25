@@ -86,6 +86,8 @@ Module Utilites
         Try
             Dim SFD As New SaveFileDialog()
             With SFD
+                .CreatePrompt = True
+                .OverwritePrompt = True
                 .ShowHelp = True
                 .Filter = "CSV file (Comma separated values text file)|*.csv"
                 .OverwritePrompt = True
