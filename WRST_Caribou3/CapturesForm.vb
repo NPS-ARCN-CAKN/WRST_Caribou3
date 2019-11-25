@@ -742,12 +742,12 @@ WHERE (CollarDeployments.AnimalId = '" & AnimalID & "') AND ('" & CaptureDate & 
                     'at this point we have transformed the csv into a clone of the destination datatable
                     Dim ImportDataTable As DataTable = TranslatorForm.DestinationDataTable
 
-                    'the next step is to get the transformed data into the Surveys GridEX DataTable
+                    'the next step is to get the transformed data into the Captures GridEX DataTable
                     'loop through the imported data datatable and try to insert them into the datatable
                     For Each Row As DataRow In ImportDataTable.Rows
 
                         'make a new row
-                        Dim NewRow As DataRow = Me.WRST_CaribouDataSet.Tables("Surveys").NewRow
+                        Dim NewRow As DataRow = Me.WRST_CaribouDataSet.Tables("Captures").NewRow
                         For Each Column As DataColumn In ImportDataTable.Columns
                             NewRow.Item(Column.ColumnName) = Row.Item(Column.ColumnName)
                         Next

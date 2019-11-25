@@ -806,7 +806,7 @@ Avoid the General data type. You may proceed but if you have problems importing 
                             ElseIf SourceFileInfo.Extension = ".xlsx" Then
 
                                 'General data types in Excel cause big problems
-                                MsgBox(DataLossMessage, MsgBoxStyle.Information, "Important note on Excel spreadsheets")
+                                'MsgBox(DataLossMessage, MsgBoxStyle.Information, "Important note on Excel spreadsheets")
 
                                 'IMEX=1 means all data will be treated as text. we had problems with group frequencies column being treated as numeric so it omitted any 
                                 'cells with commas separating frequencies
@@ -819,7 +819,7 @@ Avoid the General data type. You may proceed but if you have problems importing 
                             ElseIf SourceFileInfo.Extension = ".xls" Then
 
                                 'General data types in Excel cause big problems
-                                MsgBox(DataLossMessage, MsgBoxStyle.Information, "Important note on Excel spreadsheets")
+                                'MsgBox(DataLossMessage, MsgBoxStyle.Information, "Important note on Excel spreadsheets")
 
                                 'convert the excel sheet into a datatable
                                 Dim ExcelConnectionString As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" & SourceFileInfo.FullName & ";Extended Properties=""Excel 8.0;HDR=YES;IMEX=1"";"
@@ -1092,9 +1092,9 @@ Click Yes to certify and lock the current record. Click No to cancel.", MsgBoxSt
                 Next
                 Me.SurveysBindingSource.EndEdit()
             End If
-        Catch nrefex As NullReferenceException
-            'ignore
-            Debug.Print(nrefex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name & ")")
+            'Catch nrefex As NullReferenceException
+            '    'ignore
+            '    Debug.Print(nrefex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name & ")")
         Catch ex As Exception
             MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name & ")")
         End Try
