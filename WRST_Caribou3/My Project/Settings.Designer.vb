@@ -80,7 +80,7 @@ Namespace My
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("Alaska,Copper River,Mt. Drum,Mt. Sanford,Yukon")>  _
+         Global.System.Configuration.DefaultSettingValueAttribute("Entire area,Alaska,Copper River,Mt. Drum,Mt. Sanford,Yukon")>  _
         Public Property SearchAreas() As String
             Get
                 Return CType(Me("SearchAreas"),String)

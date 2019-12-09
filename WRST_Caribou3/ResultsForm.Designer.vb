@@ -47,7 +47,8 @@ Partial Class ResultsForm
         'SplitContainer1
         '
         Me.SplitContainer1.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.SplitContainer1.Location = New System.Drawing.Point(0, 175)
+        Me.SplitContainer1.Location = New System.Drawing.Point(0, 140)
+        Me.SplitContainer1.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.SplitContainer1.Name = "SplitContainer1"
         '
         'SplitContainer1.Panel1
@@ -59,18 +60,19 @@ Partial Class ResultsForm
         '
         Me.SplitContainer1.Panel2.Controls.Add(Me.ResultsGridEX)
         Me.SplitContainer1.Panel2.Controls.Add(Me.ResultsToolStrip)
-        Me.SplitContainer1.Size = New System.Drawing.Size(1741, 1190)
-        Me.SplitContainer1.SplitterDistance = 128
+        Me.SplitContainer1.Size = New System.Drawing.Size(1548, 704)
+        Me.SplitContainer1.SplitterDistance = 113
         Me.SplitContainer1.TabIndex = 0
         '
         'ViewsListBox
         '
         Me.ViewsListBox.Dock = System.Windows.Forms.DockStyle.Fill
         Me.ViewsListBox.FormattingEnabled = True
-        Me.ViewsListBox.ItemHeight = 20
-        Me.ViewsListBox.Location = New System.Drawing.Point(0, 36)
+        Me.ViewsListBox.ItemHeight = 16
+        Me.ViewsListBox.Location = New System.Drawing.Point(0, 29)
+        Me.ViewsListBox.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.ViewsListBox.Name = "ViewsListBox"
-        Me.ViewsListBox.Size = New System.Drawing.Size(128, 1154)
+        Me.ViewsListBox.Size = New System.Drawing.Size(113, 675)
         Me.ViewsListBox.TabIndex = 0
         '
         'Label1
@@ -79,8 +81,8 @@ Partial Class ResultsForm
         Me.Label1.Dock = System.Windows.Forms.DockStyle.Top
         Me.Label1.Location = New System.Drawing.Point(0, 0)
         Me.Label1.Name = "Label1"
-        Me.Label1.Padding = New System.Windows.Forms.Padding(8)
-        Me.Label1.Size = New System.Drawing.Size(130, 36)
+        Me.Label1.Padding = New System.Windows.Forms.Padding(7, 6, 7, 6)
+        Me.Label1.Size = New System.Drawing.Size(117, 29)
         Me.Label1.TabIndex = 1
         Me.Label1.Text = "Select a query:"
         '
@@ -99,12 +101,13 @@ Partial Class ResultsForm
         Me.ResultsGridEX.GroupRowFormatStyle.ForeColor = System.Drawing.Color.Black
         Me.ResultsGridEX.GroupTotalRowFormatStyle.FontBold = Janus.Windows.GridEX.TriState.[True]
         Me.ResultsGridEX.GroupTotals = Janus.Windows.GridEX.GroupTotals.ExpandedGroup
-        Me.ResultsGridEX.Location = New System.Drawing.Point(0, 32)
+        Me.ResultsGridEX.Location = New System.Drawing.Point(0, 27)
+        Me.ResultsGridEX.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.ResultsGridEX.Name = "ResultsGridEX"
         Me.ResultsGridEX.RecordNavigator = True
         Me.ResultsGridEX.RowHeaders = Janus.Windows.GridEX.InheritableBoolean.[True]
         Me.ResultsGridEX.SelectionMode = Janus.Windows.GridEX.SelectionMode.MultipleSelection
-        Me.ResultsGridEX.Size = New System.Drawing.Size(1609, 1158)
+        Me.ResultsGridEX.Size = New System.Drawing.Size(1431, 677)
         Me.ResultsGridEX.TabIndex = 0
         Me.ResultsGridEX.TotalRow = Janus.Windows.GridEX.InheritableBoolean.[True]
         Me.ResultsGridEX.TotalRowFormatStyle.FontBold = Janus.Windows.GridEX.TriState.[True]
@@ -115,7 +118,7 @@ Partial Class ResultsForm
         Me.ResultsToolStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ExportToCSVToolStripButton, Me.ToolStripSeparator1})
         Me.ResultsToolStrip.Location = New System.Drawing.Point(0, 0)
         Me.ResultsToolStrip.Name = "ResultsToolStrip"
-        Me.ResultsToolStrip.Size = New System.Drawing.Size(1609, 32)
+        Me.ResultsToolStrip.Size = New System.Drawing.Size(1431, 27)
         Me.ResultsToolStrip.TabIndex = 1
         Me.ResultsToolStrip.Text = "ToolStrip1"
         '
@@ -125,20 +128,21 @@ Partial Class ResultsForm
         Me.ExportToCSVToolStripButton.Image = CType(resources.GetObject("ExportToCSVToolStripButton.Image"), System.Drawing.Image)
         Me.ExportToCSVToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.ExportToCSVToolStripButton.Name = "ExportToCSVToolStripButton"
-        Me.ExportToCSVToolStripButton.Size = New System.Drawing.Size(138, 29)
+        Me.ExportToCSVToolStripButton.Size = New System.Drawing.Size(113, 24)
         Me.ExportToCSVToolStripButton.Text = "Export to CSV..."
         '
         'ToolStripSeparator1
         '
         Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
-        Me.ToolStripSeparator1.Size = New System.Drawing.Size(6, 32)
+        Me.ToolStripSeparator1.Size = New System.Drawing.Size(6, 27)
         '
         'CollapseGroupsCheckBox
         '
         Me.CollapseGroupsCheckBox.AutoSize = True
-        Me.CollapseGroupsCheckBox.Location = New System.Drawing.Point(279, 70)
+        Me.CollapseGroupsCheckBox.Location = New System.Drawing.Point(248, 56)
+        Me.CollapseGroupsCheckBox.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.CollapseGroupsCheckBox.Name = "CollapseGroupsCheckBox"
-        Me.CollapseGroupsCheckBox.Size = New System.Drawing.Size(149, 24)
+        Me.CollapseGroupsCheckBox.Size = New System.Drawing.Size(132, 21)
         Me.CollapseGroupsCheckBox.TabIndex = 0
         Me.CollapseGroupsCheckBox.Text = "Collapse groups"
         Me.CollapseGroupsCheckBox.UseVisualStyleBackColor = True
@@ -146,9 +150,10 @@ Partial Class ResultsForm
         'GroupByBoxVisibleCheckBox
         '
         Me.GroupByBoxVisibleCheckBox.AutoSize = True
-        Me.GroupByBoxVisibleCheckBox.Location = New System.Drawing.Point(135, 69)
+        Me.GroupByBoxVisibleCheckBox.Location = New System.Drawing.Point(120, 55)
+        Me.GroupByBoxVisibleCheckBox.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.GroupByBoxVisibleCheckBox.Name = "GroupByBoxVisibleCheckBox"
-        Me.GroupByBoxVisibleCheckBox.Size = New System.Drawing.Size(138, 24)
+        Me.GroupByBoxVisibleCheckBox.Size = New System.Drawing.Size(122, 21)
         Me.GroupByBoxVisibleCheckBox.TabIndex = 1
         Me.GroupByBoxVisibleCheckBox.Text = "Allow grouping"
         Me.GroupByBoxVisibleCheckBox.UseVisualStyleBackColor = True
@@ -159,18 +164,19 @@ Partial Class ResultsForm
         Me.DataSummariesLabel.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.DataSummariesLabel.Location = New System.Drawing.Point(0, 0)
         Me.DataSummariesLabel.Name = "DataSummariesLabel"
-        Me.DataSummariesLabel.Size = New System.Drawing.Size(240, 29)
+        Me.DataSummariesLabel.Size = New System.Drawing.Size(197, 24)
         Me.DataSummariesLabel.TabIndex = 2
         Me.DataSummariesLabel.Text = "Data summarization"
         '
         'ViewDescriptionTextBox
         '
         Me.ViewDescriptionTextBox.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.ViewDescriptionTextBox.Location = New System.Drawing.Point(0, 105)
+        Me.ViewDescriptionTextBox.Location = New System.Drawing.Point(0, 83)
+        Me.ViewDescriptionTextBox.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.ViewDescriptionTextBox.Multiline = True
         Me.ViewDescriptionTextBox.Name = "ViewDescriptionTextBox"
         Me.ViewDescriptionTextBox.ReadOnly = True
-        Me.ViewDescriptionTextBox.Size = New System.Drawing.Size(1741, 70)
+        Me.ViewDescriptionTextBox.Size = New System.Drawing.Size(1548, 57)
         Me.ViewDescriptionTextBox.TabIndex = 3
         '
         'Panel1
@@ -181,17 +187,19 @@ Partial Class ResultsForm
         Me.Panel1.Controls.Add(Me.GroupByBoxVisibleCheckBox)
         Me.Panel1.Dock = System.Windows.Forms.DockStyle.Top
         Me.Panel1.Location = New System.Drawing.Point(0, 0)
+        Me.Panel1.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(1741, 175)
+        Me.Panel1.Size = New System.Drawing.Size(1548, 140)
         Me.Panel1.TabIndex = 2
         '
         'ResultsForm
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 20.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1741, 1365)
+        Me.ClientSize = New System.Drawing.Size(1548, 844)
         Me.Controls.Add(Me.SplitContainer1)
         Me.Controls.Add(Me.Panel1)
+        Me.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.Name = "ResultsForm"
         Me.Text = "WRST Caribou Monitoring Results"
         Me.SplitContainer1.Panel1.ResumeLayout(False)
