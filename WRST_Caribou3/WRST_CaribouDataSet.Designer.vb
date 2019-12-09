@@ -1825,7 +1825,6 @@ Partial Public Class WRST_CaribouDataSet
             MyBase.Columns.Add(Me.columnCertificationLevel)
             Me.Constraints.Add(New Global.System.Data.UniqueConstraint("Constraint1", New Global.System.Data.DataColumn() {Me.columnEID}, true))
             Me.columnSightingDate.AllowDBNull = false
-            Me.columnSearchArea.AllowDBNull = false
             Me.columnSearchArea.MaxLength = 20
             Me.columnGroupNumber.AllowDBNull = false
             Me.columnFrequenciesInGroup.MaxLength = 4000
@@ -4018,7 +4017,11 @@ Partial Public Class WRST_CaribouDataSet
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Public Property SearchArea() As String
             Get
-                Return CType(Me(Me.tableSurveys.SearchAreaColumn),String)
+                Try 
+                    Return CType(Me(Me.tableSurveys.SearchAreaColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'SearchArea' in table 'Surveys' is DBNull.", e)
+                End Try
             End Get
             Set
                 Me(Me.tableSurveys.SearchAreaColumn) = value
@@ -4434,6 +4437,18 @@ Partial Public Class WRST_CaribouDataSet
                 Me.SetParentRow(value, Me.Table.ParentRelations("FK_Surveys_SurveyFlights"))
             End Set
         End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function IsSearchAreaNull() As Boolean
+            Return Me.IsNull(Me.tableSurveys.SearchAreaColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub SetSearchAreaNull()
+            Me(Me.tableSurveys.SearchAreaColumn) = Global.System.Convert.DBNull
+        End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
@@ -8341,7 +8356,7 @@ Namespace WRST_CaribouDataSetTableAdapters
                     ByVal CertificationLevel As String) As Integer
             Me.Adapter.InsertCommand.Parameters(0).Value = CType(SightingDate,Date)
             If (SearchArea Is Nothing) Then
-                Throw New Global.System.ArgumentNullException("SearchArea")
+                Me.Adapter.InsertCommand.Parameters(1).Value = Global.System.DBNull.Value
             Else
                 Me.Adapter.InsertCommand.Parameters(1).Value = CType(SearchArea,String)
             End If
@@ -8528,7 +8543,7 @@ Namespace WRST_CaribouDataSetTableAdapters
                     ByVal Original_EID As String) As Integer
             Me.Adapter.UpdateCommand.Parameters(0).Value = CType(SightingDate,Date)
             If (SearchArea Is Nothing) Then
-                Throw New Global.System.ArgumentNullException("SearchArea")
+                Me.Adapter.UpdateCommand.Parameters(1).Value = Global.System.DBNull.Value
             Else
                 Me.Adapter.UpdateCommand.Parameters(1).Value = CType(SearchArea,String)
             End If
