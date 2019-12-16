@@ -116,7 +116,6 @@ Public Class Form1
                 Exit Sub
             End If
             Exit Sub
-            ' northwindDataSet.Merge(tempCustomersDataTable, True, MissingSchemaAction.Ignore);
         Catch ex As Exception
             MsgBox(ex.Message & "Database update (" & System.Reflection.MethodBase.GetCurrentMethod.Name)
         End Try
