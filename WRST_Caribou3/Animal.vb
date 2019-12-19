@@ -4,6 +4,10 @@
 Public Class Animal
 
     Private _AnimalID As String
+    ''' <summary>
+    ''' AnimalID
+    ''' </summary>
+    ''' <returns>AnimalID. String</returns>
     Public Property AnimalID() As String
         Get
             Return _AnimalID
@@ -14,6 +18,10 @@ Public Class Animal
     End Property
 
     Private _AnimalDataTable As DataTable
+    ''' <summary>
+    ''' Returns a DataTable containing the animal's record from the Animals table of the Animal_Movement database.
+    ''' </summary>
+    ''' <returns></returns>
     Public Property AnimalDetails() As DataTable
         Get
             Return _AnimalDataTable
@@ -24,6 +32,10 @@ Public Class Animal
     End Property
 
     Private _AnimalDataset As DataSet
+    ''' <summary>
+    ''' Returns a Dataset of information about an animal including its record from the Animal_Movement database, collar deployments history and capture records.
+    ''' </summary>
+    ''' <returns></returns>
     Public Property AnimalDataset() As DataSet
         Get
             Return _AnimalDataset
@@ -34,7 +46,11 @@ Public Class Animal
     End Property
 
     Private _DeploymentsDataTable As DataTable
-    Public Property Captures() As DataTable
+    ''' <summary>
+    ''' Returns a DataTable of collar deployments records from the Animal_Movement database for the animal.
+    ''' </summary>
+    ''' <returns></returns>
+    Public Property Deployments() As DataTable
         Get
             Return _DeploymentsDataTable
         End Get
@@ -44,7 +60,11 @@ Public Class Animal
     End Property
 
     Private _CapturesDataTable As DataTable
-    Public Property Deployments() As DataTable
+    ''' <summary>
+    ''' Returns a DataTable of captures records from the WRST_Caribou Captures table for the animal.
+    ''' </summary>
+    ''' <returns></returns>
+    Public Property Captures() As DataTable
         Get
             Return _CapturesDataTable
         End Get
@@ -53,6 +73,10 @@ Public Class Animal
         End Set
     End Property
 
+    ''' <summary>
+    ''' Creates a new Animal object.
+    ''' </summary>
+    ''' <param name="AnimalID"></param>
     Public Sub New(AnimalID As String)
         If Not AnimalID Is Nothing Then
             If Not IsDBNull(AnimalID) Then
@@ -67,7 +91,12 @@ Public Class Animal
         End If
     End Sub
 
-    Private Function GetCollarDeploymentsDataTable(AnimalID) As DataTable
+    ''' <summary>
+    ''' Returns a DataTable of collar deployment records for the animal retrieved from Animal_Movements.
+    ''' </summary>
+    ''' <param name="AnimalID">AnimalID. String</param>
+    ''' <returns></returns>
+    Private Function GetCollarDeploymentsDataTable(AnimalID As String) As DataTable
         Dim DT As New DataTable("CollarDeployments")
         DT.TableName = "CollarDeployments"
         Try
@@ -89,7 +118,12 @@ WHERE ProjectID='WRST_Caribou' AND AnimalID='" & _AnimalID & "' ORDER BY Deploym
         Return DT
     End Function
 
-    Private Function GetAnimalDataTable(AnimalID) As DataTable
+    ''' <summary>
+    ''' Returns a DataTable with one record for AnimalID from the Animal_Movements database Animals table.
+    ''' </summary>
+    ''' <param name="AnimalID">AnimalID. String</param>
+    ''' <returns></returns>
+    Private Function GetAnimalDataTable(AnimalID As String) As DataTable
         Dim DT As New DataTable("Animal")
         DT.TableName = "Animal"
         Try
@@ -107,6 +141,11 @@ WHERE ProjectID='WRST_Caribou' AND AnimalID='" & _AnimalID & "' ORDER BY Deploym
         Return DT
     End Function
 
+    ''' <summary>
+    ''' Builds a Dataset around the animal. The Dataset contains DataTables of information from Animal_Movement and WRST_Caribou databases including the animal's details, collar deployments and captures information.
+    ''' </summary>
+    ''' <param name="AnimalID">AnimalID. String</param>
+    ''' <returns></returns>
     Private Function GetAnimalDataset(AnimalID As String) As DataSet
         Dim AnimalDataset As New DataSet(AnimalID)
         Try
@@ -131,6 +170,11 @@ WHERE ProjectID='WRST_Caribou' AND AnimalID='" & _AnimalID & "' ORDER BY Deploym
         Return AnimalDataset
     End Function
 
+    ''' <summary>
+    ''' Returns a DataTable of captures information regarding AnimalID from the WRST_Caribou database.
+    ''' </summary>
+    ''' <param name="AnimalID"></param>
+    ''' <returns></returns>
     Private Function GetCapturesDataTable(AnimalID As String) As DataTable
         Dim DT As New DataTable("Captures")
         DT.TableName = "Captures"
