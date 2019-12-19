@@ -285,61 +285,56 @@ Public Class CapturesForm
 
 
 
-    Private Sub LoadAnimalMovementFrequenciesIntoCapturesGrid()
-        'i can propbably make this more efficient by pulling all the am frequencies into a table and querying that rather
-        'than issuing a query per row loop
-        Try
-            'captures grid
-            Dim Grid As GridEX = Me.CapturesGridEX
+    '    Private Sub LoadAnimalMovementFrequenciesIntoCapturesGrid()
 
-            'loop through the rows in the captures grid
-            For Each Row As GridEXRow In Me.CapturesGridEX.GetRows
+    '        'i can propbably make this more efficient by pulling all the am frequencies into a table and querying that rather
+    '        'than issuing a query per row loop
+    '        Try
+    '            'captures grid
+    '            Dim Grid As GridEX = Me.CapturesGridEX
 
-                If Not Row Is Nothing Then
+    '            'loop through the rows in the captures grid
+    '            For Each Row As GridEXRow In Me.CapturesGridEX.GetRows
 
-                    'get the values of various cells in Row
-                    Dim AnimalID As String = GetGridEXCellValue(Row, "AnimalID")
+    '                If Not Row Is Nothing Then
 
-                    ' Dim FrequencyString As String = GetGridEXCellValue(Row, "Frequency")
-                    'Dim Frequency As Double = 0
-                    'If IsNumeric(FrequencyString) = True Then Frequency = CDbl(FrequencyString)
+    '                    'get the values of various cells in Row
+    '                    Dim AnimalID As String = GetGridEXCellValue(Row, "AnimalID")
 
-                    'capturedate
-                    Dim CaptureDateString As String = GetGridEXCellValue(Row, "CaptureDate")
-                    Dim CaptureDate As Date
-                    If IsDate(CaptureDateString) = True Then
+    '                    'capturedate
+    '                    Dim CaptureDateString As String = GetGridEXCellValue(Row, "CaptureDate")
+    '                    Dim CaptureDate As Date
+    '                    If IsDate(CaptureDateString) = True Then
 
-                        'get the caribou capture date
-                        CaptureDate = CDate(CaptureDateString)
+    '                        'get the caribou capture date
+    '                        CaptureDate = CDate(CaptureDateString)
 
-                        'now query animal movement to get the frequency of the collar deployed on the caribou on the date it was captured
-                        Dim Sql As String = "SELECT CollarDeployments.AnimalId, CollarDeployments.DeploymentDate, CollarDeployments.RetrievalDate, CollarDeployments.DeploymentId, Collars.Frequency
-FROM CollarDeployments INNER JOIN Collars ON CollarDeployments.CollarManufacturer = Collars.CollarManufacturer AND CollarDeployments.CollarId = Collars.CollarId
-WHERE (CollarDeployments.AnimalId = '" & AnimalID & "') AND ('" & CaptureDate & "' = Convert(Date,CollarDeployments.DeploymentDate))"
+    '                        'now query animal movement to get the frequency of the collar deployed on the caribou on the date it was captured
+    '                        Dim Sql As String = "SELECT CollarDeployments.AnimalId, CollarDeployments.DeploymentDate, CollarDeployments.RetrievalDate, CollarDeployments.DeploymentId, Collars.Frequency
+    'FROM CollarDeployments INNER JOIN Collars ON CollarDeployments.CollarManufacturer = Collars.CollarManufacturer AND CollarDeployments.CollarId = Collars.CollarId
+    'WHERE (CollarDeployments.AnimalId = '" & AnimalID & "') AND ('" & CaptureDate & "' = Convert(Date,CollarDeployments.DeploymentDate))"
 
-                        'get the above query into a data table
-                        Dim FreqDataTable As DataTable = GetDataTable(My.Settings.Animal_MovementConnectionString, Sql)
-                        'Debug.Print(vbNewLine & AnimalID & vbTab & CaptureDate.ToString & vbTab & Frequency & vbTab & FreqDataTable.Rows.Count)
-                        'Debug.Print(Sql)
+    '                        'get the above query into a data table
+    '                        Dim FreqDataTable As DataTable = GetDataTable(My.Settings.Animal_MovementConnectionString, Sql)
 
-                        'we should have at most one frequency for an animal on its capture date
-                        If FreqDataTable.Rows.Count = 1 Then
+    '                        'we should have at most one frequency for an animal on its capture date
+    '                        If FreqDataTable.Rows.Count = 1 Then
 
-                            'get the frequency from animal movement
-                            Dim AM_Frequency As Double = CDbl(FreqDataTable.Rows(0).Item("Frequency"))
+    '                            'get the frequency from animal movement
+    '                            Dim AM_Frequency As Double = CDbl(FreqDataTable.Rows(0).Item("Frequency"))
 
-                            'load the animalmovement frequency cell with the value
-                            Me.CapturesGridEX.CurrentRow.Cells("AnimalMovementFrequency").Value = AM_Frequency
+    '                            'load the animalmovement frequency cell with the value
+    '                            Me.CapturesGridEX.CurrentRow.Cells("AnimalMovementFrequency").Value = AM_Frequency
 
-                        End If
-                        'End If
-                    End If
-                End If
-            Next
-        Catch ex As Exception
-            MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name & ")")
-        End Try
-    End Sub
+    '                        End If
+    '                        'End If
+    '                    End If
+    '                End If
+    '            Next
+    '        Catch ex As Exception
+    '            MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name & ")")
+    '        End Try
+    '    End Sub
 
     ''' <summary>
     ''' Returns the string value of Row's ColumnName's cell value
@@ -454,6 +449,9 @@ WHERE (CollarDeployments.AnimalId = '" & AnimalID & "') AND ('" & CaptureDate & 
         ReadOnlyCheck()
     End Sub
 
+    ''' <summary>
+    ''' Allows/disallows record editing on the CapturesForm depending on the value of AllowEditsToolStripButton.Text
+    ''' </summary>
     Private Sub ReadOnlyCheck()
         With Me.CapturesGridEX
             If Me.AllowEditsToolStripButton.Text = "Disallow edits" Then
