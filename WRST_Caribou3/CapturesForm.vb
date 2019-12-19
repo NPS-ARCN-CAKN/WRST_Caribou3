@@ -2,6 +2,9 @@
 Imports Janus.Windows.GridEX
 Imports SkeeterDataTablesTranslator
 
+''' <summary>
+''' The CapturesForm allows the user to edit the Captures database table contents.
+''' </summary>
 Public Class CapturesForm
 
     Private Sub CapturesForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -46,6 +49,9 @@ Public Class CapturesForm
         End Try
     End Sub
 
+    ''' <summary>
+    ''' Loads the Captures database table into the application
+    ''' </summary>
     Private Sub LoadDataset()
         Try
             'load the captures table from database
@@ -57,6 +63,9 @@ Public Class CapturesForm
         End Try
     End Sub
 
+    ''' <summary>
+    ''' Saves the Captures data
+    ''' </summary>
     Private Sub SaveCapturesData()
         Try
             If WRST_CaribouDataSet.HasChanges = True Then
@@ -73,6 +82,9 @@ Public Class CapturesForm
     End Sub
 
 
+    ''' <summary>
+    ''' Asks the user to confirm database changes before saving them to the database
+    ''' </summary>
     Private Sub AskToSaveChanges()
         If WRST_CaribouDataSet.HasChanges = True Then
             If MsgBox("You have unsaved changes. Save to database?", MsgBoxStyle.YesNo, "Save changes?") = MsgBoxResult.Yes Then
@@ -271,189 +283,7 @@ Public Class CapturesForm
         End Try
     End Sub
 
-    'Private Sub ViewToolStripComboBox_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ViewToolStripComboBox.SelectedIndexChanged
-    '    ToggleView()
-    'End Sub
 
-    'Private Sub ToggleView()
-    '    If Me.ViewToolStripComboBox.Text = "Table" Then
-    '        Me.CapturesGridEX.View = View.TableView
-    '    Else
-    '        Me.CapturesGridEX.View = View.SingleCard
-    '        Me.ViewToolStripComboBox.Text = "Card"
-    '    End If
-    'End Sub
-
-
-
-    '  Private Sub ImportFromFileToolStripButton_Click(sender As Object, e As EventArgs) Handles ImportFromFileToolStripButton.Click
-    '      MsgBox("This import tool has not been working well. It's choking on the Sql Server time formats. Recommend a different import method for now.")
-    '      Exit Sub
-    '      Dim DataLossMessage As String = "Update this message"
-
-    '      'get the structure of the destination datatable, we only need one record since the translator will clear all records anyway
-    '      Dim Sql As String = "SELECT TOP (1) [AnimalID]
-    '    ,[CaptureDate]
-    '    ,[Crew]
-    '    ,[Shooter]
-    '    ,[Frequency]
-    '    ,[VisualCollar]
-    '    ,[SerialNumber]
-    '    ,[CaptureLatitude]
-    '    ,[CaptureLongitude]
-    '    ,[OldFrequency]
-    '    ,[OldVisualCollar]
-    '    ,[GeneralLocation]
-    '    ,[TimeStartChase]
-    '    ,[TimeFirstHitBounce]
-    '    ,[TimeSecordHitBounce]
-    '    ,[TimeThirdHitBounce]
-    '    ,[TimeVisibleEffect]
-    '    ,[TimeAnimalDown]
-    '    ,[DartLocation]
-    '    ,[Anesthetic]
-    '    ,[AnestheticDosage_mg]
-    '    ,[AnestheticConcentration_mg_ml]
-    '    ,[Sedative]
-    '    ,[SedativeDosage_mg]
-    '    ,[SedativeConcentration_mg_ml]
-    '    ,[NumHits]
-    '    ,[NumMisses]
-    '    ,[DrugEffect]
-    '    ,[InitialBodyTemp]
-    '    ,[InitialBodyTempTime]
-    '    ,[FinalBodyTemperature]
-    '    ,[FinalBodyTemperatureTime]
-    '    ,[AdditionalDrugs]
-    '    ,[Sex]
-    '    ,[EstimatedAge]
-    '    ,[WithCalf]
-    '    ,[Lactating]
-    '    ,[BodyCondition]
-    '    ,[Weight_Kg]
-    '    ,[BodyLength]
-    '    ,[NeckCircumference]
-    '    ,[Jaw]
-    '    ,[MetatarsusLength]
-    '    ,[HindfootLength]
-    '    ,[ChestGirth]
-    '    ,[BloodSampleRed]
-    '    ,[BloodSamplePurple]
-    '    ,[BloodSampleGreen]
-    '    ,[AnestheticReversal]
-    '    ,[AnestheticReversalDosage_mg]
-    '    ,[AnestheticReversalConcentration_mg_ml]
-    '    ,[AnestheticReversalRoute]
-    '    ,[AnestheticReversalTime]
-    '    ,[SedativeReversal]
-    '    ,[SedativeReversalDosage_mg]
-    '    ,[SedativeReversalConcentration_mg_ml]
-    '    ,[SedativeReversalRoute]
-    '    ,[SedativeReversalTime]
-    '    ,[TimeStanding]
-    '    ,[TimeMobile]
-    '    ,[Comments]
-    '    ,[CaptureID]
-    '    ,[RecordInsertedDate]
-    '    ,[RecordInsertedBy]
-    '    ,[ProjectID]
-    '    ,[AnestheticDosage_ml]
-    '    ,[SedativeDosage_ml]
-    '    ,[AnestheticReversalDosage_ml]
-    '    ,[SedativeReversalDosage_ml]
-    '    ,[ProtocolVersion]
-    '    ,[SOPNumber]
-    '    ,[SOPVersion]
-    '    ,[CertificationDate]
-    '    ,[CertifiedBy]
-    '    ,[ProtocolIRMAReference]
-    '    ,[CertificationLevel]
-    'FROM [WRST_Caribou].[dbo].[Captures]"
-
-    '      'use the structure of the query above to build a skeleton datatable
-    '      Dim DestinationDataTable As DataTable = GetDataTable(My.Settings.WRST_CaribouConnectionString, Sql)
-
-    '      'import the data from the selected file
-    '      If Not DestinationDataTable Is Nothing Then
-    '          'get the data fileinfo to import
-    '          Dim SourceFileInfo As New FileInfo(GetFile("Select a data file to open. If Excel workbook the data to be imported must be in the first worksheet (tab).", "Survey data file (.csv;.xls;.xlsx)|*.csv;*.xls;*.xlsx|Comma separated values (.csv)|*.csv|Excel worksheet (.xlsx)|*.xlsx|Excel worksheet (.xls)|*.xls"))
-
-    '          'convert the file into a datatable so we can work with it
-    '          Dim InputDataTable As DataTable = Nothing
-
-    '          'determine if the input file is csv or excel
-    '          If SourceFileInfo.Extension = ".csv" Then
-    '              'convert the data file into a datatable
-    '              InputDataTable = GetDataTableFromDelimitedTextFile(SourceFileInfo, ",")
-    '          ElseIf SourceFileInfo.Extension = ".xlsx" Then
-    '              'MsgBox(DataLossMessage, MsgBoxStyle.Information, "Important note on Excel spreadsheets")
-    '              'Me.HelpProvider.SetHelpKeyword(Me, "Import")
-    '              'convert the excel sheet into a datatable
-
-    '              'IMEX=1 means all data will be treated as text. we had problems with group frequencies column being treated as numeric so it omitted any cells with commas separating frequencies
-    '              'the Excel General data type confused .NET as to what kind of data to expect.
-    '              'see https://www.connectionstrings.com/excel/
-    '              Dim ExcelConnectionString As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" & SourceFileInfo.FullName & ";Extended Properties=""Excel 12.0 Xml;HDR=YES;IMEX=1"";"
-    '              Dim ExcelDataset As DataSet = GetDatasetFromExcelWorkbook(ExcelConnectionString)
-    '              InputDataTable = ExcelDataset.Tables(0) 'can only grab the first worksheet (tab)
-    '          ElseIf SourceFileInfo.Extension = ".xls" Then
-    '              MsgBox(DataLossMessage, MsgBoxStyle.Information, "Important note on Excel spreadsheets")
-
-    '              'convert the excel sheet into a datatable
-    '              Dim ExcelConnectionString As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" & SourceFileInfo.FullName & ";Extended Properties=""Excel 8.0;HDR=YES;IMEX=1"";"
-    '              Dim ExcelDataset As DataSet = GetDatasetFromExcelWorkbook(ExcelConnectionString)
-    '              InputDataTable = ExcelDataset.Tables(0) 'first worksheet
-    '          End If
-
-    '          'make a list of desired default values to pass into the data tables translator form
-    '          'these items will show up in the mappings datagridview's default values column to make things a little easier
-    '          Dim DefaultValuesList As New List(Of String)
-    '          With DefaultValuesList
-    '              'add the search areas from my.settings to the default values
-    '              For Each Item In My.Settings.SearchAreas.Split(",")
-    '                  .Add(Item)
-    '              Next
-    '              '.Add("TRUE")
-    '              '.Add("FALSE")
-
-    '              'common default values
-    '              '.Add(GetCurrentGridEXCellValue(Me.CapturesGridEX, "FlightID")) 'the primary key of the currently selected flight
-    '              '.Add(GetCurrentGridEXCellValue(Me.CapturesGridEX, "Herd")) 'the currently selected herd in the campaigns table
-    '              .Add(SourceFileInfo.Name) 'the import file name
-    '          End With
-
-    '          'open up a datatable translator form to allow the user to map fields from the csv file to the destination datatable
-    '          Dim TranslatorForm As New SkeeterDataTablesTranslatorForm(InputDataTable, DestinationDataTable, "Import data", "Use the tool on the left to map the fields from your source data table to the destination data table.", DefaultValuesList)
-    '          TranslatorForm.ShowDialog()
-
-    '          'at this point we have transformed the csv into a clone of the destination datatable
-    '          Dim ImportDataTable As DataTable = TranslatorForm.DestinationDataTable
-
-    '          'the next step is to get the transformed data into the Surveys GridEX DataTable
-    '          'loop through the waypoints datatable and try to insert them into the datatable
-    '          Dim TableName As String = SourceFileInfo.Name
-    '          For Each Row As DataRow In ImportDataTable.Rows
-
-    '              'make a new row
-    '              Dim NewRow As DataRow = Me.WRST_CaribouDataSet.Tables("Captures").NewRow
-    '              For Each Column As DataColumn In ImportDataTable.Columns
-    '                  NewRow.Item(Column.ColumnName) = Row.Item(Column.ColumnName)
-    '              Next
-
-    '              'override any selections made on the translator form
-    '              'NewRow.Item("FlightID") = FlightID
-    '              NewRow.Item("RecordInsertedDate") = Now
-    '              NewRow.Item("RecordInsertedBy") = My.User.Name
-    '              NewRow.Item("CaptureID") = Guid.NewGuid.ToString
-
-    '              'add the row
-    '              Me.WRST_CaribouDataSet.Tables("Captures").Rows.Add(NewRow)
-
-    '              'end the edit
-    '              Me.CapturesBindingSource.EndEdit()
-    '          Next
-    '      End If
-    '  End Sub
 
     Private Sub LoadAnimalMovementFrequenciesIntoCapturesGrid()
         'i can propbably make this more efficient by pulling all the am frequencies into a table and querying that rather
