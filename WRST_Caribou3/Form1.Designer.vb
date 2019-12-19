@@ -29,6 +29,8 @@ Partial Class Form1
         Dim CollaredAnimalsInGroupsGridEX_DesignTimeLayout As Janus.Windows.GridEX.GridEXLayout = New Janus.Windows.GridEX.GridEXLayout()
         Me.SplitContainer1 = New System.Windows.Forms.SplitContainer()
         Me.SurveyFlightsGridEX = New Janus.Windows.GridEX.GridEX()
+        Me.SurveyFlightsBindingSource = New System.Windows.Forms.BindingSource(Me.components)
+        Me.WRST_CaribouDataSet = New WRST_Caribou3.WRST_CaribouDataSet()
         Me.SurveysSplitContainer = New System.Windows.Forms.SplitContainer()
         Me.SurveysGridEX = New Janus.Windows.GridEX.GridEX()
         Me.SurveysBindingSource = New System.Windows.Forms.BindingSource(Me.components)
@@ -59,19 +61,22 @@ Partial Class Form1
         Me.HelpProvider = New System.Windows.Forms.HelpProvider()
         Me.BottomToolStrip = New System.Windows.Forms.ToolStrip()
         Me.CurrentDatabaseToolStripLabel = New System.Windows.Forms.ToolStripLabel()
-        Me.SurveyFlightsBindingSource = New System.Windows.Forms.BindingSource(Me.components)
-        Me.WRST_CaribouDataSet = New WRST_Caribou3.WRST_CaribouDataSet()
         Me.CapturesBindingSource = New System.Windows.Forms.BindingSource(Me.components)
         Me.SurveyFlightsTableAdapter = New WRST_Caribou3.WRST_CaribouDataSetTableAdapters.SurveyFlightsTableAdapter()
         Me.TableAdapterManager = New WRST_Caribou3.WRST_CaribouDataSetTableAdapters.TableAdapterManager()
         Me.CollaredAnimalsInGroupsTableAdapter = New WRST_Caribou3.WRST_CaribouDataSetTableAdapters.CollaredAnimalsInGroupsTableAdapter()
         Me.SurveysTableAdapter = New WRST_Caribou3.WRST_CaribouDataSetTableAdapters.SurveysTableAdapter()
         Me.CapturesTableAdapter = New WRST_Caribou3.WRST_CaribouDataSetTableAdapters.CapturesTableAdapter()
+        Me.ToolStripSeparator8 = New System.Windows.Forms.ToolStripSeparator()
+        Me.SettingsToolStripButton = New System.Windows.Forms.ToolStripButton()
+        Me.ToolStripSeparator9 = New System.Windows.Forms.ToolStripSeparator()
         CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SplitContainer1.Panel1.SuspendLayout()
         Me.SplitContainer1.Panel2.SuspendLayout()
         Me.SplitContainer1.SuspendLayout()
         CType(Me.SurveyFlightsGridEX, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.SurveyFlightsBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.WRST_CaribouDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.SurveysSplitContainer, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SurveysSplitContainer.Panel1.SuspendLayout()
         Me.SurveysSplitContainer.Panel2.SuspendLayout()
@@ -88,8 +93,6 @@ Partial Class Form1
         CType(Me.AnimalGridEX, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.MainToolStrip.SuspendLayout()
         Me.BottomToolStrip.SuspendLayout()
-        CType(Me.SurveyFlightsBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.WRST_CaribouDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.CapturesBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -131,6 +134,16 @@ Partial Class Form1
         Me.SurveyFlightsGridEX.Size = New System.Drawing.Size(1924, 227)
         Me.SurveyFlightsGridEX.TabIndex = 0
         Me.SurveyFlightsGridEX.TableHeaders = Janus.Windows.GridEX.InheritableBoolean.[True]
+        '
+        'SurveyFlightsBindingSource
+        '
+        Me.SurveyFlightsBindingSource.DataMember = "SurveyFlights"
+        Me.SurveyFlightsBindingSource.DataSource = Me.WRST_CaribouDataSet
+        '
+        'WRST_CaribouDataSet
+        '
+        Me.WRST_CaribouDataSet.DataSetName = "WRST_CaribouDataSet"
+        Me.WRST_CaribouDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
         '
         'SurveysSplitContainer
         '
@@ -296,7 +309,7 @@ Partial Class Form1
         'MainToolStrip
         '
         Me.MainToolStrip.ImageScalingSize = New System.Drawing.Size(24, 24)
-        Me.MainToolStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.SaveToolStripButton, Me.ToolStripSeparator3, Me.ReloadDatasetToolStripButton, Me.ToolStripSeparator4, Me.ResultsViewerToolStripButton, Me.ToolStripSeparator5, Me.OpenCapturesFormToolStripButton, Me.ToolStripSeparator6, Me.AllowEditsToolStripButton, Me.ToolStripSeparator7, Me.OpenWRSTCaribouDirectoryToolStripButton})
+        Me.MainToolStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.SaveToolStripButton, Me.ToolStripSeparator3, Me.ReloadDatasetToolStripButton, Me.ToolStripSeparator4, Me.ResultsViewerToolStripButton, Me.ToolStripSeparator5, Me.OpenCapturesFormToolStripButton, Me.ToolStripSeparator6, Me.AllowEditsToolStripButton, Me.ToolStripSeparator7, Me.SettingsToolStripButton, Me.ToolStripSeparator8, Me.OpenWRSTCaribouDirectoryToolStripButton, Me.ToolStripSeparator9})
         Me.MainToolStrip.Location = New System.Drawing.Point(0, 0)
         Me.MainToolStrip.Name = "MainToolStrip"
         Me.HelpProvider.SetShowHelp(Me.MainToolStrip, True)
@@ -406,16 +419,6 @@ Partial Class Form1
         Me.CurrentDatabaseToolStripLabel.Size = New System.Drawing.Size(202, 25)
         Me.CurrentDatabaseToolStripLabel.Text = "Database: Disconnected"
         '
-        'SurveyFlightsBindingSource
-        '
-        Me.SurveyFlightsBindingSource.DataMember = "SurveyFlights"
-        Me.SurveyFlightsBindingSource.DataSource = Me.WRST_CaribouDataSet
-        '
-        'WRST_CaribouDataSet
-        '
-        Me.WRST_CaribouDataSet.DataSetName = "WRST_CaribouDataSet"
-        Me.WRST_CaribouDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
-        '
         'CapturesBindingSource
         '
         Me.CapturesBindingSource.DataMember = "Captures"
@@ -446,6 +449,25 @@ Partial Class Form1
         '
         Me.CapturesTableAdapter.ClearBeforeFill = True
         '
+        'ToolStripSeparator8
+        '
+        Me.ToolStripSeparator8.Name = "ToolStripSeparator8"
+        Me.ToolStripSeparator8.Size = New System.Drawing.Size(6, 32)
+        '
+        'SettingsToolStripButton
+        '
+        Me.SettingsToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
+        Me.SettingsToolStripButton.Image = CType(resources.GetObject("SettingsToolStripButton.Image"), System.Drawing.Image)
+        Me.SettingsToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.SettingsToolStripButton.Name = "SettingsToolStripButton"
+        Me.SettingsToolStripButton.Size = New System.Drawing.Size(92, 29)
+        Me.SettingsToolStripButton.Text = "Settings..."
+        '
+        'ToolStripSeparator9
+        '
+        Me.ToolStripSeparator9.Name = "ToolStripSeparator9"
+        Me.ToolStripSeparator9.Size = New System.Drawing.Size(6, 32)
+        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 20.0!)
@@ -467,6 +489,8 @@ Partial Class Form1
         CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.SplitContainer1.ResumeLayout(False)
         CType(Me.SurveyFlightsGridEX, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.SurveyFlightsBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.WRST_CaribouDataSet, System.ComponentModel.ISupportInitialize).EndInit()
         Me.SurveysSplitContainer.Panel1.ResumeLayout(False)
         Me.SurveysSplitContainer.Panel1.PerformLayout()
         Me.SurveysSplitContainer.Panel2.ResumeLayout(False)
@@ -487,8 +511,6 @@ Partial Class Form1
         Me.MainToolStrip.PerformLayout()
         Me.BottomToolStrip.ResumeLayout(False)
         Me.BottomToolStrip.PerformLayout()
-        CType(Me.SurveyFlightsBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.WRST_CaribouDataSet, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.CapturesBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
@@ -535,4 +557,7 @@ Partial Class Form1
     Friend WithEvents AutomatchToolStripSplitButton As ToolStripSplitButton
     Friend WithEvents CurrentRowToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents AllRowsToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents ToolStripSeparator8 As ToolStripSeparator
+    Friend WithEvents SettingsToolStripButton As ToolStripButton
+    Friend WithEvents ToolStripSeparator9 As ToolStripSeparator
 End Class

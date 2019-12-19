@@ -7,6 +7,10 @@ Public Class Form1
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
+
+        'My.Settings.Item("WRST_CaribouConnectionString") = "Data Source=inpyugamsvm01\nuna_dev;Initial Catalog=WRST_Caribou;Integrated Security=True"
+        'My.Settings.Item("Animal_MovementConnectionString") = "Data Source=INPAKROVMAIS;Initial Catalog=Animal_Movement;Integrated Security=True"
+
         'make the form a reasonable size if not maximized
         Me.Width = 1200
         Me.Height = 800
@@ -58,8 +62,7 @@ Public Class Form1
             MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name)
         End Try
 
-        'update the database connection label
-        Me.CurrentDatabaseToolStripLabel.Text = GetDatabaseConnectionText()
+
 
     End Sub
 
@@ -82,10 +85,14 @@ Public Class Form1
 
     Private Sub LoadDataset()
         Try
+            'fill all the datatable adapters
             Me.SurveyFlightsTableAdapter.Fill(Me.WRST_CaribouDataSet.SurveyFlights)
             Me.SurveysTableAdapter.Fill(Me.WRST_CaribouDataSet.Surveys)
             Me.CollaredAnimalsInGroupsTableAdapter.Fill(Me.WRST_CaribouDataSet.CollaredAnimalsInGroups)
             Me.CapturesTableAdapter.Fill(Me.WRST_CaribouDataSet.Captures)
+
+            'update the database connection label
+            Me.CurrentDatabaseToolStripLabel.Text = GetDatabaseConnectionText()
         Catch ex As Exception
             Me.CurrentDatabaseToolStripLabel.Text = ex.Message
             MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name & ")")
@@ -1288,7 +1295,7 @@ Click Yes to certify and lock the current record. Click No to cancel.", MsgBoxSt
     Private Sub OpenWRSTCaribouDirectoryToolStripButton_Click(sender As Object, e As EventArgs) Handles OpenWRSTCaribouDirectoryToolStripButton.Click
         Try
             If My.Computer.FileSystem.DirectoryExists(My.Settings.SharedDirectory) Then
-                Process.Start("J:\Monitoring\Caribou\WRST")
+                Process.Start(My.Settings.SharedDirectory)
             Else
                 MsgBox("Directory " & My.Settings.SharedDirectory & " does not exist. Modify the path to the WRST Caribou shared drive in the application settings.")
             End If
@@ -1339,6 +1346,11 @@ Click Yes to certify and lock the current record. Click No to cancel.", MsgBoxSt
         Catch ex As Exception
             MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name & ")")
         End Try
+    End Sub
+
+    Private Sub SettingsToolStripButton_Click(sender As Object, e As EventArgs) Handles SettingsToolStripButton.Click
+        Dim SettingsForm As New SettingsForm
+        SettingsForm.ShowDialog()
     End Sub
 
     'Private Sub AutoLoadSurveyFlightCells()

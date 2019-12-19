@@ -141,6 +141,12 @@
     <Compile Include="ResultsForm.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="SettingsForm.Designer.vb">
+      <DependentUpon>SettingsForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="SettingsForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Utilities.vb" />
     <Compile Include="WRST_CaribouDataSet.Designer.vb">
       <AutoGen>True</AutoGen>
@@ -167,6 +173,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ResultsForm.resx">
       <DependentUpon>ResultsForm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SettingsForm.resx">
+      <DependentUpon>SettingsForm.vb</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
