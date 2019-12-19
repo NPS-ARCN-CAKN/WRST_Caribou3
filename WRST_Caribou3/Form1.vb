@@ -722,7 +722,7 @@ Public Class Form1
 ,[FrequenciesInGroup]
 ,[Lat]
 ,[Lon]
-,[Out]
+,[In]
 ,[Seen]
 ,[Marked]
 ,[Mode]

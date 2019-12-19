@@ -65,7 +65,6 @@ Partial Class SettingsForm
         Me.WRST_CaribouConnectionStringTextBox.Location = New System.Drawing.Point(17, 12)
         Me.WRST_CaribouConnectionStringTextBox.Multiline = True
         Me.WRST_CaribouConnectionStringTextBox.Name = "WRST_CaribouConnectionStringTextBox"
-        Me.WRST_CaribouConnectionStringTextBox.ReadOnly = True
         Me.WRST_CaribouConnectionStringTextBox.Size = New System.Drawing.Size(1149, 49)
         Me.WRST_CaribouConnectionStringTextBox.TabIndex = 1
         Me.WRST_CaribouConnectionStringTextBox.Text = "To change the WRST_Caribou database connection string you must edit WRST_Caribou3" &

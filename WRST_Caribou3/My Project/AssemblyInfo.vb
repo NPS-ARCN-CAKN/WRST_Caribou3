@@ -9,9 +9,9 @@ Imports System.Runtime.InteropServices
 ' Review the values of the assembly attributes
 
 <Assembly: AssemblyTitle("WRST Caribou Monitoring Database Application")>
-<Assembly: AssemblyDescription("")>
+<Assembly: AssemblyDescription("National Park Service Wrangell-St. Elias National Park and Preserve Mentasta and Chisana caribou monitoring program.")>
 <Assembly: AssemblyCompany("National Park Service")>
-<Assembly: AssemblyProduct("WRST_Caribou3")>
+<Assembly: AssemblyProduct("WRST Caribou Monitoring Database Application")>
 <Assembly: AssemblyCopyright("U.S. Public Domain")>
 <Assembly: AssemblyTrademark("")>
 

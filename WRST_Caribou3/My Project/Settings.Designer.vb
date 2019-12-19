@@ -57,8 +57,8 @@ Namespace My
         <Global.System.Configuration.ApplicationScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.Configuration.SpecialSettingAttribute(Global.System.Configuration.SpecialSetting.ConnectionString),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("Data Source=inpyugamsvm01\nuna_dev;Initial Catalog=WRST_Caribou;Integrated Securi"& _ 
-            "ty=True")>  _
+         Global.System.Configuration.DefaultSettingValueAttribute("Data Source=inpyugamsvm01\nuna;Initial Catalog=WRST_Caribou;Integrated Security=T"& _ 
+            "rue")>  _
         Public ReadOnly Property WRST_CaribouConnectionString() As String
             Get
                 Return CType(Me("WRST_CaribouConnectionString"),String)

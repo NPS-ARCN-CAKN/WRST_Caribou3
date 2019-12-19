@@ -14,7 +14,8 @@
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <TargetFrameworkProfile />
-    <PublishUrl>publish\</PublishUrl>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <PublishUrl>J:\Monitoring\Caribou\WRST\Database applications\DotNet\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
     <UpdateEnabled>false</UpdateEnabled>
@@ -24,10 +25,10 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationRevision>1</ApplicationRevision>
     <ApplicationVersion>3.0.0.%2a</ApplicationVersion>
-    <IsWebBootstrapper>false</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
+    <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -51,6 +52,7 @@
     <DocumentationFile>WRST_Caribou3.xml</DocumentationFile>
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
     <Prefer32Bit>false</Prefer32Bit>
+    <RunCodeAnalysis>false</RunCodeAnalysis>
   </PropertyGroup>
   <PropertyGroup>
     <OptionExplicit>On</OptionExplicit>
@@ -66,6 +68,21 @@
   </PropertyGroup>
   <PropertyGroup>
     <ApplicationManifest>My Project\app.manifest</ApplicationManifest>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestCertificateThumbprint>EAC15E8B542DF6F13B9768F27EC3334E2EAD431C</ManifestCertificateThumbprint>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestKeyFile>WRST_Caribou3_TemporaryKey.pfx</ManifestKeyFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <GenerateManifests>false</GenerateManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <TargetZone>LocalIntranet</TargetZone>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignManifests>true</SignManifests>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Janus.Data.v3, Version=3.5.109.0, Culture=neutral, PublicKeyToken=21d5517571b185bf" />
@@ -106,6 +123,12 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AboutForm.Designer.vb">
+      <DependentUpon>AboutForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="AboutForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Animal.vb" />
     <Compile Include="CapturesForm.Designer.vb">
       <DependentUpon>CapturesForm.vb</DependentUpon>
@@ -147,6 +170,12 @@
     <Compile Include="SettingsForm.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="SplashScreen.Designer.vb">
+      <DependentUpon>SplashScreen.vb</DependentUpon>
+    </Compile>
+    <Compile Include="SplashScreen.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Utilities.vb" />
     <Compile Include="WRST_CaribouDataSet.Designer.vb">
       <AutoGen>True</AutoGen>
@@ -158,6 +187,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="AboutForm.resx">
+      <DependentUpon>AboutForm.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="CapturesForm.resx">
       <DependentUpon>CapturesForm.vb</DependentUpon>
     </EmbeddedResource>
@@ -177,6 +209,9 @@
     <EmbeddedResource Include="SettingsForm.resx">
       <DependentUpon>SettingsForm.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="SplashScreen.resx">
+      <DependentUpon>SplashScreen.vb</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <None Include="My Project\app.manifest" />
@@ -190,6 +225,7 @@
       <LastGenOutput>Settings.Designer.vb</LastGenOutput>
     </None>
     <None Include="App.config" />
+    <None Include="WRST_Caribou3_TemporaryKey.pfx" />
     <None Include="WRST_CaribouDataSet.xsc">
       <DependentUpon>WRST_CaribouDataSet.xsd</DependentUpon>
     </None>
