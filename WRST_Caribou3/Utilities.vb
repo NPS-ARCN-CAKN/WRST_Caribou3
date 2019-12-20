@@ -330,6 +330,32 @@ ORDER BY DeploymentDate DESC"
         Return AnimalsDataTable
     End Function
 
+    Public Function GetSurvivorshipMatrix() As DataTable
+        'Get the collared animals into a datatable
+        Dim AnimalsDataTable As New DataTable()
+        'query the database and build the table
+        Dim Sql As String = "SELECT AnimalId, Species, Gender, MortalityDate, GroupName, Description,        ProjectId FROM            Animals WHERE        (ProjectId = 'WRST_Caribou')"
+        AnimalsDataTable = GetDataTable(My.Settings.Animal_MovementConnectionString, Sql)
+        AnimalsDataTable.TableName = "Animals"
+
+        Dim TrackingQuery As String = "SELECT        CollaredAnimalsInGroups.AnimalID, Year(SightingDate) as [Year], Month(SightingDate) as [Month],Dataset_Full.SightingDate, Dataset_Full.Seen, Dataset_Full.[In], Dataset_Full.FlightID
+FROM            CollaredAnimalsInGroups INNER JOIN
+                         Dataset_Full ON CollaredAnimalsInGroups.EID = Dataset_Full.EID 
+ORDER BY AnimalID,[Month]"
+
+
+        'Get survivorship data into a table
+        Dim SurvivorshipDataTable As New DataTable()
+        SurvivorshipDataTable = GetDataTable(My.Settings.WRST_CaribouConnectionString, TrackingQuery)
+
+        Try
+
+        Catch ex As Exception
+            MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name & ")")
+        End Try
+        Return SurvivorshipDataTable
+    End Function
+
     ''' <summary>
     ''' Returns a DataTable of the WRST caribou collars inventory from the Animal_Movement database.
     ''' </summary>
