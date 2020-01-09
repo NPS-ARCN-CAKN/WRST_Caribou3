@@ -51,13 +51,18 @@ Partial Class Form1
         Me.ToolStripSeparator3 = New System.Windows.Forms.ToolStripSeparator()
         Me.ReloadDatasetToolStripButton = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripSeparator4 = New System.Windows.Forms.ToolStripSeparator()
-        Me.ResultsViewerToolStripButton = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripSeparator5 = New System.Windows.Forms.ToolStripSeparator()
         Me.OpenCapturesFormToolStripButton = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripSeparator6 = New System.Windows.Forms.ToolStripSeparator()
         Me.AllowEditsToolStripButton = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripSeparator7 = New System.Windows.Forms.ToolStripSeparator()
+        Me.SettingsToolStripButton = New System.Windows.Forms.ToolStripButton()
+        Me.ToolStripSeparator8 = New System.Windows.Forms.ToolStripSeparator()
         Me.OpenWRSTCaribouDirectoryToolStripButton = New System.Windows.Forms.ToolStripButton()
+        Me.ToolStripSeparator9 = New System.Windows.Forms.ToolStripSeparator()
+        Me.ResultsToolStripDropDownButton = New System.Windows.Forms.ToolStripDropDownButton()
+        Me.DatabaseQueriesToolToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.SurvivorshipMatrixToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.HelpProvider = New System.Windows.Forms.HelpProvider()
         Me.BottomToolStrip = New System.Windows.Forms.ToolStrip()
         Me.CurrentDatabaseToolStripLabel = New System.Windows.Forms.ToolStripLabel()
@@ -67,9 +72,6 @@ Partial Class Form1
         Me.CollaredAnimalsInGroupsTableAdapter = New WRST_Caribou3.WRST_CaribouDataSetTableAdapters.CollaredAnimalsInGroupsTableAdapter()
         Me.SurveysTableAdapter = New WRST_Caribou3.WRST_CaribouDataSetTableAdapters.SurveysTableAdapter()
         Me.CapturesTableAdapter = New WRST_Caribou3.WRST_CaribouDataSetTableAdapters.CapturesTableAdapter()
-        Me.ToolStripSeparator8 = New System.Windows.Forms.ToolStripSeparator()
-        Me.SettingsToolStripButton = New System.Windows.Forms.ToolStripButton()
-        Me.ToolStripSeparator9 = New System.Windows.Forms.ToolStripSeparator()
         CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SplitContainer1.Panel1.SuspendLayout()
         Me.SplitContainer1.Panel2.SuspendLayout()
@@ -309,7 +311,7 @@ Partial Class Form1
         'MainToolStrip
         '
         Me.MainToolStrip.ImageScalingSize = New System.Drawing.Size(24, 24)
-        Me.MainToolStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.SaveToolStripButton, Me.ToolStripSeparator3, Me.ReloadDatasetToolStripButton, Me.ToolStripSeparator4, Me.ResultsViewerToolStripButton, Me.ToolStripSeparator5, Me.OpenCapturesFormToolStripButton, Me.ToolStripSeparator6, Me.AllowEditsToolStripButton, Me.ToolStripSeparator7, Me.SettingsToolStripButton, Me.ToolStripSeparator8, Me.OpenWRSTCaribouDirectoryToolStripButton, Me.ToolStripSeparator9})
+        Me.MainToolStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.SaveToolStripButton, Me.ToolStripSeparator3, Me.ReloadDatasetToolStripButton, Me.ToolStripSeparator4, Me.ResultsToolStripDropDownButton, Me.ToolStripSeparator5, Me.OpenCapturesFormToolStripButton, Me.ToolStripSeparator6, Me.AllowEditsToolStripButton, Me.ToolStripSeparator7, Me.SettingsToolStripButton, Me.ToolStripSeparator8, Me.OpenWRSTCaribouDirectoryToolStripButton, Me.ToolStripSeparator9})
         Me.MainToolStrip.Location = New System.Drawing.Point(0, 0)
         Me.MainToolStrip.Name = "MainToolStrip"
         Me.HelpProvider.SetShowHelp(Me.MainToolStrip, True)
@@ -345,15 +347,6 @@ Partial Class Form1
         Me.ToolStripSeparator4.Name = "ToolStripSeparator4"
         Me.ToolStripSeparator4.Size = New System.Drawing.Size(6, 32)
         '
-        'ResultsViewerToolStripButton
-        '
-        Me.ResultsViewerToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
-        Me.ResultsViewerToolStripButton.Image = CType(resources.GetObject("ResultsViewerToolStripButton.Image"), System.Drawing.Image)
-        Me.ResultsViewerToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.ResultsViewerToolStripButton.Name = "ResultsViewerToolStripButton"
-        Me.ResultsViewerToolStripButton.Size = New System.Drawing.Size(71, 29)
-        Me.ResultsViewerToolStripButton.Text = "Results"
-        '
         'ToolStripSeparator5
         '
         Me.ToolStripSeparator5.Name = "ToolStripSeparator5"
@@ -388,6 +381,20 @@ Partial Class Form1
         Me.ToolStripSeparator7.Name = "ToolStripSeparator7"
         Me.ToolStripSeparator7.Size = New System.Drawing.Size(6, 32)
         '
+        'SettingsToolStripButton
+        '
+        Me.SettingsToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
+        Me.SettingsToolStripButton.Image = CType(resources.GetObject("SettingsToolStripButton.Image"), System.Drawing.Image)
+        Me.SettingsToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.SettingsToolStripButton.Name = "SettingsToolStripButton"
+        Me.SettingsToolStripButton.Size = New System.Drawing.Size(92, 29)
+        Me.SettingsToolStripButton.Text = "Settings..."
+        '
+        'ToolStripSeparator8
+        '
+        Me.ToolStripSeparator8.Name = "ToolStripSeparator8"
+        Me.ToolStripSeparator8.Size = New System.Drawing.Size(6, 32)
+        '
         'OpenWRSTCaribouDirectoryToolStripButton
         '
         Me.OpenWRSTCaribouDirectoryToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
@@ -396,6 +403,33 @@ Partial Class Form1
         Me.OpenWRSTCaribouDirectoryToolStripButton.Name = "OpenWRSTCaribouDirectoryToolStripButton"
         Me.OpenWRSTCaribouDirectoryToolStripButton.Size = New System.Drawing.Size(174, 29)
         Me.OpenWRSTCaribouDirectoryToolStripButton.Text = "Open shared drive..."
+        '
+        'ToolStripSeparator9
+        '
+        Me.ToolStripSeparator9.Name = "ToolStripSeparator9"
+        Me.ToolStripSeparator9.Size = New System.Drawing.Size(6, 32)
+        '
+        'ResultsToolStripDropDownButton
+        '
+        Me.ResultsToolStripDropDownButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
+        Me.ResultsToolStripDropDownButton.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.DatabaseQueriesToolToolStripMenuItem, Me.SurvivorshipMatrixToolStripMenuItem})
+        Me.ResultsToolStripDropDownButton.Image = CType(resources.GetObject("ResultsToolStripDropDownButton.Image"), System.Drawing.Image)
+        Me.ResultsToolStripDropDownButton.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.ResultsToolStripDropDownButton.Name = "ResultsToolStripDropDownButton"
+        Me.ResultsToolStripDropDownButton.Size = New System.Drawing.Size(186, 29)
+        Me.ResultsToolStripDropDownButton.Text = "Results and analysis"
+        '
+        'DatabaseQueriesToolToolStripMenuItem
+        '
+        Me.DatabaseQueriesToolToolStripMenuItem.Name = "DatabaseQueriesToolToolStripMenuItem"
+        Me.DatabaseQueriesToolToolStripMenuItem.Size = New System.Drawing.Size(281, 30)
+        Me.DatabaseQueriesToolToolStripMenuItem.Text = "Database queries tool..."
+        '
+        'SurvivorshipMatrixToolStripMenuItem
+        '
+        Me.SurvivorshipMatrixToolStripMenuItem.Name = "SurvivorshipMatrixToolStripMenuItem"
+        Me.SurvivorshipMatrixToolStripMenuItem.Size = New System.Drawing.Size(281, 30)
+        Me.SurvivorshipMatrixToolStripMenuItem.Text = "Survivorship matrix..."
         '
         'HelpProvider
         '
@@ -448,25 +482,6 @@ Partial Class Form1
         'CapturesTableAdapter
         '
         Me.CapturesTableAdapter.ClearBeforeFill = True
-        '
-        'ToolStripSeparator8
-        '
-        Me.ToolStripSeparator8.Name = "ToolStripSeparator8"
-        Me.ToolStripSeparator8.Size = New System.Drawing.Size(6, 32)
-        '
-        'SettingsToolStripButton
-        '
-        Me.SettingsToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
-        Me.SettingsToolStripButton.Image = CType(resources.GetObject("SettingsToolStripButton.Image"), System.Drawing.Image)
-        Me.SettingsToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.SettingsToolStripButton.Name = "SettingsToolStripButton"
-        Me.SettingsToolStripButton.Size = New System.Drawing.Size(92, 29)
-        Me.SettingsToolStripButton.Text = "Settings..."
-        '
-        'ToolStripSeparator9
-        '
-        Me.ToolStripSeparator9.Name = "ToolStripSeparator9"
-        Me.ToolStripSeparator9.Size = New System.Drawing.Size(6, 32)
         '
         'Form1
         '
@@ -542,7 +557,6 @@ Partial Class Form1
     Friend WithEvents ToolStripSeparator4 As ToolStripSeparator
     Friend WithEvents CollaredAnimalsSplitContainer As SplitContainer
     Friend WithEvents AnimalGridEX As Janus.Windows.GridEX.GridEX
-    Friend WithEvents ResultsViewerToolStripButton As ToolStripButton
     Friend WithEvents HelpProvider As HelpProvider
     Friend WithEvents CapturesBindingSource As BindingSource
     Friend WithEvents CapturesTableAdapter As WRST_CaribouDataSetTableAdapters.CapturesTableAdapter
@@ -560,4 +574,7 @@ Partial Class Form1
     Friend WithEvents ToolStripSeparator8 As ToolStripSeparator
     Friend WithEvents SettingsToolStripButton As ToolStripButton
     Friend WithEvents ToolStripSeparator9 As ToolStripSeparator
+    Friend WithEvents ResultsToolStripDropDownButton As ToolStripDropDownButton
+    Friend WithEvents DatabaseQueriesToolToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents SurvivorshipMatrixToolStripMenuItem As ToolStripMenuItem
 End Class

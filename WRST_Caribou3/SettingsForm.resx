@@ -117,4 +117,7 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="WRST_CaribouConnectionStringTextBox.Text" xml:space="preserve">
+    <value>To change the WRST_Caribou database connection string you must edit WRST_Caribou3.vshost.exe.config in the application's installation directory. Update other application settings using the property grid below. Your changes may require you to restart the application.</value>
+  </data>
 </root>

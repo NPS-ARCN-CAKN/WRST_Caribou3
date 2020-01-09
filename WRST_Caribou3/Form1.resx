@@ -180,15 +180,15 @@
   <data name="ChangeOrientationToolStripButton.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAAFiUAABYlAUlSJPAAAAH1SURBVDhPpZPvTxJxHMf5z7QHNZtj68dcQ5ebbWYLtTB1
-        aKLrBybhT+KGayIgnhw6JUBOwIw0rQdlrZbWCXSAm0DQM5/p8e6OOx58VzNdr+3z4Lv33q/P7r77qiSa
-        nkS09EbikIru41l4HxY2jfFlHmZ/EiZfHMZFDo+8uxjw7GDI8x71/QFtuVjB8SomMO9+QRrP2yLmxKG3
-        ipjdLMItjutNAc6NAqbXC7C//gn185igVGWsEWXzSgbjbAZjoQxGQ2kMB9MwB1Iw+VMYepHCoI+HcYlH
-        q2UTSlVmQiychRZzjBSMBHgl+pNSSZoSBKGEo2PxINI0GCUF/e4v5eBfyHXgio4hBT3OT0p0OtRtNCnQ
-        9Pm2KZbH40UeDxZ+YICJw0Bz0Lt20TX9Fbqpz2i3fYSW+oAO6zou3nJuK1WZ0UBMmFzLw/YyD2o1D2s0
-        B0skh4lwDmMrWYywWQyHsni6fABT8ABVxlXyGstb55MwMEnc9yTQO5eAno6j2x1H58we7rn2oHNyuOPg
-        0Gb/Do0hTH5Cn1g4C3XdQVKgn+GU6O9If79ynRKXdD5S0OX4Vg5OoiKRUN+eJwXN5i05OSXnGiZJQc1N
-        l/f6wzXxlUVwrYfF1U4/Lt9dEjcxqG2hUdPsxoUbDpxvtKO63oYqDeVVqv+LSvUbUXqT2O535hMAAAAA
+        YQUAAAAJcEhZcwAAFiUAABYlAUlSJPAAAAH1SURBVDhPpZPdT1JhHMf5z6wLndXcstYcOt10M1tkSanD
+        F3S9YBK+Eme4JgLikYNNEZAjYIavdVHWamUdgQ7gJhB0110evp3DOVw8q5XOz/a7ePbd9/PbOc8elUTz
+        47CG3or/pCKHeBo6hJlNYWKFh8mXgNEbg2GRw0PPPgbdnzHsfoP6Ab+mVCxjfxkVmNc/II37VQHz4tC7
+        BcztFOASx7mdh2Mrj5nNPGwb33HxWVRQqjKWsLJ5NY0JNo3xYBpjwRRGAimY/EkYfUkMLycx5OVhWOJx
+        y7wDpSozKRZOQ5spSgpG/bwS/UmxKE0RglDEr2PxINI8FCEFA66PpeB/yHXgipYhBT2O90p0MmraaVKg
+        7vfuUSyPR4s87j//hkEmBj3NQefcR9fMJ2inP+C29R001FvctWziwg3HnlKVGfNHhan1HKwvcqDWcrBE
+        sjCHs5gMZTG+msEom8FIMIMnK0cwBo5QYVgjr7G0dSEBPZNAnzuO3vk4dHQM3a4YOmcPcM95AK2Dwx07
+        h3bbV6j1IfIT+sXCabjWHSAFullOif6O9PfL1ylxWeslBV32L6XgX5QlEjU3F0hBq2lXTk7I+YYpUlB9
+        3elpfLAuvrIw6npYXO30obZjSdzE4FIbjepWF6pa7KhssuFcvRUVasqjVM+KSvUbRqyT1Z7EdRYAAAAA
         SUVORK5CYII=
 </value>
   </data>
@@ -225,7 +225,7 @@
         TgDQASA1MVpwzwAAAABJRU5ErkJggg==
 </value>
   </data>
-  <data name="ResultsViewerToolStripButton.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="ResultsToolStripDropDownButton.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
         YQUAAAAJcEhZcwAAFiUAABYlAUlSJPAAAAIDSURBVDhPpZLrS5NhGMb3j4SWh0oRQVExD4gonkDpg4hG

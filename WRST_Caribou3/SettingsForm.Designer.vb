@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class SettingsForm
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,11 +20,11 @@ Partial Class SettingsForm
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(SettingsForm))
         Me.SettingsPropertyGrid = New System.Windows.Forms.PropertyGrid()
         Me.WRST_CaribouConnectionStringPanel = New System.Windows.Forms.Panel()
-        Me.Label2 = New System.Windows.Forms.Label()
         Me.WRST_CaribouConnectionStringTextBox = New System.Windows.Forms.TextBox()
         Me.WRST_CaribouConnectionStringPanel.SuspendLayout()
         Me.SuspendLayout()
@@ -32,43 +32,31 @@ Partial Class SettingsForm
         'SettingsPropertyGrid
         '
         Me.SettingsPropertyGrid.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.SettingsPropertyGrid.Location = New System.Drawing.Point(0, 104)
+        Me.SettingsPropertyGrid.Location = New System.Drawing.Point(0, 77)
         Me.SettingsPropertyGrid.Name = "SettingsPropertyGrid"
-        Me.SettingsPropertyGrid.Size = New System.Drawing.Size(1178, 640)
+        Me.SettingsPropertyGrid.Size = New System.Drawing.Size(1178, 667)
         Me.SettingsPropertyGrid.TabIndex = 0
         '
         'WRST_CaribouConnectionStringPanel
         '
-        Me.WRST_CaribouConnectionStringPanel.Controls.Add(Me.Label2)
         Me.WRST_CaribouConnectionStringPanel.Controls.Add(Me.WRST_CaribouConnectionStringTextBox)
         Me.WRST_CaribouConnectionStringPanel.Dock = System.Windows.Forms.DockStyle.Top
         Me.WRST_CaribouConnectionStringPanel.Location = New System.Drawing.Point(0, 0)
         Me.WRST_CaribouConnectionStringPanel.Name = "WRST_CaribouConnectionStringPanel"
-        Me.WRST_CaribouConnectionStringPanel.Size = New System.Drawing.Size(1178, 104)
+        Me.WRST_CaribouConnectionStringPanel.Size = New System.Drawing.Size(1178, 77)
         Me.WRST_CaribouConnectionStringPanel.TabIndex = 1
-        '
-        'Label2
-        '
-        Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(13, 64)
-        Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(850, 20)
-        Me.Label2.TabIndex = 3
-        Me.Label2.Text = "Update other application settings using the property grid below. Your changes may" &
-    " require you to restart the application."
         '
         'WRST_CaribouConnectionStringTextBox
         '
         Me.WRST_CaribouConnectionStringTextBox.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.WRST_CaribouConnectionStringTextBox.Enabled = False
         Me.WRST_CaribouConnectionStringTextBox.Location = New System.Drawing.Point(17, 12)
         Me.WRST_CaribouConnectionStringTextBox.Multiline = True
         Me.WRST_CaribouConnectionStringTextBox.Name = "WRST_CaribouConnectionStringTextBox"
-        Me.WRST_CaribouConnectionStringTextBox.Size = New System.Drawing.Size(1149, 49)
+        Me.WRST_CaribouConnectionStringTextBox.ReadOnly = True
+        Me.WRST_CaribouConnectionStringTextBox.Size = New System.Drawing.Size(1149, 59)
         Me.WRST_CaribouConnectionStringTextBox.TabIndex = 1
-        Me.WRST_CaribouConnectionStringTextBox.Text = "To change the WRST_Caribou database connection string you must edit WRST_Caribou3" &
-    ".vshost.exe.config in the application's installation directory."
+        Me.WRST_CaribouConnectionStringTextBox.Text = resources.GetString("WRST_CaribouConnectionStringTextBox.Text")
         '
         'SettingsForm
         '
@@ -92,5 +80,4 @@ Partial Class SettingsForm
     Friend WithEvents SettingsPropertyGrid As PropertyGrid
     Friend WithEvents WRST_CaribouConnectionStringPanel As Panel
     Friend WithEvents WRST_CaribouConnectionStringTextBox As TextBox
-    Friend WithEvents Label2 As Label
 End Class

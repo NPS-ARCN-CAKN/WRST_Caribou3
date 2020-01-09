@@ -1229,10 +1229,7 @@ Click Yes to certify and lock the current record. Click No to cancel.", MsgBoxSt
         LoadDataset()
     End Sub
 
-    Private Sub ResultsViewerToolStripButton_Click(sender As Object, e As EventArgs) Handles ResultsViewerToolStripButton.Click
-        Dim ResultsForm As New ResultsForm
-        ResultsForm.ShowDialog()
-    End Sub
+
 
     Private Sub OpenCapturesFormToolStripButton_Click(sender As Object, e As EventArgs) Handles OpenCapturesFormToolStripButton.Click
         Dim CapturesForm As New CapturesForm
@@ -1351,6 +1348,16 @@ Click Yes to certify and lock the current record. Click No to cancel.", MsgBoxSt
     Private Sub SettingsToolStripButton_Click(sender As Object, e As EventArgs) Handles SettingsToolStripButton.Click
         Dim SettingsForm As New SettingsForm
         SettingsForm.ShowDialog()
+    End Sub
+
+    Private Sub DatabaseQueriesToolToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DatabaseQueriesToolToolStripMenuItem.Click
+        Dim ResultsForm As New ResultsForm
+        ResultsForm.ShowDialog()
+    End Sub
+
+    Private Sub SurvivorshipMatrixToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SurvivorshipMatrixToolStripMenuItem.Click
+        Dim SurvivorshipForm As New SurvivorshipForm
+        SurvivorshipForm.ShowDialog()
     End Sub
 
     'Private Sub AutoLoadSurveyFlightCells()
