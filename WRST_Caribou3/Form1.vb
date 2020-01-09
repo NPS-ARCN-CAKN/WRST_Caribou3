@@ -46,7 +46,7 @@ Public Class Form1
             Me.SurveyFlightsGridEX.RootTable.Caption = "Caribou survey flights inventory"
 
             'load the collared animal deployments from Animal Movement into the CollaredAnimalsGridEX
-            LoadAnimalIDSCombo()
+            'LoadAnimalIDSCombo()
 
             'load the default values for the grid columns
             SetUpSurveyFlightsGridEXDropDowns()
@@ -587,8 +587,6 @@ Public Class Form1
         'renew default values, especially to generate a new primary key value
         LockCertifiedRecords()
 
-        'load the animalids from animal movements into the selector combo
-        LoadAnimalIDSCombo()
 
         'load animal movement grids
         LoadAnimalMovementGrids()
@@ -1067,8 +1065,8 @@ Click Yes to certify and lock the current record. Click No to cancel.", MsgBoxSt
                                     Dim EID As String = Row.Cells("EID").Value
 
                                     'reset the FrequenciesCount and NumAnimalIDs columns
-                                    'Row.Cells("FrequenciesCount").Value = 0
-                                    'Row.Cells("NumAnimalIDs").Value = 0
+                                    Row.Cells("FrequenciesCount").Value = DBNull.Value
+                                    Row.Cells("NumAnimalIDs").Value = DBNull.Value
 
                                     'count the number of comma separated frequencies in the FrequenciesInGroup column of the row.
                                     Dim NumberOfFrequencies As Integer = 0 'this will hold the number of frequencies in the group
@@ -1361,6 +1359,11 @@ Click Yes to certify and lock the current record. Click No to cancel.", MsgBoxSt
     Private Sub SurvivorshipMatrixToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SurvivorshipMatrixToolStripMenuItem.Click
         Dim SurvivorshipForm As New SurvivorshipForm
         SurvivorshipForm.ShowDialog()
+    End Sub
+
+    Private Sub CollaredAnimalsInGroupsGridEX_DropDown(sender As Object, e As ColumnActionEventArgs) Handles CollaredAnimalsInGroupsGridEX.DropDown
+        'load the animalids from animal movements into the selector combo
+        LoadAnimalIDSCombo()
     End Sub
 
     'Private Sub AutoLoadSurveyFlightCells()
