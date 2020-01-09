@@ -1051,25 +1051,30 @@ Click Yes to certify and lock the current record. Click No to cancel.", MsgBoxSt
 
 
     ''' <summary>
-    ''' Counts the number of FrequenciesInGroup and AnimalIDs in the CollaredAnimalsInGroups table. Loads the data into the SurveysGridEX.
+    ''' Quality control check. Counts the number of FrequenciesInGroup and AnimalIDs in the CollaredAnimalsInGroups table. Loads the data into the SurveysGridEX.
     ''' </summary>
     Private Sub ReconcileFrequencies()
         'check that the number of frequencies in Surveys.FrequenciesInGroup column match the number of items in the CollaredAnimalsInGroups table for the record
         Try
             If SurveysGridEX.GetRows.Count > 0 Then
                 For Each Row As GridEXRow In SurveysGridEX.GetRows
+                    Row.BeginEdit()
                     If Not Row Is Nothing Then
                         If Not Row.Cells("EID") Is Nothing Then
                             If Not Row.Cells("EID").Value Is Nothing Then
                                 'If Not Row.Cells("EID").Value.ToString.Trim <> "" Then 'nothing got past here when it was enabled, i don't know why
                                 If Not IsDBNull(Row.Cells("EID").Value) Then
                                     Dim EID As String = Row.Cells("EID").Value
-                                    'Debug.Print(EID)
 
-                                    Dim NumberOfFrequencies As Integer = 0
+                                    'reset the FrequenciesCount and NumAnimalIDs columns
+                                    'Row.Cells("FrequenciesCount").Value = 0
+                                    'Row.Cells("NumAnimalIDs").Value = 0
+
+                                    'count the number of comma separated frequencies in the FrequenciesInGroup column of the row.
+                                    Dim NumberOfFrequencies As Integer = 0 'this will hold the number of frequencies in the group
                                     If Not IsDBNull(Row.Cells("FrequenciesInGroup").Value) Then
 
-                                        'get a count of the number of frequencies in the group
+                                        'there were frequencies in the group, get a count of the number of frequencies in the group
                                         Dim FrequenciesInGroup As String = Row.Cells("FrequenciesInGroup").Value
 
                                         'count the frequencies
@@ -1084,23 +1089,21 @@ Click Yes to certify and lock the current record. Click No to cancel.", MsgBoxSt
                                     NumberOfAnimalIDs = AnimalIDsDataView.Count
 
                                     'update the number of frequencies and number of animalids columns
-                                    Row.BeginEdit()
-                                    If NumberOfAnimalIDs > 0 Or NumberOfFrequencies > 0 Then
+                                    If NumberOfFrequencies > 0 Or NumberOfAnimalIDs > 0 Then
                                         Row.Cells("FrequenciesCount").Value = NumberOfFrequencies
                                         Row.Cells("NumAnimalIDs").Value = NumberOfAnimalIDs
                                     End If
-                                    Row.EndEdit()
                                 End If
                             End If
-                            'End If
                         End If
                     End If
+                    Row.EndEdit()
                 Next
                 Me.SurveysBindingSource.EndEdit()
             End If
-            'Catch nrefex As NullReferenceException
-            '    'ignore
-            '    Debug.Print(nrefex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name & ")")
+        Catch nrefex As NullReferenceException
+            'ignore
+            Debug.Print(nrefex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name & ")")
         Catch ex As Exception
             MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name & ")")
         End Try
