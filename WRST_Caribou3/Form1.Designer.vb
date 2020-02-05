@@ -26,6 +26,8 @@ Partial Class Form1
         Dim SurveyFlightsGridEX_DesignTimeLayout As Janus.Windows.GridEX.GridEXLayout = New Janus.Windows.GridEX.GridEXLayout()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Form1))
         Dim SurveysGridEX_DesignTimeLayout As Janus.Windows.GridEX.GridEXLayout = New Janus.Windows.GridEX.GridEXLayout()
+        Dim SurveysGridEX_DesignTimeLayout_Reference_0 As Janus.Windows.Common.Layouts.JanusLayoutReference = New Janus.Windows.Common.Layouts.JanusLayoutReference("GridEXLayoutData.RootTable.FormatConditions.Condition3.FormatStyle.BackgroundImag" &
+        "e")
         Dim CollaredAnimalsInGroupsGridEX_DesignTimeLayout As Janus.Windows.GridEX.GridEXLayout = New Janus.Windows.GridEX.GridEXLayout()
         Me.SplitContainer1 = New System.Windows.Forms.SplitContainer()
         Me.SurveyFlightsGridEX = New Janus.Windows.GridEX.GridEX()
@@ -127,7 +129,7 @@ Partial Class Form1
         Me.SurveyFlightsGridEX.FilterMode = Janus.Windows.GridEX.FilterMode.Automatic
         Me.SurveyFlightsGridEX.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.SurveyFlightsGridEX.FrozenColumns = 4
-        Me.SurveyFlightsGridEX.GroupByBoxVisible = False
+        Me.SurveyFlightsGridEX.GroupMode = Janus.Windows.GridEX.GroupMode.Collapsed
         Me.SurveyFlightsGridEX.Location = New System.Drawing.Point(0, 0)
         Me.SurveyFlightsGridEX.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.SurveyFlightsGridEX.Name = "SurveyFlightsGridEX"
@@ -163,9 +165,12 @@ Partial Class Form1
         Me.SurveysGridEX.AllowAddNew = Janus.Windows.GridEX.InheritableBoolean.[True]
         Me.SurveysGridEX.AllowDelete = Janus.Windows.GridEX.InheritableBoolean.[True]
         Me.SurveysGridEX.DataSource = Me.SurveysBindingSource
+        SurveysGridEX_DesignTimeLayout_Reference_0.Instance = CType(resources.GetObject("SurveysGridEX_DesignTimeLayout_Reference_0.Instance"), Object)
+        SurveysGridEX_DesignTimeLayout.LayoutReferences.AddRange(New Janus.Windows.Common.Layouts.JanusLayoutReference() {SurveysGridEX_DesignTimeLayout_Reference_0})
         SurveysGridEX_DesignTimeLayout.LayoutString = resources.GetString("SurveysGridEX_DesignTimeLayout.LayoutString")
         Me.SurveysGridEX.DesignTimeLayout = SurveysGridEX_DesignTimeLayout
         Me.SurveysGridEX.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.SurveysGridEX.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.SurveysGridEX.FrozenColumns = 3
         Me.SurveysGridEX.GroupByBoxVisible = False
         Me.SurveysGridEX.Location = New System.Drawing.Point(0, 32)

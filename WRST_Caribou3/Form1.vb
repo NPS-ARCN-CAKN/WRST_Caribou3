@@ -142,13 +142,23 @@ Public Class Form1
 
 
             'SOPVersion default value
-            Dim MaxSOPVersion As Integer = 0
-            For Each row As GridEXRow In Grid.GetRows()
-                If row.Cells("SOPVersion").Value > MaxSOPVersion Then
-                    MaxSOPVersion = row.Cells("SOPVersion").Value
-                End If
-            Next
-            Grid.RootTable.Columns("SOPVersion").DefaultValue = MaxSOPVersion
+            'Dim MaxSOPVersion As Integer = 0
+            ''If Grid.GetRows.Count > 0 Then
+            'For Each row As GridEXRow In Grid.GetRows()
+            '    If Not row Is Nothing Then
+            '        If Not row.Cells("SOPVersion") Is Nothing Then
+            '            If Not row.Cells("SOPVersion").Value Is Nothing Then
+            '                If Not IsDBNull(row.Cells("SOPVersion").Value) Then
+            '                    If row.Cells("SOPVersion").Value > MaxSOPVersion Then
+            '                        MaxSOPVersion = row.Cells("SOPVersion").Value
+            '                    End If
+            '                End If
+            '            End If
+            '        End If
+            '    End If
+            'Next
+            ''End If
+            'Grid.RootTable.Columns("SOPVersion").DefaultValue = MaxSOPVersion
 
 
         Catch ex As Exception
