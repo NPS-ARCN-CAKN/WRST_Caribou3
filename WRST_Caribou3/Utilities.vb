@@ -292,7 +292,7 @@ WHERE
 	(CollarDeployments.ProjectId = 'WRST_Caribou') AND (Frequency=" & Frequency & ") AND ((DeploymentDate < '" & ObservationDate & "') AND (RetrievalDate IS NULL)) 
 	OR ((CollarDeployments.ProjectId = 'WRST_Caribou') AND (Frequency=" & Frequency & ") AND (DeploymentDate < '" & ObservationDate & "') AND (RetrievalDate > '" & ObservationDate & "'))
 ORDER BY DeploymentDate DESC"
-
+            Console.Write(Sql)
             'get the result into a datatable
             Dim DT As DataTable = GetDataTable(My.Settings.Animal_MovementConnectionString, Sql)
             If Not DT Is Nothing Then

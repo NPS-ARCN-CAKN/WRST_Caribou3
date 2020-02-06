@@ -1160,13 +1160,11 @@ Click Yes to certify and lock the current record. Click No to cancel.", MsgBoxSt
                         'parse the comma separated frequencies so we can deal with them individually
                         Dim FrequenciesList As List(Of Double) = GetListOfCSVFrequencies(FrequenciesInGroup)
                         For Each Frequency In FrequenciesList ' FrequenciesInGroup.Split(",")
+
                             Dim AnimalID As String = GetAnimalIDFromFrequencyAndObservationDate(Frequency, SightingDate)
                             Dim Comment As String = ""
                             If AnimalID.Length > 0 Then
                                 'the collar was  found in the AM database.
-                                '
-                                'AnimalID = Frequency
-                                'Comment = "Frequency Not found In AM at time Of insertion (" & My.User.Name & " " & Now & ")"
 
                                 'add the animalid to the XrefDataTable
                                 Dim XrefDataTable As DataTable = Me.WRST_CaribouDataSet.Tables("CollaredAnimalsInGroups")
@@ -1366,7 +1364,7 @@ Click Yes to certify and lock the current record. Click No to cancel.", MsgBoxSt
         ResultsForm.ShowDialog()
     End Sub
 
-    Private Sub SurvivorshipMatrixToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SurvivorshipMatrixToolStripMenuItem.Click
+    Private Sub SurvivorshipMatrixToolStripMenuItem_Click(sender As Object, e As EventArgs) 
         Dim SurvivorshipForm As New SurvivorshipForm
         SurvivorshipForm.ShowDialog()
     End Sub
