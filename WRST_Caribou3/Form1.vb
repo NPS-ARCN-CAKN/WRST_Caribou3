@@ -1364,10 +1364,7 @@ Click Yes to certify and lock the current record. Click No to cancel.", MsgBoxSt
         ResultsForm.ShowDialog()
     End Sub
 
-    Private Sub SurvivorshipMatrixToolStripMenuItem_Click(sender As Object, e As EventArgs) 
-        Dim SurvivorshipForm As New SurvivorshipForm
-        SurvivorshipForm.ShowDialog()
-    End Sub
+
 
     Private Sub CollaredAnimalsInGroupsGridEX_DropDown(sender As Object, e As ColumnActionEventArgs) Handles CollaredAnimalsInGroupsGridEX.DropDown
         'load the animalids from animal movements into the selector combo
