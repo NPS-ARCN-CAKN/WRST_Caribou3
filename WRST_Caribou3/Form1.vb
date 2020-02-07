@@ -1336,6 +1336,7 @@ Click Yes to certify and lock the current record. Click No to cancel.", MsgBoxSt
     End Sub
 
     Private Sub AllRowsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AllRowsToolStripMenuItem.Click
+
         Try
             'resolve any changes to the database to avoid duplicate primary key problems
             AskToSaveChanges()
