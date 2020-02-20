@@ -327,16 +327,33 @@ Public Class Form1
             Dim Grid As GridEX = Me.CollaredAnimalsInGroupsGridEX
 
 
-            Dim Sql As String = "SELECT Animals.AnimalId
-        , CONVERT(Varchar(20), Collars.Frequency) + ' - ' + Animals.AnimalId + ' Deployed: ' + CONVERT(varchar(20),DeploymentDate)  +  ISNULL(' Collar retrieved: ' + CONVERT(varchar(20), RetrievalDate),'') +  ISNULL(' DEAD: ' + CONVERT(varchar(20), MortalityDate),'') AS CollaredCaribou
-        FROM            Animals INNER JOIN
-        CollarDeployments ON Animals.ProjectId = CollarDeployments.ProjectId AND Animals.AnimalId = CollarDeployments.AnimalId INNER JOIN
-        Collars ON CollarDeployments.CollarManufacturer = Collars.CollarManufacturer AND CollarDeployments.CollarId = Collars.CollarId
-        WHERE        (Animals.ProjectId = 'WRST_Caribou') 
-        And (DeploymentDate < '" & SightingDate & "') and (RetrievalDate IS NULL Or RetrievalDate > '" & SightingDate & "')
-        ORDER BY Frequency"
+            '    Dim Sql As String = "SELECT Animals.AnimalId
+            ', CONVERT(Varchar(20), Collars.Frequency) + ' - ' + Animals.AnimalId + ' Deployed: ' + CONVERT(varchar(20),DeploymentDate)  +  ISNULL(' Collar retrieved: ' + CONVERT(varchar(20), RetrievalDate),'') +  ISNULL(' DEAD: ' + CONVERT(varchar(20), MortalityDate),'') AS CollaredCaribou
+            'FROM            Animals INNER JOIN
+            'CollarDeployments ON Animals.ProjectId = CollarDeployments.ProjectId AND Animals.AnimalId = CollarDeployments.AnimalId INNER JOIN
+            'Collars ON CollarDeployments.CollarManufacturer = Collars.CollarManufacturer AND CollarDeployments.CollarId = Collars.CollarId
+            'WHERE        (Animals.ProjectId = 'WRST_Caribou') 
+            'And (DeploymentDate < '" & SightingDate & "') and (RetrievalDate IS NULL Or RetrievalDate > '" & SightingDate & "')
+            'ORDER BY Frequency"
 
-            Dim CollaredAnimalsDataTable As DataTable = GetDataTable(My.Settings.Animal_MovementConnectionString, Sql)
+            '    Dim CollaredAnimalsDataTable As DataTable = GetDataTable(My.Settings.Animal_MovementConnectionString, Sql)
+
+            'get an inventory of collars that were available for SightingDate using the
+            'database's spGetAnimalsInventoryFromDate stored procedure
+            Dim CollaredAnimalsDataTable As New DataTable("CollaredAnimals")
+            Dim SqlConnection As New SqlConnection(My.Settings.WRST_CaribouConnectionString)
+            Dim SqlCommand As New SqlCommand("spGetAnimalsInventoryFromDate")
+            SqlCommand.Parameters.Add(New SqlParameter("Date", SightingDate))
+            With SqlCommand
+                .Connection = SqlConnection
+                .CommandType = CommandType.StoredProcedure
+            End With
+
+            Using sda As New SqlDataAdapter(SqlCommand)
+                'Dim dt As New DataTable()
+                sda.Fill(CollaredAnimalsDataTable)
+            End Using
+
 
             'set up the search area column to accept a dropdown
             With Grid.RootTable.Columns("AnimalID")
@@ -347,6 +364,8 @@ Public Class Form1
                 .AutoComplete = True
                 .ValueList.Clear()
             End With
+
+
             Dim AnimalsList As GridEXValueListItemCollection = Grid.RootTable.Columns("AnimalID").ValueList
             'load in the searcharea items into the combobox
             If CollaredAnimalsDataTable.Rows.Count > 0 Then
@@ -1336,7 +1355,6 @@ Click Yes to certify and lock the current record. Click No to cancel.", MsgBoxSt
     End Sub
 
     Private Sub AllRowsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AllRowsToolStripMenuItem.Click
-
         Try
             'resolve any changes to the database to avoid duplicate primary key problems
             AskToSaveChanges()
