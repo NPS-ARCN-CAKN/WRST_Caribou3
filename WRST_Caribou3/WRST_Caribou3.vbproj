@@ -158,6 +158,12 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="QCForm.Designer.vb">
+      <DependentUpon>QCForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="QCForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="ResultsForm.Designer.vb">
       <DependentUpon>ResultsForm.vb</DependentUpon>
     </Compile>
@@ -202,6 +208,9 @@
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="QCForm.resx">
+      <DependentUpon>QCForm.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ResultsForm.resx">
       <DependentUpon>ResultsForm.vb</DependentUpon>

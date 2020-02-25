@@ -327,32 +327,32 @@ Public Class Form1
             Dim Grid As GridEX = Me.CollaredAnimalsInGroupsGridEX
 
 
-            '    Dim Sql As String = "SELECT Animals.AnimalId
-            ', CONVERT(Varchar(20), Collars.Frequency) + ' - ' + Animals.AnimalId + ' Deployed: ' + CONVERT(varchar(20),DeploymentDate)  +  ISNULL(' Collar retrieved: ' + CONVERT(varchar(20), RetrievalDate),'') +  ISNULL(' DEAD: ' + CONVERT(varchar(20), MortalityDate),'') AS CollaredCaribou
-            'FROM            Animals INNER JOIN
-            'CollarDeployments ON Animals.ProjectId = CollarDeployments.ProjectId AND Animals.AnimalId = CollarDeployments.AnimalId INNER JOIN
-            'Collars ON CollarDeployments.CollarManufacturer = Collars.CollarManufacturer AND CollarDeployments.CollarId = Collars.CollarId
-            'WHERE        (Animals.ProjectId = 'WRST_Caribou') 
-            'And (DeploymentDate < '" & SightingDate & "') and (RetrievalDate IS NULL Or RetrievalDate > '" & SightingDate & "')
-            'ORDER BY Frequency"
-
-            '    Dim CollaredAnimalsDataTable As DataTable = GetDataTable(My.Settings.Animal_MovementConnectionString, Sql)
+            Dim Sql As String = "SELECT Animals.AnimalId
+            , CONVERT(Varchar(20), Collars.Frequency) + ' - ' + Animals.AnimalId + ' Deployed: ' + CONVERT(varchar(20),DeploymentDate)  +  ISNULL(' Collar retrieved: ' + CONVERT(varchar(20), RetrievalDate),'') +  ISNULL(' DEAD: ' + CONVERT(varchar(20), MortalityDate),'') AS CollaredCaribou
+            FROM            Animals INNER JOIN
+            CollarDeployments ON Animals.ProjectId = CollarDeployments.ProjectId AND Animals.AnimalId = CollarDeployments.AnimalId INNER JOIN
+            Collars ON CollarDeployments.CollarManufacturer = Collars.CollarManufacturer AND CollarDeployments.CollarId = Collars.CollarId
+            WHERE        (Animals.ProjectId = 'WRST_Caribou') 
+            And (DeploymentDate < '" & SightingDate & "') and (RetrievalDate IS NULL Or RetrievalDate > '" & SightingDate & "')
+            ORDER BY Frequency"
+            Debug.Print(Sql)
+            Dim CollaredAnimalsDataTable As DataTable = GetDataTable(My.Settings.Animal_MovementConnectionString, Sql)
 
             'get an inventory of collars that were available for SightingDate using the
             'database's spGetAnimalsInventoryFromDate stored procedure
-            Dim CollaredAnimalsDataTable As New DataTable("CollaredAnimals")
-            Dim SqlConnection As New SqlConnection(My.Settings.WRST_CaribouConnectionString)
-            Dim SqlCommand As New SqlCommand("spGetAnimalsInventoryFromDate")
-            SqlCommand.Parameters.Add(New SqlParameter("Date", SightingDate))
-            With SqlCommand
-                .Connection = SqlConnection
-                .CommandType = CommandType.StoredProcedure
-            End With
+            'Dim CollaredAnimalsDataTable As New DataTable("CollaredAnimals")
+            'Dim SqlConnection As New SqlConnection(My.Settings.WRST_CaribouConnectionString)
+            'Dim SqlCommand As New SqlCommand("spGetAnimalsInventoryFromDate")
+            'SqlCommand.Parameters.Add(New SqlParameter("Date", SightingDate))
+            'With SqlCommand
+            '    .Connection = SqlConnection
+            '    .CommandType = CommandType.StoredProcedure
+            'End With
 
-            Using sda As New SqlDataAdapter(SqlCommand)
-                'Dim dt As New DataTable()
-                sda.Fill(CollaredAnimalsDataTable)
-            End Using
+            'Using sda As New SqlDataAdapter(SqlCommand)
+            '    'Dim dt As New DataTable()
+            '    sda.Fill(CollaredAnimalsDataTable)
+            'End Using
 
 
             'set up the search area column to accept a dropdown
@@ -410,6 +410,7 @@ Public Class Form1
     ''' <param name="SampleDate"></param>
     ''' <returns>Double</returns>
     Private Function GetFrequencyFromAnimalIDAndDate(AnimalID As String, SampleDate As Date) As Double
+        MsgBox("Function GetFrequencyFromAnimalIDAndDate() needs repair")
         Dim Frequency As Double = 0
         Try
             Dim AnimalsDataTable As DataTable = GetAnimalsDataTable()
@@ -431,6 +432,7 @@ Public Class Form1
     ''' <param name="SampleDate">SampleDate. Date.</param>
     ''' <returns></returns>
     Private Function GetAnimalIDFromFrequencyAndDate(Frequency As Double, SampleDate As Date) As Double
+        MsgBox("GetAnimalIDFromFrequencyAndDate needs repair")
         Dim AnimalID As Double = 0
         Try
             Dim AnimalsDataTable As DataTable = GetAnimalsDataTable()
@@ -1161,11 +1163,41 @@ Click Yes to certify and lock the current record. Click No to cancel.", MsgBoxSt
     End Function
 
     ''' <summary>
+    ''' Executes the spCollaredAnimalInGroups_Insert_Frequency_Date stored procedure on the WRST_Caribou database
+    ''' to insert a new record from a frequency, sighting date and the EID of the animal group to which it belongs
+    ''' </summary>
+    ''' <param name="RecordedFrequency"></param>
+    ''' <param name="SightingDate"></param>
+    ''' <param name="EID"></param>
+    Private Sub InsertCollaredAnimal(RecordedFrequency As Double, SightingDate As Date, EID As String)
+        'Dim SqlConnection As New SqlConnection(My.Settings.WRST_CaribouConnectionString)
+        'Using (SqlConnection)
+        '    Dim SqlCommand As New SqlCommand()
+        '    With SqlCommand
+        '        .Connection = SqlConnection
+        '        .CommandText = "spCollaredAnimalInGroups_Insert_Frequency_Date"
+        '        .CommandType = CommandType.StoredProcedure
+        '        .Parameters.AddWithValue("RecordedFrequency", RecordedFrequency)
+        '        .Parameters.AddWithValue("SightingDate", SightingDate)
+        '        .Parameters.AddWithValue("EID", EID)
+        '        SqlConnection.Open()
+        '        .ExecuteNonQuery()
+        '    End With
+        'End Using
+        'spCollaredAnimalInGroups_Insert_Frequency_Date 164.694, '2010-08-30 07:58:00.000', '00215AEC-528B-4017-93D7-EE2E68C81221'
+    End Sub
+
+    Private Function GetDeploymentIDFromFrequencyAndDate(Frequency As Double, SightingDate As Date) As Integer
+        'GetDeploymentIDFromFrequencyAndDate()
+    End Function
+
+    ''' <summary>
     ''' Auto-matches a GPS collar Frequency to an AnimalID in the Animal Movement database. Helper sub to process GridEX rows from AutomatchFrequenciesToAnimals()
     ''' </summary>
     ''' <param name="Row"></param>
     ''' <param name="MissingFrequenciesArrayList"></param>
     Private Sub AutomatchFrequencyToAnimal(Row As GridEXRow, MissingFrequenciesArrayList As ArrayList)
+
         Try
             'extract the frequencies from the row's FrequenciesInGroup column and try to parse it, search for the correct animalid and insert it into the cross reference table
             If Not Row Is Nothing Then
@@ -1175,15 +1207,28 @@ Click Yes to certify and lock the current record. Click No to cancel.", MsgBoxSt
                         'get caribou group row values into variables
                         Dim FrequenciesInGroup As String = Row.Cells("FrequenciesInGroup").Value
                         Dim SightingDate As String = Row.Cells("SightingDate").Value
+                        Dim EID As String = Row.Cells("EID").Value
 
                         'parse the comma separated frequencies so we can deal with them individually
                         Dim FrequenciesList As List(Of Double) = GetListOfCSVFrequencies(FrequenciesInGroup)
                         For Each Frequency In FrequenciesList ' FrequenciesInGroup.Split(",")
+                            Dim SQL As String = "SELECT d.DeploymentId, c.Frequency, a.MortalityDate,a.AnimalID
+FROM Collars AS c INNER JOIN CollarDeployments AS d ON c.CollarManufacturer = d.CollarManufacturer AND c.CollarId = d.CollarId INNER JOIN
+Animals AS a ON d.ProjectId = a.ProjectId AND d.AnimalId = a.AnimalId
+WHERE        (d.ProjectId = 'WRST_Caribou')
+And (convert(decimal(7,3),c.Frequency) = " & Frequency & ") 
+and ('" & SightingDate & "' <= convert(date,isnull(isnull(convert(date,d.RetrievalDate),convert(date,a.MortalityDate)),'" & SightingDate & "')))
+and (datediff(day,'" & SightingDate & "',convert(date,d.DeploymentDate)) <= 0) -- # days since deployment must be positive
+order by  abs(datediff(day,'" & SightingDate & "',convert(date,d.DeploymentDate)))"
+                            Debug.Print(SQL)
+                            Dim DeploymentDataTable As DataTable = GetDataTable(My.Settings.Animal_MovementConnectionString, SQL)
+                            Dim DeploymentID As Integer = DeploymentDataTable.Rows(0).Item("DeploymentID") ' = GetDeploymentIDFromFrequencyAndDate(Frequency, SightingDate)
+                            Dim AnimalID As String = DeploymentDataTable.Rows(0).Item("AnimalID") 'GetAnimalIDFromFrequencyAndObservationDate(Frequency, SightingDate)
 
-                            Dim AnimalID As String = GetAnimalIDFromFrequencyAndObservationDate(Frequency, SightingDate)
-                            Dim Comment As String = ""
-                            If AnimalID.Length > 0 Then
-                                'the collar was  found in the AM database.
+                            ''Dim Comment As String = ""
+
+                            If DeploymentID > 0 Then 'AnimalID.Length > 0 Then
+                                'the deployment was  found in the AM database.
 
                                 'add the animalid to the XrefDataTable
                                 Dim XrefDataTable As DataTable = Me.WRST_CaribouDataSet.Tables("CollaredAnimalsInGroups")
@@ -1196,9 +1241,10 @@ Click Yes to certify and lock the current record. Click No to cancel.", MsgBoxSt
                                     'the animalid does not exist for the animal group
                                     Dim XrefDataRow As DataRow = XrefDataTable.NewRow
                                     With XrefDataRow
+                                        .Item("EID") = EID
                                         .Item("AnimalID") = AnimalID
-                                        .Item("EID") = Row.Cells("EID").Value
-                                        '.Item("Comment") = Comment
+                                        .Item("RecordedFrequency") = Frequency
+                                        .Item("DeploymentID") = DeploymentID
                                     End With
                                     If AnimalID.Trim.Length > 0 Then
                                         XrefDataTable.Rows.Add(XrefDataRow)
@@ -1220,9 +1266,6 @@ Click Yes to certify and lock the current record. Click No to cancel.", MsgBoxSt
         End Try
     End Sub
 
-    Private Sub AutoMatchFrequenciesToAnimalsToolStripButton_Click(sender As Object, e As EventArgs)
-
-    End Sub
 
     ''' <summary>
     ''' Helper Sub to show which GPS collar frequencies were not matched to animal groups, most likely because the collar is not registered or deployed in the Animal Movement database.
@@ -1388,6 +1431,11 @@ Click Yes to certify and lock the current record. Click No to cancel.", MsgBoxSt
     Private Sub CollaredAnimalsInGroupsGridEX_DropDown(sender As Object, e As ColumnActionEventArgs) Handles CollaredAnimalsInGroupsGridEX.DropDown
         'load the animalids from animal movements into the selector combo
         LoadAnimalIDSCombo()
+    End Sub
+
+    Private Sub RunQCChecksToolStripButton_Click(sender As Object, e As EventArgs) Handles RunQCChecksToolStripButton.Click
+        Dim QCForm As New QCForm
+        QCForm.ShowDialog()
     End Sub
 
     'Private Sub AutoLoadSurveyFlightCells()

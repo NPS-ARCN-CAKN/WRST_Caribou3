@@ -279,32 +279,33 @@ ORDER BY Frequency"
     ''' <returns></returns>
     Public Function GetAnimalIDFromFrequencyAndObservationDate(Frequency As Double, ObservationDate As Date) As String
         Dim AnimalID As String = ""
-        Try
-            'query the animal movement database collar deployments to find out which collar had the requested frequency at the requested date.
-            'sometimes retrievaldate is not filled in so there may be more than one record returned but the TOP 1 spec ensures only the latest deployment is returned.
+        MsgBox("disabled GetAnimalIDFromFrequencyAndObservationDate")
+        '        Try
+        '            'query the animal movement database collar deployments to find out which collar had the requested frequency at the requested date.
+        '            'sometimes retrievaldate is not filled in so there may be more than one record returned but the TOP 1 spec ensures only the latest deployment is returned.
 
-            'build a query to submit to AM database
-            Dim Sql As String = "SELECT TOP 1 Collars.Frequency, CollarDeployments.AnimalId, CollarDeployments.DeploymentDate,CollarDeployments.RetrievalDate,iif(Animals.MortalityDate is NULL,'Alive','Dead') as Status , Animals.MortalityDate, CollarDeployments.CollarId
-FROM CollarDeployments INNER JOIN
-    Collars ON CollarDeployments.CollarManufacturer = Collars.CollarManufacturer AND CollarDeployments.CollarId = Collars.CollarId INNER JOIN
-    Animals ON CollarDeployments.ProjectId = Animals.ProjectId AND CollarDeployments.AnimalId = Animals.AnimalId
-WHERE       
-	(CollarDeployments.ProjectId = 'WRST_Caribou') AND (Frequency=" & Frequency & ") AND ((DeploymentDate < '" & ObservationDate & "') AND (RetrievalDate IS NULL)) 
-	OR ((CollarDeployments.ProjectId = 'WRST_Caribou') AND (Frequency=" & Frequency & ") AND (DeploymentDate < '" & ObservationDate & "') AND (RetrievalDate > '" & ObservationDate & "'))
-ORDER BY DeploymentDate DESC"
-            Console.Write(Sql)
-            'get the result into a datatable
-            Dim DT As DataTable = GetDataTable(My.Settings.Animal_MovementConnectionString, Sql)
-            If Not DT Is Nothing Then
-                'the TOP 1 sql spec ensures only one or zero records will be returned
-                If DT.Rows.Count = 1 Then
-                    'assign the animalid
-                    AnimalID = DT.Rows(0).Item("AnimalID")
-                End If
-            End If
-        Catch ex As Exception
-            MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name & ")")
-        End Try
+        '            'build a query to submit to AM database
+        '            Dim Sql As String = "SELECT TOP 1 Collars.Frequency, CollarDeployments.AnimalId, CollarDeployments.DeploymentDate,CollarDeployments.RetrievalDate,iif(Animals.MortalityDate is NULL,'Alive','Dead') as Status , Animals.MortalityDate, CollarDeployments.CollarId
+        'FROM CollarDeployments INNER JOIN
+        '    Collars ON CollarDeployments.CollarManufacturer = Collars.CollarManufacturer AND CollarDeployments.CollarId = Collars.CollarId INNER JOIN
+        '    Animals ON CollarDeployments.ProjectId = Animals.ProjectId AND CollarDeployments.AnimalId = Animals.AnimalId
+        'WHERE       
+        '	(CollarDeployments.ProjectId = 'WRST_Caribou') AND (Frequency=" & Frequency & ") AND ((DeploymentDate < '" & ObservationDate & "') AND (RetrievalDate IS NULL)) 
+        '	OR ((CollarDeployments.ProjectId = 'WRST_Caribou') AND (Frequency=" & Frequency & ") AND (DeploymentDate < '" & ObservationDate & "') AND (RetrievalDate > '" & ObservationDate & "'))
+        'ORDER BY DeploymentDate DESC"
+        '            Console.Write(Sql)
+        '            'get the result into a datatable
+        '            Dim DT As DataTable = GetDataTable(My.Settings.Animal_MovementConnectionString, Sql)
+        '            If Not DT Is Nothing Then
+        '                'the TOP 1 sql spec ensures only one or zero records will be returned
+        '                If DT.Rows.Count = 1 Then
+        '                    'assign the animalid
+        '                    AnimalID = DT.Rows(0).Item("AnimalID")
+        '                End If
+        '            End If
+        '        Catch ex As Exception
+        '            MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name & ")")
+        '        End Try
         Return AnimalID
     End Function
 
