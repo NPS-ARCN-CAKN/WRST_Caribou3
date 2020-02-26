@@ -1187,8 +1187,24 @@ Click Yes to certify and lock the current record. Click No to cancel.", MsgBoxSt
         'spCollaredAnimalInGroups_Insert_Frequency_Date 164.694, '2010-08-30 07:58:00.000', '00215AEC-528B-4017-93D7-EE2E68C81221'
     End Sub
 
-    Private Function GetDeploymentIDFromFrequencyAndDate(Frequency As Double, SightingDate As Date) As Integer
-        'GetDeploymentIDFromFrequencyAndDate()
+    Private Function GetDeploymentDataTableFromFrequencyAndDate(Frequency As Double, SightingDate As Date) As DataTable
+        Dim DeploymentDataTable As New DataTable
+        Try
+            'If Not IsDBNull(Frequency) And Not IsDBNull(sightingdate)
+            Dim SQL As String = "SELECT d.DeploymentId, c.Frequency, a.MortalityDate,a.AnimalID
+FROM Collars AS c INNER JOIN CollarDeployments AS d ON c.CollarManufacturer = d.CollarManufacturer AND c.CollarId = d.CollarId INNER JOIN
+Animals AS a ON d.ProjectId = a.ProjectId AND d.AnimalId = a.AnimalId
+WHERE        (d.ProjectId = 'WRST_Caribou')
+And (convert(decimal(7,3),c.Frequency) = " & Frequency & ") 
+and ('" & SightingDate & "' <= convert(date,isnull(isnull(convert(date,d.RetrievalDate),convert(date,a.MortalityDate)),'" & SightingDate & "')))
+and (datediff(day,'" & SightingDate & "',convert(date,d.DeploymentDate)) <= 0) -- # days since deployment must be positive
+order by  abs(datediff(day,'" & SightingDate & "',convert(date,d.DeploymentDate)))"
+
+            DeploymentDataTable = GetDataTable(My.Settings.Animal_MovementConnectionString, SQL)
+        Catch ex As Exception
+            MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name & ")")
+        End Try
+        Return DeploymentDataTable
     End Function
 
     ''' <summary>
@@ -1212,18 +1228,10 @@ Click Yes to certify and lock the current record. Click No to cancel.", MsgBoxSt
                         'parse the comma separated frequencies so we can deal with them individually
                         Dim FrequenciesList As List(Of Double) = GetListOfCSVFrequencies(FrequenciesInGroup)
                         For Each Frequency In FrequenciesList ' FrequenciesInGroup.Split(",")
-                            Dim SQL As String = "SELECT d.DeploymentId, c.Frequency, a.MortalityDate,a.AnimalID
-FROM Collars AS c INNER JOIN CollarDeployments AS d ON c.CollarManufacturer = d.CollarManufacturer AND c.CollarId = d.CollarId INNER JOIN
-Animals AS a ON d.ProjectId = a.ProjectId AND d.AnimalId = a.AnimalId
-WHERE        (d.ProjectId = 'WRST_Caribou')
-And (convert(decimal(7,3),c.Frequency) = " & Frequency & ") 
-and ('" & SightingDate & "' <= convert(date,isnull(isnull(convert(date,d.RetrievalDate),convert(date,a.MortalityDate)),'" & SightingDate & "')))
-and (datediff(day,'" & SightingDate & "',convert(date,d.DeploymentDate)) <= 0) -- # days since deployment must be positive
-order by  abs(datediff(day,'" & SightingDate & "',convert(date,d.DeploymentDate)))"
-                            Debug.Print(SQL)
-                            Dim DeploymentDataTable As DataTable = GetDataTable(My.Settings.Animal_MovementConnectionString, SQL)
+                            Dim DeploymentDataTable As DataTable = GetDeploymentDataTableFromFrequencyAndDate(Frequency, SightingDate)
                             Dim DeploymentID As Integer = DeploymentDataTable.Rows(0).Item("DeploymentID") ' = GetDeploymentIDFromFrequencyAndDate(Frequency, SightingDate)
                             Dim AnimalID As String = DeploymentDataTable.Rows(0).Item("AnimalID") 'GetAnimalIDFromFrequencyAndObservationDate(Frequency, SightingDate)
+                            Dim ActualFrequency As String = DeploymentDataTable.Rows(0).Item("Frequency") 'GetAnimalIDFromFrequencyAndObservationDate(Frequency, SightingDate)
 
                             ''Dim Comment As String = ""
 
@@ -1244,7 +1252,10 @@ order by  abs(datediff(day,'" & SightingDate & "',convert(date,d.DeploymentDate)
                                         .Item("EID") = EID
                                         .Item("AnimalID") = AnimalID
                                         .Item("RecordedFrequency") = Frequency
+                                        .Item("ActualFrequency") = ActualFrequency
                                         .Item("DeploymentID") = DeploymentID
+                                        .Item("RecordInsertedBy") = My.User.Name
+                                        .Item("RecordInsertedDate") = Now
                                     End With
                                     If AnimalID.Trim.Length > 0 Then
                                         XrefDataTable.Rows.Add(XrefDataRow)
@@ -1433,10 +1444,43 @@ order by  abs(datediff(day,'" & SightingDate & "',convert(date,d.DeploymentDate)
         LoadAnimalIDSCombo()
     End Sub
 
-    Private Sub RunQCChecksToolStripButton_Click(sender As Object, e As EventArgs) Handles RunQCChecksToolStripButton.Click
-        Dim QCForm As New QCForm
-        QCForm.ShowDialog()
+    Private Sub RematchAllFrequenciesToCollarDeploymentswithConfirmToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles RematchAllFrequenciesToCollarDeploymentswithConfirmToolStripMenuItem.Click
+        RematchAllObservedFrequenciesToCollarDeployments()
     End Sub
+
+    Private Sub RematchAllObservedFrequenciesToCollarDeployments()
+        Dim Warning As String = "WARNING: This procedure will overwrite all the records in the CollaredAnimalsInGroups table. This procedure will loop through all the frequencies ever recorded in caribou groups and rematch them to collar deployments/animals in Animal_Movement. Proceed?"
+        If MsgBox(Warning, MsgBoxStyle.YesNo, "WARNING") = MsgBoxResult.Yes Then
+            For Each Row As DataRow In WRST_CaribouDataSet.Tables("Surveys").Rows
+                If Not IsDBNull(Row.Item("FrequenciesInGroup")) Then
+                    'parse the comma separated frequencies so we can deal with them individually
+                    Dim FrequenciesList As List(Of Double) = GetListOfCSVFrequencies(Row.Item("FrequenciesInGroup"))
+                    For Each Frequency In FrequenciesList
+                        Debug.Print(Frequency)
+                    Next
+                End If
+            Next
+        End If
+
+        'Try
+        '    'resolve any changes to the database to avoid duplicate primary key problems
+        '    AskToSaveChanges()
+
+        '    'this arraylist will hold any frequencies not found in animal movement tool
+        '    Dim MissingFrequenciesArrayList As New ArrayList
+        '    Dim GridEX As GridEX = Me.SurveysGridEX
+        '    For Each Row As GridEXRow In GridEX.GetRows
+        '        If Not GridEX.CurrentRow Is Nothing Then
+        '            AutomatchFrequencyToAnimal(Row, MissingFrequenciesArrayList)
+        '        End If
+        '    Next
+        '    ShowMissingFrequenciesList(MissingFrequenciesArrayList)
+        'Catch ex As Exception
+        '    MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name & ")")
+        'End Try
+
+    End Sub
+
 
     'Private Sub AutoLoadSurveyFlightCells()
     'THIS JUST DIDN'T WORK WELL, HARD TO TELL IF YOU ARE ON A NEW RECORD OR NOT TO AVOID OVERWRITING EXISTING DATA

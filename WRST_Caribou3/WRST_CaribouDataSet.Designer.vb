@@ -409,6 +409,16 @@ Partial Public Class WRST_CaribouDataSet
         
         Private columnComment As Global.System.Data.DataColumn
         
+        Private columnDeploymentID As Global.System.Data.DataColumn
+        
+        Private columnRecordInsertedBy As Global.System.Data.DataColumn
+        
+        Private columnRecordInsertedDate As Global.System.Data.DataColumn
+        
+        Private columnActualFrequency As Global.System.Data.DataColumn
+        
+        Private columnRecordedFrequency As Global.System.Data.DataColumn
+        
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Public Sub New()
@@ -469,6 +479,46 @@ Partial Public Class WRST_CaribouDataSet
         End Property
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property DeploymentIDColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnDeploymentID
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property RecordInsertedByColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnRecordInsertedBy
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property RecordInsertedDateColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnRecordInsertedDate
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property ActualFrequencyColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnActualFrequency
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property RecordedFrequencyColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnRecordedFrequency
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
          Global.System.ComponentModel.Browsable(false)>  _
         Public ReadOnly Property Count() As Integer
@@ -505,9 +555,9 @@ Partial Public Class WRST_CaribouDataSet
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Overloads Function AddCollaredAnimalsInGroupsRow(ByVal parentSurveysRowByFK_CollaredAnimalsInGroups_Surveys As SurveysRow, ByVal parentCapturesRowByFK_CollaredAnimalsInGroups_Captures As CapturesRow, ByVal Comment As String) As CollaredAnimalsInGroupsRow
+        Public Overloads Function AddCollaredAnimalsInGroupsRow(ByVal parentSurveysRowByFK_CollaredAnimalsInGroups_Surveys As SurveysRow, ByVal parentCapturesRowByFK_CollaredAnimalsInGroups_Captures As CapturesRow, ByVal Comment As String, ByVal DeploymentID As Integer, ByVal RecordInsertedBy As String, ByVal RecordInsertedDate As Date, ByVal ActualFrequency As Double, ByVal RecordedFrequency As Double) As CollaredAnimalsInGroupsRow
             Dim rowCollaredAnimalsInGroupsRow As CollaredAnimalsInGroupsRow = CType(Me.NewRow,CollaredAnimalsInGroupsRow)
-            Dim columnValuesArray() As Object = New Object() {Nothing, Nothing, Comment}
+            Dim columnValuesArray() As Object = New Object() {Nothing, Nothing, Comment, DeploymentID, RecordInsertedBy, RecordInsertedDate, ActualFrequency, RecordedFrequency}
             If (Not (parentSurveysRowByFK_CollaredAnimalsInGroups_Surveys) Is Nothing) Then
                 columnValuesArray(0) = parentSurveysRowByFK_CollaredAnimalsInGroups_Surveys(26)
             End If
@@ -521,8 +571,8 @@ Partial Public Class WRST_CaribouDataSet
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Function FindByEIDAnimalID(ByVal EID As String, ByVal AnimalID As String) As CollaredAnimalsInGroupsRow
-            Return CType(Me.Rows.Find(New Object() {EID, AnimalID}),CollaredAnimalsInGroupsRow)
+        Public Function FindByEIDDeploymentID(ByVal EID As String, ByVal DeploymentID As Integer) As CollaredAnimalsInGroupsRow
+            Return CType(Me.Rows.Find(New Object() {EID, DeploymentID}),CollaredAnimalsInGroupsRow)
         End Function
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -545,6 +595,11 @@ Partial Public Class WRST_CaribouDataSet
             Me.columnEID = MyBase.Columns("EID")
             Me.columnAnimalID = MyBase.Columns("AnimalID")
             Me.columnComment = MyBase.Columns("Comment")
+            Me.columnDeploymentID = MyBase.Columns("DeploymentID")
+            Me.columnRecordInsertedBy = MyBase.Columns("RecordInsertedBy")
+            Me.columnRecordInsertedDate = MyBase.Columns("RecordInsertedDate")
+            Me.columnActualFrequency = MyBase.Columns("ActualFrequency")
+            Me.columnRecordedFrequency = MyBase.Columns("RecordedFrequency")
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -556,12 +611,25 @@ Partial Public Class WRST_CaribouDataSet
             MyBase.Columns.Add(Me.columnAnimalID)
             Me.columnComment = New Global.System.Data.DataColumn("Comment", GetType(String), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnComment)
-            Me.Constraints.Add(New Global.System.Data.UniqueConstraint("Constraint1", New Global.System.Data.DataColumn() {Me.columnEID, Me.columnAnimalID}, true))
+            Me.columnDeploymentID = New Global.System.Data.DataColumn("DeploymentID", GetType(Integer), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnDeploymentID)
+            Me.columnRecordInsertedBy = New Global.System.Data.DataColumn("RecordInsertedBy", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnRecordInsertedBy)
+            Me.columnRecordInsertedDate = New Global.System.Data.DataColumn("RecordInsertedDate", GetType(Date), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnRecordInsertedDate)
+            Me.columnActualFrequency = New Global.System.Data.DataColumn("ActualFrequency", GetType(Double), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnActualFrequency)
+            Me.columnRecordedFrequency = New Global.System.Data.DataColumn("RecordedFrequency", GetType(Double), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnRecordedFrequency)
+            Me.Constraints.Add(New Global.System.Data.UniqueConstraint("Constraint1", New Global.System.Data.DataColumn() {Me.columnEID, Me.columnDeploymentID}, true))
             Me.columnEID.AllowDBNull = false
             Me.columnEID.MaxLength = 50
-            Me.columnAnimalID.AllowDBNull = false
             Me.columnAnimalID.MaxLength = 16
             Me.columnComment.MaxLength = 1000
+            Me.columnDeploymentID.AllowDBNull = false
+            Me.columnRecordInsertedBy.AllowDBNull = false
+            Me.columnRecordInsertedBy.MaxLength = 50
+            Me.columnRecordInsertedDate.AllowDBNull = false
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -3457,7 +3525,11 @@ Partial Public Class WRST_CaribouDataSet
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Public Property AnimalID() As String
             Get
-                Return CType(Me(Me.tableCollaredAnimalsInGroups.AnimalIDColumn),String)
+                Try 
+                    Return CType(Me(Me.tableCollaredAnimalsInGroups.AnimalIDColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'AnimalID' in table 'CollaredAnimalsInGroups' is DBNull.", e)
+                End Try
             End Get
             Set
                 Me(Me.tableCollaredAnimalsInGroups.AnimalIDColumn) = value
@@ -3476,6 +3548,71 @@ Partial Public Class WRST_CaribouDataSet
             End Get
             Set
                 Me(Me.tableCollaredAnimalsInGroups.CommentColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property DeploymentID() As Integer
+            Get
+                Return CType(Me(Me.tableCollaredAnimalsInGroups.DeploymentIDColumn),Integer)
+            End Get
+            Set
+                Me(Me.tableCollaredAnimalsInGroups.DeploymentIDColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property RecordInsertedBy() As String
+            Get
+                Return CType(Me(Me.tableCollaredAnimalsInGroups.RecordInsertedByColumn),String)
+            End Get
+            Set
+                Me(Me.tableCollaredAnimalsInGroups.RecordInsertedByColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property RecordInsertedDate() As Date
+            Get
+                Return CType(Me(Me.tableCollaredAnimalsInGroups.RecordInsertedDateColumn),Date)
+            End Get
+            Set
+                Me(Me.tableCollaredAnimalsInGroups.RecordInsertedDateColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property ActualFrequency() As Double
+            Get
+                Try 
+                    Return CType(Me(Me.tableCollaredAnimalsInGroups.ActualFrequencyColumn),Double)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'ActualFrequency' in table 'CollaredAnimalsInGroups' is DBNu"& _ 
+                            "ll.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableCollaredAnimalsInGroups.ActualFrequencyColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property RecordedFrequency() As Double
+            Get
+                Try 
+                    Return CType(Me(Me.tableCollaredAnimalsInGroups.RecordedFrequencyColumn),Double)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'RecordedFrequency' in table 'CollaredAnimalsInGroups' is DB"& _ 
+                            "Null.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableCollaredAnimalsInGroups.RecordedFrequencyColumn) = value
             End Set
         End Property
         
@@ -3503,6 +3640,18 @@ Partial Public Class WRST_CaribouDataSet
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function IsAnimalIDNull() As Boolean
+            Return Me.IsNull(Me.tableCollaredAnimalsInGroups.AnimalIDColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub SetAnimalIDNull()
+            Me(Me.tableCollaredAnimalsInGroups.AnimalIDColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Public Function IsCommentNull() As Boolean
             Return Me.IsNull(Me.tableCollaredAnimalsInGroups.CommentColumn)
         End Function
@@ -3511,6 +3660,30 @@ Partial Public Class WRST_CaribouDataSet
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Public Sub SetCommentNull()
             Me(Me.tableCollaredAnimalsInGroups.CommentColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function IsActualFrequencyNull() As Boolean
+            Return Me.IsNull(Me.tableCollaredAnimalsInGroups.ActualFrequencyColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub SetActualFrequencyNull()
+            Me(Me.tableCollaredAnimalsInGroups.ActualFrequencyColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function IsRecordedFrequencyNull() As Boolean
+            Return Me.IsNull(Me.tableCollaredAnimalsInGroups.RecordedFrequencyColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub SetRecordedFrequencyNull()
+            Me(Me.tableCollaredAnimalsInGroups.RecordedFrequencyColumn) = Global.System.Convert.DBNull
         End Sub
     End Class
     
@@ -7078,35 +7251,45 @@ Namespace WRST_CaribouDataSetTableAdapters
             tableMapping.ColumnMappings.Add("EID", "EID")
             tableMapping.ColumnMappings.Add("AnimalID", "AnimalID")
             tableMapping.ColumnMappings.Add("Comment", "Comment")
+            tableMapping.ColumnMappings.Add("DeploymentID", "DeploymentID")
+            tableMapping.ColumnMappings.Add("RecordInsertedBy", "RecordInsertedBy")
+            tableMapping.ColumnMappings.Add("RecordInsertedDate", "RecordInsertedDate")
+            tableMapping.ColumnMappings.Add("ActualFrequency", "ActualFrequency")
+            tableMapping.ColumnMappings.Add("RecordedFrequency", "RecordedFrequency")
             Me._adapter.TableMappings.Add(tableMapping)
             Me._adapter.DeleteCommand = New Global.System.Data.SqlClient.SqlCommand()
             Me._adapter.DeleteCommand.Connection = Me.Connection
-            Me._adapter.DeleteCommand.CommandText = "DELETE FROM CollaredAnimalsInGroups"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"WHERE (EID = @Original_EID) AND (AnimalID = "& _ 
-                "@Original_AnimalID)"
+            Me._adapter.DeleteCommand.CommandText = "DELETE FROM CollaredAnimalsInGroups"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"WHERE  (EID = @Original_EID) AND (Deployment"& _ 
+                "ID = @Original_DeploymentID)"
             Me._adapter.DeleteCommand.CommandType = Global.System.Data.CommandType.Text
             Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_EID", Global.System.Data.SqlDbType.VarChar, 50, Global.System.Data.ParameterDirection.Input, 0, 0, "EID", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
-            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_AnimalID", Global.System.Data.SqlDbType.VarChar, 16, Global.System.Data.ParameterDirection.Input, 0, 0, "AnimalID", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
+            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_DeploymentID", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 0, 0, "DeploymentID", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
             Me._adapter.InsertCommand = New Global.System.Data.SqlClient.SqlCommand()
             Me._adapter.InsertCommand.Connection = Me.Connection
-            Me._adapter.InsertCommand.CommandText = "INSERT INTO [dbo].[CollaredAnimalsInGroups] ([EID], [AnimalID], [Comment]) VALUES"& _ 
-                " (@EID, @AnimalID, @Comment);"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"SELECT EID, AnimalID, Comment FROM CollaredAnimal"& _ 
-                "sInGroups WHERE (AnimalID = @AnimalID) AND (EID = @EID)"
+            Me._adapter.InsertCommand.CommandText = "INSERT INTO CollaredAnimalsInGroups"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                  (EID, AnimalID, Comment, D"& _ 
+                "eploymentID, RecordedFrequency, ActualFrequency)"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"VALUES (@EID,@AnimalID,@Commen"& _ 
+                "t,@DeploymentID,@RecordedFrequency,@ActualFrequency); "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"SELECT EID, AnimalID, Co"& _ 
+                "mment FROM CollaredAnimalsInGroups WHERE (AnimalID = @AnimalID) AND (EID = @EID)"& _ 
+                ""
             Me._adapter.InsertCommand.CommandType = Global.System.Data.CommandType.Text
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@EID", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "EID", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@AnimalID", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "AnimalID", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Comment", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Comment", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@EID", Global.System.Data.SqlDbType.VarChar, 50, Global.System.Data.ParameterDirection.Input, 0, 0, "EID", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@AnimalID", Global.System.Data.SqlDbType.VarChar, 16, Global.System.Data.ParameterDirection.Input, 0, 0, "AnimalID", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Comment", Global.System.Data.SqlDbType.VarChar, 1000, Global.System.Data.ParameterDirection.Input, 0, 0, "Comment", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@DeploymentID", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 0, 0, "DeploymentID", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@RecordedFrequency", Global.System.Data.SqlDbType.Float, 8, Global.System.Data.ParameterDirection.Input, 0, 0, "RecordedFrequency", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@ActualFrequency", Global.System.Data.SqlDbType.Float, 8, Global.System.Data.ParameterDirection.Input, 0, 0, "ActualFrequency", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.UpdateCommand = New Global.System.Data.SqlClient.SqlCommand()
             Me._adapter.UpdateCommand.Connection = Me.Connection
-            Me._adapter.UpdateCommand.CommandText = "UPDATE CollaredAnimalsInGroups"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"SET       EID = @EID, AnimalID = @AnimalID, Comme"& _ 
-                "nt = @Comment"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"WHERE (EID = @Original_EID) AND (AnimalID = @Original_AnimalID); "& _ 
-                " "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"SELECT EID, AnimalID, Comment FROM CollaredAnimalsInGroups WHERE (AnimalID = "& _ 
-                "@AnimalID) AND (EID = @EID)"
+            Me._adapter.UpdateCommand.CommandText = "UPDATE CollaredAnimalsInGroups"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"SET          EID = @EID, AnimalID = @AnimalID, Co"& _ 
+                "mment = @Comment"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"WHERE  (EID = @Original_EID) AND (DeploymentID = @Original_Dep"& _ 
+                "loymentID);   "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"SELECT EID, AnimalID, Comment FROM CollaredAnimalsInGroups WHERE"& _ 
+                " (AnimalID = @AnimalID) AND (EID = @EID)"
             Me._adapter.UpdateCommand.CommandType = Global.System.Data.CommandType.Text
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@EID", Global.System.Data.SqlDbType.VarChar, 50, Global.System.Data.ParameterDirection.Input, 0, 0, "EID", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@AnimalID", Global.System.Data.SqlDbType.VarChar, 16, Global.System.Data.ParameterDirection.Input, 0, 0, "AnimalID", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Comment", Global.System.Data.SqlDbType.VarChar, 1000, Global.System.Data.ParameterDirection.Input, 0, 0, "Comment", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_EID", Global.System.Data.SqlDbType.VarChar, 50, Global.System.Data.ParameterDirection.Input, 0, 0, "EID", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_AnimalID", Global.System.Data.SqlDbType.VarChar, 16, Global.System.Data.ParameterDirection.Input, 0, 0, "AnimalID", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_DeploymentID", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 0, 0, "DeploymentID", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -7122,7 +7305,8 @@ Namespace WRST_CaribouDataSetTableAdapters
             Me._commandCollection = New Global.System.Data.SqlClient.SqlCommand(0) {}
             Me._commandCollection(0) = New Global.System.Data.SqlClient.SqlCommand()
             Me._commandCollection(0).Connection = Me.Connection
-            Me._commandCollection(0).CommandText = "SELECT EID, AnimalID, Comment FROM dbo.CollaredAnimalsInGroups"
+            Me._commandCollection(0).CommandText = "SELECT EID, AnimalID, Comment, DeploymentID, RecordInsertedBy, RecordInsertedDate"& _ 
+                ", ActualFrequency, RecordedFrequency"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"FROM     CollaredAnimalsInGroups"
             Me._commandCollection(0).CommandType = Global.System.Data.CommandType.Text
         End Sub
         
@@ -7182,17 +7366,13 @@ Namespace WRST_CaribouDataSetTableAdapters
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
          Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
          Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Delete, true)>  _
-        Public Overloads Overridable Function Delete(ByVal Original_EID As String, ByVal Original_AnimalID As String) As Integer
+        Public Overloads Overridable Function Delete(ByVal Original_EID As String, ByVal Original_DeploymentID As Integer) As Integer
             If (Original_EID Is Nothing) Then
                 Throw New Global.System.ArgumentNullException("Original_EID")
             Else
                 Me.Adapter.DeleteCommand.Parameters(0).Value = CType(Original_EID,String)
             End If
-            If (Original_AnimalID Is Nothing) Then
-                Throw New Global.System.ArgumentNullException("Original_AnimalID")
-            Else
-                Me.Adapter.DeleteCommand.Parameters(1).Value = CType(Original_AnimalID,String)
-            End If
+            Me.Adapter.DeleteCommand.Parameters(1).Value = CType(Original_DeploymentID,Integer)
             Dim previousConnectionState As Global.System.Data.ConnectionState = Me.Adapter.DeleteCommand.Connection.State
             If ((Me.Adapter.DeleteCommand.Connection.State And Global.System.Data.ConnectionState.Open)  _
                         <> Global.System.Data.ConnectionState.Open) Then
@@ -7212,14 +7392,14 @@ Namespace WRST_CaribouDataSetTableAdapters
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
          Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
          Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Insert, true)>  _
-        Public Overloads Overridable Function Insert(ByVal EID As String, ByVal AnimalID As String, ByVal Comment As String) As Integer
+        Public Overloads Overridable Function Insert(ByVal EID As String, ByVal AnimalID As String, ByVal Comment As String, ByVal DeploymentID As Integer, ByVal RecordedFrequency As Global.System.Nullable(Of Double), ByVal ActualFrequency As Global.System.Nullable(Of Double)) As Integer
             If (EID Is Nothing) Then
                 Throw New Global.System.ArgumentNullException("EID")
             Else
                 Me.Adapter.InsertCommand.Parameters(0).Value = CType(EID,String)
             End If
             If (AnimalID Is Nothing) Then
-                Throw New Global.System.ArgumentNullException("AnimalID")
+                Me.Adapter.InsertCommand.Parameters(1).Value = Global.System.DBNull.Value
             Else
                 Me.Adapter.InsertCommand.Parameters(1).Value = CType(AnimalID,String)
             End If
@@ -7227,6 +7407,17 @@ Namespace WRST_CaribouDataSetTableAdapters
                 Me.Adapter.InsertCommand.Parameters(2).Value = Global.System.DBNull.Value
             Else
                 Me.Adapter.InsertCommand.Parameters(2).Value = CType(Comment,String)
+            End If
+            Me.Adapter.InsertCommand.Parameters(3).Value = CType(DeploymentID,Integer)
+            If (RecordedFrequency.HasValue = true) Then
+                Me.Adapter.InsertCommand.Parameters(4).Value = CType(RecordedFrequency.Value,Double)
+            Else
+                Me.Adapter.InsertCommand.Parameters(4).Value = Global.System.DBNull.Value
+            End If
+            If (ActualFrequency.HasValue = true) Then
+                Me.Adapter.InsertCommand.Parameters(5).Value = CType(ActualFrequency.Value,Double)
+            Else
+                Me.Adapter.InsertCommand.Parameters(5).Value = Global.System.DBNull.Value
             End If
             Dim previousConnectionState As Global.System.Data.ConnectionState = Me.Adapter.InsertCommand.Connection.State
             If ((Me.Adapter.InsertCommand.Connection.State And Global.System.Data.ConnectionState.Open)  _
@@ -7247,14 +7438,14 @@ Namespace WRST_CaribouDataSetTableAdapters
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
          Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
          Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Update, true)>  _
-        Public Overloads Overridable Function Update(ByVal EID As String, ByVal AnimalID As String, ByVal Comment As String, ByVal Original_EID As String, ByVal Original_AnimalID As String) As Integer
+        Public Overloads Overridable Function Update(ByVal EID As String, ByVal AnimalID As String, ByVal Comment As String, ByVal Original_EID As String, ByVal Original_DeploymentID As Integer) As Integer
             If (EID Is Nothing) Then
                 Throw New Global.System.ArgumentNullException("EID")
             Else
                 Me.Adapter.UpdateCommand.Parameters(0).Value = CType(EID,String)
             End If
             If (AnimalID Is Nothing) Then
-                Throw New Global.System.ArgumentNullException("AnimalID")
+                Me.Adapter.UpdateCommand.Parameters(1).Value = Global.System.DBNull.Value
             Else
                 Me.Adapter.UpdateCommand.Parameters(1).Value = CType(AnimalID,String)
             End If
@@ -7268,11 +7459,7 @@ Namespace WRST_CaribouDataSetTableAdapters
             Else
                 Me.Adapter.UpdateCommand.Parameters(3).Value = CType(Original_EID,String)
             End If
-            If (Original_AnimalID Is Nothing) Then
-                Throw New Global.System.ArgumentNullException("Original_AnimalID")
-            Else
-                Me.Adapter.UpdateCommand.Parameters(4).Value = CType(Original_AnimalID,String)
-            End If
+            Me.Adapter.UpdateCommand.Parameters(4).Value = CType(Original_DeploymentID,Integer)
             Dim previousConnectionState As Global.System.Data.ConnectionState = Me.Adapter.UpdateCommand.Connection.State
             If ((Me.Adapter.UpdateCommand.Connection.State And Global.System.Data.ConnectionState.Open)  _
                         <> Global.System.Data.ConnectionState.Open) Then
@@ -7292,8 +7479,8 @@ Namespace WRST_CaribouDataSetTableAdapters
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
          Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
          Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Update, true)>  _
-        Public Overloads Overridable Function Update(ByVal Comment As String, ByVal Original_EID As String, ByVal Original_AnimalID As String) As Integer
-            Return Me.Update(Original_EID, Original_AnimalID, Comment, Original_EID, Original_AnimalID)
+        Public Overloads Overridable Function Update(ByVal AnimalID As String, ByVal Comment As String, ByVal Original_EID As String, ByVal Original_DeploymentID As Integer) As Integer
+            Return Me.Update(Original_EID, AnimalID, Comment, Original_EID, Original_DeploymentID)
         End Function
     End Class
     
