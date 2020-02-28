@@ -271,43 +271,43 @@ ORDER BY Frequency"
     End Function
 
 
-    ''' <summary>
-    ''' Returns the AnimalID associated with a GPS collar frequency at a certain date. Data from Animal_Movement database.
-    ''' </summary>
-    ''' <param name="Frequency">GPS collar frequency</param>
-    ''' <param name="ObservationDate">Date of observation</param>
-    ''' <returns></returns>
-    Public Function GetAnimalIDFromFrequencyAndObservationDate(Frequency As Double, ObservationDate As Date) As String
-        Dim AnimalID As String = ""
-        MsgBox("disabled GetAnimalIDFromFrequencyAndObservationDate")
-        '        Try
-        '            'query the animal movement database collar deployments to find out which collar had the requested frequency at the requested date.
-        '            'sometimes retrievaldate is not filled in so there may be more than one record returned but the TOP 1 spec ensures only the latest deployment is returned.
+    '''' <summary>
+    '''' Returns the AnimalID associated with a GPS collar frequency at a certain date. Data from Animal_Movement database.
+    '''' </summary>
+    '''' <param name="Frequency">GPS collar frequency</param>
+    '''' <param name="ObservationDate">Date of observation</param>
+    '''' <returns></returns>
+    'Public Function GetAnimalIDFromFrequencyAndObservationDate(Frequency As Double, ObservationDate As Date) As String
+    '    Dim AnimalID As String = ""
+    '    MsgBox("disabled GetAnimalIDFromFrequencyAndObservationDate")
+    '    '        Try
+    '    '            'query the animal movement database collar deployments to find out which collar had the requested frequency at the requested date.
+    '    '            'sometimes retrievaldate is not filled in so there may be more than one record returned but the TOP 1 spec ensures only the latest deployment is returned.
 
-        '            'build a query to submit to AM database
-        '            Dim Sql As String = "SELECT TOP 1 Collars.Frequency, CollarDeployments.AnimalId, CollarDeployments.DeploymentDate,CollarDeployments.RetrievalDate,iif(Animals.MortalityDate is NULL,'Alive','Dead') as Status , Animals.MortalityDate, CollarDeployments.CollarId
-        'FROM CollarDeployments INNER JOIN
-        '    Collars ON CollarDeployments.CollarManufacturer = Collars.CollarManufacturer AND CollarDeployments.CollarId = Collars.CollarId INNER JOIN
-        '    Animals ON CollarDeployments.ProjectId = Animals.ProjectId AND CollarDeployments.AnimalId = Animals.AnimalId
-        'WHERE       
-        '	(CollarDeployments.ProjectId = 'WRST_Caribou') AND (Frequency=" & Frequency & ") AND ((DeploymentDate < '" & ObservationDate & "') AND (RetrievalDate IS NULL)) 
-        '	OR ((CollarDeployments.ProjectId = 'WRST_Caribou') AND (Frequency=" & Frequency & ") AND (DeploymentDate < '" & ObservationDate & "') AND (RetrievalDate > '" & ObservationDate & "'))
-        'ORDER BY DeploymentDate DESC"
-        '            Console.Write(Sql)
-        '            'get the result into a datatable
-        '            Dim DT As DataTable = GetDataTable(My.Settings.Animal_MovementConnectionString, Sql)
-        '            If Not DT Is Nothing Then
-        '                'the TOP 1 sql spec ensures only one or zero records will be returned
-        '                If DT.Rows.Count = 1 Then
-        '                    'assign the animalid
-        '                    AnimalID = DT.Rows(0).Item("AnimalID")
-        '                End If
-        '            End If
-        '        Catch ex As Exception
-        '            MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name & ")")
-        '        End Try
-        Return AnimalID
-    End Function
+    '    '            'build a query to submit to AM database
+    '    '            Dim Sql As String = "SELECT TOP 1 Collars.Frequency, CollarDeployments.AnimalId, CollarDeployments.DeploymentDate,CollarDeployments.RetrievalDate,iif(Animals.MortalityDate is NULL,'Alive','Dead') as Status , Animals.MortalityDate, CollarDeployments.CollarId
+    '    'FROM CollarDeployments INNER JOIN
+    '    '    Collars ON CollarDeployments.CollarManufacturer = Collars.CollarManufacturer AND CollarDeployments.CollarId = Collars.CollarId INNER JOIN
+    '    '    Animals ON CollarDeployments.ProjectId = Animals.ProjectId AND CollarDeployments.AnimalId = Animals.AnimalId
+    '    'WHERE       
+    '    '	(CollarDeployments.ProjectId = 'WRST_Caribou') AND (Frequency=" & Frequency & ") AND ((DeploymentDate < '" & ObservationDate & "') AND (RetrievalDate IS NULL)) 
+    '    '	OR ((CollarDeployments.ProjectId = 'WRST_Caribou') AND (Frequency=" & Frequency & ") AND (DeploymentDate < '" & ObservationDate & "') AND (RetrievalDate > '" & ObservationDate & "'))
+    '    'ORDER BY DeploymentDate DESC"
+    '    '            Console.Write(Sql)
+    '    '            'get the result into a datatable
+    '    '            Dim DT As DataTable = GetDataTable(My.Settings.Animal_MovementConnectionString, Sql)
+    '    '            If Not DT Is Nothing Then
+    '    '                'the TOP 1 sql spec ensures only one or zero records will be returned
+    '    '                If DT.Rows.Count = 1 Then
+    '    '                    'assign the animalid
+    '    '                    AnimalID = DT.Rows(0).Item("AnimalID")
+    '    '                End If
+    '    '            End If
+    '    '        Catch ex As Exception
+    '    '            MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name & ")")
+    '    '        End Try
+    '    Return AnimalID
+    'End Function
 
     ''' <summary>
     ''' Returns a DataTable of the WRST caribou animals from the Animal_Movement database
@@ -404,6 +404,59 @@ ORDER BY Frequency"
         End Try
 
     End Sub
+
+
+    ''' <summary>
+    ''' Queries Animal Movement for the DeploymentID and other information for a Frequency and SightingDate. Returns a DataTable containing the columns DeploymentId, Frequency, MortalityDate and AnimalID
+    ''' </summary>
+    ''' <param name="Frequency">Frequency to look up. Double.</param>
+    ''' <param name="SightingDate">Date to look up. Date.</param>
+    ''' <returns></returns>
+    Public Function GetDeploymentDataTableFromFrequencyAndDate(Frequency As Double, SightingDate As Date) As DataTable
+        Dim DeploymentDataTable As New DataTable
+        Try
+            If Not IsDBNull(Frequency) And Not IsDBNull(SightingDate) Then
+                Dim SQL As String = "SELECT d.DeploymentId, c.Frequency, a.MortalityDate,a.AnimalID
+FROM Collars AS c INNER JOIN CollarDeployments AS d ON c.CollarManufacturer = d.CollarManufacturer AND c.CollarId = d.CollarId INNER JOIN
+Animals AS a ON d.ProjectId = a.ProjectId AND d.AnimalId = a.AnimalId
+WHERE        (d.ProjectId = 'WRST_Caribou')
+And (convert(decimal(7,3),c.Frequency) = " & Frequency & ") 
+and ('" & SightingDate & "' <= convert(date,isnull(isnull(convert(date,d.RetrievalDate),convert(date,a.MortalityDate)),'" & SightingDate & "')))
+and (datediff(day,'" & SightingDate & "',convert(date,d.DeploymentDate)) <= 0) -- # days since deployment must be positive
+order by  abs(datediff(day,'" & SightingDate & "',convert(date,d.DeploymentDate)))"
+
+                DeploymentDataTable = GetDataTable(My.Settings.Animal_MovementConnectionString, SQL)
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name & ")")
+        End Try
+        Return DeploymentDataTable
+    End Function
+
+
+    ''' <summary>
+    ''' Converts a comma separated list of frequencies (typically FrequenciesInGroup from the Surveys table) to a List of numeric frequencies
+    ''' </summary>
+    ''' <param name="FrequenciesCSV"></param>
+    ''' <returns>List(Of Double)</returns>
+    Public Function GetListOfCSVFrequencies(FrequenciesCSV As String) As List(Of Double)
+        Dim FrequenciesList As New List(Of Double)
+        Try
+            If Not FrequenciesCSV Is Nothing Then
+                If Not IsDBNull(FrequenciesCSV) Then
+                    For Each Frequency In FrequenciesCSV.Split(",")
+                        Frequency = Frequency.Trim
+                        If IsNumeric(Frequency.Trim) = True Then
+                            FrequenciesList.Add(Frequency)
+                        End If
+                    Next
+                End If
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message & " " & System.Reflection.MethodBase.GetCurrentMethod.Name)
+        End Try
+        Return FrequenciesList
+    End Function
 
 
     ''' <summary>

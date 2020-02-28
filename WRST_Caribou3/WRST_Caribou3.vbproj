@@ -164,6 +164,12 @@
     <Compile Include="QCForm.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="QC_DuplicateFrequenciesInGroupForm.Designer.vb">
+      <DependentUpon>QC_DuplicateFrequenciesInGroupForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="QC_DuplicateFrequenciesInGroupForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="ResultsForm.Designer.vb">
       <DependentUpon>ResultsForm.vb</DependentUpon>
     </Compile>
@@ -211,6 +217,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="QCForm.resx">
       <DependentUpon>QCForm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="QC_DuplicateFrequenciesInGroupForm.resx">
+      <DependentUpon>QC_DuplicateFrequenciesInGroupForm.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ResultsForm.resx">
       <DependentUpon>ResultsForm.vb</DependentUpon>
