@@ -22,10 +22,6 @@ Public Class Form1
             'load in the data from the WRST_Caribou SQL Server database
             LoadDataset()
 
-            'For Each col As DataColumn In WRST_CaribouDataSet.Tables("Surveys").Columns
-            '    Debug.Print("UPDATE Surveys SET " & col.ColumnName & " = NULL Where  " & col.ColumnName & " = 0;")
-            'Next
-
             'format all the data grids more or less the same
             FormatGridEX(Me.SurveyFlightsGridEX)
             FormatGridEX(Me.SurveysGridEX)
@@ -1088,8 +1084,9 @@ Click Yes to certify and lock the current record. Click No to cancel.", MsgBoxSt
         Try
             If SurveysGridEX.GetRows.Count > 0 Then
                 For Each Row As GridEXRow In SurveysGridEX.GetRows
-                    Row.BeginEdit()
+
                     If Not Row Is Nothing Then
+                        Row.BeginEdit()
                         If Not Row.Cells("EID") Is Nothing Then
                             If Not Row.Cells("EID").Value Is Nothing Then
                                 'If Not Row.Cells("EID").Value.ToString.Trim <> "" Then 'nothing got past here when it was enabled, i don't know why
@@ -1126,14 +1123,15 @@ Click Yes to certify and lock the current record. Click No to cancel.", MsgBoxSt
                                 End If
                             End If
                         End If
+                        Row.EndEdit()
                     End If
-                    Row.EndEdit()
+
                 Next
                 Me.SurveysBindingSource.EndEdit()
             End If
         Catch nrefex As NullReferenceException
             'ignore
-            Debug.Print(nrefex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name & ")")
+            'MsgBox(nrefex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name & ")")
         Catch ex As Exception
             MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name & ")")
         End Try
@@ -1207,12 +1205,14 @@ Click Yes to certify and lock the current record. Click No to cancel.", MsgBoxSt
                             Dim ActualFrequency As String = -999
 
                             'if there is a deployment for the date and frequency
-                            If DeploymentDataTable.Rows.Count > 0 Then
+                            If DeploymentDataTable.Rows.Count = 1 Then
                                 'we retreived a deployment
                                 ' put the deployment data into variables
                                 DeploymentID = DeploymentDataTable.Rows(0).Item("DeploymentID")
                                 AnimalID = DeploymentDataTable.Rows(0).Item("AnimalID")
                                 ActualFrequency = DeploymentDataTable.Rows(0).Item("Frequency")
+                            ElseIf DeploymentDataTable.Rows.Count = 0 Then
+                                'no deployments retrieved. the app should stick the default deployment values above in the new row
                             Else
                                 'one reason we may not have gotten a deployment row above is because the frequency needs to be truncated
                                 'sometimes it's recorded in the field or in Animal Movement to too many decimal places
@@ -1221,16 +1221,13 @@ Click Yes to certify and lock the current record. Click No to cancel.", MsgBoxSt
                                 DeploymentDataTable = GetDeploymentDataTableFromFrequencyAndDate(TruncatedFrequency, SightingDate)
 
                                 'if there is a deployment for the date and frequency
-                                If DeploymentDataTable.Rows.Count > 0 Then
+                                If DeploymentDataTable.Rows.Count = 1 Then
                                     'we retreived a deployment. put the deployment data into variables
                                     DeploymentID = DeploymentDataTable.Rows(0).Item("DeploymentID")
                                     AnimalID = DeploymentDataTable.Rows(0).Item("AnimalID")
                                     ActualFrequency = TruncatedFrequency
-                                ElseIf GetCollarDeploymentsDataTable.Rows.Count = 0 Then
-                                    'no deployment found for the frequency, replace animalid with UNK
-                                    DeploymentID = -999
-                                    AnimalID = "UNK"
-                                    ActualFrequency = 0.000
+                                Else
+                                    MsgBox("Multiple deployments problem MatchFrequencyToAnimal " & Frequency & " " & SightingDate)
                                 End If
                             End If
 
@@ -1485,6 +1482,9 @@ Click Yes to certify and lock the current record. Click No to cancel.", MsgBoxSt
 
                     'ask to save the dataset
                     AskToSaveChanges()
+
+                    'reload the dataset
+                    LoadDataset()
 
                 Catch ex As Exception
                     MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name & ")")

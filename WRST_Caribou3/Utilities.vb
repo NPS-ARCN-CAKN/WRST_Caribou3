@@ -251,7 +251,7 @@ ORDER BY Frequency"
     ''' Returns a DataTable of the WRST caribou collar deployments from the Animal_Movement database
     ''' </summary>
     ''' <returns>DataTable</returns>
-    Public Function GetCurrentCollarDeploymentsDataTable(AsOfDate As Date) As DataTable
+    Public Function zGetCurrentCollarDeploymentsDataTable(AsOfDate As Date) As DataTable
         Dim DT As New DataTable
         Try
             Dim Sql As String = "SELECT Collars.Frequency, CollarDeployments.AnimalId, CollarDeployments.DeploymentDate,CollarDeployments.RetrievalDate,iif(Animals.MortalityDate is NULL,'Alive','Dead') as Status , Animals.MortalityDate, CollarDeployments.CollarId
@@ -414,19 +414,42 @@ ORDER BY Frequency"
     ''' <returns></returns>
     Public Function GetDeploymentDataTableFromFrequencyAndDate(Frequency As Double, SightingDate As Date) As DataTable
         Dim DeploymentDataTable As New DataTable
+        'MsgBox("the frequency matcher is giving multiple deployments because of the frequency tolerance built into the query")
         Try
             If Not IsDBNull(Frequency) And Not IsDBNull(SightingDate) Then
-                Dim SQL As String = "SELECT d.DeploymentId, c.Frequency, a.MortalityDate,a.AnimalID
+
+                Dim Sql As String = "SELECT c.Frequency,a.AnimalID
+,convert(date,d.DeploymentDate) as DeploymentDate
+,convert(date,d.RetrievalDate) as RetrievalDate
+, a.MortalityDate
+,datediff(day,convert(date,d.DeploymentDate),'" & SightingDate & "') as DaysDeployedBeforeSighting -- Negative numbers mean the deployment happened after the sighting date
+,'" & SightingDate & "' as SightingDate
+,d.DeploymentId
 FROM Collars AS c INNER JOIN CollarDeployments AS d ON c.CollarManufacturer = d.CollarManufacturer AND c.CollarId = d.CollarId INNER JOIN
 Animals AS a ON d.ProjectId = a.ProjectId AND d.AnimalId = a.AnimalId
-WHERE        (d.ProjectId = 'WRST_Caribou')
-And (convert(decimal(7,3),c.Frequency) = " & Frequency & ") 
-and ('" & SightingDate & "' <= convert(date,isnull(isnull(convert(date,d.RetrievalDate),convert(date,a.MortalityDate)),'" & SightingDate & "')))
-and (datediff(day,'" & SightingDate & "',convert(date,d.DeploymentDate)) <= 0) -- # days since deployment must be positive
-order by  abs(datediff(day,'" & SightingDate & "',convert(date,d.DeploymentDate)))"
+WHERE        
+(d.ProjectId = 'WRST_Caribou') 
+And ((c.Frequency = " & Frequency & ") Or (convert(decimal(7,3),c.Frequency) = " & Frequency & ") or convert(decimal(7,3),c.Frequency) between " & Frequency & " - 0.001 and " & Frequency & " + 0.001) 
+And ('" & SightingDate & "' <= convert(date,isnull(isnull(convert(date,d.RetrievalDate),convert(date,a.MortalityDate)),'" & SightingDate & "'))) -- sightingdate must be after deploymentdate and before or equal to retrieval date if not null or mortalitydate if not null, otherwise sightingdate
+And (datediff(day,convert(date,d.DeploymentDate),'" & SightingDate & "') >= 0) -- # Days since deployment must be positive. Negative number means the sighting date was pre-deployment
+order by d.DeploymentDate "
 
-                DeploymentDataTable = GetDataTable(My.Settings.Animal_MovementConnectionString, SQL)
+                DeploymentDataTable = GetDataTable(My.Settings.Animal_MovementConnectionString, Sql)
+                If DeploymentDataTable.Rows.Count > 1 Then
+                    ' we retrieved multiple deployments, probably due to collar being redeployed without retrievaldate being set for the prior deployment
+                    'in animal movement
+                    ' or the frequency drifted or the frequency has different precision in animal movement or the Surveys table
+                    Dim SelectDeploymentForm As New SelectDeploymentForm(DeploymentDataTable)
+                    SelectDeploymentForm.ShowDialog()
+                    If Not IsDBNull(SelectDeploymentForm.DeploymentID) Then
+                        If SelectDeploymentForm.DeploymentID > 0 Then
+                            Dim DeploymentDataView As New DataView(DeploymentDataTable, "DeploymentID = " & SelectDeploymentForm.DeploymentID, "", DataViewRowState.CurrentRows)
+                            DeploymentDataTable = DeploymentDataView.ToTable
+                        End If
+                    End If
+                End If
             End If
+
         Catch ex As Exception
             MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name & ")")
         End Try
