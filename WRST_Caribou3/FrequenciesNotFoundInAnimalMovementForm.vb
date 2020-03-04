@@ -1,4 +1,4 @@
-﻿Public Class QC_DuplicateFrequenciesInGroupForm
+﻿Public Class FrequenciesNotFoundInAnimalMovementForm
     Private SurveysDataTableValue As DataTable
     Public Property SurveysDataTable() As DataTable
         Get
@@ -57,11 +57,11 @@
                         Dim NewRow As DataRow = FrequenciesDataTable.NewRow
 
                         'get info from animal movement
-                        Dim DeploymentDataTable As DataTable = GetDeploymentDataTableFromFrequencyAndDate(Frequency, SightingDate)
+                        Dim DeploymentDataTable As DataTable = GetDeploymentDataTableFromFrequencyAndDate(Frequency, SightingDate, 0.001)
                         Dim AnimalID As String = ""
                         Dim AM_Frequency As String = -999
                         Dim Problem As String = ""
-                        'Me.OutputTextBox.AppendText(SightingDate & vbTab & GroupNumber & vbTab & Frequency & vbTab & DeploymentDataTable.Rows.Count & vbNewLine)
+
                         If DeploymentDataTable.Rows.Count = 0 Then
                             AnimalID = ""
                             AM_Frequency = -999
@@ -107,9 +107,10 @@
     End Function
 
     Private Sub QC_DuplicateFrequenciesInGroupForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        Me.OutputTextBox.Text = ""
+        Me.OutputTextBox.Text = "Looking for survey frequencies that are not in Animal Movement..." & vbNewLine
+        Dim FrequenciesMatchingDataTable As DataTable = QC_GetUnmatchedCaribouInGroups()
         With Me.DuplicatesGridEX
-            .DataSource = QC_GetUnmatchedCaribouInGroups()
+            .DataSource = FrequenciesMatchingDataTable
             .RetrieveStructure()
             .AlternatingColors = True
             .RecordNavigator = True
@@ -117,6 +118,40 @@
             .GroupMode = Janus.Windows.GridEX.GroupMode.Collapsed
             .GroupTotals = Janus.Windows.GridEX.GroupTotals.ExpandedGroup
         End With
+        Me.OutputTextBox.AppendText("Found " & FrequenciesMatchingDataTable.Rows.Count & " survey frequencies" & vbNewLine)
+        Dim DV As New DataView(FrequenciesMatchingDataTable, "Problem <> 'OK'", "Frequency,SightingDate", DataViewRowState.CurrentRows)
+        Dim ProblemsDataTable As DataTable = DV.ToTable
+        Me.OutputTextBox.AppendText("Found " & ProblemsDataTable.Rows.Count & " frequencies not available in Animal Movement" & vbNewLine)
+        Me.OutputTextBox.AppendText(vbNewLine)
+        Me.OutputTextBox.AppendText("Frequency,SightingDate,GroupNumber,Problem" & vbNewLine)
+        For Each DVRow As DataRow In ProblemsDataTable.Rows
+            Me.OutputTextBox.AppendText(DVRow.Item("Frequency") & "," & DVRow.Item("SightingDate") & "," & DVRow.Item("GroupNumber") & "," & DVRow.Item("Problem") & vbNewLine)
+        Next
+        Me.OutputTextBox.AppendText(vbNewLine)
+    End Sub
 
+    Private Sub ExportResultsToolStripButton_Click(sender As Object, e As EventArgs) Handles ExportResultsToolStripButton.Click
+        ExportProblemRecords()
+    End Sub
+
+    Private Sub ExportProblemRecords()
+        Try
+            Dim ResultsDataTable As DataTable = Me.DuplicatesGridEX.DataSource
+            Dim ResultsDV As New DataView(ResultsDataTable, "Problem <> 'OK'", "Frequency", DataViewRowState.CurrentRows)
+        Dim Results As String = DataTableToCSV(ResultsDV.ToTable, "|")
+            Dim SFD As New SaveFileDialog
+            With SFD
+                .AddExtension = True
+                .InitialDirectory = "C:\"
+                .OverwritePrompt = True
+                .Title = "Save results"
+                .Filter = "Pipe separated values (.txt)|*.txt"
+                If .ShowDialog = DialogResult.OK Then
+                    My.Computer.FileSystem.WriteAllText(SFD.FileName, Results, False)
+                End If
+            End With
+        Catch ex As Exception
+            MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name & ")")
+        End Try
     End Sub
 End Class

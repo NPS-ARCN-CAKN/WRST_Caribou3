@@ -136,11 +136,11 @@
     <Compile Include="CapturesForm.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.vb">
+    <Compile Include="MainForm.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.vb">
-      <DependentUpon>Form1.vb</DependentUpon>
+    <Compile Include="MainForm.Designer.vb">
+      <DependentUpon>MainForm.vb</DependentUpon>
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="My Project\AssemblyInfo.vb" />
@@ -164,10 +164,10 @@
     <Compile Include="QCForm.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="QC_DuplicateFrequenciesInGroupForm.Designer.vb">
-      <DependentUpon>QC_DuplicateFrequenciesInGroupForm.vb</DependentUpon>
+    <Compile Include="FrequenciesNotFoundInAnimalMovementForm.Designer.vb">
+      <DependentUpon>FrequenciesNotFoundInAnimalMovementForm.vb</DependentUpon>
     </Compile>
-    <Compile Include="QC_DuplicateFrequenciesInGroupForm.vb">
+    <Compile Include="FrequenciesNotFoundInAnimalMovementForm.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="ResultsForm.Designer.vb">
@@ -211,8 +211,8 @@
     <EmbeddedResource Include="CapturesForm.resx">
       <DependentUpon>CapturesForm.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form1.resx">
-      <DependentUpon>Form1.vb</DependentUpon>
+    <EmbeddedResource Include="MainForm.resx">
+      <DependentUpon>MainForm.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="My Project\licenses.licx" />
     <EmbeddedResource Include="My Project\Resources.resx">
@@ -224,8 +224,8 @@
     <EmbeddedResource Include="QCForm.resx">
       <DependentUpon>QCForm.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="QC_DuplicateFrequenciesInGroupForm.resx">
-      <DependentUpon>QC_DuplicateFrequenciesInGroupForm.vb</DependentUpon>
+    <EmbeddedResource Include="FrequenciesNotFoundInAnimalMovementForm.resx">
+      <DependentUpon>FrequenciesNotFoundInAnimalMovementForm.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ResultsForm.resx">
       <DependentUpon>ResultsForm.vb</DependentUpon>

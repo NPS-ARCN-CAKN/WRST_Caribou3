@@ -25,6 +25,9 @@
         If Not DeploymentsDataTable Is Nothing Then
             If DeploymentsDataTable.Rows.Count > 1 Then
                 With DeploymentsGridEX
+                    .AllowAddNew = Janus.Windows.GridEX.InheritableBoolean.False
+                    .AllowDelete = Janus.Windows.GridEX.InheritableBoolean.False
+                    .AllowEdit = Janus.Windows.GridEX.InheritableBoolean.False
                     .DataSource = DeploymentsDataTable
                     .RetrieveStructure()
                 End With
@@ -42,7 +45,7 @@
         Me.HeaderLabel.AutoSize = True
     End Sub
 
-    Private Sub CancelButton_Click(sender As Object, e As EventArgs) Handles CancelButton.Click
+    Private Sub CancelButton_Click(sender As Object, e As EventArgs) Handles CancelFormButton.Click
         Me.Close()
     End Sub
 
