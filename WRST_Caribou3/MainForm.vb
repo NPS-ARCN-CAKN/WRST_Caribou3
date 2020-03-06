@@ -1461,9 +1461,7 @@ Click Yes to certify and lock the current record. Click No to cancel.", MsgBoxSt
         LoadAnimalIDSCombo()
     End Sub
 
-    Private Sub RematchAllFrequenciesToCollarDeploymentswithConfirmToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles RematchAllFrequenciesToCollarDeploymentswithConfirmToolStripMenuItem.Click
-        MatchAllObservedFrequenciesToCollarDeployments()
-    End Sub
+
 
     ''' <summary>
     ''' The MatchAllObservedFrequenciesToCollarDeployments routine deletes all the records in the CollaredCaribouInGroups table, cycles through all the detected frequencies in the FrequenciesInGroup column of the 
@@ -1513,9 +1511,7 @@ Click Yes to certify and lock the current record. Click No to cancel.", MsgBoxSt
     End Sub
 
     Private Sub CountTotalDetectedFrequenciesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CountTotalDetectedFrequenciesToolStripMenuItem.Click
-        'Dim FrequenciesNotFoundInAnimalMovementForm As New FrequenciesNotFoundInAnimalMovementForm()
-        'FrequenciesNotFoundInAnimalMovementForm.SurveysDataTable = WRST_CaribouDataSet.Tables("Surveys")
-        'FrequenciesNotFoundInAnimalMovementForm.ShowDialog()
+
         Dim QCFrequenciesForm As New QC_FrequenciesForm
         QCFrequenciesForm.Show()
 
@@ -1552,6 +1548,10 @@ Click Yes to certify and lock the current record. Click No to cancel.", MsgBoxSt
             CollarsInventoryForm.SurveyDate = CurrentSurveyDate
         End If
         CollarsInventoryForm.Show()
+    End Sub
+
+    Private Sub DMRematchAllFrequenciesToCollarDeploymentswithConfirmToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DMRematchAllFrequenciesToCollarDeploymentswithConfirmToolStripMenuItem.Click
+        MatchAllObservedFrequenciesToCollarDeployments()
     End Sub
 
 

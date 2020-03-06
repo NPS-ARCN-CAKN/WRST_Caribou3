@@ -636,6 +636,29 @@ Parameter name: key" Then
         Return Label
     End Function
 
+    ''' <summary>
+    ''' Allows the user to save a DataTable as comma separated values text file. Shows a SaveFileDialog.
+    ''' </summary>
+    ''' <param name="DataTableToExport">DataTable to be exported. DataTable.</param>
+    Public Sub ExportDataTableToCSV(DataTableToExport As DataTable)
+        Try
+            Dim Results As String = DataTableToCSV(DataTableToExport, "|")
+            Dim SFD As New SaveFileDialog
+            With SFD
+                .AddExtension = True
+                .InitialDirectory = "C:\"
+                .OverwritePrompt = True
+                .Title = "Save results"
+                .Filter = "Pipe separated values (.txt)|*.txt"
+                If .ShowDialog = DialogResult.OK Then
+                    My.Computer.FileSystem.WriteAllText(SFD.FileName, Results, False)
+                End If
+            End With
+        Catch ex As Exception
+            MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name & ")")
+        End Try
+    End Sub
+
     '''' <summary>
     '''' 
     '''' </summary>

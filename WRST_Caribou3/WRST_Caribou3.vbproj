@@ -170,12 +170,6 @@
     <Compile Include="QCForm.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FrequenciesNotFoundInAnimalMovementForm.Designer.vb">
-      <DependentUpon>FrequenciesNotFoundInAnimalMovementForm.vb</DependentUpon>
-    </Compile>
-    <Compile Include="FrequenciesNotFoundInAnimalMovementForm.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="QC_FrequenciesForm.Designer.vb">
       <DependentUpon>QC_FrequenciesForm.vb</DependentUpon>
     </Compile>
@@ -238,9 +232,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="QCForm.resx">
       <DependentUpon>QCForm.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="FrequenciesNotFoundInAnimalMovementForm.resx">
-      <DependentUpon>FrequenciesNotFoundInAnimalMovementForm.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="QC_FrequenciesForm.resx">
       <DependentUpon>QC_FrequenciesForm.vb</DependentUpon>

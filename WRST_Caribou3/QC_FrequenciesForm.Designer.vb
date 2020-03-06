@@ -30,6 +30,8 @@ Partial Class QC_FrequenciesForm
         Me.QCGridEX = New Janus.Windows.GridEX.GridEX()
         Me.TextBox1 = New System.Windows.Forms.TextBox()
         Me.TextBox2 = New System.Windows.Forms.TextBox()
+        Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
+        Me.ExportResultsToolStripButton = New System.Windows.Forms.ToolStripButton()
         CType(Me.QCBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.QCToolStrip.SuspendLayout()
         CType(Me.QCGridEX, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -38,7 +40,7 @@ Partial Class QC_FrequenciesForm
         'QCToolStrip
         '
         Me.QCToolStrip.ImageScalingSize = New System.Drawing.Size(24, 24)
-        Me.QCToolStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.RunToolStripButton})
+        Me.QCToolStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.RunToolStripButton, Me.ToolStripSeparator1, Me.ExportResultsToolStripButton})
         Me.QCToolStrip.Location = New System.Drawing.Point(0, 135)
         Me.QCToolStrip.Name = "QCToolStrip"
         Me.QCToolStrip.Size = New System.Drawing.Size(1781, 32)
@@ -47,11 +49,10 @@ Partial Class QC_FrequenciesForm
         '
         'RunToolStripButton
         '
-        Me.RunToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
         Me.RunToolStripButton.Image = CType(resources.GetObject("RunToolStripButton.Image"), System.Drawing.Image)
         Me.RunToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.RunToolStripButton.Name = "RunToolStripButton"
-        Me.RunToolStripButton.Size = New System.Drawing.Size(418, 29)
+        Me.RunToolStripButton.Size = New System.Drawing.Size(442, 29)
         Me.RunToolStripButton.Text = "Run Frequencies to Animals quality control checker"
         '
         'QCGridEX
@@ -65,6 +66,7 @@ Partial Class QC_FrequenciesForm
         Me.QCGridEX.Location = New System.Drawing.Point(0, 167)
         Me.QCGridEX.Name = "QCGridEX"
         Me.QCGridEX.RecordNavigator = True
+        Me.QCGridEX.SelectionMode = Janus.Windows.GridEX.SelectionMode.MultipleSelection
         Me.QCGridEX.Size = New System.Drawing.Size(1781, 1287)
         Me.QCGridEX.TabIndex = 3
         '
@@ -72,6 +74,7 @@ Partial Class QC_FrequenciesForm
         '
         Me.TextBox1.BackColor = System.Drawing.SystemColors.Window
         Me.TextBox1.Dock = System.Windows.Forms.DockStyle.Top
+        Me.TextBox1.Enabled = False
         Me.TextBox1.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TextBox1.Location = New System.Drawing.Point(0, 35)
         Me.TextBox1.Multiline = True
@@ -91,6 +94,19 @@ Partial Class QC_FrequenciesForm
         Me.TextBox2.Size = New System.Drawing.Size(1781, 35)
         Me.TextBox2.TabIndex = 4
         Me.TextBox2.Text = "Quality control check: Field detected frequencies to Animals matching"
+        '
+        'ToolStripSeparator1
+        '
+        Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
+        Me.ToolStripSeparator1.Size = New System.Drawing.Size(6, 32)
+        '
+        'ExportResultsToolStripButton
+        '
+        Me.ExportResultsToolStripButton.Image = CType(resources.GetObject("ExportResultsToolStripButton.Image"), System.Drawing.Image)
+        Me.ExportResultsToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.ExportResultsToolStripButton.Name = "ExportResultsToolStripButton"
+        Me.ExportResultsToolStripButton.Size = New System.Drawing.Size(218, 29)
+        Me.ExportResultsToolStripButton.Text = "Export results to CSV..."
         '
         'QC_FrequenciesForm
         '
@@ -117,4 +133,6 @@ Partial Class QC_FrequenciesForm
     Friend WithEvents QCGridEX As Janus.Windows.GridEX.GridEX
     Friend WithEvents TextBox1 As TextBox
     Friend WithEvents TextBox2 As TextBox
+    Friend WithEvents ToolStripSeparator1 As ToolStripSeparator
+    Friend WithEvents ExportResultsToolStripButton As ToolStripButton
 End Class
