@@ -70,6 +70,7 @@ Partial Class FrequenciesNotFoundInAnimalMovementForm
         Me.DuplicatesGridEX.AllowEdit = Janus.Windows.GridEX.InheritableBoolean.[False]
         Me.DuplicatesGridEX.Dock = System.Windows.Forms.DockStyle.Fill
         Me.DuplicatesGridEX.FilterMode = Janus.Windows.GridEX.FilterMode.Automatic
+        Me.DuplicatesGridEX.GroupMode = Janus.Windows.GridEX.GroupMode.Collapsed
         Me.DuplicatesGridEX.Location = New System.Drawing.Point(0, 0)
         Me.DuplicatesGridEX.Name = "DuplicatesGridEX"
         Me.DuplicatesGridEX.Size = New System.Drawing.Size(1186, 792)
@@ -95,15 +96,15 @@ Partial Class FrequenciesNotFoundInAnimalMovementForm
         Me.ExportResultsToolStripButton.Size = New System.Drawing.Size(182, 29)
         Me.ExportResultsToolStripButton.Text = "Export results to CSV"
         '
-        'QC_DuplicateFrequenciesInGroupForm
+        'FrequenciesNotFoundInAnimalMovementForm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 20.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1458, 824)
         Me.Controls.Add(Me.SplitContainer1)
         Me.Controls.Add(Me.ToolStrip1)
-        Me.Name = "QC_DuplicateFrequenciesInGroupForm"
-        Me.Text = "Duplicate frequencies in Surveys table"
+        Me.Name = "FrequenciesNotFoundInAnimalMovementForm"
+        Me.Text = "Survey frequencies not found in Animal Movement"
         Me.SplitContainer1.Panel1.ResumeLayout(False)
         Me.SplitContainer1.Panel1.PerformLayout()
         Me.SplitContainer1.Panel2.ResumeLayout(False)

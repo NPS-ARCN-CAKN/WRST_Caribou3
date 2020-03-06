@@ -414,7 +414,7 @@ Module Utilites
     ''' <param name="SightingDate">Date to look up. Date.</param>
     '''  <param name="FrequencyTolerance">Tolerance for frequency drift. +-0.001 is a good value. Double.</param>
     ''' <returns></returns>
-    Public Function GetDeploymentDataTableFromFrequencyAndDate(Frequency As Double, SightingDate As Date, FrequencyTolerance As Double) As DataTable
+    Public Function GetDeploymentDataTableFromFrequencyAndDate(Frequency As Double, SightingDate As Date, FrequencyTolerance As Double, Optional ShowDeploymentSelectorForMultipleDeployments As Boolean = True) As DataTable
 
         'we're trying to match the collar frequency detected in the field with the collar's deployments in animal movement to 
         'allow the user to match a collar to the animal it was deployed on during the survey date.
@@ -450,7 +450,7 @@ order by DaysDeployedBeforeSighting"
 
                 'this only runs if we get multiple deployments for the frequency and date
                 'the app throws up a form to allow the user to select the deployment they want.
-                If DeploymentDataTable.Rows.Count > 1 Then
+                If DeploymentDataTable.Rows.Count > 1 And ShowDeploymentSelectorForMultipleDeployments = True Then
                     ' we retrieved multiple deployments, probably due to collar being redeployed without retrievaldate being set for the prior deployment
                     'in animal movement
                     ' or the frequency drifted or the frequency has different precision in animal movement or the Surveys table

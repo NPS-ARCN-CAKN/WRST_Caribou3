@@ -1,4 +1,5 @@
 ﻿Public Class FrequenciesNotFoundInAnimalMovementForm
+
     Private SurveysDataTableValue As DataTable
     Public Property SurveysDataTable() As DataTable
         Get
@@ -9,21 +10,13 @@
         End Set
     End Property
 
-    Public Sub New(SurveysDataTable As DataTable)
-
-        ' This call is required by the designer.
-        InitializeComponent()
-
-        ' Add any initialization after the InitializeComponent() call.
-        Me.SurveysDataTable = SurveysDataTable
-    End Sub
-
     Public Function QC_GetUnmatchedCaribouInGroups() As DataTable
         Dim FrequenciesDataTable As New DataTable
 
         Try
             ' Create four typed columns in the DataTable.
             With FrequenciesDataTable
+                .Columns.Add("Table", GetType(String))
                 .Columns.Add("SightingDate", GetType(DateTime))
                 .Columns.Add("GroupNumber", GetType(String))
                 .Columns.Add("Frequency", GetType(Double))
@@ -35,67 +28,113 @@
                 .PrimaryKey = New DataColumn() { .Columns("FlightID"), .Columns("Frequency")}
             End With
 
-            Dim i As Integer = 1
             'now loop through each survey record and regenerate the matches of frequency and date to animal deployments
-            For Each SurveyRow As DataRow In Me.SurveysDataTable.Rows
+            If Not SurveysDataTable Is Nothing Then
+                For Each SurveyRow As DataRow In Me.SurveysDataTable.Rows
 
-                Dim SightingDate As String = SurveyRow.Item("SightingDate")
-                Dim GroupNumber As Integer = SurveyRow.Item("GroupNumber")
-                Dim EID As String = SurveyRow.Item("EID")
-                Dim FlightID As String = SurveyRow.Item("FlightID")
-                Dim FrequenciesInGroup As String = ""
+                    Dim SightingDate As String = SurveyRow.Item("SightingDate")
+                    Dim GroupNumber As Integer = SurveyRow.Item("GroupNumber")
+                    Dim EID As String = SurveyRow.Item("EID")
+                    Dim FlightID As String = SurveyRow.Item("FlightID")
+                    Dim FrequenciesInGroup As String = ""
 
-                If IsDBNull(SurveyRow.Item("FrequenciesInGroup")) = False And SurveyRow.Item("FrequenciesInGroup").ToString.Trim <> "" Then
-                    FrequenciesInGroup = SurveyRow.Item("FrequenciesInGroup").ToString.Trim
-                End If
+                    If IsDBNull(SurveyRow.Item("FrequenciesInGroup")) = False And SurveyRow.Item("FrequenciesInGroup").ToString.Trim <> "" Then
+                        FrequenciesInGroup = SurveyRow.Item("FrequenciesInGroup").ToString.Trim
+                    End If
 
-                If Not FrequenciesInGroup.Trim = "" Then
-                    'parse the comma separated frequencies so we can deal with them individually
-                    Dim FrequenciesList As List(Of Double) = GetListOfCSVFrequencies(FrequenciesInGroup)
+                    If Not FrequenciesInGroup.Trim = "" Then
+                        'parse the comma separated frequencies so we can deal with them individually
+                        Dim FrequenciesList As List(Of Double) = GetListOfCSVFrequencies(FrequenciesInGroup)
 
-                    For Each Frequency In FrequenciesList ' FrequenciesInGroup.Split(",")
-                        Dim NewRow As DataRow = FrequenciesDataTable.NewRow
+                        For Each Frequency In FrequenciesList ' FrequenciesInGroup.Split(",")
+                            Dim NewRow As DataRow = FrequenciesDataTable.NewRow
 
-                        'get info from animal movement
-                        Dim DeploymentDataTable As DataTable = GetDeploymentDataTableFromFrequencyAndDate(Frequency, SightingDate, 0.001)
-                        Dim AnimalID As String = ""
-                        Dim AM_Frequency As String = -999
-                        Dim Problem As String = ""
+                            'get info from animal movement
+                            Dim DeploymentDataTable As DataTable = GetDeploymentDataTableFromFrequencyAndDate(Frequency, SightingDate, 0.001)
+                            Dim AnimalID As String = ""
+                            Dim AM_Frequency As String = -999
+                            Dim Problem As String = ""
 
-                        If DeploymentDataTable.Rows.Count = 0 Then
-                            AnimalID = ""
-                            AM_Frequency = -999
-                            Problem = "No deployment in Animal Movement for this Frequency and Date"
-                        ElseIf DeploymentDataTable.Rows.Count = 1 Then
-                            AnimalID = DeploymentDataTable.Rows(0).Item("AnimalID")
-                            AM_Frequency = DeploymentDataTable.Rows(0).Item("Frequency")
-                            Problem = "OK"
-                        Else
-                            Problem = "Multiple deployments"
-                        End If
+                            If DeploymentDataTable.Rows.Count = 0 Then
+                                AnimalID = ""
+                                AM_Frequency = -999
+                                Problem = "No deployment in Animal Movement for this Frequency and Date"
+                            ElseIf DeploymentDataTable.Rows.Count = 1 Then
+                                AnimalID = DeploymentDataTable.Rows(0).Item("AnimalID")
+                                AM_Frequency = DeploymentDataTable.Rows(0).Item("Frequency")
+                                Problem = "OK"
+                            Else
+                                Problem = "Multiple deployments"
+                            End If
 
-                        With NewRow
-                            .Item("SightingDate") = SightingDate
-                            .Item("GroupNumber") = GroupNumber
-                            .Item("Frequency") = Frequency
-                            .Item("AM_Frequency") = AM_Frequency
-                            .Item("AnimalID") = AnimalID
-                            .Item("EID") = EID
-                            .Item("FlightID") = FlightID
-                            .Item("Problem") = Problem
-                        End With
-                        Try
-                            FrequenciesDataTable.Rows.Add(NewRow)
-                        Catch ex2 As System.Data.ConstraintException
-                            Me.OutputTextBox.AppendText(SightingDate & "," & GroupNumber & "," & Frequency & "," & ex2.Message & vbNewLine)
-                        End Try
+                            With NewRow
+                                .Item("Table") = SurveysDataTable.TableName
+                                .Item("SightingDate") = SightingDate
+                                .Item("GroupNumber") = GroupNumber
+                                .Item("Frequency") = Frequency
+                                .Item("AM_Frequency") = AM_Frequency
+                                .Item("AnimalID") = AnimalID
+                                .Item("EID") = EID
+                                .Item("FlightID") = FlightID
+                                .Item("Problem") = Problem
+                            End With
+                            Try
+                                FrequenciesDataTable.Rows.Add(NewRow)
+                            Catch ex2 As System.Data.ConstraintException
+                                Me.OutputTextBox.AppendText(SightingDate & "," & GroupNumber & "," & Frequency & "," & ex2.Message & vbNewLine)
+                            End Try
+                        Next
+                    End If
+                Next
+            End If
 
 
+            'early radiotracking
+            Dim ERDataTable As DataTable = GetDataTable(My.Settings.WRST_CaribouConnectionString, "SELECT * FROM EarlyRadiotracking")
+            'now loop through each survey record and regenerate the matches of frequency and date to animal deployments
+            If Not ERDataTable Is Nothing Then
+                For Each ERRow As DataRow In ERDataTable.Rows
+                    Dim Frequency As String = ERRow.Item("Frequency")
+                    Dim SightingDate As String = ERRow.Item("SightingDate")
+                    Dim NewRow As DataRow = FrequenciesDataTable.NewRow
 
-                        i = i + 1
-                    Next
-                End If
-            Next
+                    'get info from animal movement
+                    Dim DeploymentDataTable As DataTable = GetDeploymentDataTableFromFrequencyAndDate(Frequency, SightingDate, 0.001)
+                    Dim AnimalID As String = ""
+                    Dim AM_Frequency As String = -999
+                    Dim Problem As String = ""
+
+                    If DeploymentDataTable.Rows.Count = 0 Then
+                        AnimalID = ""
+                        AM_Frequency = -999
+                        Problem = "No deployment in Animal Movement for this Frequency and Date"
+                    ElseIf DeploymentDataTable.Rows.Count = 1 Then
+                        AnimalID = DeploymentDataTable.Rows(0).Item("AnimalID")
+                        AM_Frequency = DeploymentDataTable.Rows(0).Item("Frequency")
+                        Problem = "OK"
+                    Else
+                        Problem = "Multiple deployments"
+                    End If
+
+                    With NewRow
+                        .Item("Table") = ERDataTable.TableName
+                        .Item("SightingDate") = SightingDate
+                        '.Item("GroupNumber") = GroupNumber
+                        .Item("Frequency") = Frequency
+                        .Item("AM_Frequency") = AM_Frequency
+                        .Item("AnimalID") = AnimalID
+                        '.Item("EID") = EID
+                        .Item("FlightID") = "N/A"
+                        .Item("Problem") = Problem
+                    End With
+                    Try
+                        FrequenciesDataTable.Rows.Add(NewRow)
+                    Catch ex2 As System.Data.ConstraintException
+                        Me.OutputTextBox.AppendText(SightingDate & ",N/A," & Frequency & "," & ex2.Message & vbNewLine)
+                    End Try
+                Next
+            End If
+
         Catch ex As Exception
             MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name & ")")
         End Try

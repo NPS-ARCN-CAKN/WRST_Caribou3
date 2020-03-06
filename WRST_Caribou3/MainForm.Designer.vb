@@ -35,7 +35,6 @@ Partial Class MainForm
         Me.WRST_CaribouDataSet = New WRST_Caribou3.WRST_CaribouDataSet()
         Me.SurveysSplitContainer = New System.Windows.Forms.SplitContainer()
         Me.SurveysGridEX = New Janus.Windows.GridEX.GridEX()
-        Me.SurveysBindingSource = New System.Windows.Forms.BindingSource(Me.components)
         Me.SurveysToolStrip = New System.Windows.Forms.ToolStrip()
         Me.ImportSurveyDataFromFileToolStripButton = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
@@ -46,7 +45,6 @@ Partial Class MainForm
         Me.ChangeOrientationToolStripButton = New System.Windows.Forms.ToolStripButton()
         Me.CollaredAnimalsSplitContainer = New System.Windows.Forms.SplitContainer()
         Me.CollaredAnimalsInGroupsGridEX = New Janus.Windows.GridEX.GridEX()
-        Me.CollaredAnimalsInGroupsBindingSource = New System.Windows.Forms.BindingSource(Me.components)
         Me.AnimalGridEX = New Janus.Windows.GridEX.GridEX()
         Me.MainToolStrip = New System.Windows.Forms.ToolStrip()
         Me.SaveToolStripButton = New System.Windows.Forms.ToolStripButton()
@@ -65,9 +63,8 @@ Partial Class MainForm
         Me.OpenWRSTCaribouDirectoryToolStripButton = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripSeparator9 = New System.Windows.Forms.ToolStripSeparator()
         Me.QualityControlToolStripDropDownButton = New System.Windows.Forms.ToolStripDropDownButton()
-        Me.RematchAllFrequenciesToCollarDeploymentswithConfirmToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CountTotalDetectedFrequenciesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.QCFrequencyToAnimalsMatchingToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.RematchAllFrequenciesToCollarDeploymentswithConfirmToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.HelpProvider = New System.Windows.Forms.HelpProvider()
         Me.BottomToolStrip = New System.Windows.Forms.ToolStrip()
         Me.CurrentDatabaseToolStripLabel = New System.Windows.Forms.ToolStripLabel()
@@ -77,6 +74,9 @@ Partial Class MainForm
         Me.CollaredAnimalsInGroupsTableAdapter = New WRST_Caribou3.WRST_CaribouDataSetTableAdapters.CollaredAnimalsInGroupsTableAdapter()
         Me.SurveysTableAdapter = New WRST_Caribou3.WRST_CaribouDataSetTableAdapters.SurveysTableAdapter()
         Me.CapturesTableAdapter = New WRST_Caribou3.WRST_CaribouDataSetTableAdapters.CapturesTableAdapter()
+        Me.InventoryOfAvailableCollarsOnADateToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.SurveysBindingSource = New System.Windows.Forms.BindingSource(Me.components)
+        Me.CollaredAnimalsInGroupsBindingSource = New System.Windows.Forms.BindingSource(Me.components)
         CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SplitContainer1.Panel1.SuspendLayout()
         Me.SplitContainer1.Panel2.SuspendLayout()
@@ -89,18 +89,18 @@ Partial Class MainForm
         Me.SurveysSplitContainer.Panel2.SuspendLayout()
         Me.SurveysSplitContainer.SuspendLayout()
         CType(Me.SurveysGridEX, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.SurveysBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SurveysToolStrip.SuspendLayout()
         CType(Me.CollaredAnimalsSplitContainer, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.CollaredAnimalsSplitContainer.Panel1.SuspendLayout()
         Me.CollaredAnimalsSplitContainer.Panel2.SuspendLayout()
         Me.CollaredAnimalsSplitContainer.SuspendLayout()
         CType(Me.CollaredAnimalsInGroupsGridEX, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.CollaredAnimalsInGroupsBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.AnimalGridEX, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.MainToolStrip.SuspendLayout()
         Me.BottomToolStrip.SuspendLayout()
         CType(Me.CapturesBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.SurveysBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.CollaredAnimalsInGroupsBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'SplitContainer1
@@ -198,11 +198,6 @@ Partial Class MainForm
         Me.SurveysGridEX.TotalRowFormatStyle.FontBold = Janus.Windows.GridEX.TriState.[True]
         Me.SurveysGridEX.TotalRowPosition = Janus.Windows.GridEX.TotalRowPosition.BottomFixed
         '
-        'SurveysBindingSource
-        '
-        Me.SurveysBindingSource.DataMember = "FK_Surveys_SurveyFlights"
-        Me.SurveysBindingSource.DataSource = Me.SurveyFlightsBindingSource
-        '
         'SurveysToolStrip
         '
         Me.SurveysToolStrip.ImageScalingSize = New System.Drawing.Size(24, 24)
@@ -298,11 +293,6 @@ Partial Class MainForm
         Me.CollaredAnimalsInGroupsGridEX.TabIndex = 0
         Me.CollaredAnimalsInGroupsGridEX.TableHeaders = Janus.Windows.GridEX.InheritableBoolean.[True]
         '
-        'CollaredAnimalsInGroupsBindingSource
-        '
-        Me.CollaredAnimalsInGroupsBindingSource.DataMember = "FK_CollaredAnimalsInGroups_Surveys"
-        Me.CollaredAnimalsInGroupsBindingSource.DataSource = Me.SurveysBindingSource
-        '
         'AnimalGridEX
         '
         Me.AnimalGridEX.AllowEdit = Janus.Windows.GridEX.InheritableBoolean.[False]
@@ -358,7 +348,7 @@ Partial Class MainForm
         'ResultsToolStripDropDownButton
         '
         Me.ResultsToolStripDropDownButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
-        Me.ResultsToolStripDropDownButton.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.DatabaseQueriesToolToolStripMenuItem})
+        Me.ResultsToolStripDropDownButton.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.DatabaseQueriesToolToolStripMenuItem, Me.InventoryOfAvailableCollarsOnADateToolStripMenuItem})
         Me.ResultsToolStripDropDownButton.Image = CType(resources.GetObject("ResultsToolStripDropDownButton.Image"), System.Drawing.Image)
         Me.ResultsToolStripDropDownButton.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.ResultsToolStripDropDownButton.Name = "ResultsToolStripDropDownButton"
@@ -368,7 +358,7 @@ Partial Class MainForm
         'DatabaseQueriesToolToolStripMenuItem
         '
         Me.DatabaseQueriesToolToolStripMenuItem.Name = "DatabaseQueriesToolToolStripMenuItem"
-        Me.DatabaseQueriesToolToolStripMenuItem.Size = New System.Drawing.Size(281, 30)
+        Me.DatabaseQueriesToolToolStripMenuItem.Size = New System.Drawing.Size(413, 30)
         Me.DatabaseQueriesToolToolStripMenuItem.Text = "Database queries tool..."
         '
         'ToolStripSeparator5
@@ -436,30 +426,24 @@ Partial Class MainForm
         'QualityControlToolStripDropDownButton
         '
         Me.QualityControlToolStripDropDownButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
-        Me.QualityControlToolStripDropDownButton.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.RematchAllFrequenciesToCollarDeploymentswithConfirmToolStripMenuItem, Me.CountTotalDetectedFrequenciesToolStripMenuItem, Me.QCFrequencyToAnimalsMatchingToolStripMenuItem})
+        Me.QualityControlToolStripDropDownButton.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CountTotalDetectedFrequenciesToolStripMenuItem, Me.RematchAllFrequenciesToCollarDeploymentswithConfirmToolStripMenuItem})
         Me.QualityControlToolStripDropDownButton.Image = CType(resources.GetObject("QualityControlToolStripDropDownButton.Image"), System.Drawing.Image)
         Me.QualityControlToolStripDropDownButton.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.QualityControlToolStripDropDownButton.Name = "QualityControlToolStripDropDownButton"
         Me.QualityControlToolStripDropDownButton.Size = New System.Drawing.Size(147, 29)
         Me.QualityControlToolStripDropDownButton.Text = "Quality control"
         '
-        'RematchAllFrequenciesToCollarDeploymentswithConfirmToolStripMenuItem
-        '
-        Me.RematchAllFrequenciesToCollarDeploymentswithConfirmToolStripMenuItem.Name = "RematchAllFrequenciesToCollarDeploymentswithConfirmToolStripMenuItem"
-        Me.RematchAllFrequenciesToCollarDeploymentswithConfirmToolStripMenuItem.Size = New System.Drawing.Size(573, 30)
-        Me.RematchAllFrequenciesToCollarDeploymentswithConfirmToolStripMenuItem.Text = "Rematch all frequencies to collar deployments (with confirm)"
-        '
         'CountTotalDetectedFrequenciesToolStripMenuItem
         '
         Me.CountTotalDetectedFrequenciesToolStripMenuItem.Name = "CountTotalDetectedFrequenciesToolStripMenuItem"
-        Me.CountTotalDetectedFrequenciesToolStripMenuItem.Size = New System.Drawing.Size(573, 30)
-        Me.CountTotalDetectedFrequenciesToolStripMenuItem.Text = "Frequencies not in Animal Movement"
+        Me.CountTotalDetectedFrequenciesToolStripMenuItem.Size = New System.Drawing.Size(585, 30)
+        Me.CountTotalDetectedFrequenciesToolStripMenuItem.Text = "Frequencies not found in Animal Movement..."
         '
-        'QCFrequencyToAnimalsMatchingToolStripMenuItem
+        'RematchAllFrequenciesToCollarDeploymentswithConfirmToolStripMenuItem
         '
-        Me.QCFrequencyToAnimalsMatchingToolStripMenuItem.Name = "QCFrequencyToAnimalsMatchingToolStripMenuItem"
-        Me.QCFrequencyToAnimalsMatchingToolStripMenuItem.Size = New System.Drawing.Size(573, 30)
-        Me.QCFrequencyToAnimalsMatchingToolStripMenuItem.Text = "QC: Frequency to Animals Matching"
+        Me.RematchAllFrequenciesToCollarDeploymentswithConfirmToolStripMenuItem.Name = "RematchAllFrequenciesToCollarDeploymentswithConfirmToolStripMenuItem"
+        Me.RematchAllFrequenciesToCollarDeploymentswithConfirmToolStripMenuItem.Size = New System.Drawing.Size(585, 30)
+        Me.RematchAllFrequenciesToCollarDeploymentswithConfirmToolStripMenuItem.Text = "Rematch all frequencies to collar deployments (with confirm)..."
         '
         'HelpProvider
         '
@@ -513,6 +497,22 @@ Partial Class MainForm
         '
         Me.CapturesTableAdapter.ClearBeforeFill = True
         '
+        'InventoryOfAvailableCollarsOnADateToolStripMenuItem
+        '
+        Me.InventoryOfAvailableCollarsOnADateToolStripMenuItem.Name = "InventoryOfAvailableCollarsOnADateToolStripMenuItem"
+        Me.InventoryOfAvailableCollarsOnADateToolStripMenuItem.Size = New System.Drawing.Size(413, 30)
+        Me.InventoryOfAvailableCollarsOnADateToolStripMenuItem.Text = "Inventory of available collars on a date..."
+        '
+        'SurveysBindingSource
+        '
+        Me.SurveysBindingSource.DataMember = "FK_Surveys_SurveyFlights"
+        Me.SurveysBindingSource.DataSource = Me.SurveyFlightsBindingSource
+        '
+        'CollaredAnimalsInGroupsBindingSource
+        '
+        Me.CollaredAnimalsInGroupsBindingSource.DataMember = "FK_CollaredAnimalsInGroups_Surveys"
+        Me.CollaredAnimalsInGroupsBindingSource.DataSource = Me.SurveysBindingSource
+        '
         'MainForm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 20.0!)
@@ -542,7 +542,6 @@ Partial Class MainForm
         CType(Me.SurveysSplitContainer, System.ComponentModel.ISupportInitialize).EndInit()
         Me.SurveysSplitContainer.ResumeLayout(False)
         CType(Me.SurveysGridEX, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.SurveysBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
         Me.SurveysToolStrip.ResumeLayout(False)
         Me.SurveysToolStrip.PerformLayout()
         Me.CollaredAnimalsSplitContainer.Panel1.ResumeLayout(False)
@@ -550,13 +549,14 @@ Partial Class MainForm
         CType(Me.CollaredAnimalsSplitContainer, System.ComponentModel.ISupportInitialize).EndInit()
         Me.CollaredAnimalsSplitContainer.ResumeLayout(False)
         CType(Me.CollaredAnimalsInGroupsGridEX, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.CollaredAnimalsInGroupsBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.AnimalGridEX, System.ComponentModel.ISupportInitialize).EndInit()
         Me.MainToolStrip.ResumeLayout(False)
         Me.MainToolStrip.PerformLayout()
         Me.BottomToolStrip.ResumeLayout(False)
         Me.BottomToolStrip.PerformLayout()
         CType(Me.CapturesBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.SurveysBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.CollaredAnimalsInGroupsBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -609,5 +609,5 @@ Partial Class MainForm
     Friend WithEvents QualityControlToolStripDropDownButton As ToolStripDropDownButton
     Friend WithEvents RematchAllFrequenciesToCollarDeploymentswithConfirmToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents CountTotalDetectedFrequenciesToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents QCFrequencyToAnimalsMatchingToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents InventoryOfAvailableCollarsOnADateToolStripMenuItem As ToolStripMenuItem
 End Class

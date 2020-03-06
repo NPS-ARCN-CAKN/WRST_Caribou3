@@ -1150,30 +1150,30 @@ Click Yes to certify and lock the current record. Click No to cancel.", MsgBoxSt
 
 
 
-    ''' <summary>
-    ''' Executes the spCollaredAnimalInGroups_Insert_Frequency_Date stored procedure on the WRST_Caribou database
-    ''' to insert a new record from a frequency, sighting date and the EID of the animal group to which it belongs
-    ''' </summary>
-    ''' <param name="RecordedFrequency"></param>
-    ''' <param name="SightingDate"></param>
-    ''' <param name="EID"></param>
-    Private Sub InsertCollaredAnimal(RecordedFrequency As Double, SightingDate As Date, EID As String)
-        'Dim SqlConnection As New SqlConnection(My.Settings.WRST_CaribouConnectionString)
-        'Using (SqlConnection)
-        '    Dim SqlCommand As New SqlCommand()
-        '    With SqlCommand
-        '        .Connection = SqlConnection
-        '        .CommandText = "spCollaredAnimalInGroups_Insert_Frequency_Date"
-        '        .CommandType = CommandType.StoredProcedure
-        '        .Parameters.AddWithValue("RecordedFrequency", RecordedFrequency)
-        '        .Parameters.AddWithValue("SightingDate", SightingDate)
-        '        .Parameters.AddWithValue("EID", EID)
-        '        SqlConnection.Open()
-        '        .ExecuteNonQuery()
-        '    End With
-        'End Using
-        'spCollaredAnimalInGroups_Insert_Frequency_Date 164.694, '2010-08-30 07:58:00.000', '00215AEC-528B-4017-93D7-EE2E68C81221'
-    End Sub
+    '''' <summary>
+    '''' Executes the spCollaredAnimalInGroups_Insert_Frequency_Date stored procedure on the WRST_Caribou database
+    '''' to insert a new record from a frequency, sighting date and the EID of the animal group to which it belongs
+    '''' </summary>
+    '''' <param name="RecordedFrequency"></param>
+    '''' <param name="SightingDate"></param>
+    '''' <param name="EID"></param>
+    'Private Sub InsertCollaredAnimal(RecordedFrequency As Double, SightingDate As Date, EID As String)
+    '    'Dim SqlConnection As New SqlConnection(My.Settings.WRST_CaribouConnectionString)
+    '    'Using (SqlConnection)
+    '    '    Dim SqlCommand As New SqlCommand()
+    '    '    With SqlCommand
+    '    '        .Connection = SqlConnection
+    '    '        .CommandText = "spCollaredAnimalInGroups_Insert_Frequency_Date"
+    '    '        .CommandType = CommandType.StoredProcedure
+    '    '        .Parameters.AddWithValue("RecordedFrequency", RecordedFrequency)
+    '    '        .Parameters.AddWithValue("SightingDate", SightingDate)
+    '    '        .Parameters.AddWithValue("EID", EID)
+    '    '        SqlConnection.Open()
+    '    '        .ExecuteNonQuery()
+    '    '    End With
+    '    'End Using
+    '    'spCollaredAnimalInGroups_Insert_Frequency_Date 164.694, '2010-08-30 07:58:00.000', '00215AEC-528B-4017-93D7-EE2E68C81221'
+    'End Sub
 
 
 
@@ -1513,13 +1513,15 @@ Click Yes to certify and lock the current record. Click No to cancel.", MsgBoxSt
     End Sub
 
     Private Sub CountTotalDetectedFrequenciesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CountTotalDetectedFrequenciesToolStripMenuItem.Click
-        Dim DuplicateFrequenciesInGroupsForm As New FrequenciesNotFoundInAnimalMovementForm(WRST_CaribouDataSet.Tables("Surveys"))
-        DuplicateFrequenciesInGroupsForm.ShowDialog()
+        'Dim FrequenciesNotFoundInAnimalMovementForm As New FrequenciesNotFoundInAnimalMovementForm()
+        'FrequenciesNotFoundInAnimalMovementForm.SurveysDataTable = WRST_CaribouDataSet.Tables("Surveys")
+        'FrequenciesNotFoundInAnimalMovementForm.ShowDialog()
+        Dim QCFrequenciesForm As New QC_FrequenciesForm
+        QCFrequenciesForm.Show()
+
     End Sub
 
-    Private Sub QCFrequencyToAnimalsMatchingToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles QCFrequencyToAnimalsMatchingToolStripMenuItem.Click
-        'Dim QCForm As New qc_frequencytoanimalsmat
-    End Sub
+
 
     Private Sub CollaredAnimalsInGroupsGridEX_RecordUpdated(sender As Object, e As EventArgs) Handles CollaredAnimalsInGroupsGridEX.RecordUpdated
 
@@ -1542,6 +1544,17 @@ Click Yes to certify and lock the current record. Click No to cancel.", MsgBoxSt
         '        End If
 
     End Sub
+
+    Private Sub InventoryOfAvailableCollarsOnADateToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles InventoryOfAvailableCollarsOnADateToolStripMenuItem.Click
+        Dim CollarsInventoryForm As New AvailableCollarsInventoryForADateForm()
+        Dim CurrentSurveyDate As Date = GetCurrentGridEXCellValue(Me.SurveyFlightsGridEX, "TimeDepart")
+        If Not IsDBNull(CurrentSurveyDate) Then
+            CollarsInventoryForm.SurveyDate = CurrentSurveyDate
+        End If
+        CollarsInventoryForm.Show()
+    End Sub
+
+
 
 
 

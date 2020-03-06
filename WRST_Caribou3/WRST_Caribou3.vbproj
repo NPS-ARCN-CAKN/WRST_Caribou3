@@ -130,6 +130,12 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Animal.vb" />
+    <Compile Include="AvailableCollarsInventoryForADateForm.Designer.vb">
+      <DependentUpon>AvailableCollarsInventoryForADateForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="AvailableCollarsInventoryForADateForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="CapturesForm.Designer.vb">
       <DependentUpon>CapturesForm.vb</DependentUpon>
     </Compile>
@@ -170,6 +176,12 @@
     <Compile Include="FrequenciesNotFoundInAnimalMovementForm.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="QC_FrequenciesForm.Designer.vb">
+      <DependentUpon>QC_FrequenciesForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="QC_FrequenciesForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="ResultsForm.Designer.vb">
       <DependentUpon>ResultsForm.vb</DependentUpon>
     </Compile>
@@ -208,6 +220,9 @@
     <EmbeddedResource Include="AboutForm.resx">
       <DependentUpon>AboutForm.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="AvailableCollarsInventoryForADateForm.resx">
+      <DependentUpon>AvailableCollarsInventoryForADateForm.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="CapturesForm.resx">
       <DependentUpon>CapturesForm.vb</DependentUpon>
     </EmbeddedResource>
@@ -226,6 +241,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FrequenciesNotFoundInAnimalMovementForm.resx">
       <DependentUpon>FrequenciesNotFoundInAnimalMovementForm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="QC_FrequenciesForm.resx">
+      <DependentUpon>QC_FrequenciesForm.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ResultsForm.resx">
       <DependentUpon>ResultsForm.vb</DependentUpon>
