@@ -15,6 +15,7 @@
             .Columns.Add("AnimalID", GetType(String))
             .Columns.Add("AM_AnimalID", GetType(String))
             .Columns.Add("Problem", GetType(String))
+            .Columns.Add("Details", GetType(String))
             .Columns.Add("PK", GetType(String))
             .Columns.Add("FlightID", GetType(String))
             '.PrimaryKey = New DataColumn() { .Columns("FlightID"), .Columns("Frequency")}
@@ -54,6 +55,7 @@
                 Dim EID As String = SurveyRow.Item("EID")
                 Dim FlightID As String = SurveyRow.Item("FlightID")
                 Dim FrequenciesInGroup As String = SurveyRow.Item("FrequenciesInGroup")
+
 
                 'parse the comma separated frequencies so we can deal with them individually
                 Dim FrequenciesList As List(Of Double) = GetListOfCSVFrequencies(FrequenciesInGroup)
@@ -116,7 +118,7 @@
             'process all frequencies detected in early radiotracking surveys
             'add any problems to the problems data table
             'gather all frequency detections from the early radiotracking table
-            Sql = "SELECT Frequency, SightingDate,AnimalID,  ERID FROM EarlyRadiotracking WHERE Frequency is not NULL and SightingDate is not NULL ORDER BY Frequency, SightingDate"
+            Sql = "SELECT FrequencyCorrectedForDrift, SightingDate,AnimalID,  ERID FROM EarlyRadiotracking WHERE Frequency is not NULL and SightingDate is not NULL ORDER BY Frequency, SightingDate"
             Dim ERDataTable As DataTable = GetDataTable(My.Settings.WRST_CaribouConnectionString, Sql)
             ERDataTable.TableName = "EarlyRadiotracking"
 
@@ -126,7 +128,7 @@
                 'Dim GroupNumber As Integer = ERRow.Item("GroupNumber")
                 Dim ERID As String = ERRow.Item("ERID")
                 Dim AnimalID As String = ERRow.Item("AnimalID")
-                Dim Frequency As Double = ERRow.Item("Frequency")
+                Dim Frequency As Double = ERRow.Item("FrequencyCorrectedForDrift")
 
                 Dim NewRow As DataRow = ProblemsDataTable.NewRow
 
@@ -157,15 +159,24 @@
                         .Item("Frequency") = Frequency
                         .Item("PK") = ERID
                         .Item("Problem") = problem
+                        .Item("Details") = "This happens when a collar deployment is not terminated with a RetrievalDate so the app cannot determine which animal was wearing the collar at the sighting date. Possibly the collar was entered into AM twice with slightly different frequency values."
                     End With
                     ProblemsDataTable.Rows.Add(NewRow)
                 End If
+
+
+
 
                 'do another check: make sure animalids match between the ER table and animal movements database deployment record
                 If DeploymentDataTable.Rows.Count >= 1 Then
                     'we have one or more deployment matches
                     For Each DRow As DataRow In DeploymentDataTable.Rows
+
+                        'Dim DeploymentID As Integer = DRow.
+
                         If Not IsDBNull(DRow.Item("AnimalID")) Then
+
+                            'look for records where the frequency may be correct but the animalid is incorrect
                             Dim AM_AnimalID As String = DRow.Item("AnimalID")
                             If AnimalID.Trim <> AM_AnimalID.Trim Then
                                 'we found a mismatch. somehow the deployment's animalid does not match the early radiotracking recorded animalid
@@ -181,6 +192,29 @@
                                 End With
                                 ProblemsDataTable.Rows.Add(NewRow)
                             End If
+
+                            'records where the collar deployment's retrieval date is earlier than its mortality date
+                            'If Not IsDBNull(DRow.Item("RetrievalDate")) And Not IsDBNull(DRow.Item("MortalityDate")) Then
+                            '    Dim RetrievalDate As Date = DRow.Item("RetrievalDate")
+                            '    Dim MortalityDate As Date = DRow.Item("MortalityDate")
+                            '    Dim Diff As Integer = DateDiff(DateInterval.Day, RetrievalDate, MortalityDate) 'difference in days
+                            '    If AnimalID.Trim = DRow.Item("AnimalID").ToString.Trim And Frequency = DRow.Item("Frequency") And Deployment Diff > 0 Then
+                            '        'retrievaldate can't be after mortalitydate
+                            '        Dim Problem As String = "RetrievalDate is earlier than MortalityDate"
+                            '        Dim Details As String = "RetrievalDate (" & RetrievalDate & ") is earlier than MortalityDate (" & MortalityDate & ") by " & Diff & " days."
+                            '        With NewRow
+                            '            .Item("Table") = ERDataTable.TableName
+                            '            .Item("SightingDate") = SightingDate
+                            '            .Item("Frequency") = Frequency
+                            '            .Item("AM_AnimalID") = AM_AnimalID
+                            '            .Item("AnimalID") = AnimalID
+                            '            .Item("PK") = ERID
+                            '            .Item("Problem") = Problem
+                            '            .Item("Details") = Details
+                            '        End With
+                            '        ProblemsDataTable.Rows.Add(NewRow)
+                            '    End If
+                            'End If
                         End If
                     Next
                 End If
@@ -188,7 +222,6 @@
         Catch ex As Exception
             MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name & ")")
         End Try
-
 
         'sort the problems data table better
         Dim ProblemsDataView As New DataView(ProblemsDataTable, "", "Frequency,SightingDate,GroupNumber", DataViewRowState.CurrentRows)

@@ -82,7 +82,7 @@ Module Utilites
     End Function
 
     Public Sub ExportDataTable(DataTable As DataTable)
-        'not working, freezes the app
+
         Try
             Dim SFD As New SaveFileDialog()
             With SFD
@@ -94,7 +94,7 @@ Module Utilites
                 .Title = "Export"
             End With
             If SFD.ShowDialog = DialogResult.OK Then
-                My.Computer.FileSystem.WriteAllText(SFD.FileName, DataTableToCSV(DataTable, ","), False)
+                My.Computer.FileSystem.WriteAllText(SFD.FileName, DataTableToCSV(DataTable, "|"), False)
             End If
         Catch ex As Exception
             MsgBox(ex.Message & " " & System.Reflection.MethodBase.GetCurrentMethod.Name)
