@@ -139,6 +139,8 @@ Partial Class ResultsForm
         'CollapseGroupsCheckBox
         '
         Me.CollapseGroupsCheckBox.AutoSize = True
+        Me.CollapseGroupsCheckBox.Checked = True
+        Me.CollapseGroupsCheckBox.CheckState = System.Windows.Forms.CheckState.Checked
         Me.CollapseGroupsCheckBox.Location = New System.Drawing.Point(517, 5)
         Me.CollapseGroupsCheckBox.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.CollapseGroupsCheckBox.Name = "CollapseGroupsCheckBox"
@@ -150,6 +152,8 @@ Partial Class ResultsForm
         'GroupByBoxVisibleCheckBox
         '
         Me.GroupByBoxVisibleCheckBox.AutoSize = True
+        Me.GroupByBoxVisibleCheckBox.Checked = True
+        Me.GroupByBoxVisibleCheckBox.CheckState = System.Windows.Forms.CheckState.Checked
         Me.GroupByBoxVisibleCheckBox.Location = New System.Drawing.Point(389, 5)
         Me.GroupByBoxVisibleCheckBox.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.GroupByBoxVisibleCheckBox.Name = "GroupByBoxVisibleCheckBox"
@@ -209,7 +213,7 @@ Partial Class ResultsForm
         Me.Controls.Add(Me.Panel1)
         Me.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.Name = "ResultsForm"
-        Me.Text = "WRST Caribou Monitoring Results"
+        Me.Text = "Queries explorer"
         Me.SplitContainer1.Panel1.ResumeLayout(False)
         Me.SplitContainer1.Panel1.PerformLayout()
         Me.SplitContainer1.Panel2.ResumeLayout(False)

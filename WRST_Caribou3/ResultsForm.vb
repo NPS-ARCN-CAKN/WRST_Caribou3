@@ -7,8 +7,8 @@ Public Class ResultsForm
     Private Sub ResultsForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         LoadDatabaseViewsComboBox()
 
-        Me.ResultsGridEX.GroupByBoxVisible = False
-        Me.CollapseGroupsCheckBox.Visible = False
+        Me.ResultsGridEX.GroupByBoxVisible = True
+        Me.CollapseGroupsCheckBox.Visible = True
         Me.ResultsGridEX.FilterMode = FilterMode.Automatic
     End Sub
 
@@ -46,11 +46,13 @@ Public Class ResultsForm
                 'get the view description
                 Try
                     Dim ViewDescription As String = ViewName
-                    Dim ViewDT As DataTable = GetDataTable(My.Settings.WRST_CaribouConnectionString, "SELECT [Table],[TableDescription] FROM [WRST_Caribou].[dbo].[DatabaseTableDescriptions] where [table]='dbo." & ViewName & "'")
+                    Dim DescriptionQuery As String = "SELECT [Table],[TableDescription] FROM [WRST_Caribou].[dbo].[DatabaseTableDescriptions] where [table]='" & ViewName & "'"
+                    Dim ViewDT As DataTable = GetDataTable(My.Settings.WRST_CaribouConnectionString, DescriptionQuery)
                     If ViewDT.Rows.Count = 1 Then
                         ViewDescription = ViewDT.Rows(0).Item("TableDescription")
                     End If
                     Me.ViewDescriptionTextBox.Text = ViewDescription
+                    Debug.Print(vbNewLine & ViewDescription & vbNewLine & DescriptionQuery & vbNewLine & vbNewLine)
                 Catch ex As Exception
                     Me.ViewDescriptionTextBox.Text = ex.Message
                 End Try
