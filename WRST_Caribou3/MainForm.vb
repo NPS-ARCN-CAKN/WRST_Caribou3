@@ -1451,7 +1451,7 @@ Click Yes to certify and lock the current record. Click No to cancel.", MsgBoxSt
 
     Private Sub DatabaseQueriesToolToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DatabaseQueriesToolToolStripMenuItem.Click
         Dim ResultsForm As New ResultsForm
-        ResultsForm.ShowDialog()
+        ResultsForm.Show()
     End Sub
 
 
