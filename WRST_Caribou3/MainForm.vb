@@ -24,6 +24,7 @@ Public Class MainForm
 
             'format all the data grids more or less the same
             FormatGridEX(Me.SurveyFlightsGridEX)
+            Me.SurveyFlightsGridEX.FilterMode = FilterMode.Automatic
             FormatGridEX(Me.SurveysGridEX)
             FormatGridEX(Me.CollaredAnimalsInGroupsGridEX)
             FormatGridEX(Me.AnimalGridEX)

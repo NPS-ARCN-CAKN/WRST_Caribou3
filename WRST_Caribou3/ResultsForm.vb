@@ -9,6 +9,7 @@ Public Class ResultsForm
 
         Me.ResultsGridEX.GroupByBoxVisible = False
         Me.CollapseGroupsCheckBox.Visible = False
+        Me.ResultsGridEX.FilterMode = FilterMode.Automatic
     End Sub
 
 
@@ -135,5 +136,9 @@ Public Class ResultsForm
         End Try
     End Sub
 
-
+    Private Sub ReloadQueryToolStripButton_Click(sender As Object, e As EventArgs) Handles ReloadQueryToolStripButton.Click
+        LoadResultsGrid()
+        Me.ResultsGridEX.CollapseGroups()
+        Me.ResultsGridEX.CollapseRecords()
+    End Sub
 End Class
