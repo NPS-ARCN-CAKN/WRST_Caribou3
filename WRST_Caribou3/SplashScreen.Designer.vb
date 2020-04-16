@@ -40,12 +40,12 @@ Partial Class SplashScreen
         '
         'Label2
         '
-        Me.Label2.AutoSize = True
-        Me.Label2.Font = New System.Drawing.Font("Arial", 10.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label2.AutoEllipsis = True
+        Me.Label2.Font = New System.Drawing.Font("Arial", 14.0!, System.Drawing.FontStyle.Bold)
         Me.Label2.ForeColor = System.Drawing.Color.Black
-        Me.Label2.Location = New System.Drawing.Point(104, 154)
+        Me.Label2.Location = New System.Drawing.Point(116, 134)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(390, 22)
+        Me.Label2.Size = New System.Drawing.Size(398, 63)
         Me.Label2.TabIndex = 7
         Me.Label2.Text = "Caribou Monitoring Database Application"
         '
@@ -118,7 +118,7 @@ Partial Class SplashScreen
         'PictureBox1
         '
         Me.PictureBox1.Image = CType(resources.GetObject("PictureBox1.Image"), System.Drawing.Image)
-        Me.PictureBox1.Location = New System.Drawing.Point(12, 134)
+        Me.PictureBox1.Location = New System.Drawing.Point(46, 134)
         Me.PictureBox1.Name = "PictureBox1"
         Me.PictureBox1.Size = New System.Drawing.Size(64, 64)
         Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize
