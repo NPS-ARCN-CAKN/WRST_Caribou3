@@ -8,10 +8,10 @@ Imports System.Runtime.InteropServices
 
 ' Review the values of the assembly attributes
 
-<Assembly: AssemblyTitle("WRST Caribou Monitoring Database Application")>
-<Assembly: AssemblyDescription("National Park Service Wrangell-St. Elias National Park and Preserve Mentasta and Chisana caribou monitoring program.")>
+<Assembly: AssemblyTitle("NPS Alaska Caribou Monitoring Database Application")>
+<Assembly: AssemblyDescription("NPS Alaska Caribou Monitoring Database Application, Central Alaska Inventory and Monitoring Networks")>
 <Assembly: AssemblyCompany("National Park Service")>
-<Assembly: AssemblyProduct("WRST Caribou Monitoring Database Application")>
+<Assembly: AssemblyProduct("NPS Alaska Caribou Monitoring Database Application")>
 <Assembly: AssemblyCopyright("U.S. Public Domain")>
 <Assembly: AssemblyTrademark("")>
 
@@ -31,5 +31,5 @@ Imports System.Runtime.InteropServices
 ' by using the '*' as shown below:
 ' <Assembly: AssemblyVersion("1.0.*")> 
 
-<Assembly: AssemblyVersion("3.0.0.0")>
-<Assembly: AssemblyFileVersion("3.0.0.0")>
+<Assembly: AssemblyVersion("3.1.0.0")>
+<Assembly: AssemblyFileVersion("3.1.0.0")>
