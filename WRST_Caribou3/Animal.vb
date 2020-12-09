@@ -107,7 +107,7 @@ Public Class Animal
 CollarDeployments.CollarId, Collars.Manager, Collars.Owner, Collars.Notes, CollarDeployments.ProjectId, CollarDeployments.DeploymentId
 FROM            CollarDeployments INNER JOIN
 Collars ON CollarDeployments.CollarManufacturer = Collars.CollarManufacturer AND CollarDeployments.CollarId = Collars.CollarId
-WHERE ProjectID='WRST_Caribou' AND AnimalID='" & _AnimalID & "' ORDER BY DeploymentDate DESC;"
+WHERE ProjectID In ('WRST_Caribou','ChisanaCH') AND (AnimalID='" & _AnimalID & "') ORDER BY DeploymentDate DESC;"
                         DT = GetDataTable(My.Settings.Animal_MovementConnectionString, Sql)
                     End If
                 End If

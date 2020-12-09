@@ -317,7 +317,7 @@ Module Utilites
         Dim AnimalsDataTable As New DataTable()
         Try
             'query the database and build the table
-            Dim Sql As String = "SELECT AnimalId, Species, Gender, MortalityDate, GroupName, Description,        ProjectId FROM            Animals WHERE        (ProjectId = 'WRST_Caribou')"
+            Dim Sql As String = "SELECT AnimalId, Species, Gender, MortalityDate, GroupName, Description, ProjectId FROM Animals WHERE (ProjectId IN (SELECT ProjectID FROM Animal_Movement_ProjectIDs))"
             AnimalsDataTable = GetDataTable(My.Settings.Animal_MovementConnectionString, Sql)
             AnimalsDataTable.TableName = "Animals"
 
@@ -389,7 +389,6 @@ Module Utilites
                 'gridex automotically formats doubles as currency. revert. also extend dates with time
                 If Not GridEX.RootTable Is Nothing Then
                     For Each Col As GridEXColumn In GridEX.RootTable.Columns
-                        'Debug.Print(GridEX.RootTable.Caption & vbTab & Col.Key & Col.FormatString)
                         If Col.FormatString = "c" Then
                             Col.FormatString = ""
                         ElseIf Col.FormatString = "d" Then
@@ -405,30 +404,49 @@ Module Utilites
 
     End Sub
 
+    ''' <summary>
+    ''' Retrieves a DataTable of acceptable Herd/ProjectID combinations for caribou monitoring in Animal_Movement. Data from the WRST_Caribou database's Animal_Movement_ProjectIDs table. 
+    ''' </summary>
+    ''' <returns>DataTable</returns>
+    Public Function GetAnimal_Movement_ProjectIDsDataTable() As DataTable
+        Dim ProjectIDSDataTable As New DataTable
+        Try
+            ProjectIDSDataTable = GetDataTable(My.Settings.WRST_CaribouConnectionString, "SELECT Herd,ProjectID FROM Animal_Movement_ProjectIDs")
+        Catch ex As Exception
+            MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name & ")")
+        End Try
+        Return ProjectIDSDataTable
+    End Function
+
+
+
 
     ''' <summary>
     ''' Queries Animal Movement for the DeploymentID and other information for a Frequency and SightingDate. Returns a DataTable containing the columns DeploymentId, Frequency, MortalityDate and AnimalID. If multiple possible deployments
     ''' are returned the function will throw up a disambiguation form to allow the user to determine which deployment is correct.
     ''' </summary>
+    ''' <param name="Herd"></param>
     ''' <param name="Frequency">Frequency to look up. Double.</param>
     ''' <param name="SightingDate">Date to look up. Date.</param>
-    '''  <param name="FrequencyTolerance">Tolerance for frequency drift. +-0.001 is a good value. Double.</param>
+    ''' <param name="FrequencyTolerance">Tolerance for frequency drift. +-0.001 is a good value. Double.</param>
+    ''' <param name="ShowDeploymentSelectorForMultipleDeployments"></param>
     ''' <returns></returns>
-    Public Function GetDeploymentDataTableFromFrequencyAndDate(Frequency As Double, SightingDate As Date, FrequencyTolerance As Double, Optional ShowDeploymentSelectorForMultipleDeployments As Boolean = True) As DataTable
-
-        'we're trying to match the collar frequency detected in the field with the collar's deployments in animal movement to 
-        'allow the user to match a collar to the animal it was deployed on during the survey date.
+    Public Function GetDeploymentDataTableFromFrequencyAndDate(Herd As String, Frequency As Double, SightingDate As Date, FrequencyTolerance As Double, Optional ShowDeploymentSelectorForMultipleDeployments As Boolean = True) As DataTable
 
         'datatable of collar deployments to hold any matching records from animal movement
         Dim DeploymentDataTable As New DataTable
-        Try
-            'we need a frequency and a sightingdate
-            If Not IsDBNull(Frequency) And Not IsDBNull(SightingDate) Then
+        Dim ProjectID As String = GetProjectIDFromHerd(Herd.Trim)
 
-                'query to select collar deployments that were available for the survey date and the frequency.
+        'we're trying to match the collar frequency detected in the field with the collar's deployments in animal movement to 
+        'allow the user to match a collar to the animal it was deployed on during the survey date.
+        Try
+
+            'we need a frequency and a sightingdate
+            If Not IsDBNull(Frequency) And Not IsDBNull(SightingDate) And ProjectID.Trim <> "" Then
+
+                'query to select collar deployments that were available for the survey date, herd and frequency.
                 'this query is hard to understand because it must account for frequency drift, as well as the possibility that multiple deployments might be returned
                 'because the frequency may have more or fewer decimal places in animal movement database or the surveys table of wrst_caribou.
-                'see the inline query notes for details
                 Dim Sql As String = "SELECT c.Frequency,a.AnimalID
 ,convert(date,d.DeploymentDate) as DeploymentDate
 ,convert(date,d.RetrievalDate) as RetrievalDate
@@ -438,12 +456,14 @@ Module Utilites
 ,d.DeploymentId
 FROM Collars AS c INNER JOIN CollarDeployments AS d ON c.CollarManufacturer = d.CollarManufacturer AND c.CollarId = d.CollarId INNER JOIN
 Animals AS a ON d.ProjectId = a.ProjectId AND d.AnimalId = a.AnimalId
-WHERE        
-(d.ProjectId = 'WRST_Caribou') 
+WHERE (a.ProjectId = '" & ProjectID & "') 
 And ((c.Frequency = " & Frequency & ") Or (convert(decimal(7,3),c.Frequency) = " & Frequency & ") or convert(decimal(7,3),c.Frequency) between " & Frequency & " - " & FrequencyTolerance & " and " & Frequency & " + " & FrequencyTolerance & " ) 
 And ('" & SightingDate & "' <= convert(date,isnull(isnull(convert(date,d.RetrievalDate),convert(date,a.MortalityDate)),'" & SightingDate & "'))) -- sightingdate must be after the collar's deploymentdate and before or equal to it's retrieval date if not null or the animal's mortalitydate if not null, otherwise sightingdate
 And (datediff(day,convert(date,d.DeploymentDate),'" & SightingDate & "') >= 0) -- # Days since deployment must be positive. Negative number means the sighting date was pre-deployment
 order by DaysDeployedBeforeSighting"
+
+                'Debug.Print(vbNewLine & Herd & vbTab & Frequency & vbTab & SightingDate & vbTab & FrequencyTolerance)
+                'Debug.Print(Sql & vbNewLine)
 
                 'get a datatable of collar deployments from animal movement that match the frequency and sightingdate
                 DeploymentDataTable = GetDataTable(My.Settings.Animal_MovementConnectionString, Sql)
@@ -463,10 +483,13 @@ order by DaysDeployedBeforeSighting"
                         End If
                     End If
                 End If
+            Else
+                MsgBox("No deployments found for " & Herd & vbTab & Frequency & vbTab & SightingDate & vbTab & FrequencyTolerance)
             End If
         Catch ex As Exception
             MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name & ")")
         End Try
+
         Return DeploymentDataTable
     End Function
 
@@ -495,29 +518,61 @@ order by DaysDeployedBeforeSighting"
         Return FrequenciesList
     End Function
 
+    Public Function GetProjectIDFromHerd(Herd As String) As String
+        Dim ProjectID As String = ""
+        Try
+            Dim ProjectsDataTable As DataTable = GetAnimal_Movement_ProjectIDsDataTable()
+            For Each ProjectRow As DataRow In ProjectsDataTable.Rows
+                If ProjectRow.Item("Herd").ToString.Trim.ToUpper = Herd.ToUpper.Trim Then
+                    ProjectID = ProjectRow.Item("ProjectID")
+                End If
+            Next
+        Catch ex As Exception
+            'Something bad happened
+            MsgBox(ex.Message & " " & System.Reflection.MethodBase.GetCurrentMethod.Name)
+        End Try
+        Return ProjectID
+    End Function
+
+
     ''' <summary>
-    ''' Queries Animal Movement for a DataTable of collars available on SurveyDate.
+    ''' Queries Animal Movement for a DataTable of collars available on SurveyDate and part of Animals.ProjectID associated with Herd.
     ''' </summary>
     ''' <param name="SurveyDate">Survey date. Date.</param>
+    ''' <param name="Herd">Herd. String</param>
     ''' <returns>DataTable</returns>
-    Public Function GetAvailableCollarsInventoryForADate(SurveyDate As Date) As DataTable
+    Public Function GetAvailableCollarsInventoryForADate(SurveyDate As Date, Herd As String) As DataTable
+
+        'Make a DataTable to hold the inventory of deployed collars that were available on SurveyDate
         Dim CollaredAnimalsDataTable As New DataTable("CollarsInventory")
-        If Not IsDBNull(SurveyDate) Then
-            If IsDate(SurveyDate) Then
-                Dim Sql As String = "SELECT Animals.AnimalId,CollarDeployments.DeploymentID
-            , CONVERT(Varchar(20), Collars.Frequency) + ' - ' + Animals.AnimalId + ' Deployed: ' + CONVERT(varchar(20),DeploymentDate)  +  ISNULL(' Collar retrieved: ' + CONVERT(varchar(20), RetrievalDate),'') +  ISNULL(' DEAD: ' + CONVERT(varchar(20), MortalityDate),'') AS CollaredCaribou
-            FROM            Animals INNER JOIN
-            CollarDeployments ON Animals.ProjectId = CollarDeployments.ProjectId AND Animals.AnimalId = CollarDeployments.AnimalId INNER JOIN
-            Collars ON CollarDeployments.CollarManufacturer = Collars.CollarManufacturer AND CollarDeployments.CollarId = Collars.CollarId
-            WHERE (Animals.ProjectId = 'WRST_Caribou') 
+
+        Try
+            'Make sure we have a valid SurveyDate
+            If Not IsDBNull(SurveyDate) Then
+                If IsDate(SurveyDate) Then
+
+                    'Query Animal_Movement for an inventory of deployed collars that were available on SurveyDate
+                    Dim Sql As String = "SELECT a.ProjectID,a.AnimalId, d.DeploymentId
+, CONVERT(Varchar(20), c.Frequency) + ' - ' + a.AnimalId + ' Deployed: ' + CONVERT(varchar(20), d.DeploymentDate) + ISNULL(' Collar retrieved: ' + CONVERT(varchar(20), d.RetrievalDate), '') 
+ + ISNULL(' DEAD: ' + CONVERT(varchar(20), a.MortalityDate), '') AS CollaredCaribou
+FROM Animals AS a INNER JOIN
+ CollarDeployments AS d ON a.ProjectId = d.ProjectId AND a.AnimalId = d.AnimalId INNER JOIN
+ Collars AS c ON d.CollarManufacturer = c.CollarManufacturer AND d.CollarId = c.CollarId
+WHERE (a.ProjectId = '" & GetProjectIDFromHerd(Herd).ToString.Trim & "')
             And (DeploymentDate <= '" & SurveyDate & "') and (RetrievalDate IS NULL Or RetrievalDate >= '" & SurveyDate & "')
-            ORDER BY Frequency"
+            ORDER BY c.Frequency"
 
-                'get a data table of all the collared animals that were available for a date
-                CollaredAnimalsDataTable = GetDataTable(My.Settings.Animal_MovementConnectionString, Sql)
+                    'Fill the DataTable from the query above
+                    CollaredAnimalsDataTable = GetDataTable(My.Settings.Animal_MovementConnectionString, Sql)
+                End If
             End If
-        End If
 
+        Catch ex As Exception
+            'Something bad happened
+            MsgBox(ex.Message & " " & System.Reflection.MethodBase.GetCurrentMethod.Name)
+        End Try
+
+        'Return the DataTable
         Return CollaredAnimalsDataTable
     End Function
 
@@ -604,8 +659,7 @@ order by DaysDeployedBeforeSighting"
             'this conditional is a workaround for a problem where when the dataset is refreshed from the database we get errors: ""Value cannot be null. Parameter Name: key"
             If ex.Message = "Value cannot be null.
 Parameter name: key" Then
-                'do nothing, it seems to work fine failing
-                'Debug.Print(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name & ")")
+
             Else
                 MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name & ")")
             End If
@@ -659,34 +713,5 @@ Parameter name: key" Then
         End Try
     End Sub
 
-    '''' <summary>
-    '''' 
-    '''' </summary>
-    '''' <returns></returns>
-    'Public Function GetAnimal_MovementDataset() As DataSet
-    '    Dim AMDataset As New DataSet("Animal_Movement")
-    '    Try
-    '        'build the datatables from the database
-    '        Dim AnimalsDataTable As DataTable = GetAnimalsDataTable()
-    '        Dim CollarsDatatable As DataTable = GetCollarsDataTable()
-    '        Dim CollarDeploymentsDataTable As DataTable = GetCollarDeploymentsDataTable()
-    '        Dim AnimalFrequenciesLookupDataTable As DataTable = GetAnimalFrequenciesLookupDataTable()
-
-    '        'load the datatables into the animal movement dataset
-    '        With AMDataset
-    '            .Tables.Add(GetCollarsDataTable)
-    '            .Tables.Add(GetAnimalsDataTable)
-    '            .Tables.Add(GetCollarDeploymentsDataTable)
-    '            .Tables.Add(AnimalFrequenciesLookupDataTable)
-    '        End With
-
-    '        'set up relationships to show the history of collar deployments per animal
-    '        Dim AnimalsToCollarDeploymentsDataRelation As New DataRelation("Animals_CollarDeploymentsDataRelation", AMDataset.Tables("Animals").Columns("AnimalID"), AMDataset.Tables("CollarDeployments").Columns("AnimalID"))
-    '        AMDataset.Relations.Add(AnimalsToCollarDeploymentsDataRelation)
-    '    Catch ex As Exception
-    '        MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name & ")")
-    '    End Try
-    '    Return AMDataset
-    'End Function
 End Module
 

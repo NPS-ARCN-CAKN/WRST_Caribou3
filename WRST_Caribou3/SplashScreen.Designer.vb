@@ -43,9 +43,10 @@ Partial Class SplashScreen
         Me.Label2.AutoEllipsis = True
         Me.Label2.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Bold)
         Me.Label2.ForeColor = System.Drawing.Color.Black
-        Me.Label2.Location = New System.Drawing.Point(98, 152)
+        Me.Label2.Location = New System.Drawing.Point(74, 124)
+        Me.Label2.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(416, 45)
+        Me.Label2.Size = New System.Drawing.Size(312, 37)
         Me.Label2.TabIndex = 7
         Me.Label2.Text = "Caribou Monitoring Database Application"
         '
@@ -54,9 +55,10 @@ Partial Class SplashScreen
         Me.Label4.AutoSize = True
         Me.Label4.Font = New System.Drawing.Font("Arial", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label4.ForeColor = System.Drawing.Color.Transparent
-        Me.Label4.Location = New System.Drawing.Point(10, 79)
+        Me.Label4.Location = New System.Drawing.Point(8, 64)
+        Me.Label4.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(361, 19)
+        Me.Label4.Size = New System.Drawing.Size(313, 16)
         Me.Label4.TabIndex = 4
         Me.Label4.Text = "Central Alaska Inventory and Monitoring Network"
         '
@@ -65,9 +67,10 @@ Partial Class SplashScreen
         Me.Label3.AutoSize = True
         Me.Label3.Font = New System.Drawing.Font("Arial", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label3.ForeColor = System.Drawing.Color.Transparent
-        Me.Label3.Location = New System.Drawing.Point(10, 41)
+        Me.Label3.Location = New System.Drawing.Point(8, 33)
+        Me.Label3.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(344, 19)
+        Me.Label3.Size = New System.Drawing.Size(297, 16)
         Me.Label3.TabIndex = 3
         Me.Label3.Text = "Wrangell-St. Elias National Park and Preserve"
         '
@@ -75,7 +78,8 @@ Partial Class SplashScreen
         '
         Me.PictureBox2.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.PictureBox2.Image = CType(resources.GetObject("PictureBox2.Image"), System.Drawing.Image)
-        Me.PictureBox2.Location = New System.Drawing.Point(451, 22)
+        Me.PictureBox2.Location = New System.Drawing.Point(338, 18)
+        Me.PictureBox2.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.PictureBox2.Name = "PictureBox2"
         Me.PictureBox2.Size = New System.Drawing.Size(37, 48)
         Me.PictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize
@@ -87,9 +91,10 @@ Partial Class SplashScreen
         Me.Label1.AutoSize = True
         Me.Label1.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Bold)
         Me.Label1.ForeColor = System.Drawing.Color.White
-        Me.Label1.Location = New System.Drawing.Point(12, 12)
+        Me.Label1.Location = New System.Drawing.Point(9, 10)
+        Me.Label1.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(212, 24)
+        Me.Label1.Size = New System.Drawing.Size(172, 19)
         Me.Label1.TabIndex = 0
         Me.Label1.Text = "National Park Service"
         '
@@ -97,9 +102,10 @@ Partial Class SplashScreen
         '
         Me.UserLabel.AutoSize = True
         Me.UserLabel.ForeColor = System.Drawing.Color.Black
-        Me.UserLabel.Location = New System.Drawing.Point(14, 274)
+        Me.UserLabel.Location = New System.Drawing.Point(10, 223)
+        Me.UserLabel.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.UserLabel.Name = "UserLabel"
-        Me.UserLabel.Size = New System.Drawing.Size(42, 17)
+        Me.UserLabel.Size = New System.Drawing.Size(32, 13)
         Me.UserLabel.TabIndex = 9
         Me.UserLabel.Text = "User:"
         '
@@ -109,16 +115,18 @@ Partial Class SplashScreen
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.VersionLabel.AutoSize = True
         Me.VersionLabel.ForeColor = System.Drawing.Color.Black
-        Me.VersionLabel.Location = New System.Drawing.Point(12, 223)
+        Me.VersionLabel.Location = New System.Drawing.Point(9, 181)
+        Me.VersionLabel.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.VersionLabel.Name = "VersionLabel"
-        Me.VersionLabel.Size = New System.Drawing.Size(60, 17)
+        Me.VersionLabel.Size = New System.Drawing.Size(45, 13)
         Me.VersionLabel.TabIndex = 8
         Me.VersionLabel.Text = "Version:"
         '
         'PictureBox1
         '
         Me.PictureBox1.Image = CType(resources.GetObject("PictureBox1.Image"), System.Drawing.Image)
-        Me.PictureBox1.Location = New System.Drawing.Point(14, 134)
+        Me.PictureBox1.Location = New System.Drawing.Point(10, 109)
+        Me.PictureBox1.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.PictureBox1.Name = "PictureBox1"
         Me.PictureBox1.Size = New System.Drawing.Size(64, 64)
         Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize
@@ -135,8 +143,9 @@ Partial Class SplashScreen
         Me.Panel1.Controls.Add(Me.Label1)
         Me.Panel1.Dock = System.Windows.Forms.DockStyle.Top
         Me.Panel1.Location = New System.Drawing.Point(0, 0)
+        Me.Panel1.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(535, 112)
+        Me.Panel1.Size = New System.Drawing.Size(401, 91)
         Me.Panel1.TabIndex = 5
         '
         'Label5
@@ -144,28 +153,28 @@ Partial Class SplashScreen
         Me.Label5.AutoSize = True
         Me.Label5.Font = New System.Drawing.Font("Arial", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label5.ForeColor = System.Drawing.Color.Transparent
-        Me.Label5.Location = New System.Drawing.Point(10, 60)
+        Me.Label5.Location = New System.Drawing.Point(8, 49)
+        Me.Label5.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(259, 19)
+        Me.Label5.Size = New System.Drawing.Size(225, 16)
         Me.Label5.TabIndex = 5
         Me.Label5.Text = "Denali National Park and Preserve"
         '
         'SplashScreen
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.SystemColors.ActiveCaption
-        Me.ClientSize = New System.Drawing.Size(535, 322)
+        Me.ClientSize = New System.Drawing.Size(401, 262)
         Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.UserLabel)
         Me.Controls.Add(Me.VersionLabel)
         Me.Controls.Add(Me.PictureBox1)
         Me.Controls.Add(Me.Panel1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
-        Me.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.Name = "SplashScreen"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "SplashScreen"
         CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel1.ResumeLayout(False)
