@@ -110,25 +110,20 @@ Public Class MainForm
     Private Sub SaveDataset()
         Try
             Me.Validate()
-        Catch ex As Exception
-            MsgBox(ex.Message & "Validation (" & System.Reflection.MethodBase.GetCurrentMethod.Name)
-        End Try
-
-        Try
             Me.CollaredAnimalsInGroupsBindingSource.EndEdit()
             Me.SurveysBindingSource.EndEdit()
             Me.SurveyFlightsBindingSource.EndEdit()
             Me.TableAdapterManager.UpdateAll(Me.WRST_CaribouDataSet)
             WRST_CaribouDataSet.AcceptChanges()
-        Catch DBCEx As DBConcurrencyException
-            If MsgBox("Concurrency violation. " & DBCEx.Message & " Merge your edits into the database?", MsgBoxStyle.YesNo, "Concurrency violation.") = MsgBoxResult.Yes Then
-                Me.WRST_CaribouDataSet.Merge(WRST_CaribouDataSet.Tables("Surveys"))
-                SaveDataset()
-            Else
-                MsgBox("Save canceled.")
-                Exit Sub
-            End If
-            Exit Sub
+            'Catch DBCEx As DBConcurrencyException
+            '    If MsgBox("Concurrency violation. " & DBCEx.Message & " Merge your edits into the database?", MsgBoxStyle.YesNo, "Concurrency violation.") = MsgBoxResult.Yes Then
+            '        Me.WRST_CaribouDataSet.Merge(WRST_CaribouDataSet, True)
+            '        SaveDataset()
+            '    Else
+            '        MsgBox("Save canceled.")
+            '        Exit Sub
+            '    End If
+            '    Exit Sub
         Catch ex As Exception
             MsgBox(ex.Message & "Database update (" & System.Reflection.MethodBase.GetCurrentMethod.Name)
         End Try
@@ -1186,6 +1181,8 @@ Click Yes to certify and lock the current record. Click No to cancel.", MsgBoxSt
     ''' <param name="SurveyRow">DataRow from the Surveys DataTable containing EID, GroupNumber, FrequenciesInGroup and SightingDate columns.</param>
     ''' <param name="Herd">Herd associated with the Animal associated with the Collar at the time of SightingDate</param>
     Private Sub AddCollaredAnimalsRowsToSurveyRow(SurveyRow As DataRow, Herd As String)
+        CollaredAnimalsInGroupsBindingSource.EndEdit()
+
         Try
             'extract the frequencies from the row's FrequenciesInGroup column and try to parse it, search for the collar deployment in Animal Movement and insert the DeploymentID into the collared animals in groups table
             If Not SurveyRow Is Nothing Then
@@ -1378,6 +1375,8 @@ Click Yes to certify and lock the current record. Click No to cancel.", MsgBoxSt
     Private Sub CurrentRowToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CurrentRowToolStripMenuItem.Click
         'try to match any frequencies in the current survey row to animal/frequency/collar deployments in animal movements
         Try
+            CollaredAnimalsInGroupsBindingSource.EndEdit()
+
             'confirm delete all collared caribou records associated with the flight
             If MsgBox("Existing collared animals records associated with this row may be replaced. Proceed?", MsgBoxStyle.YesNo, "Confirm") = MsgBoxResult.Yes Then
                 'resolve any changes to the database to avoid duplicate primary key problems
@@ -1403,20 +1402,25 @@ Click Yes to certify and lock the current record. Click No to cancel.", MsgBoxSt
                                         Dim SurveyDataRowView As DataRowView = Me.SurveysBindingSource.Current
                                         Dim SurveyDataRow As DataRow = SurveyDataRowView.Row
 
+                                        'get a ref to the collared caribou in groups datatable
+                                        Dim CCGDataTable As DataTable = WRST_CaribouDataSet.Tables("CollaredAnimalsInGroups")
+
                                         'Get the Survey row's primary key
                                         Dim EID As String = SurveyDataRow.Item("EID").ToString.Trim
-
-                                        'Loop through the CollaredCaribouInGroups table looking for a match to the EID above
-                                        For Each CollaredCaribouInGroupRow As DataRow In WRST_CaribouDataSet.Tables("CollaredAnimalsInGroups").Rows
-                                            If CollaredCaribouInGroupRow.Item("EID") = EID Then
-                                                CollaredCaribouInGroupRow.BeginEdit()
-                                                CollaredCaribouInGroupRow.Delete()
-                                                CollaredCaribouInGroupRow.EndEdit()
-                                                CollaredAnimalsInGroupsBindingSource.EndEdit()
-                                            End If
+                                        Dim CollaredCaribouInSurveyGroupRows = CCGDataTable.Select("EID = '" & EID & "'")
+                                        For Each CollaredCaribouRow In CollaredCaribouInSurveyGroupRows
+                                            CollaredCaribouRow.BeginEdit()
+                                            CollaredCaribouRow.Delete()
+                                            CollaredCaribouRow.EndEdit()
                                         Next
-
+                                        CollaredAnimalsInGroupsBindingSource.EndEdit()
                                         SaveDataset()
+
+                                        'CollaredAnimalsInGroupsTableAdapter.Update(WRST_CaribouDataSet)
+                                        'CCGDataTable.AcceptChanges()
+
+                                        'WRST_CaribouDataSet.AcceptChanges()
+
 
                                         'Now add back to the Survey row Animals whose frequency was detected
                                         AddCollaredAnimalsRowsToSurveyRow(SurveyDataRow, Herd)
@@ -1430,6 +1434,7 @@ Click Yes to certify and lock the current record. Click No to cancel.", MsgBoxSt
                     End If
                 End If
             End If
+            'SaveDataset()
         Catch ex As Exception
             MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name & ")")
         End Try
@@ -1438,6 +1443,8 @@ Click Yes to certify and lock the current record. Click No to cancel.", MsgBoxSt
     Private Sub AllRowsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AllRowsToolStripMenuItem.Click
         'try to match any frequencies in the current survey gridex to animal/frequency/collar deployments in animal movements
         Try
+            CollaredAnimalsInGroupsBindingSource.EndEdit()
+
             'get the flightid
             Dim FlightID As String = GetCurrentGridEXCellValue(Me.SurveyFlightsGridEX, "FlightID")
             Dim Herd As String = GetCurrentGridEXCellValue(Me.SurveyFlightsGridEX, "Herd")
@@ -1462,25 +1469,26 @@ Click Yes to certify and lock the current record. Click No to cancel.", MsgBoxSt
                         Dim SurveyDataRow As DataRow = SurveyDataRowView.Row
 
                         'loop through and delete all records with the current EID
-                        Dim EID As String = SurveyDataRow.Item("EID")
-                        For Each CollaredCaribouInGroupRow As DataRow In CCGDataTable.Rows
-                            If CollaredCaribouInGroupRow.Item("EID") = EID Then
-                                'Debug.Print("DELETE FROM CAIG WHERE EID = " & EID & vbTab & Row.Item("AnimalID"))
-                                CollaredCaribouInGroupRow.BeginEdit()
-                                CollaredCaribouInGroupRow.Delete()
-                                CollaredCaribouInGroupRow.EndEdit()
-                                CollaredAnimalsInGroupsBindingSource.EndEdit()
-                            End If
+                        Dim EID As String = SurveyDataRow.Item("EID").ToString.Trim
+                        Dim CollaredCaribouInSurveyGroupRows = CCGDataTable.Select("EID = '" & EID & "'")
+                        For Each CollaredCaribouRow In CollaredCaribouInSurveyGroupRows
+                            CollaredCaribouRow.BeginEdit()
+                            CollaredCaribouRow.Delete()
+                            CollaredCaribouRow.EndEdit()
                         Next
-
+                        'CollaredAnimalsInGroupsBindingSource.EndEdit()
+                        'CollaredAnimalsInGroupsTableAdapter.Update(WRST_CaribouDataSet)
                         SaveDataset()
+                        CCGDataTable.AcceptChanges()
 
                         'Now add back to the survey row Animals whose frequency was detected
                         AddCollaredAnimalsRowsToSurveyRow(SurveyDataRow, Herd)
                         CollaredAnimalsInGroupsBindingSource.EndEdit()
+                        SaveDataset()
                     Next
                 End If
             End If
+            'SaveDataset()
         Catch ex As Exception
             MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name & ")")
         End Try
