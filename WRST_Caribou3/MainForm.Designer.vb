@@ -35,7 +35,6 @@ Partial Class MainForm
         Me.WRST_CaribouDataSet = New WRST_Caribou3.WRST_CaribouDataSet()
         Me.SurveysSplitContainer = New System.Windows.Forms.SplitContainer()
         Me.SurveysGridEX = New Janus.Windows.GridEX.GridEX()
-        Me.SurveysBindingSource = New System.Windows.Forms.BindingSource(Me.components)
         Me.SurveysToolStrip = New System.Windows.Forms.ToolStrip()
         Me.ImportSurveyDataFromFileToolStripButton = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
@@ -46,7 +45,6 @@ Partial Class MainForm
         Me.ChangeOrientationToolStripButton = New System.Windows.Forms.ToolStripButton()
         Me.CollaredAnimalsSplitContainer = New System.Windows.Forms.SplitContainer()
         Me.CollaredAnimalsInGroupsGridEX = New Janus.Windows.GridEX.GridEX()
-        Me.CollaredAnimalsInGroupsBindingSource = New System.Windows.Forms.BindingSource(Me.components)
         Me.AnimalGridEX = New Janus.Windows.GridEX.GridEX()
         Me.AnimalGridPanel = New System.Windows.Forms.Panel()
         Me.ShowAnimalDetailsCheckBox = New System.Windows.Forms.CheckBox()
@@ -80,6 +78,9 @@ Partial Class MainForm
         Me.CollaredAnimalsInGroupsTableAdapter = New WRST_Caribou3.WRST_CaribouDataSetTableAdapters.CollaredAnimalsInGroupsTableAdapter()
         Me.SurveysTableAdapter = New WRST_Caribou3.WRST_CaribouDataSetTableAdapters.SurveysTableAdapter()
         Me.CapturesTableAdapter = New WRST_Caribou3.WRST_CaribouDataSetTableAdapters.CapturesTableAdapter()
+        Me.SurveysBindingSource = New System.Windows.Forms.BindingSource(Me.components)
+        Me.CollaredAnimalsInGroupsBindingSource = New System.Windows.Forms.BindingSource(Me.components)
+        Me.ViewCaribouSightingsHistoryToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SplitContainer1.Panel1.SuspendLayout()
         Me.SplitContainer1.Panel2.SuspendLayout()
@@ -92,19 +93,19 @@ Partial Class MainForm
         Me.SurveysSplitContainer.Panel2.SuspendLayout()
         Me.SurveysSplitContainer.SuspendLayout()
         CType(Me.SurveysGridEX, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.SurveysBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SurveysToolStrip.SuspendLayout()
         CType(Me.CollaredAnimalsSplitContainer, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.CollaredAnimalsSplitContainer.Panel1.SuspendLayout()
         Me.CollaredAnimalsSplitContainer.Panel2.SuspendLayout()
         Me.CollaredAnimalsSplitContainer.SuspendLayout()
         CType(Me.CollaredAnimalsInGroupsGridEX, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.CollaredAnimalsInGroupsBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.AnimalGridEX, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.AnimalGridPanel.SuspendLayout()
         Me.MainToolStrip.SuspendLayout()
         Me.BottomToolStrip.SuspendLayout()
         CType(Me.CapturesBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.SurveysBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.CollaredAnimalsInGroupsBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'SplitContainer1
@@ -205,11 +206,6 @@ Partial Class MainForm
         Me.SurveysGridEX.TotalRowFormatStyle.FontBold = Janus.Windows.GridEX.TriState.[True]
         Me.SurveysGridEX.TotalRowPosition = Janus.Windows.GridEX.TotalRowPosition.BottomFixed
         '
-        'SurveysBindingSource
-        '
-        Me.SurveysBindingSource.DataMember = "FK_Surveys_SurveyFlights"
-        Me.SurveysBindingSource.DataSource = Me.SurveyFlightsBindingSource
-        '
         'SurveysToolStrip
         '
         Me.SurveysToolStrip.ImageScalingSize = New System.Drawing.Size(24, 24)
@@ -307,11 +303,6 @@ Partial Class MainForm
         Me.CollaredAnimalsInGroupsGridEX.TabIndex = 0
         Me.CollaredAnimalsInGroupsGridEX.TableHeaders = Janus.Windows.GridEX.InheritableBoolean.[True]
         '
-        'CollaredAnimalsInGroupsBindingSource
-        '
-        Me.CollaredAnimalsInGroupsBindingSource.DataMember = "FK_CollaredAnimalsInGroups_Surveys"
-        Me.CollaredAnimalsInGroupsBindingSource.DataSource = Me.SurveysBindingSource
-        '
         'AnimalGridEX
         '
         Me.AnimalGridEX.AllowEdit = Janus.Windows.GridEX.InheritableBoolean.[False]
@@ -386,7 +377,7 @@ Partial Class MainForm
         'ResultsToolStripDropDownButton
         '
         Me.ResultsToolStripDropDownButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
-        Me.ResultsToolStripDropDownButton.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.DatabaseQueriesToolToolStripMenuItem, Me.InventoryOfAvailableCollarsOnADateToolStripMenuItem})
+        Me.ResultsToolStripDropDownButton.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.DatabaseQueriesToolToolStripMenuItem, Me.InventoryOfAvailableCollarsOnADateToolStripMenuItem, Me.ViewCaribouSightingsHistoryToolStripMenuItem})
         Me.ResultsToolStripDropDownButton.Image = CType(resources.GetObject("ResultsToolStripDropDownButton.Image"), System.Drawing.Image)
         Me.ResultsToolStripDropDownButton.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.ResultsToolStripDropDownButton.Name = "ResultsToolStripDropDownButton"
@@ -546,6 +537,22 @@ Partial Class MainForm
         '
         Me.CapturesTableAdapter.ClearBeforeFill = True
         '
+        'SurveysBindingSource
+        '
+        Me.SurveysBindingSource.DataMember = "FK_Surveys_SurveyFlights"
+        Me.SurveysBindingSource.DataSource = Me.SurveyFlightsBindingSource
+        '
+        'CollaredAnimalsInGroupsBindingSource
+        '
+        Me.CollaredAnimalsInGroupsBindingSource.DataMember = "FK_CollaredAnimalsInGroups_Surveys"
+        Me.CollaredAnimalsInGroupsBindingSource.DataSource = Me.SurveysBindingSource
+        '
+        'ViewCaribouSightingsHistoryToolStripMenuItem
+        '
+        Me.ViewCaribouSightingsHistoryToolStripMenuItem.Name = "ViewCaribouSightingsHistoryToolStripMenuItem"
+        Me.ViewCaribouSightingsHistoryToolStripMenuItem.Size = New System.Drawing.Size(285, 22)
+        Me.ViewCaribouSightingsHistoryToolStripMenuItem.Text = "View caribou sightings history..."
+        '
         'MainForm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -575,7 +582,6 @@ Partial Class MainForm
         CType(Me.SurveysSplitContainer, System.ComponentModel.ISupportInitialize).EndInit()
         Me.SurveysSplitContainer.ResumeLayout(False)
         CType(Me.SurveysGridEX, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.SurveysBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
         Me.SurveysToolStrip.ResumeLayout(False)
         Me.SurveysToolStrip.PerformLayout()
         Me.CollaredAnimalsSplitContainer.Panel1.ResumeLayout(False)
@@ -583,7 +589,6 @@ Partial Class MainForm
         CType(Me.CollaredAnimalsSplitContainer, System.ComponentModel.ISupportInitialize).EndInit()
         Me.CollaredAnimalsSplitContainer.ResumeLayout(False)
         CType(Me.CollaredAnimalsInGroupsGridEX, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.CollaredAnimalsInGroupsBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.AnimalGridEX, System.ComponentModel.ISupportInitialize).EndInit()
         Me.AnimalGridPanel.ResumeLayout(False)
         Me.AnimalGridPanel.PerformLayout()
@@ -592,6 +597,8 @@ Partial Class MainForm
         Me.BottomToolStrip.ResumeLayout(False)
         Me.BottomToolStrip.PerformLayout()
         CType(Me.CapturesBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.SurveysBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.CollaredAnimalsInGroupsBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -648,4 +655,5 @@ Partial Class MainForm
     Friend WithEvents ToolStripSeparator11 As ToolStripSeparator
     Friend WithEvents AnimalGridPanel As Panel
     Friend WithEvents ShowAnimalDetailsCheckBox As CheckBox
+    Friend WithEvents ViewCaribouSightingsHistoryToolStripMenuItem As ToolStripMenuItem
 End Class

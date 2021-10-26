@@ -1591,4 +1591,9 @@ Click Yes to certify and lock the current record. Click No to cancel.", MsgBoxSt
         'update the surveys grid columns that count the number of frequencies and animalids to make sure all are accounted for
         ReconcileFrequencies()
     End Sub
+
+    Private Sub ViewCaribouSightingsHistoryToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ViewCaribouSightingsHistoryToolStripMenuItem.Click
+        Dim CSHForm As New CaribouSightingsHistoryForm()
+        CSHForm.Show()
+    End Sub
 End Class

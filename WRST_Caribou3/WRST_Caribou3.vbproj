@@ -142,6 +142,12 @@
     <Compile Include="CapturesForm.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="CaribouSightingsHistoryForm.Designer.vb">
+      <DependentUpon>CaribouSightingsHistoryForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="CaribouSightingsHistoryForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="MainForm.vb">
       <SubType>Form</SubType>
     </Compile>
@@ -219,6 +225,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="CapturesForm.resx">
       <DependentUpon>CapturesForm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CaribouSightingsHistoryForm.resx">
+      <DependentUpon>CaribouSightingsHistoryForm.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.vb</DependentUpon>
