@@ -71,7 +71,7 @@ Partial Class CaribouSightingsHistoryForm
         Me.Controls.Add(Me.SightingsHistoryDataGridView)
         Me.Controls.Add(Me.SightingsToolStrip)
         Me.Name = "CaribouSightingsHistoryForm"
-        Me.Text = "CaribouSightingsHistoryForm"
+        Me.Text = "Caribou Sightings History"
         CType(Me.SightingsHistoryDataGridView, System.ComponentModel.ISupportInitialize).EndInit()
         Me.SightingsToolStrip.ResumeLayout(False)
         Me.SightingsToolStrip.PerformLayout()
