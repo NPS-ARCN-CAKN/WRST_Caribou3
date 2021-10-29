@@ -85,6 +85,15 @@
     <SignManifests>true</SignManifests>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="DevExpress.Data.Desktop.v20.2, Version=20.2.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.Data.v20.2, Version=20.2.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.Printing.v20.2.Core, Version=20.2.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.Utils.v20.2, Version=20.2.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.XtraEditors.v20.2, Version=20.2.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.XtraGrid.v20.2, Version=20.2.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraLayout.v20.2, Version=20.2.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.XtraPrinting.v20.2, Version=20.2.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.XtraVerticalGrid.v20.2, Version=20.2.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="Janus.Data.v3, Version=3.5.109.0, Culture=neutral, PublicKeyToken=21d5517571b185bf" />
     <Reference Include="Janus.Windows.Common.v3, Version=3.5.109.0, Culture=neutral, PublicKeyToken=21d5517571b185bf" />
     <Reference Include="Janus.Windows.GridEX.v3, Version=3.5.109.0, Culture=neutral, PublicKeyToken=21d5517571b185bf, processorArchitecture=MSIL" />
@@ -97,6 +106,7 @@
       <HintPath>..\..\SkeeterDataTablesTranslator\SkeeterDataTablesTranslator\bin\Release\SkeeterDataTablesTranslator.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
     <Reference Include="System.Deployment" />
     <Reference Include="System.Design" />
@@ -140,6 +150,12 @@
       <DependentUpon>CapturesForm.vb</DependentUpon>
     </Compile>
     <Compile Include="CapturesForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CaribouProfileForm.Designer.vb">
+      <DependentUpon>CaribouProfileForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="CaribouProfileForm.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="CaribouSightingsHistoryForm.Designer.vb">
@@ -225,6 +241,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="CapturesForm.resx">
       <DependentUpon>CapturesForm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CaribouProfileForm.resx">
+      <DependentUpon>CaribouProfileForm.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="CaribouSightingsHistoryForm.resx">
       <DependentUpon>CaribouSightingsHistoryForm.vb</DependentUpon>

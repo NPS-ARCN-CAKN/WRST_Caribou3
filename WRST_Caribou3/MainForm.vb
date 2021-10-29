@@ -1592,7 +1592,15 @@ Click Yes to certify and lock the current record. Click No to cancel.", MsgBoxSt
         ReconcileFrequencies()
     End Sub
 
-    Private Sub ViewCaribouSightingsHistoryToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ViewCaribouSightingsHistoryToolStripMenuItem.Click
+
+
+
+    Private Sub CaribouProfileToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CaribouProfileToolStripMenuItem.Click
+        Dim CaribouProfileForm As New CaribouProfileForm()
+        CaribouProfileForm.Show()
+    End Sub
+
+    Private Sub SightingsHistoryPerAnimalToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SightingsHistoryPerAnimalToolStripMenuItem.Click
         Dim CSHForm As New CaribouSightingsHistoryForm()
         CSHForm.Show()
     End Sub
