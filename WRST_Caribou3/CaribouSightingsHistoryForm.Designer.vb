@@ -22,10 +22,11 @@ Partial Class CaribouSightingsHistoryForm
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(CaribouSightingsHistoryForm))
         Me.SightingsHistoryDataGridView = New System.Windows.Forms.DataGridView()
         Me.SightingsToolStrip = New System.Windows.Forms.ToolStrip()
-        Me.AnimalIDToolStripComboBox = New System.Windows.Forms.ToolStripComboBox()
         Me.ToolStripLabel1 = New System.Windows.Forms.ToolStripLabel()
+        Me.AnimalIDToolStripComboBox = New System.Windows.Forms.ToolStripComboBox()
         CType(Me.SightingsHistoryDataGridView, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SightingsToolStrip.SuspendLayout()
         Me.SuspendLayout()
@@ -52,16 +53,16 @@ Partial Class CaribouSightingsHistoryForm
         Me.SightingsToolStrip.TabIndex = 1
         Me.SightingsToolStrip.Text = "ToolStrip1"
         '
-        'AnimalIDToolStripComboBox
-        '
-        Me.AnimalIDToolStripComboBox.Name = "AnimalIDToolStripComboBox"
-        Me.AnimalIDToolStripComboBox.Size = New System.Drawing.Size(180, 25)
-        '
         'ToolStripLabel1
         '
         Me.ToolStripLabel1.Name = "ToolStripLabel1"
         Me.ToolStripLabel1.Size = New System.Drawing.Size(235, 22)
         Me.ToolStripLabel1.Text = "Select a caribou to see it's sightings history:"
+        '
+        'AnimalIDToolStripComboBox
+        '
+        Me.AnimalIDToolStripComboBox.Name = "AnimalIDToolStripComboBox"
+        Me.AnimalIDToolStripComboBox.Size = New System.Drawing.Size(180, 25)
         '
         'CaribouSightingsHistoryForm
         '
@@ -70,6 +71,7 @@ Partial Class CaribouSightingsHistoryForm
         Me.ClientSize = New System.Drawing.Size(800, 450)
         Me.Controls.Add(Me.SightingsHistoryDataGridView)
         Me.Controls.Add(Me.SightingsToolStrip)
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Name = "CaribouSightingsHistoryForm"
         Me.Text = "Caribou Sightings History"
         CType(Me.SightingsHistoryDataGridView, System.ComponentModel.ISupportInitialize).EndInit()

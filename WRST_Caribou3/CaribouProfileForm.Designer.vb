@@ -22,22 +22,23 @@ Partial Class CaribouProfileForm
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(CaribouProfileForm))
         Me.MainToolStrip = New System.Windows.Forms.ToolStrip()
         Me.ToolStripLabel1 = New System.Windows.Forms.ToolStripLabel()
         Me.AnimalIDToolStripComboBox = New System.Windows.Forms.ToolStripComboBox()
         Me.SplitContainer1 = New System.Windows.Forms.SplitContainer()
-        Me.AnimalVGridControl = New DevExpress.XtraVerticalGrid.VGridControl()
-        Me.AnimalTabControl = New System.Windows.Forms.TabControl()
-        Me.SurveySightingsTabPage = New System.Windows.Forms.TabPage()
-        Me.EarlyRadiotrackingTabPage = New System.Windows.Forms.TabPage()
         Me.AnimalSplitContainer = New System.Windows.Forms.SplitContainer()
-        Me.DeploymentsLabel = New System.Windows.Forms.Label()
+        Me.AnimalVGridControl = New DevExpress.XtraVerticalGrid.VGridControl()
         Me.AnimalLabel = New System.Windows.Forms.Label()
         Me.AnimalHeaderLabel = New System.Windows.Forms.Label()
         Me.DeploymentsGridControl = New DevExpress.XtraGrid.GridControl()
         Me.GridView1 = New DevExpress.XtraGrid.Views.Grid.GridView()
+        Me.DeploymentsLabel = New System.Windows.Forms.Label()
+        Me.AnimalTabControl = New System.Windows.Forms.TabControl()
+        Me.SurveySightingsTabPage = New System.Windows.Forms.TabPage()
         Me.SightingsSurveysGridControl = New DevExpress.XtraGrid.GridControl()
         Me.GridView2 = New DevExpress.XtraGrid.Views.Grid.GridView()
+        Me.EarlyRadiotrackingTabPage = New System.Windows.Forms.TabPage()
         Me.EarlyRadiotrackingGridControl = New DevExpress.XtraGrid.GridControl()
         Me.GridView3 = New DevExpress.XtraGrid.Views.Grid.GridView()
         Me.AnimalFixesTabPage = New System.Windows.Forms.TabPage()
@@ -48,18 +49,18 @@ Partial Class CaribouProfileForm
         Me.SplitContainer1.Panel1.SuspendLayout()
         Me.SplitContainer1.Panel2.SuspendLayout()
         Me.SplitContainer1.SuspendLayout()
-        CType(Me.AnimalVGridControl, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.AnimalTabControl.SuspendLayout()
-        Me.SurveySightingsTabPage.SuspendLayout()
-        Me.EarlyRadiotrackingTabPage.SuspendLayout()
         CType(Me.AnimalSplitContainer, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.AnimalSplitContainer.Panel1.SuspendLayout()
         Me.AnimalSplitContainer.Panel2.SuspendLayout()
         Me.AnimalSplitContainer.SuspendLayout()
+        CType(Me.AnimalVGridControl, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DeploymentsGridControl, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GridView1, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.AnimalTabControl.SuspendLayout()
+        Me.SurveySightingsTabPage.SuspendLayout()
         CType(Me.SightingsSurveysGridControl, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GridView2, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.EarlyRadiotrackingTabPage.SuspendLayout()
         CType(Me.EarlyRadiotrackingGridControl, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GridView3, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.AnimalFixesTabPage.SuspendLayout()
@@ -104,50 +105,6 @@ Partial Class CaribouProfileForm
         Me.SplitContainer1.SplitterDistance = 394
         Me.SplitContainer1.TabIndex = 1
         '
-        'AnimalVGridControl
-        '
-        Me.AnimalVGridControl.Cursor = System.Windows.Forms.Cursors.Default
-        Me.AnimalVGridControl.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.AnimalVGridControl.Location = New System.Drawing.Point(0, 44)
-        Me.AnimalVGridControl.Name = "AnimalVGridControl"
-        Me.AnimalVGridControl.OptionsBehavior.Editable = False
-        Me.AnimalVGridControl.Size = New System.Drawing.Size(394, 283)
-        Me.AnimalVGridControl.TabIndex = 0
-        '
-        'AnimalTabControl
-        '
-        Me.AnimalTabControl.Controls.Add(Me.SurveySightingsTabPage)
-        Me.AnimalTabControl.Controls.Add(Me.EarlyRadiotrackingTabPage)
-        Me.AnimalTabControl.Controls.Add(Me.AnimalFixesTabPage)
-        Me.AnimalTabControl.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.AnimalTabControl.Location = New System.Drawing.Point(0, 0)
-        Me.AnimalTabControl.Name = "AnimalTabControl"
-        Me.AnimalTabControl.SelectedIndex = 0
-        Me.AnimalTabControl.Size = New System.Drawing.Size(786, 736)
-        Me.AnimalTabControl.TabIndex = 0
-        '
-        'SurveySightingsTabPage
-        '
-        Me.SurveySightingsTabPage.Controls.Add(Me.SightingsSurveysGridControl)
-        Me.SurveySightingsTabPage.Location = New System.Drawing.Point(4, 22)
-        Me.SurveySightingsTabPage.Name = "SurveySightingsTabPage"
-        Me.SurveySightingsTabPage.Padding = New System.Windows.Forms.Padding(3)
-        Me.SurveySightingsTabPage.Size = New System.Drawing.Size(778, 710)
-        Me.SurveySightingsTabPage.TabIndex = 1
-        Me.SurveySightingsTabPage.Text = "Sightings (surveys)"
-        Me.SurveySightingsTabPage.UseVisualStyleBackColor = True
-        '
-        'EarlyRadiotrackingTabPage
-        '
-        Me.EarlyRadiotrackingTabPage.Controls.Add(Me.EarlyRadiotrackingGridControl)
-        Me.EarlyRadiotrackingTabPage.Location = New System.Drawing.Point(4, 22)
-        Me.EarlyRadiotrackingTabPage.Name = "EarlyRadiotrackingTabPage"
-        Me.EarlyRadiotrackingTabPage.Padding = New System.Windows.Forms.Padding(3)
-        Me.EarlyRadiotrackingTabPage.Size = New System.Drawing.Size(778, 710)
-        Me.EarlyRadiotrackingTabPage.TabIndex = 2
-        Me.EarlyRadiotrackingTabPage.Text = "Sightings (early radiotracking)"
-        Me.EarlyRadiotrackingTabPage.UseVisualStyleBackColor = True
-        '
         'AnimalSplitContainer
         '
         Me.AnimalSplitContainer.Dock = System.Windows.Forms.DockStyle.Fill
@@ -169,14 +126,15 @@ Partial Class CaribouProfileForm
         Me.AnimalSplitContainer.SplitterDistance = 327
         Me.AnimalSplitContainer.TabIndex = 1
         '
-        'DeploymentsLabel
+        'AnimalVGridControl
         '
-        Me.DeploymentsLabel.Dock = System.Windows.Forms.DockStyle.Top
-        Me.DeploymentsLabel.Location = New System.Drawing.Point(0, 0)
-        Me.DeploymentsLabel.Name = "DeploymentsLabel"
-        Me.DeploymentsLabel.Size = New System.Drawing.Size(394, 22)
-        Me.DeploymentsLabel.TabIndex = 1
-        Me.DeploymentsLabel.Text = "Collar deployments"
+        Me.AnimalVGridControl.Cursor = System.Windows.Forms.Cursors.Default
+        Me.AnimalVGridControl.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.AnimalVGridControl.Location = New System.Drawing.Point(0, 44)
+        Me.AnimalVGridControl.Name = "AnimalVGridControl"
+        Me.AnimalVGridControl.OptionsBehavior.Editable = False
+        Me.AnimalVGridControl.Size = New System.Drawing.Size(394, 283)
+        Me.AnimalVGridControl.TabIndex = 0
         '
         'AnimalLabel
         '
@@ -215,6 +173,38 @@ Partial Class CaribouProfileForm
         Me.GridView1.OptionsSelection.MultiSelectMode = DevExpress.XtraGrid.Views.Grid.GridMultiSelectMode.CellSelect
         Me.GridView1.OptionsView.ShowGroupPanel = False
         '
+        'DeploymentsLabel
+        '
+        Me.DeploymentsLabel.Dock = System.Windows.Forms.DockStyle.Top
+        Me.DeploymentsLabel.Location = New System.Drawing.Point(0, 0)
+        Me.DeploymentsLabel.Name = "DeploymentsLabel"
+        Me.DeploymentsLabel.Size = New System.Drawing.Size(394, 22)
+        Me.DeploymentsLabel.TabIndex = 1
+        Me.DeploymentsLabel.Text = "Collar deployments"
+        '
+        'AnimalTabControl
+        '
+        Me.AnimalTabControl.Controls.Add(Me.SurveySightingsTabPage)
+        Me.AnimalTabControl.Controls.Add(Me.EarlyRadiotrackingTabPage)
+        Me.AnimalTabControl.Controls.Add(Me.AnimalFixesTabPage)
+        Me.AnimalTabControl.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.AnimalTabControl.Location = New System.Drawing.Point(0, 0)
+        Me.AnimalTabControl.Name = "AnimalTabControl"
+        Me.AnimalTabControl.SelectedIndex = 0
+        Me.AnimalTabControl.Size = New System.Drawing.Size(786, 736)
+        Me.AnimalTabControl.TabIndex = 0
+        '
+        'SurveySightingsTabPage
+        '
+        Me.SurveySightingsTabPage.Controls.Add(Me.SightingsSurveysGridControl)
+        Me.SurveySightingsTabPage.Location = New System.Drawing.Point(4, 22)
+        Me.SurveySightingsTabPage.Name = "SurveySightingsTabPage"
+        Me.SurveySightingsTabPage.Padding = New System.Windows.Forms.Padding(3)
+        Me.SurveySightingsTabPage.Size = New System.Drawing.Size(778, 710)
+        Me.SurveySightingsTabPage.TabIndex = 1
+        Me.SurveySightingsTabPage.Text = "Sightings (surveys)"
+        Me.SurveySightingsTabPage.UseVisualStyleBackColor = True
+        '
         'SightingsSurveysGridControl
         '
         Me.SightingsSurveysGridControl.Dock = System.Windows.Forms.DockStyle.Fill
@@ -232,6 +222,17 @@ Partial Class CaribouProfileForm
         Me.GridView2.OptionsSelection.MultiSelect = True
         Me.GridView2.OptionsSelection.MultiSelectMode = DevExpress.XtraGrid.Views.Grid.GridMultiSelectMode.CellSelect
         Me.GridView2.OptionsView.ShowFooter = True
+        '
+        'EarlyRadiotrackingTabPage
+        '
+        Me.EarlyRadiotrackingTabPage.Controls.Add(Me.EarlyRadiotrackingGridControl)
+        Me.EarlyRadiotrackingTabPage.Location = New System.Drawing.Point(4, 22)
+        Me.EarlyRadiotrackingTabPage.Name = "EarlyRadiotrackingTabPage"
+        Me.EarlyRadiotrackingTabPage.Padding = New System.Windows.Forms.Padding(3)
+        Me.EarlyRadiotrackingTabPage.Size = New System.Drawing.Size(778, 710)
+        Me.EarlyRadiotrackingTabPage.TabIndex = 2
+        Me.EarlyRadiotrackingTabPage.Text = "Sightings (early radiotracking)"
+        Me.EarlyRadiotrackingTabPage.UseVisualStyleBackColor = True
         '
         'EarlyRadiotrackingGridControl
         '
@@ -287,6 +288,7 @@ Partial Class CaribouProfileForm
         Me.ClientSize = New System.Drawing.Size(1184, 761)
         Me.Controls.Add(Me.SplitContainer1)
         Me.Controls.Add(Me.MainToolStrip)
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Name = "CaribouProfileForm"
         Me.Text = "Caribou profile"
         Me.MainToolStrip.ResumeLayout(False)
@@ -295,18 +297,18 @@ Partial Class CaribouProfileForm
         Me.SplitContainer1.Panel2.ResumeLayout(False)
         CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.SplitContainer1.ResumeLayout(False)
-        CType(Me.AnimalVGridControl, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.AnimalTabControl.ResumeLayout(False)
-        Me.SurveySightingsTabPage.ResumeLayout(False)
-        Me.EarlyRadiotrackingTabPage.ResumeLayout(False)
         Me.AnimalSplitContainer.Panel1.ResumeLayout(False)
         Me.AnimalSplitContainer.Panel2.ResumeLayout(False)
         CType(Me.AnimalSplitContainer, System.ComponentModel.ISupportInitialize).EndInit()
         Me.AnimalSplitContainer.ResumeLayout(False)
+        CType(Me.AnimalVGridControl, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.DeploymentsGridControl, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GridView1, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.AnimalTabControl.ResumeLayout(False)
+        Me.SurveySightingsTabPage.ResumeLayout(False)
         CType(Me.SightingsSurveysGridControl, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GridView2, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.EarlyRadiotrackingTabPage.ResumeLayout(False)
         CType(Me.EarlyRadiotrackingGridControl, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GridView3, System.ComponentModel.ISupportInitialize).EndInit()
         Me.AnimalFixesTabPage.ResumeLayout(False)

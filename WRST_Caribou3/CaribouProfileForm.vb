@@ -112,8 +112,9 @@ FROM            tmpCollarDeployments
     End Sub
 
     Private Sub SetUpGridControl(GC As GridControl)
-        GC.UseEmbeddedNavigator = True
-        Dim GV As GridView = TryCast(GC.MainView, GridView)
+        Try
+            GC.UseEmbeddedNavigator = True
+            Dim GV As GridView = TryCast(GC.MainView, GridView)
         GV.OptionsBehavior.Editable = False
         GV.OptionsBehavior.AllowAddRows = False
         GV.OptionsBehavior.AllowDeleteRows = False
@@ -122,12 +123,14 @@ FROM            tmpCollarDeployments
         GV.OptionsView.ColumnAutoWidth = False
         GV.OptionsView.ShowFooter = True
         GV.OptionsDetail.EnableMasterViewMode = False 'True to show sub-tables
+        Catch ex As Exception
+        MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name & ")")
+        End Try
     End Sub
 
     Private Sub AnimalIDToolStripComboBox_SelectedIndexChanged(sender As Object, e As EventArgs) Handles AnimalIDToolStripComboBox.SelectedIndexChanged
         Dim AnimalID As String = Me.AnimalIDToolStripComboBox.Text.Trim
         Me.AnimalHeaderLabel.Text = AnimalID
         LoadData(AnimalID)
-
     End Sub
 End Class

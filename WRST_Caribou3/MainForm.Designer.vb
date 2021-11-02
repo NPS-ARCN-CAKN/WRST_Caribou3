@@ -55,19 +55,19 @@ Partial Class MainForm
         Me.ToolStripSeparator3 = New System.Windows.Forms.ToolStripSeparator()
         Me.ReloadDatasetToolStripButton = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripSeparator4 = New System.Windows.Forms.ToolStripSeparator()
+        Me.AllowEditsToolStripButton = New System.Windows.Forms.ToolStripButton()
+        Me.ToolStripSeparator6 = New System.Windows.Forms.ToolStripSeparator()
+        Me.CaribouOptionsToolStripDropDownButton = New System.Windows.Forms.ToolStripDropDownButton()
+        Me.CaribouProfileToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.SightingsHistoryPerAnimalToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripSeparator5 = New System.Windows.Forms.ToolStripSeparator()
+        Me.OpenCapturesFormToolStripButton = New System.Windows.Forms.ToolStripButton()
+        Me.ToolStripSeparator11 = New System.Windows.Forms.ToolStripSeparator()
         Me.ResultsToolStripDropDownButton = New System.Windows.Forms.ToolStripDropDownButton()
         Me.DatabaseQueriesToolToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.InventoryOfAvailableCollarsOnADateToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ViewCaribouSightingsHistoryToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ViewCaribouProfileToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripSeparator5 = New System.Windows.Forms.ToolStripSeparator()
-        Me.CaribouOptionsToolStripDropDownButton = New System.Windows.Forms.ToolStripDropDownButton()
-        Me.CaribouProfileToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.SightingsHistoryPerAnimalToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripSeparator11 = New System.Windows.Forms.ToolStripSeparator()
-        Me.OpenCapturesFormToolStripButton = New System.Windows.Forms.ToolStripButton()
-        Me.ToolStripSeparator6 = New System.Windows.Forms.ToolStripSeparator()
-        Me.AllowEditsToolStripButton = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripSeparator7 = New System.Windows.Forms.ToolStripSeparator()
         Me.QualityControlToolStripDropDownButton = New System.Windows.Forms.ToolStripDropDownButton()
         Me.CountTotalDetectedFrequenciesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -352,7 +352,7 @@ Partial Class MainForm
         'MainToolStrip
         '
         Me.MainToolStrip.ImageScalingSize = New System.Drawing.Size(24, 24)
-        Me.MainToolStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.SaveToolStripButton, Me.ToolStripSeparator3, Me.ReloadDatasetToolStripButton, Me.ToolStripSeparator4, Me.CaribouOptionsToolStripDropDownButton, Me.ToolStripSeparator5, Me.OpenCapturesFormToolStripButton, Me.ToolStripSeparator11, Me.ResultsToolStripDropDownButton, Me.ToolStripSeparator6, Me.AllowEditsToolStripButton, Me.ToolStripSeparator7, Me.QualityControlToolStripDropDownButton, Me.ToolStripSeparator9, Me.SettingsToolStripButton, Me.ToolStripSeparator8, Me.OpenWRSTCaribouDirectoryToolStripButton, Me.ToolStripSeparator10})
+        Me.MainToolStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.SaveToolStripButton, Me.ToolStripSeparator3, Me.ReloadDatasetToolStripButton, Me.ToolStripSeparator4, Me.AllowEditsToolStripButton, Me.ToolStripSeparator6, Me.CaribouOptionsToolStripDropDownButton, Me.ToolStripSeparator5, Me.OpenCapturesFormToolStripButton, Me.ToolStripSeparator11, Me.ResultsToolStripDropDownButton, Me.ToolStripSeparator7, Me.QualityControlToolStripDropDownButton, Me.ToolStripSeparator9, Me.SettingsToolStripButton, Me.ToolStripSeparator8, Me.OpenWRSTCaribouDirectoryToolStripButton, Me.ToolStripSeparator10})
         Me.MainToolStrip.Location = New System.Drawing.Point(0, 0)
         Me.MainToolStrip.Name = "MainToolStrip"
         Me.HelpProvider.SetShowHelp(Me.MainToolStrip, True)
@@ -388,6 +388,62 @@ Partial Class MainForm
         Me.ToolStripSeparator4.Name = "ToolStripSeparator4"
         Me.ToolStripSeparator4.Size = New System.Drawing.Size(6, 25)
         '
+        'AllowEditsToolStripButton
+        '
+        Me.AllowEditsToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
+        Me.AllowEditsToolStripButton.Image = CType(resources.GetObject("AllowEditsToolStripButton.Image"), System.Drawing.Image)
+        Me.AllowEditsToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.AllowEditsToolStripButton.Name = "AllowEditsToolStripButton"
+        Me.AllowEditsToolStripButton.Size = New System.Drawing.Size(69, 22)
+        Me.AllowEditsToolStripButton.Tag = "False"
+        Me.AllowEditsToolStripButton.Text = "Allow edits"
+        '
+        'ToolStripSeparator6
+        '
+        Me.ToolStripSeparator6.Name = "ToolStripSeparator6"
+        Me.ToolStripSeparator6.Size = New System.Drawing.Size(6, 25)
+        '
+        'CaribouOptionsToolStripDropDownButton
+        '
+        Me.CaribouOptionsToolStripDropDownButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
+        Me.CaribouOptionsToolStripDropDownButton.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CaribouProfileToolStripMenuItem, Me.SightingsHistoryPerAnimalToolStripMenuItem})
+        Me.CaribouOptionsToolStripDropDownButton.Image = CType(resources.GetObject("CaribouOptionsToolStripDropDownButton.Image"), System.Drawing.Image)
+        Me.CaribouOptionsToolStripDropDownButton.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.CaribouOptionsToolStripDropDownButton.Name = "CaribouOptionsToolStripDropDownButton"
+        Me.CaribouOptionsToolStripDropDownButton.Size = New System.Drawing.Size(62, 22)
+        Me.CaribouOptionsToolStripDropDownButton.Text = "Caribou"
+        '
+        'CaribouProfileToolStripMenuItem
+        '
+        Me.CaribouProfileToolStripMenuItem.Name = "CaribouProfileToolStripMenuItem"
+        Me.CaribouProfileToolStripMenuItem.Size = New System.Drawing.Size(215, 22)
+        Me.CaribouProfileToolStripMenuItem.Text = "Caribou profile..."
+        '
+        'SightingsHistoryPerAnimalToolStripMenuItem
+        '
+        Me.SightingsHistoryPerAnimalToolStripMenuItem.Name = "SightingsHistoryPerAnimalToolStripMenuItem"
+        Me.SightingsHistoryPerAnimalToolStripMenuItem.Size = New System.Drawing.Size(215, 22)
+        Me.SightingsHistoryPerAnimalToolStripMenuItem.Text = "Caribou sightings history..."
+        '
+        'ToolStripSeparator5
+        '
+        Me.ToolStripSeparator5.Name = "ToolStripSeparator5"
+        Me.ToolStripSeparator5.Size = New System.Drawing.Size(6, 25)
+        '
+        'OpenCapturesFormToolStripButton
+        '
+        Me.OpenCapturesFormToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
+        Me.OpenCapturesFormToolStripButton.Image = CType(resources.GetObject("OpenCapturesFormToolStripButton.Image"), System.Drawing.Image)
+        Me.OpenCapturesFormToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.OpenCapturesFormToolStripButton.Name = "OpenCapturesFormToolStripButton"
+        Me.OpenCapturesFormToolStripButton.Size = New System.Drawing.Size(67, 22)
+        Me.OpenCapturesFormToolStripButton.Text = "Captures..."
+        '
+        'ToolStripSeparator11
+        '
+        Me.ToolStripSeparator11.Name = "ToolStripSeparator11"
+        Me.ToolStripSeparator11.Size = New System.Drawing.Size(6, 25)
+        '
         'ResultsToolStripDropDownButton
         '
         Me.ResultsToolStripDropDownButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
@@ -421,62 +477,6 @@ Partial Class MainForm
         Me.ViewCaribouProfileToolStripMenuItem.Name = "ViewCaribouProfileToolStripMenuItem"
         Me.ViewCaribouProfileToolStripMenuItem.Size = New System.Drawing.Size(285, 22)
         Me.ViewCaribouProfileToolStripMenuItem.Text = "View caribou profile..."
-        '
-        'ToolStripSeparator5
-        '
-        Me.ToolStripSeparator5.Name = "ToolStripSeparator5"
-        Me.ToolStripSeparator5.Size = New System.Drawing.Size(6, 25)
-        '
-        'CaribouOptionsToolStripDropDownButton
-        '
-        Me.CaribouOptionsToolStripDropDownButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
-        Me.CaribouOptionsToolStripDropDownButton.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CaribouProfileToolStripMenuItem, Me.SightingsHistoryPerAnimalToolStripMenuItem})
-        Me.CaribouOptionsToolStripDropDownButton.Image = CType(resources.GetObject("CaribouOptionsToolStripDropDownButton.Image"), System.Drawing.Image)
-        Me.CaribouOptionsToolStripDropDownButton.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.CaribouOptionsToolStripDropDownButton.Name = "CaribouOptionsToolStripDropDownButton"
-        Me.CaribouOptionsToolStripDropDownButton.Size = New System.Drawing.Size(62, 22)
-        Me.CaribouOptionsToolStripDropDownButton.Text = "Caribou"
-        '
-        'CaribouProfileToolStripMenuItem
-        '
-        Me.CaribouProfileToolStripMenuItem.Name = "CaribouProfileToolStripMenuItem"
-        Me.CaribouProfileToolStripMenuItem.Size = New System.Drawing.Size(215, 22)
-        Me.CaribouProfileToolStripMenuItem.Text = "Caribou profile..."
-        '
-        'SightingsHistoryPerAnimalToolStripMenuItem
-        '
-        Me.SightingsHistoryPerAnimalToolStripMenuItem.Name = "SightingsHistoryPerAnimalToolStripMenuItem"
-        Me.SightingsHistoryPerAnimalToolStripMenuItem.Size = New System.Drawing.Size(215, 22)
-        Me.SightingsHistoryPerAnimalToolStripMenuItem.Text = "Caribou sightings history..."
-        '
-        'ToolStripSeparator11
-        '
-        Me.ToolStripSeparator11.Name = "ToolStripSeparator11"
-        Me.ToolStripSeparator11.Size = New System.Drawing.Size(6, 25)
-        '
-        'OpenCapturesFormToolStripButton
-        '
-        Me.OpenCapturesFormToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
-        Me.OpenCapturesFormToolStripButton.Image = CType(resources.GetObject("OpenCapturesFormToolStripButton.Image"), System.Drawing.Image)
-        Me.OpenCapturesFormToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.OpenCapturesFormToolStripButton.Name = "OpenCapturesFormToolStripButton"
-        Me.OpenCapturesFormToolStripButton.Size = New System.Drawing.Size(67, 22)
-        Me.OpenCapturesFormToolStripButton.Text = "Captures..."
-        '
-        'ToolStripSeparator6
-        '
-        Me.ToolStripSeparator6.Name = "ToolStripSeparator6"
-        Me.ToolStripSeparator6.Size = New System.Drawing.Size(6, 25)
-        '
-        'AllowEditsToolStripButton
-        '
-        Me.AllowEditsToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
-        Me.AllowEditsToolStripButton.Image = CType(resources.GetObject("AllowEditsToolStripButton.Image"), System.Drawing.Image)
-        Me.AllowEditsToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.AllowEditsToolStripButton.Name = "AllowEditsToolStripButton"
-        Me.AllowEditsToolStripButton.Size = New System.Drawing.Size(69, 22)
-        Me.AllowEditsToolStripButton.Tag = "False"
-        Me.AllowEditsToolStripButton.Text = "Allow edits"
         '
         'ToolStripSeparator7
         '
@@ -597,6 +597,7 @@ Partial Class MainForm
         Me.HelpProvider.SetHelpKeyword(Me, "")
         Me.HelpProvider.SetHelpNavigator(Me, System.Windows.Forms.HelpNavigator.Topic)
         Me.HelpProvider.SetHelpString(Me, "Data entry")
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Margin = New System.Windows.Forms.Padding(2)
         Me.Name = "MainForm"
         Me.HelpProvider.SetShowHelp(Me, True)
