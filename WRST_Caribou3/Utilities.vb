@@ -713,5 +713,55 @@ Parameter name: key" Then
         End Try
     End Sub
 
+    ''' <summary>
+    ''' Synchronizes the data in the Animal_Movement database tables with their equivalent temporary tables in the WRST_Caribou database by executing the spPullAMTables stored procedure. 
+    ''' Running this procedure generally takes a long time; default timeout is 10 minutes. 
+    ''' </summary>
+    ''' <param name="TimeOut">Time, in seconds, you are willing to wait for the stored procedure to complete. Default is 6000 (10 minutes).</param>
+    ''' <returns></returns>
+    Private Function SynchronizeDatabases(Optional TimeOut As Integer = 600) As Boolean
+        Dim StoredProcedureSucceeded As Boolean = False
+        Try
+            Dim conn As New SqlConnection(My.Settings.WRST_CaribouConnectionString)
+            Dim cmd As SqlCommand = conn.CreateCommand
+            conn.Open()
+            cmd.CommandType = CommandType.StoredProcedure
+            'cmd.Parameters.Add(New SqlParameter("@MyParameter", MyParameterValue)
+            cmd.CommandTimeout = TimeOut 'timeout, in seconds
+            cmd.CommandText = "spPullAMTables" 'Stored procedure name
+            cmd.ExecuteNonQuery()
+            conn.Close()
+            StoredProcedureSucceeded = True
+        Catch ex As Exception
+            MsgBox("Procedure failed to execute: " & ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name & ")")
+            StoredProcedureSucceeded = False
+        End Try
+        Return StoredProcedureSucceeded
+    End Function
+
+    ''' <summary>
+    ''' Asks the user if they want to execute the spPullAMTables on the WRST_Caribou database. 
+    ''' This stored procedures refreshes the Animal_Movement temporary tables in the WRST_Caribou database.
+    ''' Only run the stored procedure if there have been changes on the Animal_Movement database.
+    ''' </summary>
+    ''' <param name="TimeOut">Time, in seconds, you are willing to wait for the stored procedure to complete. Default is 6000 (10 minutes).</param>
+    Public Sub AskToSynchronizeDatabases(Optional TimeOut As Integer = 600)
+        Dim Warning As String = "Synchronizing the WRST_Caribou database with the Animal_Movement database takes a long time. 
+Only do this if you have recently made changes to the Animal Movement database and you would like to see these changes 
+reflected in the WRST Caribou Database Application." & vbNewLine & "Proceed?"
+        If MsgBox(Warning, MsgBoxStyle.YesNo, "Notice.") = MsgBoxResult.Yes Then
+
+            'Synchronize the data in AM database with the equivalent temporary tables in WRST_Caribou
+            Dim StoredProcedureSucceeded As Boolean = SynchronizeDatabases()
+
+            If StoredProcedureSucceeded = True Then
+                MsgBox("Databases synchronized.")
+            Else
+                MsgBox("Synchronization failed. Recent changes to Animal_Movement may not be reflected in the WRST Caribou Database Application. Contact your data manager to execute spPullAMTables stored procedure.")
+            End If
+        End If
+    End Sub
+
+
 End Module
 

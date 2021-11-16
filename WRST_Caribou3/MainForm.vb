@@ -1296,11 +1296,6 @@ Click Yes to certify and lock the current record. Click No to cancel.", MsgBoxSt
 
 
 
-    Private Sub OpenCapturesFormToolStripButton_Click(sender As Object, e As EventArgs) Handles OpenCapturesFormToolStripButton.Click
-        Dim CapturesForm As New CapturesForm
-        CapturesForm.ShowDialog()
-    End Sub
-
 
 
 
@@ -1360,17 +1355,7 @@ Click Yes to certify and lock the current record. Click No to cancel.", MsgBoxSt
         ConfirmDelete(e)
     End Sub
 
-    Private Sub OpenWRSTCaribouDirectoryToolStripButton_Click(sender As Object, e As EventArgs) Handles OpenWRSTCaribouDirectoryToolStripButton.Click
-        Try
-            If My.Computer.FileSystem.DirectoryExists(My.Settings.SharedDirectory) Then
-                Process.Start(My.Settings.SharedDirectory)
-            Else
-                MsgBox("Directory " & My.Settings.SharedDirectory & " does not exist. Modify the path to the WRST Caribou shared drive in the application settings.")
-            End If
-        Catch ex As Exception
 
-        End Try
-    End Sub
 
     Private Sub CurrentRowToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CurrentRowToolStripMenuItem.Click
         'try to match any frequencies in the current survey row to animal/frequency/collar deployments in animal movements
@@ -1494,10 +1479,7 @@ Click Yes to certify and lock the current record. Click No to cancel.", MsgBoxSt
         End Try
     End Sub
 
-    Private Sub SettingsToolStripButton_Click(sender As Object, e As EventArgs) Handles SettingsToolStripButton.Click
-        Dim SettingsForm As New SettingsForm
-        SettingsForm.ShowDialog()
-    End Sub
+
 
     Private Sub DatabaseQueriesToolToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DatabaseQueriesToolToolStripMenuItem.Click
         Dim ResultsForm As New ResultsForm
@@ -1511,56 +1493,6 @@ Click Yes to certify and lock the current record. Click No to cancel.", MsgBoxSt
         LoadAnimalIDSCombo()
     End Sub
 
-
-
-    ''' <summary>
-    ''' The MatchAllObservedFrequenciesToCollarDeployments routine deletes all the records in the CollaredCaribouInGroups table, cycles through all the detected frequencies in the FrequenciesInGroup column of the 
-    ''' Surveys table and matches the detected frequencies to Animals using the collar deployment information in Animal_Movement.
-    ''' </summary>
-    'Private Sub MatchAllObservedFrequenciesToCollarDeployments()
-    '    MsgBox("This function was removed in 2020 when a second ProjectID (ChisanaCH) was added to Animal_Movement. Contact the CAKN data manager.")
-    '    'Dim Warning As String = "WARNING: This procedure is pretty drastic. The procedure will overwrite all the records in the CollaredAnimalsInGroups table. The procedure will then loop through all the frequencies ever recorded in all caribou groups and rematch them to collar deployments/animals in Animal_Movement. The procedure will take a long time and the application may appear frozen. Please do not close the application during this time. Proceed?"
-    '    'If MsgBox(Warning, MsgBoxStyle.YesNo, "WARNING") = MsgBoxResult.Yes Then
-    '    '    If MsgBox("In order to regenerate all the collared animals in groups records the application needs to delete all existing records in the CollaredAnimalsInGroups table. You will need to re-run all data quality checks and repairs.Proceed?", MsgBoxStyle.YesNo, "WARNING") = MsgBoxResult.Yes Then
-
-    '    '        ask to save the dataset
-    '    '        AskToSaveChanges()
-
-    '    '        Try
-    '    '            delete all the records in CollaredAnimalsInGroups
-    '    '            Dim con As New SqlConnection(My.Settings.WRST_CaribouConnectionString)
-    '    '            Dim cmd As New SqlCommand("DELETE  FROM CollaredAnimalsInGroups", con)
-    '    '            Using con
-    '    '                con.Open()
-    '    '                cmd.ExecuteNonQuery()
-    '    '            End Using
-
-    '    '            AskToSaveChanges()
-
-    '    '            because we deleted all the collared animals in groups records from the database we need to re-load the front-end app
-    '    '            LoadDataset()
-
-    '    '            Now loop through each survey record And regenerate the matches of frequency And date to animal deployments
-    '    '            For Each SurveyRow As DataRow In WRST_CaribouDataSet.Tables("Surveys").Rows
-    '    '                MatchFrequencyToAnimal(SurveyRow, Herd)
-    '    '            Next
-
-    '    '            ask to save the dataset
-    '    '            AskToSaveChanges()
-
-    '    '            reload the dataset
-    '    '            LoadDataset()
-
-    '    '            Update the QC highlighting on the surveys grid.
-    '    '            ReconcileFrequencies()
-
-    '    '        Catch ex As Exception
-    '    '            MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name & ")")
-    '    '        End Try
-    '    '    End If
-    '    'End If
-    'End Sub
-
     Private Sub CountTotalDetectedFrequenciesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CountTotalDetectedFrequenciesToolStripMenuItem.Click
         Dim QCFrequenciesForm As New QC_FrequenciesForm
         QCFrequenciesForm.Show()
@@ -1568,14 +1500,6 @@ Click Yes to certify and lock the current record. Click No to cancel.", MsgBoxSt
 
 
 
-    Private Sub InventoryOfAvailableCollarsOnADateToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles InventoryOfAvailableCollarsOnADateToolStripMenuItem.Click
-        Dim CollarsInventoryForm As New AvailableCollarsInventoryForADateForm()
-        Dim CurrentSurveyDate As Date = GetCurrentGridEXCellValue(Me.SurveyFlightsGridEX, "TimeDepart")
-        If Not IsDBNull(CurrentSurveyDate) Then
-            CollarsInventoryForm.SurveyDate = CurrentSurveyDate
-        End If
-        CollarsInventoryForm.Show()
-    End Sub
 
     Private Sub ShowAnimalDetailsCheckBox_CheckedChanged(sender As Object, e As EventArgs) Handles ShowAnimalDetailsCheckBox.CheckedChanged
         'load the animal details from animal_movement
@@ -1592,9 +1516,6 @@ Click Yes to certify and lock the current record. Click No to cancel.", MsgBoxSt
         ReconcileFrequencies()
     End Sub
 
-
-
-
     Private Sub CaribouProfileToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CaribouProfileToolStripMenuItem.Click
         Dim CaribouProfileForm As New CaribouProfileForm()
         CaribouProfileForm.Show()
@@ -1603,5 +1524,47 @@ Click Yes to certify and lock the current record. Click No to cancel.", MsgBoxSt
     Private Sub SightingsHistoryPerAnimalToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SightingsHistoryPerAnimalToolStripMenuItem.Click
         Dim CSHForm As New CaribouSightingsHistoryForm()
         CSHForm.Show()
+    End Sub
+
+
+
+    Private Sub SynchronizeDatabasesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SynchronizeDatabasesToolStripMenuItem.Click
+        AskToSynchronizeDatabases()
+    End Sub
+
+    Private Sub OpenWRSTCaribouSharedNetworkDriveToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles OpenWRSTCaribouSharedNetworkDriveToolStripMenuItem.Click
+        Try
+            If My.Computer.FileSystem.DirectoryExists(My.Settings.SharedDirectory) Then
+                Process.Start(My.Settings.SharedDirectory)
+            Else
+                MsgBox("Directory " & My.Settings.SharedDirectory & " does not exist. Modify the path to the WRST Caribou shared drive in the application settings.")
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name & ")")
+        End Try
+    End Sub
+
+    Private Sub SettingsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SettingsToolStripMenuItem.Click
+        Dim SettingsForm As New SettingsForm
+        SettingsForm.ShowDialog()
+    End Sub
+
+    Private Sub InventoryOfCollarsForADateToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles InventoryOfCollarsForADateToolStripMenuItem.Click
+        Dim CollarsInventoryForm As New AvailableCollarsInventoryForADateForm()
+        Dim CurrentSurveyDate As Date = GetCurrentGridEXCellValue(Me.SurveyFlightsGridEX, "TimeDepart")
+        If Not IsDBNull(CurrentSurveyDate) Then
+            CollarsInventoryForm.SurveyDate = CurrentSurveyDate
+        End If
+        CollarsInventoryForm.Show()
+    End Sub
+
+    Private Sub InventoryOfCollarsAvailableForADateToolStripMenuItem_Click(sender As Object, e As EventArgs)
+
+    End Sub
+
+    Private Sub CapturesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CapturesToolStripMenuItem.Click
+        MsgBox("The Captures form is having problems. Temporarily unavailable.")
+        'Dim CapturesForm As New CapturesForm
+        'CapturesForm.ShowDialog()
     End Sub
 End Class

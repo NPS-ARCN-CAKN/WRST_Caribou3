@@ -1,5 +1,6 @@
 ﻿Imports DevExpress.XtraGrid
 Imports DevExpress.XtraGrid.Views.Grid
+Imports System.Data.SqlClient
 
 Public Class CaribouProfileForm
 
@@ -115,14 +116,15 @@ FROM            tmpCollarDeployments
         Try
             GC.UseEmbeddedNavigator = True
             Dim GV As GridView = TryCast(GC.MainView, GridView)
-        GV.OptionsBehavior.Editable = False
-        GV.OptionsBehavior.AllowAddRows = False
-        GV.OptionsBehavior.AllowDeleteRows = False
-        GV.BestFitColumns(True)
-        GV.OptionsView.BestFitMode = GridBestFitMode.Fast
-        GV.OptionsView.ColumnAutoWidth = False
-        GV.OptionsView.ShowFooter = True
-        GV.OptionsDetail.EnableMasterViewMode = False 'True to show sub-tables
+            GV.OptionsBehavior.Editable = False
+            GV.OptionsBehavior.AllowAddRows = False
+            GV.OptionsBehavior.AllowDeleteRows = False
+            GV.OptionsBehavior.ReadOnly = True
+            GV.BestFitColumns(True)
+            GV.OptionsView.BestFitMode = GridBestFitMode.Fast
+            GV.OptionsView.ColumnAutoWidth = False
+            GV.OptionsView.ShowFooter = True
+            GV.OptionsDetail.EnableMasterViewMode = False 'True to show sub-tables
         Catch ex As Exception
         MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name & ")")
         End Try
@@ -132,5 +134,9 @@ FROM            tmpCollarDeployments
         Dim AnimalID As String = Me.AnimalIDToolStripComboBox.Text.Trim
         Me.AnimalHeaderLabel.Text = AnimalID
         LoadData(AnimalID)
+    End Sub
+
+    Private Sub SyncDatabasesToolStripButton_Click(sender As Object, e As EventArgs) Handles SyncDatabasesToolStripButton.Click
+        AskToSynchronizeDatabases()
     End Sub
 End Class

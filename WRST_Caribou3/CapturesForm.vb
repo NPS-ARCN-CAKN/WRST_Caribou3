@@ -9,41 +9,38 @@ Public Class CapturesForm
 
     Private Sub CapturesForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
-        Try
-            'load the captures table from database
-            LoadDataset()
 
-            'standard gridex formatting
-            FormatGridEX(Me.CapturesGridEX)
+        'load the captures table from database
+        'LoadDataset()
 
-            With Me.CapturesGridEX
-                .AllowAddNew = InheritableBoolean.False
-                .AllowEdit = InheritableBoolean.False
-                .AllowDelete = InheritableBoolean.False
-            End With
+        ''standard gridex formatting
+        'FormatGridEX(Me.CapturesGridEX)
 
-            'turn off group by box, add filtering
-            With Me.CapturesGridEX
-                .GroupByBoxVisible = False
-                .FilterMode = Janus.Windows.GridEX.FilterMode.Automatic
-            End With
+        'With Me.CapturesGridEX
+        '    .AllowAddNew = InheritableBoolean.False
+        '    .AllowEdit = InheritableBoolean.False
+        '    .AllowDelete = InheritableBoolean.False
+        'End With
 
-            'set up dropdowns
-            SetUpCapturesGridEXDropDowns(Me.CapturesGridEX)
+        ''turn off group by box, add filtering
+        'With Me.CapturesGridEX
+        '    .GroupByBoxVisible = False
+        '    .FilterMode = Janus.Windows.GridEX.FilterMode.Automatic
+        'End With
 
-            'set captures grid default values
-            SetCapturesGridEXDefaultValues()
+        ''set up dropdowns
+        'SetUpCapturesGridEXDropDowns(Me.CapturesGridEX)
 
-            'load the animal movements frequencies into the captures grid
-            ' LoadAnimalMovementFrequenciesIntoCapturesGrid()
+        ''set captures grid default values
+        'SetCapturesGridEXDefaultValues()
 
-            'set up filtering tools
-            Me.CapturesGridEX.FilterMode = FilterMode.None
+        'set up filtering tools
+        'Me.CapturesGridEX.FilterMode = FilterMode.None
 
-            'make the form a reasonable size if not maximized
-            Me.Width = 1200
+        'make the form a reasonable size if not maximized
+        Me.Width = 1200
             Me.Height = 800
-
+        Try
         Catch ex As Exception
             MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name & ")")
         End Try
@@ -52,16 +49,16 @@ Public Class CapturesForm
     ''' <summary>
     ''' Loads the Captures database table into the application
     ''' </summary>
-    Private Sub LoadDataset()
-        Try
-            'load the captures table from database
-            Me.CapturesTableAdapter.Fill(Me.WRST_CaribouDataSet.Captures)
-            Me.CurrentDatabaseToolStripLabel.Text = GetDatabaseConnectionText()
-        Catch ex As Exception
-            Me.CurrentDatabaseToolStripLabel.Text = ex.Message
-            MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name & ")")
-        End Try
-    End Sub
+    'Private Sub LoadDataset()
+    '    'Try
+    '    '    'load the captures table from database
+    '    '    'Me.CapturesTableAdapter.Fill(Me.WRST_CaribouDataSet.Captures)
+    '    '    'Me.CurrentDatabaseToolStripLabel.Text = GetDatabaseConnectionText()
+    '    'Catch ex As Exception
+    '    '    Me.CurrentDatabaseToolStripLabel.Text = ex.Message
+    '    '    MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name & ")")
+    '    'End Try
+    'End Sub
 
     ''' <summary>
     ''' Saves the Captures data
@@ -358,64 +355,7 @@ Public Class CapturesForm
         Return CellValue
     End Function
 
-    Private Sub CapturesGridEX_EditingCell(sender As Object, e As EditingCellEventArgs) Handles CapturesGridEX.EditingCell
-        ' this works but isn't ready for prime time and using FrequenciesCheck might be a better way. disabled for now
-        'load data into a column
-        '        Dim AnimalID As String = GetCurrentGridEXCellValue(Me.CapturesGridEX, "AnimalID")
-        '        Dim CaptureDate As String = GetCurrentGridEXCellValue(Me.CapturesGridEX, "CaptureDate")
-        '        Dim CurrentFrequency As String = ""
-        '        If Not IsDBNull(GetCurrentGridEXCellValue(Me.CapturesGridEX, "Frequency")) Then
-        '            If Not IsDBNull(AnimalID) And Not IsDBNull(CaptureDate) Then
-        '                CurrentFrequency = GetCurrentGridEXCellValue(Me.CapturesGridEX, "Frequency")
-        '            End If
 
-        '            If IsDate(CaptureDate) Then
-        '                Dim Sql As String = "SELECT        CollarDeployments.AnimalId, CollarDeployments.DeploymentDate, CollarDeployments.RetrievalDate, CollarDeployments.DeploymentId, Collars.Frequency
-        'FROM CollarDeployments INNER JOIN Collars ON CollarDeployments.CollarManufacturer = Collars.CollarManufacturer AND CollarDeployments.CollarId = Collars.CollarId
-        'WHERE (CollarDeployments.AnimalId = '" & AnimalID & "') AND ('" & CaptureDate & "' = Convert(Date,CollarDeployments.DeploymentDate))"
-
-        '                Dim FreqDataTable As DataTable = GetDataTable(My.Settings.Animal_MovementConnectionString, Sql)
-        '                'Debug.Print(vbNewLine & AnimalID & vbTab & CaptureDate.ToString & vbTab & FreqDataTable.Rows.Count)
-        '                'Debug.Print(Sql)
-        '                If FreqDataTable.Rows.Count = 1 Then
-        '                    Dim AM_Frequency As Double = FreqDataTable.Rows(0).Item("Frequency")
-        '                    If CurrentFrequency <> "" And AM_Frequency > 0 Then
-        '                        If AM_Frequency <> CurrentFrequency Then
-        '                            If MsgBox("A different frequency exists for this AnimalID for " & CaptureDate & ". Replace " & CurrentFrequency & " with " & AM_Frequency & "? ", MsgBoxStyle.YesNo, "Frequency found") = MsgBoxResult.Yes Then
-        '                                Me.CapturesGridEX.CurrentRow.Cells("Frequency").Value = AM_Frequency
-        '                            End If
-        '                        End If
-        '                        If MsgBox("The frequency for this AnimalID and Capture Date as queried from Animal Movement is " & AM_Frequency & ". Auto-populate the Frequency cell with this value? ", MsgBoxStyle.YesNo, "Frequency found") = MsgBoxResult.Yes Then
-        '                            Me.CapturesGridEX.CurrentRow.Cells("Frequency").Value = AM_Frequency
-        '                        End If
-        '                    End If
-        '                End If
-        '            End If
-        '        End If
-
-
-
-        'Dim ColumnName As String = "Frequency"
-        'Dim Grid As GridEX = Me.CapturesGridEX
-
-        'Dim AnimalsDataTable As DataTable = GetAnimalsDataTable()
-        'Dim AnimalsDataView As DataView = AnimalsDataTable.DefaultView
-        'AnimalsDataView.Sort = ColumnName
-        'With Grid.RootTable.Columns(ColumnName)
-        '    .EditType = EditType.Combo
-        '    .HasValueList = True
-        '    .LimitToList = False
-        '    .AllowSort = True
-        '    .AutoComplete = True
-        '    .ValueList.Clear()
-        'End With
-        'Dim AnimalsList As GridEXValueListItemCollection = Grid.RootTable.Columns(ColumnName).ValueList
-        'For Each Row As DataRowView In AnimalsDataView
-        '    Dim AnimalID As String = Row.Item(ColumnName)
-        '    AnimalsList.Add(AnimalID, AnimalID)
-        'Next
-        'Me.CapturesGridEX.RootTable.Columns("Frequency")
-    End Sub
 
     Private Sub AllowFilteringToolStripButton_Click(sender As Object, e As EventArgs) Handles AllowFilteringToolStripButton.Click
         ToggleFilteringTools()

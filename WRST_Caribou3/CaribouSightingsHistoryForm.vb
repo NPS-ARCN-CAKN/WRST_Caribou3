@@ -1,4 +1,6 @@
-﻿Public Class CaribouSightingsHistoryForm
+﻿Imports System.Data.SqlClient
+
+Public Class CaribouSightingsHistoryForm
 
     Public Sub New(Optional AnimalID As String = "")
 
@@ -25,7 +27,7 @@
     Private Sub LoadData(AnimalID As String)
         If AnimalID.Trim <> "" Then
 
-            Dim Sql As String = "SELECT * FROM Dataset_Survivorship WHERE AnimalID='" & AnimalID.Trim & "' ORDER BY SightingDate Asc, AnimalID Asc"
+            Dim Sql As String = "SELECT SightingDate, Year, Month, AliveAtSightingDate, Lat, Lon, SightingType,AnimalId FROM Dataset_Survivorship WHERE AnimalID='" & AnimalID.Trim & "' ORDER BY SightingDate Asc, AnimalID Asc"
             Try
                 Dim SightingsDataTable As DataTable = GetDataTable(My.Settings.WRST_CaribouConnectionString, Sql)
                 Me.SightingsHistoryDataGridView.DataSource = SightingsDataTable
@@ -55,5 +57,10 @@
 
     Private Sub AnimalIDToolStripComboBox_SelectedIndexChanged(sender As Object, e As EventArgs) Handles AnimalIDToolStripComboBox.SelectedIndexChanged
         LoadData(Me.AnimalIDToolStripComboBox.Text.Trim)
+    End Sub
+
+    Private Sub SynchDatabasesToolStripButton_Click(sender As Object, e As EventArgs) Handles SynchDatabasesToolStripButton.Click
+        'Synchronize the animal movements data into the wrst_caribou temporary tables for faster querying
+        AskToSynchronizeDatabases()
     End Sub
 End Class

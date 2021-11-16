@@ -44,6 +44,8 @@ Partial Class CaribouProfileForm
         Me.AnimalFixesTabPage = New System.Windows.Forms.TabPage()
         Me.CollarFixesGridControl = New DevExpress.XtraGrid.GridControl()
         Me.GridView4 = New DevExpress.XtraGrid.Views.Grid.GridView()
+        Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
+        Me.SyncDatabasesToolStripButton = New System.Windows.Forms.ToolStripButton()
         Me.MainToolStrip.SuspendLayout()
         CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SplitContainer1.Panel1.SuspendLayout()
@@ -70,7 +72,7 @@ Partial Class CaribouProfileForm
         '
         'MainToolStrip
         '
-        Me.MainToolStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripLabel1, Me.AnimalIDToolStripComboBox})
+        Me.MainToolStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripLabel1, Me.AnimalIDToolStripComboBox, Me.ToolStripSeparator1, Me.SyncDatabasesToolStripButton})
         Me.MainToolStrip.Location = New System.Drawing.Point(0, 0)
         Me.MainToolStrip.Name = "MainToolStrip"
         Me.MainToolStrip.Size = New System.Drawing.Size(1184, 25)
@@ -130,6 +132,7 @@ Partial Class CaribouProfileForm
         '
         Me.AnimalVGridControl.Cursor = System.Windows.Forms.Cursors.Default
         Me.AnimalVGridControl.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.AnimalVGridControl.LayoutStyle = DevExpress.XtraVerticalGrid.LayoutViewStyle.SingleRecordView
         Me.AnimalVGridControl.Location = New System.Drawing.Point(0, 44)
         Me.AnimalVGridControl.Name = "AnimalVGridControl"
         Me.AnimalVGridControl.OptionsBehavior.Editable = False
@@ -169,6 +172,7 @@ Partial Class CaribouProfileForm
         '
         Me.GridView1.GridControl = Me.DeploymentsGridControl
         Me.GridView1.Name = "GridView1"
+        Me.GridView1.OptionsBehavior.ReadOnly = True
         Me.GridView1.OptionsSelection.MultiSelect = True
         Me.GridView1.OptionsSelection.MultiSelectMode = DevExpress.XtraGrid.Views.Grid.GridMultiSelectMode.CellSelect
         Me.GridView1.OptionsView.ShowGroupPanel = False
@@ -219,6 +223,7 @@ Partial Class CaribouProfileForm
         '
         Me.GridView2.GridControl = Me.SightingsSurveysGridControl
         Me.GridView2.Name = "GridView2"
+        Me.GridView2.OptionsBehavior.ReadOnly = True
         Me.GridView2.OptionsSelection.MultiSelect = True
         Me.GridView2.OptionsSelection.MultiSelectMode = DevExpress.XtraGrid.Views.Grid.GridMultiSelectMode.CellSelect
         Me.GridView2.OptionsView.ShowFooter = True
@@ -248,6 +253,7 @@ Partial Class CaribouProfileForm
         '
         Me.GridView3.GridControl = Me.EarlyRadiotrackingGridControl
         Me.GridView3.Name = "GridView3"
+        Me.GridView3.OptionsBehavior.ReadOnly = True
         Me.GridView3.OptionsSelection.MultiSelect = True
         Me.GridView3.OptionsSelection.MultiSelectMode = DevExpress.XtraGrid.Views.Grid.GridMultiSelectMode.CellSelect
         Me.GridView3.OptionsView.ShowFooter = True
@@ -277,9 +283,24 @@ Partial Class CaribouProfileForm
         '
         Me.GridView4.GridControl = Me.CollarFixesGridControl
         Me.GridView4.Name = "GridView4"
+        Me.GridView4.OptionsBehavior.ReadOnly = True
         Me.GridView4.OptionsSelection.MultiSelect = True
         Me.GridView4.OptionsSelection.MultiSelectMode = DevExpress.XtraGrid.Views.Grid.GridMultiSelectMode.CellSelect
         Me.GridView4.OptionsView.ShowFooter = True
+        '
+        'ToolStripSeparator1
+        '
+        Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
+        Me.ToolStripSeparator1.Size = New System.Drawing.Size(6, 25)
+        '
+        'SyncDatabasesToolStripButton
+        '
+        Me.SyncDatabasesToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
+        Me.SyncDatabasesToolStripButton.Image = CType(resources.GetObject("SyncDatabasesToolStripButton.Image"), System.Drawing.Image)
+        Me.SyncDatabasesToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.SyncDatabasesToolStripButton.Name = "SyncDatabasesToolStripButton"
+        Me.SyncDatabasesToolStripButton.Size = New System.Drawing.Size(139, 22)
+        Me.SyncDatabasesToolStripButton.Text = "Synchronize databases..."
         '
         'CaribouProfileForm
         '
@@ -340,4 +361,6 @@ Partial Class CaribouProfileForm
     Friend WithEvents AnimalFixesTabPage As TabPage
     Friend WithEvents CollarFixesGridControl As DevExpress.XtraGrid.GridControl
     Friend WithEvents GridView4 As DevExpress.XtraGrid.Views.Grid.GridView
+    Friend WithEvents ToolStripSeparator1 As ToolStripSeparator
+    Friend WithEvents SyncDatabasesToolStripButton As ToolStripButton
 End Class

@@ -27,6 +27,8 @@ Partial Class CaribouSightingsHistoryForm
         Me.SightingsToolStrip = New System.Windows.Forms.ToolStrip()
         Me.ToolStripLabel1 = New System.Windows.Forms.ToolStripLabel()
         Me.AnimalIDToolStripComboBox = New System.Windows.Forms.ToolStripComboBox()
+        Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
+        Me.SynchDatabasesToolStripButton = New System.Windows.Forms.ToolStripButton()
         CType(Me.SightingsHistoryDataGridView, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SightingsToolStrip.SuspendLayout()
         Me.SuspendLayout()
@@ -46,7 +48,7 @@ Partial Class CaribouSightingsHistoryForm
         '
         'SightingsToolStrip
         '
-        Me.SightingsToolStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripLabel1, Me.AnimalIDToolStripComboBox})
+        Me.SightingsToolStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripLabel1, Me.AnimalIDToolStripComboBox, Me.ToolStripSeparator1, Me.SynchDatabasesToolStripButton})
         Me.SightingsToolStrip.Location = New System.Drawing.Point(0, 0)
         Me.SightingsToolStrip.Name = "SightingsToolStrip"
         Me.SightingsToolStrip.Size = New System.Drawing.Size(800, 25)
@@ -63,6 +65,20 @@ Partial Class CaribouSightingsHistoryForm
         '
         Me.AnimalIDToolStripComboBox.Name = "AnimalIDToolStripComboBox"
         Me.AnimalIDToolStripComboBox.Size = New System.Drawing.Size(180, 25)
+        '
+        'ToolStripSeparator1
+        '
+        Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
+        Me.ToolStripSeparator1.Size = New System.Drawing.Size(6, 25)
+        '
+        'SynchDatabasesToolStripButton
+        '
+        Me.SynchDatabasesToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
+        Me.SynchDatabasesToolStripButton.Image = CType(resources.GetObject("SynchDatabasesToolStripButton.Image"), System.Drawing.Image)
+        Me.SynchDatabasesToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.SynchDatabasesToolStripButton.Name = "SynchDatabasesToolStripButton"
+        Me.SynchDatabasesToolStripButton.Size = New System.Drawing.Size(130, 22)
+        Me.SynchDatabasesToolStripButton.Text = "Synchronize databases"
         '
         'CaribouSightingsHistoryForm
         '
@@ -86,4 +102,6 @@ Partial Class CaribouSightingsHistoryForm
     Friend WithEvents SightingsToolStrip As ToolStrip
     Friend WithEvents AnimalIDToolStripComboBox As ToolStripComboBox
     Friend WithEvents ToolStripLabel1 As ToolStripLabel
+    Friend WithEvents ToolStripSeparator1 As ToolStripSeparator
+    Friend WithEvents SynchDatabasesToolStripButton As ToolStripButton
 End Class

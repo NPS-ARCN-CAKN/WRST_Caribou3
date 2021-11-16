@@ -60,22 +60,19 @@ Partial Class MainForm
         Me.CaribouOptionsToolStripDropDownButton = New System.Windows.Forms.ToolStripDropDownButton()
         Me.CaribouProfileToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.SightingsHistoryPerAnimalToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.InventoryOfCollarsForADateToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.CapturesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator5 = New System.Windows.Forms.ToolStripSeparator()
-        Me.OpenCapturesFormToolStripButton = New System.Windows.Forms.ToolStripButton()
-        Me.ToolStripSeparator11 = New System.Windows.Forms.ToolStripSeparator()
         Me.ResultsToolStripDropDownButton = New System.Windows.Forms.ToolStripDropDownButton()
         Me.DatabaseQueriesToolToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.InventoryOfAvailableCollarsOnADateToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ViewCaribouSightingsHistoryToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ViewCaribouProfileToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator7 = New System.Windows.Forms.ToolStripSeparator()
         Me.QualityControlToolStripDropDownButton = New System.Windows.Forms.ToolStripDropDownButton()
         Me.CountTotalDetectedFrequenciesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator9 = New System.Windows.Forms.ToolStripSeparator()
-        Me.SettingsToolStripButton = New System.Windows.Forms.ToolStripButton()
-        Me.ToolStripSeparator8 = New System.Windows.Forms.ToolStripSeparator()
-        Me.OpenWRSTCaribouDirectoryToolStripButton = New System.Windows.Forms.ToolStripButton()
-        Me.ToolStripSeparator10 = New System.Windows.Forms.ToolStripSeparator()
+        Me.DatabaseToolStripDropDownButton = New System.Windows.Forms.ToolStripDropDownButton()
+        Me.SynchronizeDatabasesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.SettingsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.OpenWRSTCaribouSharedNetworkDriveToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.HelpProvider = New System.Windows.Forms.HelpProvider()
         Me.BottomToolStrip = New System.Windows.Forms.ToolStrip()
         Me.CurrentDatabaseToolStripLabel = New System.Windows.Forms.ToolStripLabel()
@@ -352,7 +349,7 @@ Partial Class MainForm
         'MainToolStrip
         '
         Me.MainToolStrip.ImageScalingSize = New System.Drawing.Size(24, 24)
-        Me.MainToolStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.SaveToolStripButton, Me.ToolStripSeparator3, Me.ReloadDatasetToolStripButton, Me.ToolStripSeparator4, Me.AllowEditsToolStripButton, Me.ToolStripSeparator6, Me.CaribouOptionsToolStripDropDownButton, Me.ToolStripSeparator5, Me.OpenCapturesFormToolStripButton, Me.ToolStripSeparator11, Me.ResultsToolStripDropDownButton, Me.ToolStripSeparator7, Me.QualityControlToolStripDropDownButton, Me.ToolStripSeparator9, Me.SettingsToolStripButton, Me.ToolStripSeparator8, Me.OpenWRSTCaribouDirectoryToolStripButton, Me.ToolStripSeparator10})
+        Me.MainToolStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.SaveToolStripButton, Me.ToolStripSeparator3, Me.ReloadDatasetToolStripButton, Me.ToolStripSeparator4, Me.AllowEditsToolStripButton, Me.ToolStripSeparator6, Me.CaribouOptionsToolStripDropDownButton, Me.ToolStripSeparator5, Me.ResultsToolStripDropDownButton, Me.ToolStripSeparator7, Me.QualityControlToolStripDropDownButton, Me.ToolStripSeparator9, Me.DatabaseToolStripDropDownButton})
         Me.MainToolStrip.Location = New System.Drawing.Point(0, 0)
         Me.MainToolStrip.Name = "MainToolStrip"
         Me.HelpProvider.SetShowHelp(Me.MainToolStrip, True)
@@ -406,7 +403,7 @@ Partial Class MainForm
         'CaribouOptionsToolStripDropDownButton
         '
         Me.CaribouOptionsToolStripDropDownButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
-        Me.CaribouOptionsToolStripDropDownButton.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CaribouProfileToolStripMenuItem, Me.SightingsHistoryPerAnimalToolStripMenuItem})
+        Me.CaribouOptionsToolStripDropDownButton.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CaribouProfileToolStripMenuItem, Me.SightingsHistoryPerAnimalToolStripMenuItem, Me.InventoryOfCollarsForADateToolStripMenuItem, Me.CapturesToolStripMenuItem})
         Me.CaribouOptionsToolStripDropDownButton.Image = CType(resources.GetObject("CaribouOptionsToolStripDropDownButton.Image"), System.Drawing.Image)
         Me.CaribouOptionsToolStripDropDownButton.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.CaribouOptionsToolStripDropDownButton.Name = "CaribouOptionsToolStripDropDownButton"
@@ -416,38 +413,36 @@ Partial Class MainForm
         'CaribouProfileToolStripMenuItem
         '
         Me.CaribouProfileToolStripMenuItem.Name = "CaribouProfileToolStripMenuItem"
-        Me.CaribouProfileToolStripMenuItem.Size = New System.Drawing.Size(215, 22)
+        Me.CaribouProfileToolStripMenuItem.Size = New System.Drawing.Size(237, 22)
         Me.CaribouProfileToolStripMenuItem.Text = "Caribou profile..."
         '
         'SightingsHistoryPerAnimalToolStripMenuItem
         '
         Me.SightingsHistoryPerAnimalToolStripMenuItem.Name = "SightingsHistoryPerAnimalToolStripMenuItem"
-        Me.SightingsHistoryPerAnimalToolStripMenuItem.Size = New System.Drawing.Size(215, 22)
+        Me.SightingsHistoryPerAnimalToolStripMenuItem.Size = New System.Drawing.Size(237, 22)
         Me.SightingsHistoryPerAnimalToolStripMenuItem.Text = "Caribou sightings history..."
+        '
+        'InventoryOfCollarsForADateToolStripMenuItem
+        '
+        Me.InventoryOfCollarsForADateToolStripMenuItem.Name = "InventoryOfCollarsForADateToolStripMenuItem"
+        Me.InventoryOfCollarsForADateToolStripMenuItem.Size = New System.Drawing.Size(237, 22)
+        Me.InventoryOfCollarsForADateToolStripMenuItem.Text = "Inventory of collars for a date..."
+        '
+        'CapturesToolStripMenuItem
+        '
+        Me.CapturesToolStripMenuItem.Name = "CapturesToolStripMenuItem"
+        Me.CapturesToolStripMenuItem.Size = New System.Drawing.Size(237, 22)
+        Me.CapturesToolStripMenuItem.Text = "Captures..."
         '
         'ToolStripSeparator5
         '
         Me.ToolStripSeparator5.Name = "ToolStripSeparator5"
         Me.ToolStripSeparator5.Size = New System.Drawing.Size(6, 25)
         '
-        'OpenCapturesFormToolStripButton
-        '
-        Me.OpenCapturesFormToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
-        Me.OpenCapturesFormToolStripButton.Image = CType(resources.GetObject("OpenCapturesFormToolStripButton.Image"), System.Drawing.Image)
-        Me.OpenCapturesFormToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.OpenCapturesFormToolStripButton.Name = "OpenCapturesFormToolStripButton"
-        Me.OpenCapturesFormToolStripButton.Size = New System.Drawing.Size(67, 22)
-        Me.OpenCapturesFormToolStripButton.Text = "Captures..."
-        '
-        'ToolStripSeparator11
-        '
-        Me.ToolStripSeparator11.Name = "ToolStripSeparator11"
-        Me.ToolStripSeparator11.Size = New System.Drawing.Size(6, 25)
-        '
         'ResultsToolStripDropDownButton
         '
         Me.ResultsToolStripDropDownButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
-        Me.ResultsToolStripDropDownButton.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.DatabaseQueriesToolToolStripMenuItem, Me.InventoryOfAvailableCollarsOnADateToolStripMenuItem, Me.ViewCaribouSightingsHistoryToolStripMenuItem, Me.ViewCaribouProfileToolStripMenuItem})
+        Me.ResultsToolStripDropDownButton.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.DatabaseQueriesToolToolStripMenuItem})
         Me.ResultsToolStripDropDownButton.Image = CType(resources.GetObject("ResultsToolStripDropDownButton.Image"), System.Drawing.Image)
         Me.ResultsToolStripDropDownButton.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.ResultsToolStripDropDownButton.Name = "ResultsToolStripDropDownButton"
@@ -457,26 +452,8 @@ Partial Class MainForm
         'DatabaseQueriesToolToolStripMenuItem
         '
         Me.DatabaseQueriesToolToolStripMenuItem.Name = "DatabaseQueriesToolToolStripMenuItem"
-        Me.DatabaseQueriesToolToolStripMenuItem.Size = New System.Drawing.Size(285, 22)
+        Me.DatabaseQueriesToolToolStripMenuItem.Size = New System.Drawing.Size(196, 22)
         Me.DatabaseQueriesToolToolStripMenuItem.Text = "Database queries tool..."
-        '
-        'InventoryOfAvailableCollarsOnADateToolStripMenuItem
-        '
-        Me.InventoryOfAvailableCollarsOnADateToolStripMenuItem.Name = "InventoryOfAvailableCollarsOnADateToolStripMenuItem"
-        Me.InventoryOfAvailableCollarsOnADateToolStripMenuItem.Size = New System.Drawing.Size(285, 22)
-        Me.InventoryOfAvailableCollarsOnADateToolStripMenuItem.Text = "Inventory of available collars on a date..."
-        '
-        'ViewCaribouSightingsHistoryToolStripMenuItem
-        '
-        Me.ViewCaribouSightingsHistoryToolStripMenuItem.Name = "ViewCaribouSightingsHistoryToolStripMenuItem"
-        Me.ViewCaribouSightingsHistoryToolStripMenuItem.Size = New System.Drawing.Size(285, 22)
-        Me.ViewCaribouSightingsHistoryToolStripMenuItem.Text = "View caribou sightings history..."
-        '
-        'ViewCaribouProfileToolStripMenuItem
-        '
-        Me.ViewCaribouProfileToolStripMenuItem.Name = "ViewCaribouProfileToolStripMenuItem"
-        Me.ViewCaribouProfileToolStripMenuItem.Size = New System.Drawing.Size(285, 22)
-        Me.ViewCaribouProfileToolStripMenuItem.Text = "View caribou profile..."
         '
         'ToolStripSeparator7
         '
@@ -505,33 +482,33 @@ Partial Class MainForm
         Me.ToolStripSeparator9.Name = "ToolStripSeparator9"
         Me.ToolStripSeparator9.Size = New System.Drawing.Size(6, 25)
         '
-        'SettingsToolStripButton
+        'DatabaseToolStripDropDownButton
         '
-        Me.SettingsToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
-        Me.SettingsToolStripButton.Image = CType(resources.GetObject("SettingsToolStripButton.Image"), System.Drawing.Image)
-        Me.SettingsToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.SettingsToolStripButton.Name = "SettingsToolStripButton"
-        Me.SettingsToolStripButton.Size = New System.Drawing.Size(62, 22)
-        Me.SettingsToolStripButton.Text = "Settings..."
+        Me.DatabaseToolStripDropDownButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
+        Me.DatabaseToolStripDropDownButton.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.SynchronizeDatabasesToolStripMenuItem, Me.SettingsToolStripMenuItem, Me.OpenWRSTCaribouSharedNetworkDriveToolStripMenuItem})
+        Me.DatabaseToolStripDropDownButton.Image = CType(resources.GetObject("DatabaseToolStripDropDownButton.Image"), System.Drawing.Image)
+        Me.DatabaseToolStripDropDownButton.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.DatabaseToolStripDropDownButton.Name = "DatabaseToolStripDropDownButton"
+        Me.DatabaseToolStripDropDownButton.Size = New System.Drawing.Size(113, 22)
+        Me.DatabaseToolStripDropDownButton.Text = "Tasks and options"
         '
-        'ToolStripSeparator8
+        'SynchronizeDatabasesToolStripMenuItem
         '
-        Me.ToolStripSeparator8.Name = "ToolStripSeparator8"
-        Me.ToolStripSeparator8.Size = New System.Drawing.Size(6, 25)
+        Me.SynchronizeDatabasesToolStripMenuItem.Name = "SynchronizeDatabasesToolStripMenuItem"
+        Me.SynchronizeDatabasesToolStripMenuItem.Size = New System.Drawing.Size(303, 22)
+        Me.SynchronizeDatabasesToolStripMenuItem.Text = "Synchronize databases..."
         '
-        'OpenWRSTCaribouDirectoryToolStripButton
+        'SettingsToolStripMenuItem
         '
-        Me.OpenWRSTCaribouDirectoryToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
-        Me.OpenWRSTCaribouDirectoryToolStripButton.Image = CType(resources.GetObject("OpenWRSTCaribouDirectoryToolStripButton.Image"), System.Drawing.Image)
-        Me.OpenWRSTCaribouDirectoryToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.OpenWRSTCaribouDirectoryToolStripButton.Name = "OpenWRSTCaribouDirectoryToolStripButton"
-        Me.OpenWRSTCaribouDirectoryToolStripButton.Size = New System.Drawing.Size(116, 22)
-        Me.OpenWRSTCaribouDirectoryToolStripButton.Text = "Open shared drive..."
+        Me.SettingsToolStripMenuItem.Name = "SettingsToolStripMenuItem"
+        Me.SettingsToolStripMenuItem.Size = New System.Drawing.Size(303, 22)
+        Me.SettingsToolStripMenuItem.Text = "Settings..."
         '
-        'ToolStripSeparator10
+        'OpenWRSTCaribouSharedNetworkDriveToolStripMenuItem
         '
-        Me.ToolStripSeparator10.Name = "ToolStripSeparator10"
-        Me.ToolStripSeparator10.Size = New System.Drawing.Size(6, 25)
+        Me.OpenWRSTCaribouSharedNetworkDriveToolStripMenuItem.Name = "OpenWRSTCaribouSharedNetworkDriveToolStripMenuItem"
+        Me.OpenWRSTCaribouSharedNetworkDriveToolStripMenuItem.Size = New System.Drawing.Size(303, 22)
+        Me.OpenWRSTCaribouSharedNetworkDriveToolStripMenuItem.Text = "Open WRST Caribou shared network drive..."
         '
         'HelpProvider
         '
@@ -666,31 +643,28 @@ Partial Class MainForm
     Friend WithEvents CapturesBindingSource As BindingSource
     Friend WithEvents CapturesTableAdapter As WRST_CaribouDataSetTableAdapters.CapturesTableAdapter
     Friend WithEvents ToolStripSeparator5 As ToolStripSeparator
-    Friend WithEvents OpenCapturesFormToolStripButton As ToolStripButton
     Friend WithEvents ToolStripSeparator6 As ToolStripSeparator
     Friend WithEvents AllowEditsToolStripButton As ToolStripButton
     Friend WithEvents ToolStripSeparator7 As ToolStripSeparator
     Friend WithEvents BottomToolStrip As ToolStrip
     Friend WithEvents CurrentDatabaseToolStripLabel As ToolStripLabel
-    Friend WithEvents OpenWRSTCaribouDirectoryToolStripButton As ToolStripButton
     Friend WithEvents AutomatchToolStripSplitButton As ToolStripSplitButton
     Friend WithEvents CurrentRowToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents AllRowsToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents ToolStripSeparator8 As ToolStripSeparator
-    Friend WithEvents SettingsToolStripButton As ToolStripButton
     Friend WithEvents ToolStripSeparator9 As ToolStripSeparator
     Friend WithEvents ResultsToolStripDropDownButton As ToolStripDropDownButton
     Friend WithEvents DatabaseQueriesToolToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents QualityControlToolStripDropDownButton As ToolStripDropDownButton
     Friend WithEvents CountTotalDetectedFrequenciesToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents InventoryOfAvailableCollarsOnADateToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents ToolStripSeparator10 As ToolStripSeparator
-    Friend WithEvents ToolStripSeparator11 As ToolStripSeparator
     Friend WithEvents AnimalGridPanel As Panel
     Friend WithEvents ShowAnimalDetailsCheckBox As CheckBox
-    Friend WithEvents ViewCaribouSightingsHistoryToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents ViewCaribouProfileToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents CaribouOptionsToolStripDropDownButton As ToolStripDropDownButton
     Friend WithEvents CaribouProfileToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents SightingsHistoryPerAnimalToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents DatabaseToolStripDropDownButton As ToolStripDropDownButton
+    Friend WithEvents SynchronizeDatabasesToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents SettingsToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents OpenWRSTCaribouSharedNetworkDriveToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents InventoryOfCollarsForADateToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents CapturesToolStripMenuItem As ToolStripMenuItem
 End Class
