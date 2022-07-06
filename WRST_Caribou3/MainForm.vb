@@ -11,7 +11,7 @@ Public Class MainForm
 
 
         'My.Settings.Item("WRST_CaribouConnectionString") = "Data Source=INPYUGA41738\SKETR;Initial Catalog=WRST_Caribou;Integrated Security=True"
-        'My.Settings.Item("Animal_MovementConnectionString") = "Data Source=INPAKROVMAIS;Initial Catalog=Animal_Movement;Integrated Security=True"
+        My.Settings.Item("Animal_MovementConnectionString") = "Data Source=INPAKROVMAIS;Initial Catalog=Animal_Movement;Integrated Security=True"
 
         'make the form a reasonable size if not maximized
         Me.Width = 1200

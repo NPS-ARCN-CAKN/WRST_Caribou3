@@ -7,6 +7,8 @@ Public Class ResultsForm
     Private Sub ResultsForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         LoadDatabaseViewsComboBox()
 
+
+
         Me.ResultsGridEX.GroupByBoxVisible = True
         Me.CollapseGroupsCheckBox.Visible = True
         Me.ResultsGridEX.FilterMode = FilterMode.Automatic
