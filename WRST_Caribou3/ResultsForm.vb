@@ -1,4 +1,6 @@
-﻿Imports Janus.Windows.GridEX
+﻿Imports DevExpress.XtraGrid.Views.Grid
+Imports DevExpress.XtraMap
+Imports Janus.Windows.GridEX
 
 Public Class ResultsForm
 
@@ -6,7 +8,6 @@ Public Class ResultsForm
 
     Private Sub ResultsForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         LoadDatabaseViewsComboBox()
-
 
 
         Me.ResultsGridEX.GroupByBoxVisible = True
@@ -25,7 +26,9 @@ Public Class ResultsForm
                 .Items.Clear()
                 .Items.Add("")
                 For Each Row As DataRow In DatabaseViewsDataTable.Rows
-                    .Items.Add(Row.Item("Name"))
+                    Dim ViewName As String = Row.Item("Name")
+
+                    .Items.Add(ViewName)
                 Next
             End With
         Catch ex As Exception
@@ -42,6 +45,14 @@ Public Class ResultsForm
         Dim ViewName As String = Me.ViewsListBox.Text
         If ViewName.Trim.Length > 0 Then
             Try
+
+                'Clear data sources
+                Me.DatasetGridControl.DataSource = Nothing
+                Me.DatasetVGridControl.DataSource = Nothing
+                Me.DatasetPivotGridControl.DataSource = Nothing
+                Me.DatasetMapControl.Layers.Clear()
+
+                'Show the query name in the header
                 Me.DataSummariesLabel.Text = ViewName
 
 
@@ -54,7 +65,7 @@ Public Class ResultsForm
                         ViewDescription = ViewDT.Rows(0).Item("TableDescription")
                     End If
                     Me.ViewDescriptionTextBox.Text = ViewDescription
-                    Debug.Print(vbNewLine & ViewDescription & vbNewLine & DescriptionQuery & vbNewLine & vbNewLine)
+
                 Catch ex As Exception
                     Me.ViewDescriptionTextBox.Text = ex.Message
                 End Try
@@ -65,34 +76,93 @@ Public Class ResultsForm
                 Dim Sql As String = "SELECT * FROM " & ViewName.Trim & Filter
                 ResultsDataTable = GetDataTable(My.Settings.WRST_CaribouConnectionString, Sql)
 
-                'load the datatable into the gridex
-                With Me.ResultsGridEX
-                    .DataSource = ResultsDataTable
-                    .RetrieveStructure()
-                    '.GroupTotals = GroupTotals.Always
+                'Set the DatasetBindingSource to ResultsDataTable
+                Me.DatasetBindingSource.DataSource = ResultsDataTable
+
+                'Set up the GridControl
+                Me.DatasetGridControl.DataSource = DatasetBindingSource
+                SetUpGridControl(Me.DatasetGridControl)
+
+                'Populate the main GridControl's main GridView
+                Dim GV As GridView = TryCast(Me.DatasetGridControl.MainView, GridView)
+                GV.PopulateColumns()
+
+                'Bind the data to the VGridControl
+                With Me.DatasetVGridControl
+                    .DataSource = Me.DatasetBindingSource
+                    .RetrieveFields()
                 End With
 
-                'format total rows
-                For Each Col As GridEXColumn In Me.ResultsGridEX.RootTable.Columns
-                    'If Col.Key <> "Year" And Col.Key <> "Lat" And Col.Key <> "Long" Then
-                    '    If Col.DataTypeCode = TypeCode.Int16 Or Col.DataTypeCode = TypeCode.Int32 Or Col.DataTypeCode = TypeCode.Int64 Then
-                    '        Col.AggregateFunction = AggregateFunction.Sum
-                    '    ElseIf Col.DataTypeCode = TypeCode.Double Or Col.DataTypeCode = TypeCode.Decimal Or Col.DataTypeCode Then
-                    '        Col.AggregateFunction = AggregateFunction.Average
-                    '    Else
-                    '        Col.AggregateFunction = AggregateFunction.None
-                    '    End If
-                    'End If
 
-                    'other things
-                    Col.FormatString = ""
+                'Set up the pivot grid
+                With Me.DatasetPivotGridControl
+                    .DataSource = ResultsDataTable
+                    .RetrieveFields()
+                End With
+                SetUpPivotGridControl(Me.DatasetPivotGridControl)
+
+                'Set up the ChartControl
+                Me.DatasetChartControl.DataSource = Me.DatasetPivotGridControl
+
+
+                'Map
+                Dim LatColumnExists As Boolean = False
+                Dim LonColumnExists As Boolean = False
+                Dim LatColumnName As String = ""
+                Dim LonColumnName As String = ""
+                For Each Col As DataColumn In ResultsDataTable.Columns
+                    If Col.ColumnName.Trim.ToLower = "lat" Or Col.ColumnName.Trim.ToLower = "latitude" Then
+                        LatColumnExists = True
+                        LatColumnName = Col.ColumnName
+                    End If
+
+                    If Col.ColumnName.Trim.ToLower = "lon" Or Col.ColumnName.Trim.ToLower = "longitude" Then
+                        LonColumnExists = True
+                        LonColumnName = Col.ColumnName
+                    End If
                 Next
+
+                If LatColumnExists = True And LonColumnExists = True Then
+                    Try
+                        Dim MapLayer As VectorItemsLayer = GetBubbleVectorItemsLayerFromPointsDataTable(ResultsDataTable, LatColumnName, LonColumnName, 4, MarkerType.Circle, Color.Red)
+                        Me.DatasetMapControl.Layers.Add(MapLayer)
+                    Catch ex As Exception
+                        MsgBox("Map layer costruction failed: " & ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name & ")")
+                    End Try
+                End If
+
+
+
+
+                ''load the datatable into the GridEX
+                'With Me.ResultsGridEX
+                '    .DataSource = DatasetBindingSource
+                '    .RetrieveStructure()
+                '    .GroupTotals = GroupTotals.Always
+                'End With
+
+                ''format total rows
+                'For Each Col As GridEXColumn In Me.ResultsGridEX.RootTable.Columns
+                '    'If Col.Key <> "Year" And Col.Key <> "Lat" And Col.Key <> "Long" Then
+                '    '    If Col.DataTypeCode = TypeCode.Int16 Or Col.DataTypeCode = TypeCode.Int32 Or Col.DataTypeCode = TypeCode.Int64 Then
+                '    '        Col.AggregateFunction = AggregateFunction.Sum
+                '    '    ElseIf Col.DataTypeCode = TypeCode.Double Or Col.DataTypeCode = TypeCode.Decimal Or Col.DataTypeCode Then
+                '    '        Col.AggregateFunction = AggregateFunction.Average
+                '    '    Else
+                '    '        Col.AggregateFunction = AggregateFunction.None
+                '    '    End If
+                '    'End If
+
+                '    'other things
+                '    Col.FormatString = ""
+                'Next
             Catch ex As Exception
                 MsgBox("Could not load the database view " & ViewName.Trim & ". " & ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name & " a)")
+                Me.DatasetMapControl.Layers.Clear()
             End Try
         Else
             MsgBox("Select a database view.", MsgBoxStyle.Information, "View not selected")
-            End If
+        End If
         Try
         Catch ex As Exception
             MsgBox("Query failed: " & ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name & ")")
@@ -145,4 +215,50 @@ Public Class ResultsForm
         Me.ResultsGridEX.CollapseGroups()
         Me.ResultsGridEX.CollapseRecords()
     End Sub
+
+    ''' <summary>
+    ''' Returns a DevExpress VectorItemsLayer of MapBubble points derived a DataTable containing Lat/Lon pairs.
+    ''' </summary>
+    ''' <param name="PointsDataTable">DataTable containing points spatial data. DataTable</param>
+    ''' <param name="LatitudeColumnName">Name of the latitude column. String.</param>
+    ''' <param name="LongitudeColumnName">Name of the longitude column. String.</param>
+    ''' <returns>VectorItemLayer of points from WKT.</returns>
+    Public Function GetBubbleVectorItemsLayerFromPointsDataTable(PointsDataTable As DataTable, LatitudeColumnName As String, LongitudeColumnName As String, FeatureSize As Integer, MarkerType As MarkerType, FillColor As Color) As DevExpress.XtraMap.VectorItemsLayer
+        Dim MyMapItemStorage As New MapItemStorage
+
+        Dim MyPointsVectorItemsLayer As New VectorItemsLayer()
+        If LatitudeColumnName.Trim <> "" And LongitudeColumnName.Trim <> "" Then
+            For Each MyPointDataRow As DataRow In PointsDataTable.Rows
+                If Not MyPointDataRow Is Nothing Then
+                    If Not IsDBNull(MyPointDataRow.Item(LatitudeColumnName)) And Not IsDBNull(MyPointDataRow.Item(LongitudeColumnName)) Then
+                        Dim Lat As Double = CDbl(MyPointDataRow.Item(LatitudeColumnName))
+                        Dim Lon As Double = CDbl(MyPointDataRow.Item(LongitudeColumnName))
+                        Dim MyMapBubble As New MapBubble()
+                        With MyMapBubble
+                            .Location = New GeoPoint(Lat, Lon)
+                            .Value = 400
+
+                            'Add the DataRow's attributes to the MapBubble object
+                            For Each Col As DataColumn In PointsDataTable.Columns
+                                Dim MIA As New MapItemAttribute
+                                With MIA
+                                    .Name = Col.ColumnName
+                                    .Value = MyPointDataRow.Item(Col.ColumnName)
+                                End With
+                                .Attributes.Add(MIA)
+                            Next
+                            .MarkerType = MarkerType
+                            .Fill = FillColor
+                        End With
+                        MyMapItemStorage.Items.Add(MyMapBubble)
+                    End If
+                End If
+            Next
+            With MyPointsVectorItemsLayer
+                .Data = MyMapItemStorage
+                .Name = PointsDataTable.TableName & "Bubbles"
+            End With
+        End If
+        Return MyPointsVectorItemsLayer
+    End Function
 End Class
