@@ -147,6 +147,7 @@ Partial Class ResultsForm
         Me.ReloadQueryToolStripButton = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
         Me.ExportToCSVToolStripButton = New System.Windows.Forms.ToolStripButton()
+        Me.ToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator()
         Me.PivotGridTabPage = New System.Windows.Forms.TabPage()
         Me.PivotGridSplitContainer = New System.Windows.Forms.SplitContainer()
         Me.DatasetPivotGridControl = New DevExpress.XtraPivotGrid.PivotGridControl()
@@ -204,6 +205,10 @@ Partial Class ResultsForm
         Me.barDockControlLeft = New DevExpress.XtraBars.BarDockControl()
         Me.barDockControlRight = New DevExpress.XtraBars.BarDockControl()
         Me.MainDockManager = New DevExpress.XtraBars.Docking.DockManager(Me.components)
+        Me.hideContainerRight = New DevExpress.XtraBars.Docking.AutoHideContainer()
+        Me.MapDockPanel = New DevExpress.XtraBars.Docking.DockPanel()
+        Me.ControlContainer1 = New DevExpress.XtraBars.Docking.ControlContainer()
+        Me.DatasetMapControl = New DevExpress.XtraMap.MapControl()
         Me.QueriesSelectorDockPanel = New DevExpress.XtraBars.Docking.DockPanel()
         Me.DockPanel1_Container = New DevExpress.XtraBars.Docking.ControlContainer()
         Me.HeaderDockPanel = New DevExpress.XtraBars.Docking.DockPanel()
@@ -211,9 +216,8 @@ Partial Class ResultsForm
         Me.RightDockPanel = New DevExpress.XtraBars.Docking.DockPanel()
         Me.DockPanel3_Container = New DevExpress.XtraBars.Docking.ControlContainer()
         Me.ChartBarController1 = New DevExpress.XtraCharts.UI.ChartBarController(Me.components)
-        Me.MapDockPanel = New DevExpress.XtraBars.Docking.DockPanel()
-        Me.ControlContainer1 = New DevExpress.XtraBars.Docking.ControlContainer()
-        Me.DatasetMapControl = New DevExpress.XtraMap.MapControl()
+        Me.ToolStripLabel1 = New System.Windows.Forms.ToolStripLabel()
+        Me.GroupSummaryTypeToolStripComboBox = New System.Windows.Forms.ToolStripComboBox()
         Me.TabControl.SuspendLayout()
         Me.DataGridTabPage.SuspendLayout()
         CType(Me.DatasetGridControl, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -241,6 +245,10 @@ Partial Class ResultsForm
         CType(Me.CommandBarGalleryDropDown7, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.CommandBarGalleryDropDown8, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.MainDockManager, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.hideContainerRight.SuspendLayout()
+        Me.MapDockPanel.SuspendLayout()
+        Me.ControlContainer1.SuspendLayout()
+        CType(Me.DatasetMapControl, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.QueriesSelectorDockPanel.SuspendLayout()
         Me.DockPanel1_Container.SuspendLayout()
         Me.HeaderDockPanel.SuspendLayout()
@@ -248,19 +256,17 @@ Partial Class ResultsForm
         Me.RightDockPanel.SuspendLayout()
         Me.DockPanel3_Container.SuspendLayout()
         CType(Me.ChartBarController1, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.MapDockPanel.SuspendLayout()
-        Me.ControlContainer1.SuspendLayout()
-        CType(Me.DatasetMapControl, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'ViewsListBox
         '
         Me.ViewsListBox.Dock = System.Windows.Forms.DockStyle.Fill
         Me.ViewsListBox.FormattingEnabled = True
-        Me.ViewsListBox.Location = New System.Drawing.Point(0, 23)
-        Me.ViewsListBox.Margin = New System.Windows.Forms.Padding(2)
+        Me.ViewsListBox.ItemHeight = 16
+        Me.ViewsListBox.Location = New System.Drawing.Point(0, 29)
+        Me.ViewsListBox.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.ViewsListBox.Name = "ViewsListBox"
-        Me.ViewsListBox.Size = New System.Drawing.Size(193, 610)
+        Me.ViewsListBox.Size = New System.Drawing.Size(190, 749)
         Me.ViewsListBox.TabIndex = 0
         '
         'Label1
@@ -268,10 +274,9 @@ Partial Class ResultsForm
         Me.Label1.AutoSize = True
         Me.Label1.Dock = System.Windows.Forms.DockStyle.Top
         Me.Label1.Location = New System.Drawing.Point(0, 0)
-        Me.Label1.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label1.Name = "Label1"
-        Me.Label1.Padding = New System.Windows.Forms.Padding(5)
-        Me.Label1.Size = New System.Drawing.Size(88, 23)
+        Me.Label1.Padding = New System.Windows.Forms.Padding(7, 6, 7, 6)
+        Me.Label1.Size = New System.Drawing.Size(117, 29)
         Me.Label1.TabIndex = 1
         Me.Label1.Text = "Select a query:"
         '
@@ -281,20 +286,22 @@ Partial Class ResultsForm
         Me.TabControl.Controls.Add(Me.PivotGridTabPage)
         Me.TabControl.Controls.Add(Me.GridEXTabPage)
         Me.TabControl.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.TabControl.Location = New System.Drawing.Point(200, 113)
+        Me.TabControl.Location = New System.Drawing.Point(200, 119)
+        Me.TabControl.Margin = New System.Windows.Forms.Padding(4)
         Me.TabControl.Name = "TabControl"
         Me.TabControl.SelectedIndex = 0
-        Me.TabControl.Size = New System.Drawing.Size(263, 573)
+        Me.TabControl.Size = New System.Drawing.Size(1122, 725)
         Me.TabControl.TabIndex = 5
         '
         'DataGridTabPage
         '
         Me.DataGridTabPage.Controls.Add(Me.DatasetGridControl)
         Me.DataGridTabPage.Controls.Add(Me.ResultsToolStrip)
-        Me.DataGridTabPage.Location = New System.Drawing.Point(4, 22)
+        Me.DataGridTabPage.Location = New System.Drawing.Point(4, 25)
+        Me.DataGridTabPage.Margin = New System.Windows.Forms.Padding(4)
         Me.DataGridTabPage.Name = "DataGridTabPage"
-        Me.DataGridTabPage.Padding = New System.Windows.Forms.Padding(3)
-        Me.DataGridTabPage.Size = New System.Drawing.Size(255, 547)
+        Me.DataGridTabPage.Padding = New System.Windows.Forms.Padding(4)
+        Me.DataGridTabPage.Size = New System.Drawing.Size(1114, 696)
         Me.DataGridTabPage.TabIndex = 0
         Me.DataGridTabPage.Text = "Dataset"
         Me.DataGridTabPage.UseVisualStyleBackColor = True
@@ -303,31 +310,37 @@ Partial Class ResultsForm
         '
         Me.DatasetGridControl.DataSource = Me.DatasetBindingSource
         Me.DatasetGridControl.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.DatasetGridControl.Location = New System.Drawing.Point(3, 34)
+        Me.DatasetGridControl.EmbeddedNavigator.Margin = New System.Windows.Forms.Padding(4)
+        Me.DatasetGridControl.Location = New System.Drawing.Point(4, 35)
         Me.DatasetGridControl.MainView = Me.GridView1
+        Me.DatasetGridControl.Margin = New System.Windows.Forms.Padding(4)
         Me.DatasetGridControl.Name = "DatasetGridControl"
-        Me.DatasetGridControl.Size = New System.Drawing.Size(249, 510)
+        Me.DatasetGridControl.Size = New System.Drawing.Size(1106, 657)
         Me.DatasetGridControl.TabIndex = 2
         Me.DatasetGridControl.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GridView1})
         '
         'GridView1
         '
+        Me.GridView1.DetailHeight = 431
         Me.GridView1.GridControl = Me.DatasetGridControl
         Me.GridView1.Name = "GridView1"
         Me.GridView1.OptionsBehavior.AlignGroupSummaryInGroupRow = DevExpress.Utils.DefaultBoolean.[True]
         Me.GridView1.OptionsMenu.EnableGroupRowMenu = True
         Me.GridView1.OptionsMenu.ShowAddNewSummaryItem = DevExpress.Utils.DefaultBoolean.[True]
+        Me.GridView1.OptionsMenu.ShowFooterItem = True
+        Me.GridView1.OptionsMenu.ShowGroupSummaryEditorItem = True
         Me.GridView1.OptionsMenu.ShowSummaryItemMode = DevExpress.Utils.DefaultBoolean.[True]
         Me.GridView1.OptionsView.ColumnAutoWidth = False
+        Me.GridView1.OptionsView.GroupFooterShowMode = DevExpress.XtraGrid.Views.Grid.GroupFooterShowMode.VisibleAlways
         Me.GridView1.OptionsView.ShowFooter = True
         '
         'ResultsToolStrip
         '
         Me.ResultsToolStrip.ImageScalingSize = New System.Drawing.Size(24, 24)
-        Me.ResultsToolStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ReloadQueryToolStripButton, Me.ToolStripSeparator1, Me.ExportToCSVToolStripButton})
-        Me.ResultsToolStrip.Location = New System.Drawing.Point(3, 3)
+        Me.ResultsToolStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ReloadQueryToolStripButton, Me.ToolStripSeparator1, Me.ExportToCSVToolStripButton, Me.ToolStripSeparator2, Me.ToolStripLabel1, Me.GroupSummaryTypeToolStripComboBox})
+        Me.ResultsToolStrip.Location = New System.Drawing.Point(4, 4)
         Me.ResultsToolStrip.Name = "ResultsToolStrip"
-        Me.ResultsToolStrip.Size = New System.Drawing.Size(249, 31)
+        Me.ResultsToolStrip.Size = New System.Drawing.Size(1106, 31)
         Me.ResultsToolStrip.TabIndex = 1
         Me.ResultsToolStrip.Text = "ToolStrip1"
         '
@@ -336,7 +349,7 @@ Partial Class ResultsForm
         Me.ReloadQueryToolStripButton.Image = CType(resources.GetObject("ReloadQueryToolStripButton.Image"), System.Drawing.Image)
         Me.ReloadQueryToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.ReloadQueryToolStripButton.Name = "ReloadQueryToolStripButton"
-        Me.ReloadQueryToolStripButton.Size = New System.Drawing.Size(104, 28)
+        Me.ReloadQueryToolStripButton.Size = New System.Drawing.Size(125, 28)
         Me.ReloadQueryToolStripButton.Text = "Reload query"
         '
         'ToolStripSeparator1
@@ -349,16 +362,22 @@ Partial Class ResultsForm
         Me.ExportToCSVToolStripButton.Image = CType(resources.GetObject("ExportToCSVToolStripButton.Image"), System.Drawing.Image)
         Me.ExportToCSVToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.ExportToCSVToolStripButton.Name = "ExportToCSVToolStripButton"
-        Me.ExportToCSVToolStripButton.Size = New System.Drawing.Size(116, 28)
+        Me.ExportToCSVToolStripButton.Size = New System.Drawing.Size(137, 28)
         Me.ExportToCSVToolStripButton.Text = "Export to CSV..."
+        '
+        'ToolStripSeparator2
+        '
+        Me.ToolStripSeparator2.Name = "ToolStripSeparator2"
+        Me.ToolStripSeparator2.Size = New System.Drawing.Size(6, 31)
         '
         'PivotGridTabPage
         '
         Me.PivotGridTabPage.Controls.Add(Me.PivotGridSplitContainer)
-        Me.PivotGridTabPage.Location = New System.Drawing.Point(4, 22)
+        Me.PivotGridTabPage.Location = New System.Drawing.Point(4, 25)
+        Me.PivotGridTabPage.Margin = New System.Windows.Forms.Padding(4)
         Me.PivotGridTabPage.Name = "PivotGridTabPage"
-        Me.PivotGridTabPage.Padding = New System.Windows.Forms.Padding(3)
-        Me.PivotGridTabPage.Size = New System.Drawing.Size(753, 547)
+        Me.PivotGridTabPage.Padding = New System.Windows.Forms.Padding(4)
+        Me.PivotGridTabPage.Size = New System.Drawing.Size(1114, 696)
         Me.PivotGridTabPage.TabIndex = 1
         Me.PivotGridTabPage.Text = "Pivot table"
         Me.PivotGridTabPage.UseVisualStyleBackColor = True
@@ -366,7 +385,8 @@ Partial Class ResultsForm
         'PivotGridSplitContainer
         '
         Me.PivotGridSplitContainer.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.PivotGridSplitContainer.Location = New System.Drawing.Point(3, 3)
+        Me.PivotGridSplitContainer.Location = New System.Drawing.Point(4, 4)
+        Me.PivotGridSplitContainer.Margin = New System.Windows.Forms.Padding(4)
         Me.PivotGridSplitContainer.Name = "PivotGridSplitContainer"
         '
         'PivotGridSplitContainer.Panel1
@@ -376,35 +396,42 @@ Partial Class ResultsForm
         'PivotGridSplitContainer.Panel2
         '
         Me.PivotGridSplitContainer.Panel2.Controls.Add(Me.DatasetChartControl)
-        Me.PivotGridSplitContainer.Size = New System.Drawing.Size(747, 541)
-        Me.PivotGridSplitContainer.SplitterDistance = 652
+        Me.PivotGridSplitContainer.Size = New System.Drawing.Size(1106, 688)
+        Me.PivotGridSplitContainer.SplitterDistance = 960
+        Me.PivotGridSplitContainer.SplitterWidth = 5
         Me.PivotGridSplitContainer.TabIndex = 5
         '
         'DatasetPivotGridControl
         '
         Me.DatasetPivotGridControl.Dock = System.Windows.Forms.DockStyle.Fill
         Me.DatasetPivotGridControl.Location = New System.Drawing.Point(0, 0)
+        Me.DatasetPivotGridControl.Margin = New System.Windows.Forms.Padding(4)
         Me.DatasetPivotGridControl.Name = "DatasetPivotGridControl"
         Me.DatasetPivotGridControl.OptionsData.DataProcessingEngine = DevExpress.XtraPivotGrid.PivotDataProcessingEngine.Optimized
-        Me.DatasetPivotGridControl.Size = New System.Drawing.Size(652, 541)
+        Me.DatasetPivotGridControl.OptionsDataField.RowHeaderWidth = 133
+        Me.DatasetPivotGridControl.OptionsView.RowTreeOffset = 28
+        Me.DatasetPivotGridControl.OptionsView.RowTreeWidth = 133
+        Me.DatasetPivotGridControl.Size = New System.Drawing.Size(960, 688)
         Me.DatasetPivotGridControl.TabIndex = 3
         '
         'DatasetChartControl
         '
         Me.DatasetChartControl.Dock = System.Windows.Forms.DockStyle.Fill
         Me.DatasetChartControl.Location = New System.Drawing.Point(0, 0)
+        Me.DatasetChartControl.Margin = New System.Windows.Forms.Padding(4)
         Me.DatasetChartControl.Name = "DatasetChartControl"
         Me.DatasetChartControl.SeriesSerializable = New DevExpress.XtraCharts.Series(-1) {}
-        Me.DatasetChartControl.Size = New System.Drawing.Size(91, 541)
+        Me.DatasetChartControl.Size = New System.Drawing.Size(141, 688)
         Me.DatasetChartControl.TabIndex = 4
         '
         'GridEXTabPage
         '
         Me.GridEXTabPage.Controls.Add(Me.ResultsGridEX)
-        Me.GridEXTabPage.Location = New System.Drawing.Point(4, 22)
+        Me.GridEXTabPage.Location = New System.Drawing.Point(4, 25)
+        Me.GridEXTabPage.Margin = New System.Windows.Forms.Padding(4)
         Me.GridEXTabPage.Name = "GridEXTabPage"
-        Me.GridEXTabPage.Padding = New System.Windows.Forms.Padding(3)
-        Me.GridEXTabPage.Size = New System.Drawing.Size(753, 547)
+        Me.GridEXTabPage.Padding = New System.Windows.Forms.Padding(4)
+        Me.GridEXTabPage.Size = New System.Drawing.Size(1114, 696)
         Me.GridEXTabPage.TabIndex = 2
         Me.GridEXTabPage.Text = "GridEX"
         Me.GridEXTabPage.UseVisualStyleBackColor = True
@@ -424,13 +451,13 @@ Partial Class ResultsForm
         Me.ResultsGridEX.GroupRowFormatStyle.ForeColor = System.Drawing.Color.Black
         Me.ResultsGridEX.GroupTotalRowFormatStyle.FontBold = Janus.Windows.GridEX.TriState.[True]
         Me.ResultsGridEX.GroupTotals = Janus.Windows.GridEX.GroupTotals.ExpandedGroup
-        Me.ResultsGridEX.Location = New System.Drawing.Point(3, 3)
-        Me.ResultsGridEX.Margin = New System.Windows.Forms.Padding(2)
+        Me.ResultsGridEX.Location = New System.Drawing.Point(4, 4)
+        Me.ResultsGridEX.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.ResultsGridEX.Name = "ResultsGridEX"
         Me.ResultsGridEX.RecordNavigator = True
         Me.ResultsGridEX.RowHeaders = Janus.Windows.GridEX.InheritableBoolean.[True]
         Me.ResultsGridEX.SelectionMode = Janus.Windows.GridEX.SelectionMode.MultipleSelection
-        Me.ResultsGridEX.Size = New System.Drawing.Size(747, 541)
+        Me.ResultsGridEX.Size = New System.Drawing.Size(1106, 688)
         Me.ResultsGridEX.TabIndex = 0
         Me.ResultsGridEX.TotalRow = Janus.Windows.GridEX.InheritableBoolean.[True]
         Me.ResultsGridEX.TotalRowFormatStyle.FontBold = Janus.Windows.GridEX.TriState.[True]
@@ -465,15 +492,21 @@ Partial Class ResultsForm
         Me.DatasetVGridControl.Appearance.SelectedRow.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap
         Me.DatasetVGridControl.Appearance.VertLine.Options.UseTextOptions = True
         Me.DatasetVGridControl.Appearance.VertLine.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap
+        Me.DatasetVGridControl.BandsInterval = 3
         Me.DatasetVGridControl.Cursor = System.Windows.Forms.Cursors.Default
         Me.DatasetVGridControl.DataSource = Me.DatasetBindingSource
         Me.DatasetVGridControl.Dock = System.Windows.Forms.DockStyle.Fill
         Me.DatasetVGridControl.LayoutStyle = DevExpress.XtraVerticalGrid.LayoutViewStyle.SingleRecordView
         Me.DatasetVGridControl.Location = New System.Drawing.Point(0, 0)
+        Me.DatasetVGridControl.Margin = New System.Windows.Forms.Padding(4)
         Me.DatasetVGridControl.Name = "DatasetVGridControl"
-        Me.DatasetVGridControl.OptionsView.MaxRowAutoHeight = 50
+        Me.DatasetVGridControl.OptionsView.FixedLineWidth = 3
+        Me.DatasetVGridControl.OptionsView.MaxRowAutoHeight = 62
+        Me.DatasetVGridControl.OptionsView.MinRowAutoHeight = 12
         Me.DatasetVGridControl.OptionsView.ShowCaption = True
-        Me.DatasetVGridControl.Size = New System.Drawing.Size(193, 544)
+        Me.DatasetVGridControl.RecordWidth = 89
+        Me.DatasetVGridControl.RowHeaderWidth = 111
+        Me.DatasetVGridControl.Size = New System.Drawing.Size(190, 689)
         Me.DatasetVGridControl.TabIndex = 4
         '
         'CollapseGroupsCheckBox
@@ -481,10 +514,10 @@ Partial Class ResultsForm
         Me.CollapseGroupsCheckBox.AutoSize = True
         Me.CollapseGroupsCheckBox.Checked = True
         Me.CollapseGroupsCheckBox.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.CollapseGroupsCheckBox.Location = New System.Drawing.Point(388, 4)
-        Me.CollapseGroupsCheckBox.Margin = New System.Windows.Forms.Padding(2)
+        Me.CollapseGroupsCheckBox.Location = New System.Drawing.Point(517, 5)
+        Me.CollapseGroupsCheckBox.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.CollapseGroupsCheckBox.Name = "CollapseGroupsCheckBox"
-        Me.CollapseGroupsCheckBox.Size = New System.Drawing.Size(101, 17)
+        Me.CollapseGroupsCheckBox.Size = New System.Drawing.Size(132, 21)
         Me.CollapseGroupsCheckBox.TabIndex = 0
         Me.CollapseGroupsCheckBox.Text = "Collapse groups"
         Me.CollapseGroupsCheckBox.UseVisualStyleBackColor = True
@@ -494,10 +527,10 @@ Partial Class ResultsForm
         Me.GroupByBoxVisibleCheckBox.AutoSize = True
         Me.GroupByBoxVisibleCheckBox.Checked = True
         Me.GroupByBoxVisibleCheckBox.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.GroupByBoxVisibleCheckBox.Location = New System.Drawing.Point(292, 4)
-        Me.GroupByBoxVisibleCheckBox.Margin = New System.Windows.Forms.Padding(2)
+        Me.GroupByBoxVisibleCheckBox.Location = New System.Drawing.Point(389, 5)
+        Me.GroupByBoxVisibleCheckBox.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.GroupByBoxVisibleCheckBox.Name = "GroupByBoxVisibleCheckBox"
-        Me.GroupByBoxVisibleCheckBox.Size = New System.Drawing.Size(95, 17)
+        Me.GroupByBoxVisibleCheckBox.Size = New System.Drawing.Size(122, 21)
         Me.GroupByBoxVisibleCheckBox.TabIndex = 1
         Me.GroupByBoxVisibleCheckBox.Text = "Allow grouping"
         Me.GroupByBoxVisibleCheckBox.UseVisualStyleBackColor = True
@@ -507,9 +540,8 @@ Partial Class ResultsForm
         Me.DataSummariesLabel.AutoSize = True
         Me.DataSummariesLabel.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.DataSummariesLabel.Location = New System.Drawing.Point(0, 0)
-        Me.DataSummariesLabel.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.DataSummariesLabel.Name = "DataSummariesLabel"
-        Me.DataSummariesLabel.Size = New System.Drawing.Size(161, 19)
+        Me.DataSummariesLabel.Size = New System.Drawing.Size(197, 24)
         Me.DataSummariesLabel.TabIndex = 2
         Me.DataSummariesLabel.Text = "Data summarization"
         '
@@ -517,11 +549,11 @@ Partial Class ResultsForm
         '
         Me.ViewDescriptionTextBox.Dock = System.Windows.Forms.DockStyle.Fill
         Me.ViewDescriptionTextBox.Location = New System.Drawing.Point(0, 0)
-        Me.ViewDescriptionTextBox.Margin = New System.Windows.Forms.Padding(2)
+        Me.ViewDescriptionTextBox.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.ViewDescriptionTextBox.Multiline = True
         Me.ViewDescriptionTextBox.Name = "ViewDescriptionTextBox"
         Me.ViewDescriptionTextBox.ReadOnly = True
-        Me.ViewDescriptionTextBox.Size = New System.Drawing.Size(955, 56)
+        Me.ViewDescriptionTextBox.Size = New System.Drawing.Size(1314, 69)
         Me.ViewDescriptionTextBox.TabIndex = 3
         '
         'HeaderPanel
@@ -532,9 +564,9 @@ Partial Class ResultsForm
         Me.HeaderPanel.Controls.Add(Me.ViewDescriptionTextBox)
         Me.HeaderPanel.Dock = System.Windows.Forms.DockStyle.Top
         Me.HeaderPanel.Location = New System.Drawing.Point(0, 0)
-        Me.HeaderPanel.Margin = New System.Windows.Forms.Padding(2)
+        Me.HeaderPanel.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.HeaderPanel.Name = "HeaderPanel"
-        Me.HeaderPanel.Size = New System.Drawing.Size(955, 56)
+        Me.HeaderPanel.Size = New System.Drawing.Size(1314, 69)
         Me.HeaderPanel.TabIndex = 2
         '
         'MainBarManager
@@ -907,57 +939,107 @@ Partial Class ResultsForm
         Me.barDockControlTop.Dock = System.Windows.Forms.DockStyle.Top
         Me.barDockControlTop.Location = New System.Drawing.Point(0, 0)
         Me.barDockControlTop.Manager = Me.MainBarManager
-        Me.barDockControlTop.Size = New System.Drawing.Size(1161, 24)
+        Me.barDockControlTop.Margin = New System.Windows.Forms.Padding(4)
+        Me.barDockControlTop.Size = New System.Drawing.Size(1548, 30)
         '
         'barDockControlBottom
         '
         Me.barDockControlBottom.CausesValidation = False
         Me.barDockControlBottom.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.barDockControlBottom.Location = New System.Drawing.Point(0, 686)
+        Me.barDockControlBottom.Location = New System.Drawing.Point(0, 844)
         Me.barDockControlBottom.Manager = Me.MainBarManager
-        Me.barDockControlBottom.Size = New System.Drawing.Size(1161, 0)
+        Me.barDockControlBottom.Margin = New System.Windows.Forms.Padding(4)
+        Me.barDockControlBottom.Size = New System.Drawing.Size(1548, 0)
         '
         'barDockControlLeft
         '
         Me.barDockControlLeft.CausesValidation = False
         Me.barDockControlLeft.Dock = System.Windows.Forms.DockStyle.Left
-        Me.barDockControlLeft.Location = New System.Drawing.Point(0, 24)
+        Me.barDockControlLeft.Location = New System.Drawing.Point(0, 30)
         Me.barDockControlLeft.Manager = Me.MainBarManager
-        Me.barDockControlLeft.Size = New System.Drawing.Size(0, 662)
+        Me.barDockControlLeft.Margin = New System.Windows.Forms.Padding(4)
+        Me.barDockControlLeft.Size = New System.Drawing.Size(0, 814)
         '
         'barDockControlRight
         '
         Me.barDockControlRight.CausesValidation = False
         Me.barDockControlRight.Dock = System.Windows.Forms.DockStyle.Right
-        Me.barDockControlRight.Location = New System.Drawing.Point(1161, 24)
+        Me.barDockControlRight.Location = New System.Drawing.Point(1548, 30)
         Me.barDockControlRight.Manager = Me.MainBarManager
-        Me.barDockControlRight.Size = New System.Drawing.Size(0, 662)
+        Me.barDockControlRight.Margin = New System.Windows.Forms.Padding(4)
+        Me.barDockControlRight.Size = New System.Drawing.Size(0, 814)
         '
         'MainDockManager
         '
+        Me.MainDockManager.AutoHideContainers.AddRange(New DevExpress.XtraBars.Docking.AutoHideContainer() {Me.hideContainerRight})
         Me.MainDockManager.Form = Me
         Me.MainDockManager.MenuManager = Me.MainBarManager
-        Me.MainDockManager.RootPanels.AddRange(New DevExpress.XtraBars.Docking.DockPanel() {Me.QueriesSelectorDockPanel, Me.HeaderDockPanel, Me.RightDockPanel, Me.MapDockPanel})
+        Me.MainDockManager.RootPanels.AddRange(New DevExpress.XtraBars.Docking.DockPanel() {Me.QueriesSelectorDockPanel, Me.HeaderDockPanel, Me.RightDockPanel})
         Me.MainDockManager.TopZIndexControls.AddRange(New String() {"DevExpress.XtraBars.BarDockControl", "DevExpress.XtraBars.StandaloneBarDockControl", "System.Windows.Forms.MenuStrip", "System.Windows.Forms.StatusStrip", "System.Windows.Forms.StatusBar", "DevExpress.XtraBars.Ribbon.RibbonStatusBar", "DevExpress.XtraBars.Ribbon.RibbonControl", "DevExpress.XtraBars.Navigation.OfficeNavigationBar", "DevExpress.XtraBars.Navigation.TileNavPane", "DevExpress.XtraBars.TabFormControl", "DevExpress.XtraBars.FluentDesignSystem.FluentDesignFormControl", "DevExpress.XtraBars.ToolbarForm.ToolbarFormControl"})
+        '
+        'hideContainerRight
+        '
+        Me.hideContainerRight.BackColor = System.Drawing.SystemColors.Control
+        Me.hideContainerRight.Controls.Add(Me.MapDockPanel)
+        Me.hideContainerRight.Dock = System.Windows.Forms.DockStyle.Right
+        Me.hideContainerRight.Location = New System.Drawing.Point(1522, 30)
+        Me.hideContainerRight.Name = "hideContainerRight"
+        Me.hideContainerRight.Size = New System.Drawing.Size(26, 814)
+        '
+        'MapDockPanel
+        '
+        Me.MapDockPanel.Controls.Add(Me.ControlContainer1)
+        Me.MapDockPanel.Dock = DevExpress.XtraBars.Docking.DockingStyle.Right
+        Me.MapDockPanel.ID = New System.Guid("2f8beae8-1d62-4110-beef-e9295be5439d")
+        Me.MapDockPanel.Location = New System.Drawing.Point(0, 0)
+        Me.MapDockPanel.Margin = New System.Windows.Forms.Padding(4)
+        Me.MapDockPanel.Name = "MapDockPanel"
+        Me.MapDockPanel.OriginalSize = New System.Drawing.Size(498, 200)
+        Me.MapDockPanel.SavedDock = DevExpress.XtraBars.Docking.DockingStyle.Right
+        Me.MapDockPanel.SavedIndex = 3
+        Me.MapDockPanel.Size = New System.Drawing.Size(664, 814)
+        Me.MapDockPanel.Text = "Map"
+        Me.MapDockPanel.Visibility = DevExpress.XtraBars.Docking.DockVisibility.AutoHide
+        '
+        'ControlContainer1
+        '
+        Me.ControlContainer1.Controls.Add(Me.DatasetMapControl)
+        Me.ControlContainer1.Location = New System.Drawing.Point(6, 32)
+        Me.ControlContainer1.Margin = New System.Windows.Forms.Padding(4)
+        Me.ControlContainer1.Name = "ControlContainer1"
+        Me.ControlContainer1.Size = New System.Drawing.Size(654, 778)
+        Me.ControlContainer1.TabIndex = 0
+        '
+        'DatasetMapControl
+        '
+        Me.DatasetMapControl.BackColor = System.Drawing.Color.LightSteelBlue
+        Me.DatasetMapControl.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.DatasetMapControl.Location = New System.Drawing.Point(0, 0)
+        Me.DatasetMapControl.Margin = New System.Windows.Forms.Padding(4)
+        Me.DatasetMapControl.Name = "DatasetMapControl"
+        Me.DatasetMapControl.Size = New System.Drawing.Size(654, 778)
+        Me.DatasetMapControl.TabIndex = 0
         '
         'QueriesSelectorDockPanel
         '
         Me.QueriesSelectorDockPanel.Controls.Add(Me.DockPanel1_Container)
         Me.QueriesSelectorDockPanel.Dock = DevExpress.XtraBars.Docking.DockingStyle.Left
         Me.QueriesSelectorDockPanel.ID = New System.Guid("3731e7e3-3664-4df7-9c12-4626557e2817")
-        Me.QueriesSelectorDockPanel.Location = New System.Drawing.Point(0, 24)
+        Me.QueriesSelectorDockPanel.Location = New System.Drawing.Point(0, 30)
+        Me.QueriesSelectorDockPanel.Margin = New System.Windows.Forms.Padding(4)
         Me.QueriesSelectorDockPanel.Name = "QueriesSelectorDockPanel"
         Me.QueriesSelectorDockPanel.OriginalSize = New System.Drawing.Size(200, 200)
-        Me.QueriesSelectorDockPanel.Size = New System.Drawing.Size(200, 662)
+        Me.QueriesSelectorDockPanel.Size = New System.Drawing.Size(200, 814)
         Me.QueriesSelectorDockPanel.Text = "Queries selector"
         '
         'DockPanel1_Container
         '
         Me.DockPanel1_Container.Controls.Add(Me.ViewsListBox)
         Me.DockPanel1_Container.Controls.Add(Me.Label1)
-        Me.DockPanel1_Container.Location = New System.Drawing.Point(3, 26)
+        Me.DockPanel1_Container.Location = New System.Drawing.Point(4, 32)
+        Me.DockPanel1_Container.Margin = New System.Windows.Forms.Padding(4)
         Me.DockPanel1_Container.Name = "DockPanel1_Container"
-        Me.DockPanel1_Container.Size = New System.Drawing.Size(193, 633)
+        Me.DockPanel1_Container.Size = New System.Drawing.Size(190, 778)
         Me.DockPanel1_Container.TabIndex = 0
         '
         'HeaderDockPanel
@@ -965,17 +1047,19 @@ Partial Class ResultsForm
         Me.HeaderDockPanel.Controls.Add(Me.DockPanel2_Container)
         Me.HeaderDockPanel.Dock = DevExpress.XtraBars.Docking.DockingStyle.Top
         Me.HeaderDockPanel.ID = New System.Guid("cfa8c5ce-956d-4d87-a643-e3f3ce102bc3")
-        Me.HeaderDockPanel.Location = New System.Drawing.Point(200, 24)
+        Me.HeaderDockPanel.Location = New System.Drawing.Point(200, 30)
+        Me.HeaderDockPanel.Margin = New System.Windows.Forms.Padding(4)
         Me.HeaderDockPanel.Name = "HeaderDockPanel"
         Me.HeaderDockPanel.OriginalSize = New System.Drawing.Size(200, 89)
-        Me.HeaderDockPanel.Size = New System.Drawing.Size(961, 89)
+        Me.HeaderDockPanel.Size = New System.Drawing.Size(1322, 89)
         '
         'DockPanel2_Container
         '
         Me.DockPanel2_Container.Controls.Add(Me.HeaderPanel)
-        Me.DockPanel2_Container.Location = New System.Drawing.Point(3, 26)
+        Me.DockPanel2_Container.Location = New System.Drawing.Point(4, 32)
+        Me.DockPanel2_Container.Margin = New System.Windows.Forms.Padding(4)
         Me.DockPanel2_Container.Name = "DockPanel2_Container"
-        Me.DockPanel2_Container.Size = New System.Drawing.Size(955, 59)
+        Me.DockPanel2_Container.Size = New System.Drawing.Size(1314, 51)
         Me.DockPanel2_Container.TabIndex = 0
         '
         'RightDockPanel
@@ -983,18 +1067,20 @@ Partial Class ResultsForm
         Me.RightDockPanel.Controls.Add(Me.DockPanel3_Container)
         Me.RightDockPanel.Dock = DevExpress.XtraBars.Docking.DockingStyle.Right
         Me.RightDockPanel.ID = New System.Guid("e8bd7f70-23a1-4291-9a6c-b4d509c369aa")
-        Me.RightDockPanel.Location = New System.Drawing.Point(961, 113)
+        Me.RightDockPanel.Location = New System.Drawing.Point(1322, 119)
+        Me.RightDockPanel.Margin = New System.Windows.Forms.Padding(4)
         Me.RightDockPanel.Name = "RightDockPanel"
         Me.RightDockPanel.OriginalSize = New System.Drawing.Size(200, 200)
-        Me.RightDockPanel.Size = New System.Drawing.Size(200, 573)
+        Me.RightDockPanel.Size = New System.Drawing.Size(200, 725)
         Me.RightDockPanel.Text = "Record viewer"
         '
         'DockPanel3_Container
         '
         Me.DockPanel3_Container.Controls.Add(Me.DatasetVGridControl)
-        Me.DockPanel3_Container.Location = New System.Drawing.Point(4, 26)
+        Me.DockPanel3_Container.Location = New System.Drawing.Point(6, 32)
+        Me.DockPanel3_Container.Margin = New System.Windows.Forms.Padding(4)
         Me.DockPanel3_Container.Name = "DockPanel3_Container"
-        Me.DockPanel3_Container.Size = New System.Drawing.Size(193, 544)
+        Me.DockPanel3_Container.Size = New System.Drawing.Size(190, 689)
         Me.DockPanel3_Container.TabIndex = 0
         '
         'ChartBarController1
@@ -1027,49 +1113,35 @@ Partial Class ResultsForm
         Me.ChartBarController1.BarItems.Add(Me.CreateExportBaseItem1)
         Me.ChartBarController1.Control = Me.DatasetChartControl
         '
-        'MapDockPanel
+        'ToolStripLabel1
         '
-        Me.MapDockPanel.Controls.Add(Me.ControlContainer1)
-        Me.MapDockPanel.Dock = DevExpress.XtraBars.Docking.DockingStyle.Right
-        Me.MapDockPanel.ID = New System.Guid("2f8beae8-1d62-4110-beef-e9295be5439d")
-        Me.MapDockPanel.Location = New System.Drawing.Point(463, 113)
-        Me.MapDockPanel.Name = "MapDockPanel"
-        Me.MapDockPanel.OriginalSize = New System.Drawing.Size(498, 200)
-        Me.MapDockPanel.Size = New System.Drawing.Size(498, 573)
-        Me.MapDockPanel.Text = "Map"
+        Me.ToolStripLabel1.Name = "ToolStripLabel1"
+        Me.ToolStripLabel1.Size = New System.Drawing.Size(150, 28)
+        Me.ToolStripLabel1.Text = "Group summary type:"
         '
-        'ControlContainer1
+        'GroupSummaryTypeToolStripComboBox
         '
-        Me.ControlContainer1.Controls.Add(Me.DatasetMapControl)
-        Me.ControlContainer1.Location = New System.Drawing.Point(4, 26)
-        Me.ControlContainer1.Name = "ControlContainer1"
-        Me.ControlContainer1.Size = New System.Drawing.Size(491, 544)
-        Me.ControlContainer1.TabIndex = 0
-        '
-        'DatasetMapControl
-        '
-        Me.DatasetMapControl.BackColor = System.Drawing.Color.LightSteelBlue
-        Me.DatasetMapControl.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.DatasetMapControl.Location = New System.Drawing.Point(0, 0)
-        Me.DatasetMapControl.Name = "DatasetMapControl"
-        Me.DatasetMapControl.Size = New System.Drawing.Size(491, 544)
-        Me.DatasetMapControl.TabIndex = 0
+        Me.GroupSummaryTypeToolStripComboBox.Font = New System.Drawing.Font("Segoe UI", 9.0!)
+        Me.GroupSummaryTypeToolStripComboBox.Items.AddRange(New Object() {"Sum", "Avg", "Min", "Max", "Count"})
+        Me.GroupSummaryTypeToolStripComboBox.Name = "GroupSummaryTypeToolStripComboBox"
+        Me.GroupSummaryTypeToolStripComboBox.Size = New System.Drawing.Size(121, 31)
+        Me.GroupSummaryTypeToolStripComboBox.Text = "Sum"
         '
         'ResultsForm
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1161, 686)
+        Me.ClientSize = New System.Drawing.Size(1548, 844)
         Me.Controls.Add(Me.TabControl)
-        Me.Controls.Add(Me.MapDockPanel)
         Me.Controls.Add(Me.RightDockPanel)
         Me.Controls.Add(Me.HeaderDockPanel)
         Me.Controls.Add(Me.QueriesSelectorDockPanel)
+        Me.Controls.Add(Me.hideContainerRight)
         Me.Controls.Add(Me.barDockControlLeft)
         Me.Controls.Add(Me.barDockControlRight)
         Me.Controls.Add(Me.barDockControlBottom)
         Me.Controls.Add(Me.barDockControlTop)
-        Me.Margin = New System.Windows.Forms.Padding(2)
+        Me.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.Name = "ResultsForm"
         Me.Text = "Queries explorer"
         Me.TabControl.ResumeLayout(False)
@@ -1102,6 +1174,10 @@ Partial Class ResultsForm
         CType(Me.CommandBarGalleryDropDown7, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.CommandBarGalleryDropDown8, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.MainDockManager, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.hideContainerRight.ResumeLayout(False)
+        Me.MapDockPanel.ResumeLayout(False)
+        Me.ControlContainer1.ResumeLayout(False)
+        CType(Me.DatasetMapControl, System.ComponentModel.ISupportInitialize).EndInit()
         Me.QueriesSelectorDockPanel.ResumeLayout(False)
         Me.DockPanel1_Container.ResumeLayout(False)
         Me.DockPanel1_Container.PerformLayout()
@@ -1110,9 +1186,6 @@ Partial Class ResultsForm
         Me.RightDockPanel.ResumeLayout(False)
         Me.DockPanel3_Container.ResumeLayout(False)
         CType(Me.ChartBarController1, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.MapDockPanel.ResumeLayout(False)
-        Me.ControlContainer1.ResumeLayout(False)
-        CType(Me.DatasetMapControl, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -1195,4 +1268,8 @@ Partial Class ResultsForm
     Friend WithEvents MapDockPanel As DevExpress.XtraBars.Docking.DockPanel
     Friend WithEvents ControlContainer1 As DevExpress.XtraBars.Docking.ControlContainer
     Friend WithEvents DatasetMapControl As DevExpress.XtraMap.MapControl
+    Friend WithEvents hideContainerRight As DevExpress.XtraBars.Docking.AutoHideContainer
+    Friend WithEvents ToolStripSeparator2 As ToolStripSeparator
+    Friend WithEvents ToolStripLabel1 As ToolStripLabel
+    Friend WithEvents GroupSummaryTypeToolStripComboBox As ToolStripComboBox
 End Class
