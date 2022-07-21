@@ -1567,4 +1567,20 @@ Click Yes to certify and lock the current record. Click No to cancel.", MsgBoxSt
         'Dim CapturesForm As New CapturesForm
         'CapturesForm.ShowDialog()
     End Sub
+
+    Private Sub OpenIRMAProjectReferenceToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles OpenIRMAProjectReferenceToolStripMenuItem.Click
+        Try
+            Process.Start(My.Settings.IRMAProjectReference)
+        Catch ex As Exception
+            MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name & ")")
+        End Try
+    End Sub
+
+    Private Sub IRMADataDeliverablesDatasetReferenceToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles IRMADataDeliverablesDatasetReferenceToolStripMenuItem.Click
+        Try
+            Process.Start(My.Settings.IRMAProjectReference)
+        Catch ex As Exception
+            MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name & ")")
+        End Try
+    End Sub
 End Class
