@@ -1578,7 +1578,7 @@ Click Yes to certify and lock the current record. Click No to cancel.", MsgBoxSt
 
     Private Sub IRMADataDeliverablesDatasetReferenceToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles IRMADataDeliverablesDatasetReferenceToolStripMenuItem.Click
         Try
-            Process.Start(My.Settings.IRMAProjectReference)
+            Process.Start(My.Settings.IRMADataDeliverablesDatasetReference)
         Catch ex As Exception
             MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name & ")")
         End Try
