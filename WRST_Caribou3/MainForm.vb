@@ -1583,4 +1583,107 @@ Click Yes to certify and lock the current record. Click No to cancel.", MsgBoxSt
             MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name & ")")
         End Try
     End Sub
+
+    Private Sub ChangeCertificationLevelToolStripComboBox_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ChangeCertificationLevelToolStripComboBox.SelectedIndexChanged
+        Try
+            'get the flightid
+            Dim FlightID As String = GetCurrentGridEXCellValue(Me.SurveyFlightsGridEX, "FlightID")
+
+            'If we have a flightid
+            If FlightID.Trim.Length > 0 Then
+
+                'If we have a certification level choice made
+                If Me.ChangeCertificationLevelToolStripComboBox.Text.Trim.Length > 0 Then
+
+                    'Determine how to change certification level
+                    If Me.ChangeCertificationLevelToolStripComboBox.Text.Trim.ToLower = "raw" Or Me.ChangeCertificationLevelToolStripComboBox.Text.Trim.ToLower = "provisional" Then
+
+                        'Change the CertificationLevel to Raw or Provisional
+                        If MsgBox("Proceeding will changed the records shown in the grid below to " & Me.ChangeCertificationLevelToolStripComboBox.Text.Trim & ". Proceed?", MsgBoxStyle.YesNo, "Confirm") = MsgBoxResult.Yes Then
+
+                            'Get a recordset of the records to be changed
+                            Dim DV As New DataView(Me.WRST_CaribouDataSet.Tables("Surveys"), "FlightID = '" & FlightID & "'", "", DataViewRowState.CurrentRows)
+
+                            'Loop through the records and see if any of them are alread certified, these should not be changed.
+                            Dim RecordsetContainsCertifiedRecords As Boolean = False
+                            For Each SurveyDataRowView As DataRowView In DV
+                                If SurveyDataRowView.Item("FlightID") = FlightID Then
+                                    If SurveyDataRowView.Item("CertificationLevel") = "Certified" Then RecordsetContainsCertifiedRecords = True
+                                End If
+                            Next
+
+                            'Only proceed if the records to be changed are not already certified
+                            If RecordsetContainsCertifiedRecords = True Then
+                                MsgBox("WARNING: One or more of the records you are attempting to change is certified. This is not allowed. Contact the project leader or data manager to change the certification level for these records.", MsgBoxStyle.Critical, "WARNING")
+                            Else
+                                'Change the certification level for each record
+                                For Each SurveyDataRowView As DataRowView In DV
+                                    If SurveyDataRowView.Item("FlightID") = FlightID Then
+                                        SurveyDataRowView.Item("CertificationLevel") = Me.ChangeCertificationLevelToolStripComboBox.Text.Trim
+                                        SurveyDataRowView.Item("CertificationDate") = DBNull.Value
+                                        SurveyDataRowView.Item("CertifiedBy") = DBNull.Value
+                                        Me.SurveysBindingSource.EndEdit()
+                                    End If
+                                Next
+                            End If
+                        End If
+
+                    ElseIf Me.ChangeCertificationLevelToolStripComboBox.Text.Trim.ToLower = "certified" Then
+
+                        'Change the CertificationLevel to Certified
+                        If MsgBox("Proceeding will changed the records shown in the grid below to " & Me.ChangeCertificationLevelToolStripComboBox.Text.Trim & ". Records should only be certified if all quality control procedures have been run and the data have been approved by the project leader, or if the data can be validated against a report or original field data collection forms. or if. Proceed?", MsgBoxStyle.YesNo, "Confirm") = MsgBoxResult.Yes Then
+
+                            Dim DataQualityNotes As String = InputBox("If you would like to append a data quality note to each of the records to be certified then enter it here, otherwise dismiss.", "Add data quality note to the records being certified?")
+
+
+                            'now process each Survey record to match frequencies detected in groups to actual animals and insert them into the CollaredCaribouInGroups table
+                            Dim DV As New DataView(Me.WRST_CaribouDataSet.Tables("Surveys"), "FlightID = '" & FlightID & "'", "", DataViewRowState.CurrentRows)
+                            For Each SurveyDataRowView As DataRowView In DV
+
+                                If SurveyDataRowView.Item("FlightID") = FlightID Then
+                                    SurveyDataRowView.Item("CertificationLevel") = Me.ChangeCertificationLevelToolStripComboBox.Text.Trim
+                                    SurveyDataRowView.Item("CertificationDate") = Now
+                                    SurveyDataRowView.Item("CertifiedBy") = My.User.Name
+                                    If DataQualityNotes.Trim.Length > 0 Then
+                                        SurveyDataRowView.Item("DataQualityNotes") = SurveyDataRowView.Item("DataQualityNotes") & " " & Now & " " & My.User.Name & ": " & DataQualityNotes
+                                    End If
+                                    Me.SurveysBindingSource.EndEdit()
+                                End If
+                            Next
+                        End If
+
+                    End If
+                    End If
+                    'Reset the ChangeCertificationLevelToolStripComboBox
+                    Me.ChangeCertificationLevelToolStripComboBox.Text = ""
+                End If
+
+        Catch ex As Exception
+            MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name & ")")
+        End Try
+    End Sub
+
+    Private Sub AddDataQualityNotesToolStripButton_Click(sender As Object, e As EventArgs) Handles AddDataQualityNotesToolStripButton.Click
+        Try
+            'get the flightid
+            Dim FlightID As String = GetCurrentGridEXCellValue(Me.SurveyFlightsGridEX, "FlightID")
+
+            'If we have a flightid
+            If FlightID.Trim.Length > 0 Then
+
+                Dim DataQualityNotes As String = InputBox("Enter data quality note to be appended to each record in the grid below: ", "Append data quality note", Now & " " & My.User.Name & ": ")
+
+                'now process each Survey record to match frequencies detected in groups to actual animals and insert them into the CollaredCaribouInGroups table
+                Dim DV As New DataView(Me.WRST_CaribouDataSet.Tables("Surveys"), "FlightID = '" & FlightID & "'", "", DataViewRowState.CurrentRows)
+                For Each SurveyDataRowView As DataRowView In DV
+                    If SurveyDataRowView.Item("FlightID") = FlightID Then
+                        SurveyDataRowView.Item("DataQualityNotes") = SurveyDataRowView.Item("DataQualityNotes") & " " & Now & " " & My.User.Name & ": " & DataQualityNotes
+                        Me.SurveysBindingSource.EndEdit()
+                    End If
+                Next
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name & ")")
+        End Try
+    End Sub
 End Class
