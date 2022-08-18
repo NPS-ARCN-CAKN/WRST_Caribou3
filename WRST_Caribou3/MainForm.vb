@@ -1022,7 +1022,14 @@ Click Yes to certify and lock the current record. Click No to cancel.", MsgBoxSt
 
         Try
             'generic starting caption
-            Dim Herd As String = GetCurrentGridEXCellValue(Me.SurveyFlightsGridEX, "Herd").ToString.Trim
+            Dim Herd As String = ""
+            Try
+                Herd = GetCurrentGridEXCellValue(Me.SurveyFlightsGridEX, "Herd").ToString.Trim()
+            Catch ex As Exception
+                Herd = ex.Message & " " & System.Reflection.MethodBase.GetCurrentMethod.Name
+            End Try
+
+            'Reset grid caption
             Me.CollaredAnimalsInGroupsGridEX.RootTable.Caption = ""
 
             'start by getting the groupnumber and frequencies data
@@ -1664,26 +1671,27 @@ Click Yes to certify and lock the current record. Click No to cancel.", MsgBoxSt
     End Sub
 
     Private Sub AddDataQualityNotesToolStripButton_Click(sender As Object, e As EventArgs) Handles AddDataQualityNotesToolStripButton.Click
-        Try
-            'get the flightid
-            Dim FlightID As String = GetCurrentGridEXCellValue(Me.SurveyFlightsGridEX, "FlightID")
+        MsgBox("Not yet implemented.")
+        'Try
+        '    'get the flightid
+        '    Dim FlightID As String = GetCurrentGridEXCellValue(Me.SurveyFlightsGridEX, "FlightID")
 
-            'If we have a flightid
-            If FlightID.Trim.Length > 0 Then
+        '    'If we have a flightid
+        '    If FlightID.Trim.Length > 0 Then
 
-                Dim DataQualityNotes As String = InputBox("Enter data quality note to be appended to each record in the grid below: ", "Append data quality note", Now & " " & My.User.Name & ": ")
+        '        Dim DataQualityNotes As String = InputBox("Enter data quality note to be appended to each record in the grid below: ", "Append data quality note", Now & " " & My.User.Name & ": ")
 
-                'now process each Survey record to match frequencies detected in groups to actual animals and insert them into the CollaredCaribouInGroups table
-                Dim DV As New DataView(Me.WRST_CaribouDataSet.Tables("Surveys"), "FlightID = '" & FlightID & "'", "", DataViewRowState.CurrentRows)
-                For Each SurveyDataRowView As DataRowView In DV
-                    If SurveyDataRowView.Item("FlightID") = FlightID Then
-                        SurveyDataRowView.Item("DataQualityNotes") = SurveyDataRowView.Item("DataQualityNotes") & " " & Now & " " & My.User.Name & ": " & DataQualityNotes
-                        Me.SurveysBindingSource.EndEdit()
-                    End If
-                Next
-            End If
-        Catch ex As Exception
-            MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name & ")")
-        End Try
+        '        'now process each Survey record to match frequencies detected in groups to actual animals and insert them into the CollaredCaribouInGroups table
+        '        Dim DV As New DataView(Me.WRST_CaribouDataSet.Tables("Surveys"), "FlightID = '" & FlightID & "'", "", DataViewRowState.CurrentRows)
+        '        For Each SurveyDataRowView As DataRowView In DV
+        '            If SurveyDataRowView.Item("FlightID") = FlightID Then
+        '                SurveyDataRowView.Item("DataQualityNotes") = SurveyDataRowView.Item("DataQualityNotes") & " " & Now & " " & My.User.Name & ": " & DataQualityNotes
+        '                Me.SurveysBindingSource.EndEdit()
+        '            End If
+        '        Next
+        '    End If
+        'Catch ex As Exception
+        '    MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name & ")")
+        'End Try
     End Sub
 End Class
