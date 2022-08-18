@@ -1648,7 +1648,7 @@ Click Yes to certify and lock the current record. Click No to cancel.", MsgBoxSt
                             For Each SurveyDataRowView As DataRowView In DV
 
                                 If SurveyDataRowView.Item("FlightID") = FlightID Then
-                                    SurveyDataRowView.Item("CertificationLevel") = Me.ChangeCertificationLevelToolStripComboBox.Text.Trim
+                                    SurveyDataRowView.Item("CertificationLevel") = "Certified"
                                     SurveyDataRowView.Item("CertificationDate") = Now
                                     SurveyDataRowView.Item("CertifiedBy") = My.User.Name
                                     If DataQualityNotes.Trim.Length > 0 Then
