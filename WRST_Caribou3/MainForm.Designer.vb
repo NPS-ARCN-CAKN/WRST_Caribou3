@@ -47,6 +47,9 @@ Partial Class MainForm
         Me.ToolStripSeparator8 = New System.Windows.Forms.ToolStripSeparator()
         Me.ToolStripLabel1 = New System.Windows.Forms.ToolStripLabel()
         Me.ChangeCertificationLevelToolStripComboBox = New System.Windows.Forms.ToolStripComboBox()
+        Me.ToolStripSeparator10 = New System.Windows.Forms.ToolStripSeparator()
+        Me.ToolStripLabel2 = New System.Windows.Forms.ToolStripLabel()
+        Me.EditDataQualityNotesToolStripComboBox = New System.Windows.Forms.ToolStripComboBox()
         Me.CollaredAnimalsSplitContainer = New System.Windows.Forms.SplitContainer()
         Me.CollaredAnimalsInGroupsGridEX = New Janus.Windows.GridEX.GridEX()
         Me.CollaredAnimalsInGroupsBindingSource = New System.Windows.Forms.BindingSource(Me.components)
@@ -87,8 +90,6 @@ Partial Class MainForm
         Me.CollaredAnimalsInGroupsTableAdapter = New WRST_Caribou3.WRST_CaribouDataSetTableAdapters.CollaredAnimalsInGroupsTableAdapter()
         Me.SurveysTableAdapter = New WRST_Caribou3.WRST_CaribouDataSetTableAdapters.SurveysTableAdapter()
         Me.CapturesTableAdapter = New WRST_Caribou3.WRST_CaribouDataSetTableAdapters.CapturesTableAdapter()
-        Me.ToolStripSeparator10 = New System.Windows.Forms.ToolStripSeparator()
-        Me.AddDataQualityNotesToolStripButton = New System.Windows.Forms.ToolStripButton()
         CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SplitContainer1.Panel1.SuspendLayout()
         Me.SplitContainer1.Panel2.SuspendLayout()
@@ -119,7 +120,7 @@ Partial Class MainForm
         'SplitContainer1
         '
         Me.SplitContainer1.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.SplitContainer1.Location = New System.Drawing.Point(0, 27)
+        Me.SplitContainer1.Location = New System.Drawing.Point(0, 31)
         Me.SplitContainer1.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.SplitContainer1.Name = "SplitContainer1"
         Me.SplitContainer1.Orientation = System.Windows.Forms.Orientation.Horizontal
@@ -131,8 +132,8 @@ Partial Class MainForm
         'SplitContainer1.Panel2
         '
         Me.SplitContainer1.Panel2.Controls.Add(Me.SurveysSplitContainer)
-        Me.SplitContainer1.Size = New System.Drawing.Size(1373, 641)
-        Me.SplitContainer1.SplitterDistance = 140
+        Me.SplitContainer1.Size = New System.Drawing.Size(1373, 631)
+        Me.SplitContainer1.SplitterDistance = 137
         Me.SplitContainer1.SplitterWidth = 2
         Me.SplitContainer1.TabIndex = 0
         '
@@ -153,7 +154,7 @@ Partial Class MainForm
         Me.SurveyFlightsGridEX.Name = "SurveyFlightsGridEX"
         Me.SurveyFlightsGridEX.RecordNavigator = True
         Me.SurveyFlightsGridEX.RowHeaders = Janus.Windows.GridEX.InheritableBoolean.[True]
-        Me.SurveyFlightsGridEX.Size = New System.Drawing.Size(1373, 140)
+        Me.SurveyFlightsGridEX.Size = New System.Drawing.Size(1373, 137)
         Me.SurveyFlightsGridEX.TabIndex = 0
         Me.SurveyFlightsGridEX.TableHeaders = Janus.Windows.GridEX.InheritableBoolean.[True]
         '
@@ -184,8 +185,8 @@ Partial Class MainForm
         '
         Me.SurveysSplitContainer.Panel2.AutoScroll = True
         Me.SurveysSplitContainer.Panel2.Controls.Add(Me.CollaredAnimalsSplitContainer)
-        Me.SurveysSplitContainer.Size = New System.Drawing.Size(1373, 499)
-        Me.SurveysSplitContainer.SplitterDistance = 130
+        Me.SurveysSplitContainer.Size = New System.Drawing.Size(1373, 492)
+        Me.SurveysSplitContainer.SplitterDistance = 210
         Me.SurveysSplitContainer.SplitterWidth = 2
         Me.SurveysSplitContainer.TabIndex = 0
         '
@@ -207,7 +208,7 @@ Partial Class MainForm
         Me.SurveysGridEX.Name = "SurveysGridEX"
         Me.SurveysGridEX.RecordNavigator = True
         Me.SurveysGridEX.RowHeaders = Janus.Windows.GridEX.InheritableBoolean.[True]
-        Me.SurveysGridEX.Size = New System.Drawing.Size(1373, 99)
+        Me.SurveysGridEX.Size = New System.Drawing.Size(1373, 179)
         Me.SurveysGridEX.TabIndex = 0
         Me.SurveysGridEX.TableHeaders = Janus.Windows.GridEX.InheritableBoolean.[True]
         Me.SurveysGridEX.TotalRow = Janus.Windows.GridEX.InheritableBoolean.[True]
@@ -222,7 +223,7 @@ Partial Class MainForm
         'SurveysToolStrip
         '
         Me.SurveysToolStrip.ImageScalingSize = New System.Drawing.Size(24, 24)
-        Me.SurveysToolStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ImportSurveyDataFromFileToolStripButton, Me.ToolStripSeparator1, Me.AutomatchToolStripSplitButton, Me.ToolStripSeparator2, Me.ChangeOrientationToolStripButton, Me.ToolStripSeparator8, Me.ToolStripLabel1, Me.ChangeCertificationLevelToolStripComboBox, Me.ToolStripSeparator10, Me.AddDataQualityNotesToolStripButton})
+        Me.SurveysToolStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ImportSurveyDataFromFileToolStripButton, Me.ToolStripSeparator1, Me.AutomatchToolStripSplitButton, Me.ToolStripSeparator2, Me.ChangeOrientationToolStripButton, Me.ToolStripSeparator8, Me.ToolStripLabel1, Me.ChangeCertificationLevelToolStripComboBox, Me.ToolStripSeparator10, Me.ToolStripLabel2, Me.EditDataQualityNotesToolStripComboBox})
         Me.SurveysToolStrip.Location = New System.Drawing.Point(0, 0)
         Me.SurveysToolStrip.Name = "SurveysToolStrip"
         Me.SurveysToolStrip.Size = New System.Drawing.Size(1373, 31)
@@ -290,10 +291,26 @@ Partial Class MainForm
         '
         'ChangeCertificationLevelToolStripComboBox
         '
-        Me.ChangeCertificationLevelToolStripComboBox.Font = New System.Drawing.Font("Segoe UI", 9.0!)
         Me.ChangeCertificationLevelToolStripComboBox.Items.AddRange(New Object() {"", "Raw", "Provisional", "Certified"})
         Me.ChangeCertificationLevelToolStripComboBox.Name = "ChangeCertificationLevelToolStripComboBox"
         Me.ChangeCertificationLevelToolStripComboBox.Size = New System.Drawing.Size(121, 31)
+        '
+        'ToolStripSeparator10
+        '
+        Me.ToolStripSeparator10.Name = "ToolStripSeparator10"
+        Me.ToolStripSeparator10.Size = New System.Drawing.Size(6, 31)
+        '
+        'ToolStripLabel2
+        '
+        Me.ToolStripLabel2.Name = "ToolStripLabel2"
+        Me.ToolStripLabel2.Size = New System.Drawing.Size(161, 28)
+        Me.ToolStripLabel2.Text = "Edit data quality notes:"
+        '
+        'EditDataQualityNotesToolStripComboBox
+        '
+        Me.EditDataQualityNotesToolStripComboBox.Items.AddRange(New Object() {"", "Append data quality note to all displayed records", "Overwrite data quality notes for all displayed records"})
+        Me.EditDataQualityNotesToolStripComboBox.Name = "EditDataQualityNotesToolStripComboBox"
+        Me.EditDataQualityNotesToolStripComboBox.Size = New System.Drawing.Size(121, 31)
         '
         'CollaredAnimalsSplitContainer
         '
@@ -310,7 +327,7 @@ Partial Class MainForm
         '
         Me.CollaredAnimalsSplitContainer.Panel2.Controls.Add(Me.AnimalGridEX)
         Me.CollaredAnimalsSplitContainer.Panel2.Controls.Add(Me.AnimalGridPanel)
-        Me.CollaredAnimalsSplitContainer.Size = New System.Drawing.Size(1373, 367)
+        Me.CollaredAnimalsSplitContainer.Size = New System.Drawing.Size(1373, 280)
         Me.CollaredAnimalsSplitContainer.SplitterDistance = 639
         Me.CollaredAnimalsSplitContainer.TabIndex = 1
         '
@@ -329,7 +346,7 @@ Partial Class MainForm
         Me.CollaredAnimalsInGroupsGridEX.Name = "CollaredAnimalsInGroupsGridEX"
         Me.CollaredAnimalsInGroupsGridEX.RecordNavigator = True
         Me.CollaredAnimalsInGroupsGridEX.RowHeaders = Janus.Windows.GridEX.InheritableBoolean.[True]
-        Me.CollaredAnimalsInGroupsGridEX.Size = New System.Drawing.Size(639, 367)
+        Me.CollaredAnimalsInGroupsGridEX.Size = New System.Drawing.Size(639, 280)
         Me.CollaredAnimalsInGroupsGridEX.TabIndex = 0
         Me.CollaredAnimalsInGroupsGridEX.TableHeaders = Janus.Windows.GridEX.InheritableBoolean.[True]
         '
@@ -347,7 +364,7 @@ Partial Class MainForm
         Me.AnimalGridEX.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.AnimalGridEX.Name = "AnimalGridEX"
         Me.AnimalGridEX.RowFormatStyle.BackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
-        Me.AnimalGridEX.Size = New System.Drawing.Size(730, 317)
+        Me.AnimalGridEX.Size = New System.Drawing.Size(730, 230)
         Me.AnimalGridEX.TabIndex = 0
         Me.AnimalGridEX.TableHeaderFormatStyle.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         '
@@ -379,7 +396,7 @@ Partial Class MainForm
         Me.MainToolStrip.Location = New System.Drawing.Point(0, 0)
         Me.MainToolStrip.Name = "MainToolStrip"
         Me.HelpProvider.SetShowHelp(Me.MainToolStrip, True)
-        Me.MainToolStrip.Size = New System.Drawing.Size(1373, 27)
+        Me.MainToolStrip.Size = New System.Drawing.Size(1373, 31)
         Me.MainToolStrip.TabIndex = 1
         Me.MainToolStrip.Text = "ToolStrip1"
         '
@@ -389,13 +406,13 @@ Partial Class MainForm
         Me.SaveToolStripButton.Image = CType(resources.GetObject("SaveToolStripButton.Image"), System.Drawing.Image)
         Me.SaveToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.SaveToolStripButton.Name = "SaveToolStripButton"
-        Me.SaveToolStripButton.Size = New System.Drawing.Size(80, 24)
+        Me.SaveToolStripButton.Size = New System.Drawing.Size(80, 28)
         Me.SaveToolStripButton.Text = "Save edits"
         '
         'ToolStripSeparator3
         '
         Me.ToolStripSeparator3.Name = "ToolStripSeparator3"
-        Me.ToolStripSeparator3.Size = New System.Drawing.Size(6, 27)
+        Me.ToolStripSeparator3.Size = New System.Drawing.Size(6, 31)
         '
         'ReloadDatasetToolStripButton
         '
@@ -403,13 +420,13 @@ Partial Class MainForm
         Me.ReloadDatasetToolStripButton.Image = CType(resources.GetObject("ReloadDatasetToolStripButton.Image"), System.Drawing.Image)
         Me.ReloadDatasetToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.ReloadDatasetToolStripButton.Name = "ReloadDatasetToolStripButton"
-        Me.ReloadDatasetToolStripButton.Size = New System.Drawing.Size(113, 24)
+        Me.ReloadDatasetToolStripButton.Size = New System.Drawing.Size(113, 28)
         Me.ReloadDatasetToolStripButton.Text = "Reload dataset"
         '
         'ToolStripSeparator4
         '
         Me.ToolStripSeparator4.Name = "ToolStripSeparator4"
-        Me.ToolStripSeparator4.Size = New System.Drawing.Size(6, 27)
+        Me.ToolStripSeparator4.Size = New System.Drawing.Size(6, 31)
         '
         'AllowEditsToolStripButton
         '
@@ -417,14 +434,14 @@ Partial Class MainForm
         Me.AllowEditsToolStripButton.Image = CType(resources.GetObject("AllowEditsToolStripButton.Image"), System.Drawing.Image)
         Me.AllowEditsToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.AllowEditsToolStripButton.Name = "AllowEditsToolStripButton"
-        Me.AllowEditsToolStripButton.Size = New System.Drawing.Size(87, 24)
+        Me.AllowEditsToolStripButton.Size = New System.Drawing.Size(87, 28)
         Me.AllowEditsToolStripButton.Tag = "False"
         Me.AllowEditsToolStripButton.Text = "Allow edits"
         '
         'ToolStripSeparator6
         '
         Me.ToolStripSeparator6.Name = "ToolStripSeparator6"
-        Me.ToolStripSeparator6.Size = New System.Drawing.Size(6, 27)
+        Me.ToolStripSeparator6.Size = New System.Drawing.Size(6, 31)
         '
         'CaribouOptionsToolStripDropDownButton
         '
@@ -433,7 +450,7 @@ Partial Class MainForm
         Me.CaribouOptionsToolStripDropDownButton.Image = CType(resources.GetObject("CaribouOptionsToolStripDropDownButton.Image"), System.Drawing.Image)
         Me.CaribouOptionsToolStripDropDownButton.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.CaribouOptionsToolStripDropDownButton.Name = "CaribouOptionsToolStripDropDownButton"
-        Me.CaribouOptionsToolStripDropDownButton.Size = New System.Drawing.Size(74, 24)
+        Me.CaribouOptionsToolStripDropDownButton.Size = New System.Drawing.Size(75, 28)
         Me.CaribouOptionsToolStripDropDownButton.Text = "Caribou"
         '
         'CaribouProfileToolStripMenuItem
@@ -463,7 +480,7 @@ Partial Class MainForm
         'ToolStripSeparator5
         '
         Me.ToolStripSeparator5.Name = "ToolStripSeparator5"
-        Me.ToolStripSeparator5.Size = New System.Drawing.Size(6, 27)
+        Me.ToolStripSeparator5.Size = New System.Drawing.Size(6, 31)
         '
         'ResultsToolStripDropDownButton
         '
@@ -472,7 +489,7 @@ Partial Class MainForm
         Me.ResultsToolStripDropDownButton.Image = CType(resources.GetObject("ResultsToolStripDropDownButton.Image"), System.Drawing.Image)
         Me.ResultsToolStripDropDownButton.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.ResultsToolStripDropDownButton.Name = "ResultsToolStripDropDownButton"
-        Me.ResultsToolStripDropDownButton.Size = New System.Drawing.Size(152, 24)
+        Me.ResultsToolStripDropDownButton.Size = New System.Drawing.Size(153, 28)
         Me.ResultsToolStripDropDownButton.Text = "Results and analysis"
         '
         'DatabaseQueriesToolToolStripMenuItem
@@ -484,7 +501,7 @@ Partial Class MainForm
         'ToolStripSeparator7
         '
         Me.ToolStripSeparator7.Name = "ToolStripSeparator7"
-        Me.ToolStripSeparator7.Size = New System.Drawing.Size(6, 27)
+        Me.ToolStripSeparator7.Size = New System.Drawing.Size(6, 31)
         '
         'QualityControlToolStripDropDownButton
         '
@@ -493,7 +510,7 @@ Partial Class MainForm
         Me.QualityControlToolStripDropDownButton.Image = CType(resources.GetObject("QualityControlToolStripDropDownButton.Image"), System.Drawing.Image)
         Me.QualityControlToolStripDropDownButton.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.QualityControlToolStripDropDownButton.Name = "QualityControlToolStripDropDownButton"
-        Me.QualityControlToolStripDropDownButton.Size = New System.Drawing.Size(120, 24)
+        Me.QualityControlToolStripDropDownButton.Size = New System.Drawing.Size(121, 28)
         Me.QualityControlToolStripDropDownButton.Text = "Quality control"
         '
         'CountTotalDetectedFrequenciesToolStripMenuItem
@@ -506,7 +523,7 @@ Partial Class MainForm
         'ToolStripSeparator9
         '
         Me.ToolStripSeparator9.Name = "ToolStripSeparator9"
-        Me.ToolStripSeparator9.Size = New System.Drawing.Size(6, 27)
+        Me.ToolStripSeparator9.Size = New System.Drawing.Size(6, 31)
         '
         'DatabaseToolStripDropDownButton
         '
@@ -515,7 +532,7 @@ Partial Class MainForm
         Me.DatabaseToolStripDropDownButton.Image = CType(resources.GetObject("DatabaseToolStripDropDownButton.Image"), System.Drawing.Image)
         Me.DatabaseToolStripDropDownButton.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.DatabaseToolStripDropDownButton.Name = "DatabaseToolStripDropDownButton"
-        Me.DatabaseToolStripDropDownButton.Size = New System.Drawing.Size(138, 24)
+        Me.DatabaseToolStripDropDownButton.Size = New System.Drawing.Size(139, 28)
         Me.DatabaseToolStripDropDownButton.Text = "Tasks and options"
         '
         'SynchronizeDatabasesToolStripMenuItem
@@ -558,16 +575,16 @@ Partial Class MainForm
         Me.BottomToolStrip.Dock = System.Windows.Forms.DockStyle.Bottom
         Me.BottomToolStrip.ImageScalingSize = New System.Drawing.Size(24, 24)
         Me.BottomToolStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CurrentDatabaseToolStripLabel})
-        Me.BottomToolStrip.Location = New System.Drawing.Point(0, 668)
+        Me.BottomToolStrip.Location = New System.Drawing.Point(0, 662)
         Me.BottomToolStrip.Name = "BottomToolStrip"
-        Me.BottomToolStrip.Size = New System.Drawing.Size(1373, 25)
+        Me.BottomToolStrip.Size = New System.Drawing.Size(1373, 31)
         Me.BottomToolStrip.TabIndex = 1
         Me.BottomToolStrip.Text = "ToolStrip1"
         '
         'CurrentDatabaseToolStripLabel
         '
         Me.CurrentDatabaseToolStripLabel.Name = "CurrentDatabaseToolStripLabel"
-        Me.CurrentDatabaseToolStripLabel.Size = New System.Drawing.Size(169, 22)
+        Me.CurrentDatabaseToolStripLabel.Size = New System.Drawing.Size(169, 28)
         Me.CurrentDatabaseToolStripLabel.Text = "Database: Disconnected"
         '
         'CapturesBindingSource
@@ -599,20 +616,6 @@ Partial Class MainForm
         'CapturesTableAdapter
         '
         Me.CapturesTableAdapter.ClearBeforeFill = True
-        '
-        'ToolStripSeparator10
-        '
-        Me.ToolStripSeparator10.Name = "ToolStripSeparator10"
-        Me.ToolStripSeparator10.Size = New System.Drawing.Size(6, 31)
-        '
-        'AddDataQualityNotesToolStripButton
-        '
-        Me.AddDataQualityNotesToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
-        Me.AddDataQualityNotesToolStripButton.Image = CType(resources.GetObject("AddDataQualityNotesToolStripButton.Image"), System.Drawing.Image)
-        Me.AddDataQualityNotesToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.AddDataQualityNotesToolStripButton.Name = "AddDataQualityNotesToolStripButton"
-        Me.AddDataQualityNotesToolStripButton.Size = New System.Drawing.Size(198, 28)
-        Me.AddDataQualityNotesToolStripButton.Text = "Append data quality notes..."
         '
         'MainForm
         '
@@ -725,5 +728,6 @@ Partial Class MainForm
     Friend WithEvents ToolStripLabel1 As ToolStripLabel
     Friend WithEvents ChangeCertificationLevelToolStripComboBox As ToolStripComboBox
     Friend WithEvents ToolStripSeparator10 As ToolStripSeparator
-    Friend WithEvents AddDataQualityNotesToolStripButton As ToolStripButton
+    Friend WithEvents ToolStripLabel2 As ToolStripLabel
+    Friend WithEvents EditDataQualityNotesToolStripComboBox As ToolStripComboBox
 End Class

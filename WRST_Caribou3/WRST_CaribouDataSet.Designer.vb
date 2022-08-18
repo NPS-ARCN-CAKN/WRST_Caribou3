@@ -1412,6 +1412,8 @@ Partial Public Class WRST_CaribouDataSet
         
         Private columnVisualCollar As Global.System.Data.DataColumn
         
+        Private columnDataQualityNotes As Global.System.Data.DataColumn
+        
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
         Public Sub New()
@@ -1712,6 +1714,14 @@ Partial Public Class WRST_CaribouDataSet
         End Property
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public ReadOnly Property DataQualityNotesColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnDataQualityNotes
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0"),  _
          Global.System.ComponentModel.Browsable(false)>  _
         Public ReadOnly Property Count() As Integer
@@ -1781,9 +1791,10 @@ Partial Public Class WRST_CaribouDataSet
                     ByVal CertificationLevel As String,  _
                     ByVal _In As Boolean,  _
                     ByVal Caribou As Integer,  _
-                    ByVal VisualCollar As String) As SurveysRow
+                    ByVal VisualCollar As String,  _
+                    ByVal DataQualityNotes As String) As SurveysRow
             Dim rowSurveysRow As SurveysRow = CType(Me.NewRow,SurveysRow)
-            Dim columnValuesArray() As Object = New Object() {SightingDate, SearchArea, GroupNumber, SmallBull, MediumBull, LargeBull, Bull, Cow, Calf, Adult, FrequenciesInGroup, Lat, Lon, Seen, Marked, Mode, Accuracy, RetainedAntler, DistendedUdders, CalvesAtHeel, WaypointName, Comment, SourceFilename, Nothing, RecordInsertedDate, RecordInsertedBy, EID, CertificationDate, CertifiedBy, CertificationLevel, _In, Caribou, VisualCollar}
+            Dim columnValuesArray() As Object = New Object() {SightingDate, SearchArea, GroupNumber, SmallBull, MediumBull, LargeBull, Bull, Cow, Calf, Adult, FrequenciesInGroup, Lat, Lon, Seen, Marked, Mode, Accuracy, RetainedAntler, DistendedUdders, CalvesAtHeel, WaypointName, Comment, SourceFilename, Nothing, RecordInsertedDate, RecordInsertedBy, EID, CertificationDate, CertifiedBy, CertificationLevel, _In, Caribou, VisualCollar, DataQualityNotes}
             If (Not (parentSurveyFlightsRowByFK_Surveys_SurveyFlights) Is Nothing) Then
                 columnValuesArray(23) = parentSurveyFlightsRowByFK_Surveys_SurveyFlights(21)
             End If
@@ -1848,6 +1859,7 @@ Partial Public Class WRST_CaribouDataSet
             Me.columnIn = MyBase.Columns("In")
             Me.columnCaribou = MyBase.Columns("Caribou")
             Me.columnVisualCollar = MyBase.Columns("VisualCollar")
+            Me.columnDataQualityNotes = MyBase.Columns("DataQualityNotes")
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -1922,6 +1934,8 @@ Partial Public Class WRST_CaribouDataSet
             MyBase.Columns.Add(Me.columnCaribou)
             Me.columnVisualCollar = New Global.System.Data.DataColumn("VisualCollar", GetType(String), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnVisualCollar)
+            Me.columnDataQualityNotes = New Global.System.Data.DataColumn("DataQualityNotes", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnDataQualityNotes)
             Me.Constraints.Add(New Global.System.Data.UniqueConstraint("Constraint1", New Global.System.Data.DataColumn() {Me.columnEID}, true))
             Me.columnSightingDate.AllowDBNull = false
             Me.columnSearchArea.MaxLength = 20
@@ -1950,6 +1964,8 @@ Partial Public Class WRST_CaribouDataSet
             Me.columnCertificationLevel.DefaultValue = CType("Raw",String)
             Me.columnCertificationLevel.MaxLength = 15
             Me.columnVisualCollar.MaxLength = 10
+            Me.columnDataQualityNotes.Caption = "Data Quality Notes"
+            Me.columnDataQualityNotes.MaxLength = 4000
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -4664,6 +4680,21 @@ Partial Public Class WRST_CaribouDataSet
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Property DataQualityNotes() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tableSurveys.DataQualityNotesColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'DataQualityNotes' in table 'Surveys' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableSurveys.DataQualityNotesColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
         Public Property SurveyFlightsRow() As SurveyFlightsRow
             Get
                 Return CType(Me.GetParentRow(Me.Table.ParentRelations("FK_Surveys_SurveyFlights")),SurveyFlightsRow)
@@ -4947,6 +4978,18 @@ Partial Public Class WRST_CaribouDataSet
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
         Public Sub SetVisualCollarNull()
             Me(Me.tableSurveys.VisualCollarColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Function IsDataQualityNotesNull() As Boolean
+            Return Me.IsNull(Me.tableSurveys.DataQualityNotesColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Sub SetDataQualityNotesNull()
+            Me(Me.tableSurveys.DataQualityNotesColumn) = Global.System.Convert.DBNull
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -8384,6 +8427,7 @@ Namespace WRST_CaribouDataSetTableAdapters
             tableMapping.ColumnMappings.Add("In", "In")
             tableMapping.ColumnMappings.Add("Caribou", "Caribou")
             tableMapping.ColumnMappings.Add("VisualCollar", "VisualCollar")
+            tableMapping.ColumnMappings.Add("DataQualityNotes", "DataQualityNotes")
             Me._adapter.TableMappings.Add(tableMapping)
             Me._adapter.DeleteCommand = New Global.System.Data.SqlClient.SqlCommand()
             Me._adapter.DeleteCommand.Connection = Me.Connection
@@ -8395,19 +8439,20 @@ Namespace WRST_CaribouDataSetTableAdapters
             Me._adapter.InsertCommand.CommandText = "INSERT INTO Surveys"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                  (SightingDate, SearchArea, GroupNumber, Sm"& _ 
                 "allBull, MediumBull, LargeBull, Bull, Cow, Calf, Adult, FrequenciesInGroup, Lat,"& _ 
                 " Lon, [In], Seen, Marked, Mode, Accuracy, RetainedAntler, DistendedUdders, Calve"& _ 
-                "sAtHeel, WaypointName, "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                  Comment, SourceFilename, FlightID, Re"& _ 
-                "cordInsertedDate, RecordInsertedBy, EID, CertificationDate, CertifiedBy, Certifi"& _ 
-                "cationLevel, Caribou)"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"VALUES (@SightingDate,@SearchArea,@GroupNumber,@SmallBull"& _ 
-                ",@MediumBull,@LargeBull,@Bull,@Cow,@Calf,@Adult,@FrequenciesInGroup,@Lat,@Lon,@I"& _ 
-                "n,@Seen,@Marked,@Mode,@Accuracy,@RetainedAntler,@DistendedUdders,@CalvesAtHeel,@"& _ 
-                "WaypointName,@Comment,@SourceFilename,@FlightID,@RecordInsertedDate,@RecordInser"& _ 
-                "tedBy,@EID,@CertificationDate,@CertifiedBy,@CertificationLevel,@Caribou); "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"SELE"& _ 
-                "CT SightingDate, SearchArea, GroupNumber, SmallBull, MediumBull, LargeBull, Bull"& _ 
-                ", Cow, Calf, Adult, FrequenciesInGroup, Lat, Lon, [In], Seen, Marked, Mode, Accu"& _ 
-                "racy, RetainedAntler, DistendedUdders, CalvesAtHeel, WaypointName, Comment, Sour"& _ 
-                "ceFilename, FlightID, RecordInsertedDate, RecordInsertedBy, EID, CertificationDa"& _ 
-                "te, CertifiedBy, CertificationLevel FROM Surveys WHERE (EID = @EID) ORDER BY Sig"& _ 
-                "htingDate, GroupNumber"
+                "sAtHeel, WaypointName, "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                  Comment, DataQualityNotes, SourceFile"& _ 
+                "name, FlightID, RecordInsertedDate, RecordInsertedBy, EID, CertificationLevel, C"& _ 
+                "ertificationDate, CertifiedBy, Caribou, VisualCollar)"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"VALUES (@SightingDate,@Se"& _ 
+                "archArea,@GroupNumber,@SmallBull,@MediumBull,@LargeBull,@Bull,@Cow,@Calf,@Adult,"& _ 
+                "@FrequenciesInGroup,@Lat,@Lon,@In,@Seen,@Marked,@Mode,@Accuracy,@RetainedAntler,"& _ 
+                "@DistendedUdders,@CalvesAtHeel,@WaypointName,@Comment,@DataQualityNotes,@SourceF"& _ 
+                "ilename,@FlightID,@RecordInsertedDate,@RecordInsertedBy,@EID,@CertificationLevel"& _ 
+                ",@CertificationDate,@CertifiedBy,@Caribou,@VisualCollar);  "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"SELECT SightingDate"& _ 
+                ", SearchArea, GroupNumber, SmallBull, MediumBull, LargeBull, Bull, Cow, Calf, Ad"& _ 
+                "ult, FrequenciesInGroup, Lat, Lon, [In], Seen, Marked, Mode, Accuracy, RetainedA"& _ 
+                "ntler, DistendedUdders, CalvesAtHeel, WaypointName, Comment, SourceFilename, Fli"& _ 
+                "ghtID, RecordInsertedDate, RecordInsertedBy, EID, CertificationDate, CertifiedBy"& _ 
+                ", CertificationLevel FROM Surveys WHERE (EID = @EID) ORDER BY SightingDate, Grou"& _ 
+                "pNumber"
             Me._adapter.InsertCommand.CommandType = Global.System.Data.CommandType.Text
             Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@SightingDate", Global.System.Data.SqlDbType.DateTime, 8, Global.System.Data.ParameterDirection.Input, 0, 0, "SightingDate", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@SearchArea", Global.System.Data.SqlDbType.VarChar, 20, Global.System.Data.ParameterDirection.Input, 0, 0, "SearchArea", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
@@ -8432,15 +8477,17 @@ Namespace WRST_CaribouDataSetTableAdapters
             Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@CalvesAtHeel", Global.System.Data.SqlDbType.Bit, 1, Global.System.Data.ParameterDirection.Input, 0, 0, "CalvesAtHeel", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@WaypointName", Global.System.Data.SqlDbType.VarChar, 20, Global.System.Data.ParameterDirection.Input, 0, 0, "WaypointName", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Comment", Global.System.Data.SqlDbType.VarChar, 255, Global.System.Data.ParameterDirection.Input, 0, 0, "Comment", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@DataQualityNotes", Global.System.Data.SqlDbType.VarChar, 4000, Global.System.Data.ParameterDirection.Input, 0, 0, "DataQualityNotes", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@SourceFilename", Global.System.Data.SqlDbType.VarChar, 255, Global.System.Data.ParameterDirection.Input, 0, 0, "SourceFilename", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@FlightID", Global.System.Data.SqlDbType.VarChar, 50, Global.System.Data.ParameterDirection.Input, 0, 0, "FlightID", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@RecordInsertedDate", Global.System.Data.SqlDbType.DateTime, 8, Global.System.Data.ParameterDirection.Input, 0, 0, "RecordInsertedDate", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@RecordInsertedBy", Global.System.Data.SqlDbType.NVarChar, 50, Global.System.Data.ParameterDirection.Input, 0, 0, "RecordInsertedBy", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@EID", Global.System.Data.SqlDbType.VarChar, 50, Global.System.Data.ParameterDirection.Input, 0, 0, "EID", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@CertificationLevel", Global.System.Data.SqlDbType.VarChar, 15, Global.System.Data.ParameterDirection.Input, 0, 0, "CertificationLevel", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@CertificationDate", Global.System.Data.SqlDbType.DateTime, 8, Global.System.Data.ParameterDirection.Input, 0, 0, "CertificationDate", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@CertifiedBy", Global.System.Data.SqlDbType.VarChar, 50, Global.System.Data.ParameterDirection.Input, 0, 0, "CertifiedBy", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@CertificationLevel", Global.System.Data.SqlDbType.VarChar, 15, Global.System.Data.ParameterDirection.Input, 0, 0, "CertificationLevel", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Caribou", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 0, 0, "Caribou", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@VisualCollar", Global.System.Data.SqlDbType.VarChar, 10, Global.System.Data.ParameterDirection.Input, 0, 0, "VisualCollar", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.UpdateCommand = New Global.System.Data.SqlClient.SqlCommand()
             Me._adapter.UpdateCommand.Connection = Me.Connection
             Me._adapter.UpdateCommand.CommandText = "UPDATE Surveys"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"SET          SightingDate = @SightingDate, SearchArea = @SearchAr"& _ 
@@ -8453,13 +8500,14 @@ Namespace WRST_CaribouDataSetTableAdapters
                 " = @WaypointName, Comment = @Comment, SourceFilename = @SourceFilename, FlightID"& _ 
                 " = @FlightID, "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                  RecordInsertedDate = @RecordInsertedDate, Reco"& _ 
                 "rdInsertedBy = @RecordInsertedBy, EID = @EID, CertificationDate = @Certification"& _ 
-                "Date, CertifiedBy = @CertifiedBy, CertificationLevel = @CertificationLevel"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"WHER"& _ 
-                "E  (EID = @Original_EID);  "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"SELECT SightingDate, SearchArea, GroupNumber, Small"& _ 
-                "Bull, MediumBull, LargeBull, Bull, Cow, Calf, Adult, FrequenciesInGroup, Lat, Lo"& _ 
-                "n, [In], Seen, Marked, Mode, Accuracy, RetainedAntler, DistendedUdders, CalvesAt"& _ 
-                "Heel, WaypointName, Comment, SourceFilename, FlightID, RecordInsertedDate, Recor"& _ 
-                "dInsertedBy, EID, CertificationDate, CertifiedBy, CertificationLevel FROM Survey"& _ 
-                "s WHERE (EID = @EID) ORDER BY SightingDate, GroupNumber"
+                "Date, CertifiedBy = @CertifiedBy, CertificationLevel = @CertificationLevel, "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"  "& _ 
+                "                VisualCollar = @VisualCollar, DataQualityNotes = @DataQualityNot"& _ 
+                "es"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"WHERE  (EID = @Original_EID);   "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"SELECT SightingDate, SearchArea, GroupNumb"& _ 
+                "er, SmallBull, MediumBull, LargeBull, Bull, Cow, Calf, Adult, FrequenciesInGroup"& _ 
+                ", Lat, Lon, [In], Seen, Marked, Mode, Accuracy, RetainedAntler, DistendedUdders,"& _ 
+                " CalvesAtHeel, WaypointName, Comment, SourceFilename, FlightID, RecordInsertedDa"& _ 
+                "te, RecordInsertedBy, EID, CertificationDate, CertifiedBy, CertificationLevel FR"& _ 
+                "OM Surveys WHERE (EID = @EID) ORDER BY SightingDate, GroupNumber"
             Me._adapter.UpdateCommand.CommandType = Global.System.Data.CommandType.Text
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@SightingDate", Global.System.Data.SqlDbType.DateTime, 8, Global.System.Data.ParameterDirection.Input, 0, 0, "SightingDate", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@SearchArea", Global.System.Data.SqlDbType.VarChar, 20, Global.System.Data.ParameterDirection.Input, 0, 0, "SearchArea", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
@@ -8493,6 +8541,8 @@ Namespace WRST_CaribouDataSetTableAdapters
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@CertificationDate", Global.System.Data.SqlDbType.DateTime, 8, Global.System.Data.ParameterDirection.Input, 0, 0, "CertificationDate", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@CertifiedBy", Global.System.Data.SqlDbType.VarChar, 50, Global.System.Data.ParameterDirection.Input, 0, 0, "CertifiedBy", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@CertificationLevel", Global.System.Data.SqlDbType.VarChar, 15, Global.System.Data.ParameterDirection.Input, 0, 0, "CertificationLevel", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@VisualCollar", Global.System.Data.SqlDbType.VarChar, 10, Global.System.Data.ParameterDirection.Input, 0, 0, "VisualCollar", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@DataQualityNotes", Global.System.Data.SqlDbType.VarChar, 4000, Global.System.Data.ParameterDirection.Input, 0, 0, "DataQualityNotes", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_EID", Global.System.Data.SqlDbType.VarChar, 50, Global.System.Data.ParameterDirection.Input, 0, 0, "EID", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
         End Sub
         
@@ -8514,7 +8564,7 @@ Namespace WRST_CaribouDataSetTableAdapters
                 ", Mode, Accuracy, RetainedAntler, DistendedUdders, CalvesAtHeel, "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"             "& _ 
                 "     WaypointName, Comment, SourceFilename, FlightID, RecordInsertedDate, Record"& _ 
                 "InsertedBy, EID, CertificationDate, CertifiedBy, CertificationLevel, VisualColla"& _ 
-                "r"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"FROM     Surveys"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"ORDER BY SightingDate, GroupNumber"
+                "r, DataQualityNotes"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"FROM     Surveys"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"ORDER BY SightingDate, GroupNumber"
             Me._commandCollection(0).CommandType = Global.System.Data.CommandType.Text
         End Sub
         
@@ -8623,15 +8673,17 @@ Namespace WRST_CaribouDataSetTableAdapters
                     ByVal CalvesAtHeel As Global.System.Nullable(Of Boolean),  _
                     ByVal WaypointName As String,  _
                     ByVal Comment As String,  _
+                    ByVal DataQualityNotes As String,  _
                     ByVal SourceFilename As String,  _
                     ByVal FlightID As String,  _
                     ByVal RecordInsertedDate As Date,  _
                     ByVal RecordInsertedBy As String,  _
                     ByVal EID As String,  _
+                    ByVal CertificationLevel As String,  _
                     ByVal CertificationDate As Global.System.Nullable(Of Date),  _
                     ByVal CertifiedBy As String,  _
-                    ByVal CertificationLevel As String,  _
-                    ByVal Caribou As Global.System.Nullable(Of Integer)) As Integer
+                    ByVal Caribou As Global.System.Nullable(Of Integer),  _
+                    ByVal VisualCollar As String) As Integer
             Me.Adapter.InsertCommand.Parameters(0).Value = CType(SightingDate,Date)
             If (SearchArea Is Nothing) Then
                 Me.Adapter.InsertCommand.Parameters(1).Value = Global.System.DBNull.Value
@@ -8731,46 +8783,56 @@ Namespace WRST_CaribouDataSetTableAdapters
             Else
                 Me.Adapter.InsertCommand.Parameters(22).Value = CType(Comment,String)
             End If
-            If (SourceFilename Is Nothing) Then
+            If (DataQualityNotes Is Nothing) Then
                 Me.Adapter.InsertCommand.Parameters(23).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.InsertCommand.Parameters(23).Value = CType(SourceFilename,String)
+                Me.Adapter.InsertCommand.Parameters(23).Value = CType(DataQualityNotes,String)
+            End If
+            If (SourceFilename Is Nothing) Then
+                Me.Adapter.InsertCommand.Parameters(24).Value = Global.System.DBNull.Value
+            Else
+                Me.Adapter.InsertCommand.Parameters(24).Value = CType(SourceFilename,String)
             End If
             If (FlightID Is Nothing) Then
                 Throw New Global.System.ArgumentNullException("FlightID")
             Else
-                Me.Adapter.InsertCommand.Parameters(24).Value = CType(FlightID,String)
+                Me.Adapter.InsertCommand.Parameters(25).Value = CType(FlightID,String)
             End If
-            Me.Adapter.InsertCommand.Parameters(25).Value = CType(RecordInsertedDate,Date)
+            Me.Adapter.InsertCommand.Parameters(26).Value = CType(RecordInsertedDate,Date)
             If (RecordInsertedBy Is Nothing) Then
                 Throw New Global.System.ArgumentNullException("RecordInsertedBy")
             Else
-                Me.Adapter.InsertCommand.Parameters(26).Value = CType(RecordInsertedBy,String)
+                Me.Adapter.InsertCommand.Parameters(27).Value = CType(RecordInsertedBy,String)
             End If
             If (EID Is Nothing) Then
                 Throw New Global.System.ArgumentNullException("EID")
             Else
-                Me.Adapter.InsertCommand.Parameters(27).Value = CType(EID,String)
-            End If
-            If (CertificationDate.HasValue = true) Then
-                Me.Adapter.InsertCommand.Parameters(28).Value = CType(CertificationDate.Value,Date)
-            Else
-                Me.Adapter.InsertCommand.Parameters(28).Value = Global.System.DBNull.Value
-            End If
-            If (CertifiedBy Is Nothing) Then
-                Me.Adapter.InsertCommand.Parameters(29).Value = Global.System.DBNull.Value
-            Else
-                Me.Adapter.InsertCommand.Parameters(29).Value = CType(CertifiedBy,String)
+                Me.Adapter.InsertCommand.Parameters(28).Value = CType(EID,String)
             End If
             If (CertificationLevel Is Nothing) Then
                 Throw New Global.System.ArgumentNullException("CertificationLevel")
             Else
-                Me.Adapter.InsertCommand.Parameters(30).Value = CType(CertificationLevel,String)
+                Me.Adapter.InsertCommand.Parameters(29).Value = CType(CertificationLevel,String)
+            End If
+            If (CertificationDate.HasValue = true) Then
+                Me.Adapter.InsertCommand.Parameters(30).Value = CType(CertificationDate.Value,Date)
+            Else
+                Me.Adapter.InsertCommand.Parameters(30).Value = Global.System.DBNull.Value
+            End If
+            If (CertifiedBy Is Nothing) Then
+                Me.Adapter.InsertCommand.Parameters(31).Value = Global.System.DBNull.Value
+            Else
+                Me.Adapter.InsertCommand.Parameters(31).Value = CType(CertifiedBy,String)
             End If
             If (Caribou.HasValue = true) Then
-                Me.Adapter.InsertCommand.Parameters(31).Value = CType(Caribou.Value,Integer)
+                Me.Adapter.InsertCommand.Parameters(32).Value = CType(Caribou.Value,Integer)
             Else
-                Me.Adapter.InsertCommand.Parameters(31).Value = Global.System.DBNull.Value
+                Me.Adapter.InsertCommand.Parameters(32).Value = Global.System.DBNull.Value
+            End If
+            If (VisualCollar Is Nothing) Then
+                Me.Adapter.InsertCommand.Parameters(33).Value = Global.System.DBNull.Value
+            Else
+                Me.Adapter.InsertCommand.Parameters(33).Value = CType(VisualCollar,String)
             End If
             Dim previousConnectionState As Global.System.Data.ConnectionState = Me.Adapter.InsertCommand.Connection.State
             If ((Me.Adapter.InsertCommand.Connection.State And Global.System.Data.ConnectionState.Open)  _
@@ -8824,6 +8886,8 @@ Namespace WRST_CaribouDataSetTableAdapters
                     ByVal CertificationDate As Global.System.Nullable(Of Date),  _
                     ByVal CertifiedBy As String,  _
                     ByVal CertificationLevel As String,  _
+                    ByVal VisualCollar As String,  _
+                    ByVal DataQualityNotes As String,  _
                     ByVal Original_EID As String) As Integer
             Me.Adapter.UpdateCommand.Parameters(0).Value = CType(SightingDate,Date)
             If (SearchArea Is Nothing) Then
@@ -8965,10 +9029,20 @@ Namespace WRST_CaribouDataSetTableAdapters
             Else
                 Me.Adapter.UpdateCommand.Parameters(31).Value = CType(CertificationLevel,String)
             End If
+            If (VisualCollar Is Nothing) Then
+                Me.Adapter.UpdateCommand.Parameters(32).Value = Global.System.DBNull.Value
+            Else
+                Me.Adapter.UpdateCommand.Parameters(32).Value = CType(VisualCollar,String)
+            End If
+            If (DataQualityNotes Is Nothing) Then
+                Me.Adapter.UpdateCommand.Parameters(33).Value = Global.System.DBNull.Value
+            Else
+                Me.Adapter.UpdateCommand.Parameters(33).Value = CType(DataQualityNotes,String)
+            End If
             If (Original_EID Is Nothing) Then
                 Throw New Global.System.ArgumentNullException("Original_EID")
             Else
-                Me.Adapter.UpdateCommand.Parameters(32).Value = CType(Original_EID,String)
+                Me.Adapter.UpdateCommand.Parameters(34).Value = CType(Original_EID,String)
             End If
             Dim previousConnectionState As Global.System.Data.ConnectionState = Me.Adapter.UpdateCommand.Connection.State
             If ((Me.Adapter.UpdateCommand.Connection.State And Global.System.Data.ConnectionState.Open)  _
@@ -9021,8 +9095,10 @@ Namespace WRST_CaribouDataSetTableAdapters
                     ByVal CertificationDate As Global.System.Nullable(Of Date),  _
                     ByVal CertifiedBy As String,  _
                     ByVal CertificationLevel As String,  _
+                    ByVal VisualCollar As String,  _
+                    ByVal DataQualityNotes As String,  _
                     ByVal Original_EID As String) As Integer
-            Return Me.Update(SightingDate, SearchArea, GroupNumber, SmallBull, MediumBull, LargeBull, Bull, Cow, Calf, Adult, Caribou, FrequenciesInGroup, Lat, Lon, _In, Seen, Marked, Mode, Accuracy, RetainedAntler, DistendedUdders, CalvesAtHeel, WaypointName, Comment, SourceFilename, FlightID, RecordInsertedDate, RecordInsertedBy, Original_EID, CertificationDate, CertifiedBy, CertificationLevel, Original_EID)
+            Return Me.Update(SightingDate, SearchArea, GroupNumber, SmallBull, MediumBull, LargeBull, Bull, Cow, Calf, Adult, Caribou, FrequenciesInGroup, Lat, Lon, _In, Seen, Marked, Mode, Accuracy, RetainedAntler, DistendedUdders, CalvesAtHeel, WaypointName, Comment, SourceFilename, FlightID, RecordInsertedDate, RecordInsertedBy, Original_EID, CertificationDate, CertifiedBy, CertificationLevel, VisualCollar, DataQualityNotes, Original_EID)
         End Function
     End Class
     
