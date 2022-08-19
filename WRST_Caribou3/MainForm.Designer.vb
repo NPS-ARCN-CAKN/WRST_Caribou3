@@ -90,6 +90,7 @@ Partial Class MainForm
         Me.CollaredAnimalsInGroupsTableAdapter = New WRST_Caribou3.WRST_CaribouDataSetTableAdapters.CollaredAnimalsInGroupsTableAdapter()
         Me.SurveysTableAdapter = New WRST_Caribou3.WRST_CaribouDataSetTableAdapters.SurveysTableAdapter()
         Me.CapturesTableAdapter = New WRST_Caribou3.WRST_CaribouDataSetTableAdapters.CapturesTableAdapter()
+        Me.ExportFlightDatasetToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SplitContainer1.Panel1.SuspendLayout()
         Me.SplitContainer1.Panel2.SuspendLayout()
@@ -186,7 +187,7 @@ Partial Class MainForm
         Me.SurveysSplitContainer.Panel2.AutoScroll = True
         Me.SurveysSplitContainer.Panel2.Controls.Add(Me.CollaredAnimalsSplitContainer)
         Me.SurveysSplitContainer.Size = New System.Drawing.Size(1373, 492)
-        Me.SurveysSplitContainer.SplitterDistance = 210
+        Me.SurveysSplitContainer.SplitterDistance = 209
         Me.SurveysSplitContainer.SplitterWidth = 2
         Me.SurveysSplitContainer.TabIndex = 0
         '
@@ -208,7 +209,7 @@ Partial Class MainForm
         Me.SurveysGridEX.Name = "SurveysGridEX"
         Me.SurveysGridEX.RecordNavigator = True
         Me.SurveysGridEX.RowHeaders = Janus.Windows.GridEX.InheritableBoolean.[True]
-        Me.SurveysGridEX.Size = New System.Drawing.Size(1373, 179)
+        Me.SurveysGridEX.Size = New System.Drawing.Size(1373, 178)
         Me.SurveysGridEX.TabIndex = 0
         Me.SurveysGridEX.TableHeaders = Janus.Windows.GridEX.InheritableBoolean.[True]
         Me.SurveysGridEX.TotalRow = Janus.Windows.GridEX.InheritableBoolean.[True]
@@ -327,7 +328,7 @@ Partial Class MainForm
         '
         Me.CollaredAnimalsSplitContainer.Panel2.Controls.Add(Me.AnimalGridEX)
         Me.CollaredAnimalsSplitContainer.Panel2.Controls.Add(Me.AnimalGridPanel)
-        Me.CollaredAnimalsSplitContainer.Size = New System.Drawing.Size(1373, 280)
+        Me.CollaredAnimalsSplitContainer.Size = New System.Drawing.Size(1373, 281)
         Me.CollaredAnimalsSplitContainer.SplitterDistance = 639
         Me.CollaredAnimalsSplitContainer.TabIndex = 1
         '
@@ -346,7 +347,7 @@ Partial Class MainForm
         Me.CollaredAnimalsInGroupsGridEX.Name = "CollaredAnimalsInGroupsGridEX"
         Me.CollaredAnimalsInGroupsGridEX.RecordNavigator = True
         Me.CollaredAnimalsInGroupsGridEX.RowHeaders = Janus.Windows.GridEX.InheritableBoolean.[True]
-        Me.CollaredAnimalsInGroupsGridEX.Size = New System.Drawing.Size(639, 280)
+        Me.CollaredAnimalsInGroupsGridEX.Size = New System.Drawing.Size(639, 281)
         Me.CollaredAnimalsInGroupsGridEX.TabIndex = 0
         Me.CollaredAnimalsInGroupsGridEX.TableHeaders = Janus.Windows.GridEX.InheritableBoolean.[True]
         '
@@ -364,7 +365,7 @@ Partial Class MainForm
         Me.AnimalGridEX.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.AnimalGridEX.Name = "AnimalGridEX"
         Me.AnimalGridEX.RowFormatStyle.BackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
-        Me.AnimalGridEX.Size = New System.Drawing.Size(730, 230)
+        Me.AnimalGridEX.Size = New System.Drawing.Size(730, 231)
         Me.AnimalGridEX.TabIndex = 0
         Me.AnimalGridEX.TableHeaderFormatStyle.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         '
@@ -528,7 +529,7 @@ Partial Class MainForm
         'DatabaseToolStripDropDownButton
         '
         Me.DatabaseToolStripDropDownButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
-        Me.DatabaseToolStripDropDownButton.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.SynchronizeDatabasesToolStripMenuItem, Me.SettingsToolStripMenuItem, Me.OpenWRSTCaribouSharedNetworkDriveToolStripMenuItem, Me.OpenIRMAProjectReferenceToolStripMenuItem, Me.IRMADataDeliverablesDatasetReferenceToolStripMenuItem})
+        Me.DatabaseToolStripDropDownButton.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.SynchronizeDatabasesToolStripMenuItem, Me.SettingsToolStripMenuItem, Me.OpenWRSTCaribouSharedNetworkDriveToolStripMenuItem, Me.OpenIRMAProjectReferenceToolStripMenuItem, Me.IRMADataDeliverablesDatasetReferenceToolStripMenuItem, Me.ExportFlightDatasetToolStripMenuItem})
         Me.DatabaseToolStripDropDownButton.Image = CType(resources.GetObject("DatabaseToolStripDropDownButton.Image"), System.Drawing.Image)
         Me.DatabaseToolStripDropDownButton.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.DatabaseToolStripDropDownButton.Name = "DatabaseToolStripDropDownButton"
@@ -616,6 +617,12 @@ Partial Class MainForm
         'CapturesTableAdapter
         '
         Me.CapturesTableAdapter.ClearBeforeFill = True
+        '
+        'ExportFlightDatasetToolStripMenuItem
+        '
+        Me.ExportFlightDatasetToolStripMenuItem.Name = "ExportFlightDatasetToolStripMenuItem"
+        Me.ExportFlightDatasetToolStripMenuItem.Size = New System.Drawing.Size(384, 26)
+        Me.ExportFlightDatasetToolStripMenuItem.Text = "Export flight dataset..."
         '
         'MainForm
         '
@@ -730,4 +737,5 @@ Partial Class MainForm
     Friend WithEvents ToolStripSeparator10 As ToolStripSeparator
     Friend WithEvents ToolStripLabel2 As ToolStripLabel
     Friend WithEvents EditDataQualityNotesToolStripComboBox As ToolStripComboBox
+    Friend WithEvents ExportFlightDatasetToolStripMenuItem As ToolStripMenuItem
 End Class

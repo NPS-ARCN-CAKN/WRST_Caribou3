@@ -118,6 +118,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\SkeeterDataTablesTranslator\SkeeterDataTablesTranslator\bin\Release\SkeeterDataTablesTranslator.dll</HintPath>
     </Reference>
+    <Reference Include="SkeeterUtilities">
+      <HintPath>..\..\SkeeterUtilities\SkeeterUtilities\bin\Release\SkeeterUtilities.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />

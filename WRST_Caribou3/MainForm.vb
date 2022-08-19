@@ -3,6 +3,7 @@ Imports System.IO
 Imports Janus.Windows.GridEX
 Imports SkeeterDataTablesTranslator
 
+
 Public Class MainForm
 
     Dim ProjectIDsDataTable As New DataTable 'DataTable of ProjectIDs in Animal_Movement database that are related to the collared animals in WRST_Caribou database
@@ -1756,6 +1757,36 @@ Click Yes to certify and lock the current record. Click No to cancel.", MsgBoxSt
 
 
             '    End If
+        Catch ex As Exception
+            MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name & ")")
+        End Try
+    End Sub
+
+    Private Sub ExportFlightDatasetToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ExportFlightDatasetToolStripMenuItem.Click
+        Try
+            MsgBox("Experimental: Exported data directory will be in C:\Temp")
+            Dim ParentDirectory As String = "C:\Temp"
+            Dim DirGetter As New FolderBrowserDialog
+            With DirGetter
+                .RootFolder = Environment.SpecialFolder.MyComputer
+            End With
+            If DirGetter.ShowDialog = DialogResult.OK Then
+                ParentDirectory = DirGetter.SelectedPath
+            End If
+            Dim Year As String = GetCurrentGridEXCellValue(Me.SurveyFlightsGridEX, "Year")
+            Dim Herd As String = GetCurrentGridEXCellValue(Me.SurveyFlightsGridEX, "Herd")
+            Dim SurveyType As String = GetCurrentGridEXCellValue(Me.SurveyFlightsGridEX, "SurveyType")
+            Dim TimeDepart As String = GetCurrentGridEXCellValue(Me.SurveyFlightsGridEX, "TimeDepart")
+            Dim TimeReturn As String = GetCurrentGridEXCellValue(Me.SurveyFlightsGridEX, "TimeReturn")
+            Dim FlightID As String = GetCurrentGridEXCellValue(Me.SurveyFlightsGridEX, "FlightID")
+            Dim DatasetDirectoryName As String = Year & " " & Herd & " " & SurveyType & " Survey"
+            Dim DatasetDirectoryPath As String = ParentDirectory & "\" & DatasetDirectoryName
+            My.Computer.FileSystem.CreateDirectory(DatasetDirectoryPath)
+
+            Dim Sql As String = "SELECT * FROM Dataset_Full WHERE FlightID='" & FlightID & "'"
+            Dim DT As DataTable = SkeeterUtilities.DataFileToDataTableConverters.DataFileToDataTableConverters.GetDataTableFromSQLServerDatabase(My.Settings.WRST_CaribouConnectionString, Sql)
+            'Dim Dataset As String = SkeeterUtilities.DataFileToDataTableConverters.DataFileToDataTableConverters.DataTableToCSV(DT)
+            My.Computer.FileSystem.WriteAllText(DatasetDirectoryPath & "\" & DatasetDirectoryName & ".csv", Sql, False)
         Catch ex As Exception
             MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name & ")")
         End Try
