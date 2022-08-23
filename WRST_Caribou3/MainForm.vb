@@ -204,6 +204,7 @@ Public Class MainForm
             SurveysSurveyTypeList.Add("CC", "Composition count")
             SurveysSurveyTypeList.Add("PE", "Population estimate")
             SurveysSurveyTypeList.Add("RT", "Radiotracking")
+            SurveysSurveyTypeList.Add("SS", "Survey summary")
 
             'Herd dropdown
             With Grid.RootTable.Columns("Herd")
