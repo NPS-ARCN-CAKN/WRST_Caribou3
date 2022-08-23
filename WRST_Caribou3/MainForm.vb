@@ -1764,29 +1764,163 @@ Click Yes to certify and lock the current record. Click No to cancel.", MsgBoxSt
 
     Private Sub ExportFlightDatasetToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ExportFlightDatasetToolStripMenuItem.Click
         Try
-            MsgBox("Experimental: Exported data directory will be in C:\Temp")
-            Dim ParentDirectory As String = "C:\Temp"
-            Dim DirGetter As New FolderBrowserDialog
-            With DirGetter
-                .RootFolder = Environment.SpecialFolder.MyComputer
-            End With
-            If DirGetter.ShowDialog = DialogResult.OK Then
-                ParentDirectory = DirGetter.SelectedPath
-            End If
+            'Purpose: Allow user to choose a parent directory and export a new dataset directory for the flight's data in a text file
+
+
+
+            'Get basic metadata about the flight
             Dim Year As String = GetCurrentGridEXCellValue(Me.SurveyFlightsGridEX, "Year")
             Dim Herd As String = GetCurrentGridEXCellValue(Me.SurveyFlightsGridEX, "Herd")
             Dim SurveyType As String = GetCurrentGridEXCellValue(Me.SurveyFlightsGridEX, "SurveyType")
+            Dim SurveyTypeLong As String = ""
+            Select Case SurveyType
+                Case "CC"
+                    SurveyTypeLong = "Composition Count"
+                Case "PE"
+                    SurveyTypeLong = "Population"
+                Case "RT"
+                    SurveyTypeLong = "Radiotracking"
+            End Select
             Dim TimeDepart As String = GetCurrentGridEXCellValue(Me.SurveyFlightsGridEX, "TimeDepart")
+            Dim FlightDateString As String = ""
+            If IsDate(TimeDepart) Then
+                Dim FlightDate As Date = CDate(TimeDepart)
+                FlightDateString = DatePart(DateInterval.Year, FlightDate) & "-" & DatePart(DateInterval.Month, FlightDate).ToString("00") & "-" & DatePart(DateInterval.Day, FlightDate).ToString("00")
+            Else
+                FlightDateString = Year
+            End If
             Dim TimeReturn As String = GetCurrentGridEXCellValue(Me.SurveyFlightsGridEX, "TimeReturn")
+            Dim RecordInsertedDate As String = GetCurrentGridEXCellValue(Me.SurveyFlightsGridEX, "RecordInsertedDate")
+            Dim RecordInsertedBy As String = GetCurrentGridEXCellValue(Me.SurveyFlightsGridEX, "RecordInsertedBy")
+            Dim Season As String = ""
+            If Month(CDate(TimeDepart)) < 8 Then Season = "Spring" Else Season = "Fall"
             Dim FlightID As String = GetCurrentGridEXCellValue(Me.SurveyFlightsGridEX, "FlightID")
-            Dim DatasetDirectoryName As String = Year & " " & Herd & " " & SurveyType & " Survey"
-            Dim DatasetDirectoryPath As String = ParentDirectory & "\" & DatasetDirectoryName
-            My.Computer.FileSystem.CreateDirectory(DatasetDirectoryPath)
+            Dim DatasetDirectoryName As String = FlightDateString & " " & Season & " " & Herd & " " & SurveyTypeLong & " Survey"
 
-            Dim Sql As String = "SELECT * FROM Dataset_Full WHERE FlightID='" & FlightID & "'"
-            Dim DT As DataTable = SkeeterUtilities.DataFileToDataTableConverters.DataFileToDataTableConverters.GetDataTableFromSQLServerDatabase(My.Settings.WRST_CaribouConnectionString, Sql)
-            'Dim Dataset As String = SkeeterUtilities.DataFileToDataTableConverters.DataFileToDataTableConverters.DataTableToCSV(DT)
-            My.Computer.FileSystem.WriteAllText(DatasetDirectoryPath & "\" & DatasetDirectoryName & ".csv", Sql, False)
+
+            'Get a parent directory from the user
+            Dim ParentDirectory As String = "C:\"
+            Dim DirGetter As New FolderBrowserDialog
+            With DirGetter
+                '.RootFolder = Environment.SpecialFolder.MyComputer
+                .Description = "Where should the new directory " & DatasetDirectoryName & " be created?"
+                .SelectedPath = My.Settings.SharedDirectory & "\Data"
+            End With
+            If DirGetter.ShowDialog = DialogResult.OK Then
+                ParentDirectory = DirGetter.SelectedPath
+
+                Dim DatasetDirectoryPath As String = ParentDirectory & "\" & DatasetDirectoryName
+
+                'Create a standard directory based on the year, herd, survey type, etc.
+                If MsgBox("Create directory " & DatasetDirectoryPath & "?", MsgBoxStyle.YesNo, "Confirm") = MsgBoxResult.Yes Then
+                    My.Computer.FileSystem.CreateDirectory(DatasetDirectoryPath)
+
+                    Dim Sql As String = "SELECT  [Year]
+      ,[Herd]
+      ,[SurveyType]
+      ,[FlightDate]
+      ,[GroupNumber]
+      ,[SightingDate]
+      ,[SmallBull]
+      ,[MediumBull]
+      ,[LargeBull]
+      ,[Total bulls (Categorized)]
+      ,[Bull]
+      ,[Cow]
+      ,[Calf]
+      ,[Adults (recorded)]
+      ,[Total Caribou (recorded)]
+      ,[Adults (Cows + Uncategorized bulls)]
+      ,[Adults (Cows + Categorized bulls)]
+      ,[Total caribou (Cows + Calves + Categorized bulls)]
+      ,[Total caribou (Cows + Calves + Uncategorized bulls)]
+      ,[SearchArea]
+      ,[FrequenciesInGroup]
+      ,[Lat]
+      ,[Lon]
+      ,[In]
+      ,[Seen]
+      ,[Marked]
+      ,[Mode]
+      ,[Accuracy]
+      ,[RetainedAntler]
+      ,[DistendedUdders]
+      ,[CalvesAtHeel]
+      ,[WaypointName]
+      ,[SurveyComment]
+      ,[CrewNumber]
+      ,[Pilot]
+      ,[Observer1]
+      ,[Observer2]
+      ,[AircraftType]
+      ,[TailNo]
+      ,[TimeDepart]
+      ,[TimeReturn]
+      ,[FlightMonth]
+      ,[FlightDay]
+      ,[SurveyLength (hours)]
+      ,[IsFollowUpFlight]
+      ,[SpotterPlaneTailNo]
+      ,[SpotterPlaneType]
+      ,[SpotterPlanePilot]
+      ,[WeatherConditions]
+      ,[SnowConditions]
+      ,[FlightComment]
+      ,[SourceFilename]
+      ,[RecordInsertedDate]
+      ,[RecordInsertedBy]
+      ,[CertificationLevel]
+      ,[CertificationDate]
+      ,[CertifiedBy]
+      ,[DataQualityNotes]
+      ,[FlightID]
+      ,[EID]
+      ,[Notes]
+  FROM [WRST_Caribou].[dbo].[Dataset_Full] WHERE FlightID='" & FlightID & "'"
+
+                    'Query the database for the data related to the FlightID, convert it to text and export it with metadata
+                    Dim DT As DataTable = SkeeterUtilities.DataFileToDataTableConverters.DataFileToDataTableConverters.GetDataTableFromSQLServerDatabase(My.Settings.WRST_CaribouConnectionString, Sql)
+                    'Dim MDDT As DataTable = SkeeterUtilities.DataFileToDataTableConverters.DataFileToDataTableConverters.GetMetadataFromDataTable(DT, ",", "", "")
+                    Dim Dataset As String = SkeeterUtilities.DataFileToDataTableConverters.DataFileToDataTableConverters.DataTableToCSV(DT)
+                    '         Dim Metadata As String = SkeeterUtilities.DataFileToDataTableConverters.DataFileToDataTableConverters.DataTableToCSV(MDDT)
+                    Dim DatasetFileName As String = DatasetDirectoryPath & "\" & Herd.Substring(0, 1).ToUpper & "C-05 " & DatasetDirectoryName & " Dataset" & ".csv"
+                    My.Computer.FileSystem.WriteAllText(DatasetFileName, Dataset, False)
+
+                    'Create Dublin Core XML metadata sidecar document
+                    Dim UsageNotes As String = InputBox("Add any special usage notes here:", "Usage notes", Now & " " & My.User.Name & ": ", vbOK)
+                    Dim Metadata_XML As String = "<?xml version=""1.0"" encoding=""UTF-8""?>
+<metadata xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"" xmlns:dc=""http://purl.org/dc/elements/1.1/"">
+<dc:title>[SENSITIVE] " & DatasetFileName.Replace(" Dataset.csv", "").Replace(DatasetDirectoryPath & "\", "") & " Data Deliverable</dc:title>
+<dc:creator>National Park Service, Wrangell-St. Elias National Park, Copper Center, Alaska.</dc:creator>
+<dc:subject>Caribou survey field data deliverable.</dc:subject>
+<dc:description><![CDATA[Field data deliverables from the " & Year & " " & Herd & " caribou herd " & SurveyTypeLong.ToLower & " survey in Wrangell-St. Elias National Park, " & TimeDepart & " - " & TimeReturn & ". The described deliverable contains sensitive data on a species of commercial interest and may be covered by international and/or interstate data protection agreements. Do not share beyond the NPS. Methods are described in Putera JA and Miller SD. 2018. Protocol for monitoring caribou populations in Wrangell-St. Elias National Park & Preserve, Central Alaska Network: Narrative – version 1.0. Natural Resource Report. NPS/CAKN/NRR—2018/1750. National Park Service. Fort Collins, Colorado. The data in the described deliverable may or may not have been processed for quality and are not certified for analytical purposes. The described deliverable is archived here to potentially validate and correct errors in the master WRST caribou monitoring database. The data in this deliverable have been integrated in a master WRST caribou monitoring database where they may or may not have been processed for quality and may differ from the source file. Contact the project leader for data certified for analytical purposes.]]></dc:description>
+<dc:publisher>National Park Service Central Alaska Inventory and Monitoring Network, Fairbanks, Alaska.</dc:publisher>
+<dc:contributor>National Park Service, Wrangell-St. Elias National Park, Copper Center, Alaska.</dc:contributor>
+<dc:contributor>National Park Service Central Alaska Inventory and Monitoring Network, Fairbanks, Alaska.</dc:contributor>
+<dc:contributor>Alaska Department of Fish and Game.</dc:contributor>
+<dc:contributor>Government of Yukon, Department of Environment, Whitehorse, YT.</dc:contributor>
+<dc:date>" & Now & "</dc:date>
+<dc:type>Dataset</dc:type>
+<dc:format>Pipe separated values text file.</dc:format>
+<dc:identifier>" & Guid.NewGuid.ToString & "</dc:identifier>
+<dc:source>National Park Service, Wrangell-St. Elias National Park</dc:source>
+<dc:language>EN</dc:language>
+<dc:coverage>Wrangell-St. Elias National Park, Alaska</dc:coverage>
+<dc:rights>Sensitive dataset. NPS internal use only.The dataset described herein contains sensitive data regarding a species of commercial interest and may be covered by international and/or interstate data protection agreements. Contact the project leader for details.</dc:rights>
+<usagenotes><![CDATA[" & UsageNotes & "]]></usagenotes>
+</metadata>"
+                    My.Computer.FileSystem.WriteAllText(DatasetFileName & ".Metadata.xml", Metadata_XML, False)
+
+                    'Ask the user if they want to open the created directory
+                    If MsgBox("Open " & DatasetDirectoryPath & "?", MsgBoxStyle.YesNo, "Confirm") = MsgBoxResult.Yes Then
+                        Process.Start(DatasetDirectoryPath)
+                    End If
+                End If
+            Else
+                MsgBox("Export canceled.")
+            End If
+
+
         Catch ex As Exception
             MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name & ")")
         End Try

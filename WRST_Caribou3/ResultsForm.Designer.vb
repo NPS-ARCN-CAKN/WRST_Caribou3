@@ -148,6 +148,8 @@ Partial Class ResultsForm
         Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
         Me.ExportToCSVToolStripButton = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator()
+        Me.ToolStripLabel1 = New System.Windows.Forms.ToolStripLabel()
+        Me.GroupSummaryTypeToolStripComboBox = New System.Windows.Forms.ToolStripComboBox()
         Me.PivotGridTabPage = New System.Windows.Forms.TabPage()
         Me.PivotGridSplitContainer = New System.Windows.Forms.SplitContainer()
         Me.DatasetPivotGridControl = New DevExpress.XtraPivotGrid.PivotGridControl()
@@ -216,8 +218,6 @@ Partial Class ResultsForm
         Me.RightDockPanel = New DevExpress.XtraBars.Docking.DockPanel()
         Me.DockPanel3_Container = New DevExpress.XtraBars.Docking.ControlContainer()
         Me.ChartBarController1 = New DevExpress.XtraCharts.UI.ChartBarController(Me.components)
-        Me.ToolStripLabel1 = New System.Windows.Forms.ToolStripLabel()
-        Me.GroupSummaryTypeToolStripComboBox = New System.Windows.Forms.ToolStripComboBox()
         Me.TabControl.SuspendLayout()
         Me.DataGridTabPage.SuspendLayout()
         CType(Me.DatasetGridControl, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -369,6 +369,19 @@ Partial Class ResultsForm
         '
         Me.ToolStripSeparator2.Name = "ToolStripSeparator2"
         Me.ToolStripSeparator2.Size = New System.Drawing.Size(6, 31)
+        '
+        'ToolStripLabel1
+        '
+        Me.ToolStripLabel1.Name = "ToolStripLabel1"
+        Me.ToolStripLabel1.Size = New System.Drawing.Size(150, 28)
+        Me.ToolStripLabel1.Text = "Group summary type:"
+        '
+        'GroupSummaryTypeToolStripComboBox
+        '
+        Me.GroupSummaryTypeToolStripComboBox.Items.AddRange(New Object() {"Sum", "Avg", "Min", "Max", "Count"})
+        Me.GroupSummaryTypeToolStripComboBox.Name = "GroupSummaryTypeToolStripComboBox"
+        Me.GroupSummaryTypeToolStripComboBox.Size = New System.Drawing.Size(121, 31)
+        Me.GroupSummaryTypeToolStripComboBox.Text = "Sum"
         '
         'PivotGridTabPage
         '
@@ -547,13 +560,13 @@ Partial Class ResultsForm
         '
         'ViewDescriptionTextBox
         '
-        Me.ViewDescriptionTextBox.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.ViewDescriptionTextBox.Location = New System.Drawing.Point(0, 0)
+        Me.ViewDescriptionTextBox.Dock = System.Windows.Forms.DockStyle.Bottom
+        Me.ViewDescriptionTextBox.Location = New System.Drawing.Point(0, 30)
         Me.ViewDescriptionTextBox.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.ViewDescriptionTextBox.Multiline = True
         Me.ViewDescriptionTextBox.Name = "ViewDescriptionTextBox"
         Me.ViewDescriptionTextBox.ReadOnly = True
-        Me.ViewDescriptionTextBox.Size = New System.Drawing.Size(1314, 69)
+        Me.ViewDescriptionTextBox.Size = New System.Drawing.Size(1314, 39)
         Me.ViewDescriptionTextBox.TabIndex = 3
         '
         'HeaderPanel
@@ -1112,20 +1125,6 @@ Partial Class ResultsForm
         Me.ChartBarController1.BarItems.Add(Me.CreateExportToImageBaseItem1)
         Me.ChartBarController1.BarItems.Add(Me.CreateExportBaseItem1)
         Me.ChartBarController1.Control = Me.DatasetChartControl
-        '
-        'ToolStripLabel1
-        '
-        Me.ToolStripLabel1.Name = "ToolStripLabel1"
-        Me.ToolStripLabel1.Size = New System.Drawing.Size(150, 28)
-        Me.ToolStripLabel1.Text = "Group summary type:"
-        '
-        'GroupSummaryTypeToolStripComboBox
-        '
-        Me.GroupSummaryTypeToolStripComboBox.Font = New System.Drawing.Font("Segoe UI", 9.0!)
-        Me.GroupSummaryTypeToolStripComboBox.Items.AddRange(New Object() {"Sum", "Avg", "Min", "Max", "Count"})
-        Me.GroupSummaryTypeToolStripComboBox.Name = "GroupSummaryTypeToolStripComboBox"
-        Me.GroupSummaryTypeToolStripComboBox.Size = New System.Drawing.Size(121, 31)
-        Me.GroupSummaryTypeToolStripComboBox.Text = "Sum"
         '
         'ResultsForm
         '
