@@ -1026,7 +1026,9 @@ Click Yes to certify and lock the current record. Click No to cancel.", MsgBoxSt
             'generic starting caption
             Dim Herd As String = ""
             Try
-                Herd = GetCurrentGridEXCellValue(Me.SurveyFlightsGridEX, "Herd").ToString.Trim()
+                If Not Me.SurveyFlightsGridEX Is Nothing Then
+                    Herd = GetCurrentGridEXCellValue(Me.SurveyFlightsGridEX, "Herd").ToString.Trim()
+                End If
             Catch ex As Exception
                 Herd = ex.Message & " " & System.Reflection.MethodBase.GetCurrentMethod.Name
             End Try
@@ -1594,7 +1596,18 @@ Click Yes to certify and lock the current record. Click No to cancel.", MsgBoxSt
     End Sub
 
     Private Sub ChangeCertificationLevelToolStripComboBox_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ChangeCertificationLevelToolStripComboBox.SelectedIndexChanged
+        EditCertification(Me.ChangeCertificationLevelToolStripComboBox.Text)
+    End Sub
+
+    ''' <summary>
+    ''' Allows the user to change the certification level of the survey (caribou groups) data for the currently selected FlightID. 
+    ''' </summary>
+    ''' <param name="CertificationLevel">Must be 'Raw', 'Provisional', or 'Certified'.</param>
+    Private Sub EditCertification(CertificationLevel As String)
         Try
+            'Trim the input
+            CertificationLevel = CertificationLevel.Trim
+
             'get the flightid
             Dim FlightID As String = GetCurrentGridEXCellValue(Me.SurveyFlightsGridEX, "FlightID")
 
@@ -1602,13 +1615,14 @@ Click Yes to certify and lock the current record. Click No to cancel.", MsgBoxSt
             If FlightID.Trim.Length > 0 Then
 
                 'If we have a certification level choice made
-                If Me.ChangeCertificationLevelToolStripComboBox.Text.Trim.Length > 0 Then
+                If CertificationLevel.Length > 0 Then
 
                     'Determine how to change certification level
-                    If Me.ChangeCertificationLevelToolStripComboBox.Text.Trim.ToLower = "raw" Or Me.ChangeCertificationLevelToolStripComboBox.Text.Trim.ToLower = "provisional" Then
+
+                    If CertificationLevel.ToLower = "raw" Or CertificationLevel.ToLower = "provisional" Then
 
                         'Change the CertificationLevel to Raw or Provisional
-                        If MsgBox("Proceeding will changed the records shown in the grid below to " & Me.ChangeCertificationLevelToolStripComboBox.Text.Trim & ". Proceed?", MsgBoxStyle.YesNo, "Confirm") = MsgBoxResult.Yes Then
+                        If MsgBox("Proceeding will changed the records shown in the grid below to " & CertificationLevel & ". Proceed?", MsgBoxStyle.YesNo, "Confirm") = MsgBoxResult.Yes Then
 
                             'Get a recordset of the records to be changed
                             Dim DV As New DataView(Me.WRST_CaribouDataSet.Tables("Surveys"), "FlightID = '" & FlightID & "'", "", DataViewRowState.CurrentRows)
@@ -1627,7 +1641,7 @@ Click Yes to certify and lock the current record. Click No to cancel.", MsgBoxSt
                                     'User confirmed warning: Change the certification level for each record
                                     For Each SurveyDataRowView As DataRowView In DV
                                         If SurveyDataRowView.Item("FlightID") = FlightID Then
-                                            SurveyDataRowView.Item("CertificationLevel") = Me.ChangeCertificationLevelToolStripComboBox.Text.Trim
+                                            SurveyDataRowView.Item("CertificationLevel") = CertificationLevel
                                             SurveyDataRowView.Item("CertificationDate") = DBNull.Value
                                             SurveyDataRowView.Item("CertifiedBy") = DBNull.Value
                                             Me.SurveysBindingSource.EndEdit()
@@ -1640,7 +1654,7 @@ Click Yes to certify and lock the current record. Click No to cancel.", MsgBoxSt
                                 'Update the records
                                 For Each SurveyDataRowView As DataRowView In DV
                                     If SurveyDataRowView.Item("FlightID") = FlightID Then
-                                        SurveyDataRowView.Item("CertificationLevel") = Me.ChangeCertificationLevelToolStripComboBox.Text.Trim
+                                        SurveyDataRowView.Item("CertificationLevel") = CertificationLevel
                                         SurveyDataRowView.Item("CertificationDate") = DBNull.Value
                                         SurveyDataRowView.Item("CertifiedBy") = DBNull.Value
                                         Me.SurveysBindingSource.EndEdit()
@@ -1649,10 +1663,10 @@ Click Yes to certify and lock the current record. Click No to cancel.", MsgBoxSt
                             End If
                         End If
 
-                    ElseIf Me.ChangeCertificationLevelToolStripComboBox.Text.Trim.ToLower = "certified" Then
+                    ElseIf CertificationLevel.ToLower = "certified" Then
 
                         'Change the CertificationLevel to Certified
-                        If MsgBox("Proceeding will changed the records shown in the grid below to " & Me.ChangeCertificationLevelToolStripComboBox.Text.Trim & ". Records should only be certified if all quality control procedures have been run and the data have been approved by the project leader, or if the data can be validated against a report or original field data collection forms. Proceed?", MsgBoxStyle.YesNo, "Confirm") = MsgBoxResult.Yes Then
+                        If MsgBox("Proceeding will changed the records shown in the grid below to " & CertificationLevel & ". Records should only be certified if all quality control procedures have been run and the data have been approved by the project leader, or if the data can be validated against a report or original field data collection forms. Proceed?", MsgBoxStyle.YesNo, "Confirm") = MsgBoxResult.Yes Then
 
                             'Ask if the user wants to also add a data quality note
                             Dim NotePrefix As String = Now & " " & My.User.Name & ": "
@@ -1673,91 +1687,103 @@ Click Yes to certify and lock the current record. Click No to cancel.", MsgBoxSt
                                 End If
                             Next
                         End If
+                    Else
+                        MsgBox("Certification level must be 'Raw', 'Provisional' or 'Certified'")
                     End If
                 End If
-                    'Reset the ChangeCertificationLevelToolStripComboBox
-                    Me.ChangeCertificationLevelToolStripComboBox.Text = ""
-                End If
+
+                'Reset the ChangeCertificationLevelToolStripComboBox
+                Me.ChangeCertificationLevelToolStripComboBox.Text = ""
+            End If
 
         Catch ex As Exception
             MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name & ")")
         End Try
     End Sub
 
-    Private Sub EditDataQualityNotesToolStripComboBox_SelectedIndexChanged(sender As Object, e As EventArgs) Handles EditDataQualityNotesToolStripComboBox.SelectedIndexChanged
+
+    ''' <summary>
+    ''' Allows the user to overwrite the DataQualityNotes for each Survey record associated with the flight.
+    ''' </summary>
+    ''' <param name="Overwrite">Overwrite all existing notes if True, otherwise appends the new note. Boolean.</param>
+    ''' <param name="ClearAllNotes">Optional. Clear all the existing notes, regardless of the value of Overwrite. Boolean.</param>
+    Private Sub EditDataQualityNotes(Overwrite As Boolean, Optional ClearAllNotes As Boolean = False)
         Try
             'Get the flightid
             Dim FlightID As String = GetCurrentGridEXCellValue(Me.SurveyFlightsGridEX, "FlightID")
 
             'Dim some values to use later
             Dim DataQualityNotes As String = ""
-            Dim NotePrefix As String = Now & " " & My.User.Name & ": "
+            Dim NotePrefix As String = Now & " " & My.User.Name & ": " 'Date and name of user creating a data quality note.
 
-            'If we have a flightid
+            'Make sure we have a flightid
             If FlightID.Trim.Length > 0 Then
 
-                'User opted to append a data quality note to the flight's records
-                If EditDataQualityNotesToolStripComboBox.Text = "Append data quality note to all displayed records" Then
+                'Get all the survey records associated with the flight
+                Dim DV As New DataView(Me.WRST_CaribouDataSet.Tables("Surveys"), "FlightID = '" & FlightID & "'", "", DataViewRowState.CurrentRows)
 
+                'Process the records depending on what the user wants to do
+                If ClearAllNotes = True Then
+
+                    'Confirm and clear all the notes
+                    If MsgBox("This action will clear all the data quality notes for the records associated with the current flight. Proceed?", MsgBoxStyle.YesNo, "Confirm") = MsgBoxResult.Yes Then
+                        'now process each Survey record to match frequencies detected in groups to actual animals and insert them into the CollaredCaribouInGroups table
+                        For Each SurveyDataRowView As DataRowView In DV
+                            If SurveyDataRowView.Item("FlightID") = FlightID Then
+                                SurveyDataRowView.Item("DataQualityNotes") = DBNull.Value
+                            End If
+
+                            'End the edit
+                            Me.SurveysBindingSource.EndEdit()
+                        Next
+                    Else
+                        MsgBox("Canceled.")
+                    End If
+
+                Else
+
+                    'User opted to overwrite or append a new note to the records
                     'Gather a data quality note from user
                     Dim InputBoxResult As String = InputBox("Enter data quality note to append to each record in the grid below: ", "Append data quality note", NotePrefix)
-
-                    'Reset the combo box
-                    Me.EditDataQualityNotesToolStripComboBox.Text = ""
 
                     'If user entered a data quality note
                     If InputBoxResult.Trim <> NotePrefix.Trim And InputBoxResult.Trim <> "" Then
 
-                        'Prefix the note with name and date
+                        'The note 
                         DataQualityNotes = InputBoxResult
 
-                        'now process each Survey record to match frequencies detected in groups to actual animals and insert them into the CollaredCaribouInGroups table
-                        Dim DV As New DataView(Me.WRST_CaribouDataSet.Tables("Surveys"), "FlightID = '" & FlightID & "'", "", DataViewRowState.CurrentRows)
-                        For Each SurveyDataRowView As DataRowView In DV
-                            If SurveyDataRowView.Item("FlightID") = FlightID Then
-                                SurveyDataRowView.Item("DataQualityNotes") = SurveyDataRowView.Item("DataQualityNotes") & " " & DataQualityNotes
-                                Me.SurveysBindingSource.EndEdit()
-                            End If
-                        Next
+                        'Build a confirmation message to send to the user with the inputbox below
+                        Dim ConfirmMessage As String = "This action will " & IIf(Overwrite, "overwrite", "append") & " the data quality notes attribute for each record associated with the current flight. Proceed?"
+
+                        'Confirm
+                        If MsgBox(ConfirmMessage, MsgBoxStyle.YesNo, "Confirm") = MsgBoxResult.Yes Then
+
+                            'now process each Survey record to match frequencies detected in groups to actual animals and insert them into the CollaredCaribouInGroups table
+                            For Each SurveyDataRowView As DataRowView In DV
+                                If SurveyDataRowView.Item("FlightID") = FlightID Then
+
+                                    'User opted to append a data quality note to the flight's records
+                                    If Overwrite = False Then
+                                        SurveyDataRowView.Item("DataQualityNotes") = SurveyDataRowView.Item("DataQualityNotes").trim & " " & DataQualityNotes.Trim
+                                    Else
+                                        'Overwrite the notes
+                                        SurveyDataRowView.Item("DataQualityNotes") = DataQualityNotes.Trim
+                                    End If
+
+                                    'End the edit
+                                    Me.SurveysBindingSource.EndEdit()
+                                End If
+                            Next
+                        Else
+                            MsgBox("Canceled.")
+                        End If
+
                     End If
                 End If
-
-                'User opted to overwrite data quality notes for the flight's records
-                If EditDataQualityNotesToolStripComboBox.Text = "Overwrite data quality notes for all displayed records" Then
-                    'Gather a data quality note from user
-                    Dim InputBoxResult As String = InputBox("Enter data quality note to append to each record in the grid below: ", "Append data quality note", NotePrefix)
-
-                    'Reset the combo box
-                    Me.EditDataQualityNotesToolStripComboBox.Text = ""
-
-                    'If user entered a data quality note
-                    If InputBoxResult.Trim <> NotePrefix.Trim And InputBoxResult.Trim <> "" Then
-
-                        'Prefix the note with name and date
-                        DataQualityNotes = InputBoxResult
-
-                        'now process each Survey record to match frequencies detected in groups to actual animals and insert them into the CollaredCaribouInGroups table
-                        Dim DV As New DataView(Me.WRST_CaribouDataSet.Tables("Surveys"), "FlightID = '" & FlightID & "'", "", DataViewRowState.CurrentRows)
-                        For Each SurveyDataRowView As DataRowView In DV
-                            If SurveyDataRowView.Item("FlightID") = FlightID Then
-                                SurveyDataRowView.Item("DataQualityNotes") = DataQualityNotes
-                                Me.SurveysBindingSource.EndEdit()
-                            End If
-                        Next
-                    End If
-
-
-                End If
-
             Else
                 MsgBox("No flight has been selected.")
             End If
 
-
-            '    
-
-
-            '    End If
         Catch ex As Exception
             MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name & ")")
         End Try
@@ -1943,6 +1969,7 @@ Click Yes to certify and lock the current record. Click No to cancel.", MsgBoxSt
                 'Open a file dialog to allow the user to select a source file
                 Dim OFD As New OpenFileDialog
                 With OFD
+                    If My.Computer.FileSystem.FileExists(SourceFile) Then .InitialDirectory = New FileInfo(SourceFile).DirectoryName
                     .Title = "Select the source file for the " & Year & " " & IIf(TimeDepart.Trim = "", "", "(" & TimeDepart & ") ") & Herd & " " & SurveyType & " survey."
                 End With
 
@@ -1979,7 +2006,7 @@ Click Yes to certify and lock the current record. Click No to cancel.", MsgBoxSt
                                             Row.Item("SourceFile") = SourceFileInfo.FullName
                                             RowUpdated = True
                                         End If
-
+                                        Me.SurveyFlightsBindingSource.EndEdit()
 
 
                                         'The parent SurveyFlights record was updated, offer the opportunity to also update the Surveys table's SourceFileInfo column for related records on the flight.
@@ -1998,7 +2025,7 @@ Click Yes to certify and lock the current record. Click No to cancel.", MsgBoxSt
                                                 Next
                                             End If
                                         End If
-
+                                        Me.SurveysBindingSource.EndEdit()
 
 
 
@@ -2016,7 +2043,56 @@ Click Yes to certify and lock the current record. Click No to cancel.", MsgBoxSt
 
     End Sub
 
-    Private Sub SurveysGridEX_ColumnButtonClick(sender As Object, e As ColumnActionEventArgs) Handles SurveysGridEX.ColumnButtonClick
 
+
+    Private Sub RawToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles RawToolStripMenuItem.Click
+        EditCertification("Raw")
     End Sub
+
+    Private Sub ProvisionalToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ProvisionalToolStripMenuItem.Click
+        EditCertification("Provisional")
+    End Sub
+
+    Private Sub CertifiedToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CertifiedToolStripMenuItem.Click
+        EditCertification("Certified")
+    End Sub
+
+
+
+    Private Sub AppendANewNoteToAllTheRecordsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AppendANewNoteToAllTheRecordsToolStripMenuItem.Click
+        EditDataQualityNotes(False, False)
+    End Sub
+
+    Private Sub OverwriteAllDataQualityNotesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles OverwriteAllDataQualityNotesToolStripMenuItem.Click
+        EditDataQualityNotes(True, False)
+    End Sub
+
+    Private Sub ClearAllDataQualityNotesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ClearAllDataQualityNotesToolStripMenuItem.Click
+        EditDataQualityNotes(True, True)
+    End Sub
+
+    Private Sub CheckSourceFilesExistToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CheckSourceFilesExistToolStripMenuItem.Click
+        Try
+            If Not SurveyFlightsGridEX Is Nothing Then
+
+                'Loop through the rows and test the source files exist
+                For Each Row As GridEXRow In SurveyFlightsGridEX.GetRows()
+                    Dim SourceFile As String = Row.Cells("SourceFile").Value
+                    Dim SourceFileExists As Boolean = My.Computer.FileSystem.FileExists(SourceFile.Trim)
+
+                    Dim Cell As GridEXCell = Row.Cells("SourceFile")
+                    If SourceFileExists = False Then
+                        Row.BeginEdit()
+                        Cell.Value = "INVALID PATH"
+                        Row.EndEdit()
+                    End If
+                Next
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message & " " & System.Reflection.MethodBase.GetCurrentMethod.Name)
+        End Try
+    End Sub
+
+
+
 End Class
