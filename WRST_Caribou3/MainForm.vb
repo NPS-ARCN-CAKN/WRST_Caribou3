@@ -2072,22 +2072,73 @@ Click Yes to certify and lock the current record. Click No to cancel.", MsgBoxSt
     End Sub
 
     Private Sub CheckSourceFilesExistToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CheckSourceFilesExistToolStripMenuItem.Click
+        QC_CheckSourceFilesExist()
+    End Sub
+
+    Private Sub QC_CheckSourceFilesExist()
+        If MsgBox("This quality control check is focused on the SourceFile column of the SurveyFlights database table. 
+The SourceFile column contains a path to the source data file from which the animal groups data was imported into the database.
+This check will loop through all the survey flight records in the database and test whether the SourceFile attribute points to a file that exists. 
+This attribute is important in case errors need to be fixed. 
+If the SourceFile does not exist the attribute will be overwritten with 'INVALID PATH'. Proceed?", MsgBoxStyle.YesNo, "Confirm") = MsgBoxResult.Ok Then
+            Try
+                If Not SurveyFlightsGridEX Is Nothing Then
+
+                    'Loop through the rows and test the source files exist
+                    For Each Row As GridEXRow In SurveyFlightsGridEX.GetRows()
+                        Dim SourceFile As String = Row.Cells("SourceFile").Value
+                        Dim SourceFileExists As Boolean = My.Computer.FileSystem.FileExists(SourceFile.Trim)
+
+                        Dim Cell As GridEXCell = Row.Cells("SourceFile")
+                        If SourceFileExists = False Then
+                            Row.BeginEdit()
+                            Cell.Value = "INVALID PATH"
+                            Row.EndEdit()
+                        End If
+                    Next
+                End If
+            Catch ex As Exception
+                MsgBox(ex.Message & " " & System.Reflection.MethodBase.GetCurrentMethod.Name)
+            End Try
+        Else
+            MsgBox("Canceled")
+        End If
+
+    End Sub
+
+    Private Sub CheckThatTheSourceFilesForSurveyFlightsExistToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CheckThatTheSourceFilesForSurveyFlightsExistToolStripMenuItem.Click
         Try
-            If Not SurveyFlightsGridEX Is Nothing Then
+            Dim Description As String = "Survey flight records missing SourceFile attribute"
+            Dim Sql As String = "SELECT * FROM QC_SurveyFlights_MissingSourceFiles"
+            Dim DT As DataTable = GetDataTable(My.Settings.WRST_CaribouConnectionString, Sql)
+            Dim Form As New Form
+            With Form
+                .Text = "Quality control check"
+                .FormBorderStyle = FormBorderStyle.SizableToolWindow
+            End With
 
-                'Loop through the rows and test the source files exist
-                For Each Row As GridEXRow In SurveyFlightsGridEX.GetRows()
-                    Dim SourceFile As String = Row.Cells("SourceFile").Value
-                    Dim SourceFileExists As Boolean = My.Computer.FileSystem.FileExists(SourceFile.Trim)
+            Dim DescriptionTextBox As New TextBox
+            With DescriptionTextBox
+                .Text = Description & vbNewLine & "(" & Sql & ")"
+                .Dock = DockStyle.Top
+                .Multiline = True
+                .Enabled = False
+                .Height = 40
+            End With
 
-                    Dim Cell As GridEXCell = Row.Cells("SourceFile")
-                    If SourceFileExists = False Then
-                        Row.BeginEdit()
-                        Cell.Value = "INVALID PATH"
-                        Row.EndEdit()
-                    End If
-                Next
-            End If
+            Dim DGV As New DataGridView
+            With DGV
+                .DataSource = DT
+                .Dock = DockStyle.Fill
+                .ReadOnly = True
+
+            End With
+
+
+            Form.Controls.Add(DGV)
+            Form.Controls.Add(DescriptionTextBox)
+
+            Form.Show()
         Catch ex As Exception
             MsgBox(ex.Message & " " & System.Reflection.MethodBase.GetCurrentMethod.Name)
         End Try
