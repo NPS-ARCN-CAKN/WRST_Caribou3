@@ -6,6 +6,20 @@
 
     Private Sub QC_FrequenciesForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         MsgBox("2022-08-26 SDMiller: This tool is only partially working. It will return problem frequencies, but not for early radiotracknig data table yet.")
+
+        'A query to return close frequency matches, possibly of use in dev later
+        '        Select Case ProjectId, AnimalId, Frequency, DeploymentDate, MortalityDate, RetrievalDate, DateThisViewWasRefreshed, RetrievedBy
+        'From tmpCollarDeployments
+        ' Where
+        'ProjectId = 'ChisanaCH'
+        'And (frequency between 150.26 And 150.30)
+        'And (deploymentdate < @sightingdate) 
+        'And (MortalityDate Is NULL Or MortalityDate > @sightingdate)
+        'And (RetrievalDate Is NULL Or RetrievalDate > @sightingdate)
+        'order by  frequency, DeploymentDate
+
+
+
         Me.ExportResultsToolStripButton.Enabled = False
 
         With ProblemsDataTable
