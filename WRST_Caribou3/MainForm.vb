@@ -754,6 +754,7 @@ Where (CollarDeployments.DeploymentId = " & DeploymentID & ")"
 ,[Cow]
 ,[Calf]
 ,[Adult]
+,[Caribou]
 ,[FrequenciesInGroup]
 ,[Lat]
 ,[Lon]
