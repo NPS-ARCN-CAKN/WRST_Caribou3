@@ -36,6 +36,23 @@ Public Class CaribouProfileForm
             MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name & ")")
         End Try
 
+        'Captures
+        Try
+            Sql = "SELECT AnimalID, CaptureDate, ProjectID, Park, Pilot, Shooter, Handler, AircraftType, Crew, CaptureGroupSize, Frequency, VisualCollar, SerialNumber, OldFrequency, OldVisualCollar, CaptureLatitude, CaptureLongitude, GeneralLocation, 
+                  TimeStartChase, TimeFirstHitBounce, TimeSecordHitBounce, TimeThirdHitBounce, TimeVisibleEffect, TimeAnimalDown, DartLocation, NumHits, NumMisses, Anesthetic, AnestheticDosage_mg, AnestheticDosage_ml, 
+                  AnestheticConcentration_mg_ml, DrugEffect, Sedative, SedativeDosage_mg, SedativeDosage_ml, SedativeConcentration_mg_ml, InitialBodyTemp, InitialBodyTempTime, AdditionalDrugs, Sex, EstimatedAge, WithCalf, Lactating, 
+                  BodyCondition, Weight_Kg, BodyLength, NeckCircumference, Jaw, MetatarsusLength, HindfootLength, ChestGirth, NasalSwab, HairSample, BloodSampleRed, BloodSamplePurple, BloodSampleGreen, AnestheticReversal, 
+                  AnestheticReversalDosage_mg, AnestheticReversalDosage_ml, AnestheticReversalConcentration_mg_ml, AnestheticReversalRoute, AnestheticReversalTime, SedativeReversal, SedativeReversalDosage_mg, 
+                  SedativeReversalDosage_ml, SedativeReversalConcentration_mg_ml, SedativeReversalRoute, SedativeReversalTime, FinalBodyTemperature, FinalBodyTemperatureTime, TimeStanding, TimeMobile, ProtocolVersion, SOPNumber, 
+                  SOPVersion, Comments, CertificationLevel, CertificationDate, CertifiedBy, ProtocolIRMAReference, RecordInsertedDate, RecordInsertedBy, CaptureID
+FROM     Captures WHERE AnimalID='" & AnimalID & "' "
+            Dim CapturesDataTable As DataTable = GetDataTable(My.Settings.WRST_CaribouConnectionString, Sql)
+            Me.CapturesGridControl.DataSource = CapturesDataTable
+            SetUpGridControl(Me.CapturesGridControl)
+        Catch ex As Exception
+            MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name & ")")
+        End Try
+
         'Deployments
         Try
             Sql = "SELECT Frequency, DeploymentDate, RetrievalDate, RetrievedBy, DisposalDate, CollarManufacturer, CollarId, HasGps, DeploymentId, DateThisViewWasRefreshed

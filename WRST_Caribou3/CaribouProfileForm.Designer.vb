@@ -29,20 +29,13 @@ Partial Class CaribouProfileForm
         Me.AnimalIDToolStripComboBox = New System.Windows.Forms.ToolStripComboBox()
         Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
         Me.SyncDatabasesToolStripButton = New System.Windows.Forms.ToolStripButton()
-        Me.SplitContainer1 = New System.Windows.Forms.SplitContainer()
-        Me.AnimalTabControl = New System.Windows.Forms.TabControl()
-        Me.SurveySightingsTabPage = New System.Windows.Forms.TabPage()
         Me.SightingsSurveysGridControl = New DevExpress.XtraGrid.GridControl()
         Me.GridView2 = New DevExpress.XtraGrid.Views.Grid.GridView()
-        Me.EarlyRadiotrackingTabPage = New System.Windows.Forms.TabPage()
         Me.EarlyRadiotrackingGridControl = New DevExpress.XtraGrid.GridControl()
         Me.GridView3 = New DevExpress.XtraGrid.Views.Grid.GridView()
-        Me.AnimalFixesTabPage = New System.Windows.Forms.TabPage()
         Me.CollarFixesGridControl = New DevExpress.XtraGrid.GridControl()
         Me.GridView4 = New DevExpress.XtraGrid.Views.Grid.GridView()
-        Me.CapturesTabPage = New System.Windows.Forms.TabPage()
         Me.AnimalVGridControl = New DevExpress.XtraVerticalGrid.VGridControl()
-        Me.AnimalLabel = New System.Windows.Forms.Label()
         Me.AnimalHeaderLabel = New System.Windows.Forms.Label()
         Me.DeploymentsGridControl = New DevExpress.XtraGrid.GridControl()
         Me.GridView1 = New DevExpress.XtraGrid.Views.Grid.GridView()
@@ -56,18 +49,17 @@ Partial Class CaribouProfileForm
         Me.DockPanel1_Container = New DevExpress.XtraBars.Docking.ControlContainer()
         Me.CapturesGridControl = New DevExpress.XtraGrid.GridControl()
         Me.GridView5 = New DevExpress.XtraGrid.Views.Grid.GridView()
+        Me.SightingsDockPanel = New DevExpress.XtraBars.Docking.DockPanel()
+        Me.ControlContainer1 = New DevExpress.XtraBars.Docking.ControlContainer()
+        Me.EarlyRadiotrackingDockPanel = New DevExpress.XtraBars.Docking.DockPanel()
+        Me.ControlContainer2 = New DevExpress.XtraBars.Docking.ControlContainer()
+        Me.CollarFixesDockPanel = New DevExpress.XtraBars.Docking.DockPanel()
+        Me.ControlContainer3 = New DevExpress.XtraBars.Docking.ControlContainer()
         Me.MainToolStrip.SuspendLayout()
-        CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.SplitContainer1.Panel2.SuspendLayout()
-        Me.SplitContainer1.SuspendLayout()
-        Me.AnimalTabControl.SuspendLayout()
-        Me.SurveySightingsTabPage.SuspendLayout()
         CType(Me.SightingsSurveysGridControl, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GridView2, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.EarlyRadiotrackingTabPage.SuspendLayout()
         CType(Me.EarlyRadiotrackingGridControl, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GridView3, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.AnimalFixesTabPage.SuspendLayout()
         CType(Me.CollarFixesGridControl, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GridView4, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.AnimalVGridControl, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -82,6 +74,12 @@ Partial Class CaribouProfileForm
         Me.DockPanel1_Container.SuspendLayout()
         CType(Me.CapturesGridControl, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GridView5, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.SightingsDockPanel.SuspendLayout()
+        Me.ControlContainer1.SuspendLayout()
+        Me.EarlyRadiotrackingDockPanel.SuspendLayout()
+        Me.ControlContainer2.SuspendLayout()
+        Me.CollarFixesDockPanel.SuspendLayout()
+        Me.ControlContainer3.SuspendLayout()
         Me.SuspendLayout()
         '
         'MainToolStrip
@@ -120,56 +118,15 @@ Partial Class CaribouProfileForm
         Me.SyncDatabasesToolStripButton.Size = New System.Drawing.Size(172, 25)
         Me.SyncDatabasesToolStripButton.Text = "Synchronize databases..."
         '
-        'SplitContainer1
-        '
-        Me.SplitContainer1.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.SplitContainer1.Location = New System.Drawing.Point(403, 28)
-        Me.SplitContainer1.Margin = New System.Windows.Forms.Padding(4)
-        Me.SplitContainer1.Name = "SplitContainer1"
-        '
-        'SplitContainer1.Panel2
-        '
-        Me.SplitContainer1.Panel2.Controls.Add(Me.AnimalTabControl)
-        Me.SplitContainer1.Size = New System.Drawing.Size(1176, 509)
-        Me.SplitContainer1.SplitterDistance = 391
-        Me.SplitContainer1.SplitterWidth = 5
-        Me.SplitContainer1.TabIndex = 1
-        '
-        'AnimalTabControl
-        '
-        Me.AnimalTabControl.Controls.Add(Me.SurveySightingsTabPage)
-        Me.AnimalTabControl.Controls.Add(Me.EarlyRadiotrackingTabPage)
-        Me.AnimalTabControl.Controls.Add(Me.AnimalFixesTabPage)
-        Me.AnimalTabControl.Controls.Add(Me.CapturesTabPage)
-        Me.AnimalTabControl.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.AnimalTabControl.Location = New System.Drawing.Point(0, 0)
-        Me.AnimalTabControl.Margin = New System.Windows.Forms.Padding(4)
-        Me.AnimalTabControl.Name = "AnimalTabControl"
-        Me.AnimalTabControl.SelectedIndex = 0
-        Me.AnimalTabControl.Size = New System.Drawing.Size(780, 509)
-        Me.AnimalTabControl.TabIndex = 0
-        '
-        'SurveySightingsTabPage
-        '
-        Me.SurveySightingsTabPage.Controls.Add(Me.SightingsSurveysGridControl)
-        Me.SurveySightingsTabPage.Location = New System.Drawing.Point(4, 25)
-        Me.SurveySightingsTabPage.Margin = New System.Windows.Forms.Padding(4)
-        Me.SurveySightingsTabPage.Name = "SurveySightingsTabPage"
-        Me.SurveySightingsTabPage.Padding = New System.Windows.Forms.Padding(4)
-        Me.SurveySightingsTabPage.Size = New System.Drawing.Size(772, 480)
-        Me.SurveySightingsTabPage.TabIndex = 1
-        Me.SurveySightingsTabPage.Text = "Sightings (surveys)"
-        Me.SurveySightingsTabPage.UseVisualStyleBackColor = True
-        '
         'SightingsSurveysGridControl
         '
         Me.SightingsSurveysGridControl.Dock = System.Windows.Forms.DockStyle.Fill
         Me.SightingsSurveysGridControl.EmbeddedNavigator.Margin = New System.Windows.Forms.Padding(4)
-        Me.SightingsSurveysGridControl.Location = New System.Drawing.Point(4, 4)
+        Me.SightingsSurveysGridControl.Location = New System.Drawing.Point(0, 0)
         Me.SightingsSurveysGridControl.MainView = Me.GridView2
         Me.SightingsSurveysGridControl.Margin = New System.Windows.Forms.Padding(4)
         Me.SightingsSurveysGridControl.Name = "SightingsSurveysGridControl"
-        Me.SightingsSurveysGridControl.Size = New System.Drawing.Size(764, 472)
+        Me.SightingsSurveysGridControl.Size = New System.Drawing.Size(1168, 162)
         Me.SightingsSurveysGridControl.TabIndex = 3
         Me.SightingsSurveysGridControl.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GridView2})
         '
@@ -183,27 +140,15 @@ Partial Class CaribouProfileForm
         Me.GridView2.OptionsSelection.MultiSelectMode = DevExpress.XtraGrid.Views.Grid.GridMultiSelectMode.CellSelect
         Me.GridView2.OptionsView.ShowFooter = True
         '
-        'EarlyRadiotrackingTabPage
-        '
-        Me.EarlyRadiotrackingTabPage.Controls.Add(Me.EarlyRadiotrackingGridControl)
-        Me.EarlyRadiotrackingTabPage.Location = New System.Drawing.Point(4, 25)
-        Me.EarlyRadiotrackingTabPage.Margin = New System.Windows.Forms.Padding(4)
-        Me.EarlyRadiotrackingTabPage.Name = "EarlyRadiotrackingTabPage"
-        Me.EarlyRadiotrackingTabPage.Padding = New System.Windows.Forms.Padding(4)
-        Me.EarlyRadiotrackingTabPage.Size = New System.Drawing.Size(772, 680)
-        Me.EarlyRadiotrackingTabPage.TabIndex = 2
-        Me.EarlyRadiotrackingTabPage.Text = "Sightings (early radiotracking)"
-        Me.EarlyRadiotrackingTabPage.UseVisualStyleBackColor = True
-        '
         'EarlyRadiotrackingGridControl
         '
         Me.EarlyRadiotrackingGridControl.Dock = System.Windows.Forms.DockStyle.Fill
         Me.EarlyRadiotrackingGridControl.EmbeddedNavigator.Margin = New System.Windows.Forms.Padding(4)
-        Me.EarlyRadiotrackingGridControl.Location = New System.Drawing.Point(4, 4)
+        Me.EarlyRadiotrackingGridControl.Location = New System.Drawing.Point(0, 0)
         Me.EarlyRadiotrackingGridControl.MainView = Me.GridView3
         Me.EarlyRadiotrackingGridControl.Margin = New System.Windows.Forms.Padding(4)
         Me.EarlyRadiotrackingGridControl.Name = "EarlyRadiotrackingGridControl"
-        Me.EarlyRadiotrackingGridControl.Size = New System.Drawing.Size(764, 672)
+        Me.EarlyRadiotrackingGridControl.Size = New System.Drawing.Size(1168, 73)
         Me.EarlyRadiotrackingGridControl.TabIndex = 4
         Me.EarlyRadiotrackingGridControl.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GridView3})
         '
@@ -217,27 +162,15 @@ Partial Class CaribouProfileForm
         Me.GridView3.OptionsSelection.MultiSelectMode = DevExpress.XtraGrid.Views.Grid.GridMultiSelectMode.CellSelect
         Me.GridView3.OptionsView.ShowFooter = True
         '
-        'AnimalFixesTabPage
-        '
-        Me.AnimalFixesTabPage.Controls.Add(Me.CollarFixesGridControl)
-        Me.AnimalFixesTabPage.Location = New System.Drawing.Point(4, 25)
-        Me.AnimalFixesTabPage.Margin = New System.Windows.Forms.Padding(4)
-        Me.AnimalFixesTabPage.Name = "AnimalFixesTabPage"
-        Me.AnimalFixesTabPage.Padding = New System.Windows.Forms.Padding(4)
-        Me.AnimalFixesTabPage.Size = New System.Drawing.Size(772, 680)
-        Me.AnimalFixesTabPage.TabIndex = 3
-        Me.AnimalFixesTabPage.Text = "Collar fixes"
-        Me.AnimalFixesTabPage.UseVisualStyleBackColor = True
-        '
         'CollarFixesGridControl
         '
         Me.CollarFixesGridControl.Dock = System.Windows.Forms.DockStyle.Fill
         Me.CollarFixesGridControl.EmbeddedNavigator.Margin = New System.Windows.Forms.Padding(4)
-        Me.CollarFixesGridControl.Location = New System.Drawing.Point(4, 4)
+        Me.CollarFixesGridControl.Location = New System.Drawing.Point(0, 0)
         Me.CollarFixesGridControl.MainView = Me.GridView4
         Me.CollarFixesGridControl.Margin = New System.Windows.Forms.Padding(4)
         Me.CollarFixesGridControl.Name = "CollarFixesGridControl"
-        Me.CollarFixesGridControl.Size = New System.Drawing.Size(764, 672)
+        Me.CollarFixesGridControl.Size = New System.Drawing.Size(1168, 95)
         Me.CollarFixesGridControl.TabIndex = 5
         Me.CollarFixesGridControl.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GridView4})
         '
@@ -251,40 +184,20 @@ Partial Class CaribouProfileForm
         Me.GridView4.OptionsSelection.MultiSelectMode = DevExpress.XtraGrid.Views.Grid.GridMultiSelectMode.CellSelect
         Me.GridView4.OptionsView.ShowFooter = True
         '
-        'CapturesTabPage
-        '
-        Me.CapturesTabPage.Location = New System.Drawing.Point(4, 25)
-        Me.CapturesTabPage.Name = "CapturesTabPage"
-        Me.CapturesTabPage.Padding = New System.Windows.Forms.Padding(3)
-        Me.CapturesTabPage.Size = New System.Drawing.Size(772, 680)
-        Me.CapturesTabPage.TabIndex = 4
-        Me.CapturesTabPage.Text = "Captures"
-        Me.CapturesTabPage.UseVisualStyleBackColor = True
-        '
         'AnimalVGridControl
         '
         Me.AnimalVGridControl.BandsInterval = 3
         Me.AnimalVGridControl.Cursor = System.Windows.Forms.Cursors.Default
         Me.AnimalVGridControl.Dock = System.Windows.Forms.DockStyle.Fill
         Me.AnimalVGridControl.LayoutStyle = DevExpress.XtraVerticalGrid.LayoutViewStyle.SingleRecordView
-        Me.AnimalVGridControl.Location = New System.Drawing.Point(0, 139)
+        Me.AnimalVGridControl.Location = New System.Drawing.Point(0, 54)
         Me.AnimalVGridControl.Margin = New System.Windows.Forms.Padding(4)
         Me.AnimalVGridControl.Name = "AnimalVGridControl"
         Me.AnimalVGridControl.OptionsBehavior.Editable = False
         Me.AnimalVGridControl.OptionsView.FixedLineWidth = 3
         Me.AnimalVGridControl.OptionsView.MinRowAutoHeight = 12
-        Me.AnimalVGridControl.Size = New System.Drawing.Size(393, 762)
+        Me.AnimalVGridControl.Size = New System.Drawing.Size(393, 847)
         Me.AnimalVGridControl.TabIndex = 0
-        '
-        'AnimalLabel
-        '
-        Me.AnimalLabel.Dock = System.Windows.Forms.DockStyle.Top
-        Me.AnimalLabel.Location = New System.Drawing.Point(0, 54)
-        Me.AnimalLabel.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.AnimalLabel.Name = "AnimalLabel"
-        Me.AnimalLabel.Size = New System.Drawing.Size(393, 85)
-        Me.AnimalLabel.TabIndex = 2
-        Me.AnimalLabel.Text = "Animal details"
         '
         'AnimalHeaderLabel
         '
@@ -332,7 +245,7 @@ Partial Class CaribouProfileForm
         'DockManager1
         '
         Me.DockManager1.Form = Me
-        Me.DockManager1.RootPanels.AddRange(New DevExpress.XtraBars.Docking.DockPanel() {Me.AnimalDockPanel, Me.CollarDeploymentsDockPanel, Me.CapturesDockPanel})
+        Me.DockManager1.RootPanels.AddRange(New DevExpress.XtraBars.Docking.DockPanel() {Me.AnimalDockPanel, Me.CollarDeploymentsDockPanel, Me.CapturesDockPanel, Me.SightingsDockPanel, Me.EarlyRadiotrackingDockPanel, Me.CollarFixesDockPanel})
         Me.DockManager1.TopZIndexControls.AddRange(New String() {"DevExpress.XtraBars.BarDockControl", "DevExpress.XtraBars.StandaloneBarDockControl", "System.Windows.Forms.MenuStrip", "System.Windows.Forms.StatusStrip", "System.Windows.Forms.StatusBar", "DevExpress.XtraBars.Ribbon.RibbonStatusBar", "DevExpress.XtraBars.Ribbon.RibbonControl", "DevExpress.XtraBars.Navigation.OfficeNavigationBar", "DevExpress.XtraBars.Navigation.TileNavPane", "DevExpress.XtraBars.TabFormControl", "DevExpress.XtraBars.FluentDesignSystem.FluentDesignFormControl", "DevExpress.XtraBars.ToolbarForm.ToolbarFormControl"})
         '
         'AnimalDockPanel
@@ -349,7 +262,6 @@ Partial Class CaribouProfileForm
         'AnimalDockPanel_Container
         '
         Me.AnimalDockPanel_Container.Controls.Add(Me.AnimalVGridControl)
-        Me.AnimalDockPanel_Container.Controls.Add(Me.AnimalLabel)
         Me.AnimalDockPanel_Container.Controls.Add(Me.AnimalHeaderLabel)
         Me.AnimalDockPanel_Container.Location = New System.Drawing.Point(4, 32)
         Me.AnimalDockPanel_Container.Name = "AnimalDockPanel_Container"
@@ -410,13 +322,73 @@ Partial Class CaribouProfileForm
         Me.GridView5.GridControl = Me.CapturesGridControl
         Me.GridView5.Name = "GridView5"
         '
+        'SightingsDockPanel
+        '
+        Me.SightingsDockPanel.Controls.Add(Me.ControlContainer1)
+        Me.SightingsDockPanel.Dock = DevExpress.XtraBars.Docking.DockingStyle.Bottom
+        Me.SightingsDockPanel.ID = New System.Guid("a6fcc7a3-b95a-4b55-887d-ebd5553d22c8")
+        Me.SightingsDockPanel.Location = New System.Drawing.Point(403, 337)
+        Me.SightingsDockPanel.Name = "SightingsDockPanel"
+        Me.SightingsDockPanel.OriginalSize = New System.Drawing.Size(200, 200)
+        Me.SightingsDockPanel.Size = New System.Drawing.Size(1176, 200)
+        Me.SightingsDockPanel.Text = "Sightings"
+        '
+        'ControlContainer1
+        '
+        Me.ControlContainer1.Controls.Add(Me.SightingsSurveysGridControl)
+        Me.ControlContainer1.Location = New System.Drawing.Point(4, 34)
+        Me.ControlContainer1.Name = "ControlContainer1"
+        Me.ControlContainer1.Size = New System.Drawing.Size(1168, 162)
+        Me.ControlContainer1.TabIndex = 0
+        '
+        'EarlyRadiotrackingDockPanel
+        '
+        Me.EarlyRadiotrackingDockPanel.Controls.Add(Me.ControlContainer2)
+        Me.EarlyRadiotrackingDockPanel.Dock = DevExpress.XtraBars.Docking.DockingStyle.Bottom
+        Me.EarlyRadiotrackingDockPanel.ID = New System.Guid("65483a37-2711-4c35-ba1a-3827756e5b9f")
+        Me.EarlyRadiotrackingDockPanel.Location = New System.Drawing.Point(403, 226)
+        Me.EarlyRadiotrackingDockPanel.Name = "EarlyRadiotrackingDockPanel"
+        Me.EarlyRadiotrackingDockPanel.OriginalSize = New System.Drawing.Size(200, 111)
+        Me.EarlyRadiotrackingDockPanel.Size = New System.Drawing.Size(1176, 111)
+        Me.EarlyRadiotrackingDockPanel.Text = "Early radiotracking"
+        '
+        'ControlContainer2
+        '
+        Me.ControlContainer2.Controls.Add(Me.EarlyRadiotrackingGridControl)
+        Me.ControlContainer2.Location = New System.Drawing.Point(4, 34)
+        Me.ControlContainer2.Name = "ControlContainer2"
+        Me.ControlContainer2.Size = New System.Drawing.Size(1168, 73)
+        Me.ControlContainer2.TabIndex = 0
+        '
+        'CollarFixesDockPanel
+        '
+        Me.CollarFixesDockPanel.Controls.Add(Me.ControlContainer3)
+        Me.CollarFixesDockPanel.Dock = DevExpress.XtraBars.Docking.DockingStyle.Bottom
+        Me.CollarFixesDockPanel.FloatVertical = True
+        Me.CollarFixesDockPanel.ID = New System.Guid("4d9aaa43-bb7c-40ca-9a5b-30faf153743b")
+        Me.CollarFixesDockPanel.Location = New System.Drawing.Point(403, 93)
+        Me.CollarFixesDockPanel.Name = "CollarFixesDockPanel"
+        Me.CollarFixesDockPanel.OriginalSize = New System.Drawing.Size(200, 133)
+        Me.CollarFixesDockPanel.Size = New System.Drawing.Size(1176, 133)
+        Me.CollarFixesDockPanel.Text = "Collar fixes"
+        '
+        'ControlContainer3
+        '
+        Me.ControlContainer3.Controls.Add(Me.CollarFixesGridControl)
+        Me.ControlContainer3.Location = New System.Drawing.Point(4, 34)
+        Me.ControlContainer3.Name = "ControlContainer3"
+        Me.ControlContainer3.Size = New System.Drawing.Size(1168, 95)
+        Me.ControlContainer3.TabIndex = 0
+        '
         'CaribouProfileForm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1579, 937)
-        Me.Controls.Add(Me.SplitContainer1)
         Me.Controls.Add(Me.MainToolStrip)
+        Me.Controls.Add(Me.CollarFixesDockPanel)
+        Me.Controls.Add(Me.EarlyRadiotrackingDockPanel)
+        Me.Controls.Add(Me.SightingsDockPanel)
         Me.Controls.Add(Me.CapturesDockPanel)
         Me.Controls.Add(Me.CollarDeploymentsDockPanel)
         Me.Controls.Add(Me.AnimalDockPanel)
@@ -426,17 +398,10 @@ Partial Class CaribouProfileForm
         Me.Text = "Caribou profile"
         Me.MainToolStrip.ResumeLayout(False)
         Me.MainToolStrip.PerformLayout()
-        Me.SplitContainer1.Panel2.ResumeLayout(False)
-        CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.SplitContainer1.ResumeLayout(False)
-        Me.AnimalTabControl.ResumeLayout(False)
-        Me.SurveySightingsTabPage.ResumeLayout(False)
         CType(Me.SightingsSurveysGridControl, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GridView2, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.EarlyRadiotrackingTabPage.ResumeLayout(False)
         CType(Me.EarlyRadiotrackingGridControl, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GridView3, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.AnimalFixesTabPage.ResumeLayout(False)
         CType(Me.CollarFixesGridControl, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GridView4, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.AnimalVGridControl, System.ComponentModel.ISupportInitialize).EndInit()
@@ -451,6 +416,12 @@ Partial Class CaribouProfileForm
         Me.DockPanel1_Container.ResumeLayout(False)
         CType(Me.CapturesGridControl, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GridView5, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.SightingsDockPanel.ResumeLayout(False)
+        Me.ControlContainer1.ResumeLayout(False)
+        Me.EarlyRadiotrackingDockPanel.ResumeLayout(False)
+        Me.ControlContainer2.ResumeLayout(False)
+        Me.CollarFixesDockPanel.ResumeLayout(False)
+        Me.ControlContainer3.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -459,12 +430,7 @@ Partial Class CaribouProfileForm
     Friend WithEvents MainToolStrip As ToolStrip
     Friend WithEvents ToolStripLabel1 As ToolStripLabel
     Friend WithEvents AnimalIDToolStripComboBox As ToolStripComboBox
-    Friend WithEvents SplitContainer1 As SplitContainer
     Friend WithEvents AnimalVGridControl As DevExpress.XtraVerticalGrid.VGridControl
-    Friend WithEvents AnimalTabControl As TabControl
-    Friend WithEvents SurveySightingsTabPage As TabPage
-    Friend WithEvents EarlyRadiotrackingTabPage As TabPage
-    Friend WithEvents AnimalLabel As Label
     Friend WithEvents DeploymentsLabel As Label
     Friend WithEvents AnimalHeaderLabel As Label
     Friend WithEvents DeploymentsGridControl As DevExpress.XtraGrid.GridControl
@@ -473,12 +439,10 @@ Partial Class CaribouProfileForm
     Friend WithEvents GridView2 As DevExpress.XtraGrid.Views.Grid.GridView
     Friend WithEvents EarlyRadiotrackingGridControl As DevExpress.XtraGrid.GridControl
     Friend WithEvents GridView3 As DevExpress.XtraGrid.Views.Grid.GridView
-    Friend WithEvents AnimalFixesTabPage As TabPage
     Friend WithEvents CollarFixesGridControl As DevExpress.XtraGrid.GridControl
     Friend WithEvents GridView4 As DevExpress.XtraGrid.Views.Grid.GridView
     Friend WithEvents ToolStripSeparator1 As ToolStripSeparator
     Friend WithEvents SyncDatabasesToolStripButton As ToolStripButton
-    Friend WithEvents CapturesTabPage As TabPage
     Friend WithEvents DockManager1 As DevExpress.XtraBars.Docking.DockManager
     Friend WithEvents CollarDeploymentsDockPanel As DevExpress.XtraBars.Docking.DockPanel
     Friend WithEvents CollarDeploymentsDockPanel_Container As DevExpress.XtraBars.Docking.ControlContainer
@@ -488,4 +452,10 @@ Partial Class CaribouProfileForm
     Friend WithEvents DockPanel1_Container As DevExpress.XtraBars.Docking.ControlContainer
     Friend WithEvents CapturesGridControl As DevExpress.XtraGrid.GridControl
     Friend WithEvents GridView5 As DevExpress.XtraGrid.Views.Grid.GridView
+    Friend WithEvents CollarFixesDockPanel As DevExpress.XtraBars.Docking.DockPanel
+    Friend WithEvents ControlContainer3 As DevExpress.XtraBars.Docking.ControlContainer
+    Friend WithEvents EarlyRadiotrackingDockPanel As DevExpress.XtraBars.Docking.DockPanel
+    Friend WithEvents ControlContainer2 As DevExpress.XtraBars.Docking.ControlContainer
+    Friend WithEvents SightingsDockPanel As DevExpress.XtraBars.Docking.DockPanel
+    Friend WithEvents ControlContainer1 As DevExpress.XtraBars.Docking.ControlContainer
 End Class
