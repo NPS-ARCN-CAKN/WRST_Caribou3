@@ -7,6 +7,13 @@ Public Class CaribouProfileForm
 
     Private Sub CaribouProfileForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         LoadAnimalIDsComboBox()
+
+        Me.AnimalDockPanel.Options.ShowCloseButton = False
+        Me.CapturesDockPanel.Options.ShowCloseButton = False
+        Me.CollarDeploymentsDockPanel.Options.ShowCloseButton = False
+        Me.CollarFixesDockPanel.Options.ShowCloseButton = False
+        Me.EarlyRadiotrackingDockPanel.Options.ShowCloseButton = False
+        Me.SightingsDockPanel.Options.ShowCloseButton = False
     End Sub
 
     Private Sub LoadAnimalIDsComboBox()
