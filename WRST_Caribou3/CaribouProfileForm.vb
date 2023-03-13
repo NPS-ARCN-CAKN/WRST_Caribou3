@@ -4,32 +4,9 @@ Imports System.Data.SqlClient
 
 Public Class CaribouProfileForm
 
-    'Private AnimalIDValue As String
-    'Public Property AnimalID() As String
-    '    Get
-    '        Return AnimalIDValue
-    '    End Get
-    '    Set(ByVal value As String)
-    '        AnimalIDValue = value.Trim
-    '    End Set
-    'End Property
-
-    'Public Sub New(AnimalID As String)
-
-    '    ' This call is required by the designer.
-    '    InitializeComponent()
-
-    '    If Not AnimalID.Trim = "" Then
-    '        Me.AnimalID = AnimalID
-    '        'Me.Text = Me.AnimalID
-    '    End If
-
-    'End Sub
 
     Private Sub CaribouProfileForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         LoadAnimalIDsComboBox()
-
-
     End Sub
 
     Private Sub LoadAnimalIDsComboBox()
