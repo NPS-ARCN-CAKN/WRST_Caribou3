@@ -2151,6 +2151,53 @@ If the SourceFile does not exist the attribute will be overwritten with 'INVALID
         End Try
     End Sub
 
+    Private Sub GetAListOfDeploymentsForAFrequencyToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles GetAListOfDeploymentsForAFrequencyToolStripMenuItem.Click
+        'This function obtains a frequency from the user and looks for all the deployments.
+        Dim Frequency As Double = InputBox("Enter a collar frequency: ", "Get a list of deployments for a frequency")
+        If IsNumeric(Frequency) = True Then
+
+            'This is the stored procedure and frequency to look for
+            Dim QueryString As String = "GetDeploymentsForAFrequency " & Frequency
+
+            Try
+                Using Connection As New SqlConnection(My.Settings.WRST_CaribouConnectionString)
+                    Connection.Open()
+                    Dim Command As New SqlCommand(QueryString, Connection)
+                    Dim Reader As SqlDataReader = Command.ExecuteReader()
+                    Dim DTResults As New DataTable
+
+                    'Load the data table from the data reader
+                    DTResults.Load(reader)
+
+                    'Build a form to show the results in a grid
+                    Dim ResultsForm As New Form
+                    Dim DGV As New DataGridView
+
+                    'Configure the datagridview
+                    With DGV
+                        .DataSource = DTResults
+                        .Dock = DockStyle.Fill
+                    End With
+
+                    'Configure the results form and show it
+                    With ResultsForm
+                        .FormBorderStyle = FormBorderStyle.SizableToolWindow
+                        .Text = "Deployments for collar frequency " & Frequency
+                        .Controls.Add(DGV)
+                        .Width = 1200
+                        .Height = 800
+                        .Show()
+                    End With
 
 
+                End Using
+            Catch ex As Exception
+                MessageBox.Show("Error while executing .. " & ex.Message, "")
+            Finally
+            End Try
+        Else
+            MsgBox("The collar frequency must be numeric. Canceled.", MsgBoxStyle.OkOnly)
+        End If
+
+    End Sub
 End Class
