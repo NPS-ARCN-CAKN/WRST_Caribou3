@@ -504,7 +504,7 @@ Public Class CapturesForm
                     End With
 
                     'open up a datatable translator form to allow the user to map fields from the csv file to the destination datatable
-                    Dim TranslatorForm As New SkeeterDataTablesTranslatorForm(InputDataTable, DestinationDataTable, "Import data", "Use the tool on the left to map the fields from your source data table to the destination data table.", DefaultValuesList)
+                    Dim TranslatorForm As New SkeeterDataTablesTranslatorForm(InputDataTable, DestinationDataTable, "Import data", "Use the tool on the left to map the fields from your source data table to the destination data table.", DefaultValuesList, SourceFileInfo.Name, "WRST_Caribou", "Surveys")
                     TranslatorForm.ShowDialog()
 
                     'at this point we have transformed the csv into a clone of the destination datatable

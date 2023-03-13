@@ -649,13 +649,12 @@ WHERE (a.ProjectId = '" & GetProjectIDFromHerd(Herd).ToString.Trim & "')
                     If Not CurrentRow.Cells(GridEXColumnKey) Is Nothing Then
                         If Not IsDBNull(CurrentRow.Cells(GridEXColumnKey).Value) Then
                             CellValue = CurrentRow.Cells(GridEXColumnKey).Value
-                        Else
-                            CellValue = ""
                         End If
                     End If
                 End If
             End If
         Catch ex As Exception
+            Return CellValue
             MsgBox(ex.Message & " " & System.Reflection.MethodBase.GetCurrentMethod.Name)
         End Try
         Return CellValue
