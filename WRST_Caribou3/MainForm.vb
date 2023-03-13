@@ -1967,75 +1967,81 @@ Click Yes to certify and lock the current record. Click No to cancel.", MsgBoxSt
             'If we have a flight id
             If FlightID.Trim.Length > 0 Then
 
-                'Open a file dialog to allow the user to select a source file
-                Dim OFD As New OpenFileDialog
-                With OFD
-                    If My.Computer.FileSystem.FileExists(SourceFile) Then .InitialDirectory = New FileInfo(SourceFile).DirectoryName
-                    .Title = "Select the source file for the " & Year & " " & IIf(TimeDepart.Trim = "", "", "(" & TimeDepart & ") ") & Herd & " " & SurveyType & " survey."
-                End With
 
-                'If we have a source file selected
-                If OFD.ShowDialog = DialogResult.OK Then
+                'Confirm the user wants to overwrite the source file attribute for the survey
+                If MsgBox("This tool will allow you to update the source file for the data associated with the current flight. Proceed?", MsgBoxStyle.YesNo, "Confirm") = MsgBoxResult.Yes Then
+                    'Open a file dialog to allow the user to select a source file
+                    Dim OFD As New OpenFileDialog
+                    With OFD
+                        If My.Computer.FileSystem.FileExists(SourceFile) Then .InitialDirectory = New FileInfo(SourceFile).DirectoryName
+                        .Title = "Select the source file for the " & Year & " " & IIf(TimeDepart.Trim = "", "", "(" & TimeDepart & ") ") & Herd & " " & SurveyType & " survey."
+                    End With
 
-                    'Validate the file
-                    If My.Computer.FileSystem.FileExists(OFD.FileName) = True Then
+                    'If we have a source file selected
+                    If OFD.ShowDialog = DialogResult.OK Then
 
-                        'Get the selected file into a FileInfo
-                        Dim SourceFileInfo As New FileInfo(OFD.FileName)
+                        'Validate the file
+                        If My.Computer.FileSystem.FileExists(OFD.FileName) = True Then
 
-                        'Find the DataRow corresponding to the current row's FlightID
-                        For Each Row As DataRow In Me.WRST_CaribouDataSet.Tables("SurveyFlights").Rows
-                            If Not Row Is Nothing Then
+                            'Get the selected file into a FileInfo
+                            Dim SourceFileInfo As New FileInfo(OFD.FileName)
 
-                                'If the flight id row exists
-                                If IsDBNull(Row.Item("FlightID")) = False Then
-                                    If Row.Item("FlightID") = FlightID Then
+                            'Find the DataRow corresponding to the current row's FlightID
+                            For Each Row As DataRow In Me.WRST_CaribouDataSet.Tables("SurveyFlights").Rows
+                                If Not Row Is Nothing Then
 
-                                        Dim RowUpdated As Boolean = False
+                                    'If the flight id row exists
+                                    If IsDBNull(Row.Item("FlightID")) = False Then
+                                        If Row.Item("FlightID") = FlightID Then
 
-                                        'If we are about to overwrite an existing SourceFile entry
-                                        If SourceFile.Trim <> "" Then
+                                            Dim RowUpdated As Boolean = False
 
-                                            'Confirm overwrite
-                                            If MsgBox("Update SourceFile from " & vbNewLine & vbNewLine & SourceFile & " to " & vbNewLine & vbNewLine & SourceFileInfo.FullName & "?") = MsgBoxResult.Ok Then
+                                            'If we are about to overwrite an existing SourceFile entry
+                                            If SourceFile.Trim <> "" Then
+
+                                                'Confirm overwrite
+                                                If MsgBox("Update SourceFile from " & vbNewLine & vbNewLine & SourceFile & " to " & vbNewLine & vbNewLine & SourceFileInfo.FullName & "?") = MsgBoxResult.Ok Then
+                                                    Row.Item("SourceFile") = SourceFileInfo.FullName
+                                                    RowUpdated = True
+                                                End If
+                                            Else
+
+                                                'Write the selected filename to the SourceFile attribute
                                                 Row.Item("SourceFile") = SourceFileInfo.FullName
                                                 RowUpdated = True
                                             End If
-                                        Else
-
-                                            'Write the selected filename to the SourceFile attribute
-                                            Row.Item("SourceFile") = SourceFileInfo.FullName
-                                            RowUpdated = True
-                                        End If
-                                        Me.SurveyFlightsBindingSource.EndEdit()
+                                            Me.SurveyFlightsBindingSource.EndEdit()
 
 
-                                        'The parent SurveyFlights record was updated, offer the opportunity to also update the Surveys table's SourceFileInfo column for related records on the flight.
-                                        If RowUpdated = True Then
-                                            If MsgBox("Also update the SourceFilename attribute of all related caribou groups records shown below (this may overwrite existing data)?", MsgBoxStyle.YesNo) = MsgBoxResult.Yes Then
+                                            'The parent SurveyFlights record was updated, offer the opportunity to also update the Surveys table's SourceFileInfo column for related records on the flight.
+                                            If RowUpdated = True Then
+                                                If MsgBox("Also update the SourceFilename attribute of all related caribou groups records shown below (this may overwrite existing data)?", MsgBoxStyle.YesNo) = MsgBoxResult.Yes Then
 
-                                                'Update all the related Survey table records with the sourcefile
-                                                For Each SurveyRow As DataRow In WRST_CaribouDataSet.Tables("Surveys").Rows
-                                                    If Not SurveyRow Is Nothing Then
-                                                        If IsDBNull(SurveyRow.Item("FlightID")) = False Then
-                                                            If SurveyRow.Item("FlightID") = FlightID Then
-                                                                SurveyRow.Item("SourceFilename") = SourceFileInfo.Name
+                                                    'Update all the related Survey table records with the sourcefile
+                                                    For Each SurveyRow As DataRow In WRST_CaribouDataSet.Tables("Surveys").Rows
+                                                        If Not SurveyRow Is Nothing Then
+                                                            If IsDBNull(SurveyRow.Item("FlightID")) = False Then
+                                                                If SurveyRow.Item("FlightID") = FlightID Then
+                                                                    SurveyRow.Item("SourceFilename") = SourceFileInfo.Name
+                                                                End If
                                                             End If
                                                         End If
-                                                    End If
-                                                Next
+                                                    Next
+                                                End If
                                             End If
+                                            Me.SurveysBindingSource.EndEdit()
+
+
+
                                         End If
-                                        Me.SurveysBindingSource.EndEdit()
-
-
-
                                     End If
                                 End If
-                            End If
-                        Next
+                            Next
+                        End If
                     End If
                 End If
+
+
             End If
 
         Catch ex As Exception
@@ -2093,7 +2099,7 @@ If the SourceFile does not exist the attribute will be overwritten with 'INVALID
                         Dim Cell As GridEXCell = Row.Cells("SourceFile")
                         If SourceFileExists = False Then
                             Row.BeginEdit()
-                            Cell.Value = "INVALID PATH"
+                            Cell.Value = ""
                             Row.EndEdit()
                         End If
                     Next
