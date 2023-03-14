@@ -1,5 +1,6 @@
 ﻿Imports DevExpress.XtraGrid
 Imports DevExpress.XtraGrid.Views.Grid
+Imports DevExpress.XtraMap
 Imports System.Data.SqlClient
 
 Public Class CaribouProfileForm
@@ -14,6 +15,21 @@ Public Class CaribouProfileForm
         Me.CollarFixesDockPanel.Options.ShowCloseButton = False
         Me.EarlyRadiotrackingDockPanel.Options.ShowCloseButton = False
         Me.SightingsDockPanel.Options.ShowCloseButton = False
+
+
+
+    End Sub
+
+    Private Sub LoadNationalMapIntoMapControl()
+        'Add a WMS map layer to a DevExpress MapControl 
+        Try
+            Dim LayerName As String = "0"
+            Dim URL As String = "https://basemap.nationalmap.gov:443/arcgis/services/USGSTopo/MapServer/WmsServer?"
+            Dim ShadedReliefWMSImageLayer As ImageLayer = GetWMSImageLayer(LayerName, URL)
+            Me.CaribouMapControl.Layers.Add(ShadedReliefWMSImageLayer)
+        Catch ex As Exception
+            MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name & ")")
+        End Try
     End Sub
 
     Private Sub LoadAnimalIDsComboBox()
@@ -33,6 +49,10 @@ Public Class CaribouProfileForm
     End Sub
 
     Private Sub LoadData(AnimalID As String)
+
+        'Clear the map
+        Me.CaribouMapControl.Layers.Clear()
+        LoadNationalMapIntoMapControl()
 
         'Animal details
         Dim Sql As String = "SELECT * FROM tmpAnimals WHERE AnimalID='" & AnimalID & "'"
@@ -56,6 +76,11 @@ FROM     Captures WHERE AnimalID='" & AnimalID & "' "
             Dim CapturesDataTable As DataTable = GetDataTable(My.Settings.WRST_CaribouConnectionString, Sql)
             Me.CapturesGridControl.DataSource = CapturesDataTable
             SetUpGridControl(Me.CapturesGridControl)
+
+            'Load the points into the map control
+            Dim CapturesVectorItemsLayer As VectorItemsLayer = GetBubbleVectorItemsLayerFromPointsDataTable(CapturesDataTable, "CaptureLatitude", "CaptureLongitude", 1, MarkerType.Star5, Color.Orange)
+            Me.CaribouMapControl.Layers.Add(CapturesVectorItemsLayer)
+
         Catch ex As Exception
             MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name & ")")
         End Try
@@ -74,11 +99,18 @@ FROM            tmpCollarDeployments
 
         'Survey sightings
         Try
-            Sql = "select * from Dataset_SurveySightingsHistory where animalid = '" & AnimalID & "' order by sightingdate"
+            Sql = "SELECT SightingDate, SurveyType, GroupNumber, TailNo, SearchArea, SmallBull, MediumBull, LargeBull, Bull, Cow, Calf
+, Adult, FrequenciesInGroup, [In], Seen, Marked, Mode, Accuracy, Herd, Lat, Lon, Comment, SourceFilename, 
+                  RecordedFrequency, ActualFrequency, AnimalID, CaribouGroupComment, FlightID, EID, DeploymentID, Year
+FROM     Dataset_SurveySightingsHistory WHERE AnimalID = '" & AnimalID & "' order by sightingdate"
             Dim SurveySightingsDataTable As DataTable = GetDataTable(My.Settings.WRST_CaribouConnectionString, Sql)
-            'Me.SurveySightingsDataGridView.DataSource = SurveySightingsDataTable
             Me.SightingsSurveysGridControl.DataSource = SurveySightingsDataTable
             SetUpGridControl(Me.SightingsSurveysGridControl)
+
+            'Load the points into the map control
+            Dim SurveySightingsVectorItemsLayer As VectorItemsLayer = GetBubbleVectorItemsLayerFromPointsDataTable(SurveySightingsDataTable, "Lat", "Lon", 1, MarkerType.Triangle, Color.Green)
+            Me.CaribouMapControl.Layers.Add(SurveySightingsVectorItemsLayer)
+
         Catch ex As Exception
             MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name & ")")
         End Try
@@ -86,10 +118,18 @@ FROM            tmpCollarDeployments
 
         'Early radiotracking
         Try
-            Sql = "SELECT * from EarlyRadiotracking WHERE        (AnimalID = '" & AnimalID & "')"
+            Sql = "SELECT AnimalID, SightingDate, Herd, Observer, Frequency, FrequencyCorrectedForDrift, CaribouID_Recorded, Vis, Adults, Calves, GroupNumber, GroupSize, Total, RetainedAntler, Mode, Accuracy, CalfStat, Elev_m, Location, Class, HabClass, 
+                  ForCov, Topog, Snow, SnowCov, Crater, SurveyPurpose, Lat, Lon, CaribouID_2, Comments, DeploymentID, DataQuality, QCFlag, QCComment, RecordInsertedDate, RecordInsertedBy, CertificationDate, CertifiedBy, CertificationLevel, 
+                  SourceFile, ERID, ProjectID
+FROM     EarlyRadiotracking WHERE        (AnimalID = '" & AnimalID & "')"
             Dim EarlyRadiotrackingDataTable As DataTable = GetDataTable(My.Settings.WRST_CaribouConnectionString, Sql)
             Me.EarlyRadiotrackingGridControl.DataSource = EarlyRadiotrackingDataTable
             SetUpGridControl(Me.EarlyRadiotrackingGridControl)
+
+            'Load the points into the map control
+            Dim EarlyRadiotrackingVectorItemsLayer As VectorItemsLayer = GetBubbleVectorItemsLayerFromPointsDataTable(EarlyRadiotrackingDataTable, "Lat", "Lon", 1, MarkerType.Square, Color.Blue)
+            Me.CaribouMapControl.Layers.Add(EarlyRadiotrackingVectorItemsLayer)
+
         Catch ex As Exception
             MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name & ")")
         End Try
@@ -102,12 +142,20 @@ FROM            tmpCollarDeployments
     ''' </summary>
     ''' <param name="AnimalID"></param>
     Private Sub LoadCollarFixes(AnimalID As String)
-        'Early radiotracking
+        'Collar fixes
         Try
-            Dim Sql As String = "SELECT * from tmpCollarFixes WHERE        (AnimalID = '" & AnimalID & "')"
-            Dim DT As DataTable = GetDataTable(My.Settings.WRST_CaribouConnectionString, Sql)
-            Me.CollarFixesGridControl.DataSource = DT
+            Dim Sql As String = "SELECT FixDate, Lat, Lon, DeploymentDate, RetrievalDate, MortalityDate, DisposalDate, FixId, HiddenBy
+, FileId, LineNumber, CollarManufacturer, CollarId, ProjectId, DateThisViewWasRefreshed, RetrievedBy, AnimalId
+FROM     tmpCollarFixes
+ WHERE        (AnimalID = '" & AnimalID & "')"
+            Dim FixesDataTable As DataTable = GetDataTable(My.Settings.WRST_CaribouConnectionString, Sql)
+            Me.CollarFixesGridControl.DataSource = FixesDataTable
             SetUpGridControl(Me.CollarFixesGridControl)
+
+            'Load the points into the map control
+            Dim CaribouLocationsVectorItemsLayer As VectorItemsLayer = GetBubbleVectorItemsLayerFromPointsDataTable(FixesDataTable, "Lat", "Lon", 1, MarkerType.Circle, Color.Red)
+            Me.CaribouMapControl.Layers.Add(CaribouLocationsVectorItemsLayer)
+
         Catch ex As Exception
             MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name & ")")
         End Try
@@ -127,7 +175,7 @@ FROM            tmpCollarDeployments
             GV.OptionsView.ShowFooter = True
             GV.OptionsDetail.EnableMasterViewMode = False 'True to show sub-tables
         Catch ex As Exception
-        MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name & ")")
+            MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name & ")")
         End Try
     End Sub
 

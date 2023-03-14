@@ -6,6 +6,7 @@ Imports Janus.Windows.GridEX
 Imports DevExpress.XtraGrid
 Imports DevExpress.XtraGrid.Views.Grid
 Imports DevExpress.XtraPivotGrid
+Imports DevExpress.XtraMap
 
 Module Utilites
 
@@ -817,6 +818,76 @@ reflected in the WRST Caribou Database Application." & vbNewLine & "Proceed?"
             End If
         End If
     End Sub
+
+
+
+    ''' <summary>
+    ''' Returns a DevExpress VectorItemsLayer of MapBubble points derived a DataTable containing Lat/Lon pairs.
+    ''' </summary>
+    ''' <param name="PointsDataTable">DataTable containing points spatial data. DataTable</param>
+    ''' <param name="LatitudeColumnName">Name of the latitude column. String.</param>
+    ''' <param name="LongitudeColumnName">Name of the longitude column. String.</param>
+    ''' <returns>VectorItemLayer of points from WKT.</returns>
+    Public Function GetBubbleVectorItemsLayerFromPointsDataTable(PointsDataTable As DataTable, LatitudeColumnName As String, LongitudeColumnName As String, FeatureSize As Integer, MarkerType As MarkerType, FillColor As Color) As DevExpress.XtraMap.VectorItemsLayer
+        Dim MyMapItemStorage As New MapItemStorage
+
+        Dim MyPointsVectorItemsLayer As New VectorItemsLayer()
+        If LatitudeColumnName.Trim <> "" And LongitudeColumnName.Trim <> "" Then
+            For Each MyPointDataRow As DataRow In PointsDataTable.Rows
+                If Not MyPointDataRow Is Nothing Then
+                    If Not IsDBNull(MyPointDataRow.Item(LatitudeColumnName)) And Not IsDBNull(MyPointDataRow.Item(LongitudeColumnName)) Then
+                        Dim Lat As Double = CDbl(MyPointDataRow.Item(LatitudeColumnName))
+                        Dim Lon As Double = CDbl(MyPointDataRow.Item(LongitudeColumnName))
+                        Dim MyMapBubble As New MapBubble()
+                        With MyMapBubble
+                            .Location = New GeoPoint(Lat, Lon)
+                            .Value = 400
+
+                            'Add the DataRow's attributes to the MapBubble object
+                            For Each Col As DataColumn In PointsDataTable.Columns
+                                Dim MIA As New MapItemAttribute
+                                With MIA
+                                    .Name = Col.ColumnName
+                                    .Value = MyPointDataRow.Item(Col.ColumnName)
+                                End With
+                                .Attributes.Add(MIA)
+                            Next
+                            .MarkerType = MarkerType
+                            .Fill = FillColor
+                        End With
+                        MyMapItemStorage.Items.Add(MyMapBubble)
+                    End If
+                End If
+            Next
+            With MyPointsVectorItemsLayer
+                .Data = MyMapItemStorage
+                .Name = PointsDataTable.TableName & "Bubbles"
+            End With
+        End If
+        Return MyPointsVectorItemsLayer
+    End Function
+
+    ''' <summary>
+    ''' Returns a DevExpress ImageLayer based on a Web Map Service's LayerName and URL suitable for adding to a DevExpress MapControl
+    ''' </summary>
+    ''' <param name="LayerName">Name of the WMS layer. String.</param>
+    ''' <param name="URL">URL of the WMS. String.</param>
+    ''' <returns></returns>
+    Public Function GetWMSImageLayer(LayerName As String, URL As String) As ImageLayer
+        Dim MyImageLayer As New ImageLayer
+        Dim MyWMSDataProvider As New WmsDataProvider
+        Try
+            With MyWMSDataProvider
+                .ActiveLayerName = LayerName
+                .ServerUri = URL
+            End With
+            MyImageLayer.DataProvider = MyWMSDataProvider
+        Catch ex As Exception
+            MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name & ").")
+        End Try
+
+        Return MyImageLayer
+    End Function
 
 
 End Module
