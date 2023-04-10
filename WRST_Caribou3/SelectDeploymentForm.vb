@@ -19,7 +19,7 @@
     ''' for a Frequency and Date.
     ''' </summary>
     ''' <param name="DeploymentsDataTable"></param>
-    Public Sub New(DeploymentsDataTable As DataTable)
+    Public Sub New(DeploymentsDataTable As DataTable, Herd As String, SightingDate As Date, Frequency As Double)
         InitializeComponent()
 
         If Not DeploymentsDataTable Is Nothing Then
@@ -31,6 +31,9 @@
                     .DataSource = DeploymentsDataTable
                     .RetrieveStructure()
                 End With
+
+                Dim Msg As String = "Multiple deployments are available for this record (" & Herd & ", " & SightingDate & ", " & Frequency & "). This situation arises when a collar is redeployed without terminating the previous deployment. This situation is most likely to occur if the frequency for a single collar is entered into Animal Movement with a different precision for one or more deployments (164.744 for one deployment and 164.74375 for another, for example. You may select one of the deployments below but ideally the problem should be resolved in Animal Movement."
+                Me.HeaderLabel.Text = Msg
             Else
                 MsgBox("DeploymentsDataTable must contain multiple rows.")
             End If
@@ -43,6 +46,7 @@
         Me.HeaderLabel.Width = Me.LabelPanel.Width = 50
         Me.HeaderLabel.Height = Me.LabelPanel.Height
         Me.HeaderLabel.AutoSize = True
+        Me.HeaderLabel.AutoEllipsis = True
     End Sub
 
     Private Sub CancelButton_Click(sender As Object, e As EventArgs) Handles CancelFormButton.Click
@@ -71,4 +75,6 @@
         End Try
         Me.Close()
     End Sub
+
+
 End Class

@@ -115,6 +115,23 @@ FROM     Dataset_SurveySightingsHistory WHERE AnimalID = '" & AnimalID & "' orde
             MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name & ")")
         End Try
 
+        'Survivorship
+        Try
+            Sql = "SELECT AnimalId, SightingDate, Year, Month, [In], Seen, AliveAtSightingDate, SightingType, Lat, Lon
+FROM     Dataset_Survivorship
+WHERE AnimalID = '" & AnimalID & "' ORDER BY SightingDate "
+            Dim SurvivorshipDataTable As DataTable = GetDataTable(My.Settings.WRST_CaribouConnectionString, Sql)
+            Me.SurvivorshipGridControl.DataSource = SurvivorshipDataTable
+            SetUpGridControl(Me.SightingsSurveysGridControl)
+
+            'Load the points into the map control
+            'Dim SurvivorshipVectorItemsLayer As VectorItemsLayer = GetBubbleVectorItemsLayerFromPointsDataTable(SurvivorshipDataTable, "Lat", "Lon", 1, MarkerType.Triangle, Color.Green)
+            'Me.CaribouMapControl.Layers.Add(SurvivorshipVectorItemsLayer)
+
+        Catch ex As Exception
+            MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name & ")")
+        End Try
+
 
         'Early radiotracking
         Try

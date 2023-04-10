@@ -39,19 +39,19 @@ Partial Class SelectDeploymentForm
         Me.Panel1.Controls.Add(Me.SelectButton)
         Me.Panel1.Controls.Add(Me.CancelFormButton)
         Me.Panel1.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.Panel1.Location = New System.Drawing.Point(0, 399)
-        Me.Panel1.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
+        Me.Panel1.Location = New System.Drawing.Point(0, 259)
+        Me.Panel1.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(1178, 64)
+        Me.Panel1.Size = New System.Drawing.Size(785, 42)
         Me.Panel1.TabIndex = 0
         '
         'SelectButton
         '
         Me.SelectButton.Enabled = False
-        Me.SelectButton.Location = New System.Drawing.Point(953, 8)
-        Me.SelectButton.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
+        Me.SelectButton.Location = New System.Drawing.Point(635, 5)
+        Me.SelectButton.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.SelectButton.Name = "SelectButton"
-        Me.SelectButton.Size = New System.Drawing.Size(84, 29)
+        Me.SelectButton.Size = New System.Drawing.Size(56, 19)
         Me.SelectButton.TabIndex = 1
         Me.SelectButton.Text = "Select"
         Me.SelectButton.UseVisualStyleBackColor = True
@@ -59,10 +59,10 @@ Partial Class SelectDeploymentForm
         'CancelFormButton
         '
         Me.CancelFormButton.Enabled = False
-        Me.CancelFormButton.Location = New System.Drawing.Point(1071, 8)
-        Me.CancelFormButton.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
+        Me.CancelFormButton.Location = New System.Drawing.Point(714, 5)
+        Me.CancelFormButton.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.CancelFormButton.Name = "CancelFormButton"
-        Me.CancelFormButton.Size = New System.Drawing.Size(84, 29)
+        Me.CancelFormButton.Size = New System.Drawing.Size(56, 19)
         Me.CancelFormButton.TabIndex = 0
         Me.CancelFormButton.Text = "Cancel"
         Me.CancelFormButton.UseVisualStyleBackColor = True
@@ -72,9 +72,9 @@ Partial Class SelectDeploymentForm
         Me.LabelPanel.Controls.Add(Me.HeaderLabel)
         Me.LabelPanel.Dock = System.Windows.Forms.DockStyle.Top
         Me.LabelPanel.Location = New System.Drawing.Point(0, 0)
-        Me.LabelPanel.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
+        Me.LabelPanel.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.LabelPanel.Name = "LabelPanel"
-        Me.LabelPanel.Size = New System.Drawing.Size(1178, 125)
+        Me.LabelPanel.Size = New System.Drawing.Size(785, 81)
         Me.LabelPanel.TabIndex = 1
         '
         'HeaderLabel
@@ -82,11 +82,13 @@ Partial Class SelectDeploymentForm
         Me.HeaderLabel.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.HeaderLabel.AutoEllipsis = True
         Me.HeaderLabel.AutoSize = True
         Me.HeaderLabel.Location = New System.Drawing.Point(0, 0)
-        Me.HeaderLabel.MaximumSize = New System.Drawing.Size(675, 125)
+        Me.HeaderLabel.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.HeaderLabel.MaximumSize = New System.Drawing.Size(450, 81)
         Me.HeaderLabel.Name = "HeaderLabel"
-        Me.HeaderLabel.Size = New System.Drawing.Size(671, 120)
+        Me.HeaderLabel.Size = New System.Drawing.Size(450, 78)
         Me.HeaderLabel.TabIndex = 0
         Me.HeaderLabel.Text = resources.GetString("HeaderLabel.Text")
         '
@@ -96,22 +98,22 @@ Partial Class SelectDeploymentForm
         Me.DeploymentsGridEX.ColumnAutoSizeMode = Janus.Windows.GridEX.ColumnAutoSizeMode.DiaplayedCells
         Me.DeploymentsGridEX.Dock = System.Windows.Forms.DockStyle.Fill
         Me.DeploymentsGridEX.GroupByBoxVisible = False
-        Me.DeploymentsGridEX.Location = New System.Drawing.Point(0, 125)
-        Me.DeploymentsGridEX.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
+        Me.DeploymentsGridEX.Location = New System.Drawing.Point(0, 81)
+        Me.DeploymentsGridEX.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.DeploymentsGridEX.Name = "DeploymentsGridEX"
-        Me.DeploymentsGridEX.Size = New System.Drawing.Size(1178, 274)
+        Me.DeploymentsGridEX.Size = New System.Drawing.Size(785, 178)
         Me.DeploymentsGridEX.TabIndex = 2
         '
         'SelectDeploymentForm
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 20.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1178, 463)
+        Me.ClientSize = New System.Drawing.Size(785, 301)
         Me.Controls.Add(Me.DeploymentsGridEX)
         Me.Controls.Add(Me.LabelPanel)
         Me.Controls.Add(Me.Panel1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow
-        Me.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
+        Me.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.Name = "SelectDeploymentForm"
         Me.Text = "Select a deployment"
         Me.Panel1.ResumeLayout(False)

@@ -84,6 +84,7 @@ Partial Class MainForm
         Me.QualityControlToolStripDropDownButton = New System.Windows.Forms.ToolStripDropDownButton()
         Me.CountTotalDetectedFrequenciesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CheckThatTheSourceFilesForSurveyFlightsExistToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.GetAListOfDeploymentsForAFrequencyToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator9 = New System.Windows.Forms.ToolStripSeparator()
         Me.DatabaseToolStripDropDownButton = New System.Windows.Forms.ToolStripDropDownButton()
         Me.SynchronizeDatabasesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -101,7 +102,7 @@ Partial Class MainForm
         Me.CollaredAnimalsInGroupsTableAdapter = New WRST_Caribou3.WRST_CaribouDataSetTableAdapters.CollaredAnimalsInGroupsTableAdapter()
         Me.SurveysTableAdapter = New WRST_Caribou3.WRST_CaribouDataSetTableAdapters.SurveysTableAdapter()
         Me.CapturesTableAdapter = New WRST_Caribou3.WRST_CaribouDataSetTableAdapters.CapturesTableAdapter()
-        Me.GetAListOfDeploymentsForAFrequencyToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.MatchSurveyFrequenciesToAnimalsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SplitContainer1.Panel1.SuspendLayout()
         Me.SplitContainer1.Panel2.SuspendLayout()
@@ -134,8 +135,8 @@ Partial Class MainForm
         'SplitContainer1
         '
         Me.SplitContainer1.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.SplitContainer1.Location = New System.Drawing.Point(0, 49)
-        Me.SplitContainer1.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.SplitContainer1.Location = New System.Drawing.Point(0, 25)
+        Me.SplitContainer1.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.SplitContainer1.Name = "SplitContainer1"
         Me.SplitContainer1.Orientation = System.Windows.Forms.Orientation.Horizontal
         '
@@ -146,8 +147,8 @@ Partial Class MainForm
         'SplitContainer1.Panel2
         '
         Me.SplitContainer1.Panel2.Controls.Add(Me.SurveysSplitContainer)
-        Me.SplitContainer1.Size = New System.Drawing.Size(1716, 769)
-        Me.SplitContainer1.SplitterDistance = 235
+        Me.SplitContainer1.Size = New System.Drawing.Size(1229, 628)
+        Me.SplitContainer1.SplitterDistance = 191
         Me.SplitContainer1.SplitterWidth = 2
         Me.SplitContainer1.TabIndex = 0
         '
@@ -165,11 +166,11 @@ Partial Class MainForm
         Me.SurveyFlightsGridEX.GroupByBoxVisible = False
         Me.SurveyFlightsGridEX.GroupMode = Janus.Windows.GridEX.GroupMode.Collapsed
         Me.SurveyFlightsGridEX.Location = New System.Drawing.Point(0, 0)
-        Me.SurveyFlightsGridEX.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.SurveyFlightsGridEX.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.SurveyFlightsGridEX.Name = "SurveyFlightsGridEX"
         Me.SurveyFlightsGridEX.RecordNavigator = True
         Me.SurveyFlightsGridEX.RowHeaders = Janus.Windows.GridEX.InheritableBoolean.[True]
-        Me.SurveyFlightsGridEX.Size = New System.Drawing.Size(1716, 235)
+        Me.SurveyFlightsGridEX.Size = New System.Drawing.Size(1229, 191)
         Me.SurveyFlightsGridEX.TabIndex = 0
         Me.SurveyFlightsGridEX.TableHeaders = Janus.Windows.GridEX.InheritableBoolean.[True]
         '
@@ -178,12 +179,12 @@ Partial Class MainForm
         Me.SurveyFlightsContextMenuStrip.ImageScalingSize = New System.Drawing.Size(20, 20)
         Me.SurveyFlightsContextMenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CheckSourceFilesExistToolStripMenuItem})
         Me.SurveyFlightsContextMenuStrip.Name = "SurveyFlightsContextMenuStrip"
-        Me.SurveyFlightsContextMenuStrip.Size = New System.Drawing.Size(230, 28)
+        Me.SurveyFlightsContextMenuStrip.Size = New System.Drawing.Size(197, 26)
         '
         'CheckSourceFilesExistToolStripMenuItem
         '
         Me.CheckSourceFilesExistToolStripMenuItem.Name = "CheckSourceFilesExistToolStripMenuItem"
-        Me.CheckSourceFilesExistToolStripMenuItem.Size = New System.Drawing.Size(229, 24)
+        Me.CheckSourceFilesExistToolStripMenuItem.Size = New System.Drawing.Size(196, 22)
         Me.CheckSourceFilesExistToolStripMenuItem.Text = "Check SourceFiles exist"
         '
         'SurveyFlightsBindingSource
@@ -200,7 +201,7 @@ Partial Class MainForm
         '
         Me.SurveysSplitContainer.Dock = System.Windows.Forms.DockStyle.Fill
         Me.SurveysSplitContainer.Location = New System.Drawing.Point(0, 0)
-        Me.SurveysSplitContainer.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.SurveysSplitContainer.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.SurveysSplitContainer.Name = "SurveysSplitContainer"
         Me.SurveysSplitContainer.Orientation = System.Windows.Forms.Orientation.Horizontal
         '
@@ -213,8 +214,8 @@ Partial Class MainForm
         '
         Me.SurveysSplitContainer.Panel2.AutoScroll = True
         Me.SurveysSplitContainer.Panel2.Controls.Add(Me.CollaredAnimalsSplitContainer)
-        Me.SurveysSplitContainer.Size = New System.Drawing.Size(1716, 532)
-        Me.SurveysSplitContainer.SplitterDistance = 319
+        Me.SurveysSplitContainer.Size = New System.Drawing.Size(1229, 435)
+        Me.SurveysSplitContainer.SplitterDistance = 260
         Me.SurveysSplitContainer.SplitterWidth = 2
         Me.SurveysSplitContainer.TabIndex = 0
         '
@@ -233,11 +234,11 @@ Partial Class MainForm
         Me.SurveysGridEX.FrozenColumns = 3
         Me.SurveysGridEX.GroupByBoxVisible = False
         Me.SurveysGridEX.Location = New System.Drawing.Point(0, 31)
-        Me.SurveysGridEX.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.SurveysGridEX.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.SurveysGridEX.Name = "SurveysGridEX"
         Me.SurveysGridEX.RecordNavigator = True
         Me.SurveysGridEX.RowHeaders = Janus.Windows.GridEX.InheritableBoolean.[True]
-        Me.SurveysGridEX.Size = New System.Drawing.Size(1716, 288)
+        Me.SurveysGridEX.Size = New System.Drawing.Size(1229, 229)
         Me.SurveysGridEX.TabIndex = 0
         Me.SurveysGridEX.TableHeaders = Janus.Windows.GridEX.InheritableBoolean.[True]
         Me.SurveysGridEX.TotalRow = Janus.Windows.GridEX.InheritableBoolean.[True]
@@ -249,56 +250,56 @@ Partial Class MainForm
         Me.SurveysContextMenuStrip.ImageScalingSize = New System.Drawing.Size(20, 20)
         Me.SurveysContextMenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.EditCertificationToolStripMenuItem, Me.EditDataQualityNotesToolStripMenuItem})
         Me.SurveysContextMenuStrip.Name = "SurveysContextMenuStrip"
-        Me.SurveysContextMenuStrip.Size = New System.Drawing.Size(319, 52)
+        Me.SurveysContextMenuStrip.Size = New System.Drawing.Size(269, 48)
         '
         'EditCertificationToolStripMenuItem
         '
         Me.EditCertificationToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.RawToolStripMenuItem, Me.ProvisionalToolStripMenuItem, Me.CertifiedToolStripMenuItem})
         Me.EditCertificationToolStripMenuItem.Name = "EditCertificationToolStripMenuItem"
-        Me.EditCertificationToolStripMenuItem.Size = New System.Drawing.Size(318, 24)
+        Me.EditCertificationToolStripMenuItem.Size = New System.Drawing.Size(268, 22)
         Me.EditCertificationToolStripMenuItem.Text = "Certify/de-certify the records shown:"
         '
         'RawToolStripMenuItem
         '
         Me.RawToolStripMenuItem.Name = "RawToolStripMenuItem"
-        Me.RawToolStripMenuItem.Size = New System.Drawing.Size(164, 26)
+        Me.RawToolStripMenuItem.Size = New System.Drawing.Size(132, 22)
         Me.RawToolStripMenuItem.Text = "Raw"
         '
         'ProvisionalToolStripMenuItem
         '
         Me.ProvisionalToolStripMenuItem.Name = "ProvisionalToolStripMenuItem"
-        Me.ProvisionalToolStripMenuItem.Size = New System.Drawing.Size(164, 26)
+        Me.ProvisionalToolStripMenuItem.Size = New System.Drawing.Size(132, 22)
         Me.ProvisionalToolStripMenuItem.Text = "Provisional"
         '
         'CertifiedToolStripMenuItem
         '
         Me.CertifiedToolStripMenuItem.Name = "CertifiedToolStripMenuItem"
-        Me.CertifiedToolStripMenuItem.Size = New System.Drawing.Size(164, 26)
+        Me.CertifiedToolStripMenuItem.Size = New System.Drawing.Size(132, 22)
         Me.CertifiedToolStripMenuItem.Text = "Certified"
         '
         'EditDataQualityNotesToolStripMenuItem
         '
         Me.EditDataQualityNotesToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.AppendANewNoteToAllTheRecordsToolStripMenuItem, Me.OverwriteAllDataQualityNotesToolStripMenuItem, Me.ClearAllDataQualityNotesToolStripMenuItem})
         Me.EditDataQualityNotesToolStripMenuItem.Name = "EditDataQualityNotesToolStripMenuItem"
-        Me.EditDataQualityNotesToolStripMenuItem.Size = New System.Drawing.Size(318, 24)
+        Me.EditDataQualityNotesToolStripMenuItem.Size = New System.Drawing.Size(268, 22)
         Me.EditDataQualityNotesToolStripMenuItem.Text = "Edit data quality notes"
         '
         'AppendANewNoteToAllTheRecordsToolStripMenuItem
         '
         Me.AppendANewNoteToAllTheRecordsToolStripMenuItem.Name = "AppendANewNoteToAllTheRecordsToolStripMenuItem"
-        Me.AppendANewNoteToAllTheRecordsToolStripMenuItem.Size = New System.Drawing.Size(347, 26)
+        Me.AppendANewNoteToAllTheRecordsToolStripMenuItem.Size = New System.Drawing.Size(277, 22)
         Me.AppendANewNoteToAllTheRecordsToolStripMenuItem.Text = "Append a new note to all the records..."
         '
         'OverwriteAllDataQualityNotesToolStripMenuItem
         '
         Me.OverwriteAllDataQualityNotesToolStripMenuItem.Name = "OverwriteAllDataQualityNotesToolStripMenuItem"
-        Me.OverwriteAllDataQualityNotesToolStripMenuItem.Size = New System.Drawing.Size(347, 26)
+        Me.OverwriteAllDataQualityNotesToolStripMenuItem.Size = New System.Drawing.Size(277, 22)
         Me.OverwriteAllDataQualityNotesToolStripMenuItem.Text = "Overwrite all data quality notes..."
         '
         'ClearAllDataQualityNotesToolStripMenuItem
         '
         Me.ClearAllDataQualityNotesToolStripMenuItem.Name = "ClearAllDataQualityNotesToolStripMenuItem"
-        Me.ClearAllDataQualityNotesToolStripMenuItem.Size = New System.Drawing.Size(347, 26)
+        Me.ClearAllDataQualityNotesToolStripMenuItem.Size = New System.Drawing.Size(277, 22)
         Me.ClearAllDataQualityNotesToolStripMenuItem.Text = "Clear all data quality notes..."
         '
         'SurveysBindingSource
@@ -312,7 +313,7 @@ Partial Class MainForm
         Me.SurveysToolStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ImportSurveyDataFromFileToolStripButton, Me.ToolStripSeparator1, Me.AutomatchToolStripSplitButton, Me.ToolStripSeparator2, Me.ChangeOrientationToolStripButton, Me.ToolStripSeparator8, Me.ToolStripLabel1, Me.ChangeCertificationLevelToolStripComboBox, Me.ToolStripSeparator10})
         Me.SurveysToolStrip.Location = New System.Drawing.Point(0, 0)
         Me.SurveysToolStrip.Name = "SurveysToolStrip"
-        Me.SurveysToolStrip.Size = New System.Drawing.Size(1716, 31)
+        Me.SurveysToolStrip.Size = New System.Drawing.Size(1229, 31)
         Me.SurveysToolStrip.TabIndex = 1
         Me.SurveysToolStrip.Text = "ToolStrip2"
         '
@@ -321,7 +322,7 @@ Partial Class MainForm
         Me.ImportSurveyDataFromFileToolStripButton.Image = CType(resources.GetObject("ImportSurveyDataFromFileToolStripButton.Image"), System.Drawing.Image)
         Me.ImportSurveyDataFromFileToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.ImportSurveyDataFromFileToolStripButton.Name = "ImportSurveyDataFromFileToolStripButton"
-        Me.ImportSurveyDataFromFileToolStripButton.Size = New System.Drawing.Size(231, 28)
+        Me.ImportSurveyDataFromFileToolStripButton.Size = New System.Drawing.Size(191, 28)
         Me.ImportSurveyDataFromFileToolStripButton.Text = "Import survey data from file..."
         '
         'ToolStripSeparator1
@@ -336,19 +337,19 @@ Partial Class MainForm
         Me.AutomatchToolStripSplitButton.Image = CType(resources.GetObject("AutomatchToolStripSplitButton.Image"), System.Drawing.Image)
         Me.AutomatchToolStripSplitButton.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.AutomatchToolStripSplitButton.Name = "AutomatchToolStripSplitButton"
-        Me.AutomatchToolStripSplitButton.Size = New System.Drawing.Size(277, 28)
+        Me.AutomatchToolStripSplitButton.Size = New System.Drawing.Size(223, 28)
         Me.AutomatchToolStripSplitButton.Text = "Auto-match frequencies to AnimalIDs"
         '
         'CurrentRowToolStripMenuItem
         '
         Me.CurrentRowToolStripMenuItem.Name = "CurrentRowToolStripMenuItem"
-        Me.CurrentRowToolStripMenuItem.Size = New System.Drawing.Size(236, 26)
+        Me.CurrentRowToolStripMenuItem.Size = New System.Drawing.Size(189, 22)
         Me.CurrentRowToolStripMenuItem.Text = "Current row"
         '
         'AllRowsToolStripMenuItem
         '
         Me.AllRowsToolStripMenuItem.Name = "AllRowsToolStripMenuItem"
-        Me.AllRowsToolStripMenuItem.Size = New System.Drawing.Size(236, 26)
+        Me.AllRowsToolStripMenuItem.Size = New System.Drawing.Size(189, 22)
         Me.AllRowsToolStripMenuItem.Text = "All rows shown below"
         '
         'ToolStripSeparator2
@@ -361,7 +362,7 @@ Partial Class MainForm
         Me.ChangeOrientationToolStripButton.Image = CType(resources.GetObject("ChangeOrientationToolStripButton.Image"), System.Drawing.Image)
         Me.ChangeOrientationToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.ChangeOrientationToolStripButton.Name = "ChangeOrientationToolStripButton"
-        Me.ChangeOrientationToolStripButton.Size = New System.Drawing.Size(164, 28)
+        Me.ChangeOrientationToolStripButton.Size = New System.Drawing.Size(137, 28)
         Me.ChangeOrientationToolStripButton.Text = "Change orientation"
         '
         'ToolStripSeparator8
@@ -372,14 +373,14 @@ Partial Class MainForm
         'ToolStripLabel1
         '
         Me.ToolStripLabel1.Name = "ToolStripLabel1"
-        Me.ToolStripLabel1.Size = New System.Drawing.Size(180, 28)
+        Me.ToolStripLabel1.Size = New System.Drawing.Size(144, 28)
         Me.ToolStripLabel1.Text = "Change certification level:"
         '
         'ChangeCertificationLevelToolStripComboBox
         '
         Me.ChangeCertificationLevelToolStripComboBox.Items.AddRange(New Object() {"", "Raw", "Provisional", "Certified"})
         Me.ChangeCertificationLevelToolStripComboBox.Name = "ChangeCertificationLevelToolStripComboBox"
-        Me.ChangeCertificationLevelToolStripComboBox.Size = New System.Drawing.Size(121, 31)
+        Me.ChangeCertificationLevelToolStripComboBox.Size = New System.Drawing.Size(92, 31)
         '
         'ToolStripSeparator10
         '
@@ -390,7 +391,7 @@ Partial Class MainForm
         '
         Me.CollaredAnimalsSplitContainer.Dock = System.Windows.Forms.DockStyle.Fill
         Me.CollaredAnimalsSplitContainer.Location = New System.Drawing.Point(0, 0)
-        Me.CollaredAnimalsSplitContainer.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.CollaredAnimalsSplitContainer.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.CollaredAnimalsSplitContainer.Name = "CollaredAnimalsSplitContainer"
         '
         'CollaredAnimalsSplitContainer.Panel1
@@ -401,8 +402,9 @@ Partial Class MainForm
         '
         Me.CollaredAnimalsSplitContainer.Panel2.Controls.Add(Me.AnimalGridEX)
         Me.CollaredAnimalsSplitContainer.Panel2.Controls.Add(Me.AnimalGridPanel)
-        Me.CollaredAnimalsSplitContainer.Size = New System.Drawing.Size(1716, 211)
-        Me.CollaredAnimalsSplitContainer.SplitterDistance = 794
+        Me.CollaredAnimalsSplitContainer.Size = New System.Drawing.Size(1229, 173)
+        Me.CollaredAnimalsSplitContainer.SplitterDistance = 568
+        Me.CollaredAnimalsSplitContainer.SplitterWidth = 3
         Me.CollaredAnimalsSplitContainer.TabIndex = 1
         '
         'CollaredAnimalsInGroupsGridEX
@@ -416,11 +418,11 @@ Partial Class MainForm
         Me.CollaredAnimalsInGroupsGridEX.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.CollaredAnimalsInGroupsGridEX.GroupByBoxVisible = False
         Me.CollaredAnimalsInGroupsGridEX.Location = New System.Drawing.Point(0, 0)
-        Me.CollaredAnimalsInGroupsGridEX.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.CollaredAnimalsInGroupsGridEX.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.CollaredAnimalsInGroupsGridEX.Name = "CollaredAnimalsInGroupsGridEX"
         Me.CollaredAnimalsInGroupsGridEX.RecordNavigator = True
         Me.CollaredAnimalsInGroupsGridEX.RowHeaders = Janus.Windows.GridEX.InheritableBoolean.[True]
-        Me.CollaredAnimalsInGroupsGridEX.Size = New System.Drawing.Size(794, 211)
+        Me.CollaredAnimalsInGroupsGridEX.Size = New System.Drawing.Size(568, 173)
         Me.CollaredAnimalsInGroupsGridEX.TabIndex = 0
         Me.CollaredAnimalsInGroupsGridEX.TableHeaders = Janus.Windows.GridEX.InheritableBoolean.[True]
         '
@@ -434,11 +436,11 @@ Partial Class MainForm
         Me.AnimalGridEX.AllowEdit = Janus.Windows.GridEX.InheritableBoolean.[False]
         Me.AnimalGridEX.BackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
         Me.AnimalGridEX.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.AnimalGridEX.Location = New System.Drawing.Point(0, 50)
-        Me.AnimalGridEX.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.AnimalGridEX.Location = New System.Drawing.Point(0, 64)
+        Me.AnimalGridEX.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.AnimalGridEX.Name = "AnimalGridEX"
         Me.AnimalGridEX.RowFormatStyle.BackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
-        Me.AnimalGridEX.Size = New System.Drawing.Size(918, 161)
+        Me.AnimalGridEX.Size = New System.Drawing.Size(658, 109)
         Me.AnimalGridEX.TabIndex = 0
         Me.AnimalGridEX.TableHeaderFormatStyle.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         '
@@ -447,18 +449,16 @@ Partial Class MainForm
         Me.AnimalGridPanel.Controls.Add(Me.ShowAnimalDetailsCheckBox)
         Me.AnimalGridPanel.Dock = System.Windows.Forms.DockStyle.Top
         Me.AnimalGridPanel.Location = New System.Drawing.Point(0, 0)
-        Me.AnimalGridPanel.Margin = New System.Windows.Forms.Padding(4)
         Me.AnimalGridPanel.Name = "AnimalGridPanel"
-        Me.AnimalGridPanel.Size = New System.Drawing.Size(918, 50)
+        Me.AnimalGridPanel.Size = New System.Drawing.Size(658, 64)
         Me.AnimalGridPanel.TabIndex = 1
         '
         'ShowAnimalDetailsCheckBox
         '
         Me.ShowAnimalDetailsCheckBox.AutoSize = True
-        Me.ShowAnimalDetailsCheckBox.Location = New System.Drawing.Point(4, 4)
-        Me.ShowAnimalDetailsCheckBox.Margin = New System.Windows.Forms.Padding(4)
+        Me.ShowAnimalDetailsCheckBox.Location = New System.Drawing.Point(3, 3)
         Me.ShowAnimalDetailsCheckBox.Name = "ShowAnimalDetailsCheckBox"
-        Me.ShowAnimalDetailsCheckBox.Size = New System.Drawing.Size(431, 21)
+        Me.ShowAnimalDetailsCheckBox.Size = New System.Drawing.Size(324, 17)
         Me.ShowAnimalDetailsCheckBox.TabIndex = 1
         Me.ShowAnimalDetailsCheckBox.Text = "Show details for the animal selected at left (slows performance):"
         Me.ShowAnimalDetailsCheckBox.UseVisualStyleBackColor = True
@@ -470,7 +470,7 @@ Partial Class MainForm
         Me.MainToolStrip.Location = New System.Drawing.Point(0, 0)
         Me.MainToolStrip.Name = "MainToolStrip"
         Me.HelpProvider.SetShowHelp(Me.MainToolStrip, True)
-        Me.MainToolStrip.Size = New System.Drawing.Size(1716, 39)
+        Me.MainToolStrip.Size = New System.Drawing.Size(1229, 25)
         Me.MainToolStrip.TabIndex = 1
         Me.MainToolStrip.Text = "ToolStrip1"
         '
@@ -480,13 +480,13 @@ Partial Class MainForm
         Me.SaveToolStripButton.Image = CType(resources.GetObject("SaveToolStripButton.Image"), System.Drawing.Image)
         Me.SaveToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.SaveToolStripButton.Name = "SaveToolStripButton"
-        Me.SaveToolStripButton.Size = New System.Drawing.Size(80, 36)
+        Me.SaveToolStripButton.Size = New System.Drawing.Size(63, 22)
         Me.SaveToolStripButton.Text = "Save edits"
         '
         'ToolStripSeparator3
         '
         Me.ToolStripSeparator3.Name = "ToolStripSeparator3"
-        Me.ToolStripSeparator3.Size = New System.Drawing.Size(6, 39)
+        Me.ToolStripSeparator3.Size = New System.Drawing.Size(6, 25)
         '
         'ReloadDatasetToolStripButton
         '
@@ -494,13 +494,13 @@ Partial Class MainForm
         Me.ReloadDatasetToolStripButton.Image = CType(resources.GetObject("ReloadDatasetToolStripButton.Image"), System.Drawing.Image)
         Me.ReloadDatasetToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.ReloadDatasetToolStripButton.Name = "ReloadDatasetToolStripButton"
-        Me.ReloadDatasetToolStripButton.Size = New System.Drawing.Size(113, 36)
+        Me.ReloadDatasetToolStripButton.Size = New System.Drawing.Size(88, 22)
         Me.ReloadDatasetToolStripButton.Text = "Reload dataset"
         '
         'ToolStripSeparator4
         '
         Me.ToolStripSeparator4.Name = "ToolStripSeparator4"
-        Me.ToolStripSeparator4.Size = New System.Drawing.Size(6, 39)
+        Me.ToolStripSeparator4.Size = New System.Drawing.Size(6, 25)
         '
         'AllowEditsToolStripButton
         '
@@ -508,14 +508,14 @@ Partial Class MainForm
         Me.AllowEditsToolStripButton.Image = CType(resources.GetObject("AllowEditsToolStripButton.Image"), System.Drawing.Image)
         Me.AllowEditsToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.AllowEditsToolStripButton.Name = "AllowEditsToolStripButton"
-        Me.AllowEditsToolStripButton.Size = New System.Drawing.Size(87, 36)
+        Me.AllowEditsToolStripButton.Size = New System.Drawing.Size(69, 22)
         Me.AllowEditsToolStripButton.Tag = "False"
         Me.AllowEditsToolStripButton.Text = "Allow edits"
         '
         'ToolStripSeparator6
         '
         Me.ToolStripSeparator6.Name = "ToolStripSeparator6"
-        Me.ToolStripSeparator6.Size = New System.Drawing.Size(6, 39)
+        Me.ToolStripSeparator6.Size = New System.Drawing.Size(6, 25)
         '
         'CaribouOptionsToolStripDropDownButton
         '
@@ -524,37 +524,37 @@ Partial Class MainForm
         Me.CaribouOptionsToolStripDropDownButton.Image = CType(resources.GetObject("CaribouOptionsToolStripDropDownButton.Image"), System.Drawing.Image)
         Me.CaribouOptionsToolStripDropDownButton.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.CaribouOptionsToolStripDropDownButton.Name = "CaribouOptionsToolStripDropDownButton"
-        Me.CaribouOptionsToolStripDropDownButton.Size = New System.Drawing.Size(75, 36)
+        Me.CaribouOptionsToolStripDropDownButton.Size = New System.Drawing.Size(62, 22)
         Me.CaribouOptionsToolStripDropDownButton.Text = "Caribou"
         '
         'CaribouProfileToolStripMenuItem
         '
         Me.CaribouProfileToolStripMenuItem.Name = "CaribouProfileToolStripMenuItem"
-        Me.CaribouProfileToolStripMenuItem.Size = New System.Drawing.Size(296, 26)
+        Me.CaribouProfileToolStripMenuItem.Size = New System.Drawing.Size(237, 22)
         Me.CaribouProfileToolStripMenuItem.Text = "Caribou profile..."
         '
         'SightingsHistoryPerAnimalToolStripMenuItem
         '
         Me.SightingsHistoryPerAnimalToolStripMenuItem.Name = "SightingsHistoryPerAnimalToolStripMenuItem"
-        Me.SightingsHistoryPerAnimalToolStripMenuItem.Size = New System.Drawing.Size(296, 26)
+        Me.SightingsHistoryPerAnimalToolStripMenuItem.Size = New System.Drawing.Size(237, 22)
         Me.SightingsHistoryPerAnimalToolStripMenuItem.Text = "Caribou sightings history..."
         '
         'InventoryOfCollarsForADateToolStripMenuItem
         '
         Me.InventoryOfCollarsForADateToolStripMenuItem.Name = "InventoryOfCollarsForADateToolStripMenuItem"
-        Me.InventoryOfCollarsForADateToolStripMenuItem.Size = New System.Drawing.Size(296, 26)
+        Me.InventoryOfCollarsForADateToolStripMenuItem.Size = New System.Drawing.Size(237, 22)
         Me.InventoryOfCollarsForADateToolStripMenuItem.Text = "Inventory of collars for a date..."
         '
         'CapturesToolStripMenuItem
         '
         Me.CapturesToolStripMenuItem.Name = "CapturesToolStripMenuItem"
-        Me.CapturesToolStripMenuItem.Size = New System.Drawing.Size(296, 26)
+        Me.CapturesToolStripMenuItem.Size = New System.Drawing.Size(237, 22)
         Me.CapturesToolStripMenuItem.Text = "Captures..."
         '
         'ToolStripSeparator5
         '
         Me.ToolStripSeparator5.Name = "ToolStripSeparator5"
-        Me.ToolStripSeparator5.Size = New System.Drawing.Size(6, 39)
+        Me.ToolStripSeparator5.Size = New System.Drawing.Size(6, 25)
         '
         'ResultsToolStripDropDownButton
         '
@@ -563,46 +563,52 @@ Partial Class MainForm
         Me.ResultsToolStripDropDownButton.Image = CType(resources.GetObject("ResultsToolStripDropDownButton.Image"), System.Drawing.Image)
         Me.ResultsToolStripDropDownButton.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.ResultsToolStripDropDownButton.Name = "ResultsToolStripDropDownButton"
-        Me.ResultsToolStripDropDownButton.Size = New System.Drawing.Size(153, 36)
+        Me.ResultsToolStripDropDownButton.Size = New System.Drawing.Size(124, 22)
         Me.ResultsToolStripDropDownButton.Text = "Results and analysis"
         '
         'DatabaseQueriesToolToolStripMenuItem
         '
         Me.DatabaseQueriesToolToolStripMenuItem.Name = "DatabaseQueriesToolToolStripMenuItem"
-        Me.DatabaseQueriesToolToolStripMenuItem.Size = New System.Drawing.Size(247, 26)
+        Me.DatabaseQueriesToolToolStripMenuItem.Size = New System.Drawing.Size(196, 22)
         Me.DatabaseQueriesToolToolStripMenuItem.Text = "Database queries tool..."
         '
         'ToolStripSeparator7
         '
         Me.ToolStripSeparator7.Name = "ToolStripSeparator7"
-        Me.ToolStripSeparator7.Size = New System.Drawing.Size(6, 39)
+        Me.ToolStripSeparator7.Size = New System.Drawing.Size(6, 25)
         '
         'QualityControlToolStripDropDownButton
         '
         Me.QualityControlToolStripDropDownButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
-        Me.QualityControlToolStripDropDownButton.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CountTotalDetectedFrequenciesToolStripMenuItem, Me.CheckThatTheSourceFilesForSurveyFlightsExistToolStripMenuItem, Me.GetAListOfDeploymentsForAFrequencyToolStripMenuItem})
+        Me.QualityControlToolStripDropDownButton.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CountTotalDetectedFrequenciesToolStripMenuItem, Me.CheckThatTheSourceFilesForSurveyFlightsExistToolStripMenuItem, Me.GetAListOfDeploymentsForAFrequencyToolStripMenuItem, Me.MatchSurveyFrequenciesToAnimalsToolStripMenuItem})
         Me.QualityControlToolStripDropDownButton.Image = CType(resources.GetObject("QualityControlToolStripDropDownButton.Image"), System.Drawing.Image)
         Me.QualityControlToolStripDropDownButton.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.QualityControlToolStripDropDownButton.Name = "QualityControlToolStripDropDownButton"
-        Me.QualityControlToolStripDropDownButton.Size = New System.Drawing.Size(121, 36)
+        Me.QualityControlToolStripDropDownButton.Size = New System.Drawing.Size(99, 22)
         Me.QualityControlToolStripDropDownButton.Text = "Quality control"
         '
         'CountTotalDetectedFrequenciesToolStripMenuItem
         '
         Me.CountTotalDetectedFrequenciesToolStripMenuItem.Name = "CountTotalDetectedFrequenciesToolStripMenuItem"
-        Me.CountTotalDetectedFrequenciesToolStripMenuItem.Size = New System.Drawing.Size(420, 26)
+        Me.CountTotalDetectedFrequenciesToolStripMenuItem.Size = New System.Drawing.Size(340, 22)
         Me.CountTotalDetectedFrequenciesToolStripMenuItem.Text = "Frequency matching checks..."
         '
         'CheckThatTheSourceFilesForSurveyFlightsExistToolStripMenuItem
         '
         Me.CheckThatTheSourceFilesForSurveyFlightsExistToolStripMenuItem.Name = "CheckThatTheSourceFilesForSurveyFlightsExistToolStripMenuItem"
-        Me.CheckThatTheSourceFilesForSurveyFlightsExistToolStripMenuItem.Size = New System.Drawing.Size(420, 26)
+        Me.CheckThatTheSourceFilesForSurveyFlightsExistToolStripMenuItem.Size = New System.Drawing.Size(340, 22)
         Me.CheckThatTheSourceFilesForSurveyFlightsExistToolStripMenuItem.Text = "Check that the source files for survey flights exist..."
+        '
+        'GetAListOfDeploymentsForAFrequencyToolStripMenuItem
+        '
+        Me.GetAListOfDeploymentsForAFrequencyToolStripMenuItem.Name = "GetAListOfDeploymentsForAFrequencyToolStripMenuItem"
+        Me.GetAListOfDeploymentsForAFrequencyToolStripMenuItem.Size = New System.Drawing.Size(340, 22)
+        Me.GetAListOfDeploymentsForAFrequencyToolStripMenuItem.Text = "Get a list of deployments for a frequency"
         '
         'ToolStripSeparator9
         '
         Me.ToolStripSeparator9.Name = "ToolStripSeparator9"
-        Me.ToolStripSeparator9.Size = New System.Drawing.Size(6, 39)
+        Me.ToolStripSeparator9.Size = New System.Drawing.Size(6, 25)
         '
         'DatabaseToolStripDropDownButton
         '
@@ -611,43 +617,43 @@ Partial Class MainForm
         Me.DatabaseToolStripDropDownButton.Image = CType(resources.GetObject("DatabaseToolStripDropDownButton.Image"), System.Drawing.Image)
         Me.DatabaseToolStripDropDownButton.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.DatabaseToolStripDropDownButton.Name = "DatabaseToolStripDropDownButton"
-        Me.DatabaseToolStripDropDownButton.Size = New System.Drawing.Size(139, 36)
+        Me.DatabaseToolStripDropDownButton.Size = New System.Drawing.Size(113, 22)
         Me.DatabaseToolStripDropDownButton.Text = "Tasks and options"
         '
         'SynchronizeDatabasesToolStripMenuItem
         '
         Me.SynchronizeDatabasesToolStripMenuItem.Name = "SynchronizeDatabasesToolStripMenuItem"
-        Me.SynchronizeDatabasesToolStripMenuItem.Size = New System.Drawing.Size(384, 26)
+        Me.SynchronizeDatabasesToolStripMenuItem.Size = New System.Drawing.Size(303, 22)
         Me.SynchronizeDatabasesToolStripMenuItem.Text = "Synchronize databases..."
         '
         'SettingsToolStripMenuItem
         '
         Me.SettingsToolStripMenuItem.Name = "SettingsToolStripMenuItem"
-        Me.SettingsToolStripMenuItem.Size = New System.Drawing.Size(384, 26)
+        Me.SettingsToolStripMenuItem.Size = New System.Drawing.Size(303, 22)
         Me.SettingsToolStripMenuItem.Text = "Settings..."
         '
         'OpenWRSTCaribouSharedNetworkDriveToolStripMenuItem
         '
         Me.OpenWRSTCaribouSharedNetworkDriveToolStripMenuItem.Name = "OpenWRSTCaribouSharedNetworkDriveToolStripMenuItem"
-        Me.OpenWRSTCaribouSharedNetworkDriveToolStripMenuItem.Size = New System.Drawing.Size(384, 26)
+        Me.OpenWRSTCaribouSharedNetworkDriveToolStripMenuItem.Size = New System.Drawing.Size(303, 22)
         Me.OpenWRSTCaribouSharedNetworkDriveToolStripMenuItem.Text = "Open WRST Caribou shared network drive..."
         '
         'OpenIRMAProjectReferenceToolStripMenuItem
         '
         Me.OpenIRMAProjectReferenceToolStripMenuItem.Name = "OpenIRMAProjectReferenceToolStripMenuItem"
-        Me.OpenIRMAProjectReferenceToolStripMenuItem.Size = New System.Drawing.Size(384, 26)
+        Me.OpenIRMAProjectReferenceToolStripMenuItem.Size = New System.Drawing.Size(303, 22)
         Me.OpenIRMAProjectReferenceToolStripMenuItem.Text = "IRMA Project Reference..."
         '
         'IRMADataDeliverablesDatasetReferenceToolStripMenuItem
         '
         Me.IRMADataDeliverablesDatasetReferenceToolStripMenuItem.Name = "IRMADataDeliverablesDatasetReferenceToolStripMenuItem"
-        Me.IRMADataDeliverablesDatasetReferenceToolStripMenuItem.Size = New System.Drawing.Size(384, 26)
+        Me.IRMADataDeliverablesDatasetReferenceToolStripMenuItem.Size = New System.Drawing.Size(303, 22)
         Me.IRMADataDeliverablesDatasetReferenceToolStripMenuItem.Text = "IRMA Data Deliverables Dataset Reference..."
         '
         'ExportFlightDatasetToolStripMenuItem
         '
         Me.ExportFlightDatasetToolStripMenuItem.Name = "ExportFlightDatasetToolStripMenuItem"
-        Me.ExportFlightDatasetToolStripMenuItem.Size = New System.Drawing.Size(384, 26)
+        Me.ExportFlightDatasetToolStripMenuItem.Size = New System.Drawing.Size(303, 22)
         Me.ExportFlightDatasetToolStripMenuItem.Text = "Export flight dataset..."
         '
         'HelpProvider
@@ -660,16 +666,16 @@ Partial Class MainForm
         Me.BottomToolStrip.Dock = System.Windows.Forms.DockStyle.Bottom
         Me.BottomToolStrip.ImageScalingSize = New System.Drawing.Size(24, 24)
         Me.BottomToolStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CurrentDatabaseToolStripLabel})
-        Me.BottomToolStrip.Location = New System.Drawing.Point(0, 828)
+        Me.BottomToolStrip.Location = New System.Drawing.Point(0, 653)
         Me.BottomToolStrip.Name = "BottomToolStrip"
-        Me.BottomToolStrip.Size = New System.Drawing.Size(1716, 39)
+        Me.BottomToolStrip.Size = New System.Drawing.Size(1229, 25)
         Me.BottomToolStrip.TabIndex = 1
         Me.BottomToolStrip.Text = "ToolStrip1"
         '
         'CurrentDatabaseToolStripLabel
         '
         Me.CurrentDatabaseToolStripLabel.Name = "CurrentDatabaseToolStripLabel"
-        Me.CurrentDatabaseToolStripLabel.Size = New System.Drawing.Size(169, 36)
+        Me.CurrentDatabaseToolStripLabel.Size = New System.Drawing.Size(133, 22)
         Me.CurrentDatabaseToolStripLabel.Text = "Database: Disconnected"
         '
         'CapturesBindingSource
@@ -702,17 +708,17 @@ Partial Class MainForm
         '
         Me.CapturesTableAdapter.ClearBeforeFill = True
         '
-        'GetAListOfDeploymentsForAFrequencyToolStripMenuItem
+        'MatchSurveyFrequenciesToAnimalsToolStripMenuItem
         '
-        Me.GetAListOfDeploymentsForAFrequencyToolStripMenuItem.Name = "GetAListOfDeploymentsForAFrequencyToolStripMenuItem"
-        Me.GetAListOfDeploymentsForAFrequencyToolStripMenuItem.Size = New System.Drawing.Size(420, 26)
-        Me.GetAListOfDeploymentsForAFrequencyToolStripMenuItem.Text = "Get a list of deployments for a frequency"
+        Me.MatchSurveyFrequenciesToAnimalsToolStripMenuItem.Name = "MatchSurveyFrequenciesToAnimalsToolStripMenuItem"
+        Me.MatchSurveyFrequenciesToAnimalsToolStripMenuItem.Size = New System.Drawing.Size(340, 22)
+        Me.MatchSurveyFrequenciesToAnimalsToolStripMenuItem.Text = "Match survey frequencies to Animals..."
         '
         'MainForm
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1373, 693)
+        Me.ClientSize = New System.Drawing.Size(1229, 678)
         Me.Controls.Add(Me.SplitContainer1)
         Me.Controls.Add(Me.BottomToolStrip)
         Me.Controls.Add(Me.MainToolStrip)
@@ -721,7 +727,7 @@ Partial Class MainForm
         Me.HelpProvider.SetHelpNavigator(Me, System.Windows.Forms.HelpNavigator.Topic)
         Me.HelpProvider.SetHelpString(Me, "Data entry")
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
-        Me.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.Name = "MainForm"
         Me.HelpProvider.SetShowHelp(Me, True)
         Me.Text = "NPS Alaska Caribou Monitoring Database Application"
@@ -835,4 +841,5 @@ Partial Class MainForm
     Friend WithEvents CheckSourceFilesExistToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents CheckThatTheSourceFilesForSurveyFlightsExistToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents GetAListOfDeploymentsForAFrequencyToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents MatchSurveyFrequenciesToAnimalsToolStripMenuItem As ToolStripMenuItem
 End Class

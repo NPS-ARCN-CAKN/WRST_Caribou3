@@ -532,7 +532,7 @@ order by DaysDeployedBeforeSighting"
                     ' we retrieved multiple deployments, probably due to collar being redeployed without retrievaldate being set for the prior deployment
                     'in animal movement
                     ' or the frequency drifted or the frequency has different precision in animal movement or the Surveys table
-                    Dim SelectDeploymentForm As New SelectDeploymentForm(DeploymentDataTable)
+                    Dim SelectDeploymentForm As New SelectDeploymentForm(DeploymentDataTable, Herd, SightingDate, Frequency)
                     SelectDeploymentForm.ShowDialog()
                     If Not IsDBNull(SelectDeploymentForm.DeploymentID) Then
                         If SelectDeploymentForm.DeploymentID > 0 Then

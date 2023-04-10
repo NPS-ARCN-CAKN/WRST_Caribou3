@@ -2200,4 +2200,102 @@ If the SourceFile does not exist the attribute will be overwritten with 'INVALID
         End If
 
     End Sub
+
+    Private Sub MatchSurveyFrequenciesToAnimalsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles MatchSurveyFrequenciesToAnimalsToolStripMenuItem.Click
+        MatchFrequenciesToAnimals()
+    End Sub
+
+    ''' <summary>
+    ''' Fixes frequencies recorded during an aerial survey that were not then converted to Animals seen. Frequencies in the Surveys table must also have a corresponding
+    ''' record in the CollaredAnimalsInGroups table. This sub looks for Surveys with one or more untranslated frequencies, 
+    ''' looks up the corresponding animal from the collar deployments table, and if the record does not already exist in the CollaredAnimalsInGroups table, inserts it.
+    ''' </summary>
+    Private Sub MatchFrequenciesToAnimals()
+        Dim Instructions As String = "This tool will look for records in the database where a frequency was detected but not matched to a caribou and will
+attempt to perform the match.
+It is recommended that if you have any pending edits you should cancel this dialog and save them to the database before re-starting the tool. Proceed?"
+        If MsgBox(Instructions, MsgBoxStyle.YesNo, "Match frequencies to animals tool") = MsgBoxResult.Yes Then
+            Try
+
+
+                'Step 1: Look up Surveys having unmatched frequencies/animals
+                Dim Sql As String = "SELECT  [Herd],[SurveyType],[FlightDate],[CountOfFrequencies],[CountOfAnimalIDS],FlightID FROM [WRST_Caribou].[dbo].[QC_Surveys_FrequenciesNotMatchedToAnimals] ORDER BY FlightDate Desc"
+                Dim UnmatchedFrequenciesDataTable As DataTable = GetDataTable(My.Settings.WRST_CaribouConnectionString, Sql)
+
+                'Cycle through the Surveys from above
+                For Each Row As DataRow In UnmatchedFrequenciesDataTable.Rows
+                    Dim Herd As String = Row.Item("Herd")
+                    Dim SurveyType As String = Row.Item("SurveyType").ToString.Trim
+                    Dim FlightDate As String = Row.Item("FlightDate").ToString.Trim
+                    Dim FlightID As String = Row.Item("FlightID")
+
+                    'Get the frequencies detected during the survey into a DataTable
+                    Dim FrequenciesQuery As String = "SELECT SightingDate,FrequenciesInGroup,EID FROM Surveys WHERE FlightID='" & FlightID.Trim & "';"
+                    Dim FlightFrequenciesDataTable = GetDataTable(My.Settings.WRST_CaribouConnectionString, FrequenciesQuery)
+
+                    ' Loop through the data table from above so we can match frequencies to animals
+                    For Each FrequencyRow As DataRow In FlightFrequenciesDataTable.Rows
+                        Dim SightingDate As String = FrequencyRow.Item("SightingDate")
+                        Dim FrequenciesInGroup As String = FrequencyRow.Item("FrequenciesInGroup").ToString.Trim
+                        Dim EID As String = FrequencyRow.Item("EID").ToString.Trim
+
+                        ' Frequencies are recorded as comma separated values, split them out into single frequencies
+                        Dim Frequencies As String() = FrequenciesInGroup.Split(New Char() {","c})
+                        Dim Frequency As String
+
+                        ' Process each frequency from above individually
+                        For Each Frequency In Frequencies
+
+                            'Look up the DeploymentID and AnimalID, the function will throw up a form allowing the user to manually select
+                            ' a deploymentID if more than one is detected
+                            Dim DeploymentsDataTable As DataTable = GetDeploymentDataTableFromFrequencyAndDate(Herd, Frequency, SightingDate, 0.00, True)
+
+                            'If we got a deploymentid
+                            If DeploymentsDataTable.Rows.Count = 1 Then
+
+                                'There should only be one DeploymentID but we'll cycle through all the rows just to be sure
+                                For Each DeploymentRow In DeploymentsDataTable.Rows
+                                    Dim DeploymentID As Integer = DeploymentRow.item("DeploymentID")
+                                    Dim AnimalID As String = DeploymentRow.item("AnimalID").ToString.Trim
+
+                                    'Make sure the record does not already exist in the CollaredAnimalsInGroups data table.
+                                    'EID and DeploymentID should be unique
+                                    Dim AnimalsDataTable As DataTable = WRST_CaribouDataSet.Tables("CollaredAnimalsInGroups")
+                                    Dim ExistsDataView As New DataView(AnimalsDataTable, "EID='" & EID & "' And DeploymentID=" & DeploymentID, "", DataViewRowState.CurrentRows)
+                                    If ExistsDataView.Count = 0 Then
+                                        'Record does not already exist; insert a new record into the CollaredAnimalsInGroups table
+                                        Dim NewRow As DataRow = AnimalsDataTable.NewRow
+                                        With NewRow
+                                            .Item("EID") = EID
+                                            .Item("DeploymentID") = DeploymentID
+                                            .Item("AnimalID") = AnimalID
+                                            .Item("RecordInsertedDate") = Now
+                                            .Item("RecordInsertedBy") = My.User.Name
+                                        End With
+                                        Try
+                                            AnimalsDataTable.Rows.Add(NewRow)
+                                        Catch exp As Exception
+                                            MsgBox(exp.Message & " " & System.Reflection.MethodBase.GetCurrentMethod.Name)
+                                        End Try
+                                    End If
+
+                                    '                         Dim TSql As String = "IF NOT EXISTS (SELECT EID,DeploymentID FROM CollaredAnimalsInGroups WHERE EID='" & EID & "' And DeploymentID=" & DeploymentID & ")
+                                    'BEGIN"
+                                    '                         Dim InsertQuery As String = "INSERT INTO CollaredAnimalsInGroups(EID,DeploymentID,AnimalID) VALUES('" & EID & "'," & DeploymentID & ",'" & AnimalID & "');--  Herd: " & Herd & " SightingDate: " & SightingDate & " SurveyType: " & SurveyType & " Frequency: " & Frequency
+                                    '                         TSql = TSql & vbNewLine & vbTab & vbTab & InsertQuery & vbNewLine & vbTab & "END"
+                                    '                         Debug.Print(vbTab & TSql)
+                                Next
+                            Else
+                                MsgBox("Multiple deployments for " & Herd & " " & SightingDate & " " & Frequency)
+                            End If
+                        Next
+                    Next
+                Next
+            Catch ex As Exception
+                MsgBox(ex.Message & " " & System.Reflection.MethodBase.GetCurrentMethod.Name)
+            End Try
+        End If
+
+    End Sub
+
 End Class
