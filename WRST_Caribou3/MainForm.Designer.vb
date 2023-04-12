@@ -26,8 +26,6 @@ Partial Class MainForm
         Dim SurveyFlightsGridEX_DesignTimeLayout As Janus.Windows.GridEX.GridEXLayout = New Janus.Windows.GridEX.GridEXLayout()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(MainForm))
         Dim SurveysGridEX_DesignTimeLayout As Janus.Windows.GridEX.GridEXLayout = New Janus.Windows.GridEX.GridEXLayout()
-        Dim SurveysGridEX_DesignTimeLayout_Reference_0 As Janus.Windows.Common.Layouts.JanusLayoutReference = New Janus.Windows.Common.Layouts.JanusLayoutReference("GridEXLayoutData.RootTable.FormatConditions.Condition4.FormatStyle.BackgroundImag" &
-        "e")
         Dim CollaredAnimalsInGroupsGridEX_DesignTimeLayout As Janus.Windows.GridEX.GridEXLayout = New Janus.Windows.GridEX.GridEXLayout()
         Me.SplitContainer1 = New System.Windows.Forms.SplitContainer()
         Me.SurveyFlightsGridEX = New Janus.Windows.GridEX.GridEX()
@@ -85,6 +83,7 @@ Partial Class MainForm
         Me.CountTotalDetectedFrequenciesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CheckThatTheSourceFilesForSurveyFlightsExistToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.GetAListOfDeploymentsForAFrequencyToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.MatchSurveyFrequenciesToAnimalsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator9 = New System.Windows.Forms.ToolStripSeparator()
         Me.DatabaseToolStripDropDownButton = New System.Windows.Forms.ToolStripDropDownButton()
         Me.SynchronizeDatabasesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -102,7 +101,6 @@ Partial Class MainForm
         Me.CollaredAnimalsInGroupsTableAdapter = New WRST_Caribou3.WRST_CaribouDataSetTableAdapters.CollaredAnimalsInGroupsTableAdapter()
         Me.SurveysTableAdapter = New WRST_Caribou3.WRST_CaribouDataSetTableAdapters.SurveysTableAdapter()
         Me.CapturesTableAdapter = New WRST_Caribou3.WRST_CaribouDataSetTableAdapters.CapturesTableAdapter()
-        Me.MatchSurveyFrequenciesToAnimalsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SplitContainer1.Panel1.SuspendLayout()
         Me.SplitContainer1.Panel2.SuspendLayout()
@@ -136,7 +134,7 @@ Partial Class MainForm
         '
         Me.SplitContainer1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.SplitContainer1.Location = New System.Drawing.Point(0, 25)
-        Me.SplitContainer1.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.SplitContainer1.Margin = New System.Windows.Forms.Padding(2)
         Me.SplitContainer1.Name = "SplitContainer1"
         Me.SplitContainer1.Orientation = System.Windows.Forms.Orientation.Horizontal
         '
@@ -166,7 +164,7 @@ Partial Class MainForm
         Me.SurveyFlightsGridEX.GroupByBoxVisible = False
         Me.SurveyFlightsGridEX.GroupMode = Janus.Windows.GridEX.GroupMode.Collapsed
         Me.SurveyFlightsGridEX.Location = New System.Drawing.Point(0, 0)
-        Me.SurveyFlightsGridEX.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.SurveyFlightsGridEX.Margin = New System.Windows.Forms.Padding(2)
         Me.SurveyFlightsGridEX.Name = "SurveyFlightsGridEX"
         Me.SurveyFlightsGridEX.RecordNavigator = True
         Me.SurveyFlightsGridEX.RowHeaders = Janus.Windows.GridEX.InheritableBoolean.[True]
@@ -201,7 +199,7 @@ Partial Class MainForm
         '
         Me.SurveysSplitContainer.Dock = System.Windows.Forms.DockStyle.Fill
         Me.SurveysSplitContainer.Location = New System.Drawing.Point(0, 0)
-        Me.SurveysSplitContainer.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.SurveysSplitContainer.Margin = New System.Windows.Forms.Padding(2)
         Me.SurveysSplitContainer.Name = "SurveysSplitContainer"
         Me.SurveysSplitContainer.Orientation = System.Windows.Forms.Orientation.Horizontal
         '
@@ -225,8 +223,6 @@ Partial Class MainForm
         Me.SurveysGridEX.AllowDelete = Janus.Windows.GridEX.InheritableBoolean.[True]
         Me.SurveysGridEX.ContextMenuStrip = Me.SurveysContextMenuStrip
         Me.SurveysGridEX.DataSource = Me.SurveysBindingSource
-        SurveysGridEX_DesignTimeLayout_Reference_0.Instance = CType(resources.GetObject("SurveysGridEX_DesignTimeLayout_Reference_0.Instance"), Object)
-        SurveysGridEX_DesignTimeLayout.LayoutReferences.AddRange(New Janus.Windows.Common.Layouts.JanusLayoutReference() {SurveysGridEX_DesignTimeLayout_Reference_0})
         SurveysGridEX_DesignTimeLayout.LayoutString = resources.GetString("SurveysGridEX_DesignTimeLayout.LayoutString")
         Me.SurveysGridEX.DesignTimeLayout = SurveysGridEX_DesignTimeLayout
         Me.SurveysGridEX.Dock = System.Windows.Forms.DockStyle.Fill
@@ -234,7 +230,7 @@ Partial Class MainForm
         Me.SurveysGridEX.FrozenColumns = 3
         Me.SurveysGridEX.GroupByBoxVisible = False
         Me.SurveysGridEX.Location = New System.Drawing.Point(0, 31)
-        Me.SurveysGridEX.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.SurveysGridEX.Margin = New System.Windows.Forms.Padding(2)
         Me.SurveysGridEX.Name = "SurveysGridEX"
         Me.SurveysGridEX.RecordNavigator = True
         Me.SurveysGridEX.RowHeaders = Janus.Windows.GridEX.InheritableBoolean.[True]
@@ -391,7 +387,7 @@ Partial Class MainForm
         '
         Me.CollaredAnimalsSplitContainer.Dock = System.Windows.Forms.DockStyle.Fill
         Me.CollaredAnimalsSplitContainer.Location = New System.Drawing.Point(0, 0)
-        Me.CollaredAnimalsSplitContainer.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.CollaredAnimalsSplitContainer.Margin = New System.Windows.Forms.Padding(2)
         Me.CollaredAnimalsSplitContainer.Name = "CollaredAnimalsSplitContainer"
         '
         'CollaredAnimalsSplitContainer.Panel1
@@ -418,7 +414,7 @@ Partial Class MainForm
         Me.CollaredAnimalsInGroupsGridEX.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.CollaredAnimalsInGroupsGridEX.GroupByBoxVisible = False
         Me.CollaredAnimalsInGroupsGridEX.Location = New System.Drawing.Point(0, 0)
-        Me.CollaredAnimalsInGroupsGridEX.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.CollaredAnimalsInGroupsGridEX.Margin = New System.Windows.Forms.Padding(2)
         Me.CollaredAnimalsInGroupsGridEX.Name = "CollaredAnimalsInGroupsGridEX"
         Me.CollaredAnimalsInGroupsGridEX.RecordNavigator = True
         Me.CollaredAnimalsInGroupsGridEX.RowHeaders = Janus.Windows.GridEX.InheritableBoolean.[True]
@@ -437,7 +433,7 @@ Partial Class MainForm
         Me.AnimalGridEX.BackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
         Me.AnimalGridEX.Dock = System.Windows.Forms.DockStyle.Fill
         Me.AnimalGridEX.Location = New System.Drawing.Point(0, 64)
-        Me.AnimalGridEX.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.AnimalGridEX.Margin = New System.Windows.Forms.Padding(2)
         Me.AnimalGridEX.Name = "AnimalGridEX"
         Me.AnimalGridEX.RowFormatStyle.BackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
         Me.AnimalGridEX.Size = New System.Drawing.Size(658, 109)
@@ -605,6 +601,12 @@ Partial Class MainForm
         Me.GetAListOfDeploymentsForAFrequencyToolStripMenuItem.Size = New System.Drawing.Size(340, 22)
         Me.GetAListOfDeploymentsForAFrequencyToolStripMenuItem.Text = "Get a list of deployments for a frequency"
         '
+        'MatchSurveyFrequenciesToAnimalsToolStripMenuItem
+        '
+        Me.MatchSurveyFrequenciesToAnimalsToolStripMenuItem.Name = "MatchSurveyFrequenciesToAnimalsToolStripMenuItem"
+        Me.MatchSurveyFrequenciesToAnimalsToolStripMenuItem.Size = New System.Drawing.Size(340, 22)
+        Me.MatchSurveyFrequenciesToAnimalsToolStripMenuItem.Text = "Match survey frequencies to Animals..."
+        '
         'ToolStripSeparator9
         '
         Me.ToolStripSeparator9.Name = "ToolStripSeparator9"
@@ -708,12 +710,6 @@ Partial Class MainForm
         '
         Me.CapturesTableAdapter.ClearBeforeFill = True
         '
-        'MatchSurveyFrequenciesToAnimalsToolStripMenuItem
-        '
-        Me.MatchSurveyFrequenciesToAnimalsToolStripMenuItem.Name = "MatchSurveyFrequenciesToAnimalsToolStripMenuItem"
-        Me.MatchSurveyFrequenciesToAnimalsToolStripMenuItem.Size = New System.Drawing.Size(340, 22)
-        Me.MatchSurveyFrequenciesToAnimalsToolStripMenuItem.Text = "Match survey frequencies to Animals..."
-        '
         'MainForm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -727,7 +723,7 @@ Partial Class MainForm
         Me.HelpProvider.SetHelpNavigator(Me, System.Windows.Forms.HelpNavigator.Topic)
         Me.HelpProvider.SetHelpString(Me, "Data entry")
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
-        Me.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.Margin = New System.Windows.Forms.Padding(2)
         Me.Name = "MainForm"
         Me.HelpProvider.SetShowHelp(Me, True)
         Me.Text = "NPS Alaska Caribou Monitoring Database Application"

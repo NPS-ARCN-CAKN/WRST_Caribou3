@@ -1028,7 +1028,9 @@ Click Yes to certify and lock the current record. Click No to cancel.", MsgBoxSt
             Dim Herd As String = ""
             Try
                 If Not Me.SurveyFlightsGridEX Is Nothing Then
-                    Herd = GetCurrentGridEXCellValue(Me.SurveyFlightsGridEX, "Herd").ToString.Trim()
+                    If Not SurveyFlightsGridEX.CurrentRow Is Nothing Then
+                        Herd = GetCurrentGridEXCellValue(Me.SurveyFlightsGridEX, "Herd").ToString.Trim()
+                    End If
                 End If
             Catch ex As Exception
                 Herd = ex.Message & " " & System.Reflection.MethodBase.GetCurrentMethod.Name
