@@ -1963,6 +1963,7 @@ Partial Public Class WRST_CaribouDataSet
             Me.columnWaypointName.AllowDBNull = false
             Me.columnWaypointName.MaxLength = 20
             Me.columnComment.MaxLength = 255
+            Me.columnSourceFilename.AllowDBNull = false
             Me.columnSourceFilename.MaxLength = 255
             Me.columnFlightID.AllowDBNull = false
             Me.columnFlightID.MaxLength = 50
@@ -4564,11 +4565,7 @@ Partial Public Class WRST_CaribouDataSet
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
         Public Property SourceFilename() As String
             Get
-                Try 
-                    Return CType(Me(Me.tableSurveys.SourceFilenameColumn),String)
-                Catch e As Global.System.InvalidCastException
-                    Throw New Global.System.Data.StrongTypingException("The value for column 'SourceFilename' in table 'Surveys' is DBNull.", e)
-                End Try
+                Return CType(Me(Me.tableSurveys.SourceFilenameColumn),String)
             End Get
             Set
                 Me(Me.tableSurveys.SourceFilenameColumn) = value
@@ -4933,18 +4930,6 @@ Partial Public Class WRST_CaribouDataSet
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
         Public Sub SetCommentNull()
             Me(Me.tableSurveys.CommentColumn) = Global.System.Convert.DBNull
-        End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
-        Public Function IsSourceFilenameNull() As Boolean
-            Return Me.IsNull(Me.tableSurveys.SourceFilenameColumn)
-        End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
-        Public Sub SetSourceFilenameNull()
-            Me(Me.tableSurveys.SourceFilenameColumn) = Global.System.Convert.DBNull
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -8825,7 +8810,7 @@ Namespace WRST_CaribouDataSetTableAdapters
                 Me.Adapter.InsertCommand.Parameters(23).Value = CType(DataQualityNotes,String)
             End If
             If (SourceFilename Is Nothing) Then
-                Me.Adapter.InsertCommand.Parameters(24).Value = Global.System.DBNull.Value
+                Throw New Global.System.ArgumentNullException("SourceFilename")
             Else
                 Me.Adapter.InsertCommand.Parameters(24).Value = CType(SourceFilename,String)
             End If
@@ -9030,7 +9015,7 @@ Namespace WRST_CaribouDataSetTableAdapters
                 Me.Adapter.UpdateCommand.Parameters(23).Value = CType(Comment,String)
             End If
             If (SourceFilename Is Nothing) Then
-                Me.Adapter.UpdateCommand.Parameters(24).Value = Global.System.DBNull.Value
+                Throw New Global.System.ArgumentNullException("SourceFilename")
             Else
                 Me.Adapter.UpdateCommand.Parameters(24).Value = CType(SourceFilename,String)
             End If
