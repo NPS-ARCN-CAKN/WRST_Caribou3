@@ -1957,26 +1957,40 @@ Click Yes to certify and lock the current record. Click No to cancel.", MsgBoxSt
     End Sub
 
     Private Sub SurveyFlightsGridEX_ColumnButtonClick(sender As Object, e As ColumnActionEventArgs) Handles SurveyFlightsGridEX.ColumnButtonClick
+        SetSurveyFlightSourceFileAttribute()
+    End Sub
+
+    Private Sub SetSurveyFlightSourceFileAttribute()
         Try
             'Get the current row's attributes
             Dim FlightID As String = GetCurrentGridEXCellValue(Me.SurveyFlightsGridEX, "FlightID")
             Dim SourceFile As String = GetCurrentGridEXCellValue(Me.SurveyFlightsGridEX, "SourceFile")
             Dim TimeDepart As String = GetCurrentGridEXCellValue(Me.SurveyFlightsGridEX, "TimeDepart")
+
+            'I'd like to trim off the time part of the date to make msgbox instructions less cluttered below
+            Dim TimeDepartDate As Date
+            Dim TimeDepartShort As String = TimeDepart
+            If Date.TryParse(TimeDepart, TimeDepartDate) = True Then
+                TimeDepartShort = TimeDepartDate.ToString("yyyy-MM-dd")
+            End If
+
             Dim Year As String = GetCurrentGridEXCellValue(Me.SurveyFlightsGridEX, "Year")
             Dim Herd As String = GetCurrentGridEXCellValue(Me.SurveyFlightsGridEX, "Herd")
             Dim SurveyType As String = GetCurrentGridEXCellValue(Me.SurveyFlightsGridEX, "SurveyType")
 
+            'This FlightIdentifier is a short string I can put in message boxes, etc, showing the herd, date, survey type of the survey flight record being worked on
+            Dim FlightIdentifier As String = Year & " " & Herd & " " & SurveyType & " " & TimeDepartShort
+
             'If we have a flight id
             If FlightID.Trim.Length > 0 Then
 
-
                 'Confirm the user wants to overwrite the source file attribute for the survey
-                If MsgBox("This tool will allow you to update the source file for the data associated with the current flight. Proceed?", MsgBoxStyle.YesNo, "Confirm") = MsgBoxResult.Yes Then
+                If MsgBox("Update the data source file for the survey flight: " & FlightIdentifier & ". Yes to proceed?", MsgBoxStyle.YesNo, FlightIdentifier) = MsgBoxResult.Yes Then
                     'Open a file dialog to allow the user to select a source file
                     Dim OFD As New OpenFileDialog
                     With OFD
                         If My.Computer.FileSystem.FileExists(SourceFile) Then .InitialDirectory = New FileInfo(SourceFile).DirectoryName
-                        .Title = "Select the source file for the " & Year & " " & IIf(TimeDepart.Trim = "", "", "(" & TimeDepart & ") ") & Herd & " " & SurveyType & " survey."
+                        .Title = "Select the data source file for the survey flight record " & FlightIdentifier
                     End With
 
                     'If we have a source file selected
@@ -2002,7 +2016,7 @@ Click Yes to certify and lock the current record. Click No to cancel.", MsgBoxSt
                                             If SourceFile.Trim <> "" Then
 
                                                 'Confirm overwrite
-                                                If MsgBox("Update SourceFile from " & vbNewLine & vbNewLine & SourceFile & " to " & vbNewLine & vbNewLine & SourceFileInfo.FullName & "?") = MsgBoxResult.Ok Then
+                                                If MsgBox("Update SourceFile from " & vbNewLine & vbNewLine & SourceFile & " to " & vbNewLine & vbNewLine & SourceFileInfo.FullName & "?", MsgBoxStyle.YesNo, FlightIdentifier) = MsgBoxResult.Yes Then
                                                     Row.Item("SourceFile") = SourceFileInfo.FullName
                                                     RowUpdated = True
                                                 End If
@@ -2017,7 +2031,7 @@ Click Yes to certify and lock the current record. Click No to cancel.", MsgBoxSt
 
                                             'The parent SurveyFlights record was updated, offer the opportunity to also update the Surveys table's SourceFileInfo column for related records on the flight.
                                             If RowUpdated = True Then
-                                                If MsgBox("Also update the SourceFilename attribute of all related caribou groups records shown below (this may overwrite existing data)?", MsgBoxStyle.YesNo) = MsgBoxResult.Yes Then
+                                                If MsgBox("Also update the SourceFilename attribute of all related records?", MsgBoxStyle.YesNo, FlightIdentifier) = MsgBoxResult.Yes Then
 
                                                     'Update all the related Survey table records with the sourcefile
                                                     For Each SurveyRow As DataRow In WRST_CaribouDataSet.Tables("Surveys").Rows
@@ -2032,9 +2046,6 @@ Click Yes to certify and lock the current record. Click No to cancel.", MsgBoxSt
                                                 End If
                                             End If
                                             Me.SurveysBindingSource.EndEdit()
-
-
-
                                         End If
                                     End If
                                 End If
@@ -2042,17 +2053,12 @@ Click Yes to certify and lock the current record. Click No to cancel.", MsgBoxSt
                         End If
                     End If
                 End If
-
-
             End If
-
         Catch ex As Exception
             MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name & ")")
         End Try
 
     End Sub
-
-
 
     Private Sub RawToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles RawToolStripMenuItem.Click
         EditCertification("Raw")
@@ -2080,16 +2086,10 @@ Click Yes to certify and lock the current record. Click No to cancel.", MsgBoxSt
         EditDataQualityNotes(True, True)
     End Sub
 
-    Private Sub CheckSourceFilesExistToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CheckSourceFilesExistToolStripMenuItem.Click
-        QC_CheckSourceFilesExist()
-    End Sub
+
 
     Private Sub QC_CheckSourceFilesExist()
-        If MsgBox("This quality control check is focused on the SourceFile column of the SurveyFlights database table. 
-The SourceFile column contains a path to the source data file from which the animal groups data was imported into the database.
-This check will loop through all the survey flight records in the database and test whether the SourceFile attribute points to a file that exists. 
-This attribute is important in case errors need to be fixed. 
-If the SourceFile does not exist the attribute will be overwritten with 'INVALID PATH'. Proceed?", MsgBoxStyle.YesNo, "Confirm") = MsgBoxResult.Ok Then
+        If MsgBox("This quality control check ensures each survey flight record has a valid SourceFile attribute. SourceFiles found not to exist will be set blank. Proceed?", MsgBoxStyle.YesNo, "Update data source file attributes") = MsgBoxResult.Ok Then
             Try
                 If Not SurveyFlightsGridEX Is Nothing Then
 
@@ -2116,41 +2116,9 @@ If the SourceFile does not exist the attribute will be overwritten with 'INVALID
     End Sub
 
     Private Sub CheckThatTheSourceFilesForSurveyFlightsExistToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CheckThatTheSourceFilesForSurveyFlightsExistToolStripMenuItem.Click
-        Try
-            Dim Description As String = "Survey flight records missing SourceFile attribute"
-            Dim Sql As String = "SELECT * FROM QC_SurveyFlights_MissingSourceFiles"
-            Dim DT As DataTable = GetDataTable(My.Settings.WRST_CaribouConnectionString, Sql)
-            Dim Form As New Form
-            With Form
-                .Text = "Quality control check"
-                .FormBorderStyle = FormBorderStyle.SizableToolWindow
-            End With
 
-            Dim DescriptionTextBox As New TextBox
-            With DescriptionTextBox
-                .Text = Description & vbNewLine & "(" & Sql & ")"
-                .Dock = DockStyle.Top
-                .Multiline = True
-                .Enabled = False
-                .Height = 40
-            End With
-
-            Dim DGV As New DataGridView
-            With DGV
-                .DataSource = DT
-                .Dock = DockStyle.Fill
-                .ReadOnly = True
-
-            End With
-
-
-            Form.Controls.Add(DGV)
-            Form.Controls.Add(DescriptionTextBox)
-
-            Form.Show()
-        Catch ex As Exception
-            MsgBox(ex.Message & " " & System.Reflection.MethodBase.GetCurrentMethod.Name)
-        End Try
+        'Loop through all the SourceFile attributes of the SurveyFlights grid and make sure the files exist, if not set them blank
+        QC_CheckSourceFilesExist()
     End Sub
 
     Private Sub GetAListOfDeploymentsForAFrequencyToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles GetAListOfDeploymentsForAFrequencyToolStripMenuItem.Click
@@ -2256,4 +2224,63 @@ It is recommended that if you have any pending edits you should cancel this dial
 
     End Sub
 
+    Private Sub OpenSourceFileToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles OpenSourceFileToolStripMenuItem.Click
+
+        'Get the current record's SourceFile attribute from the Surveyflights grid
+        Dim SourceFile As String = GetCurrentGridEXCellValue(SurveyFlightsGridEX, "SourceFile").ToString.Trim
+
+        'See what we got and deal with it 
+        If SourceFile.Trim = "" Or IsDBNull(SourceFile) Then
+            'The source file has not been set, alert and ask user if they want to fix it
+            If MsgBox("The source file attribute has not been set for this survey flight record. Would you like to set it now?", MsgBoxStyle.YesNo, "Source file attribute has not been set for this record") = MsgBoxResult.Yes Then
+                'Open a file browser and allow user to set the SourceFile attribute for the current record
+                SetSurveyFlightSourceFileAttribute()
+            End If
+        Else
+            'We have a non-zero length SourceFile attribute, see if the file exists at the path given
+            If My.Computer.FileSystem.FileExists(SourceFile) = True Then
+                'File exists, open it
+                Process.Start(SourceFile)
+            Else
+                'File does not exist, ask the user if they want to fix the problem
+                If MsgBox("The data source file attribute (" & SourceFile & ") does not exist.", MsgBoxStyle.YesNo, "File not found") = MsgBoxResult.Yes Then
+                    'Open a file browser and allow user to set the SourceFile attribute for the current record
+                    SetSurveyFlightSourceFileAttribute()
+                End If
+            End If
+        End If
+
+    End Sub
+
+    Private Sub OpenSourceDataDirectoryToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles OpenSourceDataDirectoryToolStripMenuItem.Click
+        'User asked to open the source file directory
+        'First, get a handle on the source file
+        Dim SourceFile As String = GetCurrentGridEXCellValue(SurveyFlightsGridEX, "SourceFile").ToString.Trim
+
+        'See what we got and deal with it 
+        If SourceFile.Trim = "" Or IsDBNull(SourceFile) Then
+            'The source file has not been set, alert and ask user if they want to fix it
+            If MsgBox("The source file attribute has not been set for this survey flight record. Would you like to set it now?", MsgBoxStyle.YesNo, "Source file attribute has not been set for this record") = MsgBoxResult.Yes Then
+                'Open a file browser and allow user to set the SourceFile attribute for the current record
+                SetSurveyFlightSourceFileAttribute()
+            End If
+        Else
+            'We have a non-zero length SourceFile attribute, see if the file exists at the path given
+            If My.Computer.FileSystem.FileExists(SourceFile) = True Then
+                'File exists. Get a FileInfo which will give the directory, then open the directory
+                Dim SourceFileInfo As New FileInfo(SourceFile)
+                Process.Start(SourceFileInfo.DirectoryName)
+            Else
+                'File does not exist, ask the user if they want to fix the problem
+                If MsgBox("The data source file attribute (" & SourceFile & ") does not exist.", MsgBoxStyle.YesNo, "File not found") = MsgBoxResult.Yes Then
+                    'Open a file browser and allow user to set the SourceFile attribute for the current record
+                    SetSurveyFlightSourceFileAttribute()
+                End If
+            End If
+        End If
+    End Sub
+
+    Private Sub SetTheDataSourceFileAttributeForThisSurveyFlightToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SetTheDataSourceFileAttributeForThisSurveyFlightToolStripMenuItem.Click
+        SetSurveyFlightSourceFileAttribute()
+    End Sub
 End Class

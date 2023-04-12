@@ -1209,6 +1209,7 @@ Partial Public Class WRST_CaribouDataSet
             Me.columnAircraftType.MaxLength = 20
             Me.columnTailNo.AllowDBNull = false
             Me.columnTailNo.MaxLength = 10
+            Me.columnTimeDepart.AllowDBNull = false
             Me.columnSpotterPlaneTailNo.MaxLength = 10
             Me.columnSpotterPlaneType.MaxLength = 30
             Me.columnSpotterPlanePilot.MaxLength = 40
@@ -3866,11 +3867,7 @@ Partial Public Class WRST_CaribouDataSet
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
         Public Property TimeDepart() As Date
             Get
-                Try 
-                    Return CType(Me(Me.tableSurveyFlights.TimeDepartColumn),Date)
-                Catch e As Global.System.InvalidCastException
-                    Throw New Global.System.Data.StrongTypingException("The value for column 'TimeDepart' in table 'SurveyFlights' is DBNull.", e)
-                End Try
+                Return CType(Me(Me.tableSurveyFlights.TimeDepartColumn),Date)
             End Get
             Set
                 Me(Me.tableSurveyFlights.TimeDepartColumn) = value
@@ -4105,18 +4102,6 @@ Partial Public Class WRST_CaribouDataSet
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
         Public Sub SetAircraftTypeNull()
             Me(Me.tableSurveyFlights.AircraftTypeColumn) = Global.System.Convert.DBNull
-        End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
-        Public Function IsTimeDepartNull() As Boolean
-            Return Me.IsNull(Me.tableSurveyFlights.TimeDepartColumn)
-        End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
-        Public Sub SetTimeDepartNull()
-            Me(Me.tableSurveyFlights.TimeDepartColumn) = Global.System.Convert.DBNull
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -8001,7 +7986,7 @@ Namespace WRST_CaribouDataSetTableAdapters
                     ByVal Observer2 As String,  _
                     ByVal AircraftType As String,  _
                     ByVal TailNo As String,  _
-                    ByVal TimeDepart As Global.System.Nullable(Of Date),  _
+                    ByVal TimeDepart As Date,  _
                     ByVal TimeReturn As Global.System.Nullable(Of Date),  _
                     ByVal SpotterPlaneTailNo As String,  _
                     ByVal SpotterPlaneType As String,  _
@@ -8052,11 +8037,7 @@ Namespace WRST_CaribouDataSetTableAdapters
             Else
                 Me.Adapter.InsertCommand.Parameters(7).Value = CType(TailNo,String)
             End If
-            If (TimeDepart.HasValue = true) Then
-                Me.Adapter.InsertCommand.Parameters(8).Value = CType(TimeDepart.Value,Date)
-            Else
-                Me.Adapter.InsertCommand.Parameters(8).Value = Global.System.DBNull.Value
-            End If
+            Me.Adapter.InsertCommand.Parameters(8).Value = CType(TimeDepart,Date)
             If (TimeReturn.HasValue = true) Then
                 Me.Adapter.InsertCommand.Parameters(9).Value = CType(TimeReturn.Value,Date)
             Else
@@ -8151,7 +8132,7 @@ Namespace WRST_CaribouDataSetTableAdapters
                     ByVal Observer2 As String,  _
                     ByVal AircraftType As String,  _
                     ByVal TailNo As String,  _
-                    ByVal TimeDepart As Global.System.Nullable(Of Date),  _
+                    ByVal TimeDepart As Date,  _
                     ByVal TimeReturn As Global.System.Nullable(Of Date),  _
                     ByVal SpotterPlaneTailNo As String,  _
                     ByVal SpotterPlaneType As String,  _
@@ -8203,11 +8184,7 @@ Namespace WRST_CaribouDataSetTableAdapters
             Else
                 Me.Adapter.UpdateCommand.Parameters(7).Value = CType(TailNo,String)
             End If
-            If (TimeDepart.HasValue = true) Then
-                Me.Adapter.UpdateCommand.Parameters(8).Value = CType(TimeDepart.Value,Date)
-            Else
-                Me.Adapter.UpdateCommand.Parameters(8).Value = Global.System.DBNull.Value
-            End If
+            Me.Adapter.UpdateCommand.Parameters(8).Value = CType(TimeDepart,Date)
             If (TimeReturn.HasValue = true) Then
                 Me.Adapter.UpdateCommand.Parameters(9).Value = CType(TimeReturn.Value,Date)
             Else
@@ -8307,7 +8284,7 @@ Namespace WRST_CaribouDataSetTableAdapters
                     ByVal Observer2 As String,  _
                     ByVal AircraftType As String,  _
                     ByVal TailNo As String,  _
-                    ByVal TimeDepart As Global.System.Nullable(Of Date),  _
+                    ByVal TimeDepart As Date,  _
                     ByVal TimeReturn As Global.System.Nullable(Of Date),  _
                     ByVal SpotterPlaneTailNo As String,  _
                     ByVal SpotterPlaneType As String,  _

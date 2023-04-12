@@ -30,7 +30,8 @@ Partial Class MainForm
         Me.SplitContainer1 = New System.Windows.Forms.SplitContainer()
         Me.SurveyFlightsGridEX = New Janus.Windows.GridEX.GridEX()
         Me.SurveyFlightsContextMenuStrip = New System.Windows.Forms.ContextMenuStrip(Me.components)
-        Me.CheckSourceFilesExistToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.OpenSourceFileToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.OpenSourceDataDirectoryToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.SurveyFlightsBindingSource = New System.Windows.Forms.BindingSource(Me.components)
         Me.WRST_CaribouDataSet = New WRST_Caribou3.WRST_CaribouDataSet()
         Me.SurveysSplitContainer = New System.Windows.Forms.SplitContainer()
@@ -101,6 +102,7 @@ Partial Class MainForm
         Me.CollaredAnimalsInGroupsTableAdapter = New WRST_Caribou3.WRST_CaribouDataSetTableAdapters.CollaredAnimalsInGroupsTableAdapter()
         Me.SurveysTableAdapter = New WRST_Caribou3.WRST_CaribouDataSetTableAdapters.SurveysTableAdapter()
         Me.CapturesTableAdapter = New WRST_Caribou3.WRST_CaribouDataSetTableAdapters.CapturesTableAdapter()
+        Me.SetTheDataSourceFileAttributeForThisSurveyFlightToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SplitContainer1.Panel1.SuspendLayout()
         Me.SplitContainer1.Panel2.SuspendLayout()
@@ -175,15 +177,21 @@ Partial Class MainForm
         'SurveyFlightsContextMenuStrip
         '
         Me.SurveyFlightsContextMenuStrip.ImageScalingSize = New System.Drawing.Size(20, 20)
-        Me.SurveyFlightsContextMenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CheckSourceFilesExistToolStripMenuItem})
+        Me.SurveyFlightsContextMenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.SetTheDataSourceFileAttributeForThisSurveyFlightToolStripMenuItem, Me.OpenSourceFileToolStripMenuItem, Me.OpenSourceDataDirectoryToolStripMenuItem})
         Me.SurveyFlightsContextMenuStrip.Name = "SurveyFlightsContextMenuStrip"
-        Me.SurveyFlightsContextMenuStrip.Size = New System.Drawing.Size(197, 26)
+        Me.SurveyFlightsContextMenuStrip.Size = New System.Drawing.Size(381, 70)
         '
-        'CheckSourceFilesExistToolStripMenuItem
+        'OpenSourceFileToolStripMenuItem
         '
-        Me.CheckSourceFilesExistToolStripMenuItem.Name = "CheckSourceFilesExistToolStripMenuItem"
-        Me.CheckSourceFilesExistToolStripMenuItem.Size = New System.Drawing.Size(196, 22)
-        Me.CheckSourceFilesExistToolStripMenuItem.Text = "Check SourceFiles exist"
+        Me.OpenSourceFileToolStripMenuItem.Name = "OpenSourceFileToolStripMenuItem"
+        Me.OpenSourceFileToolStripMenuItem.Size = New System.Drawing.Size(380, 22)
+        Me.OpenSourceFileToolStripMenuItem.Text = "Open the data source file for this survey flight..."
+        '
+        'OpenSourceDataDirectoryToolStripMenuItem
+        '
+        Me.OpenSourceDataDirectoryToolStripMenuItem.Name = "OpenSourceDataDirectoryToolStripMenuItem"
+        Me.OpenSourceDataDirectoryToolStripMenuItem.Size = New System.Drawing.Size(380, 22)
+        Me.OpenSourceDataDirectoryToolStripMenuItem.Text = "Open the data source data directory for this survey flight..."
         '
         'SurveyFlightsBindingSource
         '
@@ -585,6 +593,7 @@ Partial Class MainForm
         '
         'CountTotalDetectedFrequenciesToolStripMenuItem
         '
+        Me.CountTotalDetectedFrequenciesToolStripMenuItem.Enabled = False
         Me.CountTotalDetectedFrequenciesToolStripMenuItem.Name = "CountTotalDetectedFrequenciesToolStripMenuItem"
         Me.CountTotalDetectedFrequenciesToolStripMenuItem.Size = New System.Drawing.Size(340, 22)
         Me.CountTotalDetectedFrequenciesToolStripMenuItem.Text = "Frequency matching checks..."
@@ -710,6 +719,12 @@ Partial Class MainForm
         '
         Me.CapturesTableAdapter.ClearBeforeFill = True
         '
+        'SetTheDataSourceFileAttributeForThisSurveyFlightToolStripMenuItem
+        '
+        Me.SetTheDataSourceFileAttributeForThisSurveyFlightToolStripMenuItem.Name = "SetTheDataSourceFileAttributeForThisSurveyFlightToolStripMenuItem"
+        Me.SetTheDataSourceFileAttributeForThisSurveyFlightToolStripMenuItem.Size = New System.Drawing.Size(380, 22)
+        Me.SetTheDataSourceFileAttributeForThisSurveyFlightToolStripMenuItem.Text = "Set the data source file attribute for this survey flight..."
+        '
         'MainForm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -834,8 +849,10 @@ Partial Class MainForm
     Friend WithEvents OverwriteAllDataQualityNotesToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ClearAllDataQualityNotesToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents SurveyFlightsContextMenuStrip As ContextMenuStrip
-    Friend WithEvents CheckSourceFilesExistToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents CheckThatTheSourceFilesForSurveyFlightsExistToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents GetAListOfDeploymentsForAFrequencyToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents MatchSurveyFrequenciesToAnimalsToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents OpenSourceFileToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents OpenSourceDataDirectoryToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents SetTheDataSourceFileAttributeForThisSurveyFlightToolStripMenuItem As ToolStripMenuItem
 End Class
