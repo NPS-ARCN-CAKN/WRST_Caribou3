@@ -191,6 +191,12 @@
     <Compile Include="CaribouSightingsHistoryForm.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="DeploymentsForAFrequencyForm.Designer.vb">
+      <DependentUpon>DeploymentsForAFrequencyForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="DeploymentsForAFrequencyForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="MainForm.vb">
       <SubType>Form</SubType>
     </Compile>
@@ -275,6 +281,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="CaribouSightingsHistoryForm.resx">
       <DependentUpon>CaribouSightingsHistoryForm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DeploymentsForAFrequencyForm.resx">
+      <DependentUpon>DeploymentsForAFrequencyForm.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.vb</DependentUpon>
