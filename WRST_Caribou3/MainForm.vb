@@ -1031,11 +1031,13 @@ Click Yes to certify and lock the current record. Click No to cancel.", MsgBoxSt
                 If Not Me.SurveyFlightsGridEX Is Nothing Then
                     If Not SurveyFlightsGridEX.CurrentRow Is Nothing Then
                         If Not SurveyFlightsGridEX.CurrentRow.Cells("Herd") Is Nothing Then
-                            If Not IsDBNull(SurveyFlightsGridEX.CurrentRow.Cells("Herd").Value) Then
-                                Herd = SurveyFlightsGridEX.CurrentRow.Cells("Herd").Value.ToString.Trim
+                            If Not SurveyFlightsGridEX.CurrentRow.Cells("Herd").Value Is Nothing Then
+                                If Not IsDBNull(SurveyFlightsGridEX.CurrentRow.Cells("Herd").Value) Then
+                                    Herd = SurveyFlightsGridEX.CurrentRow.Cells("Herd").Value.ToString.Trim
+                                End If
                             End If
                         End If
-                    End If
+                        End If
                 End If
             Catch nrex As System.NullReferenceException
                 Herd = nrex.Message & " " & System.Reflection.MethodBase.GetCurrentMethod.Name

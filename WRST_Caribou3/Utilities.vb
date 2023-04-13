@@ -648,8 +648,10 @@ WHERE (a.ProjectId = '" & GetProjectIDFromHerd(Herd).ToString.Trim & "')
                 If Not GridEX.CurrentRow Is Nothing Then
                     Dim CurrentRow As GridEXRow = GridEX.CurrentRow
                     If Not CurrentRow.Cells(GridEXColumnKey) Is Nothing Then
-                        If Not IsDBNull(CurrentRow.Cells(GridEXColumnKey).Value) Then
-                            CellValue = CurrentRow.Cells(GridEXColumnKey).Value
+                        If Not CurrentRow.Cells(GridEXColumnKey).Value Is Nothing Then
+                            If Not IsDBNull(CurrentRow.Cells(GridEXColumnKey).Value) Then
+                                CellValue = CurrentRow.Cells(GridEXColumnKey).Value
+                            End If
                         End If
                     End If
                 End If
