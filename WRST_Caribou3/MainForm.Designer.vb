@@ -30,6 +30,7 @@ Partial Class MainForm
         Me.SplitContainer1 = New System.Windows.Forms.SplitContainer()
         Me.SurveyFlightsGridEX = New Janus.Windows.GridEX.GridEX()
         Me.SurveyFlightsContextMenuStrip = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.SetTheDataSourceFileAttributeForThisSurveyFlightToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.OpenSourceFileToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.OpenSourceDataDirectoryToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.SurveyFlightsBindingSource = New System.Windows.Forms.BindingSource(Me.components)
@@ -102,7 +103,6 @@ Partial Class MainForm
         Me.CollaredAnimalsInGroupsTableAdapter = New WRST_Caribou3.WRST_CaribouDataSetTableAdapters.CollaredAnimalsInGroupsTableAdapter()
         Me.SurveysTableAdapter = New WRST_Caribou3.WRST_CaribouDataSetTableAdapters.SurveysTableAdapter()
         Me.CapturesTableAdapter = New WRST_Caribou3.WRST_CaribouDataSetTableAdapters.CapturesTableAdapter()
-        Me.SetTheDataSourceFileAttributeForThisSurveyFlightToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SplitContainer1.Panel1.SuspendLayout()
         Me.SplitContainer1.Panel2.SuspendLayout()
@@ -148,7 +148,7 @@ Partial Class MainForm
         '
         Me.SplitContainer1.Panel2.Controls.Add(Me.SurveysSplitContainer)
         Me.SplitContainer1.Size = New System.Drawing.Size(1229, 628)
-        Me.SplitContainer1.SplitterDistance = 191
+        Me.SplitContainer1.SplitterDistance = 183
         Me.SplitContainer1.SplitterWidth = 2
         Me.SplitContainer1.TabIndex = 0
         '
@@ -170,7 +170,7 @@ Partial Class MainForm
         Me.SurveyFlightsGridEX.Name = "SurveyFlightsGridEX"
         Me.SurveyFlightsGridEX.RecordNavigator = True
         Me.SurveyFlightsGridEX.RowHeaders = Janus.Windows.GridEX.InheritableBoolean.[True]
-        Me.SurveyFlightsGridEX.Size = New System.Drawing.Size(1229, 191)
+        Me.SurveyFlightsGridEX.Size = New System.Drawing.Size(1229, 183)
         Me.SurveyFlightsGridEX.TabIndex = 0
         Me.SurveyFlightsGridEX.TableHeaders = Janus.Windows.GridEX.InheritableBoolean.[True]
         '
@@ -180,6 +180,12 @@ Partial Class MainForm
         Me.SurveyFlightsContextMenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.SetTheDataSourceFileAttributeForThisSurveyFlightToolStripMenuItem, Me.OpenSourceFileToolStripMenuItem, Me.OpenSourceDataDirectoryToolStripMenuItem})
         Me.SurveyFlightsContextMenuStrip.Name = "SurveyFlightsContextMenuStrip"
         Me.SurveyFlightsContextMenuStrip.Size = New System.Drawing.Size(381, 70)
+        '
+        'SetTheDataSourceFileAttributeForThisSurveyFlightToolStripMenuItem
+        '
+        Me.SetTheDataSourceFileAttributeForThisSurveyFlightToolStripMenuItem.Name = "SetTheDataSourceFileAttributeForThisSurveyFlightToolStripMenuItem"
+        Me.SetTheDataSourceFileAttributeForThisSurveyFlightToolStripMenuItem.Size = New System.Drawing.Size(380, 22)
+        Me.SetTheDataSourceFileAttributeForThisSurveyFlightToolStripMenuItem.Text = "Set the data source file attribute for this survey flight..."
         '
         'OpenSourceFileToolStripMenuItem
         '
@@ -220,8 +226,8 @@ Partial Class MainForm
         '
         Me.SurveysSplitContainer.Panel2.AutoScroll = True
         Me.SurveysSplitContainer.Panel2.Controls.Add(Me.CollaredAnimalsSplitContainer)
-        Me.SurveysSplitContainer.Size = New System.Drawing.Size(1229, 435)
-        Me.SurveysSplitContainer.SplitterDistance = 260
+        Me.SurveysSplitContainer.Size = New System.Drawing.Size(1229, 443)
+        Me.SurveysSplitContainer.SplitterDistance = 254
         Me.SurveysSplitContainer.SplitterWidth = 2
         Me.SurveysSplitContainer.TabIndex = 0
         '
@@ -242,7 +248,7 @@ Partial Class MainForm
         Me.SurveysGridEX.Name = "SurveysGridEX"
         Me.SurveysGridEX.RecordNavigator = True
         Me.SurveysGridEX.RowHeaders = Janus.Windows.GridEX.InheritableBoolean.[True]
-        Me.SurveysGridEX.Size = New System.Drawing.Size(1229, 229)
+        Me.SurveysGridEX.Size = New System.Drawing.Size(1229, 223)
         Me.SurveysGridEX.TabIndex = 0
         Me.SurveysGridEX.TableHeaders = Janus.Windows.GridEX.InheritableBoolean.[True]
         Me.SurveysGridEX.TotalRow = Janus.Windows.GridEX.InheritableBoolean.[True]
@@ -406,7 +412,7 @@ Partial Class MainForm
         '
         Me.CollaredAnimalsSplitContainer.Panel2.Controls.Add(Me.AnimalGridEX)
         Me.CollaredAnimalsSplitContainer.Panel2.Controls.Add(Me.AnimalGridPanel)
-        Me.CollaredAnimalsSplitContainer.Size = New System.Drawing.Size(1229, 173)
+        Me.CollaredAnimalsSplitContainer.Size = New System.Drawing.Size(1229, 187)
         Me.CollaredAnimalsSplitContainer.SplitterDistance = 568
         Me.CollaredAnimalsSplitContainer.SplitterWidth = 3
         Me.CollaredAnimalsSplitContainer.TabIndex = 1
@@ -426,7 +432,7 @@ Partial Class MainForm
         Me.CollaredAnimalsInGroupsGridEX.Name = "CollaredAnimalsInGroupsGridEX"
         Me.CollaredAnimalsInGroupsGridEX.RecordNavigator = True
         Me.CollaredAnimalsInGroupsGridEX.RowHeaders = Janus.Windows.GridEX.InheritableBoolean.[True]
-        Me.CollaredAnimalsInGroupsGridEX.Size = New System.Drawing.Size(568, 173)
+        Me.CollaredAnimalsInGroupsGridEX.Size = New System.Drawing.Size(568, 187)
         Me.CollaredAnimalsInGroupsGridEX.TabIndex = 0
         Me.CollaredAnimalsInGroupsGridEX.TableHeaders = Janus.Windows.GridEX.InheritableBoolean.[True]
         '
@@ -444,7 +450,7 @@ Partial Class MainForm
         Me.AnimalGridEX.Margin = New System.Windows.Forms.Padding(2)
         Me.AnimalGridEX.Name = "AnimalGridEX"
         Me.AnimalGridEX.RowFormatStyle.BackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
-        Me.AnimalGridEX.Size = New System.Drawing.Size(658, 109)
+        Me.AnimalGridEX.Size = New System.Drawing.Size(658, 123)
         Me.AnimalGridEX.TabIndex = 0
         Me.AnimalGridEX.TableHeaderFormatStyle.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         '
@@ -704,6 +710,7 @@ Partial Class MainForm
         Me.TableAdapterManager.CapturesTableAdapter = Nothing
         Me.TableAdapterManager.CollaredAnimalsInGroupsTableAdapter = Me.CollaredAnimalsInGroupsTableAdapter
         Me.TableAdapterManager.SurveyFlightsTableAdapter = Me.SurveyFlightsTableAdapter
+        Me.TableAdapterManager.SurveyNamesTableAdapter = Nothing
         Me.TableAdapterManager.SurveysTableAdapter = Me.SurveysTableAdapter
         Me.TableAdapterManager.UpdateOrder = WRST_Caribou3.WRST_CaribouDataSetTableAdapters.TableAdapterManager.UpdateOrderOption.InsertUpdateDelete
         '
@@ -718,12 +725,6 @@ Partial Class MainForm
         'CapturesTableAdapter
         '
         Me.CapturesTableAdapter.ClearBeforeFill = True
-        '
-        'SetTheDataSourceFileAttributeForThisSurveyFlightToolStripMenuItem
-        '
-        Me.SetTheDataSourceFileAttributeForThisSurveyFlightToolStripMenuItem.Name = "SetTheDataSourceFileAttributeForThisSurveyFlightToolStripMenuItem"
-        Me.SetTheDataSourceFileAttributeForThisSurveyFlightToolStripMenuItem.Size = New System.Drawing.Size(380, 22)
-        Me.SetTheDataSourceFileAttributeForThisSurveyFlightToolStripMenuItem.Text = "Set the data source file attribute for this survey flight..."
         '
         'MainForm
         '

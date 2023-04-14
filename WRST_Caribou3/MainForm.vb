@@ -91,11 +91,25 @@ Public Class MainForm
 
     Private Sub LoadDataset()
         Try
-            'fill all the datatable adapters
+
+            Dim strSql As String = "SELECT SurveyName, Description, Notes FROM SurveyNames ORDER BY SurveyName"
+            'Dim SurveyNamesDataTable As New DataTable
+            Using cnn As New SqlConnection(My.Settings.WRST_CaribouConnectionString)
+                cnn.Open()
+                Using SurveyNamesSqlDataAdapter As New SqlDataAdapter(strSql, cnn)
+                    SurveyNamesSqlDataAdapter.Fill(Me.WRST_CaribouDataSet.Tables("SurveyNames"))
+                End Using
+                cnn.Close()
+            End Using
+
             Me.SurveyFlightsTableAdapter.Fill(Me.WRST_CaribouDataSet.SurveyFlights)
             Me.SurveysTableAdapter.Fill(Me.WRST_CaribouDataSet.Surveys)
             Me.CollaredAnimalsInGroupsTableAdapter.Fill(Me.WRST_CaribouDataSet.CollaredAnimalsInGroups)
             Me.CapturesTableAdapter.Fill(Me.WRST_CaribouDataSet.Captures)
+
+            For Each T As DataTable In Me.WRST_CaribouDataSet.Tables
+                Debug.Print(T.TableName & vbTab & T.Rows.Count)
+            Next
 
             'update the database connection label
             Me.CurrentDatabaseToolStripLabel.Text = GetDatabaseConnectionText()
@@ -180,6 +194,7 @@ Public Class MainForm
         Try
             Dim Grid As GridEX = Me.SurveyFlightsGridEX
             'Set up dropdowns
+            LoadGridEXDropDownWithDistinctDataTableValues(Grid, Me.WRST_CaribouDataSet.Tables("SurveyNames"), "SurveyName", "SurveyName", True)
             LoadGridEXDropDownWithDistinctDataTableValues(Grid, Me.WRST_CaribouDataSet.Tables("SurveyFlights"), "Pilot", "Pilot", False)
             LoadGridEXDropDownWithDistinctDataTableValues(Grid, Me.WRST_CaribouDataSet.Tables("SurveyFlights"), "TailNo", "TailNo", False)
             LoadGridEXDropDownWithDistinctDataTableValues(Grid, Me.WRST_CaribouDataSet.Tables("SurveyFlights"), "AircraftType", "AircraftType", False)
@@ -190,6 +205,21 @@ Public Class MainForm
             LoadGridEXDropDownWithDistinctDataTableValues(Grid, Me.WRST_CaribouDataSet.Tables("SurveyFlights"), "Pilot", "SpotterPlanePilot", False)
             LoadGridEXDropDownWithDistinctDataTableValues(Grid, Me.WRST_CaribouDataSet.Tables("SurveyFlights"), "TailNo", "SpotterPlaneTailNo", False)
             LoadGridEXDropDownWithDistinctDataTableValues(Grid, Me.WRST_CaribouDataSet.Tables("SurveyFlights"), "AircraftType", "SpotterPlaneType", False)
+
+            ''SurveyName dropdown
+            'With Grid.RootTable.Columns("SurveyName")
+            '    .EditType = EditType.Combo
+            '    .HasValueList = True
+            '    .LimitToList = True
+            '    .AllowSort = True
+            '    .AutoComplete = True
+            '    .ValueList.Clear()
+            'End With
+            'Dim SurveysSurveyNameList As GridEXValueListItemCollection = Grid.RootTable.Columns("SurveyName").ValueList
+            'For Each SurveyNamesRow As DataRow In Me.WRST_CaribouDataSet.Tables("SurveyNames").Rows
+            '    SurveysSurveyNameList.Add("SurveyName", "SurveyName")
+            'Next
+
 
             'SurveyType dropdown
             With Grid.RootTable.Columns("SurveyType")

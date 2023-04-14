@@ -33,11 +33,15 @@ Partial Public Class WRST_CaribouDataSet
     
     Private tableCaptures As CapturesDataTable
     
+    Private tableSurveyNames As SurveyNamesDataTable
+    
     Private relationFK_CollaredAnimalsInGroups_Surveys As Global.System.Data.DataRelation
     
     Private relationFK_Surveys_SurveyFlights As Global.System.Data.DataRelation
     
     Private relationFK_CollaredAnimalsInGroups_Captures As Global.System.Data.DataRelation
+    
+    Private relationFK_SurveyFlights_SurveyNames As Global.System.Data.DataRelation
     
     Private _schemaSerializationMode As Global.System.Data.SchemaSerializationMode = Global.System.Data.SchemaSerializationMode.IncludeSchema
     
@@ -79,6 +83,9 @@ Partial Public Class WRST_CaribouDataSet
             End If
             If (Not (ds.Tables("Captures")) Is Nothing) Then
                 MyBase.Tables.Add(New CapturesDataTable(ds.Tables("Captures")))
+            End If
+            If (Not (ds.Tables("SurveyNames")) Is Nothing) Then
+                MyBase.Tables.Add(New SurveyNamesDataTable(ds.Tables("SurveyNames")))
             End If
             Me.DataSetName = ds.DataSetName
             Me.Prefix = ds.Prefix
@@ -134,6 +141,16 @@ Partial Public Class WRST_CaribouDataSet
     Public ReadOnly Property Captures() As CapturesDataTable
         Get
             Return Me.tableCaptures
+        End Get
+    End Property
+    
+    <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+     Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0"),  _
+     Global.System.ComponentModel.Browsable(false),  _
+     Global.System.ComponentModel.DesignerSerializationVisibility(Global.System.ComponentModel.DesignerSerializationVisibility.Content)>  _
+    Public ReadOnly Property SurveyNames() As SurveyNamesDataTable
+        Get
+            Return Me.tableSurveyNames
         End Get
     End Property
     
@@ -216,6 +233,9 @@ Partial Public Class WRST_CaribouDataSet
             If (Not (ds.Tables("Captures")) Is Nothing) Then
                 MyBase.Tables.Add(New CapturesDataTable(ds.Tables("Captures")))
             End If
+            If (Not (ds.Tables("SurveyNames")) Is Nothing) Then
+                MyBase.Tables.Add(New SurveyNamesDataTable(ds.Tables("SurveyNames")))
+            End If
             Me.DataSetName = ds.DataSetName
             Me.Prefix = ds.Prefix
             Me.Namespace = ds.Namespace
@@ -272,9 +292,16 @@ Partial Public Class WRST_CaribouDataSet
                 Me.tableCaptures.InitVars
             End If
         End If
+        Me.tableSurveyNames = CType(MyBase.Tables("SurveyNames"),SurveyNamesDataTable)
+        If (initTable = true) Then
+            If (Not (Me.tableSurveyNames) Is Nothing) Then
+                Me.tableSurveyNames.InitVars
+            End If
+        End If
         Me.relationFK_CollaredAnimalsInGroups_Surveys = Me.Relations("FK_CollaredAnimalsInGroups_Surveys")
         Me.relationFK_Surveys_SurveyFlights = Me.Relations("FK_Surveys_SurveyFlights")
         Me.relationFK_CollaredAnimalsInGroups_Captures = Me.Relations("FK_CollaredAnimalsInGroups_Captures")
+        Me.relationFK_SurveyFlights_SurveyNames = Me.Relations("FK_SurveyFlights_SurveyNames")
     End Sub
     
     <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -293,12 +320,16 @@ Partial Public Class WRST_CaribouDataSet
         MyBase.Tables.Add(Me.tableSurveys)
         Me.tableCaptures = New CapturesDataTable()
         MyBase.Tables.Add(Me.tableCaptures)
+        Me.tableSurveyNames = New SurveyNamesDataTable()
+        MyBase.Tables.Add(Me.tableSurveyNames)
         Me.relationFK_CollaredAnimalsInGroups_Surveys = New Global.System.Data.DataRelation("FK_CollaredAnimalsInGroups_Surveys", New Global.System.Data.DataColumn() {Me.tableSurveys.EIDColumn}, New Global.System.Data.DataColumn() {Me.tableCollaredAnimalsInGroups.EIDColumn}, false)
         Me.Relations.Add(Me.relationFK_CollaredAnimalsInGroups_Surveys)
         Me.relationFK_Surveys_SurveyFlights = New Global.System.Data.DataRelation("FK_Surveys_SurveyFlights", New Global.System.Data.DataColumn() {Me.tableSurveyFlights.FlightIDColumn}, New Global.System.Data.DataColumn() {Me.tableSurveys.FlightIDColumn}, false)
         Me.Relations.Add(Me.relationFK_Surveys_SurveyFlights)
         Me.relationFK_CollaredAnimalsInGroups_Captures = New Global.System.Data.DataRelation("FK_CollaredAnimalsInGroups_Captures", New Global.System.Data.DataColumn() {Me.tableCaptures.AnimalIDColumn}, New Global.System.Data.DataColumn() {Me.tableCollaredAnimalsInGroups.AnimalIDColumn}, false)
         Me.Relations.Add(Me.relationFK_CollaredAnimalsInGroups_Captures)
+        Me.relationFK_SurveyFlights_SurveyNames = New Global.System.Data.DataRelation("FK_SurveyFlights_SurveyNames", New Global.System.Data.DataColumn() {Me.tableSurveyNames.SurveyNameColumn}, New Global.System.Data.DataColumn() {Me.tableSurveyFlights.SurveyNameColumn}, false)
+        Me.Relations.Add(Me.relationFK_SurveyFlights_SurveyNames)
     End Sub
     
     <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -322,6 +353,12 @@ Partial Public Class WRST_CaribouDataSet
     <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
      Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
     Private Function ShouldSerializeCaptures() As Boolean
+        Return false
+    End Function
+    
+    <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+     Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+    Private Function ShouldSerializeSurveyNames() As Boolean
         Return false
     End Function
     
@@ -394,6 +431,9 @@ Partial Public Class WRST_CaribouDataSet
     
     <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
     Public Delegate Sub CapturesRowChangeEventHandler(ByVal sender As Object, ByVal e As CapturesRowChangeEvent)
+    
+    <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+    Public Delegate Sub SurveyNamesRowChangeEventHandler(ByVal sender As Object, ByVal e As SurveyNamesRowChangeEvent)
     
     '''<summary>
     '''Represents the strongly named DataTable class.
@@ -813,6 +853,8 @@ Partial Public Class WRST_CaribouDataSet
         
         Private columnSourceFile As Global.System.Data.DataColumn
         
+        Private columnSurveyName As Global.System.Data.DataColumn
+        
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
         Public Sub New()
@@ -1033,6 +1075,14 @@ Partial Public Class WRST_CaribouDataSet
         End Property
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public ReadOnly Property SurveyNameColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnSurveyName
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0"),  _
          Global.System.ComponentModel.Browsable(false)>  _
         Public ReadOnly Property Count() As Integer
@@ -1092,9 +1142,13 @@ Partial Public Class WRST_CaribouDataSet
                     ByVal RecordInsertedDate As Date,  _
                     ByVal RecordInsertedBy As String,  _
                     ByVal FlightID As String,  _
-                    ByVal SourceFile As String) As SurveyFlightsRow
+                    ByVal SourceFile As String,  _
+                    ByVal parentSurveyNamesRowByFK_SurveyFlights_SurveyNames As SurveyNamesRow) As SurveyFlightsRow
             Dim rowSurveyFlightsRow As SurveyFlightsRow = CType(Me.NewRow,SurveyFlightsRow)
-            Dim columnValuesArray() As Object = New Object() {Year, SurveyType, CrewNumber, Pilot, Observer1, Observer2, AircraftType, TailNo, TimeDepart, TimeReturn, SpotterPlaneTailNo, SpotterPlaneType, SpotterPlanePilot, WeatherConditions, SnowConditions, Notes, Herd, SOPNumber, SOPVersion, RecordInsertedDate, RecordInsertedBy, FlightID, SourceFile}
+            Dim columnValuesArray() As Object = New Object() {Year, SurveyType, CrewNumber, Pilot, Observer1, Observer2, AircraftType, TailNo, TimeDepart, TimeReturn, SpotterPlaneTailNo, SpotterPlaneType, SpotterPlanePilot, WeatherConditions, SnowConditions, Notes, Herd, SOPNumber, SOPVersion, RecordInsertedDate, RecordInsertedBy, FlightID, SourceFile, Nothing}
+            If (Not (parentSurveyNamesRowByFK_SurveyFlights_SurveyNames) Is Nothing) Then
+                columnValuesArray(23) = parentSurveyNamesRowByFK_SurveyFlights_SurveyNames(0)
+            End If
             rowSurveyFlightsRow.ItemArray = columnValuesArray
             Me.Rows.Add(rowSurveyFlightsRow)
             Return rowSurveyFlightsRow
@@ -1146,6 +1200,7 @@ Partial Public Class WRST_CaribouDataSet
             Me.columnRecordInsertedBy = MyBase.Columns("RecordInsertedBy")
             Me.columnFlightID = MyBase.Columns("FlightID")
             Me.columnSourceFile = MyBase.Columns("SourceFile")
+            Me.columnSurveyName = MyBase.Columns("SurveyName")
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -1197,6 +1252,8 @@ Partial Public Class WRST_CaribouDataSet
             MyBase.Columns.Add(Me.columnFlightID)
             Me.columnSourceFile = New Global.System.Data.DataColumn("SourceFile", GetType(String), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnSourceFile)
+            Me.columnSurveyName = New Global.System.Data.DataColumn("SurveyName", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnSurveyName)
             Me.Constraints.Add(New Global.System.Data.UniqueConstraint("Constraint1", New Global.System.Data.DataColumn() {Me.columnFlightID}, true))
             Me.columnYear.AllowDBNull = false
             Me.columnSurveyType.AllowDBNull = false
@@ -1225,6 +1282,7 @@ Partial Public Class WRST_CaribouDataSet
             Me.columnFlightID.Unique = true
             Me.columnFlightID.MaxLength = 50
             Me.columnSourceFile.MaxLength = 4000
+            Me.columnSurveyName.MaxLength = 50
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -3558,6 +3616,296 @@ Partial Public Class WRST_CaribouDataSet
     End Class
     
     '''<summary>
+    '''Represents the strongly named DataTable class.
+    '''</summary>
+    <Global.System.Serializable(),  _
+     Global.System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")>  _
+    Partial Public Class SurveyNamesDataTable
+        Inherits Global.System.Data.TypedTableBase(Of SurveyNamesRow)
+        
+        Private columnSurveyName As Global.System.Data.DataColumn
+        
+        Private columnDescription As Global.System.Data.DataColumn
+        
+        Private columnNotes As Global.System.Data.DataColumn
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Sub New()
+            MyBase.New
+            Me.TableName = "SurveyNames"
+            Me.BeginInit
+            Me.InitClass
+            Me.EndInit
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Friend Sub New(ByVal table As Global.System.Data.DataTable)
+            MyBase.New
+            Me.TableName = table.TableName
+            If (table.CaseSensitive <> table.DataSet.CaseSensitive) Then
+                Me.CaseSensitive = table.CaseSensitive
+            End If
+            If (table.Locale.ToString <> table.DataSet.Locale.ToString) Then
+                Me.Locale = table.Locale
+            End If
+            If (table.Namespace <> table.DataSet.Namespace) Then
+                Me.Namespace = table.Namespace
+            End If
+            Me.Prefix = table.Prefix
+            Me.MinimumCapacity = table.MinimumCapacity
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Protected Sub New(ByVal info As Global.System.Runtime.Serialization.SerializationInfo, ByVal context As Global.System.Runtime.Serialization.StreamingContext)
+            MyBase.New(info, context)
+            Me.InitVars
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public ReadOnly Property SurveyNameColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnSurveyName
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public ReadOnly Property DescriptionColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnDescription
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public ReadOnly Property NotesColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnNotes
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0"),  _
+         Global.System.ComponentModel.Browsable(false)>  _
+        Public ReadOnly Property Count() As Integer
+            Get
+                Return Me.Rows.Count
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Default ReadOnly Property Item(ByVal index As Integer) As SurveyNamesRow
+            Get
+                Return CType(Me.Rows(index),SurveyNamesRow)
+            End Get
+        End Property
+        
+        <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Event SurveyNamesRowChanging As SurveyNamesRowChangeEventHandler
+        
+        <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Event SurveyNamesRowChanged As SurveyNamesRowChangeEventHandler
+        
+        <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Event SurveyNamesRowDeleting As SurveyNamesRowChangeEventHandler
+        
+        <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Event SurveyNamesRowDeleted As SurveyNamesRowChangeEventHandler
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Overloads Sub AddSurveyNamesRow(ByVal row As SurveyNamesRow)
+            Me.Rows.Add(row)
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Overloads Function AddSurveyNamesRow(ByVal SurveyName As String, ByVal Description As String, ByVal Notes As String) As SurveyNamesRow
+            Dim rowSurveyNamesRow As SurveyNamesRow = CType(Me.NewRow,SurveyNamesRow)
+            Dim columnValuesArray() As Object = New Object() {SurveyName, Description, Notes}
+            rowSurveyNamesRow.ItemArray = columnValuesArray
+            Me.Rows.Add(rowSurveyNamesRow)
+            Return rowSurveyNamesRow
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Function FindBySurveyName(ByVal SurveyName As String) As SurveyNamesRow
+            Return CType(Me.Rows.Find(New Object() {SurveyName}),SurveyNamesRow)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Overrides Function Clone() As Global.System.Data.DataTable
+            Dim cln As SurveyNamesDataTable = CType(MyBase.Clone,SurveyNamesDataTable)
+            cln.InitVars
+            Return cln
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Protected Overrides Function CreateInstance() As Global.System.Data.DataTable
+            Return New SurveyNamesDataTable()
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Friend Sub InitVars()
+            Me.columnSurveyName = MyBase.Columns("SurveyName")
+            Me.columnDescription = MyBase.Columns("Description")
+            Me.columnNotes = MyBase.Columns("Notes")
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Private Sub InitClass()
+            Me.columnSurveyName = New Global.System.Data.DataColumn("SurveyName", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnSurveyName)
+            Me.columnDescription = New Global.System.Data.DataColumn("Description", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnDescription)
+            Me.columnNotes = New Global.System.Data.DataColumn("Notes", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnNotes)
+            Me.Constraints.Add(New Global.System.Data.UniqueConstraint("Constraint1", New Global.System.Data.DataColumn() {Me.columnSurveyName}, true))
+            Me.columnSurveyName.AllowDBNull = false
+            Me.columnSurveyName.Unique = true
+            Me.columnSurveyName.MaxLength = 50
+            Me.columnDescription.MaxLength = 1000
+            Me.columnNotes.MaxLength = 1000
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Function NewSurveyNamesRow() As SurveyNamesRow
+            Return CType(Me.NewRow,SurveyNamesRow)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Protected Overrides Function NewRowFromBuilder(ByVal builder As Global.System.Data.DataRowBuilder) As Global.System.Data.DataRow
+            Return New SurveyNamesRow(builder)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Protected Overrides Function GetRowType() As Global.System.Type
+            Return GetType(SurveyNamesRow)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Protected Overrides Sub OnRowChanged(ByVal e As Global.System.Data.DataRowChangeEventArgs)
+            MyBase.OnRowChanged(e)
+            If (Not (Me.SurveyNamesRowChangedEvent) Is Nothing) Then
+                RaiseEvent SurveyNamesRowChanged(Me, New SurveyNamesRowChangeEvent(CType(e.Row,SurveyNamesRow), e.Action))
+            End If
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Protected Overrides Sub OnRowChanging(ByVal e As Global.System.Data.DataRowChangeEventArgs)
+            MyBase.OnRowChanging(e)
+            If (Not (Me.SurveyNamesRowChangingEvent) Is Nothing) Then
+                RaiseEvent SurveyNamesRowChanging(Me, New SurveyNamesRowChangeEvent(CType(e.Row,SurveyNamesRow), e.Action))
+            End If
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Protected Overrides Sub OnRowDeleted(ByVal e As Global.System.Data.DataRowChangeEventArgs)
+            MyBase.OnRowDeleted(e)
+            If (Not (Me.SurveyNamesRowDeletedEvent) Is Nothing) Then
+                RaiseEvent SurveyNamesRowDeleted(Me, New SurveyNamesRowChangeEvent(CType(e.Row,SurveyNamesRow), e.Action))
+            End If
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Protected Overrides Sub OnRowDeleting(ByVal e As Global.System.Data.DataRowChangeEventArgs)
+            MyBase.OnRowDeleting(e)
+            If (Not (Me.SurveyNamesRowDeletingEvent) Is Nothing) Then
+                RaiseEvent SurveyNamesRowDeleting(Me, New SurveyNamesRowChangeEvent(CType(e.Row,SurveyNamesRow), e.Action))
+            End If
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Sub RemoveSurveyNamesRow(ByVal row As SurveyNamesRow)
+            Me.Rows.Remove(row)
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Shared Function GetTypedTableSchema(ByVal xs As Global.System.Xml.Schema.XmlSchemaSet) As Global.System.Xml.Schema.XmlSchemaComplexType
+            Dim type As Global.System.Xml.Schema.XmlSchemaComplexType = New Global.System.Xml.Schema.XmlSchemaComplexType()
+            Dim sequence As Global.System.Xml.Schema.XmlSchemaSequence = New Global.System.Xml.Schema.XmlSchemaSequence()
+            Dim ds As WRST_CaribouDataSet = New WRST_CaribouDataSet()
+            Dim any1 As Global.System.Xml.Schema.XmlSchemaAny = New Global.System.Xml.Schema.XmlSchemaAny()
+            any1.Namespace = "http://www.w3.org/2001/XMLSchema"
+            any1.MinOccurs = New Decimal(0)
+            any1.MaxOccurs = Decimal.MaxValue
+            any1.ProcessContents = Global.System.Xml.Schema.XmlSchemaContentProcessing.Lax
+            sequence.Items.Add(any1)
+            Dim any2 As Global.System.Xml.Schema.XmlSchemaAny = New Global.System.Xml.Schema.XmlSchemaAny()
+            any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1"
+            any2.MinOccurs = New Decimal(1)
+            any2.ProcessContents = Global.System.Xml.Schema.XmlSchemaContentProcessing.Lax
+            sequence.Items.Add(any2)
+            Dim attribute1 As Global.System.Xml.Schema.XmlSchemaAttribute = New Global.System.Xml.Schema.XmlSchemaAttribute()
+            attribute1.Name = "namespace"
+            attribute1.FixedValue = ds.Namespace
+            type.Attributes.Add(attribute1)
+            Dim attribute2 As Global.System.Xml.Schema.XmlSchemaAttribute = New Global.System.Xml.Schema.XmlSchemaAttribute()
+            attribute2.Name = "tableTypeName"
+            attribute2.FixedValue = "SurveyNamesDataTable"
+            type.Attributes.Add(attribute2)
+            type.Particle = sequence
+            Dim dsSchema As Global.System.Xml.Schema.XmlSchema = ds.GetSchemaSerializable
+            If xs.Contains(dsSchema.TargetNamespace) Then
+                Dim s1 As Global.System.IO.MemoryStream = New Global.System.IO.MemoryStream()
+                Dim s2 As Global.System.IO.MemoryStream = New Global.System.IO.MemoryStream()
+                Try 
+                    Dim schema As Global.System.Xml.Schema.XmlSchema = Nothing
+                    dsSchema.Write(s1)
+                    Dim schemas As Global.System.Collections.IEnumerator = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator
+                    Do While schemas.MoveNext
+                        schema = CType(schemas.Current,Global.System.Xml.Schema.XmlSchema)
+                        s2.SetLength(0)
+                        schema.Write(s2)
+                        If (s1.Length = s2.Length) Then
+                            s1.Position = 0
+                            s2.Position = 0
+                            
+                            Do While ((s1.Position <> s1.Length)  _
+                                        AndAlso (s1.ReadByte = s2.ReadByte))
+                                
+                                
+                            Loop
+                            If (s1.Position = s1.Length) Then
+                                Return type
+                            End If
+                        End If
+                        
+                    Loop
+                Finally
+                    If (Not (s1) Is Nothing) Then
+                        s1.Close
+                    End If
+                    If (Not (s2) Is Nothing) Then
+                        s2.Close
+                    End If
+                End Try
+            End If
+            xs.Add(dsSchema)
+            Return type
+        End Function
+    End Class
+    
+    '''<summary>
     '''Represents strongly named DataRow class.
     '''</summary>
     Partial Public Class CollaredAnimalsInGroupsRow
@@ -4071,6 +4419,32 @@ Partial Public Class WRST_CaribouDataSet
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Property SurveyName() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tableSurveyFlights.SurveyNameColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'SurveyName' in table 'SurveyFlights' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableSurveyFlights.SurveyNameColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Property SurveyNamesRow() As SurveyNamesRow
+            Get
+                Return CType(Me.GetParentRow(Me.Table.ParentRelations("FK_SurveyFlights_SurveyNames")),SurveyNamesRow)
+            End Get
+            Set
+                Me.SetParentRow(value, Me.Table.ParentRelations("FK_SurveyFlights_SurveyNames"))
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
         Public Function IsCrewNumberNull() As Boolean
             Return Me.IsNull(Me.tableSurveyFlights.CrewNumberColumn)
         End Function
@@ -4223,6 +4597,18 @@ Partial Public Class WRST_CaribouDataSet
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
         Public Sub SetSourceFileNull()
             Me(Me.tableSurveyFlights.SourceFileColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Function IsSurveyNameNull() As Boolean
+            Return Me.IsNull(Me.tableSurveyFlights.SurveyNameColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Sub SetSurveyNameNull()
+            Me(Me.tableSurveyFlights.SurveyNameColumn) = Global.System.Convert.DBNull
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -7113,6 +7499,97 @@ Partial Public Class WRST_CaribouDataSet
     End Class
     
     '''<summary>
+    '''Represents strongly named DataRow class.
+    '''</summary>
+    Partial Public Class SurveyNamesRow
+        Inherits Global.System.Data.DataRow
+        
+        Private tableSurveyNames As SurveyNamesDataTable
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Friend Sub New(ByVal rb As Global.System.Data.DataRowBuilder)
+            MyBase.New(rb)
+            Me.tableSurveyNames = CType(Me.Table,SurveyNamesDataTable)
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Property SurveyName() As String
+            Get
+                Return CType(Me(Me.tableSurveyNames.SurveyNameColumn),String)
+            End Get
+            Set
+                Me(Me.tableSurveyNames.SurveyNameColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Property Description() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tableSurveyNames.DescriptionColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'Description' in table 'SurveyNames' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableSurveyNames.DescriptionColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Property Notes() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tableSurveyNames.NotesColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'Notes' in table 'SurveyNames' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableSurveyNames.NotesColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Function IsDescriptionNull() As Boolean
+            Return Me.IsNull(Me.tableSurveyNames.DescriptionColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Sub SetDescriptionNull()
+            Me(Me.tableSurveyNames.DescriptionColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Function IsNotesNull() As Boolean
+            Return Me.IsNull(Me.tableSurveyNames.NotesColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Sub SetNotesNull()
+            Me(Me.tableSurveyNames.NotesColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Function GetSurveyFlightsRows() As SurveyFlightsRow()
+            If (Me.Table.ChildRelations("FK_SurveyFlights_SurveyNames") Is Nothing) Then
+                Return New SurveyFlightsRow(-1) {}
+            Else
+                Return CType(MyBase.GetChildRows(Me.Table.ChildRelations("FK_SurveyFlights_SurveyNames")),SurveyFlightsRow())
+            End If
+        End Function
+    End Class
+    
+    '''<summary>
     '''Row event argument class
     '''</summary>
     <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
@@ -7242,6 +7719,42 @@ Partial Public Class WRST_CaribouDataSet
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
         Public ReadOnly Property Row() As CapturesRow
+            Get
+                Return Me.eventRow
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public ReadOnly Property Action() As Global.System.Data.DataRowAction
+            Get
+                Return Me.eventAction
+            End Get
+        End Property
+    End Class
+    
+    '''<summary>
+    '''Row event argument class
+    '''</summary>
+    <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+    Public Class SurveyNamesRowChangeEvent
+        Inherits Global.System.EventArgs
+        
+        Private eventRow As SurveyNamesRow
+        
+        Private eventAction As Global.System.Data.DataRowAction
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Sub New(ByVal row As SurveyNamesRow, ByVal action As Global.System.Data.DataRowAction)
+            MyBase.New
+            Me.eventRow = row
+            Me.eventAction = action
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public ReadOnly Property Row() As SurveyNamesRow
             Get
                 Return Me.eventRow
             End Get
@@ -7772,6 +8285,7 @@ Namespace WRST_CaribouDataSetTableAdapters
             tableMapping.ColumnMappings.Add("RecordInsertedBy", "RecordInsertedBy")
             tableMapping.ColumnMappings.Add("FlightID", "FlightID")
             tableMapping.ColumnMappings.Add("SourceFile", "SourceFile")
+            tableMapping.ColumnMappings.Add("SurveyName", "SurveyName")
             Me._adapter.TableMappings.Add(tableMapping)
             Me._adapter.DeleteCommand = New Global.System.Data.SqlClient.SqlCommand()
             Me._adapter.DeleteCommand.Connection = Me.Connection
@@ -7780,19 +8294,20 @@ Namespace WRST_CaribouDataSetTableAdapters
             Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_FlightID", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "FlightID", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
             Me._adapter.InsertCommand = New Global.System.Data.SqlClient.SqlCommand()
             Me._adapter.InsertCommand.Connection = Me.Connection
-            Me._adapter.InsertCommand.CommandText = "INSERT INTO SurveyFlights"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                  (Year, SurveyType, CrewNumber, Pilot"& _ 
-                ", Observer1, Observer2, AircraftType, TailNo, TimeDepart, TimeReturn, SpotterPla"& _ 
-                "neTailNo, SpotterPlaneType, SpotterPlanePilot, WeatherConditions, SnowConditions"& _ 
-                ", Notes, Herd, SOPNumber, "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                  SOPVersion, RecordInsertedDate, Re"& _ 
-                "cordInsertedBy, FlightID, SourceFile)"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"VALUES (@Year,@SurveyType,@CrewNumber,@Pi"& _ 
-                "lot,@Observer1,@Observer2,@AircraftType,@TailNo,@TimeDepart,@TimeReturn,@Spotter"& _ 
-                "PlaneTailNo,@SpotterPlaneType,@SpotterPlanePilot,@WeatherConditions,@SnowConditi"& _ 
-                "ons,@Notes,@Herd,@SOPNumber,@SOPVersion,@RecordInsertedDate,@RecordInsertedBy,@F"& _ 
-                "lightID,@SourceFile);  "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"SELECT Year, SurveyType, CrewNumber, Pilot, Observer1, "& _ 
-                "Observer2, AircraftType, TailNo, TimeDepart, TimeReturn, SpotterPlaneTailNo, Spo"& _ 
-                "tterPlaneType, SpotterPlanePilot, WeatherConditions, SnowConditions, Notes, Herd"& _ 
-                ", SOPNumber, SOPVersion, RecordInsertedDate, RecordInsertedBy, FlightID FROM Sur"& _ 
-                "veyFlights WHERE (FlightID = @FlightID)"
+            Me._adapter.InsertCommand.CommandText = "INSERT INTO SurveyFlights"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                         (Year, SurveyType, CrewNumber"& _ 
+                ", Pilot, Observer1, Observer2, AircraftType, TailNo, TimeDepart, TimeReturn, Spo"& _ 
+                "tterPlaneTailNo, SpotterPlaneType, SpotterPlanePilot, WeatherConditions, SnowCon"& _ 
+                "ditions, Notes, Herd, "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                         SOPNumber, SOPVersion, RecordIn"& _ 
+                "sertedDate, RecordInsertedBy, FlightID, SourceFile, SurveyName)"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"VALUES        ("& _ 
+                "@Year,@SurveyType,@CrewNumber,@Pilot,@Observer1,@Observer2,@AircraftType,@TailNo"& _ 
+                ",@TimeDepart,@TimeReturn,@SpotterPlaneTailNo,@SpotterPlaneType,@SpotterPlanePilo"& _ 
+                "t,@WeatherConditions,@SnowConditions,@Notes,@Herd,@SOPNumber,@SOPVersion,@Record"& _ 
+                "InsertedDate,@RecordInsertedBy,@FlightID,@SourceFile,@SurveyName);   "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"SELECT Ye"& _ 
+                "ar, SurveyType, CrewNumber, Pilot, Observer1, Observer2, AircraftType, TailNo, T"& _ 
+                "imeDepart, TimeReturn, SpotterPlaneTailNo, SpotterPlaneType, SpotterPlanePilot, "& _ 
+                "WeatherConditions, SnowConditions, Notes, Herd, SOPNumber, SOPVersion, RecordIns"& _ 
+                "ertedDate, RecordInsertedBy, FlightID FROM SurveyFlights WHERE (FlightID = @Flig"& _ 
+                "htID)"
             Me._adapter.InsertCommand.CommandType = Global.System.Data.CommandType.Text
             Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Year", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 0, 0, "Year", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@SurveyType", Global.System.Data.SqlDbType.VarChar, 2, Global.System.Data.ParameterDirection.Input, 0, 0, "SurveyType", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
@@ -7817,22 +8332,24 @@ Namespace WRST_CaribouDataSetTableAdapters
             Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@RecordInsertedBy", Global.System.Data.SqlDbType.NVarChar, 50, Global.System.Data.ParameterDirection.Input, 0, 0, "RecordInsertedBy", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@FlightID", Global.System.Data.SqlDbType.VarChar, 50, Global.System.Data.ParameterDirection.Input, 0, 0, "FlightID", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@SourceFile", Global.System.Data.SqlDbType.VarChar, 4000, Global.System.Data.ParameterDirection.Input, 0, 0, "SourceFile", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@SurveyName", Global.System.Data.SqlDbType.VarChar, 50, Global.System.Data.ParameterDirection.Input, 0, 0, "SurveyName", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.UpdateCommand = New Global.System.Data.SqlClient.SqlCommand()
             Me._adapter.UpdateCommand.Connection = Me.Connection
-            Me._adapter.UpdateCommand.CommandText = "UPDATE SurveyFlights"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"SET          Year = @Year, SurveyType = @SurveyType, CrewNu"& _ 
-                "mber = @CrewNumber, Pilot = @Pilot, Observer1 = @Observer1, Observer2 = @Observe"& _ 
-                "r2, AircraftType = @AircraftType, TailNo = @TailNo, TimeDepart = @TimeDepart, "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)& _ 
-                "                  TimeReturn = @TimeReturn, SpotterPlaneTailNo = @SpotterPlaneTa"& _ 
-                "ilNo, SpotterPlaneType = @SpotterPlaneType, SpotterPlanePilot = @SpotterPlanePil"& _ 
-                "ot, WeatherConditions = @WeatherConditions, SnowConditions = @SnowConditions, "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)& _ 
-                "                  Notes = @Notes, Herd = @Herd, SOPNumber = @SOPNumber, SOPVersi"& _ 
-                "on = @SOPVersion, RecordInsertedDate = @RecordInsertedDate, RecordInsertedBy = @"& _ 
-                "RecordInsertedBy, FlightID = @FlightID, SourceFile = @SourceFile"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"WHERE  (Flight"& _ 
-                "ID = @Original_FlightID);    "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"SELECT Year, SurveyType, CrewNumber, Pilot, Obser"& _ 
-                "ver1, Observer2, AircraftType, TailNo, TimeDepart, TimeReturn, IsFollowUpFlight,"& _ 
-                " SpotterPlaneTailNo, SpotterPlaneType, SpotterPlanePilot, WeatherConditions, Sno"& _ 
-                "wConditions, Notes, Herd, SOPNumber, SOPVersion, RecordInsertedDate, RecordInser"& _ 
-                "tedBy, FlightID FROM SurveyFlights WHERE (FlightID = @FlightID)"
+            Me._adapter.UpdateCommand.CommandText = "UPDATE       SurveyFlights"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"SET                Year = @Year, SurveyType = @Survey"& _ 
+                "Type, CrewNumber = @CrewNumber, Pilot = @Pilot, Observer1 = @Observer1, Observer"& _ 
+                "2 = @Observer2, AircraftType = @AircraftType, TailNo = @TailNo, TimeDepart = @Ti"& _ 
+                "meDepart, "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                         TimeReturn = @TimeReturn, SpotterPlaneTailN"& _ 
+                "o = @SpotterPlaneTailNo, SpotterPlaneType = @SpotterPlaneType, SpotterPlanePilot"& _ 
+                " = @SpotterPlanePilot, WeatherConditions = @WeatherConditions, "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"               "& _ 
+                "          SnowConditions = @SnowConditions, Notes = @Notes, Herd = @Herd, SOPNum"& _ 
+                "ber = @SOPNumber, SOPVersion = @SOPVersion, RecordInsertedDate = @RecordInserted"& _ 
+                "Date, RecordInsertedBy = @RecordInsertedBy, "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                         FlightID "& _ 
+                "= @FlightID, SourceFile = @SourceFile, SurveyName = @SurveyName"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"WHERE        (F"& _ 
+                "lightID = @Original_FlightID);     "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"SELECT Year, SurveyType, CrewNumber, Pilot,"& _ 
+                " Observer1, Observer2, AircraftType, TailNo, TimeDepart, TimeReturn, IsFollowUpF"& _ 
+                "light, SpotterPlaneTailNo, SpotterPlaneType, SpotterPlanePilot, WeatherCondition"& _ 
+                "s, SnowConditions, Notes, Herd, SOPNumber, SOPVersion, RecordInsertedDate, Recor"& _ 
+                "dInsertedBy, FlightID FROM SurveyFlights WHERE (FlightID = @FlightID)"
             Me._adapter.UpdateCommand.CommandType = Global.System.Data.CommandType.Text
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Year", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 0, 0, "Year", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@SurveyType", Global.System.Data.SqlDbType.VarChar, 2, Global.System.Data.ParameterDirection.Input, 0, 0, "SurveyType", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
@@ -7857,6 +8374,7 @@ Namespace WRST_CaribouDataSetTableAdapters
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@RecordInsertedBy", Global.System.Data.SqlDbType.NVarChar, 50, Global.System.Data.ParameterDirection.Input, 0, 0, "RecordInsertedBy", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@FlightID", Global.System.Data.SqlDbType.VarChar, 50, Global.System.Data.ParameterDirection.Input, 0, 0, "FlightID", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@SourceFile", Global.System.Data.SqlDbType.VarChar, 4000, Global.System.Data.ParameterDirection.Input, 0, 0, "SourceFile", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@SurveyName", Global.System.Data.SqlDbType.VarChar, 50, Global.System.Data.ParameterDirection.Input, 0, 0, "SurveyName", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_FlightID", Global.System.Data.SqlDbType.VarChar, 50, Global.System.Data.ParameterDirection.Input, 0, 0, "FlightID", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
         End Sub
         
@@ -7873,11 +8391,12 @@ Namespace WRST_CaribouDataSetTableAdapters
             Me._commandCollection = New Global.System.Data.SqlClient.SqlCommand(0) {}
             Me._commandCollection(0) = New Global.System.Data.SqlClient.SqlCommand()
             Me._commandCollection(0).Connection = Me.Connection
-            Me._commandCollection(0).CommandText = "SELECT Year, SurveyType, CrewNumber, Pilot, Observer1, Observer2, AircraftType, T"& _ 
-                "ailNo, TimeDepart, TimeReturn, SpotterPlaneTailNo, SpotterPlaneType, SpotterPlan"& _ 
-                "ePilot, WeatherConditions, SnowConditions, Notes, Herd, SOPNumber, "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"           "& _ 
-                "       SOPVersion, RecordInsertedDate, RecordInsertedBy, FlightID, SourceFile"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"F"& _ 
-                "ROM     SurveyFlights"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"ORDER BY Year DESC, SurveyType, TimeDepart DESC"
+            Me._commandCollection(0).CommandText = "SELECT        Year, SurveyType, CrewNumber, Pilot, Observer1, Observer2, Aircraft"& _ 
+                "Type, TailNo, TimeDepart, TimeReturn, SpotterPlaneTailNo, SpotterPlaneType, Spot"& _ 
+                "terPlanePilot, WeatherConditions, SnowConditions, Notes, Herd, "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"               "& _ 
+                "          SOPNumber, SOPVersion, RecordInsertedDate, RecordInsertedBy, FlightID,"& _ 
+                " SourceFile, SurveyName"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"FROM            SurveyFlights"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"ORDER BY Year DESC, Surv"& _ 
+                "eyType, TimeDepart DESC"
             Me._commandCollection(0).CommandType = Global.System.Data.CommandType.Text
         End Sub
         
@@ -7985,7 +8504,8 @@ Namespace WRST_CaribouDataSetTableAdapters
                     ByVal RecordInsertedDate As Date,  _
                     ByVal RecordInsertedBy As String,  _
                     ByVal FlightID As String,  _
-                    ByVal SourceFile As String) As Integer
+                    ByVal SourceFile As String,  _
+                    ByVal SurveyName As String) As Integer
             Me.Adapter.InsertCommand.Parameters(0).Value = CType(Year,Integer)
             If (SurveyType Is Nothing) Then
                 Throw New Global.System.ArgumentNullException("SurveyType")
@@ -8089,6 +8609,11 @@ Namespace WRST_CaribouDataSetTableAdapters
             Else
                 Me.Adapter.InsertCommand.Parameters(22).Value = CType(SourceFile,String)
             End If
+            If (SurveyName Is Nothing) Then
+                Me.Adapter.InsertCommand.Parameters(23).Value = Global.System.DBNull.Value
+            Else
+                Me.Adapter.InsertCommand.Parameters(23).Value = CType(SurveyName,String)
+            End If
             Dim previousConnectionState As Global.System.Data.ConnectionState = Me.Adapter.InsertCommand.Connection.State
             If ((Me.Adapter.InsertCommand.Connection.State And Global.System.Data.ConnectionState.Open)  _
                         <> Global.System.Data.ConnectionState.Open) Then
@@ -8132,6 +8657,7 @@ Namespace WRST_CaribouDataSetTableAdapters
                     ByVal RecordInsertedBy As String,  _
                     ByVal FlightID As String,  _
                     ByVal SourceFile As String,  _
+                    ByVal SurveyName As String,  _
                     ByVal Original_FlightID As String) As Integer
             Me.Adapter.UpdateCommand.Parameters(0).Value = CType(Year,Integer)
             If (SurveyType Is Nothing) Then
@@ -8236,10 +8762,15 @@ Namespace WRST_CaribouDataSetTableAdapters
             Else
                 Me.Adapter.UpdateCommand.Parameters(22).Value = CType(SourceFile,String)
             End If
+            If (SurveyName Is Nothing) Then
+                Me.Adapter.UpdateCommand.Parameters(23).Value = Global.System.DBNull.Value
+            Else
+                Me.Adapter.UpdateCommand.Parameters(23).Value = CType(SurveyName,String)
+            End If
             If (Original_FlightID Is Nothing) Then
                 Throw New Global.System.ArgumentNullException("Original_FlightID")
             Else
-                Me.Adapter.UpdateCommand.Parameters(23).Value = CType(Original_FlightID,String)
+                Me.Adapter.UpdateCommand.Parameters(24).Value = CType(Original_FlightID,String)
             End If
             Dim previousConnectionState As Global.System.Data.ConnectionState = Me.Adapter.UpdateCommand.Connection.State
             If ((Me.Adapter.UpdateCommand.Connection.State And Global.System.Data.ConnectionState.Open)  _
@@ -8283,8 +8814,9 @@ Namespace WRST_CaribouDataSetTableAdapters
                     ByVal RecordInsertedDate As Date,  _
                     ByVal RecordInsertedBy As String,  _
                     ByVal SourceFile As String,  _
+                    ByVal SurveyName As String,  _
                     ByVal Original_FlightID As String) As Integer
-            Return Me.Update(Year, SurveyType, CrewNumber, Pilot, Observer1, Observer2, AircraftType, TailNo, TimeDepart, TimeReturn, SpotterPlaneTailNo, SpotterPlaneType, SpotterPlanePilot, WeatherConditions, SnowConditions, Notes, Herd, SOPNumber, SOPVersion, RecordInsertedDate, RecordInsertedBy, Original_FlightID, SourceFile, Original_FlightID)
+            Return Me.Update(Year, SurveyType, CrewNumber, Pilot, Observer1, Observer2, AircraftType, TailNo, TimeDepart, TimeReturn, SpotterPlaneTailNo, SpotterPlaneType, SpotterPlanePilot, WeatherConditions, SnowConditions, Notes, Herd, SOPNumber, SOPVersion, RecordInsertedDate, RecordInsertedBy, Original_FlightID, SourceFile, SurveyName, Original_FlightID)
         End Function
     End Class
     
@@ -8582,10 +9114,10 @@ Namespace WRST_CaribouDataSetTableAdapters
             Me._commandCollection(0).Connection = Me.Connection
             Me._commandCollection(0).CommandText = "SELECT SightingDate, SearchArea, GroupNumber, SmallBull, MediumBull, LargeBull, B"& _ 
                 "ull, Cow, Calf, Adult, Caribou, FrequenciesInGroup, Lat, Lon, [In], Seen, Marked"& _ 
-                ", Mode, Accuracy, RetainedAntler, DistendedUdders, CalvesAtHeel, "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"             "& _ 
-                "     WaypointName, Comment, SourceFilename, FlightID, RecordInsertedDate, Record"& _ 
-                "InsertedBy, EID, CertificationDate, CertifiedBy, CertificationLevel, VisualColla"& _ 
-                "r, DataQualityNotes"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"FROM     Surveys"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"ORDER BY SightingDate, GroupNumber"
+                ", Mode, Accuracy, RetainedAntler, DistendedUdders, CalvesAtHeel, WaypointName, C"& _ 
+                "omment, SourceFilename, FlightID, RecordInsertedDate, RecordInsertedBy, EID, Cer"& _ 
+                "tificationDate, CertifiedBy, CertificationLevel, VisualCollar, DataQualityNotes "& _ 
+                "FROM Surveys ORDER BY SightingDate, GroupNumber"
             Me._commandCollection(0).CommandType = Global.System.Data.CommandType.Text
         End Sub
         
@@ -10844,6 +11376,342 @@ Namespace WRST_CaribouDataSetTableAdapters
     End Class
     
     '''<summary>
+    '''Represents the connection and commands used to retrieve and save data.
+    '''</summary>
+    <Global.System.ComponentModel.DesignerCategoryAttribute("code"),  _
+     Global.System.ComponentModel.ToolboxItem(true),  _
+     Global.System.ComponentModel.DataObjectAttribute(true),  _
+     Global.System.ComponentModel.DesignerAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterDesigner, Microsoft.VSDesigner"& _ 
+        ", Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"),  _
+     Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")>  _
+    Partial Public Class SurveyNamesTableAdapter
+        Inherits Global.System.ComponentModel.Component
+        
+        Private WithEvents _adapter As Global.System.Data.SqlClient.SqlDataAdapter
+        
+        Private _connection As Global.System.Data.SqlClient.SqlConnection
+        
+        Private _transaction As Global.System.Data.SqlClient.SqlTransaction
+        
+        Private _commandCollection() As Global.System.Data.SqlClient.SqlCommand
+        
+        Private _clearBeforeFill As Boolean
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Sub New()
+            MyBase.New
+            Me.ClearBeforeFill = true
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Protected Friend ReadOnly Property Adapter() As Global.System.Data.SqlClient.SqlDataAdapter
+            Get
+                If (Me._adapter Is Nothing) Then
+                    Me.InitAdapter
+                End If
+                Return Me._adapter
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Friend Property Connection() As Global.System.Data.SqlClient.SqlConnection
+            Get
+                If (Me._connection Is Nothing) Then
+                    Me.InitConnection
+                End If
+                Return Me._connection
+            End Get
+            Set
+                Me._connection = value
+                If (Not (Me.Adapter.InsertCommand) Is Nothing) Then
+                    Me.Adapter.InsertCommand.Connection = value
+                End If
+                If (Not (Me.Adapter.DeleteCommand) Is Nothing) Then
+                    Me.Adapter.DeleteCommand.Connection = value
+                End If
+                If (Not (Me.Adapter.UpdateCommand) Is Nothing) Then
+                    Me.Adapter.UpdateCommand.Connection = value
+                End If
+                Dim i As Integer = 0
+                Do While (i < Me.CommandCollection.Length)
+                    If (Not (Me.CommandCollection(i)) Is Nothing) Then
+                        CType(Me.CommandCollection(i),Global.System.Data.SqlClient.SqlCommand).Connection = value
+                    End If
+                    i = (i + 1)
+                Loop
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Friend Property Transaction() As Global.System.Data.SqlClient.SqlTransaction
+            Get
+                Return Me._transaction
+            End Get
+            Set
+                Me._transaction = value
+                Dim i As Integer = 0
+                Do While (i < Me.CommandCollection.Length)
+                    Me.CommandCollection(i).Transaction = Me._transaction
+                    i = (i + 1)
+                Loop
+                If ((Not (Me.Adapter) Is Nothing)  _
+                            AndAlso (Not (Me.Adapter.DeleteCommand) Is Nothing)) Then
+                    Me.Adapter.DeleteCommand.Transaction = Me._transaction
+                End If
+                If ((Not (Me.Adapter) Is Nothing)  _
+                            AndAlso (Not (Me.Adapter.InsertCommand) Is Nothing)) Then
+                    Me.Adapter.InsertCommand.Transaction = Me._transaction
+                End If
+                If ((Not (Me.Adapter) Is Nothing)  _
+                            AndAlso (Not (Me.Adapter.UpdateCommand) Is Nothing)) Then
+                    Me.Adapter.UpdateCommand.Transaction = Me._transaction
+                End If
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Protected ReadOnly Property CommandCollection() As Global.System.Data.SqlClient.SqlCommand()
+            Get
+                If (Me._commandCollection Is Nothing) Then
+                    Me.InitCommandCollection
+                End If
+                Return Me._commandCollection
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Property ClearBeforeFill() As Boolean
+            Get
+                Return Me._clearBeforeFill
+            End Get
+            Set
+                Me._clearBeforeFill = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Private Sub InitAdapter()
+            Me._adapter = New Global.System.Data.SqlClient.SqlDataAdapter()
+            Dim tableMapping As Global.System.Data.Common.DataTableMapping = New Global.System.Data.Common.DataTableMapping()
+            tableMapping.SourceTable = "Table"
+            tableMapping.DataSetTable = "SurveyNames"
+            tableMapping.ColumnMappings.Add("SurveyName", "SurveyName")
+            tableMapping.ColumnMappings.Add("Description", "Description")
+            tableMapping.ColumnMappings.Add("Notes", "Notes")
+            Me._adapter.TableMappings.Add(tableMapping)
+            Me._adapter.DeleteCommand = New Global.System.Data.SqlClient.SqlCommand()
+            Me._adapter.DeleteCommand.Connection = Me.Connection
+            Me._adapter.DeleteCommand.CommandText = "DELETE FROM SurveyNames"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"WHERE        (SurveyName = @Original_SurveyName)"
+            Me._adapter.DeleteCommand.CommandType = Global.System.Data.CommandType.Text
+            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_SurveyName", Global.System.Data.SqlDbType.VarChar, 50, Global.System.Data.ParameterDirection.Input, 0, 0, "SurveyName", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand = New Global.System.Data.SqlClient.SqlCommand()
+            Me._adapter.InsertCommand.Connection = Me.Connection
+            Me._adapter.InsertCommand.CommandText = "INSERT INTO [dbo].[SurveyNames] ([SurveyName], [Description], [Notes]) VALUES (@S"& _ 
+                "urveyName, @Description, @Notes);"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"SELECT SurveyName, Description, Notes FROM Su"& _ 
+                "rveyNames WHERE (SurveyName = @SurveyName)"
+            Me._adapter.InsertCommand.CommandType = Global.System.Data.CommandType.Text
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@SurveyName", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "SurveyName", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Description", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Description", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Notes", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Notes", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand = New Global.System.Data.SqlClient.SqlCommand()
+            Me._adapter.UpdateCommand.Connection = Me.Connection
+            Me._adapter.UpdateCommand.CommandText = "UPDATE       SurveyNames"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"SET                SurveyName = @SurveyName, Descriptio"& _ 
+                "n = @Description, Notes = @Notes"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"WHERE        (SurveyName = @Original_SurveyNam"& _ 
+                "e); "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"SELECT SurveyName, Description, Notes FROM SurveyNames WHERE (SurveyName ="& _ 
+                " @SurveyName)"
+            Me._adapter.UpdateCommand.CommandType = Global.System.Data.CommandType.Text
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@SurveyName", Global.System.Data.SqlDbType.VarChar, 50, Global.System.Data.ParameterDirection.Input, 0, 0, "SurveyName", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Description", Global.System.Data.SqlDbType.VarChar, 1000, Global.System.Data.ParameterDirection.Input, 0, 0, "Description", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Notes", Global.System.Data.SqlDbType.VarChar, 1000, Global.System.Data.ParameterDirection.Input, 0, 0, "Notes", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_SurveyName", Global.System.Data.SqlDbType.VarChar, 50, Global.System.Data.ParameterDirection.Input, 0, 0, "SurveyName", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Private Sub InitConnection()
+            Me._connection = New Global.System.Data.SqlClient.SqlConnection()
+            Me._connection.ConnectionString = Global.WRST_Caribou3.My.MySettings.Default.WRST_CaribouConnectionString
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Private Sub InitCommandCollection()
+            Me._commandCollection = New Global.System.Data.SqlClient.SqlCommand(0) {}
+            Me._commandCollection(0) = New Global.System.Data.SqlClient.SqlCommand()
+            Me._commandCollection(0).Connection = Me.Connection
+            Me._commandCollection(0).CommandText = "SELECT SurveyName, Description, Notes FROM dbo.SurveyNames"
+            Me._commandCollection(0).CommandType = Global.System.Data.CommandType.Text
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0"),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Fill, true)>  _
+        Public Overloads Overridable Function Fill(ByVal dataTable As WRST_CaribouDataSet.SurveyNamesDataTable) As Integer
+            Me.Adapter.SelectCommand = Me.CommandCollection(0)
+            If (Me.ClearBeforeFill = true) Then
+                dataTable.Clear
+            End If
+            Dim returnValue As Integer = Me.Adapter.Fill(dataTable)
+            Return returnValue
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0"),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.[Select], true)>  _
+        Public Overloads Overridable Function GetData() As WRST_CaribouDataSet.SurveyNamesDataTable
+            Me.Adapter.SelectCommand = Me.CommandCollection(0)
+            Dim dataTable As WRST_CaribouDataSet.SurveyNamesDataTable = New WRST_CaribouDataSet.SurveyNamesDataTable()
+            Me.Adapter.Fill(dataTable)
+            Return dataTable
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0"),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")>  _
+        Public Overloads Overridable Function Update(ByVal dataTable As WRST_CaribouDataSet.SurveyNamesDataTable) As Integer
+            Return Me.Adapter.Update(dataTable)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0"),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")>  _
+        Public Overloads Overridable Function Update(ByVal dataSet As WRST_CaribouDataSet) As Integer
+            Return Me.Adapter.Update(dataSet, "SurveyNames")
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0"),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")>  _
+        Public Overloads Overridable Function Update(ByVal dataRow As Global.System.Data.DataRow) As Integer
+            Return Me.Adapter.Update(New Global.System.Data.DataRow() {dataRow})
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0"),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")>  _
+        Public Overloads Overridable Function Update(ByVal dataRows() As Global.System.Data.DataRow) As Integer
+            Return Me.Adapter.Update(dataRows)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0"),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Delete, true)>  _
+        Public Overloads Overridable Function Delete(ByVal Original_SurveyName As String) As Integer
+            If (Original_SurveyName Is Nothing) Then
+                Throw New Global.System.ArgumentNullException("Original_SurveyName")
+            Else
+                Me.Adapter.DeleteCommand.Parameters(0).Value = CType(Original_SurveyName,String)
+            End If
+            Dim previousConnectionState As Global.System.Data.ConnectionState = Me.Adapter.DeleteCommand.Connection.State
+            If ((Me.Adapter.DeleteCommand.Connection.State And Global.System.Data.ConnectionState.Open)  _
+                        <> Global.System.Data.ConnectionState.Open) Then
+                Me.Adapter.DeleteCommand.Connection.Open
+            End If
+            Try 
+                Dim returnValue As Integer = Me.Adapter.DeleteCommand.ExecuteNonQuery
+                Return returnValue
+            Finally
+                If (previousConnectionState = Global.System.Data.ConnectionState.Closed) Then
+                    Me.Adapter.DeleteCommand.Connection.Close
+                End If
+            End Try
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0"),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Insert, true)>  _
+        Public Overloads Overridable Function Insert(ByVal SurveyName As String, ByVal Description As String, ByVal Notes As String) As Integer
+            If (SurveyName Is Nothing) Then
+                Throw New Global.System.ArgumentNullException("SurveyName")
+            Else
+                Me.Adapter.InsertCommand.Parameters(0).Value = CType(SurveyName,String)
+            End If
+            If (Description Is Nothing) Then
+                Me.Adapter.InsertCommand.Parameters(1).Value = Global.System.DBNull.Value
+            Else
+                Me.Adapter.InsertCommand.Parameters(1).Value = CType(Description,String)
+            End If
+            If (Notes Is Nothing) Then
+                Me.Adapter.InsertCommand.Parameters(2).Value = Global.System.DBNull.Value
+            Else
+                Me.Adapter.InsertCommand.Parameters(2).Value = CType(Notes,String)
+            End If
+            Dim previousConnectionState As Global.System.Data.ConnectionState = Me.Adapter.InsertCommand.Connection.State
+            If ((Me.Adapter.InsertCommand.Connection.State And Global.System.Data.ConnectionState.Open)  _
+                        <> Global.System.Data.ConnectionState.Open) Then
+                Me.Adapter.InsertCommand.Connection.Open
+            End If
+            Try 
+                Dim returnValue As Integer = Me.Adapter.InsertCommand.ExecuteNonQuery
+                Return returnValue
+            Finally
+                If (previousConnectionState = Global.System.Data.ConnectionState.Closed) Then
+                    Me.Adapter.InsertCommand.Connection.Close
+                End If
+            End Try
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0"),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Update, true)>  _
+        Public Overloads Overridable Function Update(ByVal SurveyName As String, ByVal Description As String, ByVal Notes As String, ByVal Original_SurveyName As String) As Integer
+            If (SurveyName Is Nothing) Then
+                Throw New Global.System.ArgumentNullException("SurveyName")
+            Else
+                Me.Adapter.UpdateCommand.Parameters(0).Value = CType(SurveyName,String)
+            End If
+            If (Description Is Nothing) Then
+                Me.Adapter.UpdateCommand.Parameters(1).Value = Global.System.DBNull.Value
+            Else
+                Me.Adapter.UpdateCommand.Parameters(1).Value = CType(Description,String)
+            End If
+            If (Notes Is Nothing) Then
+                Me.Adapter.UpdateCommand.Parameters(2).Value = Global.System.DBNull.Value
+            Else
+                Me.Adapter.UpdateCommand.Parameters(2).Value = CType(Notes,String)
+            End If
+            If (Original_SurveyName Is Nothing) Then
+                Throw New Global.System.ArgumentNullException("Original_SurveyName")
+            Else
+                Me.Adapter.UpdateCommand.Parameters(3).Value = CType(Original_SurveyName,String)
+            End If
+            Dim previousConnectionState As Global.System.Data.ConnectionState = Me.Adapter.UpdateCommand.Connection.State
+            If ((Me.Adapter.UpdateCommand.Connection.State And Global.System.Data.ConnectionState.Open)  _
+                        <> Global.System.Data.ConnectionState.Open) Then
+                Me.Adapter.UpdateCommand.Connection.Open
+            End If
+            Try 
+                Dim returnValue As Integer = Me.Adapter.UpdateCommand.ExecuteNonQuery
+                Return returnValue
+            Finally
+                If (previousConnectionState = Global.System.Data.ConnectionState.Closed) Then
+                    Me.Adapter.UpdateCommand.Connection.Close
+                End If
+            End Try
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0"),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Update, true)>  _
+        Public Overloads Overridable Function Update(ByVal Description As String, ByVal Notes As String, ByVal Original_SurveyName As String) As Integer
+            Return Me.Update(Original_SurveyName, Description, Notes, Original_SurveyName)
+        End Function
+    End Class
+    
+    '''<summary>
     '''TableAdapterManager is used to coordinate TableAdapters in the dataset to enable Hierarchical Update scenarios
     '''</summary>
     <Global.System.ComponentModel.DesignerCategoryAttribute("code"),  _
@@ -10863,6 +11731,8 @@ Namespace WRST_CaribouDataSetTableAdapters
         Private _surveysTableAdapter As SurveysTableAdapter
         
         Private _capturesTableAdapter As CapturesTableAdapter
+        
+        Private _surveyNamesTableAdapter As SurveyNamesTableAdapter
         
         Private _backupDataSetBeforeUpdate As Boolean
         
@@ -10936,6 +11806,20 @@ Namespace WRST_CaribouDataSetTableAdapters
         End Property
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0"),  _
+         Global.System.ComponentModel.EditorAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterManagerPropertyEditor, Microso"& _ 
+            "ft.VSDesigner, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3"& _ 
+            "a", "System.Drawing.Design.UITypeEditor")>  _
+        Public Property SurveyNamesTableAdapter() As SurveyNamesTableAdapter
+            Get
+                Return Me._surveyNamesTableAdapter
+            End Get
+            Set
+                Me._surveyNamesTableAdapter = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
         Public Property BackupDataSetBeforeUpdate() As Boolean
             Get
@@ -10970,6 +11854,10 @@ Namespace WRST_CaribouDataSetTableAdapters
                             AndAlso (Not (Me._capturesTableAdapter.Connection) Is Nothing)) Then
                     Return Me._capturesTableAdapter.Connection
                 End If
+                If ((Not (Me._surveyNamesTableAdapter) Is Nothing)  _
+                            AndAlso (Not (Me._surveyNamesTableAdapter.Connection) Is Nothing)) Then
+                    Return Me._surveyNamesTableAdapter.Connection
+                End If
                 Return Nothing
             End Get
             Set
@@ -10995,6 +11883,9 @@ Namespace WRST_CaribouDataSetTableAdapters
                 If (Not (Me._capturesTableAdapter) Is Nothing) Then
                     count = (count + 1)
                 End If
+                If (Not (Me._surveyNamesTableAdapter) Is Nothing) Then
+                    count = (count + 1)
+                End If
                 Return count
             End Get
         End Property
@@ -11006,6 +11897,15 @@ Namespace WRST_CaribouDataSetTableAdapters
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
         Private Function UpdateUpdatedRows(ByVal dataSet As WRST_CaribouDataSet, ByVal allChangedRows As Global.System.Collections.Generic.List(Of Global.System.Data.DataRow), ByVal allAddedRows As Global.System.Collections.Generic.List(Of Global.System.Data.DataRow)) As Integer
             Dim result As Integer = 0
+            If (Not (Me._surveyNamesTableAdapter) Is Nothing) Then
+                Dim updatedRows() As Global.System.Data.DataRow = dataSet.SurveyNames.Select(Nothing, Nothing, Global.System.Data.DataViewRowState.ModifiedCurrent)
+                updatedRows = Me.GetRealUpdatedRows(updatedRows, allAddedRows)
+                If ((Not (updatedRows) Is Nothing)  _
+                            AndAlso (0 < updatedRows.Length)) Then
+                    result = (result + Me._surveyNamesTableAdapter.Update(updatedRows))
+                    allChangedRows.AddRange(updatedRows)
+                End If
+            End If
             If (Not (Me._surveyFlightsTableAdapter) Is Nothing) Then
                 Dim updatedRows() As Global.System.Data.DataRow = dataSet.SurveyFlights.Select(Nothing, Nothing, Global.System.Data.DataViewRowState.ModifiedCurrent)
                 updatedRows = Me.GetRealUpdatedRows(updatedRows, allAddedRows)
@@ -11052,6 +11952,14 @@ Namespace WRST_CaribouDataSetTableAdapters
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
         Private Function UpdateInsertedRows(ByVal dataSet As WRST_CaribouDataSet, ByVal allAddedRows As Global.System.Collections.Generic.List(Of Global.System.Data.DataRow)) As Integer
             Dim result As Integer = 0
+            If (Not (Me._surveyNamesTableAdapter) Is Nothing) Then
+                Dim addedRows() As Global.System.Data.DataRow = dataSet.SurveyNames.Select(Nothing, Nothing, Global.System.Data.DataViewRowState.Added)
+                If ((Not (addedRows) Is Nothing)  _
+                            AndAlso (0 < addedRows.Length)) Then
+                    result = (result + Me._surveyNamesTableAdapter.Update(addedRows))
+                    allAddedRows.AddRange(addedRows)
+                End If
+            End If
             If (Not (Me._surveyFlightsTableAdapter) Is Nothing) Then
                 Dim addedRows() As Global.System.Data.DataRow = dataSet.SurveyFlights.Select(Nothing, Nothing, Global.System.Data.DataViewRowState.Added)
                 If ((Not (addedRows) Is Nothing)  _
@@ -11126,6 +12034,14 @@ Namespace WRST_CaribouDataSetTableAdapters
                     allChangedRows.AddRange(deletedRows)
                 End If
             End If
+            If (Not (Me._surveyNamesTableAdapter) Is Nothing) Then
+                Dim deletedRows() As Global.System.Data.DataRow = dataSet.SurveyNames.Select(Nothing, Nothing, Global.System.Data.DataViewRowState.Deleted)
+                If ((Not (deletedRows) Is Nothing)  _
+                            AndAlso (0 < deletedRows.Length)) Then
+                    result = (result + Me._surveyNamesTableAdapter.Update(deletedRows))
+                    allChangedRows.AddRange(deletedRows)
+                End If
+            End If
             Return result
         End Function
         
@@ -11184,6 +12100,11 @@ Namespace WRST_CaribouDataSetTableAdapters
             End If
             If ((Not (Me._capturesTableAdapter) Is Nothing)  _
                         AndAlso (Me.MatchTableAdapterConnection(Me._capturesTableAdapter.Connection) = false)) Then
+                Throw New Global.System.ArgumentException("All TableAdapters managed by a TableAdapterManager must use the same connection s"& _ 
+                        "tring.")
+            End If
+            If ((Not (Me._surveyNamesTableAdapter) Is Nothing)  _
+                        AndAlso (Me.MatchTableAdapterConnection(Me._surveyNamesTableAdapter.Connection) = false)) Then
                 Throw New Global.System.ArgumentException("All TableAdapters managed by a TableAdapterManager must use the same connection s"& _ 
                         "tring.")
             End If
@@ -11253,6 +12174,15 @@ Namespace WRST_CaribouDataSetTableAdapters
                     If Me._capturesTableAdapter.Adapter.AcceptChangesDuringUpdate Then
                         Me._capturesTableAdapter.Adapter.AcceptChangesDuringUpdate = false
                         adaptersWithAcceptChangesDuringUpdate.Add(Me._capturesTableAdapter.Adapter)
+                    End If
+                End If
+                If (Not (Me._surveyNamesTableAdapter) Is Nothing) Then
+                    revertConnections.Add(Me._surveyNamesTableAdapter, Me._surveyNamesTableAdapter.Connection)
+                    Me._surveyNamesTableAdapter.Connection = CType(workConnection,Global.System.Data.SqlClient.SqlConnection)
+                    Me._surveyNamesTableAdapter.Transaction = CType(workTransaction,Global.System.Data.SqlClient.SqlTransaction)
+                    If Me._surveyNamesTableAdapter.Adapter.AcceptChangesDuringUpdate Then
+                        Me._surveyNamesTableAdapter.Adapter.AcceptChangesDuringUpdate = false
+                        adaptersWithAcceptChangesDuringUpdate.Add(Me._surveyNamesTableAdapter.Adapter)
                     End If
                 End If
                 '
@@ -11330,6 +12260,10 @@ Namespace WRST_CaribouDataSetTableAdapters
                 If (Not (Me._capturesTableAdapter) Is Nothing) Then
                     Me._capturesTableAdapter.Connection = CType(revertConnections(Me._capturesTableAdapter),Global.System.Data.SqlClient.SqlConnection)
                     Me._capturesTableAdapter.Transaction = Nothing
+                End If
+                If (Not (Me._surveyNamesTableAdapter) Is Nothing) Then
+                    Me._surveyNamesTableAdapter.Connection = CType(revertConnections(Me._surveyNamesTableAdapter),Global.System.Data.SqlClient.SqlConnection)
+                    Me._surveyNamesTableAdapter.Transaction = Nothing
                 End If
                 If (0 < adaptersWithAcceptChangesDuringUpdate.Count) Then
                     Dim adapters((adaptersWithAcceptChangesDuringUpdate.Count) - 1) As Global.System.Data.Common.DataAdapter
