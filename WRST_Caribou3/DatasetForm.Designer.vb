@@ -30,12 +30,14 @@ Partial Class DatasetForm
         Me.DockPanel1 = New DevExpress.XtraBars.Docking.DockPanel()
         Me.DockPanel1_Container = New DevExpress.XtraBars.Docking.ControlContainer()
         Me.DatasetPivotGridControl = New DevExpress.XtraPivotGrid.PivotGridControl()
+        Me.DatasetBindingSource = New System.Windows.Forms.BindingSource(Me.components)
         CType(Me.DatasetGridControl, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DockManager, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.DockPanel1.SuspendLayout()
         Me.DockPanel1_Container.SuspendLayout()
         CType(Me.DatasetPivotGridControl, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.DatasetBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'DatasetGridControl
@@ -111,6 +113,7 @@ Partial Class DatasetForm
         Me.DockPanel1.ResumeLayout(False)
         Me.DockPanel1_Container.ResumeLayout(False)
         CType(Me.DatasetPivotGridControl, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.DatasetBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -123,4 +126,5 @@ Partial Class DatasetForm
     Friend WithEvents DockPanel1 As DevExpress.XtraBars.Docking.DockPanel
     Friend WithEvents DockPanel1_Container As DevExpress.XtraBars.Docking.ControlContainer
     Friend WithEvents DatasetPivotGridControl As DevExpress.XtraPivotGrid.PivotGridControl
+    Friend WithEvents DatasetBindingSource As BindingSource
 End Class

@@ -4,7 +4,7 @@
     Private Sub EditSurveysDatasetButton_Click(sender As Object, e As EventArgs) Handles EditSurveysDatasetButton.Click
         Try
             Dim MainForm As New MainForm
-            MainForm.ShowDialog()
+            MainForm.Show()
         Catch ex As Exception
             MsgBox(ex.Message & " " & System.Reflection.MethodBase.GetCurrentMethod.Name)
         End Try
@@ -13,7 +13,7 @@
     Private Sub AccessSurveysDatasetButton_Click(sender As Object, e As EventArgs) Handles AccessSurveysDatasetButton.Click
         Try
             Dim DatasetForm As New DatasetForm
-            DatasetForm.ShowDialog()
+            DatasetForm.Show()
         Catch ex As Exception
             MsgBox(ex.Message & " " & System.Reflection.MethodBase.GetCurrentMethod.Name)
         End Try
