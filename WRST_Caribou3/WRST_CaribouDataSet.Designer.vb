@@ -35,13 +35,13 @@ Partial Public Class WRST_CaribouDataSet
     
     Private tableSurveyNames As SurveyNamesDataTable
     
+    Private relationFK_SurveyFlights_SurveyNames As Global.System.Data.DataRelation
+    
     Private relationFK_CollaredAnimalsInGroups_Surveys As Global.System.Data.DataRelation
     
     Private relationFK_Surveys_SurveyFlights As Global.System.Data.DataRelation
     
     Private relationFK_CollaredAnimalsInGroups_Captures As Global.System.Data.DataRelation
-    
-    Private relationFK_SurveyFlights_SurveyNames As Global.System.Data.DataRelation
     
     Private _schemaSerializationMode As Global.System.Data.SchemaSerializationMode = Global.System.Data.SchemaSerializationMode.IncludeSchema
     
@@ -298,10 +298,10 @@ Partial Public Class WRST_CaribouDataSet
                 Me.tableSurveyNames.InitVars
             End If
         End If
+        Me.relationFK_SurveyFlights_SurveyNames = Me.Relations("FK_SurveyFlights_SurveyNames")
         Me.relationFK_CollaredAnimalsInGroups_Surveys = Me.Relations("FK_CollaredAnimalsInGroups_Surveys")
         Me.relationFK_Surveys_SurveyFlights = Me.Relations("FK_Surveys_SurveyFlights")
         Me.relationFK_CollaredAnimalsInGroups_Captures = Me.Relations("FK_CollaredAnimalsInGroups_Captures")
-        Me.relationFK_SurveyFlights_SurveyNames = Me.Relations("FK_SurveyFlights_SurveyNames")
     End Sub
     
     <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -322,14 +322,20 @@ Partial Public Class WRST_CaribouDataSet
         MyBase.Tables.Add(Me.tableCaptures)
         Me.tableSurveyNames = New SurveyNamesDataTable()
         MyBase.Tables.Add(Me.tableSurveyNames)
+        Dim fkc As Global.System.Data.ForeignKeyConstraint
+        fkc = New Global.System.Data.ForeignKeyConstraint("FK_SurveyFlights_SurveyNames", New Global.System.Data.DataColumn() {Me.tableSurveyNames.SurveyNameColumn}, New Global.System.Data.DataColumn() {Me.tableSurveyFlights.SurveyNameColumn})
+        Me.tableSurveyFlights.Constraints.Add(fkc)
+        fkc.AcceptRejectRule = Global.System.Data.AcceptRejectRule.None
+        fkc.DeleteRule = Global.System.Data.Rule.Cascade
+        fkc.UpdateRule = Global.System.Data.Rule.Cascade
+        Me.relationFK_SurveyFlights_SurveyNames = New Global.System.Data.DataRelation("FK_SurveyFlights_SurveyNames", New Global.System.Data.DataColumn() {Me.tableSurveyNames.SurveyNameColumn}, New Global.System.Data.DataColumn() {Me.tableSurveyFlights.SurveyNameColumn}, false)
+        Me.Relations.Add(Me.relationFK_SurveyFlights_SurveyNames)
         Me.relationFK_CollaredAnimalsInGroups_Surveys = New Global.System.Data.DataRelation("FK_CollaredAnimalsInGroups_Surveys", New Global.System.Data.DataColumn() {Me.tableSurveys.EIDColumn}, New Global.System.Data.DataColumn() {Me.tableCollaredAnimalsInGroups.EIDColumn}, false)
         Me.Relations.Add(Me.relationFK_CollaredAnimalsInGroups_Surveys)
         Me.relationFK_Surveys_SurveyFlights = New Global.System.Data.DataRelation("FK_Surveys_SurveyFlights", New Global.System.Data.DataColumn() {Me.tableSurveyFlights.FlightIDColumn}, New Global.System.Data.DataColumn() {Me.tableSurveys.FlightIDColumn}, false)
         Me.Relations.Add(Me.relationFK_Surveys_SurveyFlights)
         Me.relationFK_CollaredAnimalsInGroups_Captures = New Global.System.Data.DataRelation("FK_CollaredAnimalsInGroups_Captures", New Global.System.Data.DataColumn() {Me.tableCaptures.AnimalIDColumn}, New Global.System.Data.DataColumn() {Me.tableCollaredAnimalsInGroups.AnimalIDColumn}, false)
         Me.Relations.Add(Me.relationFK_CollaredAnimalsInGroups_Captures)
-        Me.relationFK_SurveyFlights_SurveyNames = New Global.System.Data.DataRelation("FK_SurveyFlights_SurveyNames", New Global.System.Data.DataColumn() {Me.tableSurveyNames.SurveyNameColumn}, New Global.System.Data.DataColumn() {Me.tableSurveyFlights.SurveyNameColumn}, false)
-        Me.Relations.Add(Me.relationFK_SurveyFlights_SurveyNames)
     End Sub
     
     <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -1282,7 +1288,7 @@ Partial Public Class WRST_CaribouDataSet
             Me.columnFlightID.Unique = true
             Me.columnFlightID.MaxLength = 50
             Me.columnSourceFile.MaxLength = 4000
-            Me.columnSurveyName.MaxLength = 50
+            Me.columnSurveyName.MaxLength = 100
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -3773,7 +3779,7 @@ Partial Public Class WRST_CaribouDataSet
             Me.Constraints.Add(New Global.System.Data.UniqueConstraint("Constraint1", New Global.System.Data.DataColumn() {Me.columnSurveyName}, true))
             Me.columnSurveyName.AllowDBNull = false
             Me.columnSurveyName.Unique = true
-            Me.columnSurveyName.MaxLength = 50
+            Me.columnSurveyName.MaxLength = 100
             Me.columnDescription.MaxLength = 1000
             Me.columnNotes.MaxLength = 1000
         End Sub
@@ -11508,9 +11514,10 @@ Namespace WRST_CaribouDataSetTableAdapters
             Me._adapter.TableMappings.Add(tableMapping)
             Me._adapter.DeleteCommand = New Global.System.Data.SqlClient.SqlCommand()
             Me._adapter.DeleteCommand.Connection = Me.Connection
-            Me._adapter.DeleteCommand.CommandText = "DELETE FROM SurveyNames"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"WHERE        (SurveyName = @Original_SurveyName)"
+            Me._adapter.DeleteCommand.CommandText = "/* prevent deleting a surveyname since that would cascade drastically*/"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"DELETE F"& _ 
+                "ROM SurveyNames"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"WHERE        (SurveyName = @Original_SurveyName) AND (1 = 0)"
             Me._adapter.DeleteCommand.CommandType = Global.System.Data.CommandType.Text
-            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_SurveyName", Global.System.Data.SqlDbType.VarChar, 50, Global.System.Data.ParameterDirection.Input, 0, 0, "SurveyName", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
+            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_SurveyName", Global.System.Data.SqlDbType.VarChar, 100, Global.System.Data.ParameterDirection.Input, 0, 0, "SurveyName", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
             Me._adapter.InsertCommand = New Global.System.Data.SqlClient.SqlCommand()
             Me._adapter.InsertCommand.Connection = Me.Connection
             Me._adapter.InsertCommand.CommandText = "INSERT INTO [dbo].[SurveyNames] ([SurveyName], [Description], [Notes]) VALUES (@S"& _ 

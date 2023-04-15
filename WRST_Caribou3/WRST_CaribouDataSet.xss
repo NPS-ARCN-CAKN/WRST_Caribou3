@@ -10,7 +10,7 @@
     <Shape ID="DesignTable:SurveyFlights" ZOrder="2" X="105" Y="18" Height="695" Width="222" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="628" />
     <Shape ID="DesignTable:Surveys" ZOrder="6" X="614" Y="114" Height="723" Width="189" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="672" />
     <Shape ID="DesignTable:Captures" ZOrder="4" X="1722" Y="17" Height="1802" Width="432" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="1710" />
-    <Shape ID="DesignTable:SurveyNames" ZOrder="3" X="387" Y="46" Height="134" Width="231" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="83" />
+    <Shape ID="DesignTable:SurveyNames" ZOrder="3" X="387" Y="53" Height="134" Width="231" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="83" />
   </Shapes>
   <Connectors>
     <Connector ID="DesignRelation:FK_CollaredAnimalsInGroups_Surveys" ZOrder="9" LineWidth="11">
@@ -49,15 +49,15 @@
         </Point>
       </RoutePoints>
     </Connector>
-    <Connector ID="DesignRelation:FK_SurveyNames_SurveyFlights" ZOrder="1" LineWidth="11">
+    <Connector ID="DesignRelation:FK_SurveyFlights_SurveyNames" ZOrder="1" LineWidth="11">
       <RoutePoints>
         <Point>
           <X>387</X>
-          <Y>113</Y>
+          <Y>120</Y>
         </Point>
         <Point>
           <X>327</X>
-          <Y>113</Y>
+          <Y>120</Y>
         </Point>
       </RoutePoints>
     </Connector>

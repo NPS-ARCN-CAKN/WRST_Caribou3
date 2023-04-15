@@ -23,6 +23,7 @@ Partial Class DatasetForm
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(DatasetForm))
         Me.DatasetGridControl = New DevExpress.XtraGrid.GridControl()
         Me.GridView1 = New DevExpress.XtraGrid.Views.Grid.GridView()
         Me.ToolStrip = New System.Windows.Forms.ToolStrip()
@@ -31,8 +32,13 @@ Partial Class DatasetForm
         Me.DockPanel1_Container = New DevExpress.XtraBars.Docking.ControlContainer()
         Me.DatasetPivotGridControl = New DevExpress.XtraPivotGrid.PivotGridControl()
         Me.DatasetBindingSource = New System.Windows.Forms.BindingSource(Me.components)
+        Me.LoadDatasetToolStripButton = New System.Windows.Forms.ToolStripButton()
+        Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
+        Me.ToolStripLabel1 = New System.Windows.Forms.ToolStripLabel()
+        Me.ExportToolStripComboBox = New System.Windows.Forms.ToolStripComboBox()
         CType(Me.DatasetGridControl, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GridView1, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.ToolStrip.SuspendLayout()
         CType(Me.DockManager, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.DockPanel1.SuspendLayout()
         Me.DockPanel1_Container.SuspendLayout()
@@ -54,9 +60,11 @@ Partial Class DatasetForm
         '
         Me.GridView1.GridControl = Me.DatasetGridControl
         Me.GridView1.Name = "GridView1"
+        Me.GridView1.OptionsView.ShowFooter = True
         '
         'ToolStrip
         '
+        Me.ToolStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.LoadDatasetToolStripButton, Me.ToolStripSeparator1, Me.ToolStripLabel1, Me.ExportToolStripComboBox})
         Me.ToolStrip.Location = New System.Drawing.Point(0, 0)
         Me.ToolStrip.Name = "ToolStrip"
         Me.ToolStrip.Size = New System.Drawing.Size(1187, 25)
@@ -97,6 +105,32 @@ Partial Class DatasetForm
         Me.DatasetPivotGridControl.Size = New System.Drawing.Size(1181, 375)
         Me.DatasetPivotGridControl.TabIndex = 0
         '
+        'LoadDatasetToolStripButton
+        '
+        Me.LoadDatasetToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
+        Me.LoadDatasetToolStripButton.Image = CType(resources.GetObject("LoadDatasetToolStripButton.Image"), System.Drawing.Image)
+        Me.LoadDatasetToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.LoadDatasetToolStripButton.Name = "LoadDatasetToolStripButton"
+        Me.LoadDatasetToolStripButton.Size = New System.Drawing.Size(91, 22)
+        Me.LoadDatasetToolStripButton.Text = "Refresh dataset"
+        '
+        'ToolStripSeparator1
+        '
+        Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
+        Me.ToolStripSeparator1.Size = New System.Drawing.Size(6, 25)
+        '
+        'ToolStripLabel1
+        '
+        Me.ToolStripLabel1.Name = "ToolStripLabel1"
+        Me.ToolStripLabel1.Size = New System.Drawing.Size(44, 22)
+        Me.ToolStripLabel1.Text = "Export:"
+        '
+        'ExportToolStripComboBox
+        '
+        Me.ExportToolStripComboBox.Items.AddRange(New Object() {"", "Comma separated values text file", "Microsoft Excel"})
+        Me.ExportToolStripComboBox.Name = "ExportToolStripComboBox"
+        Me.ExportToolStripComboBox.Size = New System.Drawing.Size(121, 25)
+        '
         'DatasetForm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -109,6 +143,8 @@ Partial Class DatasetForm
         Me.Text = "DatasetForm"
         CType(Me.DatasetGridControl, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GridView1, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.ToolStrip.ResumeLayout(False)
+        Me.ToolStrip.PerformLayout()
         CType(Me.DockManager, System.ComponentModel.ISupportInitialize).EndInit()
         Me.DockPanel1.ResumeLayout(False)
         Me.DockPanel1_Container.ResumeLayout(False)
@@ -127,4 +163,8 @@ Partial Class DatasetForm
     Friend WithEvents DockPanel1_Container As DevExpress.XtraBars.Docking.ControlContainer
     Friend WithEvents DatasetPivotGridControl As DevExpress.XtraPivotGrid.PivotGridControl
     Friend WithEvents DatasetBindingSource As BindingSource
+    Friend WithEvents LoadDatasetToolStripButton As ToolStripButton
+    Friend WithEvents ToolStripSeparator1 As ToolStripSeparator
+    Friend WithEvents ToolStripLabel1 As ToolStripLabel
+    Friend WithEvents ExportToolStripComboBox As ToolStripComboBox
 End Class
