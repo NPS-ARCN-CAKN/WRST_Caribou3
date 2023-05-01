@@ -10,6 +10,37 @@ Imports DevExpress.XtraMap
 
 Module Utilites
 
+    ''' <summary>
+    ''' Gets a save file name.
+    ''' </summary>
+    ''' <param name="Filter">Save file filter. Example: "SQL files (*.sql)|(*.sql)"</param>
+    ''' <param name="Extension">File extension. Example: ".sql"</param>
+    ''' <returns></returns>
+    Public Function GetSaveFile(Filter As String, Extension As String)
+
+        Dim SaveFile As String = ""
+        Try
+
+            'Open a save file dialog to allow the user to save the file someplace
+            Dim SFD As New SaveFileDialog
+            With SFD
+                .AddExtension = True
+                .DefaultExt = Extension
+                .Filter = Filter
+                .AddExtension = True
+            End With
+
+            'Show the dialog
+            If SFD.ShowDialog = DialogResult.OK Then
+                SaveFile = SFD.FileName
+            End If
+
+        Catch ex As Exception
+            MsgBox(ex.Message & "  " & System.Reflection.MethodBase.GetCurrentMethod.Name)
+        End Try
+        Return SaveFile
+    End Function
+
 
     ''' <summary>
     ''' Sets up a GridControl the way I like it

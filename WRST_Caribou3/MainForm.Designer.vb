@@ -33,6 +33,8 @@ Partial Class MainForm
         Me.SetTheDataSourceFileAttributeForThisSurveyFlightToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.OpenSourceFileToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.OpenSourceDataDirectoryToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.SurveyFlightsBindingSource = New System.Windows.Forms.BindingSource(Me.components)
+        Me.WRST_CaribouDataSet = New WRST_Caribou3.WRST_CaribouDataSet()
         Me.SurveysSplitContainer = New System.Windows.Forms.SplitContainer()
         Me.SurveysGridEX = New Janus.Windows.GridEX.GridEX()
         Me.SurveysContextMenuStrip = New System.Windows.Forms.ContextMenuStrip(Me.components)
@@ -95,20 +97,22 @@ Partial Class MainForm
         Me.HelpProvider = New System.Windows.Forms.HelpProvider()
         Me.BottomToolStrip = New System.Windows.Forms.ToolStrip()
         Me.CurrentDatabaseToolStripLabel = New System.Windows.Forms.ToolStripLabel()
-        Me.SurveyFlightsBindingSource = New System.Windows.Forms.BindingSource(Me.components)
-        Me.WRST_CaribouDataSet = New WRST_Caribou3.WRST_CaribouDataSet()
         Me.CapturesBindingSource = New System.Windows.Forms.BindingSource(Me.components)
         Me.SurveyFlightsTableAdapter = New WRST_Caribou3.WRST_CaribouDataSetTableAdapters.SurveyFlightsTableAdapter()
         Me.TableAdapterManager = New WRST_Caribou3.WRST_CaribouDataSetTableAdapters.TableAdapterManager()
         Me.CollaredAnimalsInGroupsTableAdapter = New WRST_Caribou3.WRST_CaribouDataSetTableAdapters.CollaredAnimalsInGroupsTableAdapter()
         Me.SurveysTableAdapter = New WRST_Caribou3.WRST_CaribouDataSetTableAdapters.SurveysTableAdapter()
         Me.CapturesTableAdapter = New WRST_Caribou3.WRST_CaribouDataSetTableAdapters.CapturesTableAdapter()
+        Me.SurveyNamesBindingSource = New System.Windows.Forms.BindingSource(Me.components)
+        Me.SurveyNamesTableAdapter = New WRST_Caribou3.WRST_CaribouDataSetTableAdapters.SurveyNamesTableAdapter()
         CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SplitContainer1.Panel1.SuspendLayout()
         Me.SplitContainer1.Panel2.SuspendLayout()
         Me.SplitContainer1.SuspendLayout()
         CType(Me.SurveyFlightsGridEX, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SurveyFlightsContextMenuStrip.SuspendLayout()
+        CType(Me.SurveyFlightsBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.WRST_CaribouDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.SurveysSplitContainer, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SurveysSplitContainer.Panel1.SuspendLayout()
         Me.SurveysSplitContainer.Panel2.SuspendLayout()
@@ -127,9 +131,8 @@ Partial Class MainForm
         Me.AnimalGridPanel.SuspendLayout()
         Me.MainToolStrip.SuspendLayout()
         Me.BottomToolStrip.SuspendLayout()
-        CType(Me.SurveyFlightsBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.WRST_CaribouDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.CapturesBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.SurveyNamesBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'SplitContainer1
@@ -161,7 +164,7 @@ Partial Class MainForm
         Me.SurveyFlightsGridEX.DesignTimeLayout = SurveyFlightsGridEX_DesignTimeLayout
         Me.SurveyFlightsGridEX.Dock = System.Windows.Forms.DockStyle.Fill
         Me.SurveyFlightsGridEX.FilterMode = Janus.Windows.GridEX.FilterMode.Automatic
-        Me.SurveyFlightsGridEX.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.SurveyFlightsGridEX.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!)
         Me.SurveyFlightsGridEX.FrozenColumns = 4
         Me.SurveyFlightsGridEX.GroupByBoxVisible = False
         Me.SurveyFlightsGridEX.GroupMode = Janus.Windows.GridEX.GroupMode.Collapsed
@@ -198,6 +201,16 @@ Partial Class MainForm
         Me.OpenSourceDataDirectoryToolStripMenuItem.Name = "OpenSourceDataDirectoryToolStripMenuItem"
         Me.OpenSourceDataDirectoryToolStripMenuItem.Size = New System.Drawing.Size(380, 22)
         Me.OpenSourceDataDirectoryToolStripMenuItem.Text = "Open the data source data directory for this survey flight..."
+        '
+        'SurveyFlightsBindingSource
+        '
+        Me.SurveyFlightsBindingSource.DataMember = "SurveyFlights"
+        Me.SurveyFlightsBindingSource.DataSource = Me.WRST_CaribouDataSet
+        '
+        'WRST_CaribouDataSet
+        '
+        Me.WRST_CaribouDataSet.DataSetName = "WRST_CaribouDataSet"
+        Me.WRST_CaribouDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
         '
         'SurveysSplitContainer
         '
@@ -685,16 +698,6 @@ Partial Class MainForm
         Me.CurrentDatabaseToolStripLabel.Size = New System.Drawing.Size(133, 22)
         Me.CurrentDatabaseToolStripLabel.Text = "Database: Disconnected"
         '
-        'SurveyFlightsBindingSource
-        '
-        Me.SurveyFlightsBindingSource.DataMember = "SurveyFlights"
-        Me.SurveyFlightsBindingSource.DataSource = Me.WRST_CaribouDataSet
-        '
-        'WRST_CaribouDataSet
-        '
-        Me.WRST_CaribouDataSet.DataSetName = "WRST_CaribouDataSet"
-        Me.WRST_CaribouDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
-        '
         'CapturesBindingSource
         '
         Me.CapturesBindingSource.DataMember = "Captures"
@@ -726,6 +729,15 @@ Partial Class MainForm
         '
         Me.CapturesTableAdapter.ClearBeforeFill = True
         '
+        'SurveyNamesBindingSource
+        '
+        Me.SurveyNamesBindingSource.DataMember = "SurveyNames"
+        Me.SurveyNamesBindingSource.DataSource = Me.WRST_CaribouDataSet
+        '
+        'SurveyNamesTableAdapter
+        '
+        Me.SurveyNamesTableAdapter.ClearBeforeFill = True
+        '
         'MainForm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -749,6 +761,8 @@ Partial Class MainForm
         Me.SplitContainer1.ResumeLayout(False)
         CType(Me.SurveyFlightsGridEX, System.ComponentModel.ISupportInitialize).EndInit()
         Me.SurveyFlightsContextMenuStrip.ResumeLayout(False)
+        CType(Me.SurveyFlightsBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.WRST_CaribouDataSet, System.ComponentModel.ISupportInitialize).EndInit()
         Me.SurveysSplitContainer.Panel1.ResumeLayout(False)
         Me.SurveysSplitContainer.Panel1.PerformLayout()
         Me.SurveysSplitContainer.Panel2.ResumeLayout(False)
@@ -772,9 +786,8 @@ Partial Class MainForm
         Me.MainToolStrip.PerformLayout()
         Me.BottomToolStrip.ResumeLayout(False)
         Me.BottomToolStrip.PerformLayout()
-        CType(Me.SurveyFlightsBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.WRST_CaribouDataSet, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.CapturesBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.SurveyNamesBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -856,4 +869,6 @@ Partial Class MainForm
     Friend WithEvents OpenSourceFileToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents OpenSourceDataDirectoryToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents SetTheDataSourceFileAttributeForThisSurveyFlightToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents SurveyNamesBindingSource As BindingSource
+    Friend WithEvents SurveyNamesTableAdapter As WRST_CaribouDataSetTableAdapters.SurveyNamesTableAdapter
 End Class

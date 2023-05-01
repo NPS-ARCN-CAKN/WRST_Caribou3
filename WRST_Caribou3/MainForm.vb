@@ -9,6 +9,8 @@ Public Class MainForm
     Dim ProjectIDsDataTable As New DataTable 'DataTable of ProjectIDs in Animal_Movement database that are related to the collared animals in WRST_Caribou database
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        'TODO: This line of code loads data into the 'WRST_CaribouDataSet.SurveyNames' table. You can move, or remove it, as needed.
+        Me.SurveyNamesTableAdapter.Fill(Me.WRST_CaribouDataSet.SurveyNames)
 
 
         'My.Settings.Item("WRST_CaribouConnectionString") = "Data Source=INPYUGA41738\SKETR;Initial Catalog=WRST_Caribou;Integrated Security=True"
@@ -206,20 +208,6 @@ Public Class MainForm
             LoadGridEXDropDownWithDistinctDataTableValues(Grid, Me.WRST_CaribouDataSet.Tables("SurveyFlights"), "TailNo", "SpotterPlaneTailNo", False)
             LoadGridEXDropDownWithDistinctDataTableValues(Grid, Me.WRST_CaribouDataSet.Tables("SurveyFlights"), "AircraftType", "SpotterPlaneType", False)
 
-            ''SurveyName dropdown
-            'With Grid.RootTable.Columns("SurveyName")
-            '    .EditType = EditType.Combo
-            '    .HasValueList = True
-            '    .LimitToList = True
-            '    .AllowSort = True
-            '    .AutoComplete = True
-            '    .ValueList.Clear()
-            'End With
-            'Dim SurveysSurveyNameList As GridEXValueListItemCollection = Grid.RootTable.Columns("SurveyName").ValueList
-            'For Each SurveyNamesRow As DataRow In Me.WRST_CaribouDataSet.Tables("SurveyNames").Rows
-            '    SurveysSurveyNameList.Add("SurveyName", "SurveyName")
-            'Next
-
 
             'SurveyType dropdown
             With Grid.RootTable.Columns("SurveyType")
@@ -233,8 +221,7 @@ Public Class MainForm
             Dim SurveysSurveyTypeList As GridEXValueListItemCollection = Grid.RootTable.Columns("SurveyType").ValueList
             SurveysSurveyTypeList.Add("CC", "Composition count")
             SurveysSurveyTypeList.Add("PE", "Population estimate")
-            SurveysSurveyTypeList.Add("RT", "Radiotracking")
-            SurveysSurveyTypeList.Add("SS", "Survey summary")
+            SurveysSurveyTypeList.Add("SS", "Survey summary") ' This type is to accommodate a few records where the whole survey was reduced to a single record
 
             'Herd dropdown
             With Grid.RootTable.Columns("Herd")
@@ -1122,8 +1109,8 @@ Click Yes to certify and lock the current record. Click No to cancel.", MsgBoxSt
                         SurveyType = "Composition Count"
                     Case "PE"
                         SurveyType = "Population Estimate"
-                    Case "RT"
-                        SurveyType = "Radiotracking"
+                    Case "Survey summary"
+                        SurveyType = "Survey summary"
                 End Select
 
 
@@ -1847,8 +1834,8 @@ Click Yes to certify and lock the current record. Click No to cancel.", MsgBoxSt
                     SurveyTypeLong = "Composition Count"
                 Case "PE"
                     SurveyTypeLong = "Population"
-                Case "RT"
-                    SurveyTypeLong = "Radiotracking"
+                    'Case "RT"
+                    '    SurveyTypeLong = "Radiotracking"
             End Select
             Dim TimeDepart As String = GetCurrentGridEXCellValue(Me.SurveyFlightsGridEX, "TimeDepart")
             Dim FlightDateString As String = ""

@@ -27,8 +27,8 @@ Partial Class DeploymentsForAFrequencyForm
         Me.FrequencyToolStripComboBox = New System.Windows.Forms.ToolStripComboBox()
         Me.ToolStripLabel2 = New System.Windows.Forms.ToolStripLabel()
         Me.ToleranceToolStripTextBox = New System.Windows.Forms.ToolStripTextBox()
-        Me.FrequenciesDataGridView = New System.Windows.Forms.DataGridView()
         Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
+        Me.FrequenciesDataGridView = New System.Windows.Forms.DataGridView()
         Me.ToolStrip1.SuspendLayout()
         CType(Me.FrequenciesDataGridView, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -64,6 +64,12 @@ Partial Class DeploymentsForAFrequencyForm
         Me.ToleranceToolStripTextBox.Font = New System.Drawing.Font("Segoe UI", 9.0!)
         Me.ToleranceToolStripTextBox.Name = "ToleranceToolStripTextBox"
         Me.ToleranceToolStripTextBox.Size = New System.Drawing.Size(100, 25)
+        Me.ToleranceToolStripTextBox.Text = "0"
+        '
+        'ToolStripSeparator1
+        '
+        Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
+        Me.ToolStripSeparator1.Size = New System.Drawing.Size(6, 25)
         '
         'FrequenciesDataGridView
         '
@@ -77,11 +83,6 @@ Partial Class DeploymentsForAFrequencyForm
         Me.FrequenciesDataGridView.ReadOnly = True
         Me.FrequenciesDataGridView.Size = New System.Drawing.Size(1064, 628)
         Me.FrequenciesDataGridView.TabIndex = 1
-        '
-        'ToolStripSeparator1
-        '
-        Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
-        Me.ToolStripSeparator1.Size = New System.Drawing.Size(6, 25)
         '
         'DeploymentsForAFrequencyForm
         '
