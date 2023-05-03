@@ -18,4 +18,20 @@
             MsgBox(ex.Message & " " & System.Reflection.MethodBase.GetCurrentMethod.Name)
         End Try
     End Sub
+
+    Private Sub EditRadiotrackingDatasetButton_Click(sender As Object, e As EventArgs) Handles EditRadiotrackingDatasetButton.Click
+        Dim RadiotrackingForm As New RadiotrackingForm
+        RadiotrackingForm.Show()
+
+    End Sub
+
+    Private Sub GetDeploymentsForHerdFrequencyAndDateButton_Click(sender As Object, e As EventArgs) Handles GetDeploymentsForHerdFrequencyAndDateButton.Click
+        Dim DeploymentsForAFrequencyForm As New DeploymentsForAFrequencyForm
+        DeploymentsForAFrequencyForm.Show()
+    End Sub
+
+    Private Sub OpenCaribouProfileFormButton_Click(sender As Object, e As EventArgs) Handles OpenCaribouProfileFormButton.Click
+        Dim CaribouProfileForm As New CaribouProfileForm()
+        CaribouProfileForm.Show()
+    End Sub
 End Class

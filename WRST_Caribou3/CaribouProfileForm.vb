@@ -13,7 +13,7 @@ Public Class CaribouProfileForm
         Me.CapturesDockPanel.Options.ShowCloseButton = False
         Me.CollarDeploymentsDockPanel.Options.ShowCloseButton = False
         Me.CollarFixesDockPanel.Options.ShowCloseButton = False
-        Me.EarlyRadiotrackingDockPanel.Options.ShowCloseButton = False
+        Me.RadiotrackingDockPanel.Options.ShowCloseButton = False
         Me.SightingsDockPanel.Options.ShowCloseButton = False
 
 
@@ -133,19 +133,16 @@ WHERE AnimalID = '" & AnimalID & "' ORDER BY SightingDate "
         End Try
 
 
-        'Early radiotracking
+        'Radiotracking
         Try
-            Sql = "SELECT AnimalID, SightingDate, Herd, Observer, Frequency, FrequencyCorrectedForDrift, CaribouID_Recorded, Vis, Adults, Calves, GroupNumber, GroupSize, Total, RetainedAntler, Mode, Accuracy, CalfStat, Elev_m, Location, Class, HabClass, 
-                  ForCov, Topog, Snow, SnowCov, Crater, SurveyPurpose, Lat, Lon, CaribouID_2, Comments, DeploymentID, DataQuality, QCFlag, QCComment, RecordInsertedDate, RecordInsertedBy, CertificationDate, CertifiedBy, CertificationLevel, 
-                  SourceFile, ERID, ProjectID
-FROM     EarlyRadiotracking WHERE        (AnimalID = '" & AnimalID & "')"
-            Dim EarlyRadiotrackingDataTable As DataTable = GetDataTable(My.Settings.WRST_CaribouConnectionString, Sql)
-            Me.EarlyRadiotrackingGridControl.DataSource = EarlyRadiotrackingDataTable
-            SetUpGridControl(Me.EarlyRadiotrackingGridControl)
+            Sql = "SELECT * FROM Radiotracking WHERE (AnimalID = '" & AnimalID.Trim & "')"
+            Dim RadiotrackingDataTable As DataTable = GetDataTable(My.Settings.WRST_CaribouConnectionString, Sql)
+            Me.RadiotrackingGridControl.DataSource = RadiotrackingDataTable
+            SetUpGridControl(Me.RadiotrackingGridControl)
 
             'Load the points into the map control
-            Dim EarlyRadiotrackingVectorItemsLayer As VectorItemsLayer = GetBubbleVectorItemsLayerFromPointsDataTable(EarlyRadiotrackingDataTable, "Lat", "Lon", 1, MarkerType.Square, Color.Blue)
-            Me.CaribouMapControl.Layers.Add(EarlyRadiotrackingVectorItemsLayer)
+            Dim RadiotrackingVectorItemsLayer As VectorItemsLayer = GetBubbleVectorItemsLayerFromPointsDataTable(RadiotrackingDataTable, "Lat", "Lon", 1, MarkerType.Square, Color.Blue)
+            Me.CaribouMapControl.Layers.Add(RadiotrackingVectorItemsLayer)
 
         Catch ex As Exception
             MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name & ")")

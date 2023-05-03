@@ -1,0 +1,1140 @@
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+Partial Class RadiotrackingForm
+    Inherits System.Windows.Forms.Form
+
+    'Form overrides dispose to clean up the component list.
+    <System.Diagnostics.DebuggerNonUserCode()> _
+    Protected Overrides Sub Dispose(ByVal disposing As Boolean)
+        Try
+            If disposing AndAlso components IsNot Nothing Then
+                components.Dispose()
+            End If
+        Finally
+            MyBase.Dispose(disposing)
+        End Try
+    End Sub
+
+    'Required by the Windows Form Designer
+    Private components As System.ComponentModel.IContainer
+
+    'NOTE: The following procedure is required by the Windows Form Designer
+    'It can be modified using the Windows Form Designer.  
+    'Do not modify it using the code editor.
+    <System.Diagnostics.DebuggerStepThrough()> _
+    Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
+        Dim ExpressionDataBinding1 As DevExpress.XtraPivotGrid.ExpressionDataBinding = New DevExpress.XtraPivotGrid.ExpressionDataBinding()
+        Dim DataSourceColumnBinding1 As DevExpress.XtraPivotGrid.DataSourceColumnBinding = New DevExpress.XtraPivotGrid.DataSourceColumnBinding()
+        Dim DataSourceColumnBinding2 As DevExpress.XtraPivotGrid.DataSourceColumnBinding = New DevExpress.XtraPivotGrid.DataSourceColumnBinding()
+        Dim DataSourceColumnBinding3 As DevExpress.XtraPivotGrid.DataSourceColumnBinding = New DevExpress.XtraPivotGrid.DataSourceColumnBinding()
+        Dim DataSourceColumnBinding4 As DevExpress.XtraPivotGrid.DataSourceColumnBinding = New DevExpress.XtraPivotGrid.DataSourceColumnBinding()
+        Dim DataSourceColumnBinding5 As DevExpress.XtraPivotGrid.DataSourceColumnBinding = New DevExpress.XtraPivotGrid.DataSourceColumnBinding()
+        Dim DataSourceColumnBinding6 As DevExpress.XtraPivotGrid.DataSourceColumnBinding = New DevExpress.XtraPivotGrid.DataSourceColumnBinding()
+        Dim DataSourceColumnBinding7 As DevExpress.XtraPivotGrid.DataSourceColumnBinding = New DevExpress.XtraPivotGrid.DataSourceColumnBinding()
+        Dim DataSourceColumnBinding8 As DevExpress.XtraPivotGrid.DataSourceColumnBinding = New DevExpress.XtraPivotGrid.DataSourceColumnBinding()
+        Dim DataSourceColumnBinding9 As DevExpress.XtraPivotGrid.DataSourceColumnBinding = New DevExpress.XtraPivotGrid.DataSourceColumnBinding()
+        Dim DataSourceColumnBinding10 As DevExpress.XtraPivotGrid.DataSourceColumnBinding = New DevExpress.XtraPivotGrid.DataSourceColumnBinding()
+        Dim DataSourceColumnBinding11 As DevExpress.XtraPivotGrid.DataSourceColumnBinding = New DevExpress.XtraPivotGrid.DataSourceColumnBinding()
+        Dim DataSourceColumnBinding12 As DevExpress.XtraPivotGrid.DataSourceColumnBinding = New DevExpress.XtraPivotGrid.DataSourceColumnBinding()
+        Dim DataSourceColumnBinding13 As DevExpress.XtraPivotGrid.DataSourceColumnBinding = New DevExpress.XtraPivotGrid.DataSourceColumnBinding()
+        Dim DataSourceColumnBinding14 As DevExpress.XtraPivotGrid.DataSourceColumnBinding = New DevExpress.XtraPivotGrid.DataSourceColumnBinding()
+        Dim DataSourceColumnBinding15 As DevExpress.XtraPivotGrid.DataSourceColumnBinding = New DevExpress.XtraPivotGrid.DataSourceColumnBinding()
+        Dim DataSourceColumnBinding16 As DevExpress.XtraPivotGrid.DataSourceColumnBinding = New DevExpress.XtraPivotGrid.DataSourceColumnBinding()
+        Dim DataSourceColumnBinding17 As DevExpress.XtraPivotGrid.DataSourceColumnBinding = New DevExpress.XtraPivotGrid.DataSourceColumnBinding()
+        Dim DataSourceColumnBinding18 As DevExpress.XtraPivotGrid.DataSourceColumnBinding = New DevExpress.XtraPivotGrid.DataSourceColumnBinding()
+        Dim DataSourceColumnBinding19 As DevExpress.XtraPivotGrid.DataSourceColumnBinding = New DevExpress.XtraPivotGrid.DataSourceColumnBinding()
+        Dim DataSourceColumnBinding20 As DevExpress.XtraPivotGrid.DataSourceColumnBinding = New DevExpress.XtraPivotGrid.DataSourceColumnBinding()
+        Dim DataSourceColumnBinding21 As DevExpress.XtraPivotGrid.DataSourceColumnBinding = New DevExpress.XtraPivotGrid.DataSourceColumnBinding()
+        Dim DataSourceColumnBinding22 As DevExpress.XtraPivotGrid.DataSourceColumnBinding = New DevExpress.XtraPivotGrid.DataSourceColumnBinding()
+        Dim DataSourceColumnBinding23 As DevExpress.XtraPivotGrid.DataSourceColumnBinding = New DevExpress.XtraPivotGrid.DataSourceColumnBinding()
+        Dim DataSourceColumnBinding24 As DevExpress.XtraPivotGrid.DataSourceColumnBinding = New DevExpress.XtraPivotGrid.DataSourceColumnBinding()
+        Dim DataSourceColumnBinding25 As DevExpress.XtraPivotGrid.DataSourceColumnBinding = New DevExpress.XtraPivotGrid.DataSourceColumnBinding()
+        Dim DataSourceColumnBinding26 As DevExpress.XtraPivotGrid.DataSourceColumnBinding = New DevExpress.XtraPivotGrid.DataSourceColumnBinding()
+        Dim DataSourceColumnBinding27 As DevExpress.XtraPivotGrid.DataSourceColumnBinding = New DevExpress.XtraPivotGrid.DataSourceColumnBinding()
+        Dim DataSourceColumnBinding28 As DevExpress.XtraPivotGrid.DataSourceColumnBinding = New DevExpress.XtraPivotGrid.DataSourceColumnBinding()
+        Dim DataSourceColumnBinding29 As DevExpress.XtraPivotGrid.DataSourceColumnBinding = New DevExpress.XtraPivotGrid.DataSourceColumnBinding()
+        Dim DataSourceColumnBinding30 As DevExpress.XtraPivotGrid.DataSourceColumnBinding = New DevExpress.XtraPivotGrid.DataSourceColumnBinding()
+        Dim DataSourceColumnBinding31 As DevExpress.XtraPivotGrid.DataSourceColumnBinding = New DevExpress.XtraPivotGrid.DataSourceColumnBinding()
+        Dim DataSourceColumnBinding32 As DevExpress.XtraPivotGrid.DataSourceColumnBinding = New DevExpress.XtraPivotGrid.DataSourceColumnBinding()
+        Dim DataSourceColumnBinding33 As DevExpress.XtraPivotGrid.DataSourceColumnBinding = New DevExpress.XtraPivotGrid.DataSourceColumnBinding()
+        Dim DataSourceColumnBinding34 As DevExpress.XtraPivotGrid.DataSourceColumnBinding = New DevExpress.XtraPivotGrid.DataSourceColumnBinding()
+        Dim DataSourceColumnBinding35 As DevExpress.XtraPivotGrid.DataSourceColumnBinding = New DevExpress.XtraPivotGrid.DataSourceColumnBinding()
+        Dim DataSourceColumnBinding36 As DevExpress.XtraPivotGrid.DataSourceColumnBinding = New DevExpress.XtraPivotGrid.DataSourceColumnBinding()
+        Dim DataSourceColumnBinding37 As DevExpress.XtraPivotGrid.DataSourceColumnBinding = New DevExpress.XtraPivotGrid.DataSourceColumnBinding()
+        Dim DataSourceColumnBinding38 As DevExpress.XtraPivotGrid.DataSourceColumnBinding = New DevExpress.XtraPivotGrid.DataSourceColumnBinding()
+        Dim DataSourceColumnBinding39 As DevExpress.XtraPivotGrid.DataSourceColumnBinding = New DevExpress.XtraPivotGrid.DataSourceColumnBinding()
+        Dim DataSourceColumnBinding40 As DevExpress.XtraPivotGrid.DataSourceColumnBinding = New DevExpress.XtraPivotGrid.DataSourceColumnBinding()
+        Dim DataSourceColumnBinding41 As DevExpress.XtraPivotGrid.DataSourceColumnBinding = New DevExpress.XtraPivotGrid.DataSourceColumnBinding()
+        Dim DataSourceColumnBinding42 As DevExpress.XtraPivotGrid.DataSourceColumnBinding = New DevExpress.XtraPivotGrid.DataSourceColumnBinding()
+        Dim DataSourceColumnBinding43 As DevExpress.XtraPivotGrid.DataSourceColumnBinding = New DevExpress.XtraPivotGrid.DataSourceColumnBinding()
+        Dim DataSourceColumnBinding44 As DevExpress.XtraPivotGrid.DataSourceColumnBinding = New DevExpress.XtraPivotGrid.DataSourceColumnBinding()
+        Dim DataSourceColumnBinding45 As DevExpress.XtraPivotGrid.DataSourceColumnBinding = New DevExpress.XtraPivotGrid.DataSourceColumnBinding()
+        Me.WRST_CaribouDataSet = New WRST_Caribou3.WRST_CaribouDataSet()
+        Me.RadiotrackingBindingSource = New System.Windows.Forms.BindingSource(Me.components)
+        Me.RadiotrackingTableAdapter = New WRST_Caribou3.WRST_CaribouDataSetTableAdapters.RadiotrackingTableAdapter()
+        Me.TableAdapterManager = New WRST_Caribou3.WRST_CaribouDataSetTableAdapters.TableAdapterManager()
+        Me.DockManager1 = New DevExpress.XtraBars.Docking.DockManager(Me.components)
+        Me.PivotDockPanel = New DevExpress.XtraBars.Docking.DockPanel()
+        Me.DockPanel1_Container = New DevExpress.XtraBars.Docking.ControlContainer()
+        Me.RadiotrackingPivotGridControl = New DevExpress.XtraPivotGrid.PivotGridControl()
+        Me.YearPivotGridField = New DevExpress.XtraPivotGrid.PivotGridField()
+        Me.PivotGridField1 = New DevExpress.XtraPivotGrid.PivotGridField()
+        Me.PivotGridField2 = New DevExpress.XtraPivotGrid.PivotGridField()
+        Me.PivotGridField3 = New DevExpress.XtraPivotGrid.PivotGridField()
+        Me.PivotGridField4 = New DevExpress.XtraPivotGrid.PivotGridField()
+        Me.PivotGridField5 = New DevExpress.XtraPivotGrid.PivotGridField()
+        Me.PivotGridField6 = New DevExpress.XtraPivotGrid.PivotGridField()
+        Me.PivotGridField7 = New DevExpress.XtraPivotGrid.PivotGridField()
+        Me.PivotGridField8 = New DevExpress.XtraPivotGrid.PivotGridField()
+        Me.PivotGridField9 = New DevExpress.XtraPivotGrid.PivotGridField()
+        Me.PivotGridField10 = New DevExpress.XtraPivotGrid.PivotGridField()
+        Me.PivotGridField11 = New DevExpress.XtraPivotGrid.PivotGridField()
+        Me.PivotGridField12 = New DevExpress.XtraPivotGrid.PivotGridField()
+        Me.PivotGridField13 = New DevExpress.XtraPivotGrid.PivotGridField()
+        Me.PivotGridField14 = New DevExpress.XtraPivotGrid.PivotGridField()
+        Me.PivotGridField15 = New DevExpress.XtraPivotGrid.PivotGridField()
+        Me.PivotGridField16 = New DevExpress.XtraPivotGrid.PivotGridField()
+        Me.PivotGridField17 = New DevExpress.XtraPivotGrid.PivotGridField()
+        Me.PivotGridField18 = New DevExpress.XtraPivotGrid.PivotGridField()
+        Me.PivotGridField19 = New DevExpress.XtraPivotGrid.PivotGridField()
+        Me.PivotGridField20 = New DevExpress.XtraPivotGrid.PivotGridField()
+        Me.PivotGridField21 = New DevExpress.XtraPivotGrid.PivotGridField()
+        Me.PivotGridField22 = New DevExpress.XtraPivotGrid.PivotGridField()
+        Me.PivotGridField23 = New DevExpress.XtraPivotGrid.PivotGridField()
+        Me.PivotGridField24 = New DevExpress.XtraPivotGrid.PivotGridField()
+        Me.PivotGridField25 = New DevExpress.XtraPivotGrid.PivotGridField()
+        Me.PivotGridField26 = New DevExpress.XtraPivotGrid.PivotGridField()
+        Me.PivotGridField27 = New DevExpress.XtraPivotGrid.PivotGridField()
+        Me.PivotGridField28 = New DevExpress.XtraPivotGrid.PivotGridField()
+        Me.PivotGridField29 = New DevExpress.XtraPivotGrid.PivotGridField()
+        Me.PivotGridField30 = New DevExpress.XtraPivotGrid.PivotGridField()
+        Me.PivotGridField31 = New DevExpress.XtraPivotGrid.PivotGridField()
+        Me.PivotGridField32 = New DevExpress.XtraPivotGrid.PivotGridField()
+        Me.PivotGridField33 = New DevExpress.XtraPivotGrid.PivotGridField()
+        Me.PivotGridField34 = New DevExpress.XtraPivotGrid.PivotGridField()
+        Me.PivotGridField35 = New DevExpress.XtraPivotGrid.PivotGridField()
+        Me.PivotGridField36 = New DevExpress.XtraPivotGrid.PivotGridField()
+        Me.PivotGridField37 = New DevExpress.XtraPivotGrid.PivotGridField()
+        Me.PivotGridField38 = New DevExpress.XtraPivotGrid.PivotGridField()
+        Me.PivotGridField39 = New DevExpress.XtraPivotGrid.PivotGridField()
+        Me.PivotGridField40 = New DevExpress.XtraPivotGrid.PivotGridField()
+        Me.PivotGridField41 = New DevExpress.XtraPivotGrid.PivotGridField()
+        Me.PivotGridField42 = New DevExpress.XtraPivotGrid.PivotGridField()
+        Me.PivotGridField43 = New DevExpress.XtraPivotGrid.PivotGridField()
+        Me.PivotGridField44 = New DevExpress.XtraPivotGrid.PivotGridField()
+        Me.nPivotGridField = New DevExpress.XtraPivotGrid.PivotGridField()
+        Me.RadiotrackingGridControl = New DevExpress.XtraGrid.GridControl()
+        Me.GridView1 = New DevExpress.XtraGrid.Views.Grid.GridView()
+        Me.YearGridColumn = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.colHerd = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.colSightingDate = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.colAnimalID = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.colFrequency = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.colVis = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.colGroupNumber = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.colMode = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.colAccuracy = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.colBull = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.colCow = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.colCalf = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.colAdult = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.colGroupSize = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.colRetainedAntler = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.colCalfStat = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.colLocation = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.colClass = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.colHabClass = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.colForCov = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.colTopog = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.colSnow = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.colSnowCov = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.colCrater = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.colFrequency_Recorded = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.colAnimalID_Recorded = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.colDeploymentID = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.colElev_m = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.colLat = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.colLon = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.colObserver = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.colPilot = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.colTailNo = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.colComment = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.colQCComment = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.colWaypoint = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.colRecordInsertedDate = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.colRecordInsertedBy = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.colCertificationDate = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.colCertifiedBy = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.colCertificationLevel = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.colValidatedDate = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.colValidatedBy = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.colSourceFile = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.colSourcefileURL = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.hideContainerBottom = New DevExpress.XtraBars.Docking.AutoHideContainer()
+        CType(Me.WRST_CaribouDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.RadiotrackingBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.DockManager1, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.PivotDockPanel.SuspendLayout()
+        Me.DockPanel1_Container.SuspendLayout()
+        CType(Me.RadiotrackingPivotGridControl, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.RadiotrackingGridControl, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.GridView1, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.hideContainerBottom.SuspendLayout()
+        Me.SuspendLayout()
+        '
+        'WRST_CaribouDataSet
+        '
+        Me.WRST_CaribouDataSet.DataSetName = "WRST_CaribouDataSet"
+        Me.WRST_CaribouDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
+        '
+        'RadiotrackingBindingSource
+        '
+        Me.RadiotrackingBindingSource.DataMember = "Radiotracking"
+        Me.RadiotrackingBindingSource.DataSource = Me.WRST_CaribouDataSet
+        '
+        'RadiotrackingTableAdapter
+        '
+        Me.RadiotrackingTableAdapter.ClearBeforeFill = True
+        '
+        'TableAdapterManager
+        '
+        Me.TableAdapterManager.BackupDataSetBeforeUpdate = False
+        Me.TableAdapterManager.CapturesTableAdapter = Nothing
+        Me.TableAdapterManager.CollaredAnimalsInGroupsTableAdapter = Nothing
+        Me.TableAdapterManager.RadiotrackingTableAdapter = Me.RadiotrackingTableAdapter
+        Me.TableAdapterManager.SurveyFlightsTableAdapter = Nothing
+        Me.TableAdapterManager.SurveyNamesTableAdapter = Nothing
+        Me.TableAdapterManager.SurveysTableAdapter = Nothing
+        Me.TableAdapterManager.UpdateOrder = WRST_Caribou3.WRST_CaribouDataSetTableAdapters.TableAdapterManager.UpdateOrderOption.InsertUpdateDelete
+        Me.TableAdapterManager.WorkLogTableAdapter = Nothing
+        '
+        'DockManager1
+        '
+        Me.DockManager1.AutoHideContainers.AddRange(New DevExpress.XtraBars.Docking.AutoHideContainer() {Me.hideContainerBottom})
+        Me.DockManager1.Form = Me
+        Me.DockManager1.TopZIndexControls.AddRange(New String() {"DevExpress.XtraBars.BarDockControl", "DevExpress.XtraBars.StandaloneBarDockControl", "System.Windows.Forms.MenuStrip", "System.Windows.Forms.StatusStrip", "System.Windows.Forms.StatusBar", "DevExpress.XtraBars.Ribbon.RibbonStatusBar", "DevExpress.XtraBars.Ribbon.RibbonControl", "DevExpress.XtraBars.Navigation.OfficeNavigationBar", "DevExpress.XtraBars.Navigation.TileNavPane", "DevExpress.XtraBars.TabFormControl", "DevExpress.XtraBars.FluentDesignSystem.FluentDesignFormControl", "DevExpress.XtraBars.ToolbarForm.ToolbarFormControl"})
+        '
+        'PivotDockPanel
+        '
+        Me.PivotDockPanel.Controls.Add(Me.DockPanel1_Container)
+        Me.PivotDockPanel.Dock = DevExpress.XtraBars.Docking.DockingStyle.Bottom
+        Me.PivotDockPanel.ID = New System.Guid("9defd2a9-1bb6-4606-a600-7a4af5925a25")
+        Me.PivotDockPanel.Location = New System.Drawing.Point(0, 0)
+        Me.PivotDockPanel.Name = "PivotDockPanel"
+        Me.PivotDockPanel.OriginalSize = New System.Drawing.Size(200, 309)
+        Me.PivotDockPanel.SavedDock = DevExpress.XtraBars.Docking.DockingStyle.Bottom
+        Me.PivotDockPanel.SavedIndex = 0
+        Me.PivotDockPanel.Size = New System.Drawing.Size(961, 309)
+        Me.PivotDockPanel.Text = "Pivot table generator"
+        Me.PivotDockPanel.Visibility = DevExpress.XtraBars.Docking.DockVisibility.AutoHide
+        '
+        'DockPanel1_Container
+        '
+        Me.DockPanel1_Container.Controls.Add(Me.RadiotrackingPivotGridControl)
+        Me.DockPanel1_Container.Location = New System.Drawing.Point(3, 27)
+        Me.DockPanel1_Container.Name = "DockPanel1_Container"
+        Me.DockPanel1_Container.Size = New System.Drawing.Size(955, 279)
+        Me.DockPanel1_Container.TabIndex = 0
+        '
+        'RadiotrackingPivotGridControl
+        '
+        Me.RadiotrackingPivotGridControl.DataSource = Me.RadiotrackingBindingSource
+        Me.RadiotrackingPivotGridControl.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.RadiotrackingPivotGridControl.Fields.AddRange(New DevExpress.XtraPivotGrid.PivotGridField() {Me.YearPivotGridField, Me.PivotGridField1, Me.PivotGridField2, Me.PivotGridField3, Me.PivotGridField4, Me.PivotGridField5, Me.PivotGridField6, Me.PivotGridField7, Me.PivotGridField8, Me.PivotGridField9, Me.PivotGridField10, Me.PivotGridField11, Me.PivotGridField12, Me.PivotGridField13, Me.PivotGridField14, Me.PivotGridField15, Me.PivotGridField16, Me.PivotGridField17, Me.PivotGridField18, Me.PivotGridField19, Me.PivotGridField20, Me.PivotGridField21, Me.PivotGridField22, Me.PivotGridField23, Me.PivotGridField24, Me.PivotGridField25, Me.PivotGridField26, Me.PivotGridField27, Me.PivotGridField28, Me.PivotGridField29, Me.PivotGridField30, Me.PivotGridField31, Me.PivotGridField32, Me.PivotGridField33, Me.PivotGridField34, Me.PivotGridField35, Me.PivotGridField36, Me.PivotGridField37, Me.PivotGridField38, Me.PivotGridField39, Me.PivotGridField40, Me.PivotGridField41, Me.PivotGridField42, Me.PivotGridField43, Me.PivotGridField44, Me.nPivotGridField})
+        Me.RadiotrackingPivotGridControl.Location = New System.Drawing.Point(0, 0)
+        Me.RadiotrackingPivotGridControl.Name = "RadiotrackingPivotGridControl"
+        Me.RadiotrackingPivotGridControl.OptionsData.DataProcessingEngine = DevExpress.XtraPivotGrid.PivotDataProcessingEngine.Optimized
+        Me.RadiotrackingPivotGridControl.Size = New System.Drawing.Size(955, 279)
+        Me.RadiotrackingPivotGridControl.TabIndex = 0
+        '
+        'YearPivotGridField
+        '
+        Me.YearPivotGridField.Area = DevExpress.XtraPivotGrid.PivotArea.RowArea
+        Me.YearPivotGridField.AreaIndex = 1
+        Me.YearPivotGridField.Caption = "Year"
+        ExpressionDataBinding1.Expression = "GetYear([PivotGridField2])"
+        Me.YearPivotGridField.DataBinding = ExpressionDataBinding1
+        Me.YearPivotGridField.Name = "YearPivotGridField"
+        Me.YearPivotGridField.SummaryType = DevExpress.Data.PivotGrid.PivotSummaryType.Count
+        Me.YearPivotGridField.Width = 227
+        '
+        'PivotGridField1
+        '
+        Me.PivotGridField1.Area = DevExpress.XtraPivotGrid.PivotArea.RowArea
+        Me.PivotGridField1.AreaIndex = 0
+        Me.PivotGridField1.Caption = "Herd"
+        DataSourceColumnBinding1.ColumnName = "Herd"
+        Me.PivotGridField1.DataBinding = DataSourceColumnBinding1
+        Me.PivotGridField1.Name = "PivotGridField1"
+        '
+        'PivotGridField2
+        '
+        Me.PivotGridField2.AreaIndex = 0
+        Me.PivotGridField2.Caption = "SightingDate"
+        DataSourceColumnBinding2.ColumnName = "SightingDate"
+        Me.PivotGridField2.DataBinding = DataSourceColumnBinding2
+        Me.PivotGridField2.Name = "PivotGridField2"
+        '
+        'PivotGridField3
+        '
+        Me.PivotGridField3.AreaIndex = 1
+        Me.PivotGridField3.Caption = "Animal ID"
+        DataSourceColumnBinding3.ColumnName = "AnimalID"
+        Me.PivotGridField3.DataBinding = DataSourceColumnBinding3
+        Me.PivotGridField3.Name = "PivotGridField3"
+        '
+        'PivotGridField4
+        '
+        Me.PivotGridField4.Area = DevExpress.XtraPivotGrid.PivotArea.DataArea
+        Me.PivotGridField4.AreaIndex = 1
+        Me.PivotGridField4.Caption = "Frequency"
+        DataSourceColumnBinding4.ColumnName = "Frequency"
+        Me.PivotGridField4.DataBinding = DataSourceColumnBinding4
+        Me.PivotGridField4.Name = "PivotGridField4"
+        Me.PivotGridField4.SummaryType = DevExpress.Data.PivotGrid.PivotSummaryType.CountDistinct
+        '
+        'PivotGridField5
+        '
+        Me.PivotGridField5.AreaIndex = 6
+        Me.PivotGridField5.Caption = "Vis"
+        DataSourceColumnBinding5.ColumnName = "Vis"
+        Me.PivotGridField5.DataBinding = DataSourceColumnBinding5
+        Me.PivotGridField5.Name = "PivotGridField5"
+        '
+        'PivotGridField6
+        '
+        Me.PivotGridField6.AreaIndex = 7
+        Me.PivotGridField6.Caption = "Group Number"
+        DataSourceColumnBinding6.ColumnName = "GroupNumber"
+        Me.PivotGridField6.DataBinding = DataSourceColumnBinding6
+        Me.PivotGridField6.Name = "PivotGridField6"
+        '
+        'PivotGridField7
+        '
+        Me.PivotGridField7.Area = DevExpress.XtraPivotGrid.PivotArea.ColumnArea
+        Me.PivotGridField7.AreaIndex = 0
+        Me.PivotGridField7.Caption = "Mode"
+        DataSourceColumnBinding7.ColumnName = "Mode"
+        Me.PivotGridField7.DataBinding = DataSourceColumnBinding7
+        Me.PivotGridField7.Name = "PivotGridField7"
+        '
+        'PivotGridField8
+        '
+        Me.PivotGridField8.AreaIndex = 8
+        Me.PivotGridField8.Caption = "Accuracy"
+        DataSourceColumnBinding8.ColumnName = "Accuracy"
+        Me.PivotGridField8.DataBinding = DataSourceColumnBinding8
+        Me.PivotGridField8.Name = "PivotGridField8"
+        '
+        'PivotGridField9
+        '
+        Me.PivotGridField9.AreaIndex = 9
+        Me.PivotGridField9.Caption = "Bull"
+        DataSourceColumnBinding9.ColumnName = "Bull"
+        Me.PivotGridField9.DataBinding = DataSourceColumnBinding9
+        Me.PivotGridField9.Name = "PivotGridField9"
+        '
+        'PivotGridField10
+        '
+        Me.PivotGridField10.AreaIndex = 2
+        Me.PivotGridField10.Caption = "Cow"
+        DataSourceColumnBinding10.ColumnName = "Cow"
+        Me.PivotGridField10.DataBinding = DataSourceColumnBinding10
+        Me.PivotGridField10.Name = "PivotGridField10"
+        '
+        'PivotGridField11
+        '
+        Me.PivotGridField11.AreaIndex = 3
+        Me.PivotGridField11.Caption = "Calf"
+        DataSourceColumnBinding11.ColumnName = "Calf"
+        Me.PivotGridField11.DataBinding = DataSourceColumnBinding11
+        Me.PivotGridField11.Name = "PivotGridField11"
+        '
+        'PivotGridField12
+        '
+        Me.PivotGridField12.AreaIndex = 4
+        Me.PivotGridField12.Caption = "Adult"
+        DataSourceColumnBinding12.ColumnName = "Adult"
+        Me.PivotGridField12.DataBinding = DataSourceColumnBinding12
+        Me.PivotGridField12.Name = "PivotGridField12"
+        '
+        'PivotGridField13
+        '
+        Me.PivotGridField13.AreaIndex = 5
+        Me.PivotGridField13.Caption = "Group Size"
+        DataSourceColumnBinding13.ColumnName = "GroupSize"
+        Me.PivotGridField13.DataBinding = DataSourceColumnBinding13
+        Me.PivotGridField13.Name = "PivotGridField13"
+        '
+        'PivotGridField14
+        '
+        Me.PivotGridField14.AreaIndex = 10
+        Me.PivotGridField14.Caption = "Retained Antler"
+        DataSourceColumnBinding14.ColumnName = "RetainedAntler"
+        Me.PivotGridField14.DataBinding = DataSourceColumnBinding14
+        Me.PivotGridField14.Name = "PivotGridField14"
+        '
+        'PivotGridField15
+        '
+        Me.PivotGridField15.AreaIndex = 11
+        Me.PivotGridField15.Caption = "Calf Stat"
+        DataSourceColumnBinding15.ColumnName = "CalfStat"
+        Me.PivotGridField15.DataBinding = DataSourceColumnBinding15
+        Me.PivotGridField15.Name = "PivotGridField15"
+        '
+        'PivotGridField16
+        '
+        Me.PivotGridField16.AreaIndex = 12
+        Me.PivotGridField16.Caption = "Location"
+        DataSourceColumnBinding16.ColumnName = "Location"
+        Me.PivotGridField16.DataBinding = DataSourceColumnBinding16
+        Me.PivotGridField16.Name = "PivotGridField16"
+        '
+        'PivotGridField17
+        '
+        Me.PivotGridField17.AreaIndex = 13
+        Me.PivotGridField17.Caption = "Class"
+        DataSourceColumnBinding17.ColumnName = "Class"
+        Me.PivotGridField17.DataBinding = DataSourceColumnBinding17
+        Me.PivotGridField17.Name = "PivotGridField17"
+        '
+        'PivotGridField18
+        '
+        Me.PivotGridField18.AreaIndex = 14
+        Me.PivotGridField18.Caption = "Hab Class"
+        DataSourceColumnBinding18.ColumnName = "HabClass"
+        Me.PivotGridField18.DataBinding = DataSourceColumnBinding18
+        Me.PivotGridField18.Name = "PivotGridField18"
+        '
+        'PivotGridField19
+        '
+        Me.PivotGridField19.AreaIndex = 15
+        Me.PivotGridField19.Caption = "For Cov"
+        DataSourceColumnBinding19.ColumnName = "ForCov"
+        Me.PivotGridField19.DataBinding = DataSourceColumnBinding19
+        Me.PivotGridField19.Name = "PivotGridField19"
+        '
+        'PivotGridField20
+        '
+        Me.PivotGridField20.AreaIndex = 16
+        Me.PivotGridField20.Caption = "Topog"
+        DataSourceColumnBinding20.ColumnName = "Topog"
+        Me.PivotGridField20.DataBinding = DataSourceColumnBinding20
+        Me.PivotGridField20.Name = "PivotGridField20"
+        '
+        'PivotGridField21
+        '
+        Me.PivotGridField21.AreaIndex = 17
+        Me.PivotGridField21.Caption = "Snow"
+        DataSourceColumnBinding21.ColumnName = "Snow"
+        Me.PivotGridField21.DataBinding = DataSourceColumnBinding21
+        Me.PivotGridField21.Name = "PivotGridField21"
+        '
+        'PivotGridField22
+        '
+        Me.PivotGridField22.AreaIndex = 18
+        Me.PivotGridField22.Caption = "Snow Cov"
+        DataSourceColumnBinding22.ColumnName = "SnowCov"
+        Me.PivotGridField22.DataBinding = DataSourceColumnBinding22
+        Me.PivotGridField22.Name = "PivotGridField22"
+        '
+        'PivotGridField23
+        '
+        Me.PivotGridField23.AreaIndex = 19
+        Me.PivotGridField23.Caption = "Crater"
+        DataSourceColumnBinding23.ColumnName = "Crater"
+        Me.PivotGridField23.DataBinding = DataSourceColumnBinding23
+        Me.PivotGridField23.Name = "PivotGridField23"
+        '
+        'PivotGridField24
+        '
+        Me.PivotGridField24.AreaIndex = 20
+        Me.PivotGridField24.Caption = "Frequency_Recorded"
+        DataSourceColumnBinding24.ColumnName = "Frequency_Recorded"
+        Me.PivotGridField24.DataBinding = DataSourceColumnBinding24
+        Me.PivotGridField24.Name = "PivotGridField24"
+        '
+        'PivotGridField25
+        '
+        Me.PivotGridField25.AreaIndex = 21
+        Me.PivotGridField25.Caption = "Animal ID_Recorded"
+        DataSourceColumnBinding25.ColumnName = "AnimalID_Recorded"
+        Me.PivotGridField25.DataBinding = DataSourceColumnBinding25
+        Me.PivotGridField25.Name = "PivotGridField25"
+        '
+        'PivotGridField26
+        '
+        Me.PivotGridField26.AreaIndex = 22
+        Me.PivotGridField26.Caption = "Deployment ID"
+        DataSourceColumnBinding26.ColumnName = "DeploymentID"
+        Me.PivotGridField26.DataBinding = DataSourceColumnBinding26
+        Me.PivotGridField26.Name = "PivotGridField26"
+        '
+        'PivotGridField27
+        '
+        Me.PivotGridField27.AreaIndex = 23
+        Me.PivotGridField27.Caption = "Elev_m"
+        DataSourceColumnBinding27.ColumnName = "Elev_m"
+        Me.PivotGridField27.DataBinding = DataSourceColumnBinding27
+        Me.PivotGridField27.Name = "PivotGridField27"
+        '
+        'PivotGridField28
+        '
+        Me.PivotGridField28.AreaIndex = 24
+        Me.PivotGridField28.Caption = "Lat"
+        DataSourceColumnBinding28.ColumnName = "Lat"
+        Me.PivotGridField28.DataBinding = DataSourceColumnBinding28
+        Me.PivotGridField28.Name = "PivotGridField28"
+        '
+        'PivotGridField29
+        '
+        Me.PivotGridField29.AreaIndex = 25
+        Me.PivotGridField29.Caption = "Lon"
+        DataSourceColumnBinding29.ColumnName = "Lon"
+        Me.PivotGridField29.DataBinding = DataSourceColumnBinding29
+        Me.PivotGridField29.Name = "PivotGridField29"
+        '
+        'PivotGridField30
+        '
+        Me.PivotGridField30.AreaIndex = 26
+        Me.PivotGridField30.Caption = "Observer"
+        DataSourceColumnBinding30.ColumnName = "Observer"
+        Me.PivotGridField30.DataBinding = DataSourceColumnBinding30
+        Me.PivotGridField30.Name = "PivotGridField30"
+        '
+        'PivotGridField31
+        '
+        Me.PivotGridField31.AreaIndex = 27
+        Me.PivotGridField31.Caption = "Pilot"
+        DataSourceColumnBinding31.ColumnName = "Pilot"
+        Me.PivotGridField31.DataBinding = DataSourceColumnBinding31
+        Me.PivotGridField31.Name = "PivotGridField31"
+        '
+        'PivotGridField32
+        '
+        Me.PivotGridField32.AreaIndex = 28
+        Me.PivotGridField32.Caption = "Tail No"
+        DataSourceColumnBinding32.ColumnName = "TailNo"
+        Me.PivotGridField32.DataBinding = DataSourceColumnBinding32
+        Me.PivotGridField32.Name = "PivotGridField32"
+        '
+        'PivotGridField33
+        '
+        Me.PivotGridField33.AreaIndex = 29
+        Me.PivotGridField33.Caption = "Comment"
+        DataSourceColumnBinding33.ColumnName = "Comment"
+        Me.PivotGridField33.DataBinding = DataSourceColumnBinding33
+        Me.PivotGridField33.Name = "PivotGridField33"
+        '
+        'PivotGridField34
+        '
+        Me.PivotGridField34.AreaIndex = 30
+        Me.PivotGridField34.Caption = "QC Comment"
+        DataSourceColumnBinding34.ColumnName = "QCComment"
+        Me.PivotGridField34.DataBinding = DataSourceColumnBinding34
+        Me.PivotGridField34.Name = "PivotGridField34"
+        '
+        'PivotGridField35
+        '
+        Me.PivotGridField35.AreaIndex = 31
+        Me.PivotGridField35.Caption = "Waypoint"
+        DataSourceColumnBinding35.ColumnName = "Waypoint"
+        Me.PivotGridField35.DataBinding = DataSourceColumnBinding35
+        Me.PivotGridField35.Name = "PivotGridField35"
+        '
+        'PivotGridField36
+        '
+        Me.PivotGridField36.AreaIndex = 32
+        Me.PivotGridField36.Caption = "RecordInsertedDate"
+        DataSourceColumnBinding36.ColumnName = "RecordInsertedDate"
+        Me.PivotGridField36.DataBinding = DataSourceColumnBinding36
+        Me.PivotGridField36.Name = "PivotGridField36"
+        '
+        'PivotGridField37
+        '
+        Me.PivotGridField37.AreaIndex = 33
+        Me.PivotGridField37.Caption = "Record Inserted By"
+        DataSourceColumnBinding37.ColumnName = "RecordInsertedBy"
+        Me.PivotGridField37.DataBinding = DataSourceColumnBinding37
+        Me.PivotGridField37.Name = "PivotGridField37"
+        '
+        'PivotGridField38
+        '
+        Me.PivotGridField38.AreaIndex = 34
+        Me.PivotGridField38.Caption = "CertificationDate"
+        DataSourceColumnBinding38.ColumnName = "CertificationDate"
+        Me.PivotGridField38.DataBinding = DataSourceColumnBinding38
+        Me.PivotGridField38.Name = "PivotGridField38"
+        '
+        'PivotGridField39
+        '
+        Me.PivotGridField39.AreaIndex = 35
+        Me.PivotGridField39.Caption = "Certified By"
+        DataSourceColumnBinding39.ColumnName = "CertifiedBy"
+        Me.PivotGridField39.DataBinding = DataSourceColumnBinding39
+        Me.PivotGridField39.Name = "PivotGridField39"
+        '
+        'PivotGridField40
+        '
+        Me.PivotGridField40.AreaIndex = 36
+        Me.PivotGridField40.Caption = "Certification Level"
+        DataSourceColumnBinding40.ColumnName = "CertificationLevel"
+        Me.PivotGridField40.DataBinding = DataSourceColumnBinding40
+        Me.PivotGridField40.Name = "PivotGridField40"
+        '
+        'PivotGridField41
+        '
+        Me.PivotGridField41.AreaIndex = 37
+        Me.PivotGridField41.Caption = "ValidatedDate"
+        DataSourceColumnBinding41.ColumnName = "ValidatedDate"
+        Me.PivotGridField41.DataBinding = DataSourceColumnBinding41
+        Me.PivotGridField41.Name = "PivotGridField41"
+        '
+        'PivotGridField42
+        '
+        Me.PivotGridField42.AreaIndex = 38
+        Me.PivotGridField42.Caption = "Validated By"
+        DataSourceColumnBinding42.ColumnName = "ValidatedBy"
+        Me.PivotGridField42.DataBinding = DataSourceColumnBinding42
+        Me.PivotGridField42.Name = "PivotGridField42"
+        '
+        'PivotGridField43
+        '
+        Me.PivotGridField43.AreaIndex = 39
+        Me.PivotGridField43.Caption = "Source File"
+        DataSourceColumnBinding43.ColumnName = "SourceFile"
+        Me.PivotGridField43.DataBinding = DataSourceColumnBinding43
+        Me.PivotGridField43.Name = "PivotGridField43"
+        '
+        'PivotGridField44
+        '
+        Me.PivotGridField44.AreaIndex = 40
+        Me.PivotGridField44.Caption = "Sourcefile URL"
+        DataSourceColumnBinding44.ColumnName = "SourcefileURL"
+        Me.PivotGridField44.DataBinding = DataSourceColumnBinding44
+        Me.PivotGridField44.Name = "PivotGridField44"
+        '
+        'nPivotGridField
+        '
+        Me.nPivotGridField.Area = DevExpress.XtraPivotGrid.PivotArea.DataArea
+        Me.nPivotGridField.AreaIndex = 0
+        Me.nPivotGridField.Caption = "n"
+        DataSourceColumnBinding45.ColumnName = "Herd"
+        Me.nPivotGridField.DataBinding = DataSourceColumnBinding45
+        Me.nPivotGridField.Name = "nPivotGridField"
+        Me.nPivotGridField.SummaryType = DevExpress.Data.PivotGrid.PivotSummaryType.Count
+        '
+        'RadiotrackingGridControl
+        '
+        Me.RadiotrackingGridControl.DataSource = Me.RadiotrackingBindingSource
+        Me.RadiotrackingGridControl.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.RadiotrackingGridControl.Location = New System.Drawing.Point(0, 0)
+        Me.RadiotrackingGridControl.MainView = Me.GridView1
+        Me.RadiotrackingGridControl.Name = "RadiotrackingGridControl"
+        Me.RadiotrackingGridControl.Size = New System.Drawing.Size(961, 604)
+        Me.RadiotrackingGridControl.TabIndex = 1
+        Me.RadiotrackingGridControl.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GridView1})
+        '
+        'GridView1
+        '
+        Me.GridView1.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.YearGridColumn, Me.colHerd, Me.colSightingDate, Me.colAnimalID, Me.colFrequency, Me.colVis, Me.colGroupNumber, Me.colMode, Me.colAccuracy, Me.colBull, Me.colCow, Me.colCalf, Me.colAdult, Me.colGroupSize, Me.colRetainedAntler, Me.colCalfStat, Me.colLocation, Me.colClass, Me.colHabClass, Me.colForCov, Me.colTopog, Me.colSnow, Me.colSnowCov, Me.colCrater, Me.colFrequency_Recorded, Me.colAnimalID_Recorded, Me.colDeploymentID, Me.colElev_m, Me.colLat, Me.colLon, Me.colObserver, Me.colPilot, Me.colTailNo, Me.colComment, Me.colQCComment, Me.colWaypoint, Me.colRecordInsertedDate, Me.colRecordInsertedBy, Me.colCertificationDate, Me.colCertifiedBy, Me.colCertificationLevel, Me.colValidatedDate, Me.colValidatedBy, Me.colSourceFile, Me.colSourcefileURL})
+        Me.GridView1.GridControl = Me.RadiotrackingGridControl
+        Me.GridView1.Name = "GridView1"
+        Me.GridView1.OptionsView.ShowFooter = True
+        '
+        'YearGridColumn
+        '
+        Me.YearGridColumn.Caption = "Year"
+        Me.YearGridColumn.FieldName = "YearGridColumn"
+        Me.YearGridColumn.Name = "YearGridColumn"
+        Me.YearGridColumn.UnboundDataType = GetType(Short)
+        Me.YearGridColumn.UnboundExpression = "GetYear([SightingDate])"
+        Me.YearGridColumn.Visible = True
+        Me.YearGridColumn.VisibleIndex = 0
+        '
+        'colHerd
+        '
+        Me.colHerd.FieldName = "Herd"
+        Me.colHerd.Name = "colHerd"
+        Me.colHerd.Visible = True
+        Me.colHerd.VisibleIndex = 1
+        Me.colHerd.Width = 20
+        '
+        'colSightingDate
+        '
+        Me.colSightingDate.FieldName = "SightingDate"
+        Me.colSightingDate.Name = "colSightingDate"
+        Me.colSightingDate.Visible = True
+        Me.colSightingDate.VisibleIndex = 2
+        Me.colSightingDate.Width = 20
+        '
+        'colAnimalID
+        '
+        Me.colAnimalID.FieldName = "AnimalID"
+        Me.colAnimalID.Name = "colAnimalID"
+        Me.colAnimalID.Visible = True
+        Me.colAnimalID.VisibleIndex = 3
+        Me.colAnimalID.Width = 20
+        '
+        'colFrequency
+        '
+        Me.colFrequency.FieldName = "Frequency"
+        Me.colFrequency.Name = "colFrequency"
+        Me.colFrequency.Visible = True
+        Me.colFrequency.VisibleIndex = 4
+        Me.colFrequency.Width = 20
+        '
+        'colVis
+        '
+        Me.colVis.FieldName = "Vis"
+        Me.colVis.Name = "colVis"
+        Me.colVis.Visible = True
+        Me.colVis.VisibleIndex = 5
+        Me.colVis.Width = 20
+        '
+        'colGroupNumber
+        '
+        Me.colGroupNumber.FieldName = "GroupNumber"
+        Me.colGroupNumber.Name = "colGroupNumber"
+        Me.colGroupNumber.Visible = True
+        Me.colGroupNumber.VisibleIndex = 6
+        Me.colGroupNumber.Width = 20
+        '
+        'colMode
+        '
+        Me.colMode.FieldName = "Mode"
+        Me.colMode.Name = "colMode"
+        Me.colMode.Visible = True
+        Me.colMode.VisibleIndex = 7
+        Me.colMode.Width = 20
+        '
+        'colAccuracy
+        '
+        Me.colAccuracy.FieldName = "Accuracy"
+        Me.colAccuracy.Name = "colAccuracy"
+        Me.colAccuracy.Visible = True
+        Me.colAccuracy.VisibleIndex = 8
+        Me.colAccuracy.Width = 20
+        '
+        'colBull
+        '
+        Me.colBull.FieldName = "Bull"
+        Me.colBull.Name = "colBull"
+        Me.colBull.Visible = True
+        Me.colBull.VisibleIndex = 9
+        Me.colBull.Width = 20
+        '
+        'colCow
+        '
+        Me.colCow.FieldName = "Cow"
+        Me.colCow.Name = "colCow"
+        Me.colCow.Visible = True
+        Me.colCow.VisibleIndex = 10
+        Me.colCow.Width = 20
+        '
+        'colCalf
+        '
+        Me.colCalf.FieldName = "Calf"
+        Me.colCalf.Name = "colCalf"
+        Me.colCalf.Visible = True
+        Me.colCalf.VisibleIndex = 11
+        Me.colCalf.Width = 20
+        '
+        'colAdult
+        '
+        Me.colAdult.FieldName = "Adult"
+        Me.colAdult.Name = "colAdult"
+        Me.colAdult.Visible = True
+        Me.colAdult.VisibleIndex = 12
+        Me.colAdult.Width = 20
+        '
+        'colGroupSize
+        '
+        Me.colGroupSize.FieldName = "GroupSize"
+        Me.colGroupSize.Name = "colGroupSize"
+        Me.colGroupSize.Visible = True
+        Me.colGroupSize.VisibleIndex = 13
+        Me.colGroupSize.Width = 20
+        '
+        'colRetainedAntler
+        '
+        Me.colRetainedAntler.FieldName = "RetainedAntler"
+        Me.colRetainedAntler.Name = "colRetainedAntler"
+        Me.colRetainedAntler.Visible = True
+        Me.colRetainedAntler.VisibleIndex = 14
+        Me.colRetainedAntler.Width = 20
+        '
+        'colCalfStat
+        '
+        Me.colCalfStat.FieldName = "CalfStat"
+        Me.colCalfStat.Name = "colCalfStat"
+        Me.colCalfStat.Visible = True
+        Me.colCalfStat.VisibleIndex = 15
+        Me.colCalfStat.Width = 20
+        '
+        'colLocation
+        '
+        Me.colLocation.FieldName = "Location"
+        Me.colLocation.Name = "colLocation"
+        Me.colLocation.Visible = True
+        Me.colLocation.VisibleIndex = 16
+        Me.colLocation.Width = 20
+        '
+        'colClass
+        '
+        Me.colClass.FieldName = "Class"
+        Me.colClass.Name = "colClass"
+        Me.colClass.Visible = True
+        Me.colClass.VisibleIndex = 17
+        Me.colClass.Width = 20
+        '
+        'colHabClass
+        '
+        Me.colHabClass.FieldName = "HabClass"
+        Me.colHabClass.Name = "colHabClass"
+        Me.colHabClass.Visible = True
+        Me.colHabClass.VisibleIndex = 18
+        Me.colHabClass.Width = 20
+        '
+        'colForCov
+        '
+        Me.colForCov.FieldName = "ForCov"
+        Me.colForCov.Name = "colForCov"
+        Me.colForCov.Visible = True
+        Me.colForCov.VisibleIndex = 19
+        Me.colForCov.Width = 20
+        '
+        'colTopog
+        '
+        Me.colTopog.FieldName = "Topog"
+        Me.colTopog.Name = "colTopog"
+        Me.colTopog.Visible = True
+        Me.colTopog.VisibleIndex = 20
+        Me.colTopog.Width = 20
+        '
+        'colSnow
+        '
+        Me.colSnow.FieldName = "Snow"
+        Me.colSnow.Name = "colSnow"
+        Me.colSnow.Visible = True
+        Me.colSnow.VisibleIndex = 21
+        Me.colSnow.Width = 20
+        '
+        'colSnowCov
+        '
+        Me.colSnowCov.FieldName = "SnowCov"
+        Me.colSnowCov.Name = "colSnowCov"
+        Me.colSnowCov.Visible = True
+        Me.colSnowCov.VisibleIndex = 22
+        Me.colSnowCov.Width = 20
+        '
+        'colCrater
+        '
+        Me.colCrater.FieldName = "Crater"
+        Me.colCrater.Name = "colCrater"
+        Me.colCrater.Visible = True
+        Me.colCrater.VisibleIndex = 23
+        Me.colCrater.Width = 20
+        '
+        'colFrequency_Recorded
+        '
+        Me.colFrequency_Recorded.FieldName = "Frequency_Recorded"
+        Me.colFrequency_Recorded.Name = "colFrequency_Recorded"
+        Me.colFrequency_Recorded.Visible = True
+        Me.colFrequency_Recorded.VisibleIndex = 24
+        Me.colFrequency_Recorded.Width = 20
+        '
+        'colAnimalID_Recorded
+        '
+        Me.colAnimalID_Recorded.FieldName = "AnimalID_Recorded"
+        Me.colAnimalID_Recorded.Name = "colAnimalID_Recorded"
+        Me.colAnimalID_Recorded.Visible = True
+        Me.colAnimalID_Recorded.VisibleIndex = 25
+        Me.colAnimalID_Recorded.Width = 20
+        '
+        'colDeploymentID
+        '
+        Me.colDeploymentID.FieldName = "DeploymentID"
+        Me.colDeploymentID.Name = "colDeploymentID"
+        Me.colDeploymentID.Visible = True
+        Me.colDeploymentID.VisibleIndex = 26
+        Me.colDeploymentID.Width = 20
+        '
+        'colElev_m
+        '
+        Me.colElev_m.FieldName = "Elev_m"
+        Me.colElev_m.Name = "colElev_m"
+        Me.colElev_m.Visible = True
+        Me.colElev_m.VisibleIndex = 27
+        Me.colElev_m.Width = 20
+        '
+        'colLat
+        '
+        Me.colLat.FieldName = "Lat"
+        Me.colLat.Name = "colLat"
+        Me.colLat.Visible = True
+        Me.colLat.VisibleIndex = 28
+        Me.colLat.Width = 20
+        '
+        'colLon
+        '
+        Me.colLon.FieldName = "Lon"
+        Me.colLon.Name = "colLon"
+        Me.colLon.Visible = True
+        Me.colLon.VisibleIndex = 29
+        Me.colLon.Width = 20
+        '
+        'colObserver
+        '
+        Me.colObserver.FieldName = "Observer"
+        Me.colObserver.Name = "colObserver"
+        Me.colObserver.Visible = True
+        Me.colObserver.VisibleIndex = 30
+        Me.colObserver.Width = 20
+        '
+        'colPilot
+        '
+        Me.colPilot.FieldName = "Pilot"
+        Me.colPilot.Name = "colPilot"
+        Me.colPilot.Visible = True
+        Me.colPilot.VisibleIndex = 31
+        Me.colPilot.Width = 20
+        '
+        'colTailNo
+        '
+        Me.colTailNo.FieldName = "TailNo"
+        Me.colTailNo.Name = "colTailNo"
+        Me.colTailNo.Visible = True
+        Me.colTailNo.VisibleIndex = 32
+        Me.colTailNo.Width = 20
+        '
+        'colComment
+        '
+        Me.colComment.FieldName = "Comment"
+        Me.colComment.Name = "colComment"
+        Me.colComment.Visible = True
+        Me.colComment.VisibleIndex = 33
+        Me.colComment.Width = 20
+        '
+        'colQCComment
+        '
+        Me.colQCComment.FieldName = "QCComment"
+        Me.colQCComment.Name = "colQCComment"
+        Me.colQCComment.Visible = True
+        Me.colQCComment.VisibleIndex = 34
+        Me.colQCComment.Width = 20
+        '
+        'colWaypoint
+        '
+        Me.colWaypoint.FieldName = "Waypoint"
+        Me.colWaypoint.Name = "colWaypoint"
+        Me.colWaypoint.Visible = True
+        Me.colWaypoint.VisibleIndex = 35
+        Me.colWaypoint.Width = 20
+        '
+        'colRecordInsertedDate
+        '
+        Me.colRecordInsertedDate.FieldName = "RecordInsertedDate"
+        Me.colRecordInsertedDate.Name = "colRecordInsertedDate"
+        Me.colRecordInsertedDate.Visible = True
+        Me.colRecordInsertedDate.VisibleIndex = 36
+        Me.colRecordInsertedDate.Width = 20
+        '
+        'colRecordInsertedBy
+        '
+        Me.colRecordInsertedBy.FieldName = "RecordInsertedBy"
+        Me.colRecordInsertedBy.Name = "colRecordInsertedBy"
+        Me.colRecordInsertedBy.Visible = True
+        Me.colRecordInsertedBy.VisibleIndex = 37
+        Me.colRecordInsertedBy.Width = 20
+        '
+        'colCertificationDate
+        '
+        Me.colCertificationDate.FieldName = "CertificationDate"
+        Me.colCertificationDate.Name = "colCertificationDate"
+        Me.colCertificationDate.Visible = True
+        Me.colCertificationDate.VisibleIndex = 38
+        Me.colCertificationDate.Width = 20
+        '
+        'colCertifiedBy
+        '
+        Me.colCertifiedBy.FieldName = "CertifiedBy"
+        Me.colCertifiedBy.Name = "colCertifiedBy"
+        Me.colCertifiedBy.Visible = True
+        Me.colCertifiedBy.VisibleIndex = 39
+        Me.colCertifiedBy.Width = 20
+        '
+        'colCertificationLevel
+        '
+        Me.colCertificationLevel.FieldName = "CertificationLevel"
+        Me.colCertificationLevel.Name = "colCertificationLevel"
+        Me.colCertificationLevel.Visible = True
+        Me.colCertificationLevel.VisibleIndex = 40
+        Me.colCertificationLevel.Width = 20
+        '
+        'colValidatedDate
+        '
+        Me.colValidatedDate.FieldName = "ValidatedDate"
+        Me.colValidatedDate.Name = "colValidatedDate"
+        Me.colValidatedDate.Visible = True
+        Me.colValidatedDate.VisibleIndex = 41
+        Me.colValidatedDate.Width = 20
+        '
+        'colValidatedBy
+        '
+        Me.colValidatedBy.FieldName = "ValidatedBy"
+        Me.colValidatedBy.Name = "colValidatedBy"
+        Me.colValidatedBy.Visible = True
+        Me.colValidatedBy.VisibleIndex = 42
+        Me.colValidatedBy.Width = 20
+        '
+        'colSourceFile
+        '
+        Me.colSourceFile.FieldName = "SourceFile"
+        Me.colSourceFile.Name = "colSourceFile"
+        Me.colSourceFile.Visible = True
+        Me.colSourceFile.VisibleIndex = 43
+        Me.colSourceFile.Width = 20
+        '
+        'colSourcefileURL
+        '
+        Me.colSourcefileURL.FieldName = "SourcefileURL"
+        Me.colSourcefileURL.Name = "colSourcefileURL"
+        Me.colSourcefileURL.Visible = True
+        Me.colSourcefileURL.VisibleIndex = 44
+        Me.colSourcefileURL.Width = 20
+        '
+        'hideContainerBottom
+        '
+        Me.hideContainerBottom.BackColor = System.Drawing.SystemColors.Control
+        Me.hideContainerBottom.Controls.Add(Me.PivotDockPanel)
+        Me.hideContainerBottom.Dock = System.Windows.Forms.DockStyle.Bottom
+        Me.hideContainerBottom.Location = New System.Drawing.Point(0, 604)
+        Me.hideContainerBottom.Name = "hideContainerBottom"
+        Me.hideContainerBottom.Size = New System.Drawing.Size(961, 21)
+        '
+        'RadiotrackingForm
+        '
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.ClientSize = New System.Drawing.Size(961, 625)
+        Me.Controls.Add(Me.RadiotrackingGridControl)
+        Me.Controls.Add(Me.hideContainerBottom)
+        Me.Name = "RadiotrackingForm"
+        Me.Text = "Caribou Radiotracking"
+        CType(Me.WRST_CaribouDataSet, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.RadiotrackingBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.DockManager1, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.PivotDockPanel.ResumeLayout(False)
+        Me.DockPanel1_Container.ResumeLayout(False)
+        CType(Me.RadiotrackingPivotGridControl, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.RadiotrackingGridControl, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.GridView1, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.hideContainerBottom.ResumeLayout(False)
+        Me.ResumeLayout(False)
+
+    End Sub
+
+    Friend WithEvents WRST_CaribouDataSet As WRST_CaribouDataSet
+    Friend WithEvents RadiotrackingBindingSource As BindingSource
+    Friend WithEvents RadiotrackingTableAdapter As WRST_CaribouDataSetTableAdapters.RadiotrackingTableAdapter
+    Friend WithEvents TableAdapterManager As WRST_CaribouDataSetTableAdapters.TableAdapterManager
+    Friend WithEvents DockManager1 As DevExpress.XtraBars.Docking.DockManager
+    Friend WithEvents RadiotrackingGridControl As DevExpress.XtraGrid.GridControl
+    Friend WithEvents GridView1 As DevExpress.XtraGrid.Views.Grid.GridView
+    Friend WithEvents colHerd As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents colSightingDate As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents colAnimalID As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents colFrequency As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents colVis As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents colGroupNumber As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents colMode As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents colAccuracy As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents colBull As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents colCow As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents colCalf As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents colAdult As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents colGroupSize As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents colRetainedAntler As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents colCalfStat As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents colLocation As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents colClass As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents colHabClass As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents colForCov As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents colTopog As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents colSnow As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents colSnowCov As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents colCrater As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents colFrequency_Recorded As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents colAnimalID_Recorded As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents colDeploymentID As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents colElev_m As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents colLat As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents colLon As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents colObserver As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents colPilot As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents colTailNo As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents colComment As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents colQCComment As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents colWaypoint As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents colRecordInsertedDate As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents colRecordInsertedBy As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents colCertificationDate As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents colCertifiedBy As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents colCertificationLevel As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents colValidatedDate As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents colValidatedBy As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents colSourceFile As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents colSourcefileURL As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents PivotDockPanel As DevExpress.XtraBars.Docking.DockPanel
+    Friend WithEvents DockPanel1_Container As DevExpress.XtraBars.Docking.ControlContainer
+    Friend WithEvents RadiotrackingPivotGridControl As DevExpress.XtraPivotGrid.PivotGridControl
+    Friend WithEvents YearGridColumn As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents YearPivotGridField As DevExpress.XtraPivotGrid.PivotGridField
+    Friend WithEvents PivotGridField1 As DevExpress.XtraPivotGrid.PivotGridField
+    Friend WithEvents PivotGridField2 As DevExpress.XtraPivotGrid.PivotGridField
+    Friend WithEvents PivotGridField3 As DevExpress.XtraPivotGrid.PivotGridField
+    Friend WithEvents PivotGridField4 As DevExpress.XtraPivotGrid.PivotGridField
+    Friend WithEvents PivotGridField5 As DevExpress.XtraPivotGrid.PivotGridField
+    Friend WithEvents PivotGridField6 As DevExpress.XtraPivotGrid.PivotGridField
+    Friend WithEvents PivotGridField7 As DevExpress.XtraPivotGrid.PivotGridField
+    Friend WithEvents PivotGridField8 As DevExpress.XtraPivotGrid.PivotGridField
+    Friend WithEvents PivotGridField9 As DevExpress.XtraPivotGrid.PivotGridField
+    Friend WithEvents PivotGridField10 As DevExpress.XtraPivotGrid.PivotGridField
+    Friend WithEvents PivotGridField11 As DevExpress.XtraPivotGrid.PivotGridField
+    Friend WithEvents PivotGridField12 As DevExpress.XtraPivotGrid.PivotGridField
+    Friend WithEvents PivotGridField13 As DevExpress.XtraPivotGrid.PivotGridField
+    Friend WithEvents PivotGridField14 As DevExpress.XtraPivotGrid.PivotGridField
+    Friend WithEvents PivotGridField15 As DevExpress.XtraPivotGrid.PivotGridField
+    Friend WithEvents PivotGridField16 As DevExpress.XtraPivotGrid.PivotGridField
+    Friend WithEvents PivotGridField17 As DevExpress.XtraPivotGrid.PivotGridField
+    Friend WithEvents PivotGridField18 As DevExpress.XtraPivotGrid.PivotGridField
+    Friend WithEvents PivotGridField19 As DevExpress.XtraPivotGrid.PivotGridField
+    Friend WithEvents PivotGridField20 As DevExpress.XtraPivotGrid.PivotGridField
+    Friend WithEvents PivotGridField21 As DevExpress.XtraPivotGrid.PivotGridField
+    Friend WithEvents PivotGridField22 As DevExpress.XtraPivotGrid.PivotGridField
+    Friend WithEvents PivotGridField23 As DevExpress.XtraPivotGrid.PivotGridField
+    Friend WithEvents PivotGridField24 As DevExpress.XtraPivotGrid.PivotGridField
+    Friend WithEvents PivotGridField25 As DevExpress.XtraPivotGrid.PivotGridField
+    Friend WithEvents PivotGridField26 As DevExpress.XtraPivotGrid.PivotGridField
+    Friend WithEvents PivotGridField27 As DevExpress.XtraPivotGrid.PivotGridField
+    Friend WithEvents PivotGridField28 As DevExpress.XtraPivotGrid.PivotGridField
+    Friend WithEvents PivotGridField29 As DevExpress.XtraPivotGrid.PivotGridField
+    Friend WithEvents PivotGridField30 As DevExpress.XtraPivotGrid.PivotGridField
+    Friend WithEvents PivotGridField31 As DevExpress.XtraPivotGrid.PivotGridField
+    Friend WithEvents PivotGridField32 As DevExpress.XtraPivotGrid.PivotGridField
+    Friend WithEvents PivotGridField33 As DevExpress.XtraPivotGrid.PivotGridField
+    Friend WithEvents PivotGridField34 As DevExpress.XtraPivotGrid.PivotGridField
+    Friend WithEvents PivotGridField35 As DevExpress.XtraPivotGrid.PivotGridField
+    Friend WithEvents PivotGridField36 As DevExpress.XtraPivotGrid.PivotGridField
+    Friend WithEvents PivotGridField37 As DevExpress.XtraPivotGrid.PivotGridField
+    Friend WithEvents PivotGridField38 As DevExpress.XtraPivotGrid.PivotGridField
+    Friend WithEvents PivotGridField39 As DevExpress.XtraPivotGrid.PivotGridField
+    Friend WithEvents PivotGridField40 As DevExpress.XtraPivotGrid.PivotGridField
+    Friend WithEvents PivotGridField41 As DevExpress.XtraPivotGrid.PivotGridField
+    Friend WithEvents PivotGridField42 As DevExpress.XtraPivotGrid.PivotGridField
+    Friend WithEvents PivotGridField43 As DevExpress.XtraPivotGrid.PivotGridField
+    Friend WithEvents PivotGridField44 As DevExpress.XtraPivotGrid.PivotGridField
+    Friend WithEvents nPivotGridField As DevExpress.XtraPivotGrid.PivotGridField
+    Friend WithEvents hideContainerBottom As DevExpress.XtraBars.Docking.AutoHideContainer
+End Class

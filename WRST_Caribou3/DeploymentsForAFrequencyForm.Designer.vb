@@ -52,6 +52,7 @@ Partial Class DeploymentsForAFrequencyForm
         '
         Me.FrequencyToolStripComboBox.Name = "FrequencyToolStripComboBox"
         Me.FrequencyToolStripComboBox.Size = New System.Drawing.Size(121, 25)
+        Me.FrequencyToolStripComboBox.Text = "0.000"
         '
         'ToolStripLabel2
         '
@@ -92,7 +93,7 @@ Partial Class DeploymentsForAFrequencyForm
         Me.Controls.Add(Me.FrequenciesDataGridView)
         Me.Controls.Add(Me.ToolStrip1)
         Me.Name = "DeploymentsForAFrequencyForm"
-        Me.Text = "DeploymentsForAFrequencyForm"
+        Me.Text = "GPS Collar Deployments For A Frequency"
         Me.ToolStrip1.ResumeLayout(False)
         Me.ToolStrip1.PerformLayout()
         CType(Me.FrequenciesDataGridView, System.ComponentModel.ISupportInitialize).EndInit()

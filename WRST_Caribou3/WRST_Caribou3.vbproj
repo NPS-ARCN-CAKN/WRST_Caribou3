@@ -204,6 +204,12 @@
     <Compile Include="DeploymentsForAFrequencyForm.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="FrequencyAnimalTroubleShooterForm.Designer.vb">
+      <DependentUpon>FrequencyAnimalTroubleShooterForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FrequencyAnimalTroubleShooterForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="MainForm.vb">
       <SubType>Form</SubType>
     </Compile>
@@ -237,6 +243,12 @@
       <DependentUpon>QC_FrequenciesForm.vb</DependentUpon>
     </Compile>
     <Compile Include="QC_FrequenciesForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RadiotrackingForm.Designer.vb">
+      <DependentUpon>RadiotrackingForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="RadiotrackingForm.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="ResultsForm.Designer.vb">
@@ -301,6 +313,9 @@
     <EmbeddedResource Include="DeploymentsForAFrequencyForm.resx">
       <DependentUpon>DeploymentsForAFrequencyForm.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FrequencyAnimalTroubleShooterForm.resx">
+      <DependentUpon>FrequencyAnimalTroubleShooterForm.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.vb</DependentUpon>
     </EmbeddedResource>
@@ -316,6 +331,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="QC_FrequenciesForm.resx">
       <DependentUpon>QC_FrequenciesForm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RadiotrackingForm.resx">
+      <DependentUpon>RadiotrackingForm.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ResultsForm.resx">
       <DependentUpon>ResultsForm.vb</DependentUpon>

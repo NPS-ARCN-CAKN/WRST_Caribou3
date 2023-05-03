@@ -36,7 +36,7 @@ Public Class DeploymentsForAFrequencyForm
 
                 End Using
             Catch ex As Exception
-            MessageBox.Show("Error while executing .. " & ex.Message, "")
+                MessageBox.Show("Error while executing .. " & ex.Message, "")
             End Try
         Else
             MsgBox("The collar frequency must be numeric. Canceled.", MsgBoxStyle.OkOnly)
