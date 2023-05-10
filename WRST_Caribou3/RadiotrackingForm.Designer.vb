@@ -69,11 +69,13 @@ Partial Class RadiotrackingForm
         Dim DataSourceColumnBinding43 As DevExpress.XtraPivotGrid.DataSourceColumnBinding = New DevExpress.XtraPivotGrid.DataSourceColumnBinding()
         Dim DataSourceColumnBinding44 As DevExpress.XtraPivotGrid.DataSourceColumnBinding = New DevExpress.XtraPivotGrid.DataSourceColumnBinding()
         Dim DataSourceColumnBinding45 As DevExpress.XtraPivotGrid.DataSourceColumnBinding = New DevExpress.XtraPivotGrid.DataSourceColumnBinding()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(RadiotrackingForm))
         Me.WRST_CaribouDataSet = New WRST_Caribou3.WRST_CaribouDataSet()
         Me.RadiotrackingBindingSource = New System.Windows.Forms.BindingSource(Me.components)
         Me.RadiotrackingTableAdapter = New WRST_Caribou3.WRST_CaribouDataSetTableAdapters.RadiotrackingTableAdapter()
         Me.TableAdapterManager = New WRST_Caribou3.WRST_CaribouDataSetTableAdapters.TableAdapterManager()
         Me.DockManager1 = New DevExpress.XtraBars.Docking.DockManager(Me.components)
+        Me.hideContainerBottom = New DevExpress.XtraBars.Docking.AutoHideContainer()
         Me.PivotDockPanel = New DevExpress.XtraBars.Docking.DockPanel()
         Me.DockPanel1_Container = New DevExpress.XtraBars.Docking.ControlContainer()
         Me.RadiotrackingPivotGridControl = New DevExpress.XtraPivotGrid.PivotGridControl()
@@ -170,16 +172,21 @@ Partial Class RadiotrackingForm
         Me.colValidatedBy = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.colSourceFile = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.colSourcefileURL = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.hideContainerBottom = New DevExpress.XtraBars.Docking.AutoHideContainer()
+        Me.RadiotrackingToolStrip = New System.Windows.Forms.ToolStrip()
+        Me.ToolStripLabel1 = New System.Windows.Forms.ToolStripLabel()
+        Me.ReadOnlyToolStripComboBox = New System.Windows.Forms.ToolStripComboBox()
+        Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
+        Me.RefreshToolStripButton = New System.Windows.Forms.ToolStripButton()
         CType(Me.WRST_CaribouDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.RadiotrackingBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DockManager1, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.hideContainerBottom.SuspendLayout()
         Me.PivotDockPanel.SuspendLayout()
         Me.DockPanel1_Container.SuspendLayout()
         CType(Me.RadiotrackingPivotGridControl, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.RadiotrackingGridControl, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GridView1, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.hideContainerBottom.SuspendLayout()
+        Me.RadiotrackingToolStrip.SuspendLayout()
         Me.SuspendLayout()
         '
         'WRST_CaribouDataSet
@@ -213,6 +220,15 @@ Partial Class RadiotrackingForm
         Me.DockManager1.AutoHideContainers.AddRange(New DevExpress.XtraBars.Docking.AutoHideContainer() {Me.hideContainerBottom})
         Me.DockManager1.Form = Me
         Me.DockManager1.TopZIndexControls.AddRange(New String() {"DevExpress.XtraBars.BarDockControl", "DevExpress.XtraBars.StandaloneBarDockControl", "System.Windows.Forms.MenuStrip", "System.Windows.Forms.StatusStrip", "System.Windows.Forms.StatusBar", "DevExpress.XtraBars.Ribbon.RibbonStatusBar", "DevExpress.XtraBars.Ribbon.RibbonControl", "DevExpress.XtraBars.Navigation.OfficeNavigationBar", "DevExpress.XtraBars.Navigation.TileNavPane", "DevExpress.XtraBars.TabFormControl", "DevExpress.XtraBars.FluentDesignSystem.FluentDesignFormControl", "DevExpress.XtraBars.ToolbarForm.ToolbarFormControl"})
+        '
+        'hideContainerBottom
+        '
+        Me.hideContainerBottom.BackColor = System.Drawing.SystemColors.Control
+        Me.hideContainerBottom.Controls.Add(Me.PivotDockPanel)
+        Me.hideContainerBottom.Dock = System.Windows.Forms.DockStyle.Bottom
+        Me.hideContainerBottom.Location = New System.Drawing.Point(0, 604)
+        Me.hideContainerBottom.Name = "hideContainerBottom"
+        Me.hideContainerBottom.Size = New System.Drawing.Size(961, 21)
         '
         'PivotDockPanel
         '
@@ -249,7 +265,6 @@ Partial Class RadiotrackingForm
         '
         'YearPivotGridField
         '
-        Me.YearPivotGridField.Area = DevExpress.XtraPivotGrid.PivotArea.RowArea
         Me.YearPivotGridField.AreaIndex = 1
         Me.YearPivotGridField.Caption = "Year"
         ExpressionDataBinding1.Expression = "GetYear([PivotGridField2])"
@@ -260,7 +275,6 @@ Partial Class RadiotrackingForm
         '
         'PivotGridField1
         '
-        Me.PivotGridField1.Area = DevExpress.XtraPivotGrid.PivotArea.RowArea
         Me.PivotGridField1.AreaIndex = 0
         Me.PivotGridField1.Caption = "Herd"
         DataSourceColumnBinding1.ColumnName = "Herd"
@@ -269,7 +283,7 @@ Partial Class RadiotrackingForm
         '
         'PivotGridField2
         '
-        Me.PivotGridField2.AreaIndex = 0
+        Me.PivotGridField2.AreaIndex = 2
         Me.PivotGridField2.Caption = "SightingDate"
         DataSourceColumnBinding2.ColumnName = "SightingDate"
         Me.PivotGridField2.DataBinding = DataSourceColumnBinding2
@@ -277,7 +291,7 @@ Partial Class RadiotrackingForm
         '
         'PivotGridField3
         '
-        Me.PivotGridField3.AreaIndex = 1
+        Me.PivotGridField3.AreaIndex = 4
         Me.PivotGridField3.Caption = "Animal ID"
         DataSourceColumnBinding3.ColumnName = "AnimalID"
         Me.PivotGridField3.DataBinding = DataSourceColumnBinding3
@@ -285,8 +299,7 @@ Partial Class RadiotrackingForm
         '
         'PivotGridField4
         '
-        Me.PivotGridField4.Area = DevExpress.XtraPivotGrid.PivotArea.DataArea
-        Me.PivotGridField4.AreaIndex = 1
+        Me.PivotGridField4.AreaIndex = 3
         Me.PivotGridField4.Caption = "Frequency"
         DataSourceColumnBinding4.ColumnName = "Frequency"
         Me.PivotGridField4.DataBinding = DataSourceColumnBinding4
@@ -295,7 +308,7 @@ Partial Class RadiotrackingForm
         '
         'PivotGridField5
         '
-        Me.PivotGridField5.AreaIndex = 6
+        Me.PivotGridField5.AreaIndex = 10
         Me.PivotGridField5.Caption = "Vis"
         DataSourceColumnBinding5.ColumnName = "Vis"
         Me.PivotGridField5.DataBinding = DataSourceColumnBinding5
@@ -303,7 +316,7 @@ Partial Class RadiotrackingForm
         '
         'PivotGridField6
         '
-        Me.PivotGridField6.AreaIndex = 7
+        Me.PivotGridField6.AreaIndex = 11
         Me.PivotGridField6.Caption = "Group Number"
         DataSourceColumnBinding6.ColumnName = "GroupNumber"
         Me.PivotGridField6.DataBinding = DataSourceColumnBinding6
@@ -311,8 +324,7 @@ Partial Class RadiotrackingForm
         '
         'PivotGridField7
         '
-        Me.PivotGridField7.Area = DevExpress.XtraPivotGrid.PivotArea.ColumnArea
-        Me.PivotGridField7.AreaIndex = 0
+        Me.PivotGridField7.AreaIndex = 5
         Me.PivotGridField7.Caption = "Mode"
         DataSourceColumnBinding7.ColumnName = "Mode"
         Me.PivotGridField7.DataBinding = DataSourceColumnBinding7
@@ -320,7 +332,7 @@ Partial Class RadiotrackingForm
         '
         'PivotGridField8
         '
-        Me.PivotGridField8.AreaIndex = 8
+        Me.PivotGridField8.AreaIndex = 12
         Me.PivotGridField8.Caption = "Accuracy"
         DataSourceColumnBinding8.ColumnName = "Accuracy"
         Me.PivotGridField8.DataBinding = DataSourceColumnBinding8
@@ -328,7 +340,7 @@ Partial Class RadiotrackingForm
         '
         'PivotGridField9
         '
-        Me.PivotGridField9.AreaIndex = 9
+        Me.PivotGridField9.AreaIndex = 13
         Me.PivotGridField9.Caption = "Bull"
         DataSourceColumnBinding9.ColumnName = "Bull"
         Me.PivotGridField9.DataBinding = DataSourceColumnBinding9
@@ -336,7 +348,7 @@ Partial Class RadiotrackingForm
         '
         'PivotGridField10
         '
-        Me.PivotGridField10.AreaIndex = 2
+        Me.PivotGridField10.AreaIndex = 6
         Me.PivotGridField10.Caption = "Cow"
         DataSourceColumnBinding10.ColumnName = "Cow"
         Me.PivotGridField10.DataBinding = DataSourceColumnBinding10
@@ -344,7 +356,7 @@ Partial Class RadiotrackingForm
         '
         'PivotGridField11
         '
-        Me.PivotGridField11.AreaIndex = 3
+        Me.PivotGridField11.AreaIndex = 7
         Me.PivotGridField11.Caption = "Calf"
         DataSourceColumnBinding11.ColumnName = "Calf"
         Me.PivotGridField11.DataBinding = DataSourceColumnBinding11
@@ -352,7 +364,7 @@ Partial Class RadiotrackingForm
         '
         'PivotGridField12
         '
-        Me.PivotGridField12.AreaIndex = 4
+        Me.PivotGridField12.AreaIndex = 8
         Me.PivotGridField12.Caption = "Adult"
         DataSourceColumnBinding12.ColumnName = "Adult"
         Me.PivotGridField12.DataBinding = DataSourceColumnBinding12
@@ -360,7 +372,7 @@ Partial Class RadiotrackingForm
         '
         'PivotGridField13
         '
-        Me.PivotGridField13.AreaIndex = 5
+        Me.PivotGridField13.AreaIndex = 9
         Me.PivotGridField13.Caption = "Group Size"
         DataSourceColumnBinding13.ColumnName = "GroupSize"
         Me.PivotGridField13.DataBinding = DataSourceColumnBinding13
@@ -368,7 +380,7 @@ Partial Class RadiotrackingForm
         '
         'PivotGridField14
         '
-        Me.PivotGridField14.AreaIndex = 10
+        Me.PivotGridField14.AreaIndex = 14
         Me.PivotGridField14.Caption = "Retained Antler"
         DataSourceColumnBinding14.ColumnName = "RetainedAntler"
         Me.PivotGridField14.DataBinding = DataSourceColumnBinding14
@@ -376,7 +388,7 @@ Partial Class RadiotrackingForm
         '
         'PivotGridField15
         '
-        Me.PivotGridField15.AreaIndex = 11
+        Me.PivotGridField15.AreaIndex = 15
         Me.PivotGridField15.Caption = "Calf Stat"
         DataSourceColumnBinding15.ColumnName = "CalfStat"
         Me.PivotGridField15.DataBinding = DataSourceColumnBinding15
@@ -384,7 +396,7 @@ Partial Class RadiotrackingForm
         '
         'PivotGridField16
         '
-        Me.PivotGridField16.AreaIndex = 12
+        Me.PivotGridField16.AreaIndex = 16
         Me.PivotGridField16.Caption = "Location"
         DataSourceColumnBinding16.ColumnName = "Location"
         Me.PivotGridField16.DataBinding = DataSourceColumnBinding16
@@ -392,7 +404,7 @@ Partial Class RadiotrackingForm
         '
         'PivotGridField17
         '
-        Me.PivotGridField17.AreaIndex = 13
+        Me.PivotGridField17.AreaIndex = 17
         Me.PivotGridField17.Caption = "Class"
         DataSourceColumnBinding17.ColumnName = "Class"
         Me.PivotGridField17.DataBinding = DataSourceColumnBinding17
@@ -400,7 +412,7 @@ Partial Class RadiotrackingForm
         '
         'PivotGridField18
         '
-        Me.PivotGridField18.AreaIndex = 14
+        Me.PivotGridField18.AreaIndex = 18
         Me.PivotGridField18.Caption = "Hab Class"
         DataSourceColumnBinding18.ColumnName = "HabClass"
         Me.PivotGridField18.DataBinding = DataSourceColumnBinding18
@@ -408,7 +420,7 @@ Partial Class RadiotrackingForm
         '
         'PivotGridField19
         '
-        Me.PivotGridField19.AreaIndex = 15
+        Me.PivotGridField19.AreaIndex = 19
         Me.PivotGridField19.Caption = "For Cov"
         DataSourceColumnBinding19.ColumnName = "ForCov"
         Me.PivotGridField19.DataBinding = DataSourceColumnBinding19
@@ -416,7 +428,7 @@ Partial Class RadiotrackingForm
         '
         'PivotGridField20
         '
-        Me.PivotGridField20.AreaIndex = 16
+        Me.PivotGridField20.AreaIndex = 20
         Me.PivotGridField20.Caption = "Topog"
         DataSourceColumnBinding20.ColumnName = "Topog"
         Me.PivotGridField20.DataBinding = DataSourceColumnBinding20
@@ -424,7 +436,7 @@ Partial Class RadiotrackingForm
         '
         'PivotGridField21
         '
-        Me.PivotGridField21.AreaIndex = 17
+        Me.PivotGridField21.AreaIndex = 21
         Me.PivotGridField21.Caption = "Snow"
         DataSourceColumnBinding21.ColumnName = "Snow"
         Me.PivotGridField21.DataBinding = DataSourceColumnBinding21
@@ -432,7 +444,7 @@ Partial Class RadiotrackingForm
         '
         'PivotGridField22
         '
-        Me.PivotGridField22.AreaIndex = 18
+        Me.PivotGridField22.AreaIndex = 22
         Me.PivotGridField22.Caption = "Snow Cov"
         DataSourceColumnBinding22.ColumnName = "SnowCov"
         Me.PivotGridField22.DataBinding = DataSourceColumnBinding22
@@ -440,7 +452,7 @@ Partial Class RadiotrackingForm
         '
         'PivotGridField23
         '
-        Me.PivotGridField23.AreaIndex = 19
+        Me.PivotGridField23.AreaIndex = 23
         Me.PivotGridField23.Caption = "Crater"
         DataSourceColumnBinding23.ColumnName = "Crater"
         Me.PivotGridField23.DataBinding = DataSourceColumnBinding23
@@ -448,7 +460,7 @@ Partial Class RadiotrackingForm
         '
         'PivotGridField24
         '
-        Me.PivotGridField24.AreaIndex = 20
+        Me.PivotGridField24.AreaIndex = 24
         Me.PivotGridField24.Caption = "Frequency_Recorded"
         DataSourceColumnBinding24.ColumnName = "Frequency_Recorded"
         Me.PivotGridField24.DataBinding = DataSourceColumnBinding24
@@ -456,7 +468,7 @@ Partial Class RadiotrackingForm
         '
         'PivotGridField25
         '
-        Me.PivotGridField25.AreaIndex = 21
+        Me.PivotGridField25.AreaIndex = 25
         Me.PivotGridField25.Caption = "Animal ID_Recorded"
         DataSourceColumnBinding25.ColumnName = "AnimalID_Recorded"
         Me.PivotGridField25.DataBinding = DataSourceColumnBinding25
@@ -464,7 +476,7 @@ Partial Class RadiotrackingForm
         '
         'PivotGridField26
         '
-        Me.PivotGridField26.AreaIndex = 22
+        Me.PivotGridField26.AreaIndex = 26
         Me.PivotGridField26.Caption = "Deployment ID"
         DataSourceColumnBinding26.ColumnName = "DeploymentID"
         Me.PivotGridField26.DataBinding = DataSourceColumnBinding26
@@ -472,7 +484,7 @@ Partial Class RadiotrackingForm
         '
         'PivotGridField27
         '
-        Me.PivotGridField27.AreaIndex = 23
+        Me.PivotGridField27.AreaIndex = 27
         Me.PivotGridField27.Caption = "Elev_m"
         DataSourceColumnBinding27.ColumnName = "Elev_m"
         Me.PivotGridField27.DataBinding = DataSourceColumnBinding27
@@ -480,7 +492,7 @@ Partial Class RadiotrackingForm
         '
         'PivotGridField28
         '
-        Me.PivotGridField28.AreaIndex = 24
+        Me.PivotGridField28.AreaIndex = 28
         Me.PivotGridField28.Caption = "Lat"
         DataSourceColumnBinding28.ColumnName = "Lat"
         Me.PivotGridField28.DataBinding = DataSourceColumnBinding28
@@ -488,7 +500,7 @@ Partial Class RadiotrackingForm
         '
         'PivotGridField29
         '
-        Me.PivotGridField29.AreaIndex = 25
+        Me.PivotGridField29.AreaIndex = 29
         Me.PivotGridField29.Caption = "Lon"
         DataSourceColumnBinding29.ColumnName = "Lon"
         Me.PivotGridField29.DataBinding = DataSourceColumnBinding29
@@ -496,7 +508,7 @@ Partial Class RadiotrackingForm
         '
         'PivotGridField30
         '
-        Me.PivotGridField30.AreaIndex = 26
+        Me.PivotGridField30.AreaIndex = 30
         Me.PivotGridField30.Caption = "Observer"
         DataSourceColumnBinding30.ColumnName = "Observer"
         Me.PivotGridField30.DataBinding = DataSourceColumnBinding30
@@ -504,7 +516,7 @@ Partial Class RadiotrackingForm
         '
         'PivotGridField31
         '
-        Me.PivotGridField31.AreaIndex = 27
+        Me.PivotGridField31.AreaIndex = 31
         Me.PivotGridField31.Caption = "Pilot"
         DataSourceColumnBinding31.ColumnName = "Pilot"
         Me.PivotGridField31.DataBinding = DataSourceColumnBinding31
@@ -512,7 +524,7 @@ Partial Class RadiotrackingForm
         '
         'PivotGridField32
         '
-        Me.PivotGridField32.AreaIndex = 28
+        Me.PivotGridField32.AreaIndex = 32
         Me.PivotGridField32.Caption = "Tail No"
         DataSourceColumnBinding32.ColumnName = "TailNo"
         Me.PivotGridField32.DataBinding = DataSourceColumnBinding32
@@ -520,7 +532,7 @@ Partial Class RadiotrackingForm
         '
         'PivotGridField33
         '
-        Me.PivotGridField33.AreaIndex = 29
+        Me.PivotGridField33.AreaIndex = 33
         Me.PivotGridField33.Caption = "Comment"
         DataSourceColumnBinding33.ColumnName = "Comment"
         Me.PivotGridField33.DataBinding = DataSourceColumnBinding33
@@ -528,7 +540,7 @@ Partial Class RadiotrackingForm
         '
         'PivotGridField34
         '
-        Me.PivotGridField34.AreaIndex = 30
+        Me.PivotGridField34.AreaIndex = 34
         Me.PivotGridField34.Caption = "QC Comment"
         DataSourceColumnBinding34.ColumnName = "QCComment"
         Me.PivotGridField34.DataBinding = DataSourceColumnBinding34
@@ -536,7 +548,7 @@ Partial Class RadiotrackingForm
         '
         'PivotGridField35
         '
-        Me.PivotGridField35.AreaIndex = 31
+        Me.PivotGridField35.AreaIndex = 35
         Me.PivotGridField35.Caption = "Waypoint"
         DataSourceColumnBinding35.ColumnName = "Waypoint"
         Me.PivotGridField35.DataBinding = DataSourceColumnBinding35
@@ -544,7 +556,7 @@ Partial Class RadiotrackingForm
         '
         'PivotGridField36
         '
-        Me.PivotGridField36.AreaIndex = 32
+        Me.PivotGridField36.AreaIndex = 36
         Me.PivotGridField36.Caption = "RecordInsertedDate"
         DataSourceColumnBinding36.ColumnName = "RecordInsertedDate"
         Me.PivotGridField36.DataBinding = DataSourceColumnBinding36
@@ -552,7 +564,7 @@ Partial Class RadiotrackingForm
         '
         'PivotGridField37
         '
-        Me.PivotGridField37.AreaIndex = 33
+        Me.PivotGridField37.AreaIndex = 37
         Me.PivotGridField37.Caption = "Record Inserted By"
         DataSourceColumnBinding37.ColumnName = "RecordInsertedBy"
         Me.PivotGridField37.DataBinding = DataSourceColumnBinding37
@@ -560,7 +572,7 @@ Partial Class RadiotrackingForm
         '
         'PivotGridField38
         '
-        Me.PivotGridField38.AreaIndex = 34
+        Me.PivotGridField38.AreaIndex = 38
         Me.PivotGridField38.Caption = "CertificationDate"
         DataSourceColumnBinding38.ColumnName = "CertificationDate"
         Me.PivotGridField38.DataBinding = DataSourceColumnBinding38
@@ -568,7 +580,7 @@ Partial Class RadiotrackingForm
         '
         'PivotGridField39
         '
-        Me.PivotGridField39.AreaIndex = 35
+        Me.PivotGridField39.AreaIndex = 39
         Me.PivotGridField39.Caption = "Certified By"
         DataSourceColumnBinding39.ColumnName = "CertifiedBy"
         Me.PivotGridField39.DataBinding = DataSourceColumnBinding39
@@ -576,7 +588,7 @@ Partial Class RadiotrackingForm
         '
         'PivotGridField40
         '
-        Me.PivotGridField40.AreaIndex = 36
+        Me.PivotGridField40.AreaIndex = 40
         Me.PivotGridField40.Caption = "Certification Level"
         DataSourceColumnBinding40.ColumnName = "CertificationLevel"
         Me.PivotGridField40.DataBinding = DataSourceColumnBinding40
@@ -584,7 +596,7 @@ Partial Class RadiotrackingForm
         '
         'PivotGridField41
         '
-        Me.PivotGridField41.AreaIndex = 37
+        Me.PivotGridField41.AreaIndex = 41
         Me.PivotGridField41.Caption = "ValidatedDate"
         DataSourceColumnBinding41.ColumnName = "ValidatedDate"
         Me.PivotGridField41.DataBinding = DataSourceColumnBinding41
@@ -592,7 +604,7 @@ Partial Class RadiotrackingForm
         '
         'PivotGridField42
         '
-        Me.PivotGridField42.AreaIndex = 38
+        Me.PivotGridField42.AreaIndex = 42
         Me.PivotGridField42.Caption = "Validated By"
         DataSourceColumnBinding42.ColumnName = "ValidatedBy"
         Me.PivotGridField42.DataBinding = DataSourceColumnBinding42
@@ -600,7 +612,7 @@ Partial Class RadiotrackingForm
         '
         'PivotGridField43
         '
-        Me.PivotGridField43.AreaIndex = 39
+        Me.PivotGridField43.AreaIndex = 43
         Me.PivotGridField43.Caption = "Source File"
         DataSourceColumnBinding43.ColumnName = "SourceFile"
         Me.PivotGridField43.DataBinding = DataSourceColumnBinding43
@@ -608,7 +620,7 @@ Partial Class RadiotrackingForm
         '
         'PivotGridField44
         '
-        Me.PivotGridField44.AreaIndex = 40
+        Me.PivotGridField44.AreaIndex = 44
         Me.PivotGridField44.Caption = "Sourcefile URL"
         DataSourceColumnBinding44.ColumnName = "SourcefileURL"
         Me.PivotGridField44.DataBinding = DataSourceColumnBinding44
@@ -616,8 +628,7 @@ Partial Class RadiotrackingForm
         '
         'nPivotGridField
         '
-        Me.nPivotGridField.Area = DevExpress.XtraPivotGrid.PivotArea.DataArea
-        Me.nPivotGridField.AreaIndex = 0
+        Me.nPivotGridField.AreaIndex = 45
         Me.nPivotGridField.Caption = "n"
         DataSourceColumnBinding45.ColumnName = "Herd"
         Me.nPivotGridField.DataBinding = DataSourceColumnBinding45
@@ -628,10 +639,10 @@ Partial Class RadiotrackingForm
         '
         Me.RadiotrackingGridControl.DataSource = Me.RadiotrackingBindingSource
         Me.RadiotrackingGridControl.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.RadiotrackingGridControl.Location = New System.Drawing.Point(0, 0)
+        Me.RadiotrackingGridControl.Location = New System.Drawing.Point(0, 25)
         Me.RadiotrackingGridControl.MainView = Me.GridView1
         Me.RadiotrackingGridControl.Name = "RadiotrackingGridControl"
-        Me.RadiotrackingGridControl.Size = New System.Drawing.Size(961, 604)
+        Me.RadiotrackingGridControl.Size = New System.Drawing.Size(961, 579)
         Me.RadiotrackingGridControl.TabIndex = 1
         Me.RadiotrackingGridControl.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GridView1})
         '
@@ -640,6 +651,7 @@ Partial Class RadiotrackingForm
         Me.GridView1.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.YearGridColumn, Me.colHerd, Me.colSightingDate, Me.colAnimalID, Me.colFrequency, Me.colVis, Me.colGroupNumber, Me.colMode, Me.colAccuracy, Me.colBull, Me.colCow, Me.colCalf, Me.colAdult, Me.colGroupSize, Me.colRetainedAntler, Me.colCalfStat, Me.colLocation, Me.colClass, Me.colHabClass, Me.colForCov, Me.colTopog, Me.colSnow, Me.colSnowCov, Me.colCrater, Me.colFrequency_Recorded, Me.colAnimalID_Recorded, Me.colDeploymentID, Me.colElev_m, Me.colLat, Me.colLon, Me.colObserver, Me.colPilot, Me.colTailNo, Me.colComment, Me.colQCComment, Me.colWaypoint, Me.colRecordInsertedDate, Me.colRecordInsertedBy, Me.colCertificationDate, Me.colCertifiedBy, Me.colCertificationLevel, Me.colValidatedDate, Me.colValidatedBy, Me.colSourceFile, Me.colSourcefileURL})
         Me.GridView1.GridControl = Me.RadiotrackingGridControl
         Me.GridView1.Name = "GridView1"
+        Me.GridView1.OptionsBehavior.Editable = False
         Me.GridView1.OptionsView.ShowFooter = True
         '
         'YearGridColumn
@@ -1004,14 +1016,41 @@ Partial Class RadiotrackingForm
         Me.colSourcefileURL.VisibleIndex = 44
         Me.colSourcefileURL.Width = 20
         '
-        'hideContainerBottom
+        'RadiotrackingToolStrip
         '
-        Me.hideContainerBottom.BackColor = System.Drawing.SystemColors.Control
-        Me.hideContainerBottom.Controls.Add(Me.PivotDockPanel)
-        Me.hideContainerBottom.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.hideContainerBottom.Location = New System.Drawing.Point(0, 604)
-        Me.hideContainerBottom.Name = "hideContainerBottom"
-        Me.hideContainerBottom.Size = New System.Drawing.Size(961, 21)
+        Me.RadiotrackingToolStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripLabel1, Me.ReadOnlyToolStripComboBox, Me.ToolStripSeparator1, Me.RefreshToolStripButton})
+        Me.RadiotrackingToolStrip.Location = New System.Drawing.Point(0, 0)
+        Me.RadiotrackingToolStrip.Name = "RadiotrackingToolStrip"
+        Me.RadiotrackingToolStrip.Size = New System.Drawing.Size(961, 25)
+        Me.RadiotrackingToolStrip.TabIndex = 3
+        Me.RadiotrackingToolStrip.Text = "ToolStrip1"
+        '
+        'ToolStripLabel1
+        '
+        Me.ToolStripLabel1.Name = "ToolStripLabel1"
+        Me.ToolStripLabel1.Size = New System.Drawing.Size(64, 22)
+        Me.ToolStripLabel1.Text = "Read-only:"
+        '
+        'ReadOnlyToolStripComboBox
+        '
+        Me.ReadOnlyToolStripComboBox.Items.AddRange(New Object() {"True", "False"})
+        Me.ReadOnlyToolStripComboBox.Name = "ReadOnlyToolStripComboBox"
+        Me.ReadOnlyToolStripComboBox.Size = New System.Drawing.Size(121, 25)
+        Me.ReadOnlyToolStripComboBox.Text = "True"
+        '
+        'ToolStripSeparator1
+        '
+        Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
+        Me.ToolStripSeparator1.Size = New System.Drawing.Size(6, 25)
+        '
+        'RefreshToolStripButton
+        '
+        Me.RefreshToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
+        Me.RefreshToolStripButton.Image = CType(resources.GetObject("RefreshToolStripButton.Image"), System.Drawing.Image)
+        Me.RefreshToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.RefreshToolStripButton.Name = "RefreshToolStripButton"
+        Me.RefreshToolStripButton.Size = New System.Drawing.Size(88, 22)
+        Me.RefreshToolStripButton.Text = "Reload dataset"
         '
         'RadiotrackingForm
         '
@@ -1019,19 +1058,23 @@ Partial Class RadiotrackingForm
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(961, 625)
         Me.Controls.Add(Me.RadiotrackingGridControl)
+        Me.Controls.Add(Me.RadiotrackingToolStrip)
         Me.Controls.Add(Me.hideContainerBottom)
         Me.Name = "RadiotrackingForm"
         Me.Text = "Caribou Radiotracking"
         CType(Me.WRST_CaribouDataSet, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.RadiotrackingBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.DockManager1, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.hideContainerBottom.ResumeLayout(False)
         Me.PivotDockPanel.ResumeLayout(False)
         Me.DockPanel1_Container.ResumeLayout(False)
         CType(Me.RadiotrackingPivotGridControl, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.RadiotrackingGridControl, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GridView1, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.hideContainerBottom.ResumeLayout(False)
+        Me.RadiotrackingToolStrip.ResumeLayout(False)
+        Me.RadiotrackingToolStrip.PerformLayout()
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
 
@@ -1137,4 +1180,9 @@ Partial Class RadiotrackingForm
     Friend WithEvents PivotGridField44 As DevExpress.XtraPivotGrid.PivotGridField
     Friend WithEvents nPivotGridField As DevExpress.XtraPivotGrid.PivotGridField
     Friend WithEvents hideContainerBottom As DevExpress.XtraBars.Docking.AutoHideContainer
+    Friend WithEvents RadiotrackingToolStrip As ToolStrip
+    Friend WithEvents ToolStripLabel1 As ToolStripLabel
+    Friend WithEvents ReadOnlyToolStripComboBox As ToolStripComboBox
+    Friend WithEvents ToolStripSeparator1 As ToolStripSeparator
+    Friend WithEvents RefreshToolStripButton As ToolStripButton
 End Class

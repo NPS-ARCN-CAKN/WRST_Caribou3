@@ -22,22 +22,23 @@ Partial Class Switchboard
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Me.EditSurveysDatasetButton = New System.Windows.Forms.Button()
         Me.AccessSurveysDatasetButton = New System.Windows.Forms.Button()
         Me.EditRadiotrackingDatasetButton = New System.Windows.Forms.Button()
-        Me.AccessRadiotrackingDatasetButton = New System.Windows.Forms.Button()
         Me.RadiotrackingLabel = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.GetDeploymentsForHerdFrequencyAndDateButton = New System.Windows.Forms.Button()
         Me.OpenCaribouProfileFormButton = New System.Windows.Forms.Button()
+        Me.CaribouToolTip = New System.Windows.Forms.ToolTip(Me.components)
         Me.SuspendLayout()
         '
         'EditSurveysDatasetButton
         '
         Me.EditSurveysDatasetButton.Location = New System.Drawing.Point(16, 75)
         Me.EditSurveysDatasetButton.Name = "EditSurveysDatasetButton"
-        Me.EditSurveysDatasetButton.Size = New System.Drawing.Size(173, 23)
+        Me.EditSurveysDatasetButton.Size = New System.Drawing.Size(388, 23)
         Me.EditSurveysDatasetButton.TabIndex = 1
         Me.EditSurveysDatasetButton.Text = "Edit surveys dataset..."
         Me.EditSurveysDatasetButton.UseVisualStyleBackColor = True
@@ -46,29 +47,19 @@ Partial Class Switchboard
         '
         Me.AccessSurveysDatasetButton.Location = New System.Drawing.Point(16, 46)
         Me.AccessSurveysDatasetButton.Name = "AccessSurveysDatasetButton"
-        Me.AccessSurveysDatasetButton.Size = New System.Drawing.Size(173, 23)
+        Me.AccessSurveysDatasetButton.Size = New System.Drawing.Size(388, 23)
         Me.AccessSurveysDatasetButton.TabIndex = 2
         Me.AccessSurveysDatasetButton.Text = "Access surveys dataset..."
         Me.AccessSurveysDatasetButton.UseVisualStyleBackColor = True
         '
         'EditRadiotrackingDatasetButton
         '
-        Me.EditRadiotrackingDatasetButton.Location = New System.Drawing.Point(16, 170)
+        Me.EditRadiotrackingDatasetButton.Location = New System.Drawing.Point(16, 141)
         Me.EditRadiotrackingDatasetButton.Name = "EditRadiotrackingDatasetButton"
-        Me.EditRadiotrackingDatasetButton.Size = New System.Drawing.Size(173, 24)
+        Me.EditRadiotrackingDatasetButton.Size = New System.Drawing.Size(388, 24)
         Me.EditRadiotrackingDatasetButton.TabIndex = 3
-        Me.EditRadiotrackingDatasetButton.Text = "Edit radiotracking dataset..."
+        Me.EditRadiotrackingDatasetButton.Text = "Access/edit radiotracking dataset..."
         Me.EditRadiotrackingDatasetButton.UseVisualStyleBackColor = True
-        '
-        'AccessRadiotrackingDatasetButton
-        '
-        Me.AccessRadiotrackingDatasetButton.Enabled = False
-        Me.AccessRadiotrackingDatasetButton.Location = New System.Drawing.Point(16, 141)
-        Me.AccessRadiotrackingDatasetButton.Name = "AccessRadiotrackingDatasetButton"
-        Me.AccessRadiotrackingDatasetButton.Size = New System.Drawing.Size(173, 23)
-        Me.AccessRadiotrackingDatasetButton.TabIndex = 4
-        Me.AccessRadiotrackingDatasetButton.Text = "Access radiotracking dataset..."
-        Me.AccessRadiotrackingDatasetButton.UseVisualStyleBackColor = True
         '
         'RadiotrackingLabel
         '
@@ -94,7 +85,7 @@ Partial Class Switchboard
         '
         Me.Label2.AutoSize = True
         Me.Label2.Font = New System.Drawing.Font("Arial", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label2.Location = New System.Drawing.Point(12, 211)
+        Me.Label2.Location = New System.Drawing.Point(12, 181)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(146, 22)
         Me.Label2.TabIndex = 8
@@ -102,33 +93,35 @@ Partial Class Switchboard
         '
         'GetDeploymentsForHerdFrequencyAndDateButton
         '
-        Me.GetDeploymentsForHerdFrequencyAndDateButton.Location = New System.Drawing.Point(16, 236)
+        Me.GetDeploymentsForHerdFrequencyAndDateButton.Location = New System.Drawing.Point(16, 206)
         Me.GetDeploymentsForHerdFrequencyAndDateButton.Name = "GetDeploymentsForHerdFrequencyAndDateButton"
-        Me.GetDeploymentsForHerdFrequencyAndDateButton.Size = New System.Drawing.Size(412, 23)
+        Me.GetDeploymentsForHerdFrequencyAndDateButton.Size = New System.Drawing.Size(388, 23)
         Me.GetDeploymentsForHerdFrequencyAndDateButton.TabIndex = 7
         Me.GetDeploymentsForHerdFrequencyAndDateButton.Text = "Get a list of possible GPS collar deployments for a herd, frequency and date..."
+        Me.CaribouToolTip.SetToolTip(Me.GetDeploymentsForHerdFrequencyAndDateButton, "Get a list of possible GPS collar deployments for a herd frequency and date. This" &
+        " tool is used to troubleshoot matching frequencies to animals.")
         Me.GetDeploymentsForHerdFrequencyAndDateButton.UseVisualStyleBackColor = True
         '
         'OpenCaribouProfileFormButton
         '
-        Me.OpenCaribouProfileFormButton.Location = New System.Drawing.Point(16, 265)
+        Me.OpenCaribouProfileFormButton.Location = New System.Drawing.Point(16, 235)
         Me.OpenCaribouProfileFormButton.Name = "OpenCaribouProfileFormButton"
-        Me.OpenCaribouProfileFormButton.Size = New System.Drawing.Size(412, 23)
+        Me.OpenCaribouProfileFormButton.Size = New System.Drawing.Size(388, 23)
         Me.OpenCaribouProfileFormButton.TabIndex = 9
         Me.OpenCaribouProfileFormButton.Text = "Get a caribou profile..."
+        Me.CaribouToolTip.SetToolTip(Me.OpenCaribouProfileFormButton, "Show all details about a caribou")
         Me.OpenCaribouProfileFormButton.UseVisualStyleBackColor = True
         '
         'Switchboard
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(440, 531)
+        Me.ClientSize = New System.Drawing.Size(440, 289)
         Me.Controls.Add(Me.OpenCaribouProfileFormButton)
         Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.GetDeploymentsForHerdFrequencyAndDateButton)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.RadiotrackingLabel)
-        Me.Controls.Add(Me.AccessRadiotrackingDatasetButton)
         Me.Controls.Add(Me.EditRadiotrackingDatasetButton)
         Me.Controls.Add(Me.AccessSurveysDatasetButton)
         Me.Controls.Add(Me.EditSurveysDatasetButton)
@@ -142,10 +135,10 @@ Partial Class Switchboard
     Friend WithEvents EditSurveysDatasetButton As Button
     Friend WithEvents AccessSurveysDatasetButton As Button
     Friend WithEvents EditRadiotrackingDatasetButton As Button
-    Friend WithEvents AccessRadiotrackingDatasetButton As Button
     Friend WithEvents RadiotrackingLabel As Label
     Friend WithEvents Label1 As Label
     Friend WithEvents Label2 As Label
     Friend WithEvents GetDeploymentsForHerdFrequencyAndDateButton As Button
     Friend WithEvents OpenCaribouProfileFormButton As Button
+    Friend WithEvents CaribouToolTip As ToolTip
 End Class

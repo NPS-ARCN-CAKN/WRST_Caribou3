@@ -239,7 +239,7 @@ Partial Class CaribouProfileForm
         '
         Me.DockManager1.AutoHideContainers.AddRange(New DevExpress.XtraBars.Docking.AutoHideContainer() {Me.hideContainerBottom})
         Me.DockManager1.Form = Me
-        Me.DockManager1.RootPanels.AddRange(New DevExpress.XtraBars.Docking.DockPanel() {Me.AnimalDockPanel, Me.SurvivorshipDockPanel})
+        Me.DockManager1.RootPanels.AddRange(New DevExpress.XtraBars.Docking.DockPanel() {Me.AnimalDockPanel})
         Me.DockManager1.TopZIndexControls.AddRange(New String() {"DevExpress.XtraBars.BarDockControl", "DevExpress.XtraBars.StandaloneBarDockControl", "System.Windows.Forms.MenuStrip", "System.Windows.Forms.StatusStrip", "System.Windows.Forms.StatusBar", "DevExpress.XtraBars.Ribbon.RibbonStatusBar", "DevExpress.XtraBars.Ribbon.RibbonControl", "DevExpress.XtraBars.Navigation.OfficeNavigationBar", "DevExpress.XtraBars.Navigation.TileNavPane", "DevExpress.XtraBars.TabFormControl", "DevExpress.XtraBars.FluentDesignSystem.FluentDesignFormControl", "DevExpress.XtraBars.ToolbarForm.ToolbarFormControl"})
         '
         'hideContainerBottom
@@ -250,6 +250,7 @@ Partial Class CaribouProfileForm
         Me.hideContainerBottom.Controls.Add(Me.RadiotrackingDockPanel)
         Me.hideContainerBottom.Controls.Add(Me.CollarFixesDockPanel)
         Me.hideContainerBottom.Controls.Add(Me.CapturesDockPanel)
+        Me.hideContainerBottom.Controls.Add(Me.SurvivorshipDockPanel)
         Me.hideContainerBottom.Dock = System.Windows.Forms.DockStyle.Bottom
         Me.hideContainerBottom.Location = New System.Drawing.Point(0, 740)
         Me.hideContainerBottom.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
@@ -373,10 +374,10 @@ Partial Class CaribouProfileForm
         'DockPanel1_Container
         '
         Me.DockPanel1_Container.Controls.Add(Me.CapturesGridControl)
-        Me.DockPanel1_Container.Location = New System.Drawing.Point(3, 28)
+        Me.DockPanel1_Container.Location = New System.Drawing.Point(3, 27)
         Me.DockPanel1_Container.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.DockPanel1_Container.Name = "DockPanel1_Container"
-        Me.DockPanel1_Container.Size = New System.Drawing.Size(1178, 294)
+        Me.DockPanel1_Container.Size = New System.Drawing.Size(1178, 295)
         Me.DockPanel1_Container.TabIndex = 0
         '
         'CapturesGridControl
@@ -387,7 +388,7 @@ Partial Class CaribouProfileForm
         Me.CapturesGridControl.MainView = Me.GridView5
         Me.CapturesGridControl.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.CapturesGridControl.Name = "CapturesGridControl"
-        Me.CapturesGridControl.Size = New System.Drawing.Size(1178, 294)
+        Me.CapturesGridControl.Size = New System.Drawing.Size(1178, 295)
         Me.CapturesGridControl.TabIndex = 0
         Me.CapturesGridControl.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GridView5})
         '
@@ -424,12 +425,15 @@ Partial Class CaribouProfileForm
         Me.SurvivorshipDockPanel.Controls.Add(Me.ControlContainer4)
         Me.SurvivorshipDockPanel.Dock = DevExpress.XtraBars.Docking.DockingStyle.Bottom
         Me.SurvivorshipDockPanel.ID = New System.Guid("7a4e046e-e425-4fc3-828c-b281f1e70ab1")
-        Me.SurvivorshipDockPanel.Location = New System.Drawing.Point(202, 578)
+        Me.SurvivorshipDockPanel.Location = New System.Drawing.Point(0, 0)
         Me.SurvivorshipDockPanel.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.SurvivorshipDockPanel.Name = "SurvivorshipDockPanel"
         Me.SurvivorshipDockPanel.OriginalSize = New System.Drawing.Size(200, 200)
-        Me.SurvivorshipDockPanel.Size = New System.Drawing.Size(982, 162)
+        Me.SurvivorshipDockPanel.SavedDock = DevExpress.XtraBars.Docking.DockingStyle.Bottom
+        Me.SurvivorshipDockPanel.SavedIndex = 1
+        Me.SurvivorshipDockPanel.Size = New System.Drawing.Size(1184, 162)
         Me.SurvivorshipDockPanel.Text = "Survivorship"
+        Me.SurvivorshipDockPanel.Visibility = DevExpress.XtraBars.Docking.DockVisibility.AutoHide
         '
         'ControlContainer4
         '
@@ -437,7 +441,7 @@ Partial Class CaribouProfileForm
         Me.ControlContainer4.Location = New System.Drawing.Point(3, 27)
         Me.ControlContainer4.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.ControlContainer4.Name = "ControlContainer4"
-        Me.ControlContainer4.Size = New System.Drawing.Size(976, 132)
+        Me.ControlContainer4.Size = New System.Drawing.Size(1178, 132)
         Me.ControlContainer4.TabIndex = 0
         '
         'SurvivorshipGridControl
@@ -448,7 +452,7 @@ Partial Class CaribouProfileForm
         Me.SurvivorshipGridControl.MainView = Me.GridView6
         Me.SurvivorshipGridControl.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.SurvivorshipGridControl.Name = "SurvivorshipGridControl"
-        Me.SurvivorshipGridControl.Size = New System.Drawing.Size(976, 132)
+        Me.SurvivorshipGridControl.Size = New System.Drawing.Size(1178, 132)
         Me.SurvivorshipGridControl.TabIndex = 1
         Me.SurvivorshipGridControl.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GridView6})
         '
@@ -465,7 +469,7 @@ Partial Class CaribouProfileForm
         Me.CaribouMapControl.Location = New System.Drawing.Point(202, 25)
         Me.CaribouMapControl.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.CaribouMapControl.Name = "CaribouMapControl"
-        Me.CaribouMapControl.Size = New System.Drawing.Size(982, 553)
+        Me.CaribouMapControl.Size = New System.Drawing.Size(982, 715)
         Me.CaribouMapControl.TabIndex = 8
         '
         'CaribouProfileForm
@@ -475,7 +479,6 @@ Partial Class CaribouProfileForm
         Me.ClientSize = New System.Drawing.Size(1184, 761)
         Me.Controls.Add(Me.CaribouMapControl)
         Me.Controls.Add(Me.MainToolStrip)
-        Me.Controls.Add(Me.SurvivorshipDockPanel)
         Me.Controls.Add(Me.AnimalDockPanel)
         Me.Controls.Add(Me.hideContainerBottom)
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)

@@ -202,4 +202,10 @@ FROM     tmpCollarFixes
     Private Sub SyncDatabasesToolStripButton_Click(sender As Object, e As EventArgs) Handles SyncDatabasesToolStripButton.Click
         AskToSynchronizeDatabases()
     End Sub
+
+    Private Sub AnimalIDToolStripComboBox_TextChanged(sender As Object, e As EventArgs) Handles AnimalIDToolStripComboBox.TextChanged
+        Dim AnimalID As String = Me.AnimalIDToolStripComboBox.Text.Trim
+        Me.AnimalHeaderLabel.Text = AnimalID
+        LoadData(AnimalID)
+    End Sub
 End Class

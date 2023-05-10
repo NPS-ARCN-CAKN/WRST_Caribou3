@@ -1932,7 +1932,7 @@ Click Yes to certify and lock the current record. Click No to cancel.", MsgBoxSt
       ,[FlightID]
       ,[EID]
       ,[Notes]
-  FROM [WRST_Caribou].[dbo].[Dataset_Full] WHERE FlightID='" & FlightID & "'"
+  FROM [WRST_Caribou].[dbo].[Dataset_Census] WHERE FlightID='" & FlightID & "'"
 
                     'Query the database for the data related to the FlightID, convert it to text and export it with metadata
                     Dim DT As DataTable = SkeeterUtilities.DataFileToDataTableConverters.DataFileToDataTableConverters.GetDataTableFromSQLServerDatabase(My.Settings.WRST_CaribouConnectionString, Sql)

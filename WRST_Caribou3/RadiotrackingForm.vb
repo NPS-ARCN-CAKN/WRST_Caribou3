@@ -1,6 +1,8 @@
-﻿Public Class RadiotrackingForm
+﻿Imports DevExpress.XtraGrid.Views.Grid
 
-    Private Sub LoadRadiotrackingDataset()
+Public Class RadiotrackingForm
+
+    Private Sub LoadDataset()
         'Load the radiotracking dataset into the form
         Try
             Me.RadiotrackingTableAdapter.Fill(Me.WRST_CaribouDataSet.Radiotracking)
@@ -25,9 +27,40 @@
     End Sub
 
     Private Sub RadiotrackingForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        LoadRadiotrackingDataset()
+
+        LoadDataset()
 
         SetUpPivotGridControl(Me.RadiotrackingPivotGridControl)
         SetUpGridControl(Me.RadiotrackingGridControl)
+
+        SetFormReadOnly(True)
+    End Sub
+
+    ''' <summary>
+    ''' Sets data driven controls to read-only.
+    ''' </summary>
+    ''' <param name="MakeFormReadOnly">Make the form's data controls read-only. Boolean.</param>
+    Private Sub SetFormReadOnly(MakeFormReadOnly As Boolean)
+
+        For Each MyGridView As GridView In RadiotrackingGridControl.ViewCollection
+            With MyGridView
+                .OptionsBehavior.ReadOnly = MakeFormReadOnly
+            End With
+        Next
+
+    End Sub
+
+
+
+    Private Sub ReadOnlyToolStripComboBox_TextChanged(sender As Object, e As EventArgs) Handles ReadOnlyToolStripComboBox.TextChanged
+        If Me.ReadOnlyToolStripComboBox.Text.Trim = "True" Then
+            SetFormReadOnly(True)
+        Else
+            SetFormReadOnly(False)
+        End If
+    End Sub
+
+    Private Sub RefreshToolStripButton_Click(sender As Object, e As EventArgs) Handles RefreshToolStripButton.Click
+        LoadDataset()
     End Sub
 End Class
