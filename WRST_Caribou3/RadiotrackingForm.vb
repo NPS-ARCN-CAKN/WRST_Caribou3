@@ -21,10 +21,7 @@ Public Class RadiotrackingForm
         End Try
     End Sub
 
-    Private Sub RadiotrackingBindingNavigatorSaveItem_Click(sender As Object, e As EventArgs)
 
-
-    End Sub
 
     Private Sub RadiotrackingForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
@@ -33,7 +30,7 @@ Public Class RadiotrackingForm
         SetUpPivotGridControl(Me.RadiotrackingPivotGridControl)
         SetUpGridControl(Me.RadiotrackingGridControl)
 
-        SetFormReadOnly(True)
+        'SetFormReadOnly(True)
     End Sub
 
     ''' <summary>
@@ -42,11 +39,11 @@ Public Class RadiotrackingForm
     ''' <param name="MakeFormReadOnly">Make the form's data controls read-only. Boolean.</param>
     Private Sub SetFormReadOnly(MakeFormReadOnly As Boolean)
 
-        For Each MyGridView As GridView In RadiotrackingGridControl.ViewCollection
-            With MyGridView
-                .OptionsBehavior.ReadOnly = MakeFormReadOnly
-            End With
-        Next
+        'For Each MyGridView As GridView In RadiotrackingGridControl.ViewCollection
+        '    With MyGridView
+        '        .OptionsBehavior.ReadOnly = MakeFormReadOnly
+        '    End With
+        'Next
 
     End Sub
 
@@ -62,5 +59,9 @@ Public Class RadiotrackingForm
 
     Private Sub RefreshToolStripButton_Click(sender As Object, e As EventArgs) Handles RefreshToolStripButton.Click
         LoadDataset()
+    End Sub
+
+    Private Sub SaveEditsToolStripButton_Click(sender As Object, e As EventArgs) Handles SaveEditsToolStripButton.Click
+        SaveRadiotrackingDataTableToDatabase()
     End Sub
 End Class

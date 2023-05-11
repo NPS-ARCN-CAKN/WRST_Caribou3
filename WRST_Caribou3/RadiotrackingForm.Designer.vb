@@ -23,52 +23,52 @@ Partial Class RadiotrackingForm
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim ExpressionDataBinding1 As DevExpress.XtraPivotGrid.ExpressionDataBinding = New DevExpress.XtraPivotGrid.ExpressionDataBinding()
-        Dim DataSourceColumnBinding1 As DevExpress.XtraPivotGrid.DataSourceColumnBinding = New DevExpress.XtraPivotGrid.DataSourceColumnBinding()
-        Dim DataSourceColumnBinding2 As DevExpress.XtraPivotGrid.DataSourceColumnBinding = New DevExpress.XtraPivotGrid.DataSourceColumnBinding()
-        Dim DataSourceColumnBinding3 As DevExpress.XtraPivotGrid.DataSourceColumnBinding = New DevExpress.XtraPivotGrid.DataSourceColumnBinding()
-        Dim DataSourceColumnBinding4 As DevExpress.XtraPivotGrid.DataSourceColumnBinding = New DevExpress.XtraPivotGrid.DataSourceColumnBinding()
-        Dim DataSourceColumnBinding5 As DevExpress.XtraPivotGrid.DataSourceColumnBinding = New DevExpress.XtraPivotGrid.DataSourceColumnBinding()
-        Dim DataSourceColumnBinding6 As DevExpress.XtraPivotGrid.DataSourceColumnBinding = New DevExpress.XtraPivotGrid.DataSourceColumnBinding()
-        Dim DataSourceColumnBinding7 As DevExpress.XtraPivotGrid.DataSourceColumnBinding = New DevExpress.XtraPivotGrid.DataSourceColumnBinding()
-        Dim DataSourceColumnBinding8 As DevExpress.XtraPivotGrid.DataSourceColumnBinding = New DevExpress.XtraPivotGrid.DataSourceColumnBinding()
-        Dim DataSourceColumnBinding9 As DevExpress.XtraPivotGrid.DataSourceColumnBinding = New DevExpress.XtraPivotGrid.DataSourceColumnBinding()
-        Dim DataSourceColumnBinding10 As DevExpress.XtraPivotGrid.DataSourceColumnBinding = New DevExpress.XtraPivotGrid.DataSourceColumnBinding()
-        Dim DataSourceColumnBinding11 As DevExpress.XtraPivotGrid.DataSourceColumnBinding = New DevExpress.XtraPivotGrid.DataSourceColumnBinding()
-        Dim DataSourceColumnBinding12 As DevExpress.XtraPivotGrid.DataSourceColumnBinding = New DevExpress.XtraPivotGrid.DataSourceColumnBinding()
-        Dim DataSourceColumnBinding13 As DevExpress.XtraPivotGrid.DataSourceColumnBinding = New DevExpress.XtraPivotGrid.DataSourceColumnBinding()
-        Dim DataSourceColumnBinding14 As DevExpress.XtraPivotGrid.DataSourceColumnBinding = New DevExpress.XtraPivotGrid.DataSourceColumnBinding()
-        Dim DataSourceColumnBinding15 As DevExpress.XtraPivotGrid.DataSourceColumnBinding = New DevExpress.XtraPivotGrid.DataSourceColumnBinding()
-        Dim DataSourceColumnBinding16 As DevExpress.XtraPivotGrid.DataSourceColumnBinding = New DevExpress.XtraPivotGrid.DataSourceColumnBinding()
-        Dim DataSourceColumnBinding17 As DevExpress.XtraPivotGrid.DataSourceColumnBinding = New DevExpress.XtraPivotGrid.DataSourceColumnBinding()
-        Dim DataSourceColumnBinding18 As DevExpress.XtraPivotGrid.DataSourceColumnBinding = New DevExpress.XtraPivotGrid.DataSourceColumnBinding()
-        Dim DataSourceColumnBinding19 As DevExpress.XtraPivotGrid.DataSourceColumnBinding = New DevExpress.XtraPivotGrid.DataSourceColumnBinding()
-        Dim DataSourceColumnBinding20 As DevExpress.XtraPivotGrid.DataSourceColumnBinding = New DevExpress.XtraPivotGrid.DataSourceColumnBinding()
-        Dim DataSourceColumnBinding21 As DevExpress.XtraPivotGrid.DataSourceColumnBinding = New DevExpress.XtraPivotGrid.DataSourceColumnBinding()
-        Dim DataSourceColumnBinding22 As DevExpress.XtraPivotGrid.DataSourceColumnBinding = New DevExpress.XtraPivotGrid.DataSourceColumnBinding()
-        Dim DataSourceColumnBinding23 As DevExpress.XtraPivotGrid.DataSourceColumnBinding = New DevExpress.XtraPivotGrid.DataSourceColumnBinding()
-        Dim DataSourceColumnBinding24 As DevExpress.XtraPivotGrid.DataSourceColumnBinding = New DevExpress.XtraPivotGrid.DataSourceColumnBinding()
-        Dim DataSourceColumnBinding25 As DevExpress.XtraPivotGrid.DataSourceColumnBinding = New DevExpress.XtraPivotGrid.DataSourceColumnBinding()
-        Dim DataSourceColumnBinding26 As DevExpress.XtraPivotGrid.DataSourceColumnBinding = New DevExpress.XtraPivotGrid.DataSourceColumnBinding()
-        Dim DataSourceColumnBinding27 As DevExpress.XtraPivotGrid.DataSourceColumnBinding = New DevExpress.XtraPivotGrid.DataSourceColumnBinding()
-        Dim DataSourceColumnBinding28 As DevExpress.XtraPivotGrid.DataSourceColumnBinding = New DevExpress.XtraPivotGrid.DataSourceColumnBinding()
-        Dim DataSourceColumnBinding29 As DevExpress.XtraPivotGrid.DataSourceColumnBinding = New DevExpress.XtraPivotGrid.DataSourceColumnBinding()
-        Dim DataSourceColumnBinding30 As DevExpress.XtraPivotGrid.DataSourceColumnBinding = New DevExpress.XtraPivotGrid.DataSourceColumnBinding()
-        Dim DataSourceColumnBinding31 As DevExpress.XtraPivotGrid.DataSourceColumnBinding = New DevExpress.XtraPivotGrid.DataSourceColumnBinding()
-        Dim DataSourceColumnBinding32 As DevExpress.XtraPivotGrid.DataSourceColumnBinding = New DevExpress.XtraPivotGrid.DataSourceColumnBinding()
-        Dim DataSourceColumnBinding33 As DevExpress.XtraPivotGrid.DataSourceColumnBinding = New DevExpress.XtraPivotGrid.DataSourceColumnBinding()
-        Dim DataSourceColumnBinding34 As DevExpress.XtraPivotGrid.DataSourceColumnBinding = New DevExpress.XtraPivotGrid.DataSourceColumnBinding()
-        Dim DataSourceColumnBinding35 As DevExpress.XtraPivotGrid.DataSourceColumnBinding = New DevExpress.XtraPivotGrid.DataSourceColumnBinding()
-        Dim DataSourceColumnBinding36 As DevExpress.XtraPivotGrid.DataSourceColumnBinding = New DevExpress.XtraPivotGrid.DataSourceColumnBinding()
-        Dim DataSourceColumnBinding37 As DevExpress.XtraPivotGrid.DataSourceColumnBinding = New DevExpress.XtraPivotGrid.DataSourceColumnBinding()
-        Dim DataSourceColumnBinding38 As DevExpress.XtraPivotGrid.DataSourceColumnBinding = New DevExpress.XtraPivotGrid.DataSourceColumnBinding()
-        Dim DataSourceColumnBinding39 As DevExpress.XtraPivotGrid.DataSourceColumnBinding = New DevExpress.XtraPivotGrid.DataSourceColumnBinding()
-        Dim DataSourceColumnBinding40 As DevExpress.XtraPivotGrid.DataSourceColumnBinding = New DevExpress.XtraPivotGrid.DataSourceColumnBinding()
-        Dim DataSourceColumnBinding41 As DevExpress.XtraPivotGrid.DataSourceColumnBinding = New DevExpress.XtraPivotGrid.DataSourceColumnBinding()
-        Dim DataSourceColumnBinding42 As DevExpress.XtraPivotGrid.DataSourceColumnBinding = New DevExpress.XtraPivotGrid.DataSourceColumnBinding()
-        Dim DataSourceColumnBinding43 As DevExpress.XtraPivotGrid.DataSourceColumnBinding = New DevExpress.XtraPivotGrid.DataSourceColumnBinding()
-        Dim DataSourceColumnBinding44 As DevExpress.XtraPivotGrid.DataSourceColumnBinding = New DevExpress.XtraPivotGrid.DataSourceColumnBinding()
-        Dim DataSourceColumnBinding45 As DevExpress.XtraPivotGrid.DataSourceColumnBinding = New DevExpress.XtraPivotGrid.DataSourceColumnBinding()
+        Dim ExpressionDataBinding2 As DevExpress.XtraPivotGrid.ExpressionDataBinding = New DevExpress.XtraPivotGrid.ExpressionDataBinding()
+        Dim DataSourceColumnBinding46 As DevExpress.XtraPivotGrid.DataSourceColumnBinding = New DevExpress.XtraPivotGrid.DataSourceColumnBinding()
+        Dim DataSourceColumnBinding47 As DevExpress.XtraPivotGrid.DataSourceColumnBinding = New DevExpress.XtraPivotGrid.DataSourceColumnBinding()
+        Dim DataSourceColumnBinding48 As DevExpress.XtraPivotGrid.DataSourceColumnBinding = New DevExpress.XtraPivotGrid.DataSourceColumnBinding()
+        Dim DataSourceColumnBinding49 As DevExpress.XtraPivotGrid.DataSourceColumnBinding = New DevExpress.XtraPivotGrid.DataSourceColumnBinding()
+        Dim DataSourceColumnBinding50 As DevExpress.XtraPivotGrid.DataSourceColumnBinding = New DevExpress.XtraPivotGrid.DataSourceColumnBinding()
+        Dim DataSourceColumnBinding51 As DevExpress.XtraPivotGrid.DataSourceColumnBinding = New DevExpress.XtraPivotGrid.DataSourceColumnBinding()
+        Dim DataSourceColumnBinding52 As DevExpress.XtraPivotGrid.DataSourceColumnBinding = New DevExpress.XtraPivotGrid.DataSourceColumnBinding()
+        Dim DataSourceColumnBinding53 As DevExpress.XtraPivotGrid.DataSourceColumnBinding = New DevExpress.XtraPivotGrid.DataSourceColumnBinding()
+        Dim DataSourceColumnBinding54 As DevExpress.XtraPivotGrid.DataSourceColumnBinding = New DevExpress.XtraPivotGrid.DataSourceColumnBinding()
+        Dim DataSourceColumnBinding55 As DevExpress.XtraPivotGrid.DataSourceColumnBinding = New DevExpress.XtraPivotGrid.DataSourceColumnBinding()
+        Dim DataSourceColumnBinding56 As DevExpress.XtraPivotGrid.DataSourceColumnBinding = New DevExpress.XtraPivotGrid.DataSourceColumnBinding()
+        Dim DataSourceColumnBinding57 As DevExpress.XtraPivotGrid.DataSourceColumnBinding = New DevExpress.XtraPivotGrid.DataSourceColumnBinding()
+        Dim DataSourceColumnBinding58 As DevExpress.XtraPivotGrid.DataSourceColumnBinding = New DevExpress.XtraPivotGrid.DataSourceColumnBinding()
+        Dim DataSourceColumnBinding59 As DevExpress.XtraPivotGrid.DataSourceColumnBinding = New DevExpress.XtraPivotGrid.DataSourceColumnBinding()
+        Dim DataSourceColumnBinding60 As DevExpress.XtraPivotGrid.DataSourceColumnBinding = New DevExpress.XtraPivotGrid.DataSourceColumnBinding()
+        Dim DataSourceColumnBinding61 As DevExpress.XtraPivotGrid.DataSourceColumnBinding = New DevExpress.XtraPivotGrid.DataSourceColumnBinding()
+        Dim DataSourceColumnBinding62 As DevExpress.XtraPivotGrid.DataSourceColumnBinding = New DevExpress.XtraPivotGrid.DataSourceColumnBinding()
+        Dim DataSourceColumnBinding63 As DevExpress.XtraPivotGrid.DataSourceColumnBinding = New DevExpress.XtraPivotGrid.DataSourceColumnBinding()
+        Dim DataSourceColumnBinding64 As DevExpress.XtraPivotGrid.DataSourceColumnBinding = New DevExpress.XtraPivotGrid.DataSourceColumnBinding()
+        Dim DataSourceColumnBinding65 As DevExpress.XtraPivotGrid.DataSourceColumnBinding = New DevExpress.XtraPivotGrid.DataSourceColumnBinding()
+        Dim DataSourceColumnBinding66 As DevExpress.XtraPivotGrid.DataSourceColumnBinding = New DevExpress.XtraPivotGrid.DataSourceColumnBinding()
+        Dim DataSourceColumnBinding67 As DevExpress.XtraPivotGrid.DataSourceColumnBinding = New DevExpress.XtraPivotGrid.DataSourceColumnBinding()
+        Dim DataSourceColumnBinding68 As DevExpress.XtraPivotGrid.DataSourceColumnBinding = New DevExpress.XtraPivotGrid.DataSourceColumnBinding()
+        Dim DataSourceColumnBinding69 As DevExpress.XtraPivotGrid.DataSourceColumnBinding = New DevExpress.XtraPivotGrid.DataSourceColumnBinding()
+        Dim DataSourceColumnBinding70 As DevExpress.XtraPivotGrid.DataSourceColumnBinding = New DevExpress.XtraPivotGrid.DataSourceColumnBinding()
+        Dim DataSourceColumnBinding71 As DevExpress.XtraPivotGrid.DataSourceColumnBinding = New DevExpress.XtraPivotGrid.DataSourceColumnBinding()
+        Dim DataSourceColumnBinding72 As DevExpress.XtraPivotGrid.DataSourceColumnBinding = New DevExpress.XtraPivotGrid.DataSourceColumnBinding()
+        Dim DataSourceColumnBinding73 As DevExpress.XtraPivotGrid.DataSourceColumnBinding = New DevExpress.XtraPivotGrid.DataSourceColumnBinding()
+        Dim DataSourceColumnBinding74 As DevExpress.XtraPivotGrid.DataSourceColumnBinding = New DevExpress.XtraPivotGrid.DataSourceColumnBinding()
+        Dim DataSourceColumnBinding75 As DevExpress.XtraPivotGrid.DataSourceColumnBinding = New DevExpress.XtraPivotGrid.DataSourceColumnBinding()
+        Dim DataSourceColumnBinding76 As DevExpress.XtraPivotGrid.DataSourceColumnBinding = New DevExpress.XtraPivotGrid.DataSourceColumnBinding()
+        Dim DataSourceColumnBinding77 As DevExpress.XtraPivotGrid.DataSourceColumnBinding = New DevExpress.XtraPivotGrid.DataSourceColumnBinding()
+        Dim DataSourceColumnBinding78 As DevExpress.XtraPivotGrid.DataSourceColumnBinding = New DevExpress.XtraPivotGrid.DataSourceColumnBinding()
+        Dim DataSourceColumnBinding79 As DevExpress.XtraPivotGrid.DataSourceColumnBinding = New DevExpress.XtraPivotGrid.DataSourceColumnBinding()
+        Dim DataSourceColumnBinding80 As DevExpress.XtraPivotGrid.DataSourceColumnBinding = New DevExpress.XtraPivotGrid.DataSourceColumnBinding()
+        Dim DataSourceColumnBinding81 As DevExpress.XtraPivotGrid.DataSourceColumnBinding = New DevExpress.XtraPivotGrid.DataSourceColumnBinding()
+        Dim DataSourceColumnBinding82 As DevExpress.XtraPivotGrid.DataSourceColumnBinding = New DevExpress.XtraPivotGrid.DataSourceColumnBinding()
+        Dim DataSourceColumnBinding83 As DevExpress.XtraPivotGrid.DataSourceColumnBinding = New DevExpress.XtraPivotGrid.DataSourceColumnBinding()
+        Dim DataSourceColumnBinding84 As DevExpress.XtraPivotGrid.DataSourceColumnBinding = New DevExpress.XtraPivotGrid.DataSourceColumnBinding()
+        Dim DataSourceColumnBinding85 As DevExpress.XtraPivotGrid.DataSourceColumnBinding = New DevExpress.XtraPivotGrid.DataSourceColumnBinding()
+        Dim DataSourceColumnBinding86 As DevExpress.XtraPivotGrid.DataSourceColumnBinding = New DevExpress.XtraPivotGrid.DataSourceColumnBinding()
+        Dim DataSourceColumnBinding87 As DevExpress.XtraPivotGrid.DataSourceColumnBinding = New DevExpress.XtraPivotGrid.DataSourceColumnBinding()
+        Dim DataSourceColumnBinding88 As DevExpress.XtraPivotGrid.DataSourceColumnBinding = New DevExpress.XtraPivotGrid.DataSourceColumnBinding()
+        Dim DataSourceColumnBinding89 As DevExpress.XtraPivotGrid.DataSourceColumnBinding = New DevExpress.XtraPivotGrid.DataSourceColumnBinding()
+        Dim DataSourceColumnBinding90 As DevExpress.XtraPivotGrid.DataSourceColumnBinding = New DevExpress.XtraPivotGrid.DataSourceColumnBinding()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(RadiotrackingForm))
         Me.WRST_CaribouDataSet = New WRST_Caribou3.WRST_CaribouDataSet()
         Me.RadiotrackingBindingSource = New System.Windows.Forms.BindingSource(Me.components)
@@ -177,6 +177,8 @@ Partial Class RadiotrackingForm
         Me.ReadOnlyToolStripComboBox = New System.Windows.Forms.ToolStripComboBox()
         Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
         Me.RefreshToolStripButton = New System.Windows.Forms.ToolStripButton()
+        Me.ToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator()
+        Me.SaveEditsToolStripButton = New System.Windows.Forms.ToolStripButton()
         CType(Me.WRST_CaribouDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.RadiotrackingBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DockManager1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -267,8 +269,8 @@ Partial Class RadiotrackingForm
         '
         Me.YearPivotGridField.AreaIndex = 1
         Me.YearPivotGridField.Caption = "Year"
-        ExpressionDataBinding1.Expression = "GetYear([PivotGridField2])"
-        Me.YearPivotGridField.DataBinding = ExpressionDataBinding1
+        ExpressionDataBinding2.Expression = "GetYear([PivotGridField2])"
+        Me.YearPivotGridField.DataBinding = ExpressionDataBinding2
         Me.YearPivotGridField.Name = "YearPivotGridField"
         Me.YearPivotGridField.SummaryType = DevExpress.Data.PivotGrid.PivotSummaryType.Count
         Me.YearPivotGridField.Width = 227
@@ -277,32 +279,32 @@ Partial Class RadiotrackingForm
         '
         Me.PivotGridField1.AreaIndex = 0
         Me.PivotGridField1.Caption = "Herd"
-        DataSourceColumnBinding1.ColumnName = "Herd"
-        Me.PivotGridField1.DataBinding = DataSourceColumnBinding1
+        DataSourceColumnBinding46.ColumnName = "Herd"
+        Me.PivotGridField1.DataBinding = DataSourceColumnBinding46
         Me.PivotGridField1.Name = "PivotGridField1"
         '
         'PivotGridField2
         '
         Me.PivotGridField2.AreaIndex = 2
         Me.PivotGridField2.Caption = "SightingDate"
-        DataSourceColumnBinding2.ColumnName = "SightingDate"
-        Me.PivotGridField2.DataBinding = DataSourceColumnBinding2
+        DataSourceColumnBinding47.ColumnName = "SightingDate"
+        Me.PivotGridField2.DataBinding = DataSourceColumnBinding47
         Me.PivotGridField2.Name = "PivotGridField2"
         '
         'PivotGridField3
         '
         Me.PivotGridField3.AreaIndex = 4
         Me.PivotGridField3.Caption = "Animal ID"
-        DataSourceColumnBinding3.ColumnName = "AnimalID"
-        Me.PivotGridField3.DataBinding = DataSourceColumnBinding3
+        DataSourceColumnBinding48.ColumnName = "AnimalID"
+        Me.PivotGridField3.DataBinding = DataSourceColumnBinding48
         Me.PivotGridField3.Name = "PivotGridField3"
         '
         'PivotGridField4
         '
         Me.PivotGridField4.AreaIndex = 3
         Me.PivotGridField4.Caption = "Frequency"
-        DataSourceColumnBinding4.ColumnName = "Frequency"
-        Me.PivotGridField4.DataBinding = DataSourceColumnBinding4
+        DataSourceColumnBinding49.ColumnName = "Frequency"
+        Me.PivotGridField4.DataBinding = DataSourceColumnBinding49
         Me.PivotGridField4.Name = "PivotGridField4"
         Me.PivotGridField4.SummaryType = DevExpress.Data.PivotGrid.PivotSummaryType.CountDistinct
         '
@@ -310,328 +312,328 @@ Partial Class RadiotrackingForm
         '
         Me.PivotGridField5.AreaIndex = 10
         Me.PivotGridField5.Caption = "Vis"
-        DataSourceColumnBinding5.ColumnName = "Vis"
-        Me.PivotGridField5.DataBinding = DataSourceColumnBinding5
+        DataSourceColumnBinding50.ColumnName = "Vis"
+        Me.PivotGridField5.DataBinding = DataSourceColumnBinding50
         Me.PivotGridField5.Name = "PivotGridField5"
         '
         'PivotGridField6
         '
         Me.PivotGridField6.AreaIndex = 11
         Me.PivotGridField6.Caption = "Group Number"
-        DataSourceColumnBinding6.ColumnName = "GroupNumber"
-        Me.PivotGridField6.DataBinding = DataSourceColumnBinding6
+        DataSourceColumnBinding51.ColumnName = "GroupNumber"
+        Me.PivotGridField6.DataBinding = DataSourceColumnBinding51
         Me.PivotGridField6.Name = "PivotGridField6"
         '
         'PivotGridField7
         '
         Me.PivotGridField7.AreaIndex = 5
         Me.PivotGridField7.Caption = "Mode"
-        DataSourceColumnBinding7.ColumnName = "Mode"
-        Me.PivotGridField7.DataBinding = DataSourceColumnBinding7
+        DataSourceColumnBinding52.ColumnName = "Mode"
+        Me.PivotGridField7.DataBinding = DataSourceColumnBinding52
         Me.PivotGridField7.Name = "PivotGridField7"
         '
         'PivotGridField8
         '
         Me.PivotGridField8.AreaIndex = 12
         Me.PivotGridField8.Caption = "Accuracy"
-        DataSourceColumnBinding8.ColumnName = "Accuracy"
-        Me.PivotGridField8.DataBinding = DataSourceColumnBinding8
+        DataSourceColumnBinding53.ColumnName = "Accuracy"
+        Me.PivotGridField8.DataBinding = DataSourceColumnBinding53
         Me.PivotGridField8.Name = "PivotGridField8"
         '
         'PivotGridField9
         '
         Me.PivotGridField9.AreaIndex = 13
         Me.PivotGridField9.Caption = "Bull"
-        DataSourceColumnBinding9.ColumnName = "Bull"
-        Me.PivotGridField9.DataBinding = DataSourceColumnBinding9
+        DataSourceColumnBinding54.ColumnName = "Bull"
+        Me.PivotGridField9.DataBinding = DataSourceColumnBinding54
         Me.PivotGridField9.Name = "PivotGridField9"
         '
         'PivotGridField10
         '
         Me.PivotGridField10.AreaIndex = 6
         Me.PivotGridField10.Caption = "Cow"
-        DataSourceColumnBinding10.ColumnName = "Cow"
-        Me.PivotGridField10.DataBinding = DataSourceColumnBinding10
+        DataSourceColumnBinding55.ColumnName = "Cow"
+        Me.PivotGridField10.DataBinding = DataSourceColumnBinding55
         Me.PivotGridField10.Name = "PivotGridField10"
         '
         'PivotGridField11
         '
         Me.PivotGridField11.AreaIndex = 7
         Me.PivotGridField11.Caption = "Calf"
-        DataSourceColumnBinding11.ColumnName = "Calf"
-        Me.PivotGridField11.DataBinding = DataSourceColumnBinding11
+        DataSourceColumnBinding56.ColumnName = "Calf"
+        Me.PivotGridField11.DataBinding = DataSourceColumnBinding56
         Me.PivotGridField11.Name = "PivotGridField11"
         '
         'PivotGridField12
         '
         Me.PivotGridField12.AreaIndex = 8
         Me.PivotGridField12.Caption = "Adult"
-        DataSourceColumnBinding12.ColumnName = "Adult"
-        Me.PivotGridField12.DataBinding = DataSourceColumnBinding12
+        DataSourceColumnBinding57.ColumnName = "Adult"
+        Me.PivotGridField12.DataBinding = DataSourceColumnBinding57
         Me.PivotGridField12.Name = "PivotGridField12"
         '
         'PivotGridField13
         '
         Me.PivotGridField13.AreaIndex = 9
         Me.PivotGridField13.Caption = "Group Size"
-        DataSourceColumnBinding13.ColumnName = "GroupSize"
-        Me.PivotGridField13.DataBinding = DataSourceColumnBinding13
+        DataSourceColumnBinding58.ColumnName = "GroupSize"
+        Me.PivotGridField13.DataBinding = DataSourceColumnBinding58
         Me.PivotGridField13.Name = "PivotGridField13"
         '
         'PivotGridField14
         '
         Me.PivotGridField14.AreaIndex = 14
         Me.PivotGridField14.Caption = "Retained Antler"
-        DataSourceColumnBinding14.ColumnName = "RetainedAntler"
-        Me.PivotGridField14.DataBinding = DataSourceColumnBinding14
+        DataSourceColumnBinding59.ColumnName = "RetainedAntler"
+        Me.PivotGridField14.DataBinding = DataSourceColumnBinding59
         Me.PivotGridField14.Name = "PivotGridField14"
         '
         'PivotGridField15
         '
         Me.PivotGridField15.AreaIndex = 15
         Me.PivotGridField15.Caption = "Calf Stat"
-        DataSourceColumnBinding15.ColumnName = "CalfStat"
-        Me.PivotGridField15.DataBinding = DataSourceColumnBinding15
+        DataSourceColumnBinding60.ColumnName = "CalfStat"
+        Me.PivotGridField15.DataBinding = DataSourceColumnBinding60
         Me.PivotGridField15.Name = "PivotGridField15"
         '
         'PivotGridField16
         '
         Me.PivotGridField16.AreaIndex = 16
         Me.PivotGridField16.Caption = "Location"
-        DataSourceColumnBinding16.ColumnName = "Location"
-        Me.PivotGridField16.DataBinding = DataSourceColumnBinding16
+        DataSourceColumnBinding61.ColumnName = "Location"
+        Me.PivotGridField16.DataBinding = DataSourceColumnBinding61
         Me.PivotGridField16.Name = "PivotGridField16"
         '
         'PivotGridField17
         '
         Me.PivotGridField17.AreaIndex = 17
         Me.PivotGridField17.Caption = "Class"
-        DataSourceColumnBinding17.ColumnName = "Class"
-        Me.PivotGridField17.DataBinding = DataSourceColumnBinding17
+        DataSourceColumnBinding62.ColumnName = "Class"
+        Me.PivotGridField17.DataBinding = DataSourceColumnBinding62
         Me.PivotGridField17.Name = "PivotGridField17"
         '
         'PivotGridField18
         '
         Me.PivotGridField18.AreaIndex = 18
         Me.PivotGridField18.Caption = "Hab Class"
-        DataSourceColumnBinding18.ColumnName = "HabClass"
-        Me.PivotGridField18.DataBinding = DataSourceColumnBinding18
+        DataSourceColumnBinding63.ColumnName = "HabClass"
+        Me.PivotGridField18.DataBinding = DataSourceColumnBinding63
         Me.PivotGridField18.Name = "PivotGridField18"
         '
         'PivotGridField19
         '
         Me.PivotGridField19.AreaIndex = 19
         Me.PivotGridField19.Caption = "For Cov"
-        DataSourceColumnBinding19.ColumnName = "ForCov"
-        Me.PivotGridField19.DataBinding = DataSourceColumnBinding19
+        DataSourceColumnBinding64.ColumnName = "ForCov"
+        Me.PivotGridField19.DataBinding = DataSourceColumnBinding64
         Me.PivotGridField19.Name = "PivotGridField19"
         '
         'PivotGridField20
         '
         Me.PivotGridField20.AreaIndex = 20
         Me.PivotGridField20.Caption = "Topog"
-        DataSourceColumnBinding20.ColumnName = "Topog"
-        Me.PivotGridField20.DataBinding = DataSourceColumnBinding20
+        DataSourceColumnBinding65.ColumnName = "Topog"
+        Me.PivotGridField20.DataBinding = DataSourceColumnBinding65
         Me.PivotGridField20.Name = "PivotGridField20"
         '
         'PivotGridField21
         '
         Me.PivotGridField21.AreaIndex = 21
         Me.PivotGridField21.Caption = "Snow"
-        DataSourceColumnBinding21.ColumnName = "Snow"
-        Me.PivotGridField21.DataBinding = DataSourceColumnBinding21
+        DataSourceColumnBinding66.ColumnName = "Snow"
+        Me.PivotGridField21.DataBinding = DataSourceColumnBinding66
         Me.PivotGridField21.Name = "PivotGridField21"
         '
         'PivotGridField22
         '
         Me.PivotGridField22.AreaIndex = 22
         Me.PivotGridField22.Caption = "Snow Cov"
-        DataSourceColumnBinding22.ColumnName = "SnowCov"
-        Me.PivotGridField22.DataBinding = DataSourceColumnBinding22
+        DataSourceColumnBinding67.ColumnName = "SnowCov"
+        Me.PivotGridField22.DataBinding = DataSourceColumnBinding67
         Me.PivotGridField22.Name = "PivotGridField22"
         '
         'PivotGridField23
         '
         Me.PivotGridField23.AreaIndex = 23
         Me.PivotGridField23.Caption = "Crater"
-        DataSourceColumnBinding23.ColumnName = "Crater"
-        Me.PivotGridField23.DataBinding = DataSourceColumnBinding23
+        DataSourceColumnBinding68.ColumnName = "Crater"
+        Me.PivotGridField23.DataBinding = DataSourceColumnBinding68
         Me.PivotGridField23.Name = "PivotGridField23"
         '
         'PivotGridField24
         '
         Me.PivotGridField24.AreaIndex = 24
         Me.PivotGridField24.Caption = "Frequency_Recorded"
-        DataSourceColumnBinding24.ColumnName = "Frequency_Recorded"
-        Me.PivotGridField24.DataBinding = DataSourceColumnBinding24
+        DataSourceColumnBinding69.ColumnName = "Frequency_Recorded"
+        Me.PivotGridField24.DataBinding = DataSourceColumnBinding69
         Me.PivotGridField24.Name = "PivotGridField24"
         '
         'PivotGridField25
         '
         Me.PivotGridField25.AreaIndex = 25
         Me.PivotGridField25.Caption = "Animal ID_Recorded"
-        DataSourceColumnBinding25.ColumnName = "AnimalID_Recorded"
-        Me.PivotGridField25.DataBinding = DataSourceColumnBinding25
+        DataSourceColumnBinding70.ColumnName = "AnimalID_Recorded"
+        Me.PivotGridField25.DataBinding = DataSourceColumnBinding70
         Me.PivotGridField25.Name = "PivotGridField25"
         '
         'PivotGridField26
         '
         Me.PivotGridField26.AreaIndex = 26
         Me.PivotGridField26.Caption = "Deployment ID"
-        DataSourceColumnBinding26.ColumnName = "DeploymentID"
-        Me.PivotGridField26.DataBinding = DataSourceColumnBinding26
+        DataSourceColumnBinding71.ColumnName = "DeploymentID"
+        Me.PivotGridField26.DataBinding = DataSourceColumnBinding71
         Me.PivotGridField26.Name = "PivotGridField26"
         '
         'PivotGridField27
         '
         Me.PivotGridField27.AreaIndex = 27
         Me.PivotGridField27.Caption = "Elev_m"
-        DataSourceColumnBinding27.ColumnName = "Elev_m"
-        Me.PivotGridField27.DataBinding = DataSourceColumnBinding27
+        DataSourceColumnBinding72.ColumnName = "Elev_m"
+        Me.PivotGridField27.DataBinding = DataSourceColumnBinding72
         Me.PivotGridField27.Name = "PivotGridField27"
         '
         'PivotGridField28
         '
         Me.PivotGridField28.AreaIndex = 28
         Me.PivotGridField28.Caption = "Lat"
-        DataSourceColumnBinding28.ColumnName = "Lat"
-        Me.PivotGridField28.DataBinding = DataSourceColumnBinding28
+        DataSourceColumnBinding73.ColumnName = "Lat"
+        Me.PivotGridField28.DataBinding = DataSourceColumnBinding73
         Me.PivotGridField28.Name = "PivotGridField28"
         '
         'PivotGridField29
         '
         Me.PivotGridField29.AreaIndex = 29
         Me.PivotGridField29.Caption = "Lon"
-        DataSourceColumnBinding29.ColumnName = "Lon"
-        Me.PivotGridField29.DataBinding = DataSourceColumnBinding29
+        DataSourceColumnBinding74.ColumnName = "Lon"
+        Me.PivotGridField29.DataBinding = DataSourceColumnBinding74
         Me.PivotGridField29.Name = "PivotGridField29"
         '
         'PivotGridField30
         '
         Me.PivotGridField30.AreaIndex = 30
         Me.PivotGridField30.Caption = "Observer"
-        DataSourceColumnBinding30.ColumnName = "Observer"
-        Me.PivotGridField30.DataBinding = DataSourceColumnBinding30
+        DataSourceColumnBinding75.ColumnName = "Observer"
+        Me.PivotGridField30.DataBinding = DataSourceColumnBinding75
         Me.PivotGridField30.Name = "PivotGridField30"
         '
         'PivotGridField31
         '
         Me.PivotGridField31.AreaIndex = 31
         Me.PivotGridField31.Caption = "Pilot"
-        DataSourceColumnBinding31.ColumnName = "Pilot"
-        Me.PivotGridField31.DataBinding = DataSourceColumnBinding31
+        DataSourceColumnBinding76.ColumnName = "Pilot"
+        Me.PivotGridField31.DataBinding = DataSourceColumnBinding76
         Me.PivotGridField31.Name = "PivotGridField31"
         '
         'PivotGridField32
         '
         Me.PivotGridField32.AreaIndex = 32
         Me.PivotGridField32.Caption = "Tail No"
-        DataSourceColumnBinding32.ColumnName = "TailNo"
-        Me.PivotGridField32.DataBinding = DataSourceColumnBinding32
+        DataSourceColumnBinding77.ColumnName = "TailNo"
+        Me.PivotGridField32.DataBinding = DataSourceColumnBinding77
         Me.PivotGridField32.Name = "PivotGridField32"
         '
         'PivotGridField33
         '
         Me.PivotGridField33.AreaIndex = 33
         Me.PivotGridField33.Caption = "Comment"
-        DataSourceColumnBinding33.ColumnName = "Comment"
-        Me.PivotGridField33.DataBinding = DataSourceColumnBinding33
+        DataSourceColumnBinding78.ColumnName = "Comment"
+        Me.PivotGridField33.DataBinding = DataSourceColumnBinding78
         Me.PivotGridField33.Name = "PivotGridField33"
         '
         'PivotGridField34
         '
         Me.PivotGridField34.AreaIndex = 34
         Me.PivotGridField34.Caption = "QC Comment"
-        DataSourceColumnBinding34.ColumnName = "QCComment"
-        Me.PivotGridField34.DataBinding = DataSourceColumnBinding34
+        DataSourceColumnBinding79.ColumnName = "QCComment"
+        Me.PivotGridField34.DataBinding = DataSourceColumnBinding79
         Me.PivotGridField34.Name = "PivotGridField34"
         '
         'PivotGridField35
         '
         Me.PivotGridField35.AreaIndex = 35
         Me.PivotGridField35.Caption = "Waypoint"
-        DataSourceColumnBinding35.ColumnName = "Waypoint"
-        Me.PivotGridField35.DataBinding = DataSourceColumnBinding35
+        DataSourceColumnBinding80.ColumnName = "Waypoint"
+        Me.PivotGridField35.DataBinding = DataSourceColumnBinding80
         Me.PivotGridField35.Name = "PivotGridField35"
         '
         'PivotGridField36
         '
         Me.PivotGridField36.AreaIndex = 36
         Me.PivotGridField36.Caption = "RecordInsertedDate"
-        DataSourceColumnBinding36.ColumnName = "RecordInsertedDate"
-        Me.PivotGridField36.DataBinding = DataSourceColumnBinding36
+        DataSourceColumnBinding81.ColumnName = "RecordInsertedDate"
+        Me.PivotGridField36.DataBinding = DataSourceColumnBinding81
         Me.PivotGridField36.Name = "PivotGridField36"
         '
         'PivotGridField37
         '
         Me.PivotGridField37.AreaIndex = 37
         Me.PivotGridField37.Caption = "Record Inserted By"
-        DataSourceColumnBinding37.ColumnName = "RecordInsertedBy"
-        Me.PivotGridField37.DataBinding = DataSourceColumnBinding37
+        DataSourceColumnBinding82.ColumnName = "RecordInsertedBy"
+        Me.PivotGridField37.DataBinding = DataSourceColumnBinding82
         Me.PivotGridField37.Name = "PivotGridField37"
         '
         'PivotGridField38
         '
         Me.PivotGridField38.AreaIndex = 38
         Me.PivotGridField38.Caption = "CertificationDate"
-        DataSourceColumnBinding38.ColumnName = "CertificationDate"
-        Me.PivotGridField38.DataBinding = DataSourceColumnBinding38
+        DataSourceColumnBinding83.ColumnName = "CertificationDate"
+        Me.PivotGridField38.DataBinding = DataSourceColumnBinding83
         Me.PivotGridField38.Name = "PivotGridField38"
         '
         'PivotGridField39
         '
         Me.PivotGridField39.AreaIndex = 39
         Me.PivotGridField39.Caption = "Certified By"
-        DataSourceColumnBinding39.ColumnName = "CertifiedBy"
-        Me.PivotGridField39.DataBinding = DataSourceColumnBinding39
+        DataSourceColumnBinding84.ColumnName = "CertifiedBy"
+        Me.PivotGridField39.DataBinding = DataSourceColumnBinding84
         Me.PivotGridField39.Name = "PivotGridField39"
         '
         'PivotGridField40
         '
         Me.PivotGridField40.AreaIndex = 40
         Me.PivotGridField40.Caption = "Certification Level"
-        DataSourceColumnBinding40.ColumnName = "CertificationLevel"
-        Me.PivotGridField40.DataBinding = DataSourceColumnBinding40
+        DataSourceColumnBinding85.ColumnName = "CertificationLevel"
+        Me.PivotGridField40.DataBinding = DataSourceColumnBinding85
         Me.PivotGridField40.Name = "PivotGridField40"
         '
         'PivotGridField41
         '
         Me.PivotGridField41.AreaIndex = 41
         Me.PivotGridField41.Caption = "ValidatedDate"
-        DataSourceColumnBinding41.ColumnName = "ValidatedDate"
-        Me.PivotGridField41.DataBinding = DataSourceColumnBinding41
+        DataSourceColumnBinding86.ColumnName = "ValidatedDate"
+        Me.PivotGridField41.DataBinding = DataSourceColumnBinding86
         Me.PivotGridField41.Name = "PivotGridField41"
         '
         'PivotGridField42
         '
         Me.PivotGridField42.AreaIndex = 42
         Me.PivotGridField42.Caption = "Validated By"
-        DataSourceColumnBinding42.ColumnName = "ValidatedBy"
-        Me.PivotGridField42.DataBinding = DataSourceColumnBinding42
+        DataSourceColumnBinding87.ColumnName = "ValidatedBy"
+        Me.PivotGridField42.DataBinding = DataSourceColumnBinding87
         Me.PivotGridField42.Name = "PivotGridField42"
         '
         'PivotGridField43
         '
         Me.PivotGridField43.AreaIndex = 43
         Me.PivotGridField43.Caption = "Source File"
-        DataSourceColumnBinding43.ColumnName = "SourceFile"
-        Me.PivotGridField43.DataBinding = DataSourceColumnBinding43
+        DataSourceColumnBinding88.ColumnName = "SourceFile"
+        Me.PivotGridField43.DataBinding = DataSourceColumnBinding88
         Me.PivotGridField43.Name = "PivotGridField43"
         '
         'PivotGridField44
         '
         Me.PivotGridField44.AreaIndex = 44
         Me.PivotGridField44.Caption = "Sourcefile URL"
-        DataSourceColumnBinding44.ColumnName = "SourcefileURL"
-        Me.PivotGridField44.DataBinding = DataSourceColumnBinding44
+        DataSourceColumnBinding89.ColumnName = "SourcefileURL"
+        Me.PivotGridField44.DataBinding = DataSourceColumnBinding89
         Me.PivotGridField44.Name = "PivotGridField44"
         '
         'nPivotGridField
         '
         Me.nPivotGridField.AreaIndex = 45
         Me.nPivotGridField.Caption = "n"
-        DataSourceColumnBinding45.ColumnName = "Herd"
-        Me.nPivotGridField.DataBinding = DataSourceColumnBinding45
+        DataSourceColumnBinding90.ColumnName = "Herd"
+        Me.nPivotGridField.DataBinding = DataSourceColumnBinding90
         Me.nPivotGridField.Name = "nPivotGridField"
         Me.nPivotGridField.SummaryType = DevExpress.Data.PivotGrid.PivotSummaryType.Count
         '
@@ -651,7 +653,8 @@ Partial Class RadiotrackingForm
         Me.GridView1.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.YearGridColumn, Me.colHerd, Me.colSightingDate, Me.colAnimalID, Me.colFrequency, Me.colVis, Me.colGroupNumber, Me.colMode, Me.colAccuracy, Me.colBull, Me.colCow, Me.colCalf, Me.colAdult, Me.colGroupSize, Me.colRetainedAntler, Me.colCalfStat, Me.colLocation, Me.colClass, Me.colHabClass, Me.colForCov, Me.colTopog, Me.colSnow, Me.colSnowCov, Me.colCrater, Me.colFrequency_Recorded, Me.colAnimalID_Recorded, Me.colDeploymentID, Me.colElev_m, Me.colLat, Me.colLon, Me.colObserver, Me.colPilot, Me.colTailNo, Me.colComment, Me.colQCComment, Me.colWaypoint, Me.colRecordInsertedDate, Me.colRecordInsertedBy, Me.colCertificationDate, Me.colCertifiedBy, Me.colCertificationLevel, Me.colValidatedDate, Me.colValidatedBy, Me.colSourceFile, Me.colSourcefileURL})
         Me.GridView1.GridControl = Me.RadiotrackingGridControl
         Me.GridView1.Name = "GridView1"
-        Me.GridView1.OptionsBehavior.Editable = False
+        Me.GridView1.OptionsBehavior.AllowAddRows = DevExpress.Utils.DefaultBoolean.[True]
+        Me.GridView1.OptionsBehavior.AllowDeleteRows = DevExpress.Utils.DefaultBoolean.[True]
         Me.GridView1.OptionsView.ShowFooter = True
         '
         'YearGridColumn
@@ -1018,7 +1021,7 @@ Partial Class RadiotrackingForm
         '
         'RadiotrackingToolStrip
         '
-        Me.RadiotrackingToolStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripLabel1, Me.ReadOnlyToolStripComboBox, Me.ToolStripSeparator1, Me.RefreshToolStripButton})
+        Me.RadiotrackingToolStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripLabel1, Me.ReadOnlyToolStripComboBox, Me.ToolStripSeparator1, Me.RefreshToolStripButton, Me.ToolStripSeparator2, Me.SaveEditsToolStripButton})
         Me.RadiotrackingToolStrip.Location = New System.Drawing.Point(0, 0)
         Me.RadiotrackingToolStrip.Name = "RadiotrackingToolStrip"
         Me.RadiotrackingToolStrip.Size = New System.Drawing.Size(961, 25)
@@ -1033,6 +1036,7 @@ Partial Class RadiotrackingForm
         '
         'ReadOnlyToolStripComboBox
         '
+        Me.ReadOnlyToolStripComboBox.Enabled = False
         Me.ReadOnlyToolStripComboBox.Items.AddRange(New Object() {"True", "False"})
         Me.ReadOnlyToolStripComboBox.Name = "ReadOnlyToolStripComboBox"
         Me.ReadOnlyToolStripComboBox.Size = New System.Drawing.Size(121, 25)
@@ -1051,6 +1055,20 @@ Partial Class RadiotrackingForm
         Me.RefreshToolStripButton.Name = "RefreshToolStripButton"
         Me.RefreshToolStripButton.Size = New System.Drawing.Size(88, 22)
         Me.RefreshToolStripButton.Text = "Reload dataset"
+        '
+        'ToolStripSeparator2
+        '
+        Me.ToolStripSeparator2.Name = "ToolStripSeparator2"
+        Me.ToolStripSeparator2.Size = New System.Drawing.Size(6, 25)
+        '
+        'SaveEditsToolStripButton
+        '
+        Me.SaveEditsToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
+        Me.SaveEditsToolStripButton.Image = CType(resources.GetObject("SaveEditsToolStripButton.Image"), System.Drawing.Image)
+        Me.SaveEditsToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.SaveEditsToolStripButton.Name = "SaveEditsToolStripButton"
+        Me.SaveEditsToolStripButton.Size = New System.Drawing.Size(38, 22)
+        Me.SaveEditsToolStripButton.Text = "Save "
         '
         'RadiotrackingForm
         '
@@ -1185,4 +1203,6 @@ Partial Class RadiotrackingForm
     Friend WithEvents ReadOnlyToolStripComboBox As ToolStripComboBox
     Friend WithEvents ToolStripSeparator1 As ToolStripSeparator
     Friend WithEvents RefreshToolStripButton As ToolStripButton
+    Friend WithEvents ToolStripSeparator2 As ToolStripSeparator
+    Friend WithEvents SaveEditsToolStripButton As ToolStripButton
 End Class

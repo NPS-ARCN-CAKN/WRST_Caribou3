@@ -51,8 +51,8 @@ Module Utilites
             GC.UseEmbeddedNavigator = True
             Dim GV As GridView = TryCast(GC.MainView, GridView)
             If Not GV Is Nothing Then
-                GV.OptionsBehavior.AllowAddRows = True
-                GV.OptionsBehavior.AllowDeleteRows = True
+                'GV.OptionsBehavior.AllowAddRows = True
+                'GV.OptionsBehavior.AllowDeleteRows = True
                 GV.BestFitColumns(True)
                 GV.OptionsView.BestFitMode = GridBestFitMode.Fast
                 GV.OptionsView.ColumnAutoWidth = False
